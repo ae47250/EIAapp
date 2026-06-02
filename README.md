@@ -13,6 +13,7 @@ package.json
 api/
   search-eia.js
   interpret-query.js
+  openai-diagnostic.js
 ```
 
 ## File plan
@@ -21,6 +22,7 @@ api/
 |---|---:|---|
 | `index.html` | Modified | Red theme and visible title text: `New and improved version` |
 | `api/interpret-query.js` | Modified | Adds OpenAI-assisted query interpretation with rule fallback |
+| `api/openai-diagnostic.js` | Added | Tests whether the deployed backend can reach OpenAI |
 | `README.md` | Modified | Documents the AI comparison setup |
 | `package.json` | Copied | Keeps Node/Vercel API files using ES modules |
 | `api/search-eia.js` | Copied/adjusted | Calls `await interpretQuery(...)` and searches EIA |
@@ -84,11 +86,30 @@ If `OPENAI_API_KEY` is missing, invalid, or OpenAI fails, the app falls back to 
 
 The app should still work without AI, but typo correction and flexible wording will be weaker.
 
+## OpenAI diagnostic
+
+After deploying and setting `OPENAI_API_KEY`, test this route:
+
+```text
+/api/openai-diagnostic
+```
+
+Expected success response:
+
+```text
+ok = true
+openaiConfigured = true
+userMessage = OpenAI diagnostic request succeeded.
+```
+
+If `OPENAI_API_KEY` is missing, the route returns `openaiConfigured = false` and explains that the key must be added in Vercel.
+
 ## Smoke tests
 
 After deploying, test these API routes:
 
 ```text
+/api/openai-diagnostic
 /api/interpret-query?q=brzil%20enrgy%20prducton
 /api/search-eia?q=brzil%20enrgy%20prducton
 /api/interpret-query?q=how%20much%20oil%20does%20japn%20use
