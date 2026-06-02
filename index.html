@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New and improved version</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #7f0000 0%, #b91c1c 35%, #ef4444 70%, #fecaca 100%);
+      background-attachment: fixed;
+      color: #111827;
+      line-height: 1.5;
+    }
+    .page { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 42px; }
+    .hero { background: linear-gradient(135deg, #991b1b, #450a0a); color: white; border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2); }
+    h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; }
+    h2, h3 { margin-top: 0; }
+    .subtitle { max-width: 820px; margin: 0; color: #fee2e2; font-size: 17px; }
+    .search-panel { margin-top: 18px; display: grid; grid-template-columns: minmax(220px, 1fr) 140px; gap: 10px; }
+    input, button { font: inherit; border-radius: 10px; }
+    input { width: 100%; border: 1px solid #fecaca; padding: 13px 14px; color: #111827; background: white; }
+    button { border: 0; padding: 13px 16px; color: white; background: #111827; cursor: pointer; font-weight: 700; }
+    button:hover:not(:disabled) { background: #374151; }
+    button:disabled { cursor: not-allowed; opacity: 0.55; }
+    .examples { margin-top: 12px; color: #fee2e2; font-size: 14px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 20px; }
+    .card { background: rgba(255, 255, 255, 0.96); border: 1px solid #fecaca; border-radius: 14px; padding: 20px; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08); }
+    .compact-card { padding: 14px 16px; }
+    .muted { color: #4b5563; font-size: 14px; }
+    .error { border-color: #fca5a5; background: #fff1f2; color: #991b1b; font-weight: 700; }
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+    .secondary-button { background: #b91c1c; }
+    .secondary-button:hover:not(:disabled) { background: #991b1b; }
+    .ghost-button { background: #fee2e2; color: #7f1d1d; border: 1px solid #fca5a5; padding: 8px 11px; font-size: 13px; }
+    .ghost-button:hover:not(:disabled) { background: #fecaca; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 10px; margin-top: 14px; }
+    .stat { border: 1px solid #fecaca; border-radius: 12px; padding: 12px; background: #fff7f7; }
+    .stat-label { color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat-value { margin-top: 3px; font-weight: 700; }
+    canvas { width: 100%; height: 240px; border: 1px solid #d1d5db; border-radius: 12px; background: #ffffff; margin-top: 12px; }
+    .table-wrap { width: 100%; overflow-x: auto; margin-top: 12px; }
+    .recent-observations-card { padding: 14px 16px; }
+    .recent-observations-card h3 { margin-bottom: 4px; }
+    .compact-observations { display: grid; grid-template-columns: repeat(4, minmax(110px, 1fr)); gap: 8px; margin-top: 10px; }
+    .compact-observation { border: 1px solid #fecaca; border-radius: 10px; background: #fff7f7; padding: 8px 10px; }
+    .compact-observation-period { color: #6b7280; font-size: 12px; font-weight: 700; }
+    .compact-observation-value { margin-top: 2px; font-size: 14px; font-weight: 700; }
+    .compact-observation-unit { color: #6b7280; font-size: 11px; margin-top: 1px; }
+    table { width: 100%; min-width: 780px; border-collapse: collapse; font-size: 14px; background: white; }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 9px; text-align: left; vertical-align: top; }
+    th { background: #fee2e2; color: #7f1d1d; white-space: nowrap; }
+    tr:hover td { background: #fff7f7; }
+    .about { margin-top: 22px; }
+    @media (max-width: 760px) {
+      .page { width: min(100% - 22px, 1120px); padding-top: 14px; }
+      .hero { padding: 20px; }
+      .search-panel { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      canvas { height: 200px; }
+      .compact-observations { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>New and improved version</h1>
+      <p class="subtitle">AI-assisted EIA country energy search. OpenAI interprets messy search text; EIA supplies the data.</p>
+      <div class="search-panel">
+        <input id="searchBox" type="text" aria-label="Search query" placeholder="Try: brzil enrgy prducton" />
+        <button id="searchButton" type="button">Search</button>
+      </div>
+      <div class="examples">Examples: brzil enrgy prducton | how much oil does japn use | Brazil energy consumption | Jordan electricity generation</div>
+    </section>
+
+    <section id="status" class="grid"></section>
+    <section id="results" class="grid"></section>
+
+    <section class="card about">
+      <h2>About this version</h2>
+      <p class="muted">This comparison version can use OpenAI to interpret the user's search phrase, correct obvious typos, and return structured intent. The app still gets all energy observations from the U.S. Energy Information Administration API.</p>
+      <p class="muted">If OpenAI is not configured or fails, the backend falls back to rule-based interpretation.</p>
+    </section>
+  </main>
+
+  <script>
+    const state = { data: null, selectedSeries: null };
+    document.getElementById("searchButton").addEventListener("click", searchEIA);
+    document.getElementById("searchBox").addEventListener("keydown", event => { if (event.key === "Enter") searchEIA(); });
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-select-series]");
+      if (button) selectSeriesFromButton(button);
+    });
+
+    async function searchEIA() {
+      const query = document.getElementById("searchBox").value.trim();
+      const searchButton = document.getElementById("searchButton");
+      if (!query) return showStatus("Enter a country and variable. Example: brzil enrgy prducton.", true);
+      searchButton.disabled = true;
+      searchButton.textContent = "Searching...";
+      showStatus("Interpreting query and searching EIA data...");
+      document.getElementById("results").innerHTML = "";
+      try {
+        const url = new URL("/api/search-eia", window.location.origin);
+        url.searchParams.set("q", query);
+        const data = await fetchJson(url);
+        state.data = data;
+        renderData(data);
+      } catch (error) {
+        showStatus(error.message, true);
+      } finally {
+        searchButton.disabled = false;
+        searchButton.textContent = "Search";
+      }
+    }
+
+    async function selectSeriesFromButton(button) {
+      const existingData = state.data || {};
+      const url = new URL("/api/search-eia", window.location.origin);
+      url.searchParams.set("q", document.getElementById("searchBox").value.trim());
+      url.searchParams.set("country", button.dataset.countryCode || existingData.country?.code || "");
+      url.searchParams.set("productId", button.dataset.productId || "");
+      url.searchParams.set("activityId", button.dataset.activityId || "");
+      url.searchParams.set("unit", button.dataset.unitFacet || "");
+      showStatus("Loading selected series...");
+      try {
+        const data = await fetchJson(url);
+        state.data = { ...existingData, ...data, variables: existingData.variables || data.variables || [] };
+        renderData(state.data);
+      } catch (error) {
+        showStatus(error.message, true);
+      }
+    }
+
+    async function fetchJson(url) {
+      const response = await fetch(url);
+      let data;
+      try { data = await response.json(); } catch { throw new Error("The backend returned a non-JSON response. Check the Vercel function logs."); }
+      if (!response.ok || data.error) throw new Error(data.userMessage || data.error || `Request failed with status ${response.status}.`);
+      return data;
+    }
+
+    function renderData(data) {
+      if (data.needsCountry) return showStatus(data.userMessage || "Please include a country name.", true);
+      if (!data.selectedSeries) return showStatus(data.userMessage || "No matching EIA series was found.", true);
+      const interpreter = data.intent?.interpreter ? `Interpreter: ${data.intent.interpreter}. Corrected query: ${data.intent.correctedQuery || data.query}.` : "Search complete.";
+      showStatus(`${interpreter} ${data.note || ""}`.trim());
+      renderSingle(data);
+    }
+
+    function renderSingle(data) {
+      const series = data.selectedSeries;
+      const results = document.getElementById("results");
+      if (!series?.points?.length) {
+        results.innerHTML = `<div class="card error">${escapeHtml(data.userMessage || "No numeric observations found for this series.")}</div>`;
+        return;
+      }
+      state.selectedSeries = series;
+      results.innerHTML = `
+        <article class="card">
+          <h2>${escapeHtml(series.title)}</h2>
+          <div class="muted">${escapeHtml(series.country)} (${escapeHtml(series.countryCode)}) | ${escapeHtml(series.frequency)} | Source: ${escapeHtml(data.source || "EIA")}</div>
+          ${renderStats(series)}
+          <div class="toolbar"><button class="secondary-button" type="button" onclick="downloadCsv()">Download selected data as CSV</button></div>
+          <canvas id="chart" aria-label="Line chart"></canvas>
+        </article>
+        ${renderObservationTable(getRecentYears(series.points, 4), series.unit)}
+        ${renderVariablesTable(data.variables || [])}
+      `;
+      drawChart(getRecentYears(series.points, 10), series.unit);
+    }
+
+    function renderStats(series) {
+      return `<div class="stats">
+        <div class="stat"><div class="stat-label">Coverage</div><div class="stat-value">${escapeHtml(formatCoverage(series.coverage))}</div></div>
+        <div class="stat"><div class="stat-label">Latest period</div><div class="stat-value">${escapeHtml(series.latestPeriod)}</div></div>
+        <div class="stat"><div class="stat-label">Latest value</div><div class="stat-value">${formatNumber(series.latestValue)}</div></div>
+        <div class="stat"><div class="stat-label">Unit</div><div class="stat-value">${escapeHtml(series.unit)}</div></div>
+      </div>`;
+    }
+
+    function renderObservationTable(points, unit) {
+      const cells = [...points].slice().reverse().map(point => `<div class="compact-observation"><div class="compact-observation-period">${escapeHtml(point.period)}</div><div class="compact-observation-value">${formatNumber(point.value)}</div><div class="compact-observation-unit">${escapeHtml(unit)}</div></div>`).join("");
+      return `<article class="card recent-observations-card"><h3>Recent observations</h3><div class="muted">Last 4 years shown. CSV download includes the full selected series.</div><div class="compact-observations">${cells}</div></article>`;
+    }
+
+    function renderVariablesTable(variables) {
+      if (!Array.isArray(variables) || variables.length === 0) return "";
+      const rows = variables.map(variable => `<tr>
+        <td><button class="ghost-button" type="button" data-select-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}">Graph</button></td>
+        <td>${escapeHtml(variable.country || "")}</td><td>${escapeHtml(variable.countryCode || "")}</td><td>${escapeHtml(variable.label)}</td><td>${escapeHtml(variable.coverage || "")}</td><td>${escapeHtml(variable.frequency || "annual")}</td><td>${escapeHtml(variable.unit || "")}</td><td>${escapeHtml(variable.productId)} / ${escapeHtml(variable.activityId)} / ${escapeHtml(variable.unitFacet)}</td>
+      </tr>`).join("");
+      return `<article class="card"><h3>Matching EIA variables</h3><p class="muted">Click Graph to load another series.</p><div class="table-wrap"><table><thead><tr><th>Select</th><th>Country</th><th>ISO</th><th>Variable</th><th>Coverage</th><th>Frequency</th><th>Unit</th><th>Indicator code</th></tr></thead><tbody>${rows}</tbody></table></div></article>`;
+    }
+
+    function getRecentYears(points, yearCount) {
+      const cleanPoints = (points || []).map(point => ({ ...point, period: String(point.period || ""), year: getPeriodYear(point.period) })).filter(point => point.period && Number.isFinite(Number(point.value)));
+      if (cleanPoints.length === 0) return [];
+      const validYears = cleanPoints.map(point => point.year).filter(year => Number.isFinite(year));
+      if (validYears.length === 0) return cleanPoints.slice(-yearCount);
+      const latestYear = Math.max(...validYears);
+      const firstYear = latestYear - yearCount + 1;
+      return cleanPoints.filter(point => Number.isFinite(point.year) && point.year >= firstYear && point.year <= latestYear);
+    }
+
+    function getPeriodYear(period) { const match = String(period || "").match(/\d{4}/); return match ? Number(match[0]) : NaN; }
+
+    function drawChart(points, unit) {
+      const canvas = document.getElementById("chart");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight || 240;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+      const cleanPoints = (points || []).map(point => ({ period: String(point.period), value: Number(point.value) })).filter(point => point.period && Number.isFinite(point.value));
+      if (cleanPoints.length === 0) { ctx.fillText("No numeric data to graph.", 20, 30); return; }
+      const values = cleanPoints.map(point => point.value);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const range = max - min || Math.abs(max) || 1;
+      const left = 76, right = 30, top = 30, bottom = 62;
+      const chartWidth = Math.max(10, width - left - right);
+      const chartHeight = Math.max(10, height - top - bottom);
+      const x = index => cleanPoints.length === 1 ? left + chartWidth / 2 : left + (index / (cleanPoints.length - 1)) * chartWidth;
+      const y = value => top + chartHeight - ((value - min) / range) * chartHeight;
+      ctx.font = "12px Arial";
+      ctx.fillStyle = "#374151";
+      ctx.strokeStyle = "#d1d5db";
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(left, top); ctx.lineTo(left, top + chartHeight); ctx.lineTo(left + chartWidth, top + chartHeight); ctx.stroke();
+      ctx.fillText(formatNumber(max), 8, top + 4); ctx.fillText(formatNumber(min), 8, top + chartHeight); ctx.fillText(unit || "Value", left, 16);
+      cleanPoints.forEach((point, index) => { if (index % Math.ceil(cleanPoints.length / 8) !== 0 && index !== cleanPoints.length - 1) return; ctx.fillText(point.period, x(index) - 14, top + chartHeight + 24); });
+      ctx.beginPath(); cleanPoints.forEach((point, index) => { const px = x(index), py = y(point.value); if (index === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); });
+      ctx.strokeStyle = "#b91c1c"; ctx.lineWidth = 3; ctx.stroke();
+      cleanPoints.forEach((point, index) => { ctx.beginPath(); ctx.arc(x(index), y(point.value), 3.5, 0, Math.PI * 2); ctx.fillStyle = "#b91c1c"; ctx.fill(); });
+    }
+
+    function downloadCsv() {
+      const series = state.selectedSeries;
+      if (!series?.points?.length) return showStatus("No selected data are available to download.", true);
+      const rows = [["period", "country", "country_code", "series", "value", "unit"]];
+      for (const point of series.points) rows.push([point.period, series.country, series.countryCode, series.title, point.value, series.unit]);
+      const csv = rows.map(row => row.map(csvCell).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = makeCsvFilename(series);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+
+    function makeCsvFilename(series) { return `${series.countryCode || "country"}-${series.productId || "product"}-${series.activityId || "activity"}.csv`.toLowerCase().replace(/[^a-z0-9._-]+/g, "-"); }
+    function csvCell(value) { const text = String(value ?? ""); return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text; }
+    function showStatus(message, isError = false) { document.getElementById("status").innerHTML = `<div class="card compact-card ${isError ? "error" : ""}">${escapeHtml(message)}</div>`; }
+    function escapeHtml(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
+    function escapeAttr(value) { return escapeHtml(value); }
+    function formatNumber(value) { const number = Number(value); return Number.isFinite(number) ? number.toLocaleString(undefined, { maximumFractionDigits: 4 }) : ""; }
+    function formatCoverage(coverage) { if (!coverage) return "Not available"; return coverage.start === coverage.end ? `${coverage.start} (${coverage.count} obs.)` : `${coverage.start}-${coverage.end} (${coverage.count} obs.)`; }
+  </script>
+</body>
+</html>
