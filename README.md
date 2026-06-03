@@ -4,6 +4,10 @@ This is the AI-assisted comparison version of the EIA country energy search app.
 
 The baseline app is `ae47250/NewRepapp`. This repo, `ae47250/EIAapp`, is for testing whether OpenAI improves query interpretation before the app searches EIA data.
 
+## Codex/AI coding instructions
+
+This repository uses `AGENTS.md` for Codex and AI coding-agent instructions. Review that file before making repository changes so edits follow the project scope, change-reporting, data-source, security, and deployment rules.
+
 ## File structure
 
 ```text
