@@ -1,4 +1,5 @@
 const DEFAULT_MODEL = "gpt-5.4-mini";
+const OPENAI_TIMEOUT_MS = 20000;
 
 export default async function handler(req, res) {
   setJsonHeaders(res);
@@ -23,6 +24,9 @@ export default async function handler(req, res) {
     });
   }
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), OPENAI_TIMEOUT_MS);
+
   try {
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
@@ -30,6 +34,7 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json"
       },
+      signal: controller.signal,
       body: JSON.stringify({
         model,
         input: "Return exactly this JSON: {\"diagnostic\":\"openai-ok\"}"
@@ -51,7 +56,7 @@ export default async function handler(req, res) {
         model,
         status: response.status,
         userMessage: "OpenAI request failed. Check OPENAI_API_KEY, OPENAI_MODEL, account access, and Vercel function logs.",
-        openaiError: scrubSecret(json?.error?.message || text, apiKey)
+        diagnosticError: "OpenAI request failed."
       });
     }
 
@@ -64,13 +69,19 @@ export default async function handler(req, res) {
       userMessage: "OpenAI diagnostic request succeeded."
     });
   } catch (error) {
-    return res.status(500).json({
+    const timedOut = error.name === "AbortError";
+    return res.status(timedOut ? 504 : 500).json({
       ok: false,
       openaiConfigured: true,
       model,
-      userMessage: "The backend could not reach OpenAI. Check network access and Vercel function logs.",
-      details: scrubSecret(error.message, apiKey)
+      diagnosticTimeout: timedOut,
+      userMessage: timedOut
+        ? "OpenAI diagnostic request timed out. Check OpenAI availability and Vercel function logs."
+        : "The backend could not reach OpenAI. Check network access and Vercel function logs.",
+      diagnosticError: timedOut ? "OpenAI request timed out." : "OpenAI request failed."
     });
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -85,6 +96,7 @@ function extractResponseText(data) {
 }
 
 function scrubSecret(text, apiKey) {
+  if (!apiKey) return String(text || "");
   return String(text || "").replaceAll(apiKey || "", "[hidden-openai-key]");
 }
 
