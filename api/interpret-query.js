@@ -29,6 +29,8 @@ const FREQUENCY_RULES = [
   { value: "annual", terms: ["annual", "yearly", "year", "years"] }
 ];
 
+const OPENAI_TIMEOUT_MS = 20000;
+
 const COUNTRY_ALIASES = new Map([
   ["us", "USA"], ["usa", "USA"], ["united states", "USA"], ["america", "USA"],
   ["uk", "GBR"], ["britain", "GBR"], ["great britain", "GBR"], ["united kingdom", "GBR"],
@@ -55,9 +57,16 @@ const FALLBACK_COUNTRIES = [
 const STOP_WORDS = new Set(["a", "an", "and", "are", "as", "at", "by", "can", "chart", "country", "data", "download", "eia", "for", "from", "graph", "i", "in", "of", "on", "or", "please", "plot", "search", "series", "show", "table", "the", "to", "with"]);
 
 export default async function handler(req, res) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Method not allowed.", userMessage: "Use a GET request for this endpoint." });
+  }
+
   const query = String(req.query.q || "").trim();
   if (!query) {
     return res.status(400).json({ error: "Missing query.", userMessage: "Enter a search phrase such as Brazil energy consumption." });
+  }
+  if (query.length > 240) {
+    return res.status(400).json({ error: "Search query is too long.", userMessage: "Use a shorter country and energy topic search." });
   }
 
   const intent = await interpretQuery(query);
@@ -112,6 +121,9 @@ async function interpretQueryWithOpenAI(query, countries, fallbackIntent) {
     `User query: ${query}`
   ].join("\n");
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), OPENAI_TIMEOUT_MS);
+
   try {
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
@@ -119,6 +131,7 @@ async function interpretQueryWithOpenAI(query, countries, fallbackIntent) {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json"
       },
+      signal: controller.signal,
       body: JSON.stringify({
         model,
         input: prompt
@@ -152,6 +165,8 @@ async function interpretQueryWithOpenAI(query, countries, fallbackIntent) {
     };
   } catch {
     return null;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
