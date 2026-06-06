@@ -66,8 +66,7 @@ export default async function handler(req, res) {
   } catch (error) {
     return res.status(500).json({
       error: "Server error while contacting EIA API.",
-      userMessage: friendlyErrorMessage(error),
-      details: hideApiKey(error.message, apiKey)
+      userMessage: friendlyErrorMessage(error)
     });
   }
 }
@@ -362,10 +361,11 @@ function cleanFacet(value) {
 }
 async function fetchJsonCached(url, ttlMs, apiKey) {
   const now = Date.now();
-  const cached = cache.get(url);
+  const cacheKey = buildCacheKey(url);
+  const cached = cache.get(cacheKey);
   if (cached && now - cached.createdAt < ttlMs) return cached.value;
   const value = await fetchJson(url, apiKey);
-  cache.set(url, { createdAt: now, value });
+  cache.set(cacheKey, { createdAt: now, value });
   pruneCache();
   return value;
 }
@@ -390,6 +390,11 @@ function pruneCache() {
   if (cache.size <= MAX_CACHE_ITEMS) return;
   for (const key of Array.from(cache.keys()).slice(0, cache.size - MAX_CACHE_ITEMS)) cache.delete(key);
 }
+function buildCacheKey(url) {
+  const parsed = new URL(url);
+  parsed.searchParams.delete("api_key");
+  return parsed.toString();
+}
 function friendlyErrorMessage(error) {
   const message = String(error?.message || "");
   if (message.includes("timed out")) return "The EIA API request timed out. Try the same search again.";
@@ -399,7 +404,10 @@ function friendlyErrorMessage(error) {
   if (message.includes("no numeric observations")) return "EIA found the series metadata but returned no numeric observations for that exact series.";
   return "Something went wrong while contacting EIA. Check the Vercel function logs for details.";
 }
-function hideApiKey(text, apiKey) { return String(text || "").replaceAll(apiKey || "", "[hidden-api-key]"); }
+function hideApiKey(text, apiKey) {
+  if (!apiKey) return String(text || "");
+  return String(text || "").replaceAll(apiKey || "", "[hidden-api-key]");
+}
 function setJsonHeaders(res) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
