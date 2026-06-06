@@ -24,7 +24,7 @@ api/
 
 | File | Action | Purpose |
 |---|---:|---|
-| `index.html` | Modified | Red theme and visible title text: `New and improved version` |
+| `index.html` | Modified | Blue theme and visible title text: `New and improved version` |
 | `api/interpret-query.js` | Modified | Adds OpenAI-assisted query interpretation with rule fallback |
 | `api/openai-diagnostic.js` | Added | Tests whether the deployed backend can reach OpenAI |
 | `README.md` | Modified | Documents the AI comparison setup |
