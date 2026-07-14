@@ -58,7 +58,7 @@ Do not commit API keys to GitHub.
 
 ## Temporary single-user login
 
-The app uses a signed, HTTP-only cookie that expires after eight hours. The cookie uses `SameSite=Strict` and is marked `Secure` in production. The cookie contains only signed session timing and random nonce data; it does not contain the username, password, password hash, or signing secret.
+The app uses a signed, HTTP-only cookie that expires after 20 minutes of inactivity. Each authenticated request refreshes the cookie, so the timeout slides forward while the session is active. The cookie uses `SameSite=Strict` and is marked `Secure` in production. The cookie contains only signed session timing and random nonce data; it does not contain the username, password, password hash, or signing secret.
 
 Protected routes:
 

@@ -52,7 +52,7 @@ after(() => {
   restoreEnvironment(originalEnvironment);
 });
 
-test("successful login creates an HTTP-only eight-hour session", async () => {
+test("successful login creates an HTTP-only 20-minute sliding session", async () => {
   const res = createMockResponse();
   await loginHandler(createRequest({
     method: "POST",
@@ -76,6 +76,9 @@ test("successful login creates an HTTP-only eight-hour session", async () => {
     headers: { cookie: cookie.split(";")[0] }
   }));
   assert.equal(protectedResponse.headers.get("x-middleware-next"), "1");
+  const refreshedCookie = protectedResponse.headers.get("set-cookie");
+  assert.match(refreshedCookie, new RegExp(`^${SESSION_COOKIE_NAME}=`));
+  assert.match(refreshedCookie, new RegExp(`Max-Age=${SESSION_DURATION_SECONDS}`));
 });
 
 test("incorrect username and password return the same generic response", async () => {
