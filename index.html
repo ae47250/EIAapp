@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New and improved version</title>
+  <title>EIA++ Data Extraction Tool</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #008cff 0%, #00a3ff 45%, #6fd3ff 100%);
+      background: orange;
       background-attachment: fixed;
       color: #111827;
       line-height: 1.5;
     }
     .page { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 42px; }
-    .hero { background: linear-gradient(135deg, #0057d9, #00327a); color: white; border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2); }
+    .hero { background: lightblue; color: #111827; border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2); }
     h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; }
     h2, h3 { margin-top: 0; }
-    .subtitle { max-width: 820px; margin: 0; color: #dff3ff; font-size: 17px; }
+    .subtitle { max-width: 820px; margin: 0; color: #111827; font-family: Arial, sans-serif; font-size: 24px; }
     .hero-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; }
     .logout-form { flex: 0 0 auto; }
     .logout-button { padding: 8px 12px; background: #dff3ff; color: #00327a; font-size: 13px; }
@@ -29,7 +29,7 @@
     button { border: 0; padding: 13px 16px; color: white; background: #111827; cursor: pointer; font-weight: 700; }
     button:hover:not(:disabled) { background: #374151; }
     button:disabled { cursor: not-allowed; opacity: 0.55; }
-    .examples { margin-top: 12px; color: #dff3ff; font-size: 14px; }
+    .examples { margin-top: 12px; color: #111827; font-family: Arial, sans-serif; font-size: 24px; }
     .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 20px; }
     .card { background: rgba(255, 255, 255, 0.96); border: 1px solid #b9e8ff; border-radius: 14px; padding: 20px; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08); }
     .compact-card { padding: 14px 16px; }
@@ -58,6 +58,7 @@
     th { background: #dff3ff; color: #00327a; white-space: nowrap; }
     tr:hover td { background: #f1fbff; }
     .about { margin-top: 22px; }
+    .about .muted { font-family: Arial, sans-serif; font-size: 16px; }
     @media (max-width: 760px) {
       .page { width: min(100% - 22px, 1120px); padding-top: 14px; }
       .hero { padding: 20px; }
@@ -74,7 +75,7 @@
   <main class="page">
     <section class="hero">
       <div class="hero-heading">
-        <h1>EIA DATA EXTRACTION TOOL: New and improved version</h1>
+        <h1>EIA++ Data Extraction Tool</h1>
         <form class="logout-form" method="post" action="/api/logout">
           <button class="logout-button" type="submit">Logout</button>
         </form>
@@ -100,7 +101,7 @@
     <section id="results" class="grid"></section>
 
     <section class="card about">
-      <h3>About this version</h3>
+      <h2>About this version</h2>
       <p class="muted">This comparison version can use OpenAI to interpret the user's search phrase, correct obvious typos, and return structured intent. The app still gets all energy observations from the U.S. Energy Information Administration API.</p>
       <p class="muted">If OpenAI is not configured or fails, the backend falls back to rule-based interpretation.</p>
     </section>
