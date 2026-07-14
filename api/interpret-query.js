@@ -1,3 +1,5 @@
+import { requireAuthentication } from "../lib/auth.js";
+
 const PRODUCT_RULES = [
   { value: "natural gas", terms: ["natural gas", "nat gas", "gas"] },
   { value: "petroleum", terms: ["petroleum", "oil", "crude", "crude oil", "gasoline", "diesel", "liquid fuels", "petroleum and other liquids"] },
@@ -57,6 +59,8 @@ const FALLBACK_COUNTRIES = [
 const STOP_WORDS = new Set(["a", "an", "and", "are", "as", "at", "by", "can", "chart", "country", "data", "download", "eia", "for", "from", "graph", "i", "in", "of", "on", "or", "please", "plot", "search", "series", "show", "table", "the", "to", "with"]);
 
 export default async function handler(req, res) {
+  if (!requireAuthentication(req, res)) return;
+
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed.", userMessage: "Use a GET request for this endpoint." });
   }

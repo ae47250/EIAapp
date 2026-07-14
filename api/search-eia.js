@@ -1,4 +1,5 @@
 import { interpretQuery, findCountryByCode, hasPhrase, normalizeText } from "./interpret-query.js";
+import { requireAuthentication } from "../lib/auth.js";
 
 const EIA_BASE_URL = "https://api.eia.gov/v2/international";
 const DEFAULT_FREQUENCY = "annual";
@@ -15,6 +16,7 @@ globalThis.__EIA_APP_CACHE__ = cache;
 
 export default async function handler(req, res) {
   setJsonHeaders(res);
+  if (!requireAuthentication(req, res)) return;
 
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed.", userMessage: "Use the search box on the webpage or send a GET request." });

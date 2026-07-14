@@ -1,8 +1,11 @@
+import { requireAuthentication } from "../lib/auth.js";
+
 const DEFAULT_MODEL = "gpt-5.4-mini";
 const OPENAI_TIMEOUT_MS = 20000;
 
 export default async function handler(req, res) {
   setJsonHeaders(res);
+  if (!requireAuthentication(req, res)) return;
 
   if (req.method !== "GET") {
     return res.status(405).json({
