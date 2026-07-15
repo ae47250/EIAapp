@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 
 import { GET as searchEia } from "../app/api/search-eia/route.js";
-import { buildXlsx } from "../lib/client/xlsx.js";
+import { buildXlsx, workbookFileName } from "../lib/client/xlsx.js";
 
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/eia-search.json", import.meta.url), "utf8"));
 const originalEnvironment = {
@@ -74,6 +74,7 @@ test("browser-side XLSX export retains All_Data and Metadata sheets", async () =
   assert.match(workbookText, /Metadata/);
   assert.match(workbookText, /Observation period/);
   assert.match(workbookText, /Total primary energy - Production/);
+  assert.equal(workbookFileName(body.selectedSeries), "Brazil_Primary_Energy_Production.xlsx");
 });
 
 async function mockEiaFetch(input) {
