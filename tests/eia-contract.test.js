@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 
 import { GET as searchEia } from "../app/api/search-eia/route.js";
+import { GET as interpretQuery } from "../app/api/interpret-query/route.js";
 import { buildXlsx, workbookFileName } from "../lib/client/xlsx.js";
 
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/eia-search.json", import.meta.url), "utf8"));
@@ -12,6 +13,8 @@ const originalEnvironment = {
   LOGIN_REQUIRED: process.env.LOGIN_REQUIRED
 };
 const originalFetch = globalThis.fetch;
+let exactSeriesRequests = 0;
+let openAiRequests = 0;
 
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
@@ -26,6 +29,7 @@ after(() => {
 });
 
 test("Next search route preserves the EIA response contract with a variable typo", async () => {
+  exactSeriesRequests = 0;
   const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20enrgy%20production"));
   const body = await response.json();
 
@@ -45,7 +49,38 @@ test("Next search route preserves the EIA response contract with a variable typo
   ]);
   assert.equal(body.variables.length, 2);
   assert.equal(body.variables[0].activityId, "1");
+  assert.equal(body.variables[1].coverage, "2023-2024 (2 obs.)");
+  assert.equal(exactSeriesRequests, 1);
   assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
+});
+
+test("staged interpretation is reused without a second OpenAI request", async () => {
+  process.env.OPENAI_API_KEY = "fixture-openai-key";
+  openAiRequests = 0;
+  try {
+    const interpretationResponse = await interpretQuery(new Request("https://example.test/api/interpret-query?q=Brazil%20enrgy%20production"));
+    const { intent } = await interpretationResponse.json();
+    assert.equal(intent.interpreter, "openai");
+    assert.equal(openAiRequests, 1);
+
+    const url = new URL("https://example.test/api/search-eia");
+    url.searchParams.set("q", "Brazil enrgy production");
+    url.searchParams.set("intentReady", "1");
+    url.searchParams.set("intentCorrectedQuery", intent.correctedQuery);
+    url.searchParams.set("intentInterpreter", intent.interpreter);
+    url.searchParams.set("intentCountryCode", intent.countryCode);
+    url.searchParams.set("intentProduct", intent.product);
+    url.searchParams.set("intentActivity", intent.activity);
+    url.searchParams.set("intentFrequency", intent.frequency);
+    const response = await searchEia(new Request(url));
+    const body = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(body.intent.interpreter, "openai");
+    assert.equal(openAiRequests, 1);
+  } finally {
+    delete process.env.OPENAI_API_KEY;
+  }
 });
 
 test("exact-series selection keeps the alternate-series response shape", async () => {
@@ -79,9 +114,24 @@ test("browser-side XLSX export retains All_Data and Metadata sheets", async () =
 
 async function mockEiaFetch(input) {
   const url = new URL(String(input));
+  if (url.hostname === "api.openai.com") {
+    openAiRequests += 1;
+    return jsonResponse({
+      output_text: JSON.stringify({
+        correctedQuery: "Brazil energy production",
+        countryName: "Brazil",
+        countryCode: "BRA",
+        product: "total energy",
+        activity: "production",
+        frequency: "annual",
+        confidence: 0.98
+      })
+    });
+  }
   if (url.pathname.endsWith("/facet/countryRegionId/")) return jsonResponse(fixture.countries);
 
   const activityId = url.searchParams.get("facets[activityId][]");
+  if (activityId) exactSeriesRequests += 1;
   const rows = activityId ? fixture.exactRows[activityId] || [] : fixture.broadRows;
   return jsonResponse({ response: { data: rows } });
 }

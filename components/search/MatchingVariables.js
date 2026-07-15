@@ -4,7 +4,7 @@ export default function MatchingVariables({ variables, onSelect, onDownload }) {
   return (
     <article className="card">
       <h2 className="result-card-title">Matching EIA Variables</h2>
-      <p className="muted">Click Graph to load another series.</p>
+      <p className="muted">The top series is loaded automatically. Graph and Excel load other complete series on demand.</p>
       <div className="table-wrap">
         <table>
           <thead>

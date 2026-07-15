@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
 import MatchingVariables from "./MatchingVariables.js";
@@ -16,6 +16,7 @@ export default function SearchWorkspace({ showLogout }) {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const seriesCache = useRef(new Map());
 
   async function searchEia() {
     const cleanQuery = query.trim();
@@ -29,9 +30,12 @@ export default function SearchWorkspace({ showLogout }) {
 
     setLoading(true);
     setData(null);
-    setStatus({ message: "Interpreting query and searching EIA data..." });
+    setStatus({ message: "Interpreting query..." });
     try {
-      const params = new URLSearchParams({ q: cleanQuery });
+      const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: cleanQuery })}`);
+      const intent = interpretation.intent;
+      setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
+      const params = appendIntentParams(new URLSearchParams({ q: cleanQuery }), intent);
       const nextData = await fetchJson(`/api/search-eia?${params}`);
       applySearchResult(nextData);
     } catch (error) {
@@ -45,11 +49,11 @@ export default function SearchWorkspace({ showLogout }) {
     const existingData = data || {};
     setStatus({ message: "Loading selected series..." });
     try {
-      const nextData = await fetchJson(buildSeriesUrl(variable, existingData));
+      const selectedSeries = await loadSeries(variable, existingData);
       applySearchResult({
         ...existingData,
-        ...nextData,
-        variables: existingData.variables || nextData.variables || []
+        selectedSeries,
+        variables: existingData.variables || []
       });
     } catch (error) {
       setStatus({ error: true, message: error.message });
@@ -57,15 +61,37 @@ export default function SearchWorkspace({ showLogout }) {
   }
 
   async function downloadSeries(variable) {
+    setStatus({ message: "Loading series for Excel..." });
     try {
-      const current = data?.selectedSeries;
-      const series = sameSeries(current, variable)
-        ? current
-        : (await fetchJson(buildSeriesUrl(variable, data || {}))).selectedSeries;
+      const series = await loadSeries(variable, data || {});
       if (!series?.points?.length) throw new Error("No downloadable observations are available for this series.");
       downloadSeriesWorkbook(series);
+      setStatus({ message: "Excel download started." });
     } catch (error) {
       setStatus({ error: true, message: error.message });
+    }
+  }
+
+  async function loadSeries(variable, existingData) {
+    const current = existingData.selectedSeries;
+    if (sameSeries(current, variable)) return current;
+
+    const key = seriesCacheKey(variable);
+    const cached = seriesCache.current.get(key);
+    if (cached) return await cached;
+
+    const request = fetchJson(buildSeriesUrl(variable, existingData)).then(result => {
+      if (!result.selectedSeries?.points?.length) throw new Error("No observations are available for this series.");
+      seriesCache.current.set(key, result.selectedSeries);
+      return result.selectedSeries;
+    });
+    seriesCache.current.set(key, request);
+
+    try {
+      return await request;
+    } catch (error) {
+      if (seriesCache.current.get(key) === request) seriesCache.current.delete(key);
+      throw error;
     }
   }
 
@@ -82,8 +108,9 @@ export default function SearchWorkspace({ showLogout }) {
     }
 
     const interpreter = nextData.intent?.interpreter
-      ? `Interpreter: ${nextData.intent.interpreter}. Corrected query: ${nextData.intent.correctedQuery || nextData.query}.`
+      ? formatInterpreter(nextData.intent, nextData.query)
       : "Search complete.";
+    seriesCache.current.set(seriesCacheKey(nextData.selectedSeries), nextData.selectedSeries);
     setData(nextData);
     setStatus({ message: `${interpreter} ${nextData.note || ""}`.trim() });
   }
@@ -164,7 +191,28 @@ function buildSeriesUrl(variable, existingData) {
     activityId: String(variable.activityId || ""),
     unit: String(variable.unitFacet || "")
   });
+  appendIntentParams(params, existingData.intent);
   return `/api/search-eia?${params}`;
+}
+
+function appendIntentParams(params, intent) {
+  if (!intent) return params;
+  params.set("intentReady", "1");
+  params.set("intentCorrectedQuery", String(intent.correctedQuery || ""));
+  params.set("intentInterpreter", String(intent.interpreter || "rules"));
+  params.set("intentCountryCode", String(intent.countryCode || intent.country?.code || ""));
+  params.set("intentProduct", String(intent.product || ""));
+  params.set("intentActivity", String(intent.activity || ""));
+  params.set("intentFrequency", String(intent.frequency || "annual"));
+  return params;
+}
+
+function formatInterpreter(intent, fallbackQuery) {
+  return `Interpreter: ${intent?.interpreter || "rules"}. Corrected query: ${intent?.correctedQuery || fallbackQuery}.`;
+}
+
+function seriesCacheKey(series) {
+  return [series?.countryCode, series?.productId, series?.activityId, series?.unitFacet, series?.frequency || "annual"].join("|");
 }
 
 function sameSeries(series, variable) {
