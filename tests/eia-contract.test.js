@@ -15,6 +15,7 @@ const originalEnvironment = {
 const originalFetch = globalThis.fetch;
 let exactSeriesRequests = 0;
 let openAiRequests = 0;
+let failNextExactRequest = false;
 
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
@@ -83,6 +84,19 @@ test("staged interpretation is reused without a second OpenAI request", async ()
   }
 });
 
+test("a transient EIA server error retries only the selected top series", async () => {
+  globalThis.__EIA_APP_CACHE__?.clear();
+  exactSeriesRequests = 0;
+  failNextExactRequest = true;
+
+  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20energy%20production"));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.selectedSeries.activityId, "1");
+  assert.equal(exactSeriesRequests, 2);
+});
+
 test("exact-series selection keeps the alternate-series response shape", async () => {
   const url = new URL("https://example.test/api/search-eia");
   url.searchParams.set("q", "Brazil energy consumption");
@@ -132,6 +146,13 @@ async function mockEiaFetch(input) {
 
   const activityId = url.searchParams.get("facets[activityId][]");
   if (activityId) exactSeriesRequests += 1;
+  if (activityId && failNextExactRequest) {
+    failNextExactRequest = false;
+    return new Response("<html><h1>502 Bad Gateway</h1></html>", {
+      status: 502,
+      headers: { "Content-Type": "text/html" }
+    });
+  }
   const rows = activityId ? fixture.exactRows[activityId] || [] : fixture.broadRows;
   return jsonResponse({ response: { data: rows } });
 }
