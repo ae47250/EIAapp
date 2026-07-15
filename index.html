@@ -131,9 +131,12 @@
     .results-pair:empty { display: none; }
     .results-pair.single-result { grid-template-columns: 1fr; }
     .results-pair > .card { min-width: 0; }
-    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); font-size: 13px; }
     .compact-card { padding: 14px 16px; }
     .result-card-title { margin: 0 0 10px; color: var(--ink); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; line-height: 1.25; text-align: left; }
+    .selected-series-heading h2 { margin: 0; color: var(--ink); font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; line-height: 1.12; }
+    .selected-series-heading h2 + h2 { margin-top: 4px; }
+    .selected-source { margin-top: 10px; color: var(--muted); font-size: 16px; line-height: 1.35; }
     .muted { color: var(--muted); font-size: 14px; }
     .error { border-color: #fca5a5; background: #fff1f2; color: #000000; font-weight: 700; }
     .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
@@ -142,11 +145,17 @@
     .ghost-button { background: rgba(15, 111, 255, 0.08); color: #000000; border: 1px solid rgba(15, 111, 255, 0.18); padding: 8px 11px; font-size: 13px; box-shadow: none; }
     .ghost-button:hover:not(:disabled) { background: rgba(15, 111, 255, 0.14); }
     .variable-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-    .stats { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 10px; margin-top: 14px; }
+    .stats { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(220px, 2fr); gap: 10px; margin-top: 14px; }
     .stat { border: 1px solid rgba(15, 111, 255, 0.12); border-radius: 14px; padding: 12px; background: linear-gradient(180deg, rgba(241, 251, 255, 0.96), rgba(227, 245, 255, 0.88)); }
+    .coverage-stat { text-align: center; }
+    .latest-stat { font-size: 12px; }
+    .latest-stat .stat-label, .latest-stat .stat-value { font-size: 12px; }
+    .latest-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .stat-label { color: #000000; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
     .stat-value { margin-top: 3px; font-weight: 700; }
+    .chart-wrap { position: relative; }
     canvas { width: 100%; height: 240px; border: 1px solid rgba(148, 163, 184, 0.28); border-radius: 14px; background: #ffffff; margin-top: 12px; }
+    .chart-tooltip { position: absolute; display: none; pointer-events: none; padding: 6px 8px; border: 1px solid rgba(15, 111, 255, 0.22); border-radius: 8px; background: rgba(255, 255, 255, 0.96); color: var(--ink); font-size: 12px; line-height: 1.35; box-shadow: 0 8px 18px rgba(15, 23, 42, 0.14); transform: translate(-50%, calc(-100% - 10px)); white-space: nowrap; z-index: 3; }
     .range-filter { margin: 8px 30px 0 76px; }
     .range-values { display: flex; justify-content: space-between; gap: 12px; color: var(--ink); font-size: 13px; font-weight: 700; }
     .range-controls { position: relative; height: 34px; margin-top: 2px; }
@@ -161,9 +170,12 @@
     .compact-observation-period { color: #000000; font-size: 12px; font-weight: 700; }
     .compact-observation-value { margin-top: 2px; font-size: 14px; font-weight: 700; }
     .compact-observation-unit { color: #000000; font-size: 11px; margin-top: 1px; }
-    table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 14px; background: rgba(255, 255, 255, 0.96); }
+    table { width: 100%; min-width: 700px; border-collapse: collapse; background: rgba(255, 255, 255, 0.96); }
     th, td { border-bottom: 1px solid #e5e7eb; padding: 9px; text-align: left; vertical-align: top; }
-    th { background: #dff3ff; color: #000000; white-space: nowrap; }
+    th { background: #dff3ff; color: #000000; white-space: nowrap; font-size: 12px; font-weight: 700; }
+    td { font-size: 10px; }
+    td.variable-name { font-weight: 700; }
+    th:nth-child(4), td:nth-child(4) { text-align: center; }
     tr:hover td { background: #f8fdff; }
     .about { margin-top: 8ch; background: var(--card-yellow); color: var(--ink); }
     .about h2 { margin-bottom: 4px; color: var(--ink); }
@@ -203,7 +215,7 @@
       </div>
 
       <div class="search-panel">
-        <textarea id="searchBox" rows="2" aria-label="Search query" placeholder="This data set is currently designed to find data for one country so you need to specify one country here"></textarea>
+        <textarea id="searchBox" rows="2" aria-label="Search query">brzil erngy production</textarea>
         <button id="searchButton" type="button">Search</button>
       </div>
 
@@ -320,11 +332,16 @@
       results.innerHTML = `
         ${variablesCard}
         <article class="card">
-          <h3 class="result-card-title">${escapeHtml(series.title)}</h3>
-          <div class="muted">${escapeHtml(series.country)} (${escapeHtml(series.countryCode)}) | ${escapeHtml(series.frequency)} | Source: ${escapeHtml(data.source || "EIA")}</div>
+          <div class="selected-series-heading">
+            <h2>${escapeHtml(series.country || "")}</h2>
+            <h2>${escapeHtml(series.title || "")}</h2>
+          </div>
+          <div class="selected-source">Source: ${escapeHtml(data.source || "EIA")}</div>
           ${renderStats(series)}
-          <div class="toolbar"><button class="secondary-button" type="button" onclick="downloadCsv()">Download selected data as CSV</button></div>
-          <canvas id="chart" aria-label="Line chart"></canvas>
+          <div class="chart-wrap">
+            <canvas id="chart" aria-label="Line chart"></canvas>
+            <div id="chartTooltip" class="chart-tooltip" role="status" aria-live="polite"></div>
+          </div>
           ${renderRangeSlider(series.points)}
         </article>
       `;
@@ -333,10 +350,12 @@
 
     function renderStats(series) {
       return `<div class="stats">
-        <div class="stat"><div class="stat-label">Coverage</div><div class="stat-value">${escapeHtml(formatCoverage(series.coverage))}</div></div>
-        <div class="stat"><div class="stat-label">Latest period</div><div class="stat-value">${escapeHtml(series.latestPeriod)}</div></div>
-        <div class="stat"><div class="stat-label">Latest value</div><div class="stat-value">${formatNumber(series.latestValue)}</div></div>
-        <div class="stat"><div class="stat-label">Unit</div><div class="stat-value">${escapeHtml(series.unit)}</div></div>
+        <div class="stat coverage-stat"><div class="stat-label">Coverage</div><div class="stat-value">${escapeHtml(formatCoverage(series.coverage))}</div></div>
+        <div class="stat latest-stat"><div class="latest-row">
+          <div><div class="stat-label">Latest Period</div><div class="stat-value">${escapeHtml(series.latestPeriod)}</div></div>
+          <div><div class="stat-label">Latest Value</div><div class="stat-value">${formatNumber(series.latestValue)}</div></div>
+          <div><div class="stat-label">Units</div><div class="stat-value">${escapeHtml(series.unit)}</div></div>
+        </div></div>
       </div>`;
     }
 
@@ -348,10 +367,10 @@
     function renderVariablesTable(variables) {
       if (!Array.isArray(variables) || variables.length === 0) return "";
       const rows = variables.map(variable => `<tr>
-        <td><div class="variable-actions"><button class="ghost-button" type="button" data-select-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}">Graph</button><button class="ghost-button" type="button" data-download-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}" ${state.selectedSeries?.points?.length ? "" : "disabled"}>Download Excel</button></div></td>
-        <td>${escapeHtml(variable.country || "")}</td><td>${escapeHtml(variable.label)}</td><td>${escapeHtml(variable.coverage || "")}</td><td>${escapeHtml(variable.frequency || "annual")}</td><td>${escapeHtml(variable.unit || "")}</td><td>${escapeHtml(variable.productId)} / ${escapeHtml(variable.activityId)} / ${escapeHtml(variable.unitFacet)}</td>
+        <td><div class="variable-actions"><button class="ghost-button" type="button" data-select-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}">Graph</button><button class="ghost-button" type="button" data-download-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}" ${state.selectedSeries?.points?.length ? "" : "disabled"}>Excel</button></div></td>
+        <td>${escapeHtml(variable.country || "")}</td><td class="variable-name">${escapeHtml(variable.label)}</td><td>${escapeHtml(variable.coverage || "")}</td><td>${escapeHtml(variable.frequency || "annual")}</td><td>${escapeHtml(variable.unit || "")}</td><td>${escapeHtml(variable.productId)} / ${escapeHtml(variable.activityId)} / ${escapeHtml(variable.unitFacet)}</td>
       </tr>`).join("");
-      return `<article class="card"><h3 class="result-card-title">Matching EIA Variables</h3><p class="muted">Click Graph to load another series.</p><div class="table-wrap"><table><thead><tr><th>Select</th><th>Country</th><th>Variable</th><th>Coverage</th><th>Frequency</th><th>Unit</th><th>Indicator code</th></tr></thead><tbody>${rows}</tbody></table></div></article>`;
+      return `<article class="card"><h2 class="result-card-title">Matching EIA Variables</h2><p class="muted">Click Graph to load another series.</p><div class="table-wrap"><table><thead><tr><th>Select</th><th>Country</th><th>Variable</th><th>Coverage</th><th>Frequency</th><th>Unit</th><th>Indicator code</th></tr></thead><tbody>${rows}</tbody></table></div></article>`;
     }
 
     function resetChartRange(points) {
@@ -435,6 +454,7 @@
       const chartHeight = Math.max(10, height - top - bottom);
       const x = index => cleanPoints.length === 1 ? left + chartWidth / 2 : left + (index / (cleanPoints.length - 1)) * chartWidth;
       const y = value => top + chartHeight - ((value - min) / range) * chartHeight;
+      const plottedPoints = cleanPoints.map((point, index) => ({ ...point, x: x(index), y: y(point.value) }));
       ctx.font = "12px Arial";
       ctx.fillStyle = "#374151";
       ctx.strokeStyle = "#d1d5db";
@@ -442,25 +462,32 @@
       ctx.beginPath(); ctx.moveTo(left, top); ctx.lineTo(left, top + chartHeight); ctx.lineTo(left + chartWidth, top + chartHeight); ctx.stroke();
       ctx.fillText(formatNumber(max), 8, top + 4); ctx.fillText(formatNumber(min), 8, top + chartHeight); ctx.fillText(unit || "Value", left, 16);
       cleanPoints.forEach((point, index) => { if (index % Math.ceil(cleanPoints.length / 8) !== 0 && index !== cleanPoints.length - 1) return; ctx.fillText(point.period, x(index) - 14, top + chartHeight + 24); });
-      ctx.beginPath(); cleanPoints.forEach((point, index) => { const px = x(index), py = y(point.value); if (index === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); });
+      ctx.beginPath(); plottedPoints.forEach((point, index) => { if (index === 0) ctx.moveTo(point.x, point.y); else ctx.lineTo(point.x, point.y); });
       ctx.strokeStyle = "#0057d9"; ctx.lineWidth = 3; ctx.stroke();
-      cleanPoints.forEach((point, index) => { ctx.beginPath(); ctx.arc(x(index), y(point.value), 3.5, 0, Math.PI * 2); ctx.fillStyle = "#0057d9"; ctx.fill(); });
+      plottedPoints.forEach(point => { ctx.beginPath(); ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2); ctx.fillStyle = "#0057d9"; ctx.fill(); });
+      setupChartTooltip(canvas, plottedPoints);
     }
 
-    function downloadCsv() {
-      const series = state.selectedSeries;
-      if (!series?.points?.length) return showStatus("No selected data are available to download.", true);
-      const rows = [["period", "country", "country_code", "series", "value", "unit"]];
-      for (const point of series.points) rows.push([point.period, series.country, series.countryCode, series.title, point.value, series.unit]);
-      const csv = rows.map(row => row.map(csvCell).join(",")).join("\n");
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = makeCsvFilename(series);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(link.href);
+    function setupChartTooltip(canvas, plottedPoints) {
+      const tooltip = document.getElementById("chartTooltip");
+      if (!tooltip) return;
+      canvas.onmousemove = event => {
+        if (!plottedPoints.length) return;
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const nearest = plottedPoints.reduce((best, point) => Math.abs(point.x - mouseX) < Math.abs(best.x - mouseX) ? point : best, plottedPoints[0]);
+        tooltip.innerHTML = `${escapeHtml(nearest.period)}<br>${escapeHtml(formatTooltipValue(nearest.value))}`;
+        tooltip.style.display = "block";
+        tooltip.style.left = `${nearest.x}px`;
+        tooltip.style.top = `${nearest.y}px`;
+      };
+      canvas.onmouseleave = () => { tooltip.style.display = "none"; };
+    }
+
+    function formatTooltipValue(value) {
+      const number = Number(value);
+      if (!Number.isFinite(number)) return "Not available";
+      return Math.round(Math.abs(number)) > 100 ? String(Math.round(number)) : number.toFixed(1);
     }
 
     async function downloadExcelFromButton(button) {
@@ -601,10 +628,8 @@
       return value >>> 0;
     });
 
-    function makeCsvFilename(series) { return `${series.countryCode || "country"}-${series.productId || "product"}-${series.activityId || "activity"}.csv`.toLowerCase().replace(/[^a-z0-9._-]+/g, "-"); }
     function columnName(index) { let name = ""; for (let value = index + 1; value > 0; value = Math.floor((value - 1) / 26)) name = String.fromCharCode(65 + ((value - 1) % 26)) + name; return name; }
     function safeFileName(value) { return String(value || "eia-series").replace(/[^a-z0-9_-]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 80) || "eia-series"; }
-    function csvCell(value) { const text = String(value ?? ""); return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text; }
     function showStatus(message, isError = false) { document.getElementById("status").innerHTML = `<div class="card compact-card ${isError ? "error" : ""}">${escapeHtml(message)}</div>`; }
     function escapeHtml(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
     function escapeAttr(value) { return escapeHtml(value); }
