@@ -1,4 +1,5 @@
 import { interpretQuery, findCountryByCode, hasPhrase, normalizeText } from "./interpret-query.js";
+import { requireAuthentication } from "../lib/auth.js";
 
 const EIA_BASE_URL = "https://api.eia.gov/v2/international";
 const DEFAULT_FREQUENCY = "annual";
@@ -15,6 +16,7 @@ globalThis.__EIA_APP_CACHE__ = cache;
 
 export default async function handler(req, res) {
   setJsonHeaders(res);
+  if (!requireAuthentication(req, res)) return;
 
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed.", userMessage: "Use the search box on the webpage or send a GET request." });
@@ -376,8 +378,17 @@ async function fetchJson(url, apiKey) {
     const response = await fetch(url, { signal: controller.signal });
     const text = await response.text();
     let json;
-    try { json = JSON.parse(text); } catch { throw new Error(`EIA returned a non-JSON response: ${text.slice(0, 180)}`); }
-    if (!response.ok) throw new Error(`EIA request failed: ${json?.error || json?.message || `HTTP ${response.status}`}`);
+    try {
+      json = JSON.parse(text);
+    } catch {
+      logUpstreamEiaResponse("non-JSON response", response, text, url);
+      if (response.status === 503) throw new Error("EIA service unavailable.");
+      throw new Error(`EIA returned a non-JSON response: ${text.slice(0, 180)}`);
+    }
+    if (!response.ok) {
+      logUpstreamEiaResponse("non-OK response", response, text, url);
+      throw new Error(`EIA request failed: ${json?.error || json?.message || `HTTP ${response.status}`}`);
+    }
     return json;
   } catch (error) {
     if (error.name === "AbortError") throw new Error("The EIA request timed out.");
@@ -395,9 +406,21 @@ function buildCacheKey(url) {
   parsed.searchParams.delete("api_key");
   return parsed.toString();
 }
+function logUpstreamEiaResponse(reason, response, text, url) {
+  const parsed = new URL(url);
+  parsed.searchParams.delete("api_key");
+  console.error("[search-eia] EIA upstream response issue", {
+    reason,
+    status: response.status,
+    contentType: response.headers.get("content-type") || "",
+    url: parsed.toString(),
+    bodySnippet: String(text || "").slice(0, 300)
+  });
+}
 function friendlyErrorMessage(error) {
   const message = String(error?.message || "");
   if (message.includes("timed out")) return "The EIA API request timed out. Try the same search again.";
+  if (message.includes("service unavailable")) return "EIA is temporarily unavailable. Try again later.";
   if (message.includes("non-JSON")) return "EIA returned an unexpected response. Check the API route and Vercel function logs.";
   if (message.includes("EIA request failed")) return "EIA rejected the request. Check the selected country/series or try a broader search.";
   if (message.includes("fetch failed") || message.includes("network")) return "The backend could not reach EIA. Try again later.";

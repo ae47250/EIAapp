@@ -46,7 +46,74 @@ OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-5.4-mini
 ```
 
+The temporary single-user login also requires these server-only variables:
+
+```text
+APP_USERNAME=your chosen username
+APP_PASSWORD_HASH=a generated scrypt hash, never the plain password
+SESSION_SECRET=a random signing secret
+```
+
 Do not commit API keys to GitHub.
+
+## Temporary single-user login
+
+The app uses a signed, HTTP-only cookie that expires after 20 minutes of inactivity. Each authenticated request refreshes the cookie, so the timeout slides forward while the session is active. The cookie uses `SameSite=Strict` and is marked `Secure` in production. The cookie contains only signed session timing and random nonce data; it does not contain the username, password, password hash, or signing secret.
+
+Protected routes:
+
+```text
+/
+/index.html
+/api/search-eia
+/api/interpret-query
+/api/openai-diagnostic
+```
+
+Public routes:
+
+```text
+/login
+/login.html
+/api/login
+/api/logout
+necessary static assets
+```
+
+Authentication is enforced both by Vercel Routing Middleware and inside every private API handler. The middleware protects the static application page and protects API routes by default; the handler-level checks prevent API access from relying only on a redirect or hidden user interface.
+
+### Generate the password hash
+
+Run this locally in an interactive terminal:
+
+```text
+npm run generate-password-hash
+```
+
+The script asks for the password without displaying it and prints a scrypt hash. Put only that hash in `APP_PASSWORD_HASH`. Do not paste your real password into Codex, a command-line argument, GitHub, or a tracked file.
+
+### Generate the session secret
+
+Run this command locally:
+
+```text
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+Put the output in `SESSION_SECRET`. Do not commit or share it.
+
+### Configure Vercel
+
+1. Open the EIAapp project in Vercel.
+2. Open **Settings -> Environment Variables**.
+3. Add `APP_USERNAME` with the username you chose.
+4. Add `APP_PASSWORD_HASH` with the complete output from `npm run generate-password-hash`.
+5. Add `SESSION_SECRET` with the complete output from the command above.
+6. Apply each variable to Production and Preview. Add Development only if you use `vercel dev` locally.
+7. Confirm none of these names use a `NEXT_PUBLIC_` prefix.
+8. Save the variables, then redeploy the branch or production deployment because existing deployments do not receive newly added values automatically.
+
+The login endpoint permits five failed attempts per 15-minute window for each observed client address. This state is stored in memory and is therefore limited to one Vercel function instance. It reduces basic repeated attempts but is not strong distributed rate limiting; multiple instances or cold starts can reset or split the counters. Use a distributed service such as Vercel Firewall rate limiting or a shared store if stronger protection becomes necessary.
 
 ## What OpenAI does
 
