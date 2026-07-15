@@ -382,6 +382,7 @@ async function fetchJson(url, apiKey) {
       json = JSON.parse(text);
     } catch {
       logUpstreamEiaResponse("non-JSON response", response, text, url);
+      if (response.status === 503) throw new Error("EIA service unavailable.");
       throw new Error(`EIA returned a non-JSON response: ${text.slice(0, 180)}`);
     }
     if (!response.ok) {
@@ -419,6 +420,7 @@ function logUpstreamEiaResponse(reason, response, text, url) {
 function friendlyErrorMessage(error) {
   const message = String(error?.message || "");
   if (message.includes("timed out")) return "The EIA API request timed out. Try the same search again.";
+  if (message.includes("service unavailable")) return "EIA is temporarily unavailable. Try again later.";
   if (message.includes("non-JSON")) return "EIA returned an unexpected response. Check the API route and Vercel function logs.";
   if (message.includes("EIA request failed")) return "EIA rejected the request. Check the selected country/series or try a broader search.";
   if (message.includes("fetch failed") || message.includes("network")) return "The backend could not reach EIA. Try again later.";
