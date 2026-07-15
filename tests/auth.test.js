@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { after, before, beforeEach, test } from "node:test";
 import { randomBytes } from "node:crypto";
 
-import loginHandler, { resetLoginAttemptsForTests } from "../api/login.js";
-import logoutHandler from "../api/logout.js";
-import interpretQueryHandler from "../api/interpret-query.js";
-import openaiDiagnosticHandler from "../api/openai-diagnostic.js";
-import searchEiaHandler from "../api/search-eia.js";
-import middleware from "../middleware.js";
+import loginHandler, { resetLoginAttemptsForTests } from "../lib/server/login.js";
+import logoutHandler from "../lib/server/logout.js";
+import openaiDiagnosticHandler from "../lib/server/openai-diagnostic.js";
+import interpretQueryHandler from "../lib/sources/eia/interpret-query.js";
+import searchEiaHandler from "../lib/sources/eia/search.js";
+import { proxy as middleware } from "../proxy.js";
 import {
   INVALID_CREDENTIALS_MESSAGE,
   SESSION_COOKIE_NAME,
@@ -146,10 +146,22 @@ test("every private API handler rejects requests without a session", async () =>
   }
 });
 
-test("routing middleware rejects unauthenticated API requests", async () => {
+test("proxy passes API requests to handlers for direct authorization", async () => {
   const response = await middleware(new Request("https://example.test/api/search-eia?q=test"));
-  assert.equal(response.status, 401);
-  assert.deepEqual(await response.json(), { error: "Authentication required." });
+  assert.equal(response.headers.get("x-middleware-next"), "1");
+});
+
+test("proxy does not refresh sessions on public login and logout routes", async () => {
+  const token = createSessionToken();
+  const cookie = createSessionCookie(token).split(";")[0];
+
+  for (const pathname of ["/api/login", "/api/logout"]) {
+    const response = await middleware(new Request(`https://example.test${pathname}`, {
+      headers: { cookie }
+    }));
+    assert.equal(response.headers.get("x-middleware-next"), "1");
+    assert.equal(response.headers.get("set-cookie"), null);
+  }
 });
 
 test("logout deletes the session cookie and redirects to login", () => {
