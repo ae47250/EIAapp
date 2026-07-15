@@ -49,10 +49,13 @@ OPENAI_MODEL=gpt-5.4-mini
 The temporary single-user login also requires these server-only variables:
 
 ```text
+LOGIN_REQUIRED=on
 APP_USERNAME=your chosen username
 APP_PASSWORD_HASH=a generated scrypt hash, never the plain password
 SESSION_SECRET=a random signing secret
 ```
+
+Set `LOGIN_REQUIRED=off` to make the page and API routes public without removing the login architecture. The switch is case-insensitive, but only the value `off` disables login; a missing value or any other value keeps login enabled.
 
 Do not commit API keys to GitHub.
 
@@ -106,12 +109,13 @@ Put the output in `SESSION_SECRET`. Do not commit or share it.
 
 1. Open the EIAapp project in Vercel.
 2. Open **Settings -> Environment Variables**.
-3. Add `APP_USERNAME` with the username you chose.
-4. Add `APP_PASSWORD_HASH` with the complete output from `npm run generate-password-hash`.
-5. Add `SESSION_SECRET` with the complete output from the command above.
-6. Apply each variable to Production and Preview. Add Development only if you use `vercel dev` locally.
-7. Confirm none of these names use a `NEXT_PUBLIC_` prefix.
-8. Save the variables, then redeploy the branch or production deployment because existing deployments do not receive newly added values automatically.
+3. Add `LOGIN_REQUIRED` with `on` or `off`.
+4. Add `APP_USERNAME` with the username you chose.
+5. Add `APP_PASSWORD_HASH` with the complete output from `npm run generate-password-hash`.
+6. Add `SESSION_SECRET` with the complete output from the command above.
+7. Apply each variable to Production and Preview. Add Development only if you use `vercel dev` locally.
+8. Confirm none of these names use a `NEXT_PUBLIC_` prefix.
+9. Save the variables, then redeploy the branch or production deployment because existing deployments do not receive newly added values automatically.
 
 The login endpoint permits five failed attempts per 15-minute window for each observed client address. This state is stored in memory and is therefore limited to one Vercel function instance. It reduces basic repeated attempts but is not strong distributed rate limiting; multiple instances or cold starts can reset or split the counters. Use a distributed service such as Vercel Firewall rate limiting or a shared store if stronger protection becomes necessary.
 

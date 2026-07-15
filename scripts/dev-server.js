@@ -12,6 +12,7 @@ import {
   createSessionCookie,
   createSessionToken,
   isAuthenticatedRequest,
+  isLoginRequired,
   normalizeReturnTo
 } from "../lib/auth.js";
 
@@ -50,7 +51,7 @@ const server = createServer(async (req, res) => {
     }
 
     if (url.pathname === "/" || url.pathname === "/index.html") {
-      if (!isAuthenticatedRequest(req)) {
+      if (isLoginRequired() && !isAuthenticatedRequest(req)) {
         const returnTo = normalizeReturnTo(`${url.pathname}${url.search}`);
         res.statusCode = 302;
         res.setHeader("Cache-Control", "no-store");
@@ -58,7 +59,7 @@ const server = createServer(async (req, res) => {
         return res.end();
       }
 
-      refreshSession(res);
+      if (isLoginRequired()) refreshSession(res);
       return serveHtml(res, "index.html");
     }
 
@@ -85,6 +86,7 @@ server.listen(port, host, () => {
 
 function applyApiAuthentication(req, res, pathname) {
   if (pathname === "/api/login" || pathname === "/api/logout") return true;
+  if (!isLoginRequired()) return true;
   if (!isAuthenticatedRequest(req)) {
     res.setHeader("Cache-Control", "no-store");
     res.status(401).json({ error: "Authentication required." });

@@ -23,6 +23,7 @@ const originalEnvironment = {
   APP_USERNAME: process.env.APP_USERNAME,
   APP_PASSWORD_HASH: process.env.APP_PASSWORD_HASH,
   SESSION_SECRET: process.env.SESSION_SECRET,
+  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED,
   NODE_ENV: process.env.NODE_ENV,
   VERCEL_ENV: process.env.VERCEL_ENV
 };
@@ -44,6 +45,7 @@ beforeEach(() => {
   process.env.APP_PASSWORD_HASH = passwordHash;
   process.env.SESSION_SECRET = sessionSecret;
   process.env.NODE_ENV = "test";
+  delete process.env.LOGIN_REQUIRED;
   delete process.env.VERCEL_ENV;
   resetLoginAttemptsForTests();
 });
@@ -108,6 +110,25 @@ test("unauthenticated protected-page requests redirect to login", async () => {
   const location = new URL(response.headers.get("location"));
   assert.equal(location.pathname, "/login");
   assert.equal(location.searchParams.get("returnTo"), "/index.html?view=recent");
+});
+
+test("LOGIN_REQUIRED=off bypasses page and API authentication", async () => {
+  process.env.LOGIN_REQUIRED = "OFF";
+
+  const pageResponse = await middleware(new Request("https://example.test/"));
+  assert.equal(pageResponse.headers.get("x-middleware-next"), "1");
+  assert.equal(pageResponse.headers.get("set-cookie"), null);
+
+  const handlers = [searchEiaHandler, interpretQueryHandler, openaiDiagnosticHandler];
+  for (const handler of handlers) {
+    const res = createMockResponse();
+    await handler(createRequest({ method: "POST" }), res);
+    assert.equal(res.statusCode, 405);
+  }
+
+  process.env.LOGIN_REQUIRED = "false";
+  const failSafeResponse = await middleware(new Request("https://example.test/"));
+  assert.equal(failSafeResponse.status, 302);
 });
 
 test("every private API handler rejects requests without a session", async () => {
