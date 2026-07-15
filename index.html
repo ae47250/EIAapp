@@ -127,12 +127,13 @@
     .example-query { color: #000000; }
     .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 20px; }
     .grid:empty { display: none; }
-    .results-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin-top: 20px; align-items: start; }
+    .results-pair { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; margin-top: 20px; align-items: start; }
     .results-pair:empty { display: none; }
     .results-pair.single-result { grid-template-columns: 1fr; }
     .results-pair > .card { min-width: 0; }
     .card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); }
     .compact-card { padding: 14px 16px; }
+    .result-card-title { margin: 0 0 10px; color: var(--ink); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; line-height: 1.25; text-align: left; }
     .muted { color: var(--muted); font-size: 14px; }
     .error { border-color: #fca5a5; background: #fff1f2; color: #000000; font-weight: 700; }
     .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
@@ -140,20 +141,27 @@
     .secondary-button:hover:not(:disabled) { filter: brightness(1.03); }
     .ghost-button { background: rgba(15, 111, 255, 0.08); color: #000000; border: 1px solid rgba(15, 111, 255, 0.18); padding: 8px 11px; font-size: 13px; box-shadow: none; }
     .ghost-button:hover:not(:disabled) { background: rgba(15, 111, 255, 0.14); }
+    .variable-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
     .stats { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 10px; margin-top: 14px; }
     .stat { border: 1px solid rgba(15, 111, 255, 0.12); border-radius: 14px; padding: 12px; background: linear-gradient(180deg, rgba(241, 251, 255, 0.96), rgba(227, 245, 255, 0.88)); }
     .stat-label { color: #000000; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
     .stat-value { margin-top: 3px; font-weight: 700; }
     canvas { width: 100%; height: 240px; border: 1px solid rgba(148, 163, 184, 0.28); border-radius: 14px; background: #ffffff; margin-top: 12px; }
+    .range-filter { margin: 8px 30px 0 76px; }
+    .range-values { display: flex; justify-content: space-between; gap: 12px; color: var(--ink); font-size: 13px; font-weight: 700; }
+    .range-controls { position: relative; height: 34px; margin-top: 2px; }
+    .range-controls input[type="range"] { position: absolute; inset: 0; width: 100%; margin: 0; background: transparent; pointer-events: none; accent-color: #0057d9; }
+    .range-controls input[type="range"]::-webkit-slider-thumb { pointer-events: auto; }
+    .range-controls input[type="range"]::-moz-range-thumb { pointer-events: auto; }
     .table-wrap { width: 100%; overflow-x: auto; margin-top: 12px; }
     .recent-observations-card { padding: 14px 16px; }
-    .recent-observations-card h3 { margin-bottom: 4px; }
+    .recent-country { margin-top: 8px; color: var(--ink); font-size: 14px; font-weight: 700; }
     .compact-observations { display: grid; grid-template-columns: repeat(4, minmax(110px, 1fr)); gap: 8px; margin-top: 10px; }
     .compact-observation { border: 1px solid rgba(15, 111, 255, 0.12); border-radius: 12px; background: linear-gradient(180deg, rgba(241, 251, 255, 0.96), rgba(227, 245, 255, 0.88)); padding: 8px 10px; }
     .compact-observation-period { color: #000000; font-size: 12px; font-weight: 700; }
     .compact-observation-value { margin-top: 2px; font-size: 14px; font-weight: 700; }
     .compact-observation-unit { color: #000000; font-size: 11px; margin-top: 1px; }
-    table { width: 100%; min-width: 780px; border-collapse: collapse; font-size: 14px; background: rgba(255, 255, 255, 0.96); }
+    table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 14px; background: rgba(255, 255, 255, 0.96); }
     th, td { border-bottom: 1px solid #e5e7eb; padding: 9px; text-align: left; vertical-align: top; }
     th { background: #dff3ff; color: #000000; white-space: nowrap; }
     tr:hover td { background: #f8fdff; }
@@ -170,6 +178,7 @@
       .search-panel { grid-template-columns: 1fr; }
       .stats { grid-template-columns: 1fr 1fr; }
       canvas { height: 200px; }
+      .range-filter { margin-left: 0; margin-right: 0; }
       .compact-observations { grid-template-columns: 1fr 1fr; }
       .results-pair { grid-template-columns: 1fr; }
     }
@@ -215,7 +224,7 @@
   </main>
 
   <script>
-    const state = { data: null, selectedSeries: null };
+    const state = { data: null, selectedSeries: null, chartRange: { start: 0, end: 0 } };
     document.getElementById("searchButton").addEventListener("click", searchEIA);
     document.getElementById("searchBox").addEventListener("keydown", event => {
       if (event.key === "Enter") {
@@ -230,6 +239,11 @@
     document.addEventListener("click", event => {
       const button = event.target.closest("[data-select-series]");
       if (button) selectSeriesFromButton(button);
+      const downloadButton = event.target.closest("[data-download-series]");
+      if (downloadButton) downloadExcelFromButton(downloadButton);
+    });
+    document.addEventListener("input", event => {
+      if (event.target.matches("[data-chart-range]")) updateChartRange(event.target);
     });
 
     async function searchEIA() {
@@ -299,20 +313,22 @@
         return;
       }
       state.selectedSeries = series;
+      resetChartRange(series.points);
       const variablesCard = renderVariablesTable(data.variables || []);
       results.classList.toggle("single-result", !variablesCard);
-      document.getElementById("recentObservations").innerHTML = renderObservationTable(getRecentYears(series.points, 4), series.unit);
+      document.getElementById("recentObservations").innerHTML = renderObservationTable(getRecentYears(series.points, 4), series.unit, series.country);
       results.innerHTML = `
         ${variablesCard}
         <article class="card">
-          <h2>${escapeHtml(series.title)}</h2>
+          <h3 class="result-card-title">${escapeHtml(series.title)}</h3>
           <div class="muted">${escapeHtml(series.country)} (${escapeHtml(series.countryCode)}) | ${escapeHtml(series.frequency)} | Source: ${escapeHtml(data.source || "EIA")}</div>
           ${renderStats(series)}
           <div class="toolbar"><button class="secondary-button" type="button" onclick="downloadCsv()">Download selected data as CSV</button></div>
           <canvas id="chart" aria-label="Line chart"></canvas>
+          ${renderRangeSlider(series.points)}
         </article>
       `;
-      drawChart(getRecentYears(series.points, 10), series.unit);
+      drawSelectedChart();
     }
 
     function renderStats(series) {
@@ -324,18 +340,65 @@
       </div>`;
     }
 
-    function renderObservationTable(points, unit) {
+    function renderObservationTable(points, unit, country) {
       const cells = [...points].slice().reverse().map(point => `<div class="compact-observation"><div class="compact-observation-period">${escapeHtml(point.period)}</div><div class="compact-observation-value">${formatNumber(point.value)}</div><div class="compact-observation-unit">${escapeHtml(unit)}</div></div>`).join("");
-      return `<article class="card recent-observations-card"><h3>Recent observations</h3><div class="muted">Last 4 years shown. CSV download includes the full selected series.</div><div class="compact-observations">${cells}</div></article>`;
+      return `<article class="card recent-observations-card"><h3 class="result-card-title">Recent Observations</h3><div class="muted">Last 4 years shown. CSV download includes the full selected series.</div><div class="recent-country">${escapeHtml(country || "")}</div><div class="compact-observations">${cells}</div></article>`;
     }
 
     function renderVariablesTable(variables) {
       if (!Array.isArray(variables) || variables.length === 0) return "";
       const rows = variables.map(variable => `<tr>
-        <td><button class="ghost-button" type="button" data-select-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}">Graph</button></td>
-        <td>${escapeHtml(variable.country || "")}</td><td>${escapeHtml(variable.countryCode || "")}</td><td>${escapeHtml(variable.label)}</td><td>${escapeHtml(variable.coverage || "")}</td><td>${escapeHtml(variable.frequency || "annual")}</td><td>${escapeHtml(variable.unit || "")}</td><td>${escapeHtml(variable.productId)} / ${escapeHtml(variable.activityId)} / ${escapeHtml(variable.unitFacet)}</td>
+        <td><div class="variable-actions"><button class="ghost-button" type="button" data-select-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}">Graph</button><button class="ghost-button" type="button" data-download-series="1" data-country-code="${escapeAttr(variable.countryCode)}" data-product-id="${escapeAttr(variable.productId)}" data-activity-id="${escapeAttr(variable.activityId)}" data-unit-facet="${escapeAttr(variable.unitFacet)}" ${state.selectedSeries?.points?.length ? "" : "disabled"}>Download Excel</button></div></td>
+        <td>${escapeHtml(variable.country || "")}</td><td>${escapeHtml(variable.label)}</td><td>${escapeHtml(variable.coverage || "")}</td><td>${escapeHtml(variable.frequency || "annual")}</td><td>${escapeHtml(variable.unit || "")}</td><td>${escapeHtml(variable.productId)} / ${escapeHtml(variable.activityId)} / ${escapeHtml(variable.unitFacet)}</td>
       </tr>`).join("");
-      return `<article class="card"><h3>Matching EIA variables</h3><p class="muted">Click Graph to load another series.</p><div class="table-wrap"><table><thead><tr><th>Select</th><th>Country</th><th>ISO</th><th>Variable</th><th>Coverage</th><th>Frequency</th><th>Unit</th><th>Indicator code</th></tr></thead><tbody>${rows}</tbody></table></div></article>`;
+      return `<article class="card"><h3 class="result-card-title">Matching EIA Variables</h3><p class="muted">Click Graph to load another series.</p><div class="table-wrap"><table><thead><tr><th>Select</th><th>Country</th><th>Variable</th><th>Coverage</th><th>Frequency</th><th>Unit</th><th>Indicator code</th></tr></thead><tbody>${rows}</tbody></table></div></article>`;
+    }
+
+    function resetChartRange(points) {
+      const cleanPoints = getCleanPoints(points);
+      state.chartRange = { start: 0, end: Math.max(0, cleanPoints.length - 1) };
+    }
+
+    function renderRangeSlider(points) {
+      const cleanPoints = getCleanPoints(points);
+      if (cleanPoints.length <= 1) return "";
+      const end = cleanPoints.length - 1;
+      return `<div class="range-filter" aria-label="Displayed graph date range">
+        <div class="range-values"><span id="rangeStartLabel">${escapeHtml(cleanPoints[state.chartRange.start]?.period || "")}</span><span id="rangeEndLabel">${escapeHtml(cleanPoints[state.chartRange.end]?.period || "")}</span></div>
+        <div class="range-controls">
+          <input type="range" min="0" max="${end}" step="1" value="${state.chartRange.start}" data-chart-range="start" aria-label="Graph beginning period">
+          <input type="range" min="0" max="${end}" step="1" value="${state.chartRange.end}" data-chart-range="end" aria-label="Graph ending period">
+        </div>
+      </div>`;
+    }
+
+    function updateChartRange(input) {
+      const series = state.selectedSeries;
+      const cleanPoints = getCleanPoints(series?.points);
+      if (cleanPoints.length === 0) return;
+      const maxIndex = cleanPoints.length - 1;
+      let nextValue = Math.max(0, Math.min(maxIndex, Number(input.value)));
+      if (input.dataset.chartRange === "start") {
+        state.chartRange.start = Math.min(nextValue, state.chartRange.end);
+      } else {
+        state.chartRange.end = Math.max(nextValue, state.chartRange.start);
+      }
+      document.querySelector('[data-chart-range="start"]').value = state.chartRange.start;
+      document.querySelector('[data-chart-range="end"]').value = state.chartRange.end;
+      document.getElementById("rangeStartLabel").textContent = cleanPoints[state.chartRange.start]?.period || "";
+      document.getElementById("rangeEndLabel").textContent = cleanPoints[state.chartRange.end]?.period || "";
+      drawSelectedChart();
+    }
+
+    function drawSelectedChart() {
+      const series = state.selectedSeries;
+      const cleanPoints = getCleanPoints(series?.points);
+      const visiblePoints = cleanPoints.slice(state.chartRange.start, state.chartRange.end + 1);
+      drawChart(visiblePoints, series?.unit);
+    }
+
+    function getCleanPoints(points) {
+      return (points || []).map(point => ({ period: String(point.period || ""), value: Number(point.value) })).filter(point => point.period && Number.isFinite(point.value));
     }
 
     function getRecentYears(points, yearCount) {
@@ -400,11 +463,152 @@
       URL.revokeObjectURL(link.href);
     }
 
+    async function downloadExcelFromButton(button) {
+      const series = await getSeriesForDownload(button);
+      if (!series?.points?.length) return showStatus("No selected data are available to download.", true);
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(buildXlsx(series));
+      link.download = `${safeFileName(series.title || series.productId || "eia-series")}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+
+    async function getSeriesForDownload(button) {
+      const current = state.selectedSeries;
+      if (current && current.countryCode === button.dataset.countryCode && current.productId === button.dataset.productId && current.activityId === button.dataset.activityId && current.unitFacet === button.dataset.unitFacet) return current;
+      const existingData = state.data || {};
+      const url = new URL("/api/search-eia", window.location.origin);
+      url.searchParams.set("q", document.getElementById("searchBox").value.trim());
+      url.searchParams.set("country", button.dataset.countryCode || existingData.country?.code || "");
+      url.searchParams.set("productId", button.dataset.productId || "");
+      url.searchParams.set("activityId", button.dataset.activityId || "");
+      url.searchParams.set("unit", button.dataset.unitFacet || "");
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!response.ok || !data.selectedSeries?.points?.length) {
+        showStatus(data.userMessage || "No downloadable observations are available for this series.", true);
+        return null;
+      }
+      return data.selectedSeries;
+    }
+
+    function buildXlsx(series) {
+      const seriesId = `${series.productId || ""} / ${series.activityId || ""} / ${series.unitFacet || ""}`;
+      const dataRows = [
+        ["Observation period", "Observation value", "Series name", "Series ID", "Units", "Frequency", "Country", "Description"],
+        ...getCleanPoints(series.points).map(point => [point.period, point.value, series.title || "", seriesId, series.unit || "", series.frequency || "", series.country || "", `${series.product || ""} ${series.activity || ""}`.trim()])
+      ];
+      const metadataRows = [
+        ["Field", "Value"],
+        ["Series name", series.title || ""],
+        ["Series ID", seriesId],
+        ["Country", series.country || ""],
+        ["Country code", series.countryCode || ""],
+        ["Units", series.unit || ""],
+        ["Frequency", series.frequency || ""],
+        ["Coverage", formatCoverage(series.coverage)],
+        ["Latest period", series.latestPeriod || ""],
+        ["Latest value", Number.isFinite(Number(series.latestValue)) ? Number(series.latestValue) : ""],
+        ["Product", series.product || ""],
+        ["Activity", series.activity || ""]
+      ];
+      const files = {
+        "[Content_Types].xml": `<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`,
+        "_rels/.rels": `<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
+        "xl/workbook.xml": `<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="All_Data" sheetId="1" r:id="rId1"/><sheet name="Metadata" sheetId="2" r:id="rId2"/></sheets></workbook>`,
+        "xl/_rels/workbook.xml.rels": `<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/></Relationships>`,
+        "xl/worksheets/sheet1.xml": worksheetXml(dataRows),
+        "xl/worksheets/sheet2.xml": worksheetXml(metadataRows)
+      };
+      return new Blob([zipStore(files)], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    }
+
+    function worksheetXml(rows) {
+      const sheetData = rows.map((row, rowIndex) => `<row r="${rowIndex + 1}">${row.map((cell, columnIndex) => cellXml(cell, columnName(columnIndex) + (rowIndex + 1))).join("")}</row>`).join("");
+      return `<?xml version="1.0" encoding="UTF-8"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${sheetData}</sheetData></worksheet>`;
+    }
+
+    function cellXml(value, ref) {
+      const number = Number(value);
+      if (typeof value === "number" && Number.isFinite(number)) return `<c r="${ref}"><v>${number}</v></c>`;
+      return `<c r="${ref}" t="inlineStr"><is><t>${escapeXml(value)}</t></is></c>`;
+    }
+
+    function zipStore(files) {
+      const encoder = new TextEncoder();
+      const parts = [];
+      const central = [];
+      let offset = 0;
+      for (const [name, content] of Object.entries(files)) {
+        const nameBytes = encoder.encode(name);
+        const data = encoder.encode(content);
+        const crc = crc32(data);
+        const local = zipHeader(0x04034b50, nameBytes, data.length, crc, offset);
+        parts.push(local, nameBytes, data);
+        central.push(zipHeader(0x02014b50, nameBytes, data.length, crc, offset));
+        offset += local.length + nameBytes.length + data.length;
+      }
+      const centralOffset = offset;
+      for (const record of central) {
+        parts.push(record.bytes, record.nameBytes);
+        offset += record.bytes.length + record.nameBytes.length;
+      }
+      const end = new Uint8Array(22);
+      const view = new DataView(end.buffer);
+      view.setUint32(0, 0x06054b50, true);
+      view.setUint16(8, central.length, true);
+      view.setUint16(10, central.length, true);
+      view.setUint32(12, offset - centralOffset, true);
+      view.setUint32(16, centralOffset, true);
+      parts.push(end);
+      return new Blob(parts);
+    }
+
+    function zipHeader(signature, nameBytes, size, crc, offset) {
+      const isCentral = signature === 0x02014b50;
+      const bytes = new Uint8Array(isCentral ? 46 : 30);
+      const view = new DataView(bytes.buffer);
+      view.setUint32(0, signature, true);
+      if (isCentral) {
+        view.setUint16(4, 20, true);
+        view.setUint16(6, 20, true);
+        view.setUint32(16, crc, true);
+        view.setUint32(20, size, true);
+        view.setUint32(24, size, true);
+        view.setUint16(28, nameBytes.length, true);
+        view.setUint32(42, offset, true);
+        return { bytes, nameBytes };
+      }
+      view.setUint16(4, 20, true);
+      view.setUint32(14, crc, true);
+      view.setUint32(18, size, true);
+      view.setUint32(22, size, true);
+      view.setUint16(26, nameBytes.length, true);
+      return bytes;
+    }
+
+    function crc32(bytes) {
+      let crc = -1;
+      for (const byte of bytes) crc = (crc >>> 8) ^ crcTable[(crc ^ byte) & 0xff];
+      return (crc ^ -1) >>> 0;
+    }
+
+    const crcTable = Array.from({ length: 256 }, (_, index) => {
+      let value = index;
+      for (let bit = 0; bit < 8; bit++) value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
+      return value >>> 0;
+    });
+
     function makeCsvFilename(series) { return `${series.countryCode || "country"}-${series.productId || "product"}-${series.activityId || "activity"}.csv`.toLowerCase().replace(/[^a-z0-9._-]+/g, "-"); }
+    function columnName(index) { let name = ""; for (let value = index + 1; value > 0; value = Math.floor((value - 1) / 26)) name = String.fromCharCode(65 + ((value - 1) % 26)) + name; return name; }
+    function safeFileName(value) { return String(value || "eia-series").replace(/[^a-z0-9_-]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 80) || "eia-series"; }
     function csvCell(value) { const text = String(value ?? ""); return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text; }
     function showStatus(message, isError = false) { document.getElementById("status").innerHTML = `<div class="card compact-card ${isError ? "error" : ""}">${escapeHtml(message)}</div>`; }
     function escapeHtml(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
     function escapeAttr(value) { return escapeHtml(value); }
+    function escapeXml(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;"); }
     function formatNumber(value) { const number = Number(value); return Number.isFinite(number) ? number.toLocaleString(undefined, { maximumFractionDigits: 4 }) : ""; }
     function formatCoverage(coverage) { if (!coverage) return "Not available"; return coverage.start === coverage.end ? `${coverage.start} (${coverage.count} obs.)` : `${coverage.start}-${coverage.end} (${coverage.count} obs.)`; }
   </script>
