@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EIA++ Data Extraction Tool</title>
+  <title>EIA++ AI Assisted Data Extraction Tool</title>
   <style>
     :root {
-      --page-red: #ffd6d6;
-      --ocean-blue: #0077b6;
+      --page-red: #f2a6a6;
+      --card-yellow: #f7f7d7;
       --panel: rgba(255, 255, 255, 0.94);
-      --ink: #0f172a;
-      --muted: #516074;
+      --ink: #000000;
+      --muted: #000000;
       --accent: #0f6fff;
       --border: rgba(148, 163, 184, 0.3);
       --shadow: 0 22px 60px rgba(2, 10, 23, 0.28);
@@ -40,8 +40,8 @@
     }
     .page { width: min(1160px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0 44px; position: relative; z-index: 1; }
     .hero {
-      background: var(--ocean-blue);
-      color: white;
+      background: var(--card-yellow);
+      color: var(--ink);
       border: 1px solid rgba(255, 255, 255, 0.55);
       border-radius: 24px;
       padding: 30px;
@@ -61,17 +61,16 @@
     }
     h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; text-align: center; flex: 1; }
     h2, h3 { margin-top: 0; color: var(--ink); }
-    .examples, .ai-heading, .ai-description { font-family: Arial, sans-serif; font-size: 18px; font-weight: 400; }
-    .ai-heading { margin: 18px 0 8px; color: white; text-align: center; }
-    .ai-description { max-width: 980px; margin: 0 auto; color: white; text-align: center; }
+    .examples, .ai-description { font-family: Arial, sans-serif; font-size: 18px; font-weight: 400; }
+    .ai-description { max-width: 980px; margin: 0 auto; color: var(--ink); text-align: center; }
     .hero-heading { display: grid; grid-template-columns: 1fr auto 1fr; align-items: flex-start; gap: 18px; position: relative; z-index: 1; }
     .hero-heading h1 { grid-column: 2; }
     .hero-heading .logout-form { grid-column: 3; justify-self: end; }
     .logout-button {
       padding: 9px 12px;
-      border: 1px solid rgba(15, 111, 255, 0.18);
+      border: 1px solid #b91c1c;
       background: rgba(15, 111, 255, 0.08);
-      color: #0b4fb6;
+      color: #000000;
       font-size: 13px;
     }
     .logout-button:hover:not(:disabled) { background: rgba(15, 111, 255, 0.14); }
@@ -81,7 +80,7 @@
       width: 100%;
       min-height: 84px;
       max-height: none;
-      border: 1px solid rgba(71, 85, 105, 0.2);
+      border: 4px solid #16803c;
       padding: 14px 15px;
       color: var(--ink);
       background: rgba(255, 255, 255, 0.98);
@@ -93,10 +92,10 @@
       overflow-y: hidden;
       resize: none;
     }
-    textarea::placeholder { color: #7a8796; }
+    textarea::placeholder { color: #000000; }
     textarea:focus-visible {
       outline: 3px solid rgba(15, 111, 255, 0.18);
-      border-color: rgba(15, 111, 255, 0.55);
+      border-color: #116b31;
     }
     .search-panel textarea { border-radius: 12px 12px 0 0; }
     .search-panel button { border-radius: 0 0 12px 12px; background: #16803c; box-shadow: 0 10px 20px rgba(22, 128, 60, 0.24); font-family: Arial, sans-serif; font-size: 18px; font-weight: 400; }
@@ -104,7 +103,7 @@
     button {
       border: 0;
       padding: 13px 16px;
-      color: white;
+      color: #000000;
       background: linear-gradient(135deg, var(--accent) 0%, #0a58cc 55%, #0a3e92 100%);
       cursor: pointer;
       font-weight: 700;
@@ -114,7 +113,7 @@
     button:disabled { cursor: not-allowed; opacity: 0.55; transform: none; }
     .examples {
       margin-top: 14px;
-      color: white;
+      color: var(--ink);
       font-size: 18px;
       font-weight: 400;
       padding: 0;
@@ -123,20 +122,23 @@
     }
     .examples p { margin: 0; }
     .examples p + p { margin-top: 8px; }
-    .examples strong { font-weight: 400; }
+    .examples strong { font-weight: 700; }
+    .example-item { padding-left: 3ch; }
+    .example-query { color: #000000; }
     .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 20px; }
+    .grid:empty { display: none; }
     .card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); }
     .compact-card { padding: 14px 16px; }
     .muted { color: var(--muted); font-size: 14px; }
-    .error { border-color: #fca5a5; background: #fff1f2; color: #991b1b; font-weight: 700; }
+    .error { border-color: #fca5a5; background: #fff1f2; color: #000000; font-weight: 700; }
     .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
     .secondary-button { background: linear-gradient(135deg, #0f6fff 0%, #0050c5 100%); }
     .secondary-button:hover:not(:disabled) { filter: brightness(1.03); }
-    .ghost-button { background: rgba(15, 111, 255, 0.08); color: #0b4fb6; border: 1px solid rgba(15, 111, 255, 0.18); padding: 8px 11px; font-size: 13px; box-shadow: none; }
+    .ghost-button { background: rgba(15, 111, 255, 0.08); color: #000000; border: 1px solid rgba(15, 111, 255, 0.18); padding: 8px 11px; font-size: 13px; box-shadow: none; }
     .ghost-button:hover:not(:disabled) { background: rgba(15, 111, 255, 0.14); }
     .stats { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 10px; margin-top: 14px; }
     .stat { border: 1px solid rgba(15, 111, 255, 0.12); border-radius: 14px; padding: 12px; background: linear-gradient(180deg, rgba(241, 251, 255, 0.96), rgba(227, 245, 255, 0.88)); }
-    .stat-label { color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat-label { color: #000000; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
     .stat-value { margin-top: 3px; font-weight: 700; }
     canvas { width: 100%; height: 240px; border: 1px solid rgba(148, 163, 184, 0.28); border-radius: 14px; background: #ffffff; margin-top: 12px; }
     .table-wrap { width: 100%; overflow-x: auto; margin-top: 12px; }
@@ -144,16 +146,18 @@
     .recent-observations-card h3 { margin-bottom: 4px; }
     .compact-observations { display: grid; grid-template-columns: repeat(4, minmax(110px, 1fr)); gap: 8px; margin-top: 10px; }
     .compact-observation { border: 1px solid rgba(15, 111, 255, 0.12); border-radius: 12px; background: linear-gradient(180deg, rgba(241, 251, 255, 0.96), rgba(227, 245, 255, 0.88)); padding: 8px 10px; }
-    .compact-observation-period { color: #6b7280; font-size: 12px; font-weight: 700; }
+    .compact-observation-period { color: #000000; font-size: 12px; font-weight: 700; }
     .compact-observation-value { margin-top: 2px; font-size: 14px; font-weight: 700; }
-    .compact-observation-unit { color: #6b7280; font-size: 11px; margin-top: 1px; }
+    .compact-observation-unit { color: #000000; font-size: 11px; margin-top: 1px; }
     table { width: 100%; min-width: 780px; border-collapse: collapse; font-size: 14px; background: rgba(255, 255, 255, 0.96); }
     th, td { border-bottom: 1px solid #e5e7eb; padding: 9px; text-align: left; vertical-align: top; }
-    th { background: #dff3ff; color: #00327a; white-space: nowrap; }
+    th { background: #dff3ff; color: #000000; white-space: nowrap; }
     tr:hover td { background: #f8fdff; }
-    .about { margin-top: 22px; background: var(--ocean-blue); color: white; }
-    .about h2 { color: white; }
-    .about .muted { color: white; font-family: Arial, sans-serif; font-size: 16px; }
+    .about { margin-top: 8ch; background: var(--card-yellow); color: var(--ink); }
+    .about h2 { margin-bottom: 4px; color: var(--ink); }
+    .about .muted { color: var(--ink); font-family: Arial, sans-serif; font-size: 16px; }
+    .about ul { margin: 0; padding-left: 22px; }
+    .about li + li { margin-top: 4px; }
     @media (max-width: 760px) {
       .page { width: min(100% - 20px, 1120px); padding-top: 14px; }
       .hero { padding: 20px; border-radius: 20px; }
@@ -170,18 +174,18 @@
   <main class="page">
     <section class="hero">
       <div class="hero-heading">
-        <h1>EIA++ Data Extraction Tool</h1>
+        <h1>EIA++ AI Assisted Data Extraction Tool</h1>
         <form class="logout-form" method="post" action="/api/logout">
           <button class="logout-button" type="submit">Logout</button>
         </form>
       </div>
 
-      <h2 class="ai-heading">AI-Assisted Search</h2>
       <p class="ai-description">Unclear wording, typos, and grammatical errors are interpreted and corrected by AI. The request is then converted into structured search instructions used to retrieve the intended data from major data providers through direct API requests.</p>
 
       <div class="examples">
-        <p><strong>Examples:</strong> “brzil erngy production” and “how much oil dos japn us” are fine. Typos and grammar errors in searches are fine.</p>
-        <p>“Looking for data usa prdouction and consumption of nuclear energy”: AI converts this into structure to retrieve the data.</p>
+        <p><strong>Examples:</strong></p>
+        <p class="example-item">“<span class="example-query">brzil erngy production</span>” and “<span class="example-query">how much oil dos japn us</span>” are fine.</p>
+        <p class="example-item">“<span class="example-query">Looking for data usa prdouction and consumption of nuclear energy</span>”<br />AI converts this into structure to retrieve the data.</p>
       </div>
 
       <div class="search-panel">
@@ -196,7 +200,11 @@
 
     <section class="card about">
       <h2>About</h2>
-      <p class="muted">The tool interprets unclear wording, corrects typos and grammar, and converts the request into structured search instructions.<br />All data is retrieved directly from major data providers through API requests.<br />In plain English, the app determines what the user is asking for, finds the matching data, and returns it in an organized format.</p>
+      <ul class="muted">
+        <li>The tool interprets unclear wording, corrects typos and grammar, and converts the request into structured search instructions.</li>
+        <li>All data is retrieved directly from major data providers through API requests.</li>
+        <li>In plain English, the app determines what the user is asking for, finds the matching data, and returns it in an organized format.</li>
+      </ul>
     </section>
   </main>
 
