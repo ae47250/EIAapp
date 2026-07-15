@@ -378,8 +378,16 @@ async function fetchJson(url, apiKey) {
     const response = await fetch(url, { signal: controller.signal });
     const text = await response.text();
     let json;
-    try { json = JSON.parse(text); } catch { throw new Error(`EIA returned a non-JSON response: ${text.slice(0, 180)}`); }
-    if (!response.ok) throw new Error(`EIA request failed: ${json?.error || json?.message || `HTTP ${response.status}`}`);
+    try {
+      json = JSON.parse(text);
+    } catch {
+      logUpstreamEiaResponse("non-JSON response", response, text, url);
+      throw new Error(`EIA returned a non-JSON response: ${text.slice(0, 180)}`);
+    }
+    if (!response.ok) {
+      logUpstreamEiaResponse("non-OK response", response, text, url);
+      throw new Error(`EIA request failed: ${json?.error || json?.message || `HTTP ${response.status}`}`);
+    }
     return json;
   } catch (error) {
     if (error.name === "AbortError") throw new Error("The EIA request timed out.");
@@ -396,6 +404,17 @@ function buildCacheKey(url) {
   const parsed = new URL(url);
   parsed.searchParams.delete("api_key");
   return parsed.toString();
+}
+function logUpstreamEiaResponse(reason, response, text, url) {
+  const parsed = new URL(url);
+  parsed.searchParams.delete("api_key");
+  console.error("[search-eia] EIA upstream response issue", {
+    reason,
+    status: response.status,
+    contentType: response.headers.get("content-type") || "",
+    url: parsed.toString(),
+    bodySnippet: String(text || "").slice(0, 300)
+  });
 }
 function friendlyErrorMessage(error) {
   const message = String(error?.message || "");
