@@ -8,7 +8,7 @@ The baseline app is `ae47250/NewRepapp`. This repo, `ae47250/EIAapp`, is for tes
 
 This repository uses `AGENTS.md` for Codex and AI coding-agent instructions. Review that file before making repository changes so edits follow the project scope, change-reporting, data-source, security, and deployment rules.
 
-## File structure 
+## File structure
 
 ```text
 index.html
