@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eia-app.local/schema/route.schema.json",
+  "title": "Normalized EIA route metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "route",
+    "route_family",
+    "route_id",
+    "name",
+    "description",
+    "frequencies",
+    "facets",
+    "measures",
+    "date_start",
+    "date_end",
+    "default_date_format",
+    "default_frequency",
+    "api_version",
+    "captured_at",
+    "metadata_hash",
+    "raw_metadata_reference"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "source": { "const": "EIA" },
+    "route": { "type": "string", "pattern": "^/[a-z0-9][a-z0-9/-]*$" },
+    "route_family": { "enum": ["domestic", "international", "seds"] },
+    "route_id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "frequencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/frequency" }
+    },
+    "facets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/facet" }
+    },
+    "measures": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/measure" }
+    },
+    "date_start": { "type": ["string", "null"] },
+    "date_end": { "type": ["string", "null"] },
+    "default_date_format": { "type": ["string", "null"] },
+    "default_frequency": { "type": ["string", "null"] },
+    "api_version": { "type": "string", "minLength": 1 },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "metadata_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "raw_metadata_reference": { "type": "string", "format": "uri" }
+  },
+  "$defs": {
+    "frequency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "query", "date_format"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "query": { "type": ["string", "null"] },
+        "date_format": { "type": ["string", "null"] }
+      }
+    },
+    "facet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" }
+      }
+    },
+    "measure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "alias", "unit"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "alias": { "type": "string", "minLength": 1 },
+        "unit": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eia-app.local/schema/manifest.schema.json",
+  "title": "EIA normalized metadata build manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "api_version",
+    "checked_at",
+    "content_updated_at",
+    "content_hash",
+    "routes_checked",
+    "routes_succeeded",
+    "routes_failed",
+    "refresh_status",
+    "record_counts",
+    "change_counts",
+    "diff_summary",
+    "rollback_snapshot_reference",
+    "update_schedule_state",
+    "warnings",
+    "errors",
+    "build_version"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "source": { "const": "EIA" },
+    "api_version": { "type": "string", "minLength": 1 },
+    "checked_at": { "type": "string", "format": "date-time" },
+    "content_updated_at": { "type": ["string", "null"], "format": "date-time" },
+    "content_hash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "routes_checked": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "routes_succeeded": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "routes_failed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["route", "error"],
+        "properties": {
+          "route": { "type": "string", "minLength": 1 },
+          "error": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "refresh_status": { "enum": ["complete", "unchanged", "failed", "partial"] },
+    "record_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domestic", "international", "seds", "total"],
+      "properties": {
+        "domestic": { "type": "integer", "minimum": 0 },
+        "international": { "type": "integer", "minimum": 0 },
+        "seds": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "change_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed", "changed"],
+      "properties": {
+        "added": { "type": "integer", "minimum": 0 },
+        "removed": { "type": "integer", "minimum": 0 },
+        "changed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "diff_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["routes", "facets", "measures", "frequencies", "units", "geographies", "coverage"],
+      "properties": {
+        "routes": { "type": "integer", "minimum": 0 },
+        "facets": { "type": "integer", "minimum": 0 },
+        "measures": { "type": "integer", "minimum": 0 },
+        "frequencies": { "type": "integer", "minimum": 0 },
+        "units": { "type": "integer", "minimum": 0 },
+        "geographies": { "type": "integer", "minimum": 0 },
+        "coverage": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "rollback_snapshot_reference": { "type": ["string", "null"] },
+    "update_schedule_state": { "type": "string", "minLength": 1 },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "errors": { "type": "array", "items": { "type": "string" } },
+    "build_version": { "type": "string", "minLength": 1 }
+  }
+}
