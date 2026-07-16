@@ -1,96 +1,116 @@
 # EIA metadata Phase 4 deterministic-ranking report
 
-Status: implemented, calibrated, and locally verified. Review required before Phase 5. Phase 4 ranking is not connected to the public search workflow.
+Status: implemented, recalibrated, and locally verified. Review is required before Phase 5. Phase 4 remains disconnected from the public search workflow.
 
 ## Scope
 
-Phase 4 adds deterministic ranking on top of the Phase 3 candidate sets. It does not change retrieval, does not use semantic reranking, and does not connect the ranked output into the public search route yet.
+Phase 4 ranks the local candidates produced by Phase 3. It does not fetch observations, add semantic reranking, or change the public `/api/search-eia` workflow.
 
-Ranking weights live in the versioned configuration file `data/eia/phase4-ranking-config.json`.
+Versioned inputs:
 
-Route profiles and controlled vocabulary live in `data/eia/phase4-routing-config.json`. That file records the Phase 1B manifest hash and is regenerated only when the local EIA metadata cache is intentionally rebuilt.
+- `data/eia/phase4-ranking-config.json` defines the score scale, weights, tier order, semantic floors, and display limits.
+- `data/eia/phase4-routing-config.json` contains the route profiles and shared controlled vocabulary used by interpretation, retrieval, and ranking.
+- `data/eia/phase4-concept-taxonomy.json` contains approved concept relationships, contradiction caps, and route/frequency fallback rules.
 
-## Routing cleanup
+The taxonomy records the Phase 1B manifest hash. It must be reviewed when the local metadata build or controlled vocabulary is intentionally rebuilt. No live EIA lookup changes the taxonomy during a query.
 
-The route decision now uses route profiles instead of hidden term-specific shortcuts:
+## Eligibility before scoring
 
-1. Country and world-region requests route to International.
-2. U.S. state nonannual requests route to Domestic first because SEDS is annual-only.
-3. U.S. state annual energy-system requests can route to SEDS.
-4. U.S. state electricity-specific requests route to Domestic.
+A candidate is removed before scoring when:
 
-The previous code-level shortcut for state-level `total energy` was removed. `total energy` is now a configured broad product/scope like the other product families.
+1. Its route family does not match the validated route and no configured route fallback applies.
+2. Its normalized geography does not exactly match the requested geography.
+3. Its selector geography conflicts with the requested geography.
+4. Its canonical selector duplicates an earlier candidate.
 
-Products, activities, scopes, sectors, units, frequencies, aliases, and ambiguity groups are now controlled vocabulary in configuration rather than scattered JavaScript constants. The interpreter, router, retriever, and ranker all read the shared config.
+A wrong-frequency candidate cannot remain primary. It moves to fallback Tier B. The taxonomy also permits an annual SEDS state candidate as Tier B for a monthly or quarterly Domestic state request, but only when such a candidate is supplied to the ranker. Phase 3 does not currently perform that cross-route retrieval.
 
-## Ranking behavior
+## Semantic validation
 
-The ranker applies hard eligibility checks before scoring:
+The ranker detects candidate products, scopes, activities, sectors, and units from normalized metadata and the shared controlled vocabulary. It then applies versioned relationships rather than query-specific JavaScript rules.
 
-1. Route family must match the Phase 3 retrieval family.
-2. Geography must match the validated retrieval geography exactly.
-3. Selector geography must match the validated geography when the selector exposes a geography facet.
-4. Wrong-frequency candidates are moved to the fallback pool instead of being scored as primary.
-5. Candidates missing key eligibility data are excluded or downgraded with warnings.
+Examples:
 
-After eligibility, the ranker scores candidates using configured weights for:
+- Wind, solar, hydro, geothermal, and biofuels are related renewable concepts.
+- Electricity generation implies the electricity product family.
+- A mixed renewable-and-nuclear candidate is too broad for a renewable-only request.
+- A generation-and-consumption candidate is contradictory when the requested activity is only generation or only consumption.
+- Specialized scopes such as process fuel do not outrank an unqualified total-energy series when that scope was not requested.
 
-- route appropriateness;
-- activity match;
-- product or scope match;
-- sector match;
-- frequency preference;
-- unit match;
-- lexical metadata match;
-- requested-date coverage when a request period is present;
-- aggregation role;
-- currentness and availability.
+The configured minimum compatibility is `0.65` for product or scope and `0.80` for an explicitly requested activity. Candidates below either active floor are excluded before display.
 
-Exact verified aggregates receive the highest priority within the relevant pool. Fallback candidates never outrank primary candidates. Ties resolve deterministically using selector identity and candidate ID.
+## Tiers
 
-Broad-product alternatives are fallback suggestions unless they directly match the requested product. Derived metrics such as intensity, ratios, shares, per-capita, and per-dollar series are penalized unless the user asks for that derived metric. If no sector is requested, unqualified totals are preferred over sector-specific totals.
+The previous 1000-point primary-pool bonus is removed. Candidates now use an explicit deterministic order:
 
-When activity is missing but a weak source hint is present, such as `from`, the hint can guide fallback ranking but does not clear the missing-activity ambiguity. The ranked result keeps a warning explaining that the activity was inferred only for ranking. For example, `California monthly electricity from moon` keeps `activity` missing, treats `from` as a weak generation/source hint, returns no primary candidates, and ranks all-fuels net-generation suggestions first.
+1. Tier A: exact requested concept and frequency.
+2. Tier B: approved frequency or route fallback.
+3. Tier C: related concept that clears the semantic floors.
 
-Ranking outputs retain:
+Tier order is applied before score order. Ties use canonical selector identity and candidate ID, so identical inputs and metadata produce identical results.
 
-- reason codes;
-- warnings;
-- score values;
-- ranking configuration version;
-- stable diagnostics for repeatability review.
+## Score composition
+
+The relevance score is normalized to `0-100` and retains the points for every component:
+
+| Component | Maximum points |
+| --- | ---: |
+| Product or scope | 22 |
+| Activity | 18 |
+| Measure or aggregation role | 15 |
+| Fielded lexical IDF | 20 |
+| Sector | 5 |
+| Frequency | 5 |
+| Unit | 5 |
+| Requested-date coverage | 4 |
+| Currentness | 3 |
+| Availability | 3 |
+
+Sector, frequency, unit, date coverage, and similar constraints are active only when the user requested them. Route and geography are hard eligibility facts and do not receive score points a second time.
+
+Lexical scoring uses deterministic fielded inverse-document-frequency weighting over the retrieved candidate set. Title matches receive more credit than measure, normalized field, facet, or description matches. Full BM25F, MMR, neural reranking, and reciprocal-rank fusion remain deferred.
+
+## Aggregates and ambiguity
+
+Verified exact aggregates receive priority. When no sector is requested, an all-sector total ranks ahead of sector-specific totals. Derived measures such as intensity, per-capita values, ratios, and shares do not receive aggregate credit unless requested.
+
+If activity is missing, a weak wording hint may influence ranking at half activity weight, but the result remains Tier C and retains a warning. The hint does not silently become validated user intent.
+
+## Families and display set
+
+Canonical selectors are deduplicated before scoring. Unit and frequency variants with the same semantic title are grouped into one family. The ranker retains all accepted candidates for auditing but recommends at most one representative per family.
+
+The display set contains at most five family representatives with a score of at least `60`. It may contain fewer than five, including zero, rather than padding the result with misleading candidates.
 
 ## Verification results
 
-- Full repository suite: 98 tests passed, 0 failed.
-- Focused ranking suite: 5 tests passed, 0 failed.
+- Full repository suite: 111 tests passed, 0 failed.
+- Focused ranking suite: 16 tests passed, 0 failed.
+- Query-interpretation suite: 22 tests passed, 0 failed.
+- Local-retrieval suite: 13 tests passed, 0 failed.
+- Explicit `LOGIN_REQUIRED=off` test: passed.
+- Ranking module and test syntax checks: passed.
+- Ranking, routing, and taxonomy JSON parsing: passed.
 - Production Next.js build: passed.
-- Syntax checks on the new ranking module and tests: passed.
 
-The focused ranking suite covers:
-
-- top-1 accuracy;
-- hit rate at 5;
-- mean reciprocal rank;
-- NDCG at 10;
-- explicit-frequency violation handling;
-- requested-date coverage;
-- currentness and availability;
-- exact aggregate priority;
-- stable repeated ranking;
-- fallback separation.
+The ranking tests cover graded Top-1 accuracy, Hit Rate@5, mean reciprocal rank, NDCG@10, tiers, semantic floors, explicit-frequency handling, approved SEDS fallback, geography gating, exact aggregate priority, active score components, fielded IDF, compact EIA dates, family grouping, duplicate removal, score bounds, and stable repeated ranking.
 
 ## Manual review
 
-Reviewed representative routing/retrieval/ranking behavior:
+Real Phase 1B metadata produced these representative results:
 
-- `California monthly electricity generation` ranked real `Net generation` records first.
-- `Brazil renewable energy production` surfaced Brazil renewable aggregate records first, with biofuels and other renewable-family matches as fallback suggestions; regional selectors such as `WP13` are excluded.
-- `Texas annual total energy consumption` uses SEDS and ranks `Total energy consumption, Texas` first instead of carbon-intensity or sector-specific series.
-- `Texas monthly total energy consumption` now routes to Domestic first and returns only fallback suggestions, instead of silently using annual SEDS fallback as an exact answer.
+- `California monthly electricity generation`: `ELEC.GEN.ALL-CA-99.M`, the all-sector/all-fuels monthly net-generation series, ranked first.
+- `Texas annual total energy consumption`: `SEDS.TETCB.TX.A`, the unqualified total-energy-consumption series, ranked first.
+- `Texas monthly total energy consumption`: all 50 retrieved Domestic electricity-input candidates failed the activity floor; no misleading display result was returned.
+- `Brazil renewable energy production`: the renewable-production aggregate ranked first; unit variants were grouped and related renewable concepts remained available.
+- `California monthly electricity from moon`: the all-sector/all-fuels monthly net-generation series ranked first in Tier C, with the missing-activity warning retained.
 
-If Domestic metadata cannot find the requested nonannual state variable, Phase 5 wiring should present ranked fallback/suggestion candidates from local metadata rather than inventing them with AI.
+## Remaining limitation
+
+The Phase 1B Domestic cache is Electricity-only. The ranker can score a configured annual SEDS fallback, but Phase 3 currently does not retrieve cross-route SEDS candidates for a Domestic monthly or quarterly request. Phase 5 wiring must either supply that separate fallback pool or clearly report that no requested-frequency series was found. It must not invent or silently substitute a series.
+
+Observation-level quality is also unavailable in the Phase 1B metadata cache, so Phase 4 quality scoring uses metadata coverage, active status, and availability only.
 
 ## Review gate
 
-Approve the deterministic weight configuration and ranking behavior before connecting Phase 4 into any public search path or starting Phase 5.
+Approve the versioned taxonomy, A/B/C tiers, normalized score composition, semantic floors, family grouping, and representative results before connecting ranking to a public search path or starting Phase 5.

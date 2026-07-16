@@ -3,9 +3,13 @@ import { test } from "node:test";
 
 import { interpretQueryWithRules } from "../lib/sources/eia/interpret-query.js";
 import { retrieveLocalCandidates } from "../lib/sources/eia/local-retrieval.js";
-import { RANKING_CONFIG_VERSION, rankLocalCandidates } from "../lib/sources/eia/local-ranking.js";
+import {
+  RANKING_CONFIG_VERSION,
+  RANKING_TAXONOMY_VERSION,
+  rankLocalCandidates
+} from "../lib/sources/eia/local-ranking.js";
 
-test("deterministic ranking meets the baseline metrics on representative cases", () => {
+test("deterministic ranking meets the graded baseline metrics on representative cases", () => {
   const cases = [
     {
       intent: { ...interpretQueryWithRules("California monthly electricity generation"), requestedPeriod: "2024" },
@@ -21,6 +25,7 @@ test("deterministic ranking meets the baseline metrics on representative cases",
             description: "Verified monthly aggregate electricity generation.",
             measure: "net generation",
             geography: { name: "California", code: "CA", type: "state" },
+            frequency: "monthly",
             unit: "million kilowatthours",
             date_end: "2024",
             selector: {
@@ -37,6 +42,7 @@ test("deterministic ranking meets the baseline metrics on representative cases",
             description: "This note mentions generation in passing.",
             measure: "value",
             geography: { name: "California", code: "CA", type: "state" },
+            frequency: "monthly",
             unit: "million kilowatthours",
             date_end: "2024",
             selector: {
@@ -69,7 +75,7 @@ test("deterministic ranking meets the baseline metrics on representative cases",
       }),
       relevance: new Map([
         ["exact-aggregate", 3],
-        ["mention-only", 1],
+        ["mention-only", 0],
         ["wrong-frequency", 0]
       ])
     },
@@ -233,10 +239,11 @@ test("deterministic ranking meets the baseline metrics on representative cases",
     };
   });
 
-  assert.equal(metricTop1(evaluated), 1);
+  assert.equal(metricTop1(evaluated), 1, evaluated.map(item => item.topCandidates[0]?.candidate_id).join(","));
   assert.equal(metricHitRateAt5(evaluated), 1);
   assert.equal(metricMeanReciprocalRank(evaluated), 1);
-  assert.ok(metricNdcgAt10(evaluated) >= 0.99);
+  const ndcgAt10 = metricNdcgAt10(evaluated);
+  assert.ok(ndcgAt10 >= 0.99, `NDCG@10=${ndcgAt10}; orders=${evaluated.map(item => item.topCandidates.map(candidate => candidate.candidate_id).join(">"))}`);
   assert.ok(evaluated.every(item => item.ranked.diagnostics.rankingConfigVersion === RANKING_CONFIG_VERSION));
 });
 
@@ -488,7 +495,7 @@ test("unqualified aggregates outrank sector-specific and derived records when no
   });
 
   assert.equal(ranked.retrievals[0].rankedCandidates[0].candidate_id, "unqualified-total");
-  assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("unqualified_aggregate_boost"));
+  assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("exact_verified_aggregate"));
 });
 
 test("weak activity inference ranks all-fuels totals first and reports the warning", async () => {
@@ -498,10 +505,9 @@ test("weak activity inference ranks all-fuels totals first and reports the warni
   const first = ranked.retrievals[0].rankedCandidates[0];
 
   assert.equal(ranked.retrievals[0].primaryCandidates.length, 0);
-  assert.equal(first.series_id, "ELEC.GEN.ALL-CA-94.M");
+  assert.equal(first.series_id, "ELEC.GEN.ALL-CA-99.M");
   assert.ok(first.ranking.reasonCodes.includes("activity_inferred_from_preposition"));
-  assert.ok(first.ranking.reasonCodes.includes("missing_activity_fallback_penalty"));
-  assert.ok(first.ranking.reasonCodes.includes("all_sectors_aggregate_boost"));
+  assert.ok(first.ranking.reasonCodes.includes("all_sectors_aggregate_priority"));
   assert.ok(first.ranking.warnings.some(warning => warning.includes("No explicit activity was found")));
 });
 
@@ -515,6 +521,287 @@ test("the Phase 3 output shape remains compatible with the ranker", async () => 
   assert.equal(ranked.diagnostics.rankingApplied, true);
   assert.ok(top.title.match(/petroleum|consumption/i));
   assert.ok(top.ranking.reasonCodes.length > 0);
+});
+
+test("assigns exact, approved-fallback, and related candidates to tiers A, B, and C", () => {
+  const intent = interpretQueryWithRules("Brazil annual renewable energy production");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "international",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "international",
+        geography: { name: "Brazil", code: "BRA", type: "country" },
+        frequency: { value: "annual", requested: "annual", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "exact",
+            title: "Renewable energy production, Brazil, Annual",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "REN" } }
+          }),
+          buildCandidate({
+            candidate_id: "frequency-fallback",
+            title: "Renewable energy production, Brazil, Monthly",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            frequency: "monthly",
+            selector: { route: "/international", measure: "value", frequency: "monthly", facets: { countryRegionId: "BRA", productId: "REN-M" } }
+          }),
+          buildCandidate({
+            candidate_id: "related",
+            title: "Wind energy production, Brazil, Annual",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "WND" } }
+          })
+        ]
+      })
+    ],
+    diagnostics: {}
+  });
+
+  assert.deepEqual(ranked.retrievals[0].rankedCandidates.map(candidate => [candidate.candidate_id, candidate.ranking.tier]), [
+    ["exact", "A"],
+    ["frequency-fallback", "B"],
+    ["related", "C"]
+  ]);
+  assert.deepEqual(ranked.retrievals[0].primaryCandidates.map(candidate => candidate.candidate_id), ["exact"]);
+});
+
+test("semantic floors reject mixed or contradictory concepts before display", () => {
+  const intent = interpretQueryWithRules("Brazil annual renewable energy production");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "international",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "international",
+        geography: { name: "Brazil", code: "BRA", type: "country" },
+        frequency: { value: "annual", requested: "annual", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "renewable-only",
+            title: "Renewable energy production, Brazil, Annual",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "REN" } }
+          }),
+          buildCandidate({
+            candidate_id: "mixed-nuclear-renewable",
+            title: "Nuclear and renewable energy production, Brazil, Annual",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "NUC-REN" } }
+          })
+        ]
+      })
+    ],
+    diagnostics: {}
+  });
+
+  const retrieval = ranked.retrievals[0];
+  assert.deepEqual(retrieval.rankedCandidates.map(candidate => candidate.candidate_id), ["renewable-only"]);
+  assert.deepEqual(retrieval.displayCandidates.map(candidate => candidate.candidate_id), ["renewable-only"]);
+  assert.ok(retrieval.excludedCandidates.some(candidate =>
+    candidate.candidateId === "mixed-nuclear-renewable" && candidate.reasonCodes.includes("product_or_scope_semantic_floor_failed")
+  ));
+});
+
+test("an activity contradiction fails the activity floor even when query words appear in the title", () => {
+  const intent = interpretQueryWithRules("California monthly electricity generation");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "domestic",
+    retrievals: [buildRetrieval({
+      routeFamily: "domestic",
+      geography: { name: "California", code: "CA", type: "state" },
+      frequency: { value: "monthly", requested: "monthly", mode: "exact" },
+      primaryCandidates: [buildCandidate({
+        candidate_id: "mixed-generation-consumption",
+        title: "Electricity generation and consumption, California, Monthly",
+        geography: { name: "California", code: "CA", type: "state" },
+        frequency: "monthly",
+        selector: { route: "/seriesid", measure: "value", frequency: "monthly", facets: { series_id: "ELEC.CA.MIXED.M" } }
+      })]
+    })],
+    diagnostics: {}
+  });
+
+  const retrieval = ranked.retrievals[0];
+  assert.equal(retrieval.rankedCandidates.length, 0);
+  assert.ok(retrieval.excludedCandidates.some(candidate =>
+    candidate.candidateId === "mixed-generation-consumption" && candidate.reasonCodes.includes("activity_semantic_floor_failed")
+  ));
+});
+
+test("allows only the configured annual SEDS fallback for a nonannual state request", () => {
+  const intent = interpretQueryWithRules("Texas monthly total energy consumption");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "domestic",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "domestic",
+        geography: { name: "Texas", code: "TX", type: "state" },
+        frequency: { value: "monthly", requested: "monthly", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "approved-seds",
+            title: "Total energy consumption, Texas, Annual",
+            geography: { name: "Texas", code: "TX", type: "state" },
+            frequency: "annual",
+            selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "TETCB" } }
+          }),
+          buildCandidate({
+            candidate_id: "unapproved-international",
+            title: "Total energy consumption, Texas, Monthly",
+            geography: { name: "Texas", code: "TX", type: "state" },
+            frequency: "monthly",
+            selector: { route: "/international", measure: "value", frequency: "monthly", facets: { countryRegionId: "TX", productId: "TOTAL" } }
+          })
+        ]
+      })
+    ],
+    diagnostics: {}
+  });
+
+  const retrieval = ranked.retrievals[0];
+  assert.deepEqual(retrieval.rankedCandidates.map(candidate => candidate.candidate_id), ["approved-seds"]);
+  assert.equal(retrieval.rankedCandidates[0].ranking.tier, "B");
+  assert.equal(retrieval.rankedCandidates[0].ranking.signals.approvedFallback, "seds_annual_state_fallback");
+  assert.ok(retrieval.excludedCandidates.some(candidate => candidate.candidateId === "unapproved-international"));
+});
+
+test("scores only requested constraints and exposes a reproducible 0-100 composition", () => {
+  const intent = interpretQueryWithRules("California monthly electricity generation");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "domestic",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "domestic",
+        geography: { name: "California", code: "CA", type: "state" },
+        frequency: { value: "monthly", requested: "monthly", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "all-sectors",
+            title: "Net generation, California, all sectors, all fuels, Monthly",
+            measure: "net generation",
+            geography: { name: "California", code: "CA", type: "state" },
+            frequency: "monthly",
+            selector: { route: "/seriesid", measure: "net generation", frequency: "monthly", facets: { series_id: "ELEC.GEN.ALL-CA-99.M" } }
+          })
+        ]
+      })
+    ],
+    diagnostics: {}
+  });
+
+  const top = ranked.retrievals[0].rankedCandidates[0];
+  const components = top.ranking.components;
+  const points = Object.values(components).reduce((sum, value) => sum + value.points, 0);
+  const maximum = Object.values(components).reduce((sum, value) => sum + value.maximum, 0);
+  assert.equal(components.frequency.maximum, 5);
+  assert.equal(components.sector.maximum, 0);
+  assert.equal(components.unit.maximum, 0);
+  assert.equal(top.ranking.score, Math.round((points / maximum) * 1000) / 10);
+  assert.ok(top.ranking.score >= 0 && top.ranking.score <= 100);
+  assert.equal(ranked.diagnostics.rankingTaxonomyVersion, RANKING_TAXONOMY_VERSION);
+  assert.equal(ranked.diagnostics.rankingConfigVersion, RANKING_CONFIG_VERSION);
+});
+
+test("fielded IDF gives title matches more credit than normalized-field-only matches", () => {
+  const intent = interpretQueryWithRules("Brazil annual petroleum consumption");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "international",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "international",
+        geography: { name: "Brazil", code: "BRA", type: "country" },
+        frequency: { value: "annual", requested: "annual", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "title-match",
+            title: "Petroleum consumption, Brazil, Annual",
+            product_or_scope: "petroleum",
+            activity: "consumption",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "PET-TITLE" } }
+          }),
+          buildCandidate({
+            candidate_id: "normalized-fields-only",
+            title: "Official balance, Brazil, Annual",
+            product_or_scope: "petroleum",
+            activity: "consumption",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "PET-FIELDS" } }
+          })
+        ]
+      })
+    ],
+    diagnostics: {}
+  });
+
+  const [first, second] = ranked.retrievals[0].rankedCandidates;
+  assert.equal(first.candidate_id, "title-match");
+  assert.ok(first.ranking.components.fieldedLexical.points > second.ranking.components.fieldedLexical.points);
+});
+
+test("groups unit variants into one display family and can return fewer than five results", () => {
+  const intent = interpretQueryWithRules("Brazil annual renewable energy production");
+  const variants = [
+    ["qbtu", "quadrillion btu", "REN-QBTU"],
+    ["tj", "terajoules", "REN-TJ"]
+  ].map(([candidate_id, unit, productId]) => buildCandidate({
+    candidate_id,
+    title: "Renewable energy production, Brazil, Annual",
+    unit,
+    geography: { name: "Brazil", code: "BRA", type: "country" },
+    selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId } }
+  }));
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "international",
+    retrievals: [buildRetrieval({
+      routeFamily: "international",
+      geography: { name: "Brazil", code: "BRA", type: "country" },
+      frequency: { value: "annual", requested: "annual", mode: "exact" },
+      primaryCandidates: variants
+    })],
+    diagnostics: {}
+  });
+
+  const retrieval = ranked.retrievals[0];
+  assert.equal(retrieval.rankedCandidates.length, 2);
+  assert.equal(retrieval.candidateFamilies.length, 1);
+  assert.equal(retrieval.candidateFamilies[0].variantCount, 2);
+  assert.equal(retrieval.displayCandidates.length, 1);
+});
+
+test("parses compact EIA year-month coverage and removes duplicate selectors deterministically", () => {
+  const intent = { ...interpretQueryWithRules("Brazil annual petroleum consumption"), requestedPeriod: "2024" };
+  const candidate = buildCandidate({
+    candidate_id: "compact-date",
+    title: "Petroleum consumption, Brazil, Annual",
+    geography: { name: "Brazil", code: "BRA", type: "country" },
+    date_start: "201001",
+    date_end: "202412",
+    selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "BRA", productId: "PET" } }
+  });
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "international",
+    retrievals: [buildRetrieval({
+      routeFamily: "international",
+      geography: { name: "Brazil", code: "BRA", type: "country" },
+      frequency: { value: "annual", requested: "annual", mode: "exact" },
+      primaryCandidates: [candidate, { ...candidate, candidate_id: "duplicate" }]
+    })],
+    diagnostics: {}
+  });
+
+  const retrieval = ranked.retrievals[0];
+  assert.equal(retrieval.rankedCandidates.length, 1);
+  assert.ok(retrieval.rankedCandidates[0].ranking.reasonCodes.includes("requested_date_covered"));
+  assert.ok(retrieval.excludedCandidates.some(item => item.reasonCodes.includes("duplicate_canonical_selector")));
 });
 
 function buildRetrieval(overrides) {

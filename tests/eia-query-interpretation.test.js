@@ -161,9 +161,9 @@ test("broad approved product families retain narrower options without forced sel
 
   assert.equal(intent.product, "renewable");
   assert.equal(intent.fields.product.breadth, "broad");
-  assert.deepEqual(intent.fields.product.alternatives, ["wind", "solar", "hydro", "biofuels"]);
+  assert.deepEqual(intent.fields.product.alternatives, ["wind", "solar", "hydro", "geothermal", "biofuels"]);
   assert.equal(intent.structuredIntent.productBreadth, "broad");
-  assert.deepEqual(intent.structuredIntent.productAlternatives, ["wind", "solar", "hydro", "biofuels"]);
+  assert.deepEqual(intent.structuredIntent.productAlternatives, ["wind", "solar", "hydro", "geothermal", "biofuels"]);
   assert.equal(intent.needsClarification, false);
 });
 

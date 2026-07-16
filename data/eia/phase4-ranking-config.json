@@ -1,82 +1,54 @@
 {
-  "version": "phase4-v1",
+  "version": "phase4-v2",
+  "taxonomyVersion": "phase4-concepts-v1",
+  "scoreScale": {
+    "minimum": 0,
+    "maximum": 100,
+    "displayThreshold": 60,
+    "displayLimit": 5
+  },
+  "tierOrder": ["A", "B", "C"],
+  "tiers": {
+    "A": "Exact requested concept and frequency",
+    "B": "Approved frequency or route fallback",
+    "C": "Related concept that clears semantic floors"
+  },
+  "semanticFloors": {
+    "productOrScope": 0.65,
+    "activity": 0.8
+  },
   "weights": {
-    "pool": {
-      "primary": 1000,
-      "fallback": 0
-    },
-    "tier": {
-      "exact_phrase": 260,
-      "approved_alias": 190,
-      "all_tokens": 120,
-      "partial_tokens": 60,
-      "trigram": 20
-    },
-    "routeAppropriateness": 25,
-    "geography": {
-      "exact": 40
-    },
-    "activity": {
-      "title": 65,
-      "measure": 60,
-      "description": 25,
-      "facets": 15,
-      "conceptType": 20
-    },
-    "productOrScope": {
-      "title": 75,
-      "measure": 60,
-      "description": 25,
-      "facets": 20,
-      "conceptType": 20
-    },
-    "sector": {
-      "title": 50,
-      "measure": 30,
-      "description": 20,
-      "facets": 30
-    },
-    "frequency": {
-      "exact": 60
-    },
-    "unit": {
-      "title": 20,
-      "description": 10,
-      "facets": 15,
-      "exact": 40
-    },
-    "lexical": {
-      "title": 20,
-      "description": 10,
-      "measure": 15,
-      "facets": 8,
-      "fullQuery": 50
-    },
-    "requestedDateCoverage": {
-      "covered": 80,
-      "partial": 30
-    },
-    "aggregationRole": {
-      "verified": 70,
-      "exact": 120
-    },
-    "currentness": {
-      "active": 35,
-      "recencyScale": 1
-    },
-    "availability": {
-      "present": 15,
-      "missing": -10
-    },
-    "broadProductAlternative": 30,
-    "wrongFrequencyFallbackPenalty": -20,
-    "missingMetadataPenalty": -10,
-    "misleadingDescriptionPenalty": -80,
-    "derivedMetricPenalty": -500,
-    "unrequestedSectorPenalty": -120,
-    "unqualifiedAggregateBoost": 160,
-    "allSectorsAggregateBoost": 90,
-    "missingActivityFallbackPenalty": -40
+    "productOrScope": 22,
+    "activity": 18,
+    "measureOrAggregation": 15,
+    "fieldedLexical": 20,
+    "sector": 5,
+    "frequency": 5,
+    "unit": 5,
+    "requestedDateCoverage": 4,
+    "currentness": 3,
+    "availability": 3
+  },
+  "weakInferenceWeightFactor": 0.5,
+  "fieldWeights": {
+    "title": 3,
+    "measure": 2.5,
+    "productOrScope": 2.5,
+    "sector": 2,
+    "facets": 1.5,
+    "description": 1
+  },
+  "aggregation": {
+    "exactVerified": 0.95,
+    "verifiedAggregate": 0.9,
+    "aggregate": 0.8,
+    "ordinarySeries": 0.55,
+    "derivedUnrequested": 0
+  },
+  "quality": {
+    "inactiveCurrentness": 0,
+    "unknownCurrentness": 0.35,
+    "missingAvailability": 0
   },
   "keywords": {
     "aggregation": [
@@ -89,36 +61,16 @@
       "average price",
       "all energy"
     ],
-    "sector": [
-      "residential",
-      "commercial",
-      "industrial",
-      "transportation",
-      "electric power",
-      "utility",
-      "sector"
+    "allSectorsAggregate": [
+      "all sectors",
+      "all sources"
     ],
-    "unrequestedSector": [
+    "sectorSpecific": [
       "residential sector",
       "commercial sector",
       "industrial sector",
       "transportation sector",
-      "electric power sector",
-      "sector"
-    ],
-    "allSectorsAggregate": [
-      "all sectors",
-      "all fuels",
-      "all sources"
-    ],
-    "unit": [
-      "btu",
-      "kwh",
-      "barrels",
-      "million",
-      "dollars",
-      "cubic feet",
-      "megawatts"
+      "electric power sector"
     ],
     "derivedMetric": [
       "intensity",

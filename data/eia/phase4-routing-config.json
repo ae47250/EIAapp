@@ -23,7 +23,7 @@
       "geographyTypes": ["country", "region"],
       "frequencies": ["annual", "monthly", "quarterly"],
       "defaultFrequency": "monthly",
-      "conceptHints": ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable", "hydro", "solar", "wind", "biofuels", "total energy", "consumption", "production", "imports", "exports", "prices"]
+      "conceptHints": ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable", "hydro", "solar", "wind", "geothermal", "biofuels", "total energy", "consumption", "production", "imports", "exports", "prices"]
     },
     "seds": {
       "label": "SEDS",
@@ -91,7 +91,7 @@
       "renewable": {
         "terms": ["renewable energy", "renewables", "renewable"],
         "ambiguity": "broad",
-        "alternatives": ["wind", "solar", "hydro", "biofuels"]
+        "alternatives": ["wind", "solar", "hydro", "geothermal", "biofuels"]
       },
       "hydro": {
         "terms": ["hydroelectric", "hydropower", "hydro"],
@@ -103,6 +103,10 @@
       },
       "wind": {
         "terms": ["wind"],
+        "ambiguity": "specific"
+      },
+      "geothermal": {
+        "terms": ["geothermal", "geotherm"],
         "ambiguity": "specific"
       },
       "biofuels": {
@@ -152,6 +156,9 @@
       },
       "customers": {
         "terms": ["customer accounts", "customers", "customer"]
+      },
+      "process fuel": {
+        "terms": ["process fuel", "process fuels", "intermediate products", "no direct fuel costs", "no direct cost"]
       }
     },
     "sectors": {

@@ -50,10 +50,10 @@ test("broad renewable intent retrieves several approved product options", async 
   const titles = candidates.map(candidate => candidate.title.toLowerCase());
 
   assert.ok(titles.some(title => title.includes("renewable")));
-  assert.ok(titles.some(title => /wind|solar|hydro|biofuel|biomass/.test(title)));
-  assert.ok(titles.every(title => /renewable|wind|solar|hydro|biofuel|biomass/.test(title)));
+  assert.ok(titles.some(title => /wind|solar|hydro|geothermal|biofuel|biomass/.test(title)));
+  assert.ok(titles.every(title => /renewable|wind|solar|hydro|geothermal|biofuel|biomass/.test(title)));
   assert.ok(candidates.every(candidate => candidate.selector.facets.countryRegionId === "BRA"));
-  assert.deepEqual(result.retrievals[0].concept.productAlternatives, ["wind", "solar", "hydro", "biofuels"]);
+  assert.deepEqual(result.retrievals[0].concept.productAlternatives, ["wind", "solar", "hydro", "geothermal", "biofuels"]);
 });
 
 test("nonannual state total-energy requests do not fall into SEDS annual candidates", async () => {
