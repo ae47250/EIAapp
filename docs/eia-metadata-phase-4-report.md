@@ -107,7 +107,7 @@ Real Phase 1B metadata produced these representative results:
 
 ## Remaining limitation
 
-The Phase 1B Domestic cache is Electricity-only. The ranker can score a configured annual SEDS fallback, but Phase 3 currently does not retrieve cross-route SEDS candidates for a Domestic monthly or quarterly request. Phase 5 wiring must either supply that separate fallback pool or clearly report that no requested-frequency series was found. It must not invent or silently substitute a series.
+The Phase 1B Domestic cache is Electricity-only. The ranker can score a configured annual SEDS fallback, but Phase 3 intentionally does not retrieve across route families. Phase 4A supplies a separately hard-filtered SEDS fallback pool when the primary Domestic ranking is empty. It must not invent or silently substitute a series.
 
 Observation-level quality is also unavailable in the Phase 1B metadata cache, so Phase 4 quality scoring uses metadata coverage, active status, and availability only.
 

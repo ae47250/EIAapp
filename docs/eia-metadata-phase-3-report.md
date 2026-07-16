@@ -50,7 +50,7 @@ Manual raw-set review confirmed:
 - California monthly electricity generation returned actual monthly `Net generation` series after excluding fuel-quality records that merely mentioned generation.
 - Texas annual total energy consumption reached the 50-candidate cap across the approved broad product family.
 - Brazil renewable production returned 14 primary renewable or biofuel candidates and separate relevant solar, wind, or hydro fallback candidates; unrelated fossil production was not used to pad the pool.
-- Texas monthly total energy consumption returned annual SEDS options only in the fallback pool because Phase 2 had explicitly marked the frequency substitution.
+- Texas monthly total energy consumption remained on the Domestic route and did not retrieve annual SEDS records. Phase 4A performs that separate fallback retrieval without weakening Phase 3 route gating.
 
 ## Review gate
 
