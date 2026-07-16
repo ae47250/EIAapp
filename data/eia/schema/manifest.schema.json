@@ -16,6 +16,7 @@
     "routes_failed",
     "refresh_status",
     "record_counts",
+    "directory_counts",
     "change_counts",
     "diff_summary",
     "rollback_snapshot_reference",
@@ -55,6 +56,14 @@
         "international": { "type": "integer", "minimum": 0 },
         "seds": { "type": "integer", "minimum": 0 },
         "total": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "directory_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plants"],
+      "properties": {
+        "plants": { "type": "integer", "minimum": 0 }
       }
     },
     "change_counts": {

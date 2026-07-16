@@ -6,6 +6,7 @@ import loginHandler, { resetLoginAttemptsForTests } from "../lib/server/login.js
 import logoutHandler from "../lib/server/logout.js";
 import openaiDiagnosticHandler from "../lib/server/openai-diagnostic.js";
 import interpretQueryHandler from "../lib/sources/eia/interpret-query.js";
+import plantMetadataHandler from "../lib/sources/eia/plant-metadata.js";
 import searchEiaHandler from "../lib/sources/eia/search.js";
 import { proxy as middleware } from "../proxy.js";
 import {
@@ -119,7 +120,7 @@ test("LOGIN_REQUIRED=off bypasses page and API authentication", async () => {
   assert.equal(pageResponse.headers.get("x-middleware-next"), "1");
   assert.equal(pageResponse.headers.get("set-cookie"), null);
 
-  const handlers = [searchEiaHandler, interpretQueryHandler, openaiDiagnosticHandler];
+  const handlers = [searchEiaHandler, interpretQueryHandler, plantMetadataHandler, openaiDiagnosticHandler];
   for (const handler of handlers) {
     const res = createMockResponse();
     await handler(createRequest({ method: "POST" }), res);
@@ -135,6 +136,7 @@ test("every private API handler rejects requests without a session", async () =>
   const handlers = [
     ["search-eia", searchEiaHandler],
     ["interpret-query", interpretQueryHandler],
+    ["plant-metadata", plantMetadataHandler],
     ["openai-diagnostic", openaiDiagnosticHandler]
   ];
 

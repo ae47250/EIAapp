@@ -1,10 +1,10 @@
 {
   "phase": "1B",
   "valid": true,
-  "checked_at": "2026-07-16T05:22:57.264Z",
+  "checked_at": "2026-07-16T11:51:42.502Z",
   "production_activated": false,
   "scope": {
-    "domestic": "Electricity bulk series except ELEC.PLANT facility-level records",
+    "domestic": "Electricity bulk series plus a compact plant directory; full ELEC.PLANT series are on-demand only",
     "international": "All INTL bulk series",
     "seds": "All SEDS bulk series",
     "comprehensive_domestic": false
@@ -59,10 +59,26 @@
       "errors": []
     }
   ],
+  "directories": [
+    {
+      "family": "plant_directory",
+      "output": "plants.jsonl.gz",
+      "source_url": "https://www.eia.gov/opendata/bulk/ELEC.zip",
+      "records": 15539,
+      "source_records": 679219,
+      "content_hash": "d41e5f66fa9b030c1e491a38ff54e2a2b734635139c9a7cb245decd0aee99c88",
+      "compressed_bytes": 1042940,
+      "missing_states": 31,
+      "missing_coordinates": 291,
+      "lookup_mode": "official_eia_api_v2_on_demand",
+      "errors": []
+    }
+  ],
   "totals": {
     "records": 238478,
     "excluded_records": 679219,
-    "compressed_bytes": 26628707
+    "directory_records": 15539,
+    "compressed_bytes": 27671647
   },
   "errors": []
 }

@@ -94,6 +94,59 @@ export function shouldIncludeBulkSeries(record, routeFamily) {
   return false;
 }
 
+export function isElectricityPlantSeries(record) {
+  return String(record?.series_id || "").startsWith("ELEC.PLANT.");
+}
+
+export function parseElectricityPlantDirectorySource(record) {
+  const seriesId = requiredText(record?.series_id, "plant series id");
+  const match = /^ELEC\.PLANT\.[^.]+\.([0-9]+)-/.exec(seriesId);
+  if (!match) throw new Error(`Plant series ID has an unsupported shape: ${seriesId}`);
+
+  const plantId = match[1];
+  const nameParts = requiredText(record?.name, "plant series name")
+    .split(" : ")
+    .map(part => part.trim());
+  const plantLabel = nameParts[1];
+  if (!plantLabel) throw new Error(`Plant series ${seriesId} has no plant name segment.`);
+  const name = plantLabel.replace(new RegExp(`\\s*\\(${plantId}\\)\\s*$`), "").trim();
+  if (!name) throw new Error(`Plant series ${seriesId} has an empty plant name.`);
+
+  const geography = nullableText(record.geography || record.iso3166);
+  const stateMatch = /^USA-([A-Z]{2})$/.exec(geography || "");
+  const latitude = finiteCoordinate(record.lat, -90, 90);
+  const longitude = finiteCoordinate(record.lon, -180, 180);
+
+  return {
+    plant_id: plantId,
+    name,
+    state_code: stateMatch?.[1] || null,
+    latitude,
+    longitude
+  };
+}
+
+export function normalizePlantDirectoryEntry(input) {
+  const normalized = {
+    schema_version: SCHEMA_VERSION,
+    source: "EIA",
+    plant_id: requiredText(input?.plant_id, "plant id"),
+    name: requiredText(input?.name, "plant name"),
+    aliases: [...new Set((input?.aliases || []).map(String).map(value => value.trim()).filter(Boolean))]
+      .filter(value => value !== input.name)
+      .sort((left, right) => left.localeCompare(right)),
+    state_code: nullableText(input?.state_code),
+    latitude: input?.latitude == null ? null : Number(input.latitude),
+    longitude: input?.longitude == null ? null : Number(input.longitude),
+    series_count: Number(input?.series_count),
+    lookup_mode: "official_eia_api_v2_on_demand",
+    raw_metadata_reference: "https://api.eia.gov/v2/electricity/"
+  };
+
+  const compacted = Object.fromEntries(Object.entries(normalized).filter(([, value]) => value != null));
+  return { ...compacted, metadata_hash: sha256(stableStringify(compacted)) };
+}
+
 export function normalizeBulkSeries(record, { routeFamily } = {}) {
   const seriesId = requiredText(record?.series_id, "bulk series id");
   if (!shouldIncludeBulkSeries(record, routeFamily)) {
@@ -333,6 +386,12 @@ function nullableText(value) {
   if (value == null) return null;
   const text = String(value).trim();
   return text || null;
+}
+
+function finiteCoordinate(value, minimum, maximum) {
+  if (value == null || value === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) && number >= minimum && number <= maximum ? number : null;
 }
 
 function requiredText(value, label) {

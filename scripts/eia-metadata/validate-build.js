@@ -62,6 +62,34 @@ export function validateSeriesRecord(record) {
   return errors;
 }
 
+export function validatePlantDirectoryRecord(record) {
+  const errors = [];
+  requireEqual(errors, record?.schema_version, "1.0.0", "schema_version");
+  requireEqual(errors, record?.source, "EIA", "source");
+  requirePattern(errors, record?.plant_id, /^[0-9]+$/, "plant_id");
+  requireText(errors, record?.name, "name");
+  requireArray(errors, record?.aliases, "aliases", false);
+  if (Array.isArray(record?.aliases) && new Set(record.aliases).size !== record.aliases.length) {
+    errors.push("aliases contains duplicates");
+  }
+  if (record?.state_code !== undefined) requirePattern(errors, record.state_code, /^[A-Z]{2}$/, "state_code");
+  requireCoordinate(errors, record?.latitude, -90, 90, "latitude");
+  requireCoordinate(errors, record?.longitude, -180, 180, "longitude");
+  if (!Number.isInteger(record?.series_count) || record.series_count < 1) {
+    errors.push("series_count must be a positive integer");
+  }
+  requireEqual(
+    errors,
+    record?.lookup_mode,
+    "official_eia_api_v2_on_demand",
+    "lookup_mode"
+  );
+  requireSafeReference(errors, record?.raw_metadata_reference);
+  requireHash(errors, record?.metadata_hash, "metadata_hash");
+  validateRecordHash(errors, record);
+  return errors;
+}
+
 export function validateManifest(manifest) {
   const errors = [];
   requireEqual(errors, manifest?.schema_version, "1.0.0", "schema_version");
@@ -85,6 +113,7 @@ export function validateManifest(manifest) {
     }
     if (expectedTotal !== manifest.record_counts.total) errors.push("record_counts.total is inconsistent");
   }
+  requireNumericObject(errors, manifest?.directory_counts, "directory_counts", ["plants"]);
   requireNumericObject(errors, manifest?.change_counts, "change_counts", ["added", "removed", "changed"]);
   requireNumericObject(errors, manifest?.diff_summary, "diff_summary", [
     "routes",
@@ -170,6 +199,13 @@ function requireDateTime(errors, value, label) {
 
 function requireNonnegativeInteger(errors, value, label) {
   if (!Number.isInteger(value) || value < 0) errors.push(`${label} must be a nonnegative integer`);
+}
+
+function requireCoordinate(errors, value, minimum, maximum, label) {
+  if (value === undefined) return;
+  if (typeof value !== "number" || !Number.isFinite(value) || value < minimum || value > maximum) {
+    errors.push(`${label} is invalid`);
+  }
 }
 
 function requireNumericObject(errors, value, label, fields) {

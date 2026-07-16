@@ -17,14 +17,18 @@ import { fileURLToPath } from "node:url";
 
 import { loadPhase1aFixtures } from "./discover-routes.js";
 import {
+  isElectricityPlantSeries,
   normalizeBulkSeries,
+  normalizePlantDirectoryEntry,
   normalizeRouteFixture,
+  parseElectricityPlantDirectorySource,
   sha256,
   shouldIncludeBulkSeries,
   stableStringify
 } from "./normalize.js";
 import {
   validateManifest,
+  validatePlantDirectoryRecord,
   validateRouteRecord,
   validateSeriesRecord
 } from "./validate-build.js";
@@ -32,6 +36,7 @@ import {
 const BUILD_VERSION = "phase1b";
 const API_VERSION = "2.1.13";
 const GITHUB_FILE_LIMIT = 100 * 1024 * 1024;
+const PLANT_DIRECTORY_OUTPUT = "plants.jsonl.gz";
 
 export const BULK_BUILD_SOURCES = Object.freeze([
   {
@@ -66,6 +71,9 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     await access(archivePath);
     artifacts.push(await buildFamilyArtifact({ ...source, archivePath, stageDir }));
   }
+  const plantArtifact = artifacts.find(artifact => artifact.family === "domestic")?.plant_directory;
+  if (!plantArtifact) throw new Error("Domestic build did not produce the plant directory.");
+  const seriesArtifacts = artifacts.map(({ plant_directory: ignored, ...artifact }) => artifact);
 
   const routeEntries = await loadPhase1aFixtures();
   const routes = routeEntries.map(entry => normalizeRouteFixture(entry.fixture));
@@ -75,10 +83,11 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
   const routesJson = `${JSON.stringify(routes, null, 2)}\n`;
   await writeFile(join(stageDir, "routes.json"), routesJson, "utf8");
   const routesHash = sha256(routesJson);
-  const counts = Object.fromEntries(artifacts.map(artifact => [artifact.family, artifact.records]));
+  const counts = Object.fromEntries(seriesArtifacts.map(artifact => [artifact.family, artifact.records]));
   counts.total = Object.values(counts).reduce((sum, value) => sum + value, 0);
   const contentHash = sha256(stableStringify({
-    artifacts: artifacts.map(artifact => ({ family: artifact.family, content_hash: artifact.content_hash })),
+    artifacts: seriesArtifacts.map(artifact => ({ family: artifact.family, content_hash: artifact.content_hash })),
+    plant_directory_hash: plantArtifact.content_hash,
     routes_hash: routesHash
   }));
 
@@ -94,21 +103,22 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     routes_failed: [],
     refresh_status: "partial",
     record_counts: counts,
+    directory_counts: { plants: plantArtifact.records },
     change_counts: { added: counts.total, removed: 0, changed: 0 },
     diff_summary: {
       routes: routes.length,
-      facets: artifacts.reduce((sum, artifact) => sum + artifact.facets, 0),
-      measures: artifacts.reduce((sum, artifact) => sum + artifact.measures, 0),
-      frequencies: artifacts.reduce((sum, artifact) => sum + artifact.frequencies, 0),
-      units: artifacts.reduce((sum, artifact) => sum + artifact.units, 0),
-      geographies: artifacts.reduce((sum, artifact) => sum + artifact.geographies, 0),
-      coverage: artifacts.length
+      facets: seriesArtifacts.reduce((sum, artifact) => sum + artifact.facets, 0),
+      measures: seriesArtifacts.reduce((sum, artifact) => sum + artifact.measures, 0),
+      frequencies: seriesArtifacts.reduce((sum, artifact) => sum + artifact.frequencies, 0),
+      units: seriesArtifacts.reduce((sum, artifact) => sum + artifact.units, 0),
+      geographies: seriesArtifacts.reduce((sum, artifact) => sum + artifact.geographies, 0),
+      coverage: seriesArtifacts.length
     },
     rollback_snapshot_reference: null,
     update_schedule_state: "not_configured",
     warnings: [
       "Phase 1B staging cache only; it is not active production metadata.",
-      "Domestic coverage is Electricity-only and excludes ELEC.PLANT facility-level series.",
+      "Domestic coverage is Electricity-only; full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
       "International dataFlagId is treated as an observation annotation, not candidate identity.",
       "Artifacts are gzip-compressed because uncompressed normalized files are not GitHub-safe."
     ],
@@ -119,7 +129,7 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
   if (manifestErrors.length) throw new Error(`Manifest validation failed:\n${manifestErrors.join("\n")}`);
 
   const validationArtifacts = [];
-  for (const artifact of artifacts) {
+  for (const artifact of seriesArtifacts) {
     const validation = await validateCompressedArtifact(join(stageDir, artifact.output));
     if (validation.errors.length) {
       throw new Error(`${artifact.output} validation failed:\n${validation.errors.join("\n")}`);
@@ -130,6 +140,19 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     validationArtifacts.push({ ...artifact, ...validation });
   }
 
+  const plantValidation = await validateCompressedPlantDirectory(join(stageDir, plantArtifact.output));
+  if (plantValidation.errors.length) {
+    throw new Error(`${plantArtifact.output} validation failed:\n${plantValidation.errors.join("\n")}`);
+  }
+  if (
+    plantValidation.records !== plantArtifact.records ||
+    plantValidation.source_records !== plantArtifact.source_records ||
+    plantValidation.content_hash !== plantArtifact.content_hash
+  ) {
+    throw new Error(`${plantArtifact.output} changed between build and validation.`);
+  }
+  const validatedPlantArtifact = { ...plantArtifact, ...plantValidation };
+
   await writeFile(join(stageDir, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
   const validationReport = {
     phase: "1B",
@@ -137,16 +160,19 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     checked_at: checkedAt,
     production_activated: false,
     scope: {
-      domestic: "Electricity bulk series except ELEC.PLANT facility-level records",
+      domestic: "Electricity bulk series plus a compact plant directory; full ELEC.PLANT series are on-demand only",
       international: "All INTL bulk series",
       seds: "All SEDS bulk series",
       comprehensive_domestic: false
     },
     artifacts: validationArtifacts,
+    directories: [validatedPlantArtifact],
     totals: {
       records: counts.total,
-      excluded_records: artifacts.reduce((sum, artifact) => sum + artifact.excluded_records, 0),
-      compressed_bytes: validationArtifacts.reduce((sum, artifact) => sum + artifact.compressed_bytes, 0)
+      excluded_records: seriesArtifacts.reduce((sum, artifact) => sum + artifact.excluded_records, 0),
+      directory_records: plantArtifact.records,
+      compressed_bytes: validationArtifacts.reduce((sum, artifact) => sum + artifact.compressed_bytes, 0) +
+        validatedPlantArtifact.compressed_bytes
     },
     errors: []
   };
@@ -180,6 +206,7 @@ export async function buildFamilyArtifact({ archivePath, family, output, sourceU
   const frequencies = new Set();
   const units = new Set();
   const geographies = new Set();
+  const plantDirectory = family === "domestic" ? new Map() : null;
   let missingGeographies = 0;
   let records = 0;
   let excludedRecords = 0;
@@ -191,6 +218,9 @@ export async function buildFamilyArtifact({ archivePath, family, output, sourceU
       if (metadataEnd < 0) throw new Error(`${family} bulk series is missing its data boundary.`);
       const metadata = JSON.parse(`${line.slice(0, metadataEnd)}}`);
       if (!shouldIncludeBulkSeries(metadata, family)) {
+        if (plantDirectory && isElectricityPlantSeries(metadata)) {
+          addPlantDirectorySource(plantDirectory, metadata);
+        }
         excludedRecords += 1;
         continue;
       }
@@ -232,6 +262,10 @@ export async function buildFamilyArtifact({ archivePath, family, output, sourceU
     throw new Error(`${output} is ${outputStat.size} bytes and exceeds the GitHub file limit.`);
   }
 
+  const plantDirectoryArtifact = plantDirectory
+    ? await writePlantDirectoryArtifact(plantDirectory, stageDir)
+    : null;
+
   return {
     family,
     output,
@@ -245,8 +279,100 @@ export async function buildFamilyArtifact({ archivePath, family, output, sourceU
     frequencies: frequencies.size,
     units: units.size,
     geographies: geographies.size,
-    missing_geographies: missingGeographies
+    missing_geographies: missingGeographies,
+    ...(plantDirectoryArtifact ? { plant_directory: plantDirectoryArtifact } : {})
   };
+}
+
+async function writePlantDirectoryArtifact(directory, stageDir) {
+  const outputPath = join(stageDir, PLANT_DIRECTORY_OUTPUT);
+  const gzip = createGzip({ level: 9 });
+  const outputStream = createWriteStream(outputPath, { flags: "wx" });
+  gzip.pipe(outputStream);
+  const contentHash = createHash("sha256");
+  let sourceRecords = 0;
+  let missingStates = 0;
+  let missingCoordinates = 0;
+
+  for (const accumulator of [...directory.values()].sort(comparePlantIds)) {
+    const name = selectDominantValue(accumulator.names);
+    const stateCode = selectDominantValue(accumulator.states);
+    const coordinates = selectDominantValue(accumulator.coordinates);
+    const record = normalizePlantDirectoryEntry({
+      plant_id: accumulator.plant_id,
+      name,
+      aliases: [...accumulator.names.keys()].filter(value => value !== name),
+      state_code: stateCode,
+      latitude: coordinates?.latitude,
+      longitude: coordinates?.longitude,
+      series_count: accumulator.series_count
+    });
+    const errors = validatePlantDirectoryRecord(record);
+    if (errors.length) throw new Error(`Plant ${record.plant_id}: ${errors.join("; ")}`);
+    if (!record.state_code) missingStates += 1;
+    if (record.latitude == null || record.longitude == null) missingCoordinates += 1;
+    sourceRecords += record.series_count;
+    const serialized = `${JSON.stringify(record)}\n`;
+    contentHash.update(serialized);
+    if (!gzip.write(serialized)) await once(gzip, "drain");
+  }
+
+  gzip.end();
+  await finished(outputStream);
+  const outputStat = await stat(outputPath);
+  return {
+    family: "plant_directory",
+    output: PLANT_DIRECTORY_OUTPUT,
+    source_url: "https://www.eia.gov/opendata/bulk/ELEC.zip",
+    records: directory.size,
+    source_records: sourceRecords,
+    content_hash: contentHash.digest("hex"),
+    compressed_bytes: outputStat.size,
+    missing_states: missingStates,
+    missing_coordinates: missingCoordinates,
+    lookup_mode: "official_eia_api_v2_on_demand"
+  };
+}
+
+function addPlantDirectorySource(directory, record) {
+  const source = parseElectricityPlantDirectorySource(record);
+  let accumulator = directory.get(source.plant_id);
+  if (!accumulator) {
+    accumulator = {
+      plant_id: source.plant_id,
+      names: new Map(),
+      states: new Map(),
+      coordinates: new Map(),
+      series_count: 0
+    };
+    directory.set(source.plant_id, accumulator);
+  }
+
+  incrementCount(accumulator.names, source.name, source.name);
+  if (source.state_code) incrementCount(accumulator.states, source.state_code, source.state_code);
+  if (source.latitude != null && source.longitude != null) {
+    const key = `${source.latitude},${source.longitude}`;
+    incrementCount(accumulator.coordinates, key, {
+      latitude: source.latitude,
+      longitude: source.longitude
+    });
+  }
+  accumulator.series_count += 1;
+}
+
+function incrementCount(values, key, value) {
+  const current = values.get(key);
+  values.set(key, { value, count: (current?.count || 0) + 1 });
+}
+
+function selectDominantValue(values) {
+  if (!values?.size) return null;
+  return [...values.entries()]
+    .sort((left, right) => right[1].count - left[1].count || left[0].localeCompare(right[0]))[0][1].value;
+}
+
+function comparePlantIds(left, right) {
+  return Number(left.plant_id) - Number(right.plant_id) || left.plant_id.localeCompare(right.plant_id);
 }
 
 export async function validateCompressedArtifact(path) {
@@ -280,6 +406,45 @@ export async function validateCompressedArtifact(path) {
 
   return {
     records,
+    content_hash: hash.digest("hex"),
+    compressed_bytes: (await stat(path)).size,
+    errors
+  };
+}
+
+export async function validateCompressedPlantDirectory(path) {
+  const input = createReadStream(path).pipe(createGunzip());
+  const lines = createInterface({ input, crlfDelay: Infinity });
+  const hash = createHash("sha256");
+  const plantIds = new Set();
+  const errors = [];
+  let records = 0;
+  let sourceRecords = 0;
+
+  for await (const line of lines) {
+    if (!line) continue;
+    hash.update(`${line}\n`);
+    let record;
+    try {
+      record = JSON.parse(line);
+    } catch {
+      errors.push(`Line ${records + 1} is not valid JSON.`);
+      continue;
+    }
+    for (const error of validatePlantDirectoryRecord(record)) {
+      if (errors.length < 20) errors.push(`Line ${records + 1}: ${error}`);
+    }
+    if (plantIds.has(record.plant_id) && errors.length < 20) {
+      errors.push(`Duplicate plant ID at line ${records + 1}.`);
+    }
+    plantIds.add(record.plant_id);
+    sourceRecords += Number(record.series_count || 0);
+    records += 1;
+  }
+
+  return {
+    records,
+    source_records: sourceRecords,
     content_hash: hash.digest("hex"),
     compressed_bytes: (await stat(path)).size,
     errors

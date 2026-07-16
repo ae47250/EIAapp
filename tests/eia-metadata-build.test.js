@@ -5,11 +5,20 @@ import { join } from "node:path";
 import { test } from "node:test";
 
 import {
+  normalizePlantDirectoryEntry,
   normalizeBulkSeries,
+  parseElectricityPlantDirectorySource,
   shouldIncludeBulkSeries
 } from "../scripts/eia-metadata/normalize.js";
-import { activateBuildDirectory } from "../scripts/eia-metadata/build-cache.js";
-import { validateManifest, validateSeriesRecord } from "../scripts/eia-metadata/validate-build.js";
+import {
+  activateBuildDirectory,
+  validateCompressedPlantDirectory
+} from "../scripts/eia-metadata/build-cache.js";
+import {
+  validateManifest,
+  validatePlantDirectoryRecord,
+  validateSeriesRecord
+} from "../scripts/eia-metadata/validate-build.js";
 
 const bulkRecords = {
   domestic: {
@@ -89,6 +98,34 @@ test("facility-level Electricity records are explicitly excluded", () => {
   assert.equal(shouldIncludeBulkSeries(bulkRecords.domestic, "domestic"), true);
 });
 
+test("plant records normalize to a compact on-demand directory entry", () => {
+  const source = parseElectricityPlantDirectorySource({
+    series_id: "ELEC.PLANT.AVG_HEAT.10026-NG-ALL.A",
+    name: "MMBtu per unit : Encina Water Pollution Control (10026) : natural gas : all primemovers : annual",
+    geography: "USA-CA",
+    lat: "33.1165",
+    lon: "-117.3215"
+  });
+  assert.deepEqual(source, {
+    plant_id: "10026",
+    name: "Encina Water Pollution Control",
+    state_code: "CA",
+    latitude: 33.1165,
+    longitude: -117.3215
+  });
+
+  const record = normalizePlantDirectoryEntry({
+    ...source,
+    aliases: ["Encina WPC", "Encina WPC"],
+    series_count: 42
+  });
+  assert.deepEqual(validatePlantDirectoryRecord(record), []);
+  assert.equal(record.lookup_mode, "official_eia_api_v2_on_demand");
+  assert.deepEqual(record.aliases, ["Encina WPC"]);
+  assert.equal(Object.hasOwn(record, "series_id"), false);
+  assert.equal(Object.hasOwn(record, "data"), false);
+});
+
 test("invalid or cross-family series IDs are rejected", () => {
   assert.throws(
     () => normalizeBulkSeries({ ...bulkRecords.international, series_id: "INTL.invalid" }, { routeFamily: "international" }),
@@ -143,6 +180,7 @@ test("generated Phase 1B artifacts remain valid staging metadata", async () => {
     seds: 48046,
     total: 238478
   });
+  assert.equal(manifest.directory_counts.plants, report.directories[0].records);
   assert.equal(report.valid, true);
   assert.equal(report.production_activated, false);
   assert.equal(report.scope.comprehensive_domestic, false);
@@ -151,4 +189,16 @@ test("generated Phase 1B artifacts remain valid staging metadata", async () => {
     assert.equal((await stat(new URL(artifact.output, buildRoot))).size, artifact.compressed_bytes);
     assert.equal(artifact.missing_geographies, 0);
   }
+
+  const plantDirectory = report.directories[0];
+  assert.equal(plantDirectory.output, "plants.jsonl.gz");
+  assert.equal(plantDirectory.lookup_mode, "official_eia_api_v2_on_demand");
+  assert.equal(plantDirectory.source_records, report.totals.excluded_records);
+  assert.ok(plantDirectory.records > 1_000);
+  assert.ok(plantDirectory.compressed_bytes < 10 * 1024 * 1024);
+  assert.equal((await stat(new URL(plantDirectory.output, buildRoot))).size, plantDirectory.compressed_bytes);
+  assert.deepEqual(
+    (await validateCompressedPlantDirectory(new URL(plantDirectory.output, buildRoot))).errors,
+    []
+  );
 });

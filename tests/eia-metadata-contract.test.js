@@ -22,7 +22,8 @@ import {
 const schemaUrls = [
   new URL("../data/eia/schema/route.schema.json", import.meta.url),
   new URL("../data/eia/schema/series.schema.json", import.meta.url),
-  new URL("../data/eia/schema/manifest.schema.json", import.meta.url)
+  new URL("../data/eia/schema/manifest.schema.json", import.meta.url),
+  new URL("../data/eia/schema/plant-directory.schema.json", import.meta.url)
 ];
 
 test("Phase 1A schemas use JSON Schema 2020-12 and reject unknown fields", async () => {
@@ -169,6 +170,7 @@ test("manifest validation catches inconsistent totals and failed complete builds
     routes_failed: [],
     refresh_status: "complete",
     record_counts: { domestic: 1, international: 1, seds: 1, total: 3 },
+    directory_counts: { plants: 0 },
     change_counts: { added: 3, removed: 0, changed: 0 },
     diff_summary: {
       routes: 3,
