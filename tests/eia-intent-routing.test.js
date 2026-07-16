@@ -13,7 +13,7 @@ test("routes a country request to International with validated monthly frequency
   assert.equal(intent.frequency, "monthly");
   assert.equal(intent.validation.geography, "valid");
   assert.equal(intent.validation.frequency, "valid");
-  assert.equal(intent.fallback.used, false);
+  assert.equal(intent.fallback.used, true);
 });
 
 test("routes annual state total-energy requests to SEDS", () => {

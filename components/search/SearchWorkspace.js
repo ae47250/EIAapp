@@ -19,7 +19,8 @@ export default function SearchWorkspace({ showLogout }) {
   const seriesCache = useRef(new Map());
 
   async function searchEia() {
-    const cleanQuery = query.trim();
+    const originalQuery = query;
+    const cleanQuery = query.trim().replace(/\s+/g, " ");
     if (!cleanQuery) {
       setStatus({
         error: true,
@@ -32,7 +33,7 @@ export default function SearchWorkspace({ showLogout }) {
     setData(null);
     setStatus({ message: "Interpreting query..." });
     try {
-      const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: cleanQuery })}`);
+      const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
       const intent = interpretation.intent;
       const missingFields = Array.isArray(intent.missingFields) ? intent.missingFields : [];
       const needsTopicClarification = missingFields.some(field => field === "product" || field === "activity");
@@ -41,7 +42,7 @@ export default function SearchWorkspace({ showLogout }) {
         return;
       }
       setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
-      const params = appendIntentParams(new URLSearchParams({ q: cleanQuery }), intent);
+      const params = appendIntentParams(new URLSearchParams({ q: originalQuery }), intent);
       const nextData = await fetchJson(`/api/search-eia?${params}`);
       applySearchResult(nextData);
     } catch (error) {
@@ -211,7 +212,7 @@ async function fetchJson(url) {
 
 function buildSeriesUrl(variable, existingData) {
   const params = new URLSearchParams({
-    q: String(existingData.query || "brazil energy production"),
+    q: String(existingData.intent?.originalQuery ?? existingData.query ?? "brazil energy production"),
     country: String(variable.countryCode || existingData.country?.code || ""),
     productId: String(variable.productId || ""),
     activityId: String(variable.activityId || ""),
@@ -224,12 +225,23 @@ function buildSeriesUrl(variable, existingData) {
 function appendIntentParams(params, intent) {
   if (!intent) return params;
   params.set("intentReady", "1");
+  params.set("intentPayload", JSON.stringify({
+    originalQuery: intent.originalQuery,
+    cleanedQuery: intent.cleanedQuery,
+    correctedQuery: intent.correctedQuery,
+    interpreter: intent.interpreter,
+    confidence: intent.confidence,
+    fields: intent.fields,
+    ambiguity: intent.ambiguity,
+    fallback: intent.fallback
+  }));
   params.set("intentCorrectedQuery", String(intent.correctedQuery || ""));
   params.set("intentInterpreter", String(intent.interpreter || "rules"));
   params.set("intentCountryCode", String(intent.countryCode || intent.country?.code || ""));
   params.set("intentProduct", String(intent.product || ""));
   params.set("intentActivity", String(intent.activity || ""));
   params.set("intentFrequency", String(intent.frequency || "annual"));
+  params.set("intentConfidence", String(intent.confidence ?? ""));
   return params;
 }
 

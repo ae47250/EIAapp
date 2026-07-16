@@ -68,6 +68,16 @@ test("staged interpretation is reused without a second OpenAI request", async ()
     const url = new URL("https://example.test/api/search-eia");
     url.searchParams.set("q", "Brazil enrgy production");
     url.searchParams.set("intentReady", "1");
+    url.searchParams.set("intentPayload", JSON.stringify({
+      originalQuery: intent.originalQuery,
+      cleanedQuery: intent.cleanedQuery,
+      correctedQuery: intent.correctedQuery,
+      interpreter: intent.interpreter,
+      confidence: intent.confidence,
+      fields: intent.fields,
+      ambiguity: intent.ambiguity,
+      fallback: intent.fallback
+    }));
     url.searchParams.set("intentCorrectedQuery", intent.correctedQuery);
     url.searchParams.set("intentInterpreter", intent.interpreter);
     url.searchParams.set("intentCountryCode", intent.countryCode);
@@ -79,6 +89,8 @@ test("staged interpretation is reused without a second OpenAI request", async ()
 
     assert.equal(response.status, 200);
     assert.equal(body.intent.interpreter, "openai");
+    assert.equal(body.intent.fields.product.validation, "approved");
+    assert.equal(body.intent.fields.product.fallbackUsed, false);
     assert.equal(openAiRequests, 1);
   } finally {
     delete process.env.OPENAI_API_KEY;
