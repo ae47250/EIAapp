@@ -34,6 +34,12 @@ export default function SearchWorkspace({ showLogout }) {
     try {
       const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: cleanQuery })}`);
       const intent = interpretation.intent;
+      const missingFields = Array.isArray(intent.missingFields) ? intent.missingFields : [];
+      const needsTopicClarification = missingFields.some(field => field === "product" || field === "activity");
+      if (intent.needsClarification && needsTopicClarification) {
+        setStatus({ error: true, message: intent.clarificationMessage || "Please clarify the country, energy product, and activity." });
+        return;
+      }
       setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
       const params = appendIntentParams(new URLSearchParams({ q: cleanQuery }), intent);
       const nextData = await fetchJson(`/api/search-eia?${params}`);
@@ -116,7 +122,7 @@ export default function SearchWorkspace({ showLogout }) {
   }
 
   function applySearchResult(nextData) {
-    if (nextData.needsCountry) {
+    if (nextData.needsCountry || nextData.needsClarification) {
       setData(null);
       setStatus({ error: true, message: nextData.userMessage || "Please include a country name." });
       return;

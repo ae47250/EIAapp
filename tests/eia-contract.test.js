@@ -15,6 +15,7 @@ const originalEnvironment = {
 const originalFetch = globalThis.fetch;
 let exactSeriesRequests = 0;
 let openAiRequests = 0;
+let broadDataRequests = 0;
 let failNextExactRequest = false;
 
 before(() => {
@@ -82,6 +83,20 @@ test("staged interpretation is reused without a second OpenAI request", async ()
   } finally {
     delete process.env.OPENAI_API_KEY;
   }
+});
+
+test("unclear input asks for clarification before a broad EIA data request", async () => {
+  broadDataRequests = 0;
+  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20numbers"));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.needsClarification, true);
+  assert.deepEqual(body.intent.missingFields, ["product", "activity"]);
+  assert.equal(body.selectedSeries, null);
+  assert.deepEqual(body.variables, []);
+  assert.match(body.userMessage, /product and activity/i);
+  assert.equal(broadDataRequests, 0);
 });
 
 test("a transient EIA server error retries only the selected top series", async () => {
@@ -173,6 +188,7 @@ async function mockEiaFetch(input) {
   const countryCode = url.searchParams.get("facets[countryRegionId][]");
   const activityId = url.searchParams.get("facets[activityId][]");
   if (activityId) exactSeriesRequests += 1;
+  else if (countryCode) broadDataRequests += 1;
   if (activityId && failNextExactRequest) {
     failNextExactRequest = false;
     return new Response("<html><h1>502 Bad Gateway</h1></html>", {
