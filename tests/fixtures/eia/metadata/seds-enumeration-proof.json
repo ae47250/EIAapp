@@ -1,0 +1,83 @@
+{
+  "fixture_version": "1.0.0",
+  "captured_at": "2026-07-16T04:34:35Z",
+  "source": "EIA API v2 and EIA bulk manifest",
+  "api_version": "2.1.13",
+  "route_family": "seds",
+  "route": "/seds",
+  "evidence": {
+    "facet_endpoints": [
+      {
+        "facet": "seriesId",
+        "source_url": "https://api.eia.gov/v2/seds/facet/seriesId/",
+        "total_facets": 968,
+        "sample": {
+          "id": "AVACE",
+          "name": "Aviation gasoline transportation sector CO2 emissions"
+        }
+      },
+      {
+        "facet": "stateId",
+        "source_url": "https://api.eia.gov/v2/seds/facet/stateId/",
+        "total_facets": 54,
+        "sample": {
+          "id": "NC",
+          "name": "North Carolina"
+        }
+      }
+    ],
+    "conditional_facet_probe": {
+      "facet": "seriesId",
+      "filter": {
+        "stateId": "IN"
+      },
+      "source_url": "https://api.eia.gov/v2/seds/facet/seriesId/?facets%5BstateId%5D%5B%5D=IN",
+      "unfiltered_total_facets": 968,
+      "filtered_total_facets": 968
+    },
+    "active_snapshot": {
+      "source_url": "https://api.eia.gov/v2/seds/data/?frequency=annual&start=2024&end=2024&length=1",
+      "frequency": "annual",
+      "period": "2024",
+      "measurement_columns_requested": [],
+      "total_rows": 48046,
+      "sample_selector": {
+        "seriesId": "ABICB",
+        "stateId": "AK"
+      }
+    },
+    "observation_index_scans": [
+      {
+        "frequency": "annual",
+        "source_url": "https://api.eia.gov/v2/seds/data/?frequency=annual&length=1",
+        "total_rows": 2574644,
+        "sample_row_bytes": 194,
+        "rough_uncompressed_bytes": 499480936
+      }
+    ],
+    "series_id_probe": {
+      "series_id": "SEDS.TETCB.IN.A",
+      "source_url": "https://api.eia.gov/v2/seriesid/SEDS.TETCB.IN.A?length=1",
+      "api_version": "2.1.13",
+      "resolved_route": "/seds",
+      "frequency": "annual",
+      "total_periods": 65,
+      "returned_measure": "value",
+      "measurement_value_omitted": true,
+      "sample_selector": {
+        "seriesId": "TETCB",
+        "stateId": "IN"
+      }
+    },
+    "bulk_file": {
+      "data_set": "SEDS",
+      "title": "State Energy Data System (SEDS)",
+      "manifest_url": "https://api.eia.gov/bulk/manifest.txt",
+      "access_url": "https://www.eia.gov/opendata/bulk/SEDS.zip",
+      "last_updated": "2026-06-26T15:32:24-04:00",
+      "content_length_bytes": 9467055,
+      "route_native": false,
+      "downloaded": false
+    }
+  }
+}

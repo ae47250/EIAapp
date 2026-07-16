@@ -1,0 +1,183 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "source": "EIA",
+    "route": "/electricity/retail-sales",
+    "route_family": "domestic",
+    "route_id": "retail-sales",
+    "name": "Electricity Sales to Ultimate Customers",
+    "description": "Electricity sales to ultimate customer by state and sector (number of customers, average price, revenue, and megawatthours of sales).\nSources: Forms EIA-826, EIA-861, EIA-861M",
+    "frequencies": [
+      {
+        "id": "annual",
+        "description": "One data point for each calendar year.",
+        "query": "A",
+        "date_format": "YYYY"
+      },
+      {
+        "id": "monthly",
+        "description": "One data point for each month.",
+        "query": "M",
+        "date_format": "YYYY-MM"
+      },
+      {
+        "id": "quarterly",
+        "description": "One data point every 3 months.",
+        "query": "Q",
+        "date_format": "YYYY-\"Q\"Q"
+      }
+    ],
+    "facets": [
+      {
+        "id": "sectorid",
+        "description": "Sector"
+      },
+      {
+        "id": "stateid",
+        "description": "State / Census Region"
+      }
+    ],
+    "measures": [
+      {
+        "id": "customers",
+        "alias": "Number of Ultimate Customers",
+        "unit": "number of customers"
+      },
+      {
+        "id": "price",
+        "alias": "Average Price of Electricity to Ultimate Customers",
+        "unit": "cents per kilowatt-hour"
+      },
+      {
+        "id": "revenue",
+        "alias": "Revenue from Sales to Ultimate Customers",
+        "unit": "million dollars"
+      },
+      {
+        "id": "sales",
+        "alias": "Megawatt-hours Sold to Ultimate Customers",
+        "unit": "million kilowatt hours"
+      }
+    ],
+    "date_start": "2001-01",
+    "date_end": "2026-04",
+    "default_date_format": "YYYY-MM",
+    "default_frequency": "monthly",
+    "api_version": "2.1.13",
+    "captured_at": "2026-07-16T04:10:26Z",
+    "raw_metadata_reference": "https://api.eia.gov/v2/electricity/retail-sales/",
+    "metadata_hash": "c5a81ae96b0de56e08940df9cc1826e4b295c830c353a617f78b9f948c680de4"
+  },
+  {
+    "schema_version": "1.0.0",
+    "source": "EIA",
+    "route": "/international",
+    "route_family": "international",
+    "route_id": "international",
+    "name": "International",
+    "description": "Country level production, consumption, imports, exports by energy source (petroleum, natural gas, electricity, renewable, etc.). Interactive product: https://www.eia.gov/international/data/world",
+    "frequencies": [
+      {
+        "id": "annual",
+        "description": "One data point for each calendar year.",
+        "query": "A",
+        "date_format": "YYYY"
+      },
+      {
+        "id": "monthly",
+        "description": "One data point for each month.",
+        "query": "M",
+        "date_format": "YYYY-MM"
+      },
+      {
+        "id": "quarterly",
+        "description": "One data point every 3 months.",
+        "query": "Q",
+        "date_format": "YYYY-\"Q\"Q"
+      }
+    ],
+    "facets": [
+      {
+        "id": "activityId",
+        "description": "Activity"
+      },
+      {
+        "id": "countryRegionId",
+        "description": "Country/Region"
+      },
+      {
+        "id": "countryRegionTypeId",
+        "description": "Country/Region Type"
+      },
+      {
+        "id": "dataFlagId",
+        "description": "Data flag ID"
+      },
+      {
+        "id": "productId",
+        "description": "Product"
+      },
+      {
+        "id": "unit",
+        "description": "Unit"
+      }
+    ],
+    "measures": [
+      {
+        "id": "value",
+        "alias": "value",
+        "unit": null
+      }
+    ],
+    "date_start": "1949-01",
+    "date_end": "2026-03",
+    "default_date_format": "YYYY-MM",
+    "default_frequency": "monthly",
+    "api_version": "2.1.13",
+    "captured_at": "2026-07-16T04:10:26Z",
+    "raw_metadata_reference": "https://api.eia.gov/v2/international/",
+    "metadata_hash": "595d9302acbfd366c10979596cac7bd5993d1618ddade080f0df47e33fa74b2a"
+  },
+  {
+    "schema_version": "1.0.0",
+    "source": "EIA",
+    "route": "/seds",
+    "route_family": "seds",
+    "route_id": "seds",
+    "name": "State Energy Data System (SEDS)",
+    "description": "Estimated production, consumption, price, and expenditure data for all energy sources by state and sector. Source: https://www.eia.gov/state/seds/seds-technical-notes-complete.php Product: SEDS (https://www.eia.gov/state/seds/)",
+    "frequencies": [
+      {
+        "id": "annual",
+        "description": "One data point for each calendar year.",
+        "query": "A",
+        "date_format": "YYYY"
+      }
+    ],
+    "facets": [
+      {
+        "id": "seriesId",
+        "description": "Unique series identifier"
+      },
+      {
+        "id": "stateId",
+        "description": "State name"
+      }
+    ],
+    "measures": [
+      {
+        "id": "value",
+        "alias": "value",
+        "unit": null
+      }
+    ],
+    "date_start": "1960",
+    "date_end": "2024",
+    "default_date_format": "YYYY",
+    "default_frequency": "annual",
+    "api_version": "2.1.13",
+    "captured_at": "2026-07-16T04:10:26Z",
+    "raw_metadata_reference": "https://api.eia.gov/v2/seds/",
+    "metadata_hash": "e3a73730f8770e926590c2a34cc51c3881a9ac1db53165fd40517b62b0ccbeb0"
+  }
+]

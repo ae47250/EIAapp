@@ -10,6 +10,13 @@ const TRUSTED_SELECTOR_SOURCES = new Set([
   "official_combination_metadata",
   "recorded_observation_fixture"
 ]);
+const BULK_FREQUENCIES = Object.freeze({
+  A: "annual",
+  Q: "quarterly",
+  M: "monthly",
+  W: "weekly",
+  D: "daily"
+});
 
 export function normalizeRouteFixture(fixture) {
   const response = fixture?.response;
@@ -78,6 +85,44 @@ export function normalizeSeriesCandidate(input) {
   return { ...normalized, metadata_hash: sha256(stableStringify(normalized)) };
 }
 
+export function shouldIncludeBulkSeries(record, routeFamily) {
+  const seriesId = String(record?.series_id || "");
+  if (!seriesId) return false;
+  if (routeFamily === "domestic") return seriesId.startsWith("ELEC.") && !seriesId.startsWith("ELEC.PLANT.");
+  if (routeFamily === "international") return seriesId.startsWith("INTL.");
+  if (routeFamily === "seds") return seriesId.startsWith("SEDS.");
+  return false;
+}
+
+export function normalizeBulkSeries(record, { routeFamily } = {}) {
+  const seriesId = requiredText(record?.series_id, "bulk series id");
+  if (!shouldIncludeBulkSeries(record, routeFamily)) {
+    throw new Error(`Bulk series ${seriesId} is outside the ${routeFamily || "unknown"} build scope.`);
+  }
+
+  const frequency = BULK_FREQUENCIES[requiredText(record.f, "bulk frequency").toUpperCase()];
+  if (!frequency) throw new Error(`Bulk series ${seriesId} has unsupported frequency ${record.f}.`);
+
+  const selector = buildBulkSelector(seriesId, routeFamily, frequency);
+  const normalized = normalizeSeriesCandidate({
+    route_family: routeFamily,
+    selector_source: "official_series_metadata",
+    selector,
+    series_id: seriesId,
+    title: requiredText(record.name, "bulk series name"),
+    description: String(record.description || "").trim(),
+    geography: buildBulkGeography(record, routeFamily),
+    concept_type: inferConceptType(record.name),
+    unit: nullableText(record.units),
+    date_start: nullableText(record.start),
+    date_end: nullableText(record.end),
+    is_active: true,
+    raw_metadata_reference: `https://api.eia.gov/v2/seriesid/${encodeURIComponent(seriesId)}`
+  });
+
+  return compactSeriesRecord(normalized);
+}
+
 export function buildCandidateId(selector) {
   return `eia:1:${sha256(stableStringify(normalizeSelector(selector)))}`;
 }
@@ -98,6 +143,108 @@ export function canonicalize(value) {
 
 export function sha256(value) {
   return createHash("sha256").update(String(value)).digest("hex");
+}
+
+function buildBulkSelector(seriesId, routeFamily, frequency) {
+  if (routeFamily === "domestic") {
+    const parts = seriesId.split(".");
+    return {
+      route: "/seriesid",
+      measure: requiredText(parts[1], "domestic series measure").toLowerCase(),
+      frequency,
+      facets: { series_id: seriesId }
+    };
+  }
+
+  if (routeFamily === "international") {
+    const match = /^INTL\.([^-]+)-([^-]+)-(.+)-([^-]+)\.([AMQWD])$/.exec(seriesId);
+    if (!match) throw new Error(`International series ID has an unsupported shape: ${seriesId}`);
+    return {
+      route: "/international",
+      measure: "value",
+      frequency,
+      facets: {
+        productId: match[1],
+        activityId: match[2],
+        countryRegionId: match[3],
+        unit: match[4]
+      }
+    };
+  }
+
+  if (routeFamily === "seds") {
+    const match = /^SEDS\.([^.]+)\.([^.]+)\.([AMQWD])$/.exec(seriesId);
+    if (!match) throw new Error(`SEDS series ID has an unsupported shape: ${seriesId}`);
+    return {
+      route: "/seds",
+      measure: "value",
+      frequency,
+      facets: { seriesId: match[1], stateId: match[2] }
+    };
+  }
+
+  throw new Error(`Unsupported bulk route family: ${routeFamily || "missing"}`);
+}
+
+function buildBulkGeography(record, routeFamily) {
+  const sourceCode = nullableText(
+    record.geography ||
+    record.iso3166 ||
+    (routeFamily === "seds" ? /^SEDS\.[^.]+\.([^.]+)\./.exec(String(record.series_id || ""))?.[1] : null)
+  );
+  if (!sourceCode) return null;
+
+  if (routeFamily === "domestic") {
+    const code = sourceCode === "USA" ? "US" : sourceCode.replace(/^USA-/, "");
+    return {
+      name: sourceCode === "USA" ? "United States" : extractDomesticGeographyName(record.name, code),
+      code,
+      type: sourceCode === "USA" ? "national" : /^[A-Z]{2}$/.test(code) ? "state" : "region"
+    };
+  }
+
+  const code = routeFamily === "seds" ? sourceCode.replace(/^USA-/, "") : sourceCode;
+  const name = extractTrailingGeographyName(record.name) || code;
+  return {
+    name,
+    code,
+    type: routeFamily === "seds" ? "state" : "other"
+  };
+}
+
+function extractDomesticGeographyName(name, fallback) {
+  const parts = String(name || "").split(" : ").map(part => part.trim()).filter(Boolean);
+  const ignored = /^(annual|quarterly|monthly|weekly|daily|all sectors|commercial|industrial|residential|transportation|electric power)$/i;
+  for (let index = parts.length - 1; index >= 1; index -= 1) {
+    if (!ignored.test(parts[index])) return parts[index];
+  }
+  return fallback;
+}
+
+function extractTrailingGeographyName(name) {
+  const parts = String(name || "").split(",").map(part => part.trim()).filter(Boolean);
+  if (parts.length < 2) return null;
+  return /^(annual|quarterly|monthly|weekly|daily)$/i.test(parts.at(-1))
+    ? parts.at(-2)
+    : parts.at(-1);
+}
+
+function inferConceptType(name) {
+  const normalized = String(name || "").toLowerCase();
+  if (normalized.includes("price") || normalized.includes("cost")) return "price";
+  if (normalized.includes("stock") || normalized.includes("inventory")) return "stock";
+  if (normalized.includes("share") || normalized.includes("percent")) return "share";
+  if (normalized.includes("rate")) return "rate";
+  return "other";
+}
+
+function compactSeriesRecord(record) {
+  const { metadata_hash: ignoredHash, ...withoutHash } = record;
+  const compacted = Object.fromEntries(Object.entries(withoutHash).filter(([, value]) => {
+    if (value == null || value === "") return false;
+    return !Array.isArray(value) || value.length > 0;
+  }));
+  return { ...compacted, metadata_hash: sha256(stableStringify(compacted)) };
 }
 
 function normalizeSelector(selector) {
