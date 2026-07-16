@@ -50,6 +50,8 @@ Exact verified aggregates receive the highest priority within the relevant pool.
 
 Broad-product alternatives are fallback suggestions unless they directly match the requested product. Derived metrics such as intensity, ratios, shares, per-capita, and per-dollar series are penalized unless the user asks for that derived metric. If no sector is requested, unqualified totals are preferred over sector-specific totals.
 
+When activity is missing but a weak source hint is present, such as `from`, the hint can guide fallback ranking but does not clear the missing-activity ambiguity. The ranked result keeps a warning explaining that the activity was inferred only for ranking. For example, `California monthly electricity from moon` keeps `activity` missing, treats `from` as a weak generation/source hint, returns no primary candidates, and ranks all-fuels net-generation suggestions first.
+
 Ranking outputs retain:
 
 - reason codes;

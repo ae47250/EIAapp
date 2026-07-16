@@ -491,6 +491,20 @@ test("unqualified aggregates outrank sector-specific and derived records when no
   assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("unqualified_aggregate_boost"));
 });
 
+test("weak activity inference ranks all-fuels totals first and reports the warning", async () => {
+  const intent = interpretQueryWithRules("California monthly electricity from moon");
+  const retrieval = await retrieveLocalCandidates(intent);
+  const ranked = rankLocalCandidates(intent, retrieval);
+  const first = ranked.retrievals[0].rankedCandidates[0];
+
+  assert.equal(ranked.retrievals[0].primaryCandidates.length, 0);
+  assert.equal(first.series_id, "ELEC.GEN.ALL-CA-94.M");
+  assert.ok(first.ranking.reasonCodes.includes("activity_inferred_from_preposition"));
+  assert.ok(first.ranking.reasonCodes.includes("missing_activity_fallback_penalty"));
+  assert.ok(first.ranking.reasonCodes.includes("all_sectors_aggregate_boost"));
+  assert.ok(first.ranking.warnings.some(warning => warning.includes("No explicit activity was found")));
+});
+
 test("the Phase 3 output shape remains compatible with the ranker", async () => {
   const intent = interpretQueryWithRules("Brazil annual petroleum consumption");
   const retrieval = await retrieveLocalCandidates(intent);

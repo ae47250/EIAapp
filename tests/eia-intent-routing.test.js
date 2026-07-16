@@ -35,6 +35,18 @@ test("routes state electricity requests to Domestic EIA", () => {
   assert.equal(intent.frequency, "monthly");
 });
 
+test("records weak activity inference without clearing missing-activity ambiguity", () => {
+  const intent = interpretQueryWithRules("California monthly electricity from moon");
+
+  assert.equal(intent.route.family, "domestic");
+  assert.equal(intent.product, "electricity");
+  assert.equal(intent.activity, null);
+  assert.equal(intent.structuredIntent.activityInference.activity, "generation");
+  assert.equal(intent.structuredIntent.activityInference.sourceTerm, "from");
+  assert.ok(intent.ambiguity.reasons.includes("activity_or_scope_missing"));
+  assert.ok(intent.missingFields.includes("activity"));
+});
+
 test("routes explicit plant requests to Domestic EIA without retrieving plant candidates", () => {
   const intent = interpretQueryWithRules("monthly generation at Palo Verde power plant in Arizona");
 

@@ -70,6 +70,17 @@ test("nonannual state total-energy requests do not fall into SEDS annual candida
   assert.ok(allCandidates(retrieval).every(candidate => candidate.frequency === "monthly"));
 });
 
+test("weak activity inference retrieves suggestions but keeps them out of primary", async () => {
+  const result = await retrieveLocalCandidates(interpretQueryWithRules("California monthly electricity from moon"));
+  const retrieval = result.retrievals[0];
+
+  assert.equal(retrieval.concept.activity, "generation");
+  assert.equal(retrieval.concept.activitySource, "weak_inference");
+  assert.equal(retrieval.primaryCandidates.length, 0);
+  assert.ok(retrieval.fallbackCandidates.length > 0);
+  assert.ok(retrieval.fallbackCandidates.every(candidate => candidate.retrieval.reasonCodes.includes("activity_weak_inference_fallback")));
+});
+
 test("deduplicates canonical selectors and separates weak fallback matches", async () => {
   const intent = fixtureIntent();
   const strong = fixtureRecord("one", "Solar electricity production", "A");
