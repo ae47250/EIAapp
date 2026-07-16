@@ -114,6 +114,32 @@ test("exact-series selection keeps the alternate-series response shape", async (
   assert.deepEqual(body.variables, []);
 });
 
+test("an exact series with no observations is marked for the UI to hide", async () => {
+  const url = new URL("https://example.test/api/search-eia");
+  url.searchParams.set("q", "Brazil empty series");
+  url.searchParams.set("country", "BRA");
+  url.searchParams.set("productId", "999");
+  url.searchParams.set("activityId", "999");
+  url.searchParams.set("unit", "QBTU");
+  const response = await searchEia(new Request(url));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.selectedSeries, null);
+  assert.equal(body.emptySeries, true);
+});
+
+test("a legacy EIA entity returns a clear historical-data notice", async () => {
+  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Former%20Czechoslovakia%20energy%20production"));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.country.name, "Former Czechoslovakia");
+  assert.equal(body.selectedSeries, null);
+  assert.equal(body.legacyEntity, true);
+  assert.match(body.userMessage, /historical EIA entity/i);
+});
+
 test("browser-side XLSX export retains All_Data and Metadata sheets", async () => {
   const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20energy%20production"));
   const body = await response.json();
@@ -144,6 +170,7 @@ async function mockEiaFetch(input) {
   }
   if (url.pathname.endsWith("/facet/countryRegionId/")) return jsonResponse(fixture.countries);
 
+  const countryCode = url.searchParams.get("facets[countryRegionId][]");
   const activityId = url.searchParams.get("facets[activityId][]");
   if (activityId) exactSeriesRequests += 1;
   if (activityId && failNextExactRequest) {
@@ -153,7 +180,9 @@ async function mockEiaFetch(input) {
       headers: { "Content-Type": "text/html" }
     });
   }
-  const rows = activityId ? fixture.exactRows[activityId] || [] : fixture.broadRows;
+  const rows = countryCode === "CSK"
+    ? [{ period: "2024", value: "NA", countryRegionId: "CSK", productId: "44", activityId: "1", unit: "QBTU" }]
+    : activityId ? fixture.exactRows[activityId] || [] : fixture.broadRows;
   return jsonResponse({ response: { data: rows } });
 }
 

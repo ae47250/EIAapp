@@ -1,0 +1,22 @@
+EIA facet audit summary
+Total facet entries: 268
+Successes: 257
+Timeouts: 1
+No country interpreted: 2
+No data returned: 1
+No usable series: 7
+Backend errors: 0
+Average response time: 3696 ms
+
+Major findings:
+- The EIA country facet returns 268 usable entries in total.
+- The set mixes true countries with regions and groups, so the count is broader than country-only coverage.
+- The fixed query strategy that worked for USA scales to the full facet list, but some entries are slow enough to need a timeout guard.
+- Failures should be interpreted separately as interpretation misses, empty upstream data, upstream EIA errors, and timeouts.
+- No-series examples were mostly legacy or special entries: Former Czechoslovakia, Germany, East, Germany, West, Hawaiian Trade Zone, Former Serbia and Montenegro, Former U.S.S.R., and Former Yugoslavia.
+- No-country examples were the broad group labels Other Americas and Other Asia-Pacific.
+- The no-data example was World.
+- The timeout example was United Kingdom.
+
+Top error samples:
+- GBR United Kingdom | status=0 | AbortError: This operation was aborted

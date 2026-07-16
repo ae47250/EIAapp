@@ -56,6 +56,10 @@ export default function SearchWorkspace({ showLogout }) {
         variables: existingData.variables || []
       });
     } catch (error) {
+      if (error.emptySeries) {
+        hideEmptyVariable(variable);
+        return;
+      }
       setStatus({ error: true, message: error.message });
     }
   }
@@ -68,6 +72,10 @@ export default function SearchWorkspace({ showLogout }) {
       downloadSeriesWorkbook(series);
       setStatus({ message: "Excel download started." });
     } catch (error) {
+      if (error.emptySeries) {
+        hideEmptyVariable(variable);
+        return;
+      }
       setStatus({ error: true, message: error.message });
     }
   }
@@ -81,7 +89,11 @@ export default function SearchWorkspace({ showLogout }) {
     if (cached) return await cached;
 
     const request = fetchJson(buildSeriesUrl(variable, existingData)).then(result => {
-      if (!result.selectedSeries?.points?.length) throw new Error("No observations are available for this series.");
+      if (!result.selectedSeries?.points?.length) {
+        const error = new Error("No observations are available for this series.");
+        error.emptySeries = result.emptySeries === true;
+        throw error;
+      }
       seriesCache.current.set(key, result.selectedSeries);
       return result.selectedSeries;
     });
@@ -93,6 +105,14 @@ export default function SearchWorkspace({ showLogout }) {
       if (seriesCache.current.get(key) === request) seriesCache.current.delete(key);
       throw error;
     }
+  }
+
+  function hideEmptyVariable(variable) {
+    setData(currentData => currentData ? {
+      ...currentData,
+      variables: (currentData.variables || []).filter(candidate => !sameSeries(candidate, variable))
+    } : currentData);
+    setStatus({ message: "An EIA series with no observations was hidden." });
   }
 
   function applySearchResult(nextData) {
