@@ -1,0 +1,179 @@
+{
+  "version": "phase4-routing-vocabulary-v1",
+  "source": {
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "6f2997cd02f66f8543a6dad1a6697344bce5426a2e29c9c08da5e7ac14e5c4a1",
+    "refreshPolicy": "Regenerate this file when the local EIA metadata cache is intentionally rebuilt; no live EIA lookup is performed during routing or ranking.",
+    "coverageWarning": "Domestic Phase 1B coverage is Electricity-only; non-electricity Domestic suggestions depend on future Domestic metadata builds."
+  },
+  "routePriority": ["domestic", "international", "seds"],
+  "routeProfiles": {
+    "domestic": {
+      "label": "Domestic EIA",
+      "description": "U.S. domestic EIA metadata. In the current Phase 1B cache this primarily means Electricity bulk metadata, including state and U.S. electricity generation, sales, customers, prices, capacity, and plant-related electricity records.",
+      "geographyTypes": ["state", "us-national"],
+      "frequencies": ["annual", "monthly", "quarterly"],
+      "defaultFrequency": "monthly",
+      "stateNonAnnualPrimary": true,
+      "conceptHints": ["electricity", "generation", "capacity", "plant", "sales", "customers"]
+    },
+    "international": {
+      "label": "International",
+      "description": "Country and world-region EIA metadata for production, consumption, imports, exports, and energy products such as petroleum, natural gas, electricity, renewables, coal, nuclear, and total energy.",
+      "geographyTypes": ["country", "region"],
+      "frequencies": ["annual", "monthly", "quarterly"],
+      "defaultFrequency": "monthly",
+      "conceptHints": ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable", "hydro", "solar", "wind", "biofuels", "total energy", "consumption", "production", "imports", "exports", "prices"]
+    },
+    "seds": {
+      "label": "SEDS",
+      "description": "State Energy Data System metadata for annual U.S. state energy-system series such as total energy consumption, production, prices, expenditures, and sector energy use.",
+      "geographyTypes": ["state"],
+      "frequencies": ["annual"],
+      "defaultFrequency": "annual",
+      "stateAnnualConceptHints": ["total energy", "consumption", "production", "prices", "expenditures"]
+    }
+  },
+  "geographyAliases": {
+    "us": "USA",
+    "u s": "USA",
+    "usa": "USA",
+    "america": "USA",
+    "united states": "USA",
+    "uk": "GBR",
+    "britain": "GBR",
+    "great britain": "GBR",
+    "united kingdom": "GBR",
+    "uae": "ARE",
+    "emirates": "ARE",
+    "south korea": "KOR",
+    "north korea": "PRK",
+    "russia": "RUS",
+    "iran": "IRN",
+    "venezuela": "VEN",
+    "vietnam": "VNM",
+    "czech republic": "CZE",
+    "czechia": "CZE",
+    "dc": "DC"
+  },
+  "vocabulary": {
+    "products": {
+      "natural gas": {
+        "terms": ["natural gas plant liquids", "natural gas liquids", "dry natural gas", "marketed natural gas", "natural gas", "nat gas"],
+        "ambiguity": "specific"
+      },
+      "petroleum": {
+        "terms": ["petroleum and other liquids", "liquid fuels", "refined petroleum", "crude oil", "petroleum", "gasoline", "diesel", "crude", "oil"],
+        "ambiguity": "specific"
+      },
+      "electricity": {
+        "terms": ["electricity", "electric power", "power"],
+        "ambiguity": "specific"
+      },
+      "coal": {
+        "terms": ["coal"],
+        "ambiguity": "specific"
+      },
+      "nuclear": {
+        "terms": ["nuclear"],
+        "ambiguity": "specific"
+      },
+      "renewable": {
+        "terms": ["renewable energy", "renewables", "renewable"],
+        "ambiguity": "broad",
+        "alternatives": ["wind", "solar", "hydro", "biofuels"]
+      },
+      "hydro": {
+        "terms": ["hydroelectric", "hydropower", "hydro"],
+        "ambiguity": "specific"
+      },
+      "solar": {
+        "terms": ["solar"],
+        "ambiguity": "specific"
+      },
+      "wind": {
+        "terms": ["wind"],
+        "ambiguity": "specific"
+      },
+      "biofuels": {
+        "terms": ["biofuels", "biofuel", "biomass"],
+        "ambiguity": "specific"
+      },
+      "total energy": {
+        "terms": ["primary energy", "total energy", "all energy", "energy"],
+        "ambiguity": "broad",
+        "alternatives": ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable"]
+      }
+    },
+    "activities": {
+      "consumption": {
+        "terms": ["consumption", "consumed", "consume", "usage", "demand", "use"]
+      },
+      "production": {
+        "terms": ["production", "produced", "produce", "supply", "output"]
+      },
+      "generation": {
+        "terms": ["electricity generation", "power generation", "net generation", "generation", "generated"],
+        "titleOrMeasureRequired": true
+      },
+      "imports": {
+        "terms": ["imports", "imported", "import"]
+      },
+      "exports": {
+        "terms": ["exports", "exported", "export"]
+      },
+      "reserves": {
+        "terms": ["reserves", "reserve"]
+      },
+      "capacity": {
+        "terms": ["capacity"]
+      },
+      "prices": {
+        "terms": ["prices", "price", "cost"],
+        "conceptType": "price"
+      }
+    },
+    "scopes": {
+      "plant": {
+        "terms": ["power plant", "electric plant", "plant", "facility"]
+      },
+      "sales": {
+        "terms": ["retail sales", "electricity sales", "sales"]
+      },
+      "customers": {
+        "terms": ["customer accounts", "customers", "customer"]
+      }
+    },
+    "sectors": {
+      "residential": { "terms": ["residential"] },
+      "commercial": { "terms": ["commercial"] },
+      "industrial": { "terms": ["industrial"] },
+      "transportation": { "terms": ["transportation"] },
+      "electric power": { "terms": ["electric power", "utility"] },
+      "utility": { "terms": ["utility"] }
+    },
+    "units": {
+      "btu": { "terms": ["btu", "quadrillion btu", "million btu"] },
+      "kwh": { "terms": ["kwh", "kilowatthours", "kilowatt hours"] },
+      "barrels": { "terms": ["barrels", "barrels per day"] },
+      "cubic feet": { "terms": ["cubic feet", "cf", "bcf"] },
+      "dollars": { "terms": ["dollars", "price", "cost"] },
+      "megawatts": { "terms": ["megawatts", "mw"] }
+    },
+    "frequencies": {
+      "monthly": { "terms": ["monthly", "months", "month"] },
+      "quarterly": { "terms": ["quarterly", "quarters", "quarter"] },
+      "annual": { "terms": ["annually", "annual", "yearly", "years", "year"] }
+    },
+    "ambiguousProducts": {
+      "gas": {
+        "alternatives": ["natural gas", "petroleum"],
+        "reason": "The product term may refer to more than one approved energy-product family.",
+        "contexts": [
+          { "value": "natural gas", "terms": ["pipeline", "storage", "withdrawals", "withdrawal", "dry gas", "marketed production", "underground storage", "lng"] },
+          { "value": "petroleum", "terms": ["pump price", "pump prices", "motor fuel", "retail gasoline", "regular grade", "highway use", "gasoline consumption"] }
+        ]
+      }
+    }
+  }
+}

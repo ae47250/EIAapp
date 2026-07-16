@@ -155,13 +155,29 @@ test("deterministic ranking meets the baseline metrics on representative cases",
       ])
     },
     {
-      intent: { ...interpretQueryWithRules("Texas monthly total energy consumption"), requestedPeriod: "2024" },
+      intent: { ...interpretQueryWithRules("Texas annual total energy consumption"), requestedPeriod: "2024" },
       retrieval: buildRetrieval({
         routeFamily: "seds",
         geography: { name: "Texas", code: "TX", type: "state" },
-        frequency: { value: "annual", requested: "monthly", mode: "fallback" },
-        primaryCandidates: [],
-        fallbackCandidates: [
+        frequency: { value: "annual", requested: "annual", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "derived-intensity",
+            series_id: "SEDS.TX.CARBON.INTENSITY.A",
+            title: "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption), Texas",
+            description: "Derived formula divided by total energy consumption.",
+            measure: "value",
+            geography: { name: "Texas", code: "TX", type: "state" },
+            unit: "metric tons per billion btu",
+            date_start: "2010",
+            date_end: "2024",
+            selector: {
+              route: "/seds",
+              measure: "value",
+              frequency: "annual",
+              facets: { stateId: "TX", seriesId: "CDTCR" }
+            }
+          }),
           buildCandidate({
             candidate_id: "coverage-hit",
             series_id: "SEDS.TX.TEC.A",
@@ -196,9 +212,11 @@ test("deterministic ranking meets the baseline metrics on representative cases",
               facets: { stateId: "TX", seriesId: "TEC_OLD" }
             }
           })
-        ]
+        ],
+        fallbackCandidates: []
       }),
       relevance: new Map([
+        ["derived-intensity", 0],
         ["coverage-hit", 2],
         ["coverage-miss", 1]
       ])
@@ -262,6 +280,35 @@ test("wrong-frequency candidates stay in fallback and are still auditable", () =
   assert.equal(retrieval.fallbackCandidates.length, 1);
   assert.ok(retrieval.diagnostics.rankingWarnings.some(warning => warning.includes("wrong_frequency_fallback")));
   assert.ok(retrieval.fallbackCandidates[0].ranking.reasonCodes.includes("frequency_mismatch_fallback"));
+});
+
+test("selector geography mismatches are excluded before scoring", () => {
+  const intent = interpretQueryWithRules("Brazil renewable energy production");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "international",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "international",
+        geography: { name: "Brazil", code: "BRA", type: "country" },
+        frequency: { value: "annual", requested: "annual", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "regional-selector",
+            title: "Renewable energy production, Brazil, Annual",
+            geography: { name: "Brazil", code: "BRA", type: "country" },
+            selector: { route: "/international", measure: "value", frequency: "annual", facets: { countryRegionId: "WP13", productId: "REN" } }
+          })
+        ],
+        fallbackCandidates: []
+      })
+    ],
+    diagnostics: {}
+  });
+
+  const retrieval = ranked.retrievals[0];
+  assert.equal(retrieval.rankedCandidates.length, 0);
+  assert.ok(retrieval.diagnostics.rankingWarnings.some(warning => warning.includes("selector_geography_mismatch")));
 });
 
 test("broad renewable queries keep several options in the top ranks and stay deterministic", () => {
@@ -397,6 +444,51 @@ test("requested-date coverage and currentness outrank stale non-covering records
   assert.equal(retrieval.rankedCandidates[0].candidate_id, "current-hit");
   assert.ok(retrieval.rankedCandidates[0].ranking.reasonCodes.includes("requested_date_covered"));
   assert.ok(retrieval.rankedCandidates[0].ranking.reasonCodes.includes("current_active"));
+});
+
+test("unqualified aggregates outrank sector-specific and derived records when no sector is requested", () => {
+  const intent = {
+    ...interpretQueryWithRules("Texas annual total energy consumption"),
+    requestedPeriod: "2024"
+  };
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "seds",
+    retrievals: [
+      buildRetrieval({
+        routeFamily: "seds",
+        geography: { name: "Texas", code: "TX", type: "state" },
+        frequency: { value: "annual", requested: "annual", mode: "exact" },
+        primaryCandidates: [
+          buildCandidate({
+            candidate_id: "sector-total",
+            series_id: "SEDS.TX.TRANSPORT.A",
+            title: "Total energy consumption in the transportation sector, Texas",
+            geography: { name: "Texas", code: "TX", type: "state" },
+            selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "TEACB" } }
+          }),
+          buildCandidate({
+            candidate_id: "derived-total",
+            series_id: "SEDS.TX.INTENSITY.A",
+            title: "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption), Texas",
+            geography: { name: "Texas", code: "TX", type: "state" },
+            selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "CDTCR" } }
+          }),
+          buildCandidate({
+            candidate_id: "unqualified-total",
+            series_id: "SEDS.TX.TOTAL.A",
+            title: "Total energy consumption, Texas",
+            geography: { name: "Texas", code: "TX", type: "state" },
+            selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "TETCB" } }
+          })
+        ]
+      })
+    ],
+    diagnostics: {}
+  });
+
+  assert.equal(ranked.retrievals[0].rankedCandidates[0].candidate_id, "unqualified-total");
+  assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("unqualified_aggregate_boost"));
 });
 
 test("the Phase 3 output shape remains compatible with the ranker", async () => {

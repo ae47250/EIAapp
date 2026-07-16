@@ -1,6 +1,6 @@
 # EIA metadata Phase 4 deterministic-ranking report
 
-Status: implemented and locally verified. Review required before Phase 5. Phase 4 ranking is not connected to the public search workflow.
+Status: implemented, calibrated, and locally verified. Review required before Phase 5. Phase 4 ranking is not connected to the public search workflow.
 
 ## Scope
 
@@ -8,14 +8,30 @@ Phase 4 adds deterministic ranking on top of the Phase 3 candidate sets. It does
 
 Ranking weights live in the versioned configuration file `data/eia/phase4-ranking-config.json`.
 
+Route profiles and controlled vocabulary live in `data/eia/phase4-routing-config.json`. That file records the Phase 1B manifest hash and is regenerated only when the local EIA metadata cache is intentionally rebuilt.
+
+## Routing cleanup
+
+The route decision now uses route profiles instead of hidden term-specific shortcuts:
+
+1. Country and world-region requests route to International.
+2. U.S. state nonannual requests route to Domestic first because SEDS is annual-only.
+3. U.S. state annual energy-system requests can route to SEDS.
+4. U.S. state electricity-specific requests route to Domestic.
+
+The previous code-level shortcut for state-level `total energy` was removed. `total energy` is now a configured broad product/scope like the other product families.
+
+Products, activities, scopes, sectors, units, frequencies, aliases, and ambiguity groups are now controlled vocabulary in configuration rather than scattered JavaScript constants. The interpreter, router, retriever, and ranker all read the shared config.
+
 ## Ranking behavior
 
 The ranker applies hard eligibility checks before scoring:
 
 1. Route family must match the Phase 3 retrieval family.
 2. Geography must match the validated retrieval geography exactly.
-3. Wrong-frequency candidates are moved to the fallback pool instead of being scored as primary.
-4. Candidates missing key eligibility data are excluded or downgraded with warnings.
+3. Selector geography must match the validated geography when the selector exposes a geography facet.
+4. Wrong-frequency candidates are moved to the fallback pool instead of being scored as primary.
+5. Candidates missing key eligibility data are excluded or downgraded with warnings.
 
 After eligibility, the ranker scores candidates using configured weights for:
 
@@ -31,6 +47,8 @@ After eligibility, the ranker scores candidates using configured weights for:
 - currentness and availability.
 
 Exact verified aggregates receive the highest priority within the relevant pool. Fallback candidates never outrank primary candidates. Ties resolve deterministically using selector identity and candidate ID.
+
+Broad-product alternatives are fallback suggestions unless they directly match the requested product. Derived metrics such as intensity, ratios, shares, per-capita, and per-dollar series are penalized unless the user asks for that derived metric. If no sector is requested, unqualified totals are preferred over sector-specific totals.
 
 Ranking outputs retain:
 
@@ -62,11 +80,14 @@ The focused ranking suite covers:
 
 ## Manual review
 
-Reviewed the top 10 ranked results for representative queries:
+Reviewed representative routing/retrieval/ranking behavior:
 
 - `California monthly electricity generation` ranked real `Net generation` records first.
-- `Brazil renewable energy production` surfaced the expected renewable-family series and biofuels in the leading results.
-- `Texas monthly total energy consumption` kept annual SEDS results in the fallback pool as intended.
+- `Brazil renewable energy production` surfaced Brazil renewable aggregate records first, with biofuels and other renewable-family matches as fallback suggestions; regional selectors such as `WP13` are excluded.
+- `Texas annual total energy consumption` uses SEDS and ranks `Total energy consumption, Texas` first instead of carbon-intensity or sector-specific series.
+- `Texas monthly total energy consumption` now routes to Domestic first and returns only fallback suggestions, instead of silently using annual SEDS fallback as an exact answer.
+
+If Domestic metadata cannot find the requested nonannual state variable, Phase 5 wiring should present ranked fallback/suggestion candidates from local metadata rather than inventing them with AI.
 
 ## Review gate
 

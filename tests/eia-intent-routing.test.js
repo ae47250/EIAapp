@@ -58,14 +58,13 @@ test("preserves geography and concept mention order", () => {
   assert.ok(intent.ambiguity.reasons.includes("multiple_geographies"));
 });
 
-test("represents SEDS frequency fallback instead of silently accepting unsupported monthly data", () => {
+test("routes nonannual U.S. state requests to Domestic before SEDS fallback", () => {
   const intent = interpretQueryWithRules("Texas monthly total energy consumption");
 
-  assert.equal(intent.route.family, "seds");
-  assert.equal(intent.frequency, "annual");
-  assert.equal(intent.validation.frequency, "fallback");
-  assert.equal(intent.fallback.used, true);
-  assert.ok(intent.fallback.reasons.includes("frequency_monthly_unsupported_by_seds_using_annual"));
+  assert.equal(intent.route.family, "domestic");
+  assert.equal(intent.frequency, "monthly");
+  assert.equal(intent.validation.frequency, "valid");
+  assert.equal(intent.route.reason, "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.");
 });
 
 test("represents missing geography and deterministic route fallback", () => {

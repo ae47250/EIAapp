@@ -52,24 +52,29 @@ test("broad renewable intent retrieves several approved product options", async 
   assert.ok(titles.some(title => title.includes("renewable")));
   assert.ok(titles.some(title => /wind|solar|hydro|biofuel|biomass/.test(title)));
   assert.ok(titles.every(title => /renewable|wind|solar|hydro|biofuel|biomass/.test(title)));
+  assert.ok(candidates.every(candidate => candidate.selector.facets.countryRegionId === "BRA"));
   assert.deepEqual(result.retrievals[0].concept.productAlternatives, ["wind", "solar", "hydro", "biofuels"]);
 });
 
-test("frequency fallback stays out of the primary pool", async () => {
+test("nonannual state total-energy requests do not fall into SEDS annual candidates", async () => {
   const result = await retrieveLocalCandidates(interpretQueryWithRules("Texas monthly total energy consumption"));
   const retrieval = result.retrievals[0];
 
-  assert.equal(retrieval.frequency.mode, "fallback");
+  assert.equal(result.routeFamily, "domestic");
+  assert.equal(retrieval.frequency.mode, "exact");
+  assert.equal(retrieval.frequency.value, "monthly");
   assert.equal(retrieval.primaryCandidates.length, 0);
   assert.ok(retrieval.fallbackCandidates.length > 0);
-  assert.ok(retrieval.fallbackCandidates.every(candidate => candidate.retrieval.reasonCodes.includes("frequency_fallback")));
+  assert.ok(retrieval.fallbackCandidates.every(candidate => candidate.retrieval.reasonCodes.includes("product_alternative_fallback")));
+  assert.ok(allCandidates(retrieval).every(candidate => candidate.route_family === "domestic"));
+  assert.ok(allCandidates(retrieval).every(candidate => candidate.frequency === "monthly"));
 });
 
 test("deduplicates canonical selectors and separates weak fallback matches", async () => {
   const intent = fixtureIntent();
   const strong = fixtureRecord("one", "Solar electricity production", "A");
   const duplicate = { ...strong, candidate_id: "duplicate" };
-  const weak = fixtureRecord("two", "Electricity use", "B");
+  const weak = fixtureRecord("two", "Solar use", "B");
   const result = await retrieveLocalCandidates(intent, {
     records: [strong, duplicate, weak],
     indexMetadata: { manifestContentHash: "test-hash" }
