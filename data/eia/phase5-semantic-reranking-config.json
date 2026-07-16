@@ -1,0 +1,27 @@
+{
+  "version": "phase5-v1",
+  "defaultMode": "off",
+  "allowedModes": ["off", "shadow"],
+  "trigger": {
+    "minimumFamilies": 2,
+    "maximumFamilies": 5,
+    "minimumScore": 60,
+    "maximumTopScoreGap": 5,
+    "requireSameTier": true,
+    "requireUnresolvedAmbiguity": true,
+    "protectExactVerifiedAggregate": true
+  },
+  "response": {
+    "minimumConfidence": 0.65,
+    "maximumReasonCodes": 10,
+    "maximumReasonCodeLength": 80
+  },
+  "openai": {
+    "timeoutMs": 30000,
+    "defaultModel": "gpt-5.4-mini"
+  },
+  "rollback": {
+    "environmentVariable": "EIA_SEMANTIC_RERANKING",
+    "disabledValue": "off"
+  }
+}
