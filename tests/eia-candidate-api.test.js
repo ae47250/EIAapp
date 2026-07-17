@@ -65,6 +65,11 @@ test("explicit selection reruns validation and fetches only the verified series 
   const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
   const candidate = initial.variables[0];
   assert.equal(Object.hasOwn(candidate, "equivalentChoiceGroup"), false);
+  assert.equal(initial.diagnostics.resultCertaintyVersion, "1.0.0");
+  assert.equal(candidate.certainty.semanticCompatibility, "compatible");
+  assert.equal(candidate.certainty.conceptPairStatus, "validated");
+  assert.equal(candidate.certainty.aggregationRelation, "unknown");
+  assert.equal(candidate.certainty.hierarchyEvidenceStatus, "none");
   seriesRequests = 0;
   const url = new URL("https://example.test/api/search-eia");
   url.searchParams.set("q", query);
@@ -79,6 +84,7 @@ test("explicit selection reruns validation and fetches only the verified series 
   assert.equal(body.selectedSeries.selectorVerified, true);
   assert.equal(body.selectedSeries.measureField, "consumption");
   assert.equal(body.selectedSeries.unit, "quadrillion Btu");
+  assert.deepEqual(body.selectedSeries.certainty, candidate.certainty);
   assert.deepEqual(body.selectedSeries.points, [{ period: "2023", value: 10.5 }, { period: "2024", value: 11.25 }]);
 });
 

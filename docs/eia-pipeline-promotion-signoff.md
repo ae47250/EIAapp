@@ -21,6 +21,7 @@ Implementation is complete behind a default-off feature flag. Promotion remains 
 - Ranking configuration: `phase4-v8`
 - Routing vocabulary: `phase4-routing-vocabulary-v5`
 - Concept taxonomy: `phase4-concepts-v2`
+- Result certainty contract: `1.0.0`
 - Semantic reranking: disabled
 - Public feature flag: `EIA_CANDIDATE_PIPELINE`; only exact value `on` enables the new path
 - Default/rollback behavior: unset or any value other than `on` uses the unchanged legacy handler

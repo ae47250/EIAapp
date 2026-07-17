@@ -4,7 +4,7 @@ export default function CandidateGroups({ groups, warnings, onSelect, onDownload
   return (
     <article className="card candidate-groups-card">
       <h2 className="result-card-title">Choose an EIA Series</h2>
-      <p className="muted">Results are grouped by meaning. No graph or observation data loads until you choose Graph or Excel.</p>
+      <p className="muted">Compatible candidates are grouped by meaning. Aggregation relationships are not verified. No graph or observation data loads until you choose Graph or Excel.</p>
       {warnings?.length ? (
         <ul className="candidate-warning-list">
           {warnings.map(warning => <li key={`${warning.code}-${warning.message}`}>{warning.message}</li>)}
@@ -38,8 +38,8 @@ export default function CandidateGroups({ groups, warnings, onSelect, onDownload
                     </td>
                     <td className="variable-name">
                       {candidate.title}
-                      {candidate.equivalentChoiceGroup ? <span className="candidate-badge">Equivalent choice</span> : null}
                       {candidate.fallback ? <span className="candidate-badge fallback">Fallback</span> : null}
+                      <div className="muted">Semantic: {candidate.certainty?.semanticCompatibility || "unknown"}; aggregation: {candidate.certainty?.aggregationRelation || "unknown"}; hierarchy evidence: {candidate.certainty?.hierarchyEvidenceStatus || "none"}.</div>
                     </td>
                     <td>{candidate.routeFamily} / {candidate.rankingTier}</td>
                     <td>{candidate.frequency}</td>

@@ -55,6 +55,11 @@ test("Next search route preserves the EIA response contract with a variable typo
   assert.equal(body.variables.length, 1);
   assert.equal(body.variables[0].activityId, "1");
   assert.ok(body.variables.every(variable => variable.activity === "Production"));
+  assert.equal(body.variables[0].certainty.semanticCompatibility, "compatible");
+  assert.equal(body.variables[0].certainty.frequencyRelation, "defaulted");
+  assert.equal(body.variables[0].certainty.aggregationRelation, "unknown");
+  assert.equal(body.variables[0].certainty.hierarchyEvidenceStatus, "none");
+  assert.deepEqual(body.selectedSeries.certainty, body.variables[0].certainty);
   assert.equal(exactSeriesRequests, 1);
   assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
 });
