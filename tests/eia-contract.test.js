@@ -83,6 +83,7 @@ test("full staged workflow preserves exact raw input and separate cleaned text",
       originalQuery: intent.originalQuery,
       cleanedQuery: intent.cleanedQuery,
       correctedQuery: intent.correctedQuery,
+      correctedQuerySource: intent.correctedQuerySource,
       interpreter: intent.interpreter,
       confidence: intent.confidence,
       fields: intent.fields,
@@ -102,6 +103,7 @@ test("full staged workflow preserves exact raw input and separate cleaned text",
     assert.equal(body.intent.interpreter, "openai");
     assert.equal(body.intent.originalQuery, raw);
     assert.equal(body.intent.cleanedQuery, "Brazil enrgy production");
+    assert.equal(body.intent.correctedQuerySource, "ai");
     assert.equal(body.intent.fields.product.validation, "approved");
     assert.equal(body.intent.fields.product.fallbackUsed, false);
     assert.equal(openAiRequests, 1);

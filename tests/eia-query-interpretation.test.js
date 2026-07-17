@@ -18,12 +18,14 @@ test("mechanical cleanup preserves raw input separately and performs no semantic
   assert.equal(intent.cleanedQuery, "montly nat gas prodction usa");
   assert.equal(cleanQueryMechanically(raw), "montly nat gas prodction usa");
   assert.equal(intent.correctedQuery, "monthly nat gas production usa");
+  assert.equal(intent.correctedQuerySource, "deterministic_typo_rules");
 });
 
 test("rules recover the requested country, product, activity, and annual default from messy input", () => {
   const intent = interpretQueryWithRules("looking for data on ergy consn for usa");
 
   assert.equal(intent.correctedQuery, "looking for data on energy consumption for usa");
+  assert.equal(intent.correctedQuerySource, "deterministic_typo_rules");
   assert.equal(intent.countryCode, "USA");
   assert.equal(intent.product, "total energy");
   assert.equal(intent.activity, "consumption");
@@ -35,6 +37,7 @@ test("rules normalize supported production and consumption typos without broad f
   assert.equal(interpretQueryWithRules("USA energy consumtion").activity, "consumption");
   assert.equal(interpretQueryWithRules("USA energy prodction").activity, "production");
   assert.equal(interpretQueryWithRules("USA energy discussion").activity, null);
+  assert.equal(interpretQueryWithRules("USA energy production").correctedQuerySource, "unchanged");
 });
 
 test("validated high-confidence AI output uses only supported categories", () => {
@@ -49,6 +52,7 @@ test("validated high-confidence AI output uses only supported categories", () =>
   }, "data pls usa ergy consn");
 
   assert.equal(intent.interpreter, "openai");
+  assert.equal(intent.correctedQuerySource, "ai");
   assert.equal(intent.countryCode, "USA");
   assert.equal(intent.product, "total energy");
   assert.equal(intent.activity, "consumption");
@@ -281,6 +285,7 @@ test("AI receives only the exact raw query while cleaned text remains available 
     assert.equal(intent.originalQuery, raw);
     assert.equal(intent.cleanedQuery, "montly nat gas prodction usa");
     assert.equal(intent.correctedQuery, "monthly natural gas production USA");
+    assert.equal(intent.correctedQuerySource, "ai");
     assert.equal(intent.fields.product.fallbackUsed, false);
     assert.equal(intent.fallback.used, false);
     assert.match(requestBody.input, /Raw query: "   montly  nat gas prodction usa   "/);

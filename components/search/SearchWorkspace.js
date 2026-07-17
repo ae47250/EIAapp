@@ -264,6 +264,7 @@ function appendIntentParams(params, intent) {
     originalQuery: intent.originalQuery,
     cleanedQuery: intent.cleanedQuery,
     correctedQuery: intent.correctedQuery,
+    correctedQuerySource: intent.correctedQuerySource,
     interpreter: intent.interpreter,
     confidence: intent.confidence,
     fields: intent.fields,
@@ -271,6 +272,7 @@ function appendIntentParams(params, intent) {
     fallback: intent.fallback
   }));
   params.set("intentCorrectedQuery", String(intent.correctedQuery || ""));
+  params.set("intentCorrectedQuerySource", String(intent.correctedQuerySource || "unchanged"));
   params.set("intentInterpreter", String(intent.interpreter || "rules"));
   params.set("intentCountryCode", String(intent.countryCode || intent.country?.code || ""));
   params.set("intentProduct", String(intent.product || ""));

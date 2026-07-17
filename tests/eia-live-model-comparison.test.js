@@ -66,9 +66,10 @@ test("intent summaries retain field-level provenance", () => {
   const fields = {
     product: { aiValue: "oil", normalizedValue: "petroleum", validation: "fallback", fallbackUsed: true, fallbackReason: "unsupported_ai_value" }
   };
-  const summary = summarizeIntent({ interpreter: "openai", fields, structuredIntent: { product: "petroleum", fields } });
+  const summary = summarizeIntent({ interpreter: "openai", correctedQuerySource: "ai", fields, structuredIntent: { product: "petroleum", fields } });
 
   assert.deepEqual(summary.fields, fields);
+  assert.equal(summary.correctedQuerySource, "ai");
 });
 
 test("provenance statistics separate acceptance, rejection, repair, and visible failure", () => {

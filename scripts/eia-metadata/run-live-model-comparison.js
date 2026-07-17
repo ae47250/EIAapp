@@ -284,6 +284,7 @@ export function summarizeIntent(intent) {
     originalQuery: intent?.originalQuery || "",
     cleanedQuery: intent?.cleanedQuery || "",
     correctedQuery: intent?.correctedQuery || "",
+    correctedQuerySource: intent?.correctedQuerySource || "unknown",
     geography: structured.geography || null,
     geographies: structured.geographies || [],
     product: structured.product || null,
@@ -550,6 +551,7 @@ function renderIntent(lines, result) {
   lines.push(`| Interpreter | ${md(intent.interpreter || "none")} |`);
   lines.push(`| Cleaned query | ${code(intent.cleanedQuery || "")} |`);
   lines.push(`| Corrected query | ${code(intent.correctedQuery || "")} |`);
+  lines.push(`| Corrected-query source | ${md(intent.correctedQuerySource || "unknown")} |`);
   lines.push(`| Confidence | ${formatNumber(intent.confidence)} |`);
   lines.push(`| Geography order | ${md(geographies)} |`);
   lines.push(`| Product | ${md(intent.product || "missing")} |`);
