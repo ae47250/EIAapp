@@ -3,7 +3,7 @@
 This branch is the Next.js App Router migration of `ae47250/EIAapp`. The static production baseline remains on `main` so it can be used as a rollback and behavior-comparison point while this branch is tested.
 
 ## Architecture
-
+ 
 ```text
 app/
   page.js                         protected search page
