@@ -5,12 +5,9 @@ import { buildLocalCandidatePipeline } from "../../lib/sources/eia/candidate-pip
 import { cleanQueryMechanically, interpretQuery } from "../../lib/sources/eia/interpret-query.js";
 
 const MODEL = "gpt-4.1-nano";
-const REPORT_PATH = resolve(process.argv[2] || "HOHO2.md");
+const REPORT_PATH = resolve(process.argv[2] || "RAW-ONLY-EIA.md");
 const TOP_LIMIT = 5;
-const CONDITIONS = [
-  { id: "raw_plus_cleaned", label: "Raw + mechanically cleaned", includeCleanedQueryInPrompt: true },
-  { id: "raw_only", label: "Raw only", includeCleanedQueryInPrompt: false }
-];
+const CONDITIONS = [{ id: "raw_only", label: "Raw only" }];
 
 const QUERIES = [
   { id: "Q01", raw: "  “California\u00a0monthly   electricity\n generation”  " },
@@ -44,11 +41,10 @@ async function main() {
 
   try {
     for (const query of QUERIES) {
-      for (const condition of CONDITIONS) {
-        console.error(`[${query.id}] ${condition.id}`);
-        run.results.push(await execute(query, condition));
-        await checkpoint(run);
-      }
+      const condition = CONDITIONS[0];
+      console.error(`[${query.id}] ${condition.id}`);
+      run.results.push(await execute(query, condition));
+      await checkpoint(run);
     }
     run.status = "complete";
     run.completedAt = new Date().toISOString();
@@ -64,7 +60,7 @@ async function main() {
 async function execute(query, condition) {
   const startedAt = performance.now();
   try {
-    const intent = await interpretQuery(query.raw, [], { includeCleanedQueryInPrompt: condition.includeCleanedQueryInPrompt });
+    const intent = await interpretQuery(query.raw);
     const interpretedAt = performance.now();
     const pipeline = await buildLocalCandidatePipeline(intent);
     return {
@@ -141,7 +137,7 @@ async function checkpoint(run) {
 
 function renderReport(run) {
   const lines = [
-    "# Raw-only versus raw-plus-cleaned EIA interpretation A/B test",
+    "# Raw-only EIA interpretation regression run",
     "",
     `Status: **${run.status}** (${run.results.length}/${run.queries.length * run.conditions.length} OpenAI calls recorded).`,
     "",
@@ -152,32 +148,28 @@ function renderReport(run) {
     "",
     "## Method",
     "",
-    "- Condition A sends the exact raw note and the mechanically cleaned copy.",
-    "- Condition B sends only the exact raw note.",
+    "- The AI receives only the exact raw note.",
+    "- The mechanically cleaned copy remains available to deterministic processing but is not sent to AI.",
     "- Mechanical cleanup changes curly quotes, non-breaking spaces, repeated whitespace, tabs/newlines, and edge whitespace only.",
-    "- Both conditions use the same model, local metadata index, validation, routing, retrieval, and ranking configuration.",
-    "- There are 20 queries and two conditions, producing exactly 40 interpretation calls with no separate model probe.",
+    "- The run uses the same local metadata index, validation, routing, retrieval, and ranking configuration as the application.",
+    "- There are 20 queries, producing exactly 20 interpretation calls with no separate model probe.",
     "",
     "## Summary",
     "",
     "| Metric | Result |",
     "| --- | ---: |",
-    `| Completed pairs | ${completedPairs(run)}/${run.queries.length} |`,
-    `| Same validated intent | ${countSame(run, intentSignature)}/${completedPairs(run)} |`,
-    `| Same top-five order | ${countSame(run, orderSignature)}/${completedPairs(run)} |`,
-    `| Same warnings | ${countSame(run, warningSignature)}/${completedPairs(run)} |`,
+    `| Completed queries | ${run.results.filter(result => !result.error).length}/${run.queries.length} |`,
     `| Errors | ${run.results.filter(result => result.error).length} |`,
     "",
-    "## Pair comparison",
+    "## Results",
     "",
-    "| ID | Same intent | Same top five | Same warnings | Raw + cleaned top result | Raw-only top result |",
-    "| --- | --- | --- | --- | --- | --- |"
+    "| ID | Top result | Error |",
+    "| --- | --- | --- |"
   ];
 
   for (const query of run.queries) {
-    const a = find(run, query.id, "raw_plus_cleaned");
-    const b = find(run, query.id, "raw_only");
-    lines.push(`| ${query.id} | ${compare(a, b, intentSignature)} | ${compare(a, b, orderSignature)} | ${compare(a, b, warningSignature)} | ${md(topLabel(a))} | ${md(topLabel(b))} |`);
+    const result = find(run, query.id, "raw_only");
+    lines.push(`| ${query.id} | ${md(topLabel(result))} | ${md(result?.error?.message || "none")} |`);
   }
 
   lines.push("", "## Complete results", "");
@@ -185,7 +177,7 @@ function renderReport(run) {
     lines.push(`### ${query.id}`, "", "Raw input:", "", "```text", visibleRaw(query.raw), "```", "", `Mechanically cleaned: \`${inline(cleanQueryMechanically(query.raw))}\``, "");
     for (const condition of run.conditions) renderCondition(lines, condition, find(run, query.id, condition.id));
   }
-  lines.push("## GPT analysis instructions", "", "Assess whether supplying the mechanically cleaned copy materially improved validated intent, routing, warnings, or top-five candidate quality. Treat score/order differences as downstream consequences of intent differences because semantic reranking was disabled. Identify failures, regressions, and cases where both conditions were equally wrong. Do not attribute deterministic ranking points to the AI model.", "");
+  lines.push("## GPT analysis instructions", "", "Assess raw-only validated intent, routing, warnings, and top-five candidate quality. The cleaned note remains deterministic infrastructure and was not sent to AI. Do not attribute deterministic ranking points to the AI model.", "");
   return `${lines.join("\n")}\n`;
 }
 

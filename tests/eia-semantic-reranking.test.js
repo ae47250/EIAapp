@@ -39,7 +39,7 @@ test("ambiguous close same-tier families receive a validated shadow order only",
     mode: "shadow",
     requestRerank: async request => {
       assert.equal(request.rawQuery, "Japan energy supply");
-      assert.equal(request.lightlyCleanedQuery, "Japan energy supply");
+      assert.equal("lightlyCleanedQuery" in request, false);
       assert.deepEqual(request.allowedFamilyIds, ["family-a", "family-b"]);
       return { ...validResponse(["family-b", "family-a"]), usage: { input_tokens: 120, output_tokens: 24, total_tokens: 144 }, model: "fixture-model" };
     }
@@ -120,11 +120,11 @@ test("trigger requires ambiguity, credible same-tier families, and a close score
   assert.equal(evaluateSemanticRerankingTrigger(ambiguousIntent(), rankedFixture({ secondTier: "B" }).retrievals[0]).reason, "top_families_are_in_different_tiers");
 });
 
-test("request contains raw and cleaned text, structured intent, and only known eligible families", () => {
+test("request contains raw text, structured intent, and only known eligible families", () => {
   const request = buildSemanticRerankingRequest(ambiguousIntent(), rankedFixture().retrievals[0], ["family-a", "family-b"]);
 
   assert.equal(request.rawQuery, "Japan energy supply");
-  assert.equal(request.lightlyCleanedQuery, "Japan energy supply");
+  assert.equal("lightlyCleanedQuery" in request, false);
   assert.equal(request.structuredIntent.product, "total energy");
   assert.deepEqual(request.allowedFamilyIds, ["family-a", "family-b"]);
   assert.ok(request.candidates.every(candidate => request.allowedFamilyIds.includes(candidate.familyId)));

@@ -226,7 +226,7 @@ test("ordinary lowercase three-letter words are not accepted as country codes", 
   assert.equal(intent.structuredIntent.geography, null);
 });
 
-test("AI receives both exact raw and lightly cleaned query forms", async () => {
+test("AI receives only the exact raw query while cleaned text remains available locally", async () => {
   const originalKey = process.env.OPENAI_API_KEY;
   const originalFetch = globalThis.fetch;
   const raw = "   montly  nat gas prodction usa   ";
@@ -261,7 +261,7 @@ test("AI receives both exact raw and lightly cleaned query forms", async () => {
     assert.equal(intent.fields.product.fallbackUsed, false);
     assert.equal(intent.fallback.used, false);
     assert.match(requestBody.input, /Raw query: "   montly  nat gas prodction usa   "/);
-    assert.match(requestBody.input, /Lightly cleaned query: "montly nat gas prodction usa"/);
+    assert.doesNotMatch(requestBody.input, /Lightly cleaned query:/);
     assert.doesNotMatch(requestBody.input, /Known geographies:/);
     assert.doesNotMatch(requestBody.input, /Afghanistan=AFG/);
   } finally {
@@ -271,7 +271,7 @@ test("AI receives both exact raw and lightly cleaned query forms", async () => {
   }
 });
 
-test("raw-only evaluation omits the lightly cleaned query without changing local validation", async () => {
+test("raw-only interpretation preserves exact raw and cleaned forms through staged normalization", async () => {
   const originalKey = process.env.OPENAI_API_KEY;
   const originalFetch = globalThis.fetch;
   let requestBody;
@@ -297,9 +297,15 @@ test("raw-only evaluation omits the lightly cleaned query without changing local
   };
 
   try {
-    const intent = await interpretQuery("  California   monthly electricity generation  ", [], { includeCleanedQueryInPrompt: false });
+    const raw = "  California\u00a0  monthly electricity\n generation  ";
+    const intent = await interpretQuery(raw);
+    const staged = normalizeSubmittedIntent(intent, raw);
     assert.equal(intent.countryCode, "CA");
     assert.equal(intent.route.family, "domestic");
+    assert.equal(intent.originalQuery, raw);
+    assert.equal(intent.cleanedQuery, "California monthly electricity generation");
+    assert.equal(staged.originalQuery, raw);
+    assert.equal(staged.cleanedQuery, "California monthly electricity generation");
     assert.match(requestBody.input, /Interpret the exact raw query supplied below/);
     assert.doesNotMatch(requestBody.input, /Lightly cleaned query:/);
   } finally {
