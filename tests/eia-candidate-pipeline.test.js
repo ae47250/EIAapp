@@ -91,6 +91,23 @@ test("blocks ambiguous product alternatives when activity is also missing", asyn
   assert.ok(result.diagnostics.clarificationReasons.includes("missing_activity"));
 });
 
+test("blocks unresolved product and activity pairing before retrieval or ranking", async () => {
+  let retrievalCalls = 0;
+  let rankingCalls = 0;
+  const intent = interpretQueryWithRules("Texas coal and natural gas production and consumption");
+  const result = await buildLocalCandidatePipeline(intent, {
+    retrieveCandidates: async () => { retrievalCalls += 1; throw new Error("retrieval must not run"); },
+    rankCandidates: () => { rankingCalls += 1; throw new Error("ranking must not run"); }
+  });
+
+  assert.equal(retrievalCalls, 0);
+  assert.equal(rankingCalls, 0);
+  assert.deepEqual(result.retrievals, []);
+  assert.equal(result.diagnostics.rankingApplied, false);
+  assert.equal(result.diagnostics.clarificationBlocked, true);
+  assert.ok(result.diagnostics.clarificationReasons.includes("concept_pair_scope_unresolved"));
+});
+
 test("asks for clarification instead of showing candidates for unresolved qualifiers", async () => {
   const result = await buildLocalCandidatePipeline(interpretQueryWithRules("California monthly electricity from moon"));
 

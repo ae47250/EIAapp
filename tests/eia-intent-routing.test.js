@@ -75,6 +75,30 @@ test("preserves geography and concept mention order", () => {
   assert.ok(intent.ambiguity.reasons.includes("multiple_geographies"));
 });
 
+test("preserves only governed product and activity pair scopes", () => {
+  const ordered = interpretQueryWithRules("Texas coal production and natural gas consumption");
+  const sharedTrailing = interpretQueryWithRules("Texas oil and natural gas production");
+  const unresolved = interpretQueryWithRules("Texas coal and natural gas production and consumption");
+
+  assert.deepEqual(ordered.conceptPairs.map(pair => [pair.product, pair.activity]), [
+    ["coal", "production"],
+    ["natural gas", "consumption"]
+  ]);
+  assert.equal(ordered.structuredIntent.conceptPairRule, "ordered_one_to_one_pairs");
+  assert.deepEqual(sharedTrailing.conceptPairs.map(pair => [pair.product, pair.activity]), [
+    ["petroleum", "production"],
+    ["natural gas", "production"]
+  ]);
+  assert.equal(sharedTrailing.structuredIntent.conceptPairRule, "shared_trailing_activity");
+  assert.deepEqual(unresolved.conceptPairs, []);
+  assert.equal(unresolved.structuredIntent.schemaVersion, "2.1.0");
+  assert.equal(unresolved.structuredIntent.conceptPairStatus, "unresolved");
+  assert.equal(unresolved.needsClarification, true);
+  assert.equal(unresolved.blockingClarification, true);
+  assert.ok(unresolved.ambiguity.reasons.includes("concept_pair_scope_unresolved"));
+  assert.ok(!unresolved.ambiguity.reasons.includes("activity_or_scope_missing"));
+});
+
 test("routes mixed U.S. and foreign-country requests through International", () => {
   const intent = interpretQueryWithRules("United States then Canada annual natural gas production");
 

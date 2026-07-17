@@ -617,6 +617,28 @@ test("AI cannot collapse an unresolved broad product into one interpretation", (
   assert.ok(intent.missingFields.includes("activity"));
 });
 
+test("AI cannot resolve unsupported product and activity pairing scope", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Texas coal production and natural gas consumption",
+    confidence: 0.98,
+    conceptPairs: [
+      { order: 0, product: "coal", activity: "production", confidence: 0.98 },
+      { order: 1, product: "natural gas", activity: "consumption", confidence: 0.98 }
+    ],
+    fields: {
+      country: { value: "TX", confidence: 0.98 },
+      product: { value: "coal", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 }
+    }
+  }, "Texas coal and natural gas production and consumption");
+
+  assert.deepEqual(intent.validatedConceptPairs, []);
+  assert.deepEqual(intent.conceptPairs, []);
+  assert.equal(intent.structuredIntent.conceptPairStatus, "unresolved");
+  assert.equal(intent.blockingClarification, true);
+  assert.match(intent.clarificationMessage, /which activity applies to each energy product/i);
+});
+
 test("genuinely unknown source terms remain blocking qualifiers", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "California monthly electricity from moon",

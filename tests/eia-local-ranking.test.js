@@ -506,15 +506,13 @@ test("hierarchy-like labels receive no aggregation points or verified relationsh
   }
 });
 
-test("unresolved qualifiers block ranking instead of inventing an activity", async () => {
+test("unresolved intent cannot reach ranking directly", () => {
   const intent = interpretQueryWithRules("California monthly electricity from moon");
-  const retrieval = await retrieveLocalCandidates(intent);
-  const ranked = rankLocalCandidates(intent, retrieval);
+  const unresolvedPairs = interpretQueryWithRules("Texas coal and natural gas production and consumption");
+  const retrieval = { schemaVersion: "1.0.0", routeFamily: "domestic", retrievals: [], diagnostics: {} };
 
-  assert.deepEqual(ranked.retrievals[0].diagnostics.blockedByUnresolvedQualifiers, ["moon"]);
-  assert.equal(ranked.retrievals[0].primaryCandidates.length, 0);
-  assert.equal(ranked.retrievals[0].fallbackCandidates.length, 0);
-  assert.equal(ranked.retrievals[0].displayCandidates.length, 0);
+  assert.throws(() => rankLocalCandidates(intent, retrieval), /cannot run until the structured intent is resolved/i);
+  assert.throws(() => rankLocalCandidates(unresolvedPairs, retrieval), /cannot run until the structured intent is resolved/i);
 });
 
 test("the Phase 3 output shape remains compatible with the ranker", async () => {

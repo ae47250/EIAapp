@@ -70,15 +70,15 @@ test("nonannual state total-energy requests do not fall into SEDS annual candida
   assert.ok(allCandidates(retrieval).every(candidate => candidate.frequency === "monthly"));
 });
 
-test("unresolved qualifiers block retrieval instead of using weak activity inference", async () => {
-  const result = await retrieveLocalCandidates(interpretQueryWithRules("California monthly electricity from moon"));
-  const retrieval = result.retrievals[0];
-
-  assert.equal(retrieval.concept.activity, null);
-  assert.equal(retrieval.concept.activitySource, "missing");
-  assert.deepEqual(retrieval.diagnostics.blockedByUnresolvedQualifiers, ["moon"]);
-  assert.equal(retrieval.primaryCandidates.length, 0);
-  assert.equal(retrieval.fallbackCandidates.length, 0);
+test("unresolved intent cannot reach retrieval directly", async () => {
+  await assert.rejects(
+    retrieveLocalCandidates(interpretQueryWithRules("California monthly electricity from moon")),
+    error => error instanceof LocalRetrievalError && error.code === "CLARIFICATION_REQUIRED"
+  );
+  await assert.rejects(
+    retrieveLocalCandidates(interpretQueryWithRules("Texas coal and natural gas production and consumption")),
+    error => error instanceof LocalRetrievalError && error.code === "CLARIFICATION_REQUIRED"
+  );
 });
 
 test("deduplicates canonical selectors and excludes explicit activity mismatches", async () => {
