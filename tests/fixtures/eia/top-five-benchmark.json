@@ -1,0 +1,276 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewStatus": "human-reviewed",
+  "reviewBasis": "Existing approved Q01-Q14 remediation and promotion cohort",
+  "cases": [
+    {
+      "id": "Q01",
+      "query": "California monthly electricity generation",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "CA",
+            "product": "electricity",
+            "activity": "generation",
+            "topSeriesIds": [
+              "ELEC.GEN.ALL-CA-1.M",
+              "ELEC.GEN.ALL-CA-2.M",
+              "ELEC.GEN.ALL-CA-3.M",
+              "ELEC.GEN.ALL-CA-4.M",
+              "ELEC.GEN.ALL-CA-5.M"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q02",
+      "query": "Texas monthly total energy consumption",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "TX",
+            "product": "total energy",
+            "activity": "consumption",
+            "topSeriesIds": [
+              "SEDS.TEACB.TX.A",
+              "SEDS.TEAPB.TX.A",
+              "SEDS.TECCB.TX.A",
+              "SEDS.TECPB.TX.A",
+              "SEDS.TEICB.TX.A"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q03",
+      "query": "New Mexico monthly marketed natural gas production",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "NM",
+            "product": "natural gas",
+            "activity": "production",
+            "topSeriesIds": [
+              "NG.N9050NM2.M",
+              "NG.NA1160_SNM_2.M",
+              "NG.NA1150_SNM_2.M"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q04",
+      "query": "New York monthly residential natural gas consumption",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "NY",
+            "product": "natural gas",
+            "activity": "consumption",
+            "topSeriesIds": [
+              "NG.N3010NY2.M"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q05",
+      "query": "Iowa monthly wind net generation",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "IA",
+            "product": "wind",
+            "activity": "generation",
+            "topSeriesIds": [
+              "ELEC.GEN.WND-IA-1.M",
+              "ELEC.GEN.WND-IA-2.M",
+              "ELEC.GEN.WND-IA-4.M",
+              "ELEC.GEN.WND-IA-94.M",
+              "ELEC.GEN.WND-IA-96.M"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q06",
+      "query": "California renewable energy",
+      "expected": {
+        "clarificationRequired": true,
+        "clarificationReasons": [
+          "missing_activity"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "id": "Q07",
+      "query": "Texas gas",
+      "expected": {
+        "clarificationRequired": true,
+        "clarificationReasons": [
+          "missing_activity",
+          "product_ambiguous"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "id": "Q08",
+      "query": "United States weekly working gas in underground storage",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "USA",
+            "product": "natural gas",
+            "activity": "storage",
+            "topSeriesIds": [
+              "NG.NW2_EPG0_SWO_R48_BCF.W"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q09",
+      "query": "Brazil annual petroleum consumption",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "BRA",
+            "product": "petroleum",
+            "activity": "consumption",
+            "topSeriesIds": [
+              "INTL.5-2-BRA-MT.A",
+              "INTL.54-2-BRA-MT.A",
+              "INTL.67-2-BRA-MT.A",
+              "INTL.65-13-BRA-TBPD.A",
+              "INTL.66-13-BRA-TBPD.A"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q10",
+      "query": "Japan monthly solar electricity generation",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "JPN",
+            "product": "solar",
+            "activity": "generation",
+            "topSeriesIds": [
+              "INTL.116-12-JPN-BKWH.A",
+              "INTL.36-12-JPN-BKWH.A"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q11",
+      "query": "Germany renewable energy production and consumption",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "DEU",
+            "product": "renewable",
+            "activity": "production",
+            "topSeriesIds": [
+              "INTL.4418-1-DEU-QBTU.A",
+              "INTL.79-1-DEU-MT.A"
+            ]
+          },
+          {
+            "geography": "DEU",
+            "product": "renewable",
+            "activity": "consumption",
+            "topSeriesIds": [
+              "INTL.4418-2-DEU-QBTU.A",
+              "INTL.79-2-DEU-MT.A"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q12",
+      "query": "Brazil then Japan annual electricity generation",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "BRA",
+            "product": "electricity",
+            "activity": "generation",
+            "topSeriesIds": [
+              "INTL.2-12-BRA-BKWH.A",
+              "INTL.116-12-BRA-BKWH.A",
+              "INTL.117-12-BRA-BKWH.A",
+              "INTL.27-12-BRA-BKWH.A",
+              "INTL.28-12-BRA-BKWH.A"
+            ]
+          },
+          {
+            "geography": "JPN",
+            "product": "electricity",
+            "activity": "generation",
+            "topSeriesIds": [
+              "INTL.2-12-JPN-BKWH.A",
+              "INTL.116-12-JPN-BKWH.A",
+              "INTL.117-12-JPN-BKWH.A",
+              "INTL.27-12-JPN-BKWH.A",
+              "INTL.28-12-JPN-BKWH.A"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q13",
+      "query": "plz shwo montly nat gas prodction in Texas, not prices",
+      "expected": {
+        "clarificationRequired": false,
+        "groups": [
+          {
+            "geography": "TX",
+            "product": "natural gas",
+            "activity": "production",
+            "topSeriesIds": [
+              "NG.N9050TX2.M",
+              "NG.NA1160_STX_2.M",
+              "NG.NA1150_STX_2.M"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q14",
+      "query": "California monthly electricity from moon",
+      "expected": {
+        "clarificationRequired": true,
+        "clarificationReasons": [
+          "missing_activity",
+          "unresolved_qualifier"
+        ],
+        "groups": []
+      }
+    }
+  ]
+}

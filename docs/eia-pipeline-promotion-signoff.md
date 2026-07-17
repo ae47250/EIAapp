@@ -22,6 +22,8 @@ Implementation is complete behind a default-off feature flag. Promotion remains 
 - Routing vocabulary: `phase4-routing-vocabulary-v5`
 - Concept taxonomy: `phase4-concepts-v2`
 - Result certainty contract: `1.0.0`
+- Offline top-five benchmark: `1.0.0` (approved Q01-Q14 cohort)
+- Offline top-five benchmark SHA-256: `22f37d44a7cab54ce0ab9943de89d20545a81273b0a2f4939fb8ebd6d019977b`
 - Semantic reranking: disabled
 - Public feature flag: `EIA_CANDIDATE_PIPELINE`; only exact value `on` enables the new path
 - Default/rollback behavior: unset or any value other than `on` uses the unchanged legacy handler
@@ -56,14 +58,21 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 - [x] Semantic reranking remains disabled and contributes no points.
 - [x] Login-off behavior remains covered by tests.
 - [x] Legacy API response shape remains covered with the feature flag off.
+- [x] Clarification blocks ranking with the candidate flag both off and on.
+- [x] Adversarial AI `correctedQuery` wording cannot change validated activity under either flag path.
+- [x] Untrusted total, aggregate, component, parent, and child labels contribute no hierarchy preference.
+- [x] Exact Q01-Q14 top-five series IDs are frozen in a versioned offline benchmark.
 
 ## Verification Results
 
 | Check | Result |
 | --- | --- |
-| Full Node test suite | PASS: 166 passed, 0 failed |
+| Full Node test suite | PASS: 184 passed, 0 failed |
 | Next.js production build | PASS: Next.js 16.2.10, all routes compiled |
-| Focused candidate API/contract tests | PASS: 11 passed, 0 failed |
+| Focused Step 8 tests | PASS: 34 passed, 0 failed |
+| Versioned Q01-Q14 top-five benchmark | PASS: 14/14 cases, including repeated deterministic runs |
+| Cross-flag safety contract | PASS: clarification and adversarial correction invariants with flag off/on |
+| Hierarchy trap contract | PASS: labels and untrusted relationship-shaped fields do not affect ranking |
 | Q03-Q14 deterministic remediation test | PASS |
 | Cold local retrieval test | PASS: 1835.473 ms, budget below 3000 ms |
 | Local production HTTP representative cohort | PASS: 8/8 responses |
@@ -96,6 +105,9 @@ The complete live report is `HOHO3.md` with SHA-256 `4224a967be3c5a7c74a84f258a4
 - [x] Q08 no longer reports missing availability for compact weekly dates.
 - [x] Q09 receives no broad/total preference; remaining ties are deterministic and hierarchy-neutral.
 - [x] Q13 uses a requested lexical qualifier when present and never labels unrequested choices as subtypes or equivalents.
+- [x] Q01-Q14 exact top-five IDs or clarification outcomes are stored in `tests/fixtures/eia/top-five-benchmark.json`.
+- [x] Every resolved benchmark case reports zero aggregation points and no verified hierarchy relationship.
+- [x] Every benchmark case produces the same outcome on an immediate repeated run.
 - [x] Q01-Q14 rerun live with `gpt-5.4-mini` and `gpt-4.1-nano` after these changes.
 
 ## Expanded Cohort Checklist

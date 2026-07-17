@@ -506,6 +506,57 @@ test("hierarchy-like labels receive no aggregation points or verified relationsh
   }
 });
 
+test("hierarchy labels and untrusted relationship-shaped fields cannot influence tie order", () => {
+  const intent = interpretQueryWithRules("Texas annual total energy consumption");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "seds",
+    retrievals: [buildRetrieval({
+      routeFamily: "seds",
+      geography: { name: "Texas", code: "TX", type: "state" },
+      frequency: { value: "annual", requested: "annual", mode: "exact" },
+      primaryCandidates: [
+        buildCandidate({
+          candidate_id: "total-label",
+          series_id: "Z.TOTAL",
+          title: "Total energy consumption, Texas, Annual - total",
+          geography: { name: "Texas", code: "TX", type: "state" },
+          is_total: true,
+          component_candidate_ids: ["component-label"],
+          selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "Z.TOTAL" } }
+        }),
+        buildCandidate({
+          candidate_id: "aggregate-label",
+          series_id: "M.AGGREGATE",
+          title: "Total energy consumption, Texas, Annual - aggregate",
+          geography: { name: "Texas", code: "TX", type: "state" },
+          aggregate_candidate_id: "invented-parent",
+          selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "M.AGGREGATE" } }
+        }),
+        buildCandidate({
+          candidate_id: "component-label",
+          series_id: "A.COMPONENT",
+          title: "Total energy consumption, Texas, Annual - component",
+          geography: { name: "Texas", code: "TX", type: "state" },
+          parent_candidate_id: "total-label",
+          selector: { route: "/seds", measure: "value", frequency: "annual", facets: { stateId: "TX", seriesId: "A.COMPONENT" } }
+        })
+      ]
+    })],
+    diagnostics: {}
+  });
+
+  const candidates = ranked.retrievals[0].rankedCandidates;
+  assert.deepEqual(candidates.map(candidate => candidate.candidate_id), [
+    "component-label",
+    "aggregate-label",
+    "total-label"
+  ]);
+  assert.ok(candidates.every(candidate => candidate.ranking.components.measureOrAggregation.points === 0));
+  assert.ok(candidates.every(candidate => candidate.ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy")));
+  assert.equal(ranked.retrievals[0].diagnostics.hierarchyPreferenceApplied, false);
+});
+
 test("unresolved intent cannot reach ranking directly", () => {
   const intent = interpretQueryWithRules("California monthly electricity from moon");
   const unresolvedPairs = interpretQueryWithRules("Texas coal and natural gas production and consumption");
