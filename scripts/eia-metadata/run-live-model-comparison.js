@@ -40,37 +40,68 @@ const OFFICIAL_SOURCES = [
 ];
 
 export const LIVE_COMPARISON_QUERIES = [
-  { id: "Q01", focus: "Clear Domestic monthly baseline", raw: "California monthly electricity generation" },
-  { id: "Q02", focus: "Domestic-to-SEDS frequency fallback", raw: "Texas monthly total energy consumption" },
-  { id: "Q03", focus: "Specific natural-gas production terminology", raw: "New Mexico monthly marketed natural gas production" },
-  { id: "Q04", focus: "Explicit sector and activity", raw: "New York monthly residential natural gas consumption" },
-  { id: "Q05", focus: "Renewable subtype and generation wording", raw: "Iowa monthly wind net generation" },
-  { id: "Q06", focus: "Broad renewable request with missing activity", raw: "California renewable energy" },
-  { id: "Q07", focus: "Ambiguous product and missing activity", raw: "Texas gas" },
-  { id: "Q08", focus: "Unsupported frequency and storage wording", raw: "United States weekly working gas in underground storage" },
-  { id: "Q09", focus: "Clear International petroleum request", raw: "Brazil annual petroleum consumption" },
-  { id: "Q10", focus: "International monthly renewable generation", raw: "Japan monthly solar electricity generation" },
-  { id: "Q11", focus: "Broad product with two activity mentions", raw: "Germany renewable energy production and consumption" },
-  { id: "Q12", focus: "Multiple geographies and mention order", raw: "Brazil then Japan annual electricity generation" },
-  { id: "Q13", focus: "Messy spelling and negative constraint", raw: "plz shwo montly nat gas prodction in Texas, not prices" },
-  { id: "Q14", focus: "Impossible source term and weak activity hint", raw: "California monthly electricity from moon" },
-  { id: "Q15", focus: "Explicit price measure", raw: "Texas annual natural gas prices" },
-  { id: "Q16", focus: "Explicit expenditure measure", raw: "California annual petroleum expenditures" },
-  { id: "Q17", focus: "Stock request with flow exclusion", raw: "United States weekly natural gas storage, not production" },
-  { id: "Q18", focus: "State and U.S. national geographies", raw: "Texas and United States monthly natural gas production" },
-  { id: "Q19", focus: "U.S. and foreign-country geographies", raw: "United States then Canada annual natural gas production" },
-  { id: "Q20", focus: "Explicit requested date range", raw: "Brazil annual petroleum consumption from 2010 to 2020" },
-  { id: "Q21", focus: "Explicit requested unit", raw: "Brazil annual petroleum consumption in barrels" },
-  { id: "Q22", focus: "Quarterly Domestic request", raw: "California quarterly electricity generation" },
-  { id: "Q23", focus: "Weekly non-storage request", raw: "United States weekly natural gas production" },
-  { id: "Q24", focus: "Misspelled geography", raw: "Califronia monthly electricity generation" },
-  { id: "Q25", focus: "Multiple products with one activity", raw: "Brazil annual petroleum and natural gas consumption" },
-  { id: "Q26", focus: "One product with multiple sectors", raw: "Texas annual natural gas consumption for residential and commercial sectors" },
-  { id: "Q27", focus: "Broad product with explicit product exclusion", raw: "Brazil annual energy consumption excluding petroleum" },
-  { id: "Q28", focus: "Unavailable geography-frequency combination", raw: "France weekly solar electricity generation" },
-  { id: "Q29", focus: "Explicit stock wording", raw: "United States weekly working natural gas stocks" },
-  { id: "Q30", focus: "Explicit technical measure", raw: "Texas annual natural gas conversion factor" }
+  benchmarkQuery("Q01", "Clear Domestic monthly baseline", "California monthly electricity generation", ["CA"], "electricity", "generation", "monthly", "domestic", false),
+  benchmarkQuery("Q02", "Domestic-to-SEDS frequency fallback", "Texas monthly total energy consumption", ["TX"], "total energy", "consumption", "monthly", "domestic", false),
+  benchmarkQuery("Q03", "Specific natural-gas production terminology", "New Mexico monthly marketed natural gas production", ["NM"], "natural gas", "production", "monthly", "domestic", false),
+  benchmarkQuery("Q04", "Explicit sector and activity", "New York monthly residential natural gas consumption", ["NY"], "natural gas", "consumption", "monthly", "domestic", false, { sector: "residential" }),
+  benchmarkQuery("Q05", "Renewable subtype and generation wording", "Iowa monthly wind net generation", ["IA"], "wind", "generation", "monthly", "domestic", false),
+  benchmarkQuery("Q06", "Broad renewable request with missing activity", "California renewable energy", ["CA"], "renewable", null, "annual", "seds", true),
+  benchmarkQuery("Q07", "Ambiguous product and missing activity", "Texas gas", ["TX"], null, null, "annual", "seds", true),
+  benchmarkQuery("Q08", "Weekly storage wording", "United States weekly working gas in underground storage", ["USA"], "natural gas", "storage", "weekly", "domestic", false),
+  benchmarkQuery("Q09", "Clear International petroleum request", "Brazil annual petroleum consumption", ["BRA"], "petroleum", "consumption", "annual", "international", false),
+  benchmarkQuery("Q10", "International monthly renewable generation", "Japan monthly solar electricity generation", ["JPN"], "solar", "generation", "monthly", "international", false),
+  benchmarkQuery("Q11", "Broad product with two activity mentions", "Germany renewable energy production and consumption", ["DEU"], "renewable", "production", "annual", "international", false, { conceptActivities: ["production", "consumption"] }),
+  benchmarkQuery("Q12", "Multiple geographies and mention order", "Brazil then Japan annual electricity generation", ["BRA", "JPN"], "electricity", "generation", "annual", "international", false),
+  benchmarkQuery("Q13", "Messy spelling and negative constraint", "plz shwo montly nat gas prodction in Texas, not prices", ["TX"], "natural gas", "production", "monthly", "domestic", false, { exclusions: ["activity:prices"] }),
+  benchmarkQuery("Q14", "Impossible source term and weak activity hint", "California monthly electricity from moon", ["CA"], "electricity", null, "monthly", "domestic", true, { unknownQualifiers: ["moon"] }),
+  benchmarkQuery("Q15", "Explicit price measure", "Texas annual natural gas prices", ["TX"], "natural gas", "prices", "annual", "seds", false),
+  benchmarkQuery("Q16", "Explicit expenditure measure", "California annual petroleum expenditures", ["CA"], "petroleum", "expenditures", "annual", "seds", false),
+  benchmarkQuery("Q17", "Stock request with flow exclusion", "United States weekly natural gas storage, not production", ["USA"], "natural gas", "storage", "weekly", "domestic", false, { exclusions: ["activity:production"] }),
+  benchmarkQuery("Q18", "State and U.S. national geographies", "Texas and United States monthly natural gas production", ["TX", "USA"], "natural gas", "production", "monthly", "domestic", false),
+  benchmarkQuery("Q19", "U.S. and foreign-country geographies", "United States then Canada annual natural gas production", ["USA", "CAN"], "natural gas", "production", "annual", "international", false),
+  benchmarkQuery("Q20", "Explicit requested date range", "Brazil annual petroleum consumption from 2010 to 2020", ["BRA"], "petroleum", "consumption", "annual", "international", false),
+  benchmarkQuery("Q21", "Explicit requested unit", "Brazil annual petroleum consumption in barrels", ["BRA"], "petroleum", "consumption", "annual", "international", false),
+  benchmarkQuery("Q22", "Quarterly Domestic request", "California quarterly electricity generation", ["CA"], "electricity", "generation", "quarterly", "domestic", false),
+  benchmarkQuery("Q23", "Weekly non-storage request", "United States weekly natural gas production", ["USA"], "natural gas", "production", "weekly", "domestic", false),
+  benchmarkQuery("Q24", "Misspelled geography", "Califronia monthly electricity generation", ["CA"], "electricity", "generation", "monthly", "domestic", false),
+  benchmarkQuery("Q25", "Multiple products with one activity", "Brazil annual petroleum and natural gas consumption", ["BRA"], "petroleum", "consumption", "annual", "international", false, { conceptProducts: ["petroleum", "natural gas"] }),
+  benchmarkQuery("Q26", "One product with multiple sectors", "Texas annual natural gas consumption for residential and commercial sectors", ["TX"], "natural gas", "consumption", "annual", "seds", false, { sector: "residential" }),
+  benchmarkQuery("Q27", "Broad product with explicit product exclusion", "Brazil annual energy consumption excluding petroleum", ["BRA"], "total energy", "consumption", "annual", "international", false, { exclusions: ["product:petroleum"] }),
+  benchmarkQuery("Q28", "Unavailable geography-frequency combination", "France weekly solar electricity generation", ["FRA"], "solar", "generation", "weekly", "international", false),
+  benchmarkQuery("Q29", "Explicit stock wording", "United States weekly working natural gas stocks", ["USA"], "natural gas", "storage", "weekly", "domestic", false),
+  benchmarkQuery("Q30", "Explicit technical measure", "Texas annual natural gas conversion factor", ["TX"], "natural gas", null, "annual", "seds", true),
+  benchmarkQuery("Q31", "Negated competing activity", "Brazil annual petroleum consumption, not production", ["BRA"], "petroleum", "consumption", "annual", "international", false, { exclusions: ["activity:production"] }),
+  benchmarkQuery("Q32", "Domestic activity injection guard", "Texas monthly natural gas production, not consumption", ["TX"], "natural gas", "production", "monthly", "domestic", false, { exclusions: ["activity:consumption"] }),
+  benchmarkQuery("Q33", "Product exclusion injection guard", "California monthly electricity generation, not natural gas", ["CA"], "electricity", "generation", "monthly", "domestic", false, { exclusions: ["product:natural gas"] }),
+  benchmarkQuery("Q34", "Clear nuclear generation", "France annual nuclear electricity generation", ["FRA"], "nuclear", "generation", "annual", "international", false),
+  benchmarkQuery("Q35", "Explicit electric-power sector", "Ohio monthly coal consumption electric power sector", ["OH"], "coal", "consumption", "monthly", "domestic", false, { sector: "electric power" }),
+  benchmarkQuery("Q36", "Ordered imports and exports", "Canada annual natural gas imports and exports", ["CAN"], "natural gas", "imports", "annual", "international", false, { conceptActivities: ["imports", "exports"] }),
+  benchmarkQuery("Q37", "Quarterly crude-oil production", "Alaska quarterly crude oil production", ["AK"], "petroleum", "production", "quarterly", "domestic", false),
+  benchmarkQuery("Q38", "Implicit annual International default", "Brazil electricity generation", ["BRA"], "electricity", "generation", "annual", "international", false),
+  benchmarkQuery("Q39", "Unknown source qualifier", "California electricity from moon", ["CA"], "electricity", null, "annual", "domestic", true, { unknownQualifiers: ["moon"] }),
+  benchmarkQuery("Q40", "Missing geography", "annual coal production", [], "coal", "production", "annual", "international", true)
 ];
+
+function benchmarkQuery(id, focus, raw, geographies, product, activity, frequency, route, needsClarification, options = {}) {
+  return {
+    id,
+    focus,
+    raw,
+    expected: {
+      geographies,
+      product,
+      activity,
+      sector: options.sector ?? null,
+      frequency,
+      route,
+      needsClarification,
+      conceptProducts: options.conceptProducts || (product ? [product] : []),
+      conceptActivities: options.conceptActivities || (activity ? [activity] : []),
+      exclusions: options.exclusions || [],
+      unknownQualifiers: options.unknownQualifiers || []
+    }
+  };
+}
 
 async function main() {
   if (!process.env.OPENAI_API_KEY) {
@@ -200,6 +231,7 @@ async function executeQuery(model, query) {
     const intentStartedAt = performance.now();
     const intent = await interpretQuery(query.raw);
     const intentElapsedMs = round(performance.now() - intentStartedAt);
+    const intentSummary = summarizeIntent(intent);
 
     const pipelineStartedAt = performance.now();
     const deterministic = await buildLocalCandidatePipeline(intent);
@@ -210,7 +242,8 @@ async function executeQuery(model, query) {
       queryId: query.id,
       rawInput: query.raw,
       focus: query.focus,
-      intent: summarizeIntent(intent),
+      intent: intentSummary,
+      benchmark: assessExpectedIntent(intentSummary, query.expected),
       diagnostics: {
         intentElapsedMs,
         deterministicElapsedMs,
@@ -276,6 +309,24 @@ export function summarizeIntent(intent) {
     mentions: structured.mentions || null,
     fields: structured.fields || intent?.fields || {}
   };
+}
+
+export function assessExpectedIntent(intent, expected) {
+  const actual = {
+    geographies: (intent?.geographies || []).map(item => item.code),
+    product: intent?.product ?? null,
+    activity: intent?.activity ?? null,
+    sector: intent?.sector ?? null,
+    frequency: intent?.frequency ?? null,
+    route: intent?.route?.family ?? null,
+    needsClarification: Boolean(intent?.needsClarification),
+    conceptProducts: [...new Set((intent?.conceptPairs || []).map(item => item.product).filter(Boolean))],
+    conceptActivities: [...new Set((intent?.conceptPairs || []).map(item => item.activity).filter(Boolean))],
+    exclusions: (intent?.exclusions || []).map(item => `${item.type}:${item.value}`),
+    unknownQualifiers: (intent?.unknownQualifiers || []).map(item => item.value)
+  };
+  const checks = Object.fromEntries(Object.keys(expected || {}).map(key => [key, JSON.stringify(actual[key]) === JSON.stringify(expected[key])]));
+  return { passed: Object.values(checks).every(Boolean), checks, expected, actual };
 }
 
 function summarizeRetrieval(retrieval) {
@@ -375,8 +426,8 @@ function renderReport(run) {
   lines.push("");
 
   lines.push("## Fixed raw query inventory", "");
-  lines.push("| ID | Test focus | Raw input text |", "| --- | --- | --- |");
-  for (const query of run.queries) lines.push(`| ${query.id} | ${md(query.focus)} | ${code(query.raw)} |`);
+  lines.push("| ID | Test focus | Raw input text | Human-reviewed expected intent |", "| --- | --- | --- | --- |");
+  for (const query of run.queries) lines.push(`| ${query.id} | ${md(query.focus)} | ${code(query.raw)} | ${md(formatExpectedIntent(query.expected))} |`);
   lines.push("");
 
   lines.push("## Model access preflight", "");
@@ -407,6 +458,14 @@ function renderReport(run) {
   }
   lines.push("");
 
+  lines.push("## Human-reviewed benchmark", "");
+  lines.push("| Model | Graded | Passed | Failed | Mismatched fields |", "| --- | ---: | ---: | ---: | --- |");
+  for (const model of run.models) {
+    const stats = benchmarkStats(run.results.filter(result => result.model === model));
+    lines.push(`| ${code(model)} | ${stats.graded} | ${stats.passed} | ${stats.failed} | ${md(formatBenchmarkFailures(stats.failures))} |`);
+  }
+  lines.push("");
+
   lines.push("## Cross-model comparison", "");
   lines.push("| ID | Mini vs nano: same validated semantic intent | Mini vs nano: same top-five order | gpt-5.4-mini top result(s) | gpt-4.1-nano top result(s) | o3 top result(s) | Warning difference |", "| --- | --- | --- | --- | --- | --- | --- |");
   for (const query of run.queries) {
@@ -423,10 +482,16 @@ function renderReport(run) {
   lines.push("");
 
   const comparison = comparisonStats(run);
+  const requiredBenchmarkModels = ["gpt-5.4-mini", "gpt-4.1-nano"];
+  const requiredBenchmarksPass = requiredBenchmarkModels.every(model => {
+    const stats = benchmarkStats(run.results.filter(result => result.model === model));
+    return stats.graded === run.queries.length && stats.passed === stats.graded;
+  });
   const cohortPassed = run.status === "complete"
     && comparison.comparable === run.queries.length
     && comparison.sameIntent === comparison.comparable
-    && comparison.sameOrder === comparison.comparable;
+    && comparison.sameOrder === comparison.comparable
+    && requiredBenchmarksPass;
   const o3Availability = run.modelAvailability.find(item => item.model === "o3");
   lines.push("## Assessment", "");
   lines.push(`- Mini/nano comparable queries: ${comparison.comparable}/${run.queries.length}.`);
@@ -435,6 +500,10 @@ function renderReport(run) {
   lines.push(`- Same warnings: ${comparison.sameWarnings}/${comparison.comparable || 0}.`);
   lines.push(`- Raw AI-field disagreement before validation: ${comparison.comparable - comparison.sameAiFields}/${comparison.comparable || 0}.`);
   lines.push(`- Validated semantic-intent disagreement after validation: ${comparison.comparable - comparison.sameIntent}/${comparison.comparable || 0}.`);
+  for (const model of requiredBenchmarkModels) {
+    const stats = benchmarkStats(run.results.filter(result => result.model === model));
+    lines.push(`- ${model} human-reviewed benchmark: ${stats.passed}/${stats.graded || 0}.`);
+  }
   lines.push(`- Semantic reranking calls: 0. Candidate scores and order remain deterministic.`);
   lines.push(`- o3 access: ${o3Availability?.available ? "available" : `blocked${o3Availability?.error?.code ? ` (${o3Availability.error.code})` : ""}`}.`);
   lines.push(`- Gate conclusion: ${cohortPassed
@@ -498,11 +567,14 @@ function renderIntent(lines, result) {
   lines.push(`| Clarification | ${md(intent.needsClarification ? intent.clarificationMessage || "required" : "not required")} |`);
   lines.push("");
 
+  const failedBenchmarkFields = Object.entries(result.benchmark?.checks || {}).filter(([, passed]) => !passed).map(([field]) => field);
+  lines.push(`- Human-reviewed benchmark: ${result.benchmark?.passed ? "pass" : `fail (${failedBenchmarkFields.join(", ") || "not graded"})`}.`);
+
   const fields = Object.entries(intent.fields || {});
   if (fields.length > 0) {
-    lines.push("| Field provenance | AI value | Validated value | Status | Repair reason |", "| --- | --- | --- | --- | --- |");
+    lines.push("| Field provenance | AI value | Deterministic evidence | Validated value | Status | Conflict | Resolution source | Repair reason |", "| --- | --- | --- | --- | --- | --- | --- | --- |");
     for (const [name, field] of fields) {
-      lines.push(`| ${md(name)} | ${code(formatFieldValue(field.aiValue))} | ${code(formatFieldValue(field.normalizedValue ?? field.value))} | ${md(field.validation || "unknown")} | ${md(field.fallbackReason || field.reason || "none")} |`);
+      lines.push(`| ${md(name)} | ${code(formatFieldValue(field.aiValue))} | ${code(formatFieldValue(field.deterministicValue))} | ${code(formatFieldValue(field.normalizedValue ?? field.value))} | ${md(field.validation || "unknown")} | ${md(field.conflictStatus || "unknown")} | ${md(field.resolutionSource || "unknown")} | ${md(field.fallbackReason || field.reason || "none")} |`);
     }
     lines.push("");
   }
@@ -548,6 +620,20 @@ function modelStats(results) {
     blocked: results.filter(result => result.blocked).length,
     errors: results.filter(result => result.error && !result.blocked).length,
     totalElapsedMs: results.reduce((sum, result) => sum + Number(result.diagnostics?.totalElapsedMs || 0), 0)
+  };
+}
+
+export function benchmarkStats(results) {
+  const graded = results.filter(result => !result.error && result.benchmark);
+  const failures = graded.filter(result => !result.benchmark.passed).map(result => ({
+    queryId: result.queryId,
+    fields: Object.entries(result.benchmark.checks || {}).filter(([, passed]) => !passed).map(([field]) => field)
+  }));
+  return {
+    graded: graded.length,
+    passed: graded.length - failures.length,
+    failed: failures.length,
+    failures
   };
 }
 
@@ -677,6 +763,23 @@ function formatConceptPairs(pairs) {
 function formatStructuredValues(values) {
   if (!Array.isArray(values) || values.length === 0) return "none";
   return values.map(item => `${item.type ? `${item.type}:` : ""}${item.value || item}`).join(", ");
+}
+
+function formatExpectedIntent(expected) {
+  return [
+    `geo=${expected.geographies.join(",") || "none"}`,
+    `product=${expected.product || "none"}`,
+    `activity=${expected.activity || "none"}`,
+    `sector=${expected.sector || "none"}`,
+    `frequency=${expected.frequency || "none"}`,
+    `route=${expected.route || "none"}`,
+    `clarify=${yesNo(expected.needsClarification)}`
+  ].join("; ");
+}
+
+function formatBenchmarkFailures(failures) {
+  if (!failures.length) return "none";
+  return failures.map(failure => `${failure.queryId}: ${failure.fields.join(", ") || "unknown"}`).join("; ");
 }
 
 function formatWarnings(warnings) {

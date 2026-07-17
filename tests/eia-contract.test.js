@@ -18,6 +18,7 @@ let exactSeriesRequests = 0;
 let openAiRequests = 0;
 let broadDataRequests = 0;
 let failNextExactRequest = false;
+let lastOpenAiInput = "";
 
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
@@ -58,17 +59,25 @@ test("Next search route preserves the EIA response contract with a variable typo
   assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
 });
 
-test("staged interpretation is reused without a second OpenAI request", async () => {
+test("full staged workflow preserves exact raw input and separate cleaned text", async () => {
   process.env.OPENAI_API_KEY = "fixture-openai-key";
   openAiRequests = 0;
+  lastOpenAiInput = "";
   try {
-    const interpretationResponse = await interpretQuery(new Request("https://example.test/api/interpret-query?q=Brazil%20enrgy%20production"));
+    const raw = "  Brazil\u00a0  enrgy\nproduction  ";
+    const interpretationUrl = new URL("https://example.test/api/interpret-query");
+    interpretationUrl.searchParams.set("q", raw);
+    const interpretationResponse = await interpretQuery(new Request(interpretationUrl));
     const { intent } = await interpretationResponse.json();
     assert.equal(intent.interpreter, "openai");
+    assert.equal(intent.originalQuery, raw);
+    assert.equal(intent.cleanedQuery, "Brazil enrgy production");
+    assert.match(lastOpenAiInput, new RegExp(`Raw query: ${escapeRegExp(JSON.stringify(raw))}`));
+    assert.doesNotMatch(lastOpenAiInput, /Lightly cleaned query:/);
     assert.equal(openAiRequests, 1);
 
     const url = new URL("https://example.test/api/search-eia");
-    url.searchParams.set("q", "Brazil enrgy production");
+    url.searchParams.set("q", raw);
     url.searchParams.set("intentReady", "1");
     url.searchParams.set("intentPayload", JSON.stringify({
       originalQuery: intent.originalQuery,
@@ -91,12 +100,43 @@ test("staged interpretation is reused without a second OpenAI request", async ()
 
     assert.equal(response.status, 200);
     assert.equal(body.intent.interpreter, "openai");
+    assert.equal(body.intent.originalQuery, raw);
+    assert.equal(body.intent.cleanedQuery, "Brazil enrgy production");
     assert.equal(body.intent.fields.product.validation, "approved");
     assert.equal(body.intent.fields.product.fallbackUsed, false);
     assert.equal(openAiRequests, 1);
   } finally {
     delete process.env.OPENAI_API_KEY;
   }
+});
+
+test("legacy ranking ignores adversarial AI-corrected wording", async () => {
+  const raw = "Brazil energy production";
+  const url = new URL("https://example.test/api/search-eia");
+  url.searchParams.set("q", raw);
+  url.searchParams.set("intentReady", "1");
+  url.searchParams.set("intentPayload", JSON.stringify({
+    originalQuery: raw,
+    cleanedQuery: raw,
+    correctedQuery: "Brazil energy consumption",
+    interpreter: "openai",
+    confidence: 0.98,
+    fields: {
+      country: { value: "BRA", confidence: 0.98 },
+      product: { value: "total energy", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 },
+      frequency: { value: "annual", explicit: false, confidence: 0.98 }
+    }
+  }));
+
+  const response = await searchEia(new Request(url));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.intent.activity, "production");
+  assert.equal(body.intent.correctedQuery, "Brazil energy consumption");
+  assert.equal(body.selectedSeries.activity, "Production");
+  assert.equal(body.variables[0].activity, "Production");
 });
 
 test("unclear input asks for clarification before a broad EIA data request", async () => {
@@ -181,10 +221,11 @@ test("browser-side XLSX export retains All_Data and Metadata sheets", async () =
   assert.equal(workbookFileName(body.selectedSeries), "Brazil_Primary_Energy_Production.xlsx");
 });
 
-async function mockEiaFetch(input) {
+async function mockEiaFetch(input, options = {}) {
   const url = new URL(String(input));
   if (url.hostname === "api.openai.com") {
     openAiRequests += 1;
+    lastOpenAiInput = JSON.parse(options.body).input;
     return jsonResponse({
       output_text: JSON.stringify({
         correctedQuery: "Brazil energy production",
@@ -214,6 +255,10 @@ async function mockEiaFetch(input) {
     ? [{ period: "2024", value: "NA", countryRegionId: "CSK", productId: "44", activityId: "1", unit: "QBTU" }]
     : activityId ? fixture.exactRows[activityId] || [] : fixture.broadRows;
   return jsonResponse({ response: { data: rows } });
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function jsonResponse(body) {

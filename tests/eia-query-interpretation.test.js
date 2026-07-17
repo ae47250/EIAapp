@@ -126,7 +126,7 @@ test("submitted intent cannot introduce an unknown country code", () => {
   assert.equal(intent.needsClarification, true);
 });
 
-test("validated AI fields remain authoritative when deterministic rules disagree", () => {
+test("AI-corrected product cannot override conflicting raw-derived evidence", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "United States natural gas consumption",
     confidence: 0.9,
@@ -138,9 +138,32 @@ test("validated AI fields remain authoritative when deterministic rules disagree
     }
   }, "USA gasoline consumption");
 
-  assert.equal(intent.product, "natural gas");
-  assert.equal(intent.fields.product.validation, "approved");
-  assert.equal(intent.fields.product.fallbackUsed, false);
+  assert.equal(intent.product, "petroleum");
+  assert.equal(intent.fields.product.validation, "fallback");
+  assert.equal(intent.fields.product.fallbackUsed, true);
+  assert.equal(intent.fields.product.deterministicValue, "petroleum");
+  assert.equal(intent.fields.product.conflictStatus, "conflict");
+  assert.equal(intent.fields.product.resolutionSource, "deterministic_fallback");
+  assert.equal(intent.fields.product.validationEvidenceSource, "raw_derived_deterministic");
+});
+
+test("AI-corrected text cannot manufacture sector evidence absent from the raw query", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Iowa monthly wind net generation electric power sector",
+    confidence: 0.97,
+    fields: {
+      country: { value: "IA", confidence: 0.98 },
+      product: { value: "wind", confidence: 0.98 },
+      activity: { value: "generation", confidence: 0.98 },
+      sector: { value: "electric power", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, "Iowa monthly wind net generation");
+
+  assert.equal(intent.sector, null);
+  assert.equal(intent.fields.sector.validation, "rejected");
+  assert.equal(intent.fields.sector.conflictStatus, "ai_only");
+  assert.equal(intent.fields.sector.resolutionSource, "unresolved");
 });
 
 test("cross-family ambiguity stays broad for later candidate retrieval", () => {

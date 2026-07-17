@@ -142,6 +142,15 @@ test("preserves sector, ordered repeated activities, explicit frequency, and neg
   assert.deepEqual(negated.conceptPairs.map(pair => pair.activity), ["production"]);
 });
 
+test("does not reinterpret an explicit sector phrase as a second product", () => {
+  const intent = interpretQueryWithRules("Ohio monthly coal consumption electric power sector");
+
+  assert.equal(intent.product, "coal");
+  assert.equal(intent.fields.product.normalizedValue, "coal");
+  assert.equal(intent.sector, "electric power");
+  assert.deepEqual(intent.conceptPairs.map(pair => pair.product), ["coal"]);
+});
+
 test("preserves a requested unsupported frequency instead of silently replacing it", () => {
   const intent = buildStructuredIntent({}, "Japan weekly solar electricity generation");
 
