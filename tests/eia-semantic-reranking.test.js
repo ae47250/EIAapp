@@ -9,27 +9,14 @@ import {
   validateSemanticRerankingResponse
 } from "../lib/sources/eia/semantic-reranking.js";
 
-test("clear exact aggregates are protected from unnecessary AI calls", async () => {
-  let calls = 0;
-  const result = await applyConditionalSemanticReranking(clearIntent(), rankedFixture({ exactAggregate: true }), {
-    mode: "shadow",
-    requestRerank: async () => { calls += 1; return validResponse(["family-b", "family-a"]); }
-  });
+test("candidate labels do not create a protected aggregate status", () => {
+  const trigger = evaluateSemanticRerankingTrigger(
+    ambiguousIntent(),
+    rankedFixture({ firstTier: "B", secondTier: "B" }).retrievals[0]
+  );
 
-  assert.equal(calls, 0);
-  assert.equal(result.retrievals[0].semanticReranking.reason, "decisive_exact_aggregate");
-  assert.equal(result.diagnostics.semanticRerankingApplied, false);
-});
-
-test("verified exact aggregates remain protected in a labeled frequency-fallback tier", async () => {
-  let calls = 0;
-  const result = await applyConditionalSemanticReranking(ambiguousIntent(), rankedFixture({ exactAggregate: true, firstTier: "B", secondTier: "B" }), {
-    mode: "shadow",
-    requestRerank: async () => { calls += 1; return validResponse(["family-b", "family-a"]); }
-  });
-
-  assert.equal(calls, 0);
-  assert.equal(result.retrievals[0].semanticReranking.reason, "decisive_exact_aggregate");
+  assert.equal(trigger.eligible, true);
+  assert.equal(trigger.reason, "conditional_ambiguity_trigger");
 });
 
 test("ambiguous close same-tier families receive a validated shadow order only", async () => {
@@ -211,8 +198,7 @@ function clearIntent() {
 }
 
 function rankedFixture(options = {}) {
-  const firstReasons = options.exactAggregate ? ["exact_verified_aggregate"] : ["ordinary_series"];
-  const first = candidate("candidate-a", "family-a", 72, options.firstTier || (options.exactAggregate ? "A" : "C"), firstReasons);
+  const first = candidate("candidate-a", "family-a", 72, options.firstTier || "C", ["aggregation_relation_unknown_no_verified_hierarchy"]);
   const second = candidate("candidate-b", "family-b", 72 - (options.scoreGap ?? 2), options.secondTier || "C", ["ordinary_series"]);
   return {
     routeFamily: "international",

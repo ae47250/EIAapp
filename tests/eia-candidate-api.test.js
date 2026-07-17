@@ -36,7 +36,10 @@ test("candidate mode returns at most ten grouped choices without selecting or fe
   assert.ok(body.variables.length > 1 && body.variables.length <= 10);
   assert.equal(body.variables.length, body.diagnostics.displayedCandidateCount);
   assert.ok(body.candidateGroups.every(group => group.technical === false));
-  assert.ok(body.userWarnings.some(warning => warning.code === "activity_missing_aggregate_priority"));
+  assert.ok(body.userWarnings.some(warning => warning.code === "activity_missing_hierarchy_unknown"));
+  assert.equal(body.diagnostics.hierarchyEvidenceStatus, "none");
+  assert.equal(body.diagnostics.verifiedHierarchyRelationshipCount, 0);
+  assert.equal(body.diagnostics.hierarchyPreferenceApplied, false);
   assert.equal(body.diagnostics.semanticRerankingApplied, false);
   assert.equal(seriesRequests, 0);
 });

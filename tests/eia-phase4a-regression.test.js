@@ -13,24 +13,25 @@ test("Q03-Q14 deterministic remediation cohort", async () => {
   assert.equal(top(results.get("Q03")).series_id, "NG.N9050NM2.M");
   assert.equal(top(results.get("Q04")).series_id, "NG.N3010NY2.M");
   assert.match(top(results.get("Q04")).title, /residential consumption/i);
-  assert.equal(top(results.get("Q05")).series_id, "ELEC.GEN.WND-IA-99.M");
+  assert.match(top(results.get("Q05")).title, /generation.*Iowa.*wind/i);
+  assert.equal(top(results.get("Q05")).ranking.components.measureOrAggregation.points, 0);
 
   const q06 = results.get("Q06").retrievals[0];
-  assert.ok(q06.displayCandidates.slice(0, 3).every(candidate => candidate.ranking.reasonCodes.includes("official_total_label")));
-  assert.ok(hasWarning(q06, "activity_missing_aggregate_priority"));
+  assert.ok(q06.displayCandidates.slice(0, 3).every(candidate => candidate.ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy")));
+  assert.ok(hasWarning(q06, "activity_missing_hierarchy_unknown"));
   assert.ok(!hasWarning(q06, "requested_frequency_unavailable_seds_annual_fallback"));
 
   const q07 = results.get("Q07").retrievals;
   assert.deepEqual(q07.map(item => item.concept.product), ["natural gas", "petroleum"]);
   assert.ok(q07.every(item => item.displayCandidates.length > 0));
   assert.ok(q07.every(item => hasWarning(item, "ambiguous_product_interpretation")));
-  assert.ok(q07.every(item => hasWarning(item, "activity_missing_aggregate_priority")));
+  assert.ok(q07.every(item => hasWarning(item, "activity_missing_hierarchy_unknown")));
 
   assert.equal(top(results.get("Q08")).series_id, "NG.NW2_EPG0_SWO_R48_BCF.W");
   assert.equal(top(results.get("Q08")).frequency, "weekly");
   assert.equal(top(results.get("Q09")).series_id, "INTL.5-2-BRA-MT.A");
   assert.match(top(results.get("Q09")).title, /^Petroleum and other liquids consumption/i);
-  assert.ok(top(results.get("Q09")).ranking.reasonCodes.includes("broad_scope_preferred_no_subtype_requested"));
+  assert.ok(top(results.get("Q09")).ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy"));
 
   const q10 = results.get("Q10").retrievals[0];
   assert.equal(q10.displayCandidates[0].series_id, "INTL.116-12-JPN-BKWH.A");
@@ -46,13 +47,13 @@ test("Q03-Q14 deterministic remediation cohort", async () => {
   const q12 = results.get("Q12").retrievals;
   assert.deepEqual(q12.map(item => item.geography.code), ["BRA", "JPN"]);
   assert.deepEqual(q12.map(item => item.displayCandidates[0].series_id), ["INTL.2-12-BRA-BKWH.A", "INTL.2-12-JPN-BKWH.A"]);
-  assert.ok(q12.every(item => item.displayCandidates[0].ranking.reasonCodes.includes("official_total_label")));
+  assert.ok(q12.every(item => item.displayCandidates[0].ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy")));
 
   const q13 = results.get("Q13").retrievals[0];
   assert.equal(q13.displayCandidates[0].series_id, "NG.N9050TX2.M");
   assert.ok(q13.displayCandidates.every(candidate => /production/i.test(candidate.title)));
   assert.ok(q13.displayCandidates.every(candidate => !/price|cost/i.test(candidate.title)));
-  assert.ok(q13.displayCandidates.slice(0, 2).every(candidate => candidate.ranking.signals.equivalentChoiceGroup));
+  assert.ok(q13.displayCandidates.slice(0, 2).every(candidate => !candidate.ranking.signals.equivalentChoiceGroup));
 
   const q14 = results.get("Q14").retrievals[0];
   assert.deepEqual(q14.displayCandidates, []);

@@ -453,7 +453,7 @@ test("requested-date coverage and currentness outrank stale non-covering records
   assert.ok(retrieval.rankedCandidates[0].ranking.reasonCodes.includes("current_active"));
 });
 
-test("unqualified aggregates outrank sector-specific and derived records when no sector is requested", () => {
+test("hierarchy-like labels receive no aggregation points or verified relationship claims", () => {
   const intent = {
     ...interpretQueryWithRules("Texas annual total energy consumption"),
     requestedPeriod: "2024"
@@ -494,8 +494,16 @@ test("unqualified aggregates outrank sector-specific and derived records when no
     diagnostics: {}
   });
 
-  assert.equal(ranked.retrievals[0].rankedCandidates[0].candidate_id, "unqualified-total");
-  assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("official_total_label"));
+  const retrieval = ranked.retrievals[0];
+  assert.equal(retrieval.diagnostics.hierarchyEvidenceStatus, "none");
+  assert.equal(retrieval.diagnostics.verifiedHierarchyRelationshipCount, 0);
+  assert.equal(retrieval.diagnostics.hierarchyPreferenceApplied, false);
+  for (const candidate of retrieval.rankedCandidates) {
+    assert.equal(candidate.ranking.components.measureOrAggregation.maximum, 0);
+    assert.equal(candidate.ranking.components.measureOrAggregation.points, 0);
+    assert.ok(candidate.ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy"));
+    assert.ok(!candidate.ranking.reasonCodes.some(reason => /official_(total|aggregate)|aggregate_metadata|equivalent_semantic/.test(reason)));
+  }
 });
 
 test("unresolved qualifiers block ranking instead of inventing an activity", async () => {

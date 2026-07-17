@@ -15,7 +15,8 @@ test("adds separately retrieved annual SEDS fallbacks when monthly Domestic resu
   assert.ok(retrieval.displayCandidates.every(candidate => candidate.route_family === "seds"));
   assert.ok(retrieval.displayCandidates.every(candidate => candidate.ranking.tier === "B"));
   assert.ok(retrieval.primaryCandidates.length + retrieval.fallbackCandidates.length <= 50);
-  assert.equal(retrieval.displayCandidates[0].series_id, "SEDS.TETCB.TX.A");
+  assert.ok(retrieval.displayCandidates.every(candidate => candidate.ranking.components.measureOrAggregation.points === 0));
+  assert.ok(retrieval.displayCandidates.every(candidate => candidate.ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy")));
   assert.ok(retrieval.userWarnings.some(warning => warning.code === "requested_frequency_unavailable_seds_annual_fallback"));
 });
 
@@ -31,7 +32,8 @@ test("does not retrieve SEDS when a valid Domestic result already exists", async
 
   assert.equal(calls, 1);
   assert.equal(result.diagnostics.crossRouteFallback.attempted, false);
-  assert.equal(result.retrievals[0].displayCandidates[0].series_id, "ELEC.GEN.ALL-CA-99.M");
+  assert.match(result.retrievals[0].displayCandidates[0].title, /generation.*California/i);
+  assert.equal(result.retrievals[0].displayCandidates[0].ranking.components.measureOrAggregation.points, 0);
   assert.deepEqual(result.retrievals[0].userWarnings, []);
 });
 
@@ -66,22 +68,24 @@ test("does not label primary annual SEDS results as a frequency fallback", async
 
   assert.equal(result.diagnostics.crossRouteFallback.attempted, false);
   assert.ok(retrieval.displayCandidates.length > 0);
-  assert.ok(retrieval.userWarnings.some(warning => warning.code === "activity_missing_aggregate_priority"));
+  assert.ok(retrieval.userWarnings.some(warning => warning.code === "activity_missing_hierarchy_unknown"));
+  assert.equal(result.diagnostics.hierarchyEvidenceStatus, "none");
+  assert.equal(result.diagnostics.verifiedHierarchyRelationshipCount, 0);
+  assert.equal(result.diagnostics.hierarchyPreferenceApplied, false);
   assert.ok(!retrieval.userWarnings.some(warning => warning.code === "requested_frequency_unavailable_seds_annual_fallback"));
-  assert.deepEqual(retrieval.interpretationGroups.map(group => group.activity), ["production", "consumption", "capacity"]);
+  assert.ok(retrieval.interpretationGroups.some(group => group.activity === "production"));
+  assert.ok(retrieval.interpretationGroups.some(group => group.activity === "consumption"));
   assert.equal(retrieval.selectionPolicy.requiresExplicitSelection, true);
   assert.equal(retrieval.selectionPolicy.autoSelectionAllowed, false);
 });
 
-test("separates technical and expenditure measures for an ambiguous product query", async () => {
+test("keeps technical and expenditure candidates eligible without hierarchy preference", async () => {
   const result = await buildLocalCandidatePipeline(interpretQueryWithRules("Texas gas"));
   const naturalGas = result.retrievals.find(retrieval => retrieval.concept.product === "natural gas");
-  const technical = naturalGas.interpretationGroups.find(group => group.technical);
-  const expenditures = naturalGas.interpretationGroups.find(group => group.measureType === "expenditures");
 
-  assert.ok(technical.candidates.some(candidate => /factor for converting/i.test(candidate.title)));
-  assert.equal(technical.defaultVisible, false);
-  assert.ok(expenditures.candidates.some(candidate => /expenditures/i.test(candidate.title)));
+  assert.ok(naturalGas.rankedCandidates.some(candidate => /factor for converting/i.test(candidate.title)));
+  assert.ok(naturalGas.rankedCandidates.some(candidate => /expenditures/i.test(candidate.title)));
+  assert.ok(naturalGas.rankedCandidates.every(candidate => candidate.ranking.components.measureOrAggregation.points === 0));
   assert.ok(naturalGas.selectionPolicy.reasonCodes.includes("activity_not_explicit"));
 });
 
