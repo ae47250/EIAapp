@@ -11,6 +11,7 @@ test("Q03-Q14 deterministic remediation cohort", async () => {
   }
 
   assert.equal(top(results.get("Q03")).series_id, "NG.N9050NM2.M");
+  assert.ok(top(results.get("Q03")).ranking.reasonCodes.includes("requested_lexical_qualifier_match"));
   assert.equal(top(results.get("Q04")).series_id, "NG.N3010NY2.M");
   assert.match(top(results.get("Q04")).title, /residential consumption/i);
   assert.match(top(results.get("Q05")).title, /generation.*Iowa.*wind/i);
@@ -52,7 +53,8 @@ test("Q03-Q14 deterministic remediation cohort", async () => {
   assert.equal(q13.displayCandidates[0].series_id, "NG.N9050TX2.M");
   assert.ok(q13.displayCandidates.every(candidate => /production/i.test(candidate.title)));
   assert.ok(q13.displayCandidates.every(candidate => !/price|cost/i.test(candidate.title)));
-  assert.ok(q13.displayCandidates.slice(0, 2).every(candidate => !candidate.ranking.signals.equivalentChoiceGroup));
+  assert.ok(q13.displayCandidates.every(candidate => !candidate.ranking.reasonCodes.some(reason => /subtype|equivalent/i.test(reason))));
+  assert.ok(q13.displayCandidates.every(candidate => !Object.hasOwn(candidate.ranking.signals, "specificity")));
 
   const q14 = results.get("Q14");
   assert.deepEqual(q14.retrievals, []);

@@ -515,6 +515,46 @@ test("unresolved intent cannot reach ranking directly", () => {
   assert.throws(() => rankLocalCandidates(unresolvedPairs, retrieval), /cannot run until the structured intent is resolved/i);
 });
 
+test("unrequested lexical qualifiers do not create a narrower-or-broader ranking preference", () => {
+  const intent = interpretQueryWithRules("Texas monthly natural gas production");
+  const ranked = rankLocalCandidates(intent, {
+    schemaVersion: "1.0.0",
+    routeFamily: "domestic",
+    retrievals: [buildRetrieval({
+      routeFamily: "domestic",
+      geography: { name: "Texas", code: "TX", type: "state" },
+      frequency: { value: "monthly", requested: "monthly", mode: "exact" },
+      primaryCandidates: [
+        buildCandidate({
+          candidate_id: "marketed-first-by-selector",
+          series_id: "A.MARKETED",
+          title: "Marketed natural gas production, Texas, Monthly",
+          geography: { name: "Texas", code: "TX", type: "state" },
+          frequency: "monthly",
+          selector: { route: "/seriesid", measure: "production", frequency: "monthly", facets: { series_id: "A.MARKETED" } }
+        }),
+        buildCandidate({
+          candidate_id: "generic-second-by-selector",
+          series_id: "Z.GENERIC",
+          title: "Natural gas production, Texas, Monthly",
+          geography: { name: "Texas", code: "TX", type: "state" },
+          frequency: "monthly",
+          selector: { route: "/seriesid", measure: "production", frequency: "monthly", facets: { series_id: "Z.GENERIC" } }
+        })
+      ]
+    })],
+    diagnostics: {}
+  });
+
+  const candidates = ranked.retrievals[0].rankedCandidates;
+  assert.deepEqual(candidates.map(candidate => candidate.candidate_id), [
+    "marketed-first-by-selector",
+    "generic-second-by-selector"
+  ]);
+  assert.ok(candidates.every(candidate => candidate.ranking.signals.lexicalQualifiers.requestedQualifiers.length === 0));
+  assert.ok(candidates.every(candidate => !candidate.ranking.reasonCodes.some(reason => /subtype|equivalent/i.test(reason))));
+});
+
 test("the Phase 3 output shape remains compatible with the ranker", async () => {
   const intent = interpretQueryWithRules("Brazil annual petroleum consumption");
   const retrieval = await retrieveLocalCandidates(intent);

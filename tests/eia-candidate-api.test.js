@@ -64,6 +64,7 @@ test("explicit selection reruns validation and fetches only the verified series 
   const query = "Brazil annual petroleum consumption";
   const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
   const candidate = initial.variables[0];
+  assert.equal(Object.hasOwn(candidate, "equivalentChoiceGroup"), false);
   seriesRequests = 0;
   const url = new URL("https://example.test/api/search-eia");
   url.searchParams.set("q", query);

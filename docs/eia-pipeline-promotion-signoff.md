@@ -17,9 +17,9 @@ Implementation is complete behind a default-off feature flag. Promotion remains 
 - Metadata build: `phase1b`
 - Manifest content hash: `1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028`
 - Normalized records: `254499`
-- Candidate pipeline: `phase4a-v3`
-- Ranking configuration: `phase4-v6`
-- Routing vocabulary: `phase4-routing-vocabulary-v4`
+- Candidate pipeline: `phase4a-v6`
+- Ranking configuration: `phase4-v8`
+- Routing vocabulary: `phase4-routing-vocabulary-v5`
 - Concept taxonomy: `phase4-concepts-v2`
 - Semantic reranking: disabled
 - Public feature flag: `EIA_CANDIDATE_PIPELINE`; only exact value `on` enables the new path
@@ -44,8 +44,8 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 - [x] Unsupported hierarchy language was replaced with accurate official-total-label terminology.
 - [x] Ambiguous results are grouped by activity and measure type.
 - [x] Technical measures are separately labeled and hidden unless explicitly requested.
-- [x] Broad-versus-subtype ties use controlled vocabulary before selector IDs.
-- [x] Remaining semantic ties are marked as equivalent choices.
+- [x] Explicit lexical qualifiers may break ties only when the user requested them.
+- [x] Remaining ties use stable canonical selector and candidate identifiers without total, subtype, or equivalence claims.
 - [x] Candidate display is capped at 10 across all initial groups.
 - [x] No candidate is graphed or fetched automatically.
 - [x] A click is required for Graph or Excel.
@@ -81,8 +81,8 @@ The complete live report is `HOHO3.md` with SHA-256 `4224a967be3c5a7c74a84f258a4
 | --- | ---: | --- |
 | California monthly electricity generation | 5 | Domestic candidates; no automatic selection |
 | Texas monthly total energy consumption | 5 | Annual SEDS fallback warning |
-| California renewable energy | 5 | Missing-activity grouping warning |
-| Texas gas | 9 | Natural-gas/petroleum interpretations; no automatic selection |
+| California renewable energy | 0 | Clarification required before ranking |
+| Texas gas | 0 | Clarification required before ranking |
 | United States weekly working gas in underground storage | 1 | Lower 48 coverage note |
 | Japan monthly solar electricity generation | 2 | Annual International fallback warning |
 | plz shwo montly nat gas prodction in Texas, not prices | 3 | Production choices; price exclusion preserved |
@@ -93,8 +93,8 @@ The complete live report is `HOHO3.md` with SHA-256 `4224a967be3c5a7c74a84f258a4
 - [x] Q01-Q14 remain present in the runner.
 - [x] Q03-Q14 deterministic regression assertions pass.
 - [x] Q08 no longer reports missing availability for compact weekly dates.
-- [x] Q09 broad petroleum is preferred before unrequested subtypes for an auditable reason.
-- [x] Q13 marketed and dry natural-gas production can be labeled equivalent when no subtype is requested.
+- [x] Q09 receives no broad/total preference; remaining ties are deterministic and hierarchy-neutral.
+- [x] Q13 uses a requested lexical qualifier when present and never labels unrequested choices as subtypes or equivalents.
 - [x] Q01-Q14 rerun live with `gpt-5.4-mini` and `gpt-4.1-nano` after these changes.
 
 ## Expanded Cohort Checklist
@@ -124,11 +124,11 @@ The runner now contains Q15-Q30 for:
 
 - [x] Q01 clear Domestic result
 - [x] Q02 labeled SEDS fallback
-- [x] Q06 grouped missing-activity choices
-- [x] Q07 multiple product interpretations
+- [x] Q06 clarification before candidate display
+- [x] Q07 clarification before candidate display
 - [x] Q08 Lower 48 scope note
 - [x] Q10 labeled International annual fallback
-- [x] Q13 equivalent subtype choices and price exclusion
+- [x] Q13 hierarchy-neutral choices and price exclusion
 - [x] Q14 clarification with no generic result
 - [x] Explicit technical-measure query
 - [x] Empty and unavailable-frequency cases
