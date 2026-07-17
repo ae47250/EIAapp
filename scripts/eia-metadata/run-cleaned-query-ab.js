@@ -5,7 +5,7 @@ import { buildLocalCandidatePipeline } from "../../lib/sources/eia/candidate-pip
 import { cleanQueryMechanically, interpretQuery } from "../../lib/sources/eia/interpret-query.js";
 
 const MODEL = "gpt-4.1-nano";
-const REPORT_PATH = resolve("HOHO2.md");
+const REPORT_PATH = resolve(process.argv[2] || "HOHO2.md");
 const TOP_LIMIT = 5;
 const CONDITIONS = [
   { id: "raw_plus_cleaned", label: "Raw + mechanically cleaned", includeCleanedQueryInPrompt: true },
