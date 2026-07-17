@@ -15,7 +15,7 @@ import { finished } from "node:stream/promises";
 import { createGunzip, createGzip } from "node:zlib";
 import { fileURLToPath } from "node:url";
 
-import { loadPhase1aFixtures } from "./discover-routes.js";
+import { loadPhase1aFixtures, loadPhase4aDomesticFixtures } from "./discover-routes.js";
 import {
   isElectricityPlantSeries,
   normalizeBulkSeries,
@@ -43,7 +43,15 @@ export const BULK_BUILD_SOURCES = Object.freeze([
     archive: "ELEC.zip",
     family: "domestic",
     output: "domestic.jsonl.gz",
+    buildPlantDirectory: true,
     sourceUrl: "https://www.eia.gov/opendata/bulk/ELEC.zip"
+  },
+  {
+    archive: "NG.zip",
+    family: "domestic",
+    output: "natural-gas.jsonl.gz",
+    buildPlantDirectory: false,
+    sourceUrl: "https://www.eia.gov/opendata/bulk/NG.zip"
   },
   {
     archive: "INTL.zip",
@@ -71,11 +79,11 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     await access(archivePath);
     artifacts.push(await buildFamilyArtifact({ ...source, archivePath, stageDir }));
   }
-  const plantArtifact = artifacts.find(artifact => artifact.family === "domestic")?.plant_directory;
+  const plantArtifact = artifacts.find(artifact => artifact.plant_directory)?.plant_directory;
   if (!plantArtifact) throw new Error("Domestic build did not produce the plant directory.");
   const seriesArtifacts = artifacts.map(({ plant_directory: ignored, ...artifact }) => artifact);
 
-  const routeEntries = await loadPhase1aFixtures();
+  const routeEntries = [...await loadPhase1aFixtures(), ...await loadPhase4aDomesticFixtures()];
   const routes = routeEntries.map(entry => normalizeRouteFixture(entry.fixture));
   const routeErrors = routes.flatMap(record => validateRouteRecord(record).map(error => `${record.route}: ${error}`));
   if (routeErrors.length) throw new Error(`Route validation failed:\n${routeErrors.join("\n")}`);
@@ -83,7 +91,8 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
   const routesJson = `${JSON.stringify(routes, null, 2)}\n`;
   await writeFile(join(stageDir, "routes.json"), routesJson, "utf8");
   const routesHash = sha256(routesJson);
-  const counts = Object.fromEntries(seriesArtifacts.map(artifact => [artifact.family, artifact.records]));
+  const counts = { domestic: 0, international: 0, seds: 0 };
+  for (const artifact of seriesArtifacts) counts[artifact.family] = (counts[artifact.family] || 0) + artifact.records;
   counts.total = Object.values(counts).reduce((sum, value) => sum + value, 0);
   const contentHash = sha256(stableStringify({
     artifacts: seriesArtifacts.map(artifact => ({ family: artifact.family, content_hash: artifact.content_hash })),
@@ -118,7 +127,8 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     update_schedule_state: "not_configured",
     warnings: [
       "Phase 1B staging cache only; it is not active production metadata.",
-      "Domestic coverage is Electricity-only; full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
+      "Domestic coverage includes Electricity and Natural Gas; other Domestic product families remain outside this partial cache.",
+      "Full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
       "International dataFlagId is treated as an observation annotation, not candidate identity.",
       "Artifacts are gzip-compressed because uncompressed normalized files are not GitHub-safe."
     ],
@@ -160,7 +170,7 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
     checked_at: checkedAt,
     production_activated: false,
     scope: {
-      domestic: "Electricity bulk series plus a compact plant directory; full ELEC.PLANT series are on-demand only",
+      domestic: "Electricity and Natural Gas bulk series plus a compact plant directory; full ELEC.PLANT series are on-demand only",
       international: "All INTL bulk series",
       seds: "All SEDS bulk series",
       comprehensive_domestic: false
@@ -186,7 +196,7 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
   return { outputDir: resolvedOutputDir, rollbackPath, manifest, validationReport };
 }
 
-export async function buildFamilyArtifact({ archivePath, family, output, sourceUrl, stageDir }) {
+export async function buildFamilyArtifact({ archivePath, family, output, sourceUrl, stageDir, buildPlantDirectory = false }) {
   const outputPath = join(stageDir, output);
   const archiveProcess = spawn("tar", ["-xOf", archivePath], { stdio: ["ignore", "pipe", "pipe"] });
   const closePromise = once(archiveProcess, "close");
@@ -206,7 +216,7 @@ export async function buildFamilyArtifact({ archivePath, family, output, sourceU
   const frequencies = new Set();
   const units = new Set();
   const geographies = new Set();
-  const plantDirectory = family === "domestic" ? new Map() : null;
+  const plantDirectory = buildPlantDirectory ? new Map() : null;
   let missingGeographies = 0;
   let records = 0;
   let excludedRecords = 0;

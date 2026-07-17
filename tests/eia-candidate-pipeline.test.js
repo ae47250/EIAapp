@@ -35,12 +35,64 @@ test("does not retrieve SEDS when a valid Domestic result already exists", async
   assert.deepEqual(result.retrievals[0].userWarnings, []);
 });
 
-test("never uses the SEDS fallback for a country request", async () => {
-  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("Brazil monthly total energy consumption"));
+test("labels narrower national coverage when metadata uses the same geography code", async () => {
+  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("United States weekly natural gas storage"));
+  const retrieval = result.retrievals[0];
+
+  assert.equal(retrieval.displayCandidates[0].geography.name, "Lower 48 States");
+  assert.ok(retrieval.userWarnings.some(warning =>
+    warning.code === "coverage_geography_scope_note" && warning.message === "Coverage geography: Lower 48 States."
+  ));
+  assert.ok(!retrieval.displayCandidates[0].ranking.warnings.includes("date_end_missing"));
+});
+
+test("uses labeled annual International fallbacks for unavailable country frequencies", async () => {
+  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("Japan monthly solar electricity generation"));
+  const retrieval = result.retrievals[0];
 
   assert.equal(result.routeFamily, "international");
+  assert.equal(result.diagnostics.crossRouteFallback.attempted, true);
+  assert.equal(result.diagnostics.crossRouteFallback.toRoute, "international");
+  assert.ok(retrieval.displayCandidates.length > 0);
+  assert.ok(retrieval.displayCandidates.every(candidate => candidate.route_family === "international"));
+  assert.ok(retrieval.displayCandidates.every(candidate => candidate.frequency === "annual"));
+  assert.ok(retrieval.displayCandidates.every(candidate => candidate.ranking.tier === "B"));
+  assert.ok(retrieval.userWarnings.some(warning => warning.code === "requested_frequency_unavailable_international_annual_fallback"));
+});
+
+test("does not label primary annual SEDS results as a frequency fallback", async () => {
+  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("California renewable energy"));
+  const retrieval = result.retrievals[0];
+
   assert.equal(result.diagnostics.crossRouteFallback.attempted, false);
-  assert.ok(result.retrievals[0].displayCandidates.every(candidate => candidate.route_family === "international"));
+  assert.ok(retrieval.displayCandidates.length > 0);
+  assert.ok(retrieval.userWarnings.some(warning => warning.code === "activity_missing_aggregate_priority"));
+  assert.ok(!retrieval.userWarnings.some(warning => warning.code === "requested_frequency_unavailable_seds_annual_fallback"));
+  assert.deepEqual(retrieval.interpretationGroups.map(group => group.activity), ["production", "consumption", "capacity"]);
+  assert.equal(retrieval.selectionPolicy.requiresExplicitSelection, true);
+  assert.equal(retrieval.selectionPolicy.autoSelectionAllowed, false);
+});
+
+test("separates technical and expenditure measures for an ambiguous product query", async () => {
+  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("Texas gas"));
+  const naturalGas = result.retrievals.find(retrieval => retrieval.concept.product === "natural gas");
+  const technical = naturalGas.interpretationGroups.find(group => group.technical);
+  const expenditures = naturalGas.interpretationGroups.find(group => group.measureType === "expenditures");
+
+  assert.ok(technical.candidates.some(candidate => /factor for converting/i.test(candidate.title)));
+  assert.equal(technical.defaultVisible, false);
+  assert.ok(expenditures.candidates.some(candidate => /expenditures/i.test(candidate.title)));
+  assert.ok(naturalGas.selectionPolicy.reasonCodes.includes("activity_not_explicit"));
+});
+
+test("asks for clarification instead of showing candidates for unresolved qualifiers", async () => {
+  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("California monthly electricity from moon"));
+  const retrieval = result.retrievals[0];
+
+  assert.equal(retrieval.emptyResult, true);
+  assert.deepEqual(retrieval.displayCandidates, []);
+  assert.ok(retrieval.userWarnings.some(warning => warning.code === "unresolved_qualifier_requires_clarification"));
+  assert.ok(!retrieval.userWarnings.some(warning => warning.code === "no_displayable_candidate"));
 });
 
 test("reports an empty result instead of silently selecting a substitute", async () => {

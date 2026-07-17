@@ -153,6 +153,19 @@ test("response validation accepts only a complete permutation of known family ID
   assert.equal(duplicate.valid, false);
 });
 
+test("response validation accepts a complete permutation inside a JSON code fence", () => {
+  const response = {
+    outputText: `\`\`\`json
+${JSON.stringify(validResponse(["family-b", "family-a"]))}
+\`\`\``
+  };
+
+  const validated = validateSemanticRerankingResponse(response, ["family-a", "family-b"]);
+
+  assert.equal(validated.valid, true);
+  assert.deepEqual(validated.orderedFamilyIds, ["family-b", "family-a"]);
+});
+
 async function runWithResponse(response) {
   return applyConditionalSemanticReranking(ambiguousIntent(), rankedFixture(), {
     mode: "shadow",

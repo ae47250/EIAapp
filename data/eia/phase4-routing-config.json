@@ -1,21 +1,22 @@
 {
-  "version": "phase4-routing-vocabulary-v1",
+  "version": "phase4-routing-vocabulary-v4",
   "source": {
     "metadataBuild": "phase1b",
-    "manifestContentHash": "6f2997cd02f66f8543a6dad1a6697344bce5426a2e29c9c08da5e7ac14e5c4a1",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
     "refreshPolicy": "Regenerate this file when the local EIA metadata cache is intentionally rebuilt; no live EIA lookup is performed during routing or ranking.",
-    "coverageWarning": "Domestic Phase 1B coverage is Electricity-only; non-electricity Domestic suggestions depend on future Domestic metadata builds."
+    "coverageWarning": "Domestic coverage includes Electricity and the validated Natural Gas bulk index. Other Domestic product families remain outside the local cache."
   },
   "routePriority": ["domestic", "international", "seds"],
   "routeProfiles": {
     "domestic": {
       "label": "Domestic EIA",
-      "description": "U.S. domestic EIA metadata. In the current Phase 1B cache this primarily means Electricity bulk metadata, including state and U.S. electricity generation, sales, customers, prices, capacity, and plant-related electricity records.",
-      "geographyTypes": ["state", "us-national"],
-      "frequencies": ["annual", "monthly", "quarterly"],
+      "description": "U.S. domestic EIA metadata for Electricity and Natural Gas, including state and U.S. generation, production, consumption, storage, sales, customers, prices, capacity, and plant-related electricity records.",
+      "geographyTypes": ["state", "national"],
+      "frequencies": ["annual", "monthly", "quarterly", "weekly"],
       "defaultFrequency": "monthly",
       "stateNonAnnualPrimary": true,
-      "conceptHints": ["electricity", "generation", "capacity", "plant", "sales", "customers"]
+      "conceptHints": ["electricity", "natural gas", "generation", "production", "consumption", "storage", "capacity", "plant", "sales", "customers"],
+      "stateElectricityConceptHints": ["electricity", "generation", "capacity", "plant", "sales", "customers"]
     },
     "international": {
       "label": "International",
@@ -70,10 +71,23 @@
     "products": {
       "natural gas": {
         "terms": ["natural gas plant liquids", "natural gas liquids", "dry natural gas", "marketed natural gas", "natural gas", "nat gas"],
+        "broadTerms": ["natural gas", "nat gas"],
+        "subtypeQualifiers": {
+          "natural gas plant liquids": ["natural gas plant liquids", "natural gas liquids"],
+          "dry natural gas": ["dry natural gas", "natural gas dry"],
+          "marketed natural gas": ["marketed natural gas", "natural gas marketed"]
+        },
         "ambiguity": "specific"
       },
       "petroleum": {
         "terms": ["petroleum and other liquids", "liquid fuels", "refined petroleum", "crude oil", "petroleum", "gasoline", "diesel", "crude", "oil"],
+        "broadTerms": ["petroleum and other liquids", "liquid fuels", "petroleum", "oil"],
+        "subtypeQualifiers": {
+          "refined petroleum": ["refined petroleum", "petroleum products refined"],
+          "crude oil": ["crude oil", "crude petroleum"],
+          "gasoline": ["gasoline"],
+          "diesel": ["diesel"]
+        },
         "ambiguity": "specific"
       },
       "electricity": {
@@ -90,8 +104,18 @@
       },
       "renewable": {
         "terms": ["renewable energy", "renewables", "renewable"],
+        "broadTerms": ["renewable energy", "renewables", "renewable"],
+        "subtypeQualifiers": {
+          "noncombustible renewable": ["noncombustible renewable", "renewable noncombustible"],
+          "combustible renewable": ["combustible renewable", "renewable combustible"]
+        },
         "ambiguity": "broad",
         "alternatives": ["wind", "solar", "hydro", "geothermal", "biofuels"]
+      },
+      "fossil fuels": {
+        "terms": ["fossil fuel", "fossil fuels"],
+        "ambiguity": "broad",
+        "alternatives": ["natural gas", "petroleum", "coal"]
       },
       "hydro": {
         "terms": ["hydroelectric", "hydropower", "hydro"],
@@ -113,6 +137,10 @@
         "terms": ["biofuels", "biofuel", "biomass"],
         "ambiguity": "specific"
       },
+      "marine": {
+        "terms": ["tide and wave", "tidal", "wave energy", "marine energy"],
+        "ambiguity": "specific"
+      },
       "total energy": {
         "terms": ["primary energy", "total energy", "all energy", "energy"],
         "ambiguity": "broad",
@@ -128,7 +156,8 @@
       },
       "generation": {
         "terms": ["electricity generation", "power generation", "net generation", "generation", "generated"],
-        "titleOrMeasureRequired": true
+        "titleOrMeasureRequired": true,
+        "titleOrMeasureTerms": ["net generation"]
       },
       "imports": {
         "terms": ["imports", "imported", "import"]
@@ -142,9 +171,17 @@
       "capacity": {
         "terms": ["capacity"]
       },
+      "storage": {
+        "terms": ["underground storage", "working gas", "inventories", "inventory", "stocks", "stock", "storage"],
+        "conceptType": "stock"
+      },
       "prices": {
         "terms": ["prices", "price", "cost"],
         "conceptType": "price"
+      },
+      "expenditures": {
+        "terms": ["expenditures", "expenditure", "spending"],
+        "conceptType": "flow"
       }
     },
     "scopes": {
@@ -178,6 +215,8 @@
       "megawatts": { "terms": ["megawatts", "mw"] }
     },
     "frequencies": {
+      "daily": { "terms": ["daily", "days", "day"] },
+      "weekly": { "terms": ["weekly", "weeks", "week"] },
       "monthly": { "terms": ["monthly", "months", "month"] },
       "quarterly": { "terms": ["quarterly", "quarters", "quarter"] },
       "annual": { "terms": ["annually", "annual", "yearly", "years", "year"] }
@@ -191,6 +230,101 @@
           { "value": "petroleum", "terms": ["pump price", "pump prices", "motor fuel", "retail gasoline", "regular grade", "highway use", "gasoline consumption"] }
         ]
       }
+    },
+    "negationMarkers": ["not", "no", "without", "exclude", "excluding", "except"],
+    "unknownQualifierConnectors": ["from", "using", "via", "source"]
+  },
+  "candidatePresentation": {
+    "activityOrder": ["production", "consumption", "generation", "imports", "exports", "storage", "capacity", "prices", "expenditures", "sales", "reserves", "other"],
+    "activityLabels": {
+      "production": "Production",
+      "consumption": "Consumption",
+      "generation": "Generation",
+      "imports": "Imports",
+      "exports": "Exports",
+      "storage": "Storage",
+      "capacity": "Capacity",
+      "prices": "Prices",
+      "expenditures": "Expenditures",
+      "sales": "Sales",
+      "reserves": "Reserves",
+      "other": "Other measures"
+    },
+    "measureTypes": {
+      "technical": {
+        "label": "Technical measures",
+        "terms": ["conversion factor", "factor for converting", "heat content", "thermal conversion"],
+        "technical": true
+      },
+      "expenditures": {
+        "label": "Expenditures",
+        "activityValues": ["expenditures"],
+        "terms": ["expenditures", "expenditure", "spending"],
+        "defaultActivity": "expenditures"
+      },
+      "price": {
+        "label": "Price",
+        "activityValues": ["prices"],
+        "conceptTypes": ["price"],
+        "defaultActivity": "prices"
+      },
+      "stock": {
+        "label": "Stock or storage level",
+        "activityValues": ["storage", "reserves"],
+        "conceptTypes": ["stock"],
+        "defaultActivity": "storage"
+      },
+      "capacity": {
+        "label": "Capacity",
+        "activityValues": ["capacity"],
+        "terms": ["capacity"],
+        "defaultActivity": "capacity"
+      },
+      "quantity": {
+        "label": "Energy or physical quantity",
+        "activityValues": ["production", "consumption", "generation", "imports", "exports", "sales"]
+      },
+      "other": {
+        "label": "Other measure"
+      }
     }
-  }
+  },
+  "compoundProductRules": [
+    {
+      "carrier": "electricity",
+      "activity": "generation",
+      "preferSpecificProduct": true
+    }
+  ],
+  "officialTotalSelectors": [
+    {
+      "route": "/international",
+      "facets": { "productId": "2", "activityId": "12" },
+      "role": "exact_total"
+    },
+    {
+      "route": "/seriesid",
+      "facet": "series_id",
+      "pattern": "^ELEC\\.GEN\\.[A-Z0-9+]+-[A-Z0-9+]+-99\\.[AMQWD]$",
+      "role": "exact_total"
+    },
+    {
+      "route": "/seds",
+      "facet": "seriesId",
+      "values": ["TETCB", "TETPB", "TEPRB"],
+      "role": "exact_total"
+    },
+    {
+      "route": "/seds",
+      "facet": "seriesId",
+      "pattern": "^[A-Z0-9]{2,}TC[BP]$",
+      "role": "exact_total"
+    },
+    {
+      "route": "/seds",
+      "facet": "seriesId",
+      "pattern": "^[A-Z0-9]{2,}PRB$",
+      "role": "exact_total"
+    }
+  ]
 }

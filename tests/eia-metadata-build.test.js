@@ -53,6 +53,18 @@ const bulkRecords = {
   }
 };
 
+const naturalGasRecord = {
+  series_id: "NG.N9050NM2.M",
+  name: "New Mexico Natural Gas Marketed Production, Monthly",
+  description: "New Mexico Natural Gas Marketed Production",
+  units: "Million Cubic Feet",
+  f: "M",
+  geography: "USA-NM",
+  start: "198901",
+  end: "202604",
+  data: [["202604", 1]]
+};
+
 test("bulk adapters produce deterministic valid records without observations", () => {
   for (const [routeFamily, input] of Object.entries(bulkRecords)) {
     const first = normalizeBulkSeries(input, { routeFamily });
@@ -91,11 +103,35 @@ test("family adapters preserve the required retrieval selectors", () => {
     normalizeBulkSeries({ ...bulkRecords.seds, geography: null }, { routeFamily: "seds" }).geography,
     { name: "Indiana", code: "IN", type: "state" }
   );
+  assert.deepEqual(normalizeBulkSeries(naturalGasRecord, { routeFamily: "domestic" }).selector, {
+    route: "/seriesid",
+    measure: "n9050nm2",
+    frequency: "monthly",
+    facets: { series_id: "NG.N9050NM2.M" }
+  });
+  assert.deepEqual(normalizeBulkSeries(naturalGasRecord, { routeFamily: "domestic" }).geography, {
+    name: "New Mexico",
+    code: "NM",
+    type: "state"
+  });
+  assert.deepEqual(normalizeBulkSeries({
+    ...naturalGasRecord,
+    series_id: "NG.NW2_EPG0_SWO_R48_BCF.W",
+    name: "Weekly Lower 48 States Natural Gas Working Underground Storage, Weekly",
+    geography: null,
+    iso3166: null,
+    f: "W"
+  }, { routeFamily: "domestic" }).geography, {
+    name: "Lower 48 States",
+    code: "USA",
+    type: "national"
+  });
 });
 
 test("facility-level Electricity records are explicitly excluded", () => {
   assert.equal(shouldIncludeBulkSeries({ series_id: "ELEC.PLANT.GEN.123" }, "domestic"), false);
   assert.equal(shouldIncludeBulkSeries(bulkRecords.domestic, "domestic"), true);
+  assert.equal(shouldIncludeBulkSeries(naturalGasRecord, "domestic"), true);
 });
 
 test("plant records normalize to a compact on-demand directory entry", () => {
@@ -175,10 +211,10 @@ test("generated Phase 1B artifacts remain valid staging metadata", async () => {
   assert.deepEqual(validateManifest(manifest), []);
   assert.equal(manifest.refresh_status, "partial");
   assert.deepEqual(manifest.record_counts, {
-    domestic: 86025,
+    domestic: 102046,
     international: 104407,
     seds: 48046,
-    total: 238478
+    total: 254499
   });
   assert.equal(manifest.directory_counts.plants, report.directories[0].records);
   assert.equal(report.valid, true);
@@ -187,7 +223,8 @@ test("generated Phase 1B artifacts remain valid staging metadata", async () => {
 
   for (const artifact of report.artifacts) {
     assert.equal((await stat(new URL(artifact.output, buildRoot))).size, artifact.compressed_bytes);
-    assert.equal(artifact.missing_geographies, 0);
+    if (artifact.output === "natural-gas.jsonl.gz") assert.ok(artifact.missing_geographies > 0);
+    else assert.equal(artifact.missing_geographies, 0);
   }
 
   const plantDirectory = report.directories[0];

@@ -10,7 +10,7 @@ import {
   retrieveLocalCandidates
 } from "../lib/sources/eia/local-retrieval.js";
 
-const INDEX_HASH = "6f2997cd02f66f8543a6dad1a6697344bce5426a2e29c9c08da5e7ac14e5c4a1";
+const INDEX_HASH = "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028";
 
 test("retrieves relevant International candidates from the local Phase 1b index", async () => {
   const result = await retrieveLocalCandidates(interpretQueryWithRules("Brazil annual petroleum consumption"));
@@ -70,18 +70,18 @@ test("nonannual state total-energy requests do not fall into SEDS annual candida
   assert.ok(allCandidates(retrieval).every(candidate => candidate.frequency === "monthly"));
 });
 
-test("weak activity inference retrieves suggestions but keeps them out of primary", async () => {
+test("unresolved qualifiers block retrieval instead of using weak activity inference", async () => {
   const result = await retrieveLocalCandidates(interpretQueryWithRules("California monthly electricity from moon"));
   const retrieval = result.retrievals[0];
 
-  assert.equal(retrieval.concept.activity, "generation");
-  assert.equal(retrieval.concept.activitySource, "weak_inference");
+  assert.equal(retrieval.concept.activity, null);
+  assert.equal(retrieval.concept.activitySource, "missing");
+  assert.deepEqual(retrieval.diagnostics.blockedByUnresolvedQualifiers, ["moon"]);
   assert.equal(retrieval.primaryCandidates.length, 0);
-  assert.ok(retrieval.fallbackCandidates.length > 0);
-  assert.ok(retrieval.fallbackCandidates.every(candidate => candidate.retrieval.reasonCodes.includes("activity_weak_inference_fallback")));
+  assert.equal(retrieval.fallbackCandidates.length, 0);
 });
 
-test("deduplicates canonical selectors and separates weak fallback matches", async () => {
+test("deduplicates canonical selectors and excludes explicit activity mismatches", async () => {
   const intent = fixtureIntent();
   const strong = fixtureRecord("one", "Solar electricity production", "A");
   const duplicate = { ...strong, candidate_id: "duplicate" };
@@ -93,8 +93,8 @@ test("deduplicates canonical selectors and separates weak fallback matches", asy
   const retrieval = result.retrievals[0];
 
   assert.equal(retrieval.primaryCandidates.length, 1);
-  assert.equal(retrieval.fallbackCandidates.length, 1);
-  assert.equal(new Set(allCandidates(retrieval).map(candidate => JSON.stringify(candidate.selector))).size, 2);
+  assert.equal(retrieval.fallbackCandidates.length, 0);
+  assert.equal(new Set(allCandidates(retrieval).map(candidate => JSON.stringify(candidate.selector))).size, 1);
 });
 
 test("stops at the hard 50-candidate limit without padding or ranking", async () => {

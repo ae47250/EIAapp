@@ -495,20 +495,18 @@ test("unqualified aggregates outrank sector-specific and derived records when no
   });
 
   assert.equal(ranked.retrievals[0].rankedCandidates[0].candidate_id, "unqualified-total");
-  assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("exact_verified_aggregate"));
+  assert.ok(ranked.retrievals[0].rankedCandidates[0].ranking.reasonCodes.includes("official_total_label"));
 });
 
-test("weak activity inference ranks all-fuels totals first and reports the warning", async () => {
+test("unresolved qualifiers block ranking instead of inventing an activity", async () => {
   const intent = interpretQueryWithRules("California monthly electricity from moon");
   const retrieval = await retrieveLocalCandidates(intent);
   const ranked = rankLocalCandidates(intent, retrieval);
-  const first = ranked.retrievals[0].rankedCandidates[0];
 
+  assert.deepEqual(ranked.retrievals[0].diagnostics.blockedByUnresolvedQualifiers, ["moon"]);
   assert.equal(ranked.retrievals[0].primaryCandidates.length, 0);
-  assert.equal(first.series_id, "ELEC.GEN.ALL-CA-99.M");
-  assert.ok(first.ranking.reasonCodes.includes("activity_inferred_from_preposition"));
-  assert.ok(first.ranking.reasonCodes.includes("all_sectors_aggregate_priority"));
-  assert.ok(first.ranking.warnings.some(warning => warning.includes("No explicit activity was found")));
+  assert.equal(ranked.retrievals[0].fallbackCandidates.length, 0);
+  assert.equal(ranked.retrievals[0].displayCandidates.length, 0);
 });
 
 test("the Phase 3 output shape remains compatible with the ranker", async () => {
@@ -615,7 +613,7 @@ test("an activity contradiction fails the activity floor even when query words a
       frequency: { value: "monthly", requested: "monthly", mode: "exact" },
       primaryCandidates: [buildCandidate({
         candidate_id: "mixed-generation-consumption",
-        title: "Electricity generation and consumption, California, Monthly",
+        title: "Electricity net generation and consumption, California, Monthly",
         geography: { name: "California", code: "CA", type: "state" },
         frequency: "monthly",
         selector: { route: "/seriesid", measure: "value", frequency: "monthly", facets: { series_id: "ELEC.CA.MIXED.M" } }
@@ -804,10 +802,55 @@ test("parses compact EIA year-month coverage and removes duplicate selectors det
   assert.ok(retrieval.excludedCandidates.some(item => item.reasonCodes.includes("duplicate_canonical_selector")));
 });
 
+test("accepts official EIA coverage dates for every supported frequency", () => {
+  const cases = [
+    { frequency: "annual", dateStart: "2010", dateEnd: "2026", requestedPeriod: "2024" },
+    { frequency: "quarterly", dateStart: "2010Q1", dateEnd: "2026Q2", requestedPeriod: "2024Q4" },
+    { frequency: "monthly", dateStart: "201001", dateEnd: "202606", requestedPeriod: "202405" },
+    { frequency: "weekly", dateStart: "20100101", dateEnd: "20260710", requestedPeriod: "2026-07-10" },
+    { frequency: "daily", dateStart: "19970107", dateEnd: "20260713", requestedPeriod: "20260713" }
+  ];
+
+  for (const item of cases) {
+    const intent = { ...interpretQueryWithRules(`United States ${item.frequency} natural gas storage`), requestedPeriod: item.requestedPeriod };
+    const candidate = buildCandidate({
+      candidate_id: `coverage-${item.frequency}`,
+      title: `Natural gas storage, United States, ${item.frequency}`,
+      description: "Natural gas working storage.",
+      geography: { name: "United States", code: "USA", type: "national" },
+      product_or_scope: "natural gas",
+      activity: "storage",
+      concept_type: "stock",
+      frequency: item.frequency,
+      date_start: item.dateStart,
+      date_end: item.dateEnd,
+      selector: { route: "/seriesid", measure: "storage", frequency: item.frequency, facets: { series_id: `NG.STORAGE.${item.frequency}` } }
+    });
+    const ranked = rankLocalCandidates(intent, {
+      schemaVersion: "1.0.0",
+      routeFamily: "domestic",
+      retrievals: [buildRetrieval({
+        routeFamily: "domestic",
+        geography: candidate.geography,
+        concept: { product: "natural gas", productBreadth: "specific", productAlternatives: [], activity: "storage" },
+        frequency: { value: item.frequency, requested: item.frequency, mode: "exact" },
+        primaryCandidates: [candidate]
+      })],
+      diagnostics: {}
+    });
+    const result = ranked.retrievals[0].rankedCandidates[0];
+
+    assert.ok(result, `${item.frequency} candidate should remain rankable`);
+    assert.ok(result.ranking.reasonCodes.includes("availability_present"));
+    assert.ok(result.ranking.reasonCodes.includes("requested_date_covered"));
+    assert.ok(!result.ranking.warnings.includes("date_end_missing"));
+  }
+});
+
 function buildRetrieval(overrides) {
   return {
     geography: { name: "Unknown", code: "XX", type: "country" },
-    concept: { product: "electricity", productBreadth: "specific", productAlternatives: [], activity: "generation" },
+    concept: { product: null, productBreadth: "specific", productAlternatives: [], activity: null },
     frequency: { value: "annual", requested: "annual", mode: "exact" },
     routeFamily: "international",
     primaryCandidates: [],

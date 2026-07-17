@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { buildStructuredIntent } from "../lib/sources/eia/intent-routing.js";
+import { buildStructuredIntent, resolveApprovedGeography } from "../lib/sources/eia/intent-routing.js";
 import { interpretQueryWithRules } from "../lib/sources/eia/interpret-query.js";
 
 test("routes a country request to International with validated monthly frequency", () => {
@@ -35,14 +35,15 @@ test("routes state electricity requests to Domestic EIA", () => {
   assert.equal(intent.frequency, "monthly");
 });
 
-test("records weak activity inference without clearing missing-activity ambiguity", () => {
+test("blocks an unresolved source qualifier instead of inferring an activity", () => {
   const intent = interpretQueryWithRules("California monthly electricity from moon");
 
   assert.equal(intent.route.family, "domestic");
   assert.equal(intent.product, "electricity");
   assert.equal(intent.activity, null);
-  assert.equal(intent.structuredIntent.activityInference.activity, "generation");
-  assert.equal(intent.structuredIntent.activityInference.sourceTerm, "from");
+  assert.equal(intent.structuredIntent.activityInference, null);
+  assert.deepEqual(intent.unknownQualifiers.map(item => item.value), ["moon"]);
+  assert.equal(intent.blockingClarification, true);
   assert.ok(intent.ambiguity.reasons.includes("activity_or_scope_missing"));
   assert.ok(intent.missingFields.includes("activity"));
 });
@@ -65,9 +66,25 @@ test("preserves geography and concept mention order", () => {
     "product:petroleum",
     "activity:consumption"
   ]);
+  assert.deepEqual(intent.conceptPairs.map(pair => `${pair.product}:${pair.activity}`), [
+    "natural gas:production",
+    "petroleum:consumption"
+  ]);
   assert.equal(intent.route.family, "international");
   assert.equal(intent.ambiguity.status, "ambiguous");
   assert.ok(intent.ambiguity.reasons.includes("multiple_geographies"));
+});
+
+test("routes mixed U.S. and foreign-country requests through International", () => {
+  const intent = interpretQueryWithRules("United States then Canada annual natural gas production");
+
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["USA", "CAN"]);
+  assert.equal(intent.route.family, "international");
+});
+
+test("canonicalizes U.S. aliases to the governed national geography", () => {
+  assert.equal(resolveApprovedGeography("US").code, "USA");
+  assert.equal(resolveApprovedGeography("United States").code, "USA");
 });
 
 test("routes nonannual U.S. state requests to Domestic before SEDS fallback", () => {
@@ -110,4 +127,27 @@ test("accepts an explicitly uppercase local metadata country code", () => {
 
   assert.equal(intent.structuredIntent.geography.code, "BRA");
   assert.equal(intent.route.family, "international");
+});
+
+test("preserves sector, ordered repeated activities, explicit frequency, and negation", () => {
+  const sector = interpretQueryWithRules("New York monthly residential natural gas consumption");
+  const repeated = interpretQueryWithRules("Germany renewable energy production and consumption");
+  const negated = interpretQueryWithRules("plz shwo montly nat gas prodction in Texas, not prices");
+
+  assert.equal(sector.sector, "residential");
+  assert.equal(sector.frequencyExplicit, true);
+  assert.equal(sector.requestedFrequency, "monthly");
+  assert.deepEqual(repeated.conceptPairs.map(pair => pair.activity), ["production", "consumption"]);
+  assert.deepEqual(negated.exclusions.map(item => `${item.type}:${item.value}`), ["activity:prices"]);
+  assert.deepEqual(negated.conceptPairs.map(pair => pair.activity), ["production"]);
+});
+
+test("preserves a requested unsupported frequency instead of silently replacing it", () => {
+  const intent = buildStructuredIntent({}, "Japan weekly solar electricity generation");
+
+  assert.equal(intent.frequency, "weekly");
+  assert.equal(intent.requestedFrequency, "weekly");
+  assert.equal(intent.frequencyExplicit, true);
+  assert.equal(intent.validation.frequency, "unsupported");
+  assert.equal(intent.validation.frequencySupportedByRoute, false);
 });

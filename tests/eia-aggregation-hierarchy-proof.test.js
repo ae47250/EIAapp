@@ -89,10 +89,10 @@ test("the complete Phase 1B cache has no verified aggregation hierarchy", async 
   const proof = await auditAggregationHierarchy();
 
   assert.equal(proof.audit_valid, true);
-  assert.equal(proof.metadata.scanned_records, 238478);
+  assert.equal(proof.metadata.scanned_records, 254499);
   assert.deepEqual(
     Object.fromEntries(Object.entries(proof.evidence.family_artifacts).map(([family, value]) => [family, value.record_count])),
-    { domestic: 86025, international: 104407, seds: 48046 }
+    { domestic: 102046, international: 104407, seds: 48046 }
   );
   assert.equal(proof.status, "blocked");
   assert.equal(proof.hierarchy_ready, false);

@@ -10,7 +10,8 @@ const fixture = JSON.parse(readFileSync(new URL("./fixtures/eia-search.json", im
 const originalEnvironment = {
   EIA_API_KEY: process.env.EIA_API_KEY,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED
+  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED,
+  EIA_CANDIDATE_PIPELINE: process.env.EIA_CANDIDATE_PIPELINE
 };
 const originalFetch = globalThis.fetch;
 let exactSeriesRequests = 0;
@@ -21,6 +22,7 @@ let failNextExactRequest = false;
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
   process.env.LOGIN_REQUIRED = "off";
+  process.env.EIA_CANDIDATE_PIPELINE = "off";
   delete process.env.OPENAI_API_KEY;
   globalThis.fetch = mockEiaFetch;
 });

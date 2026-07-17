@@ -2,49 +2,56 @@
   "schema_version": "1.0.0",
   "source": "EIA",
   "api_version": "2.1.13",
-  "checked_at": "2026-07-16T11:51:42.502Z",
-  "content_updated_at": "2026-07-16T11:51:42.502Z",
-  "content_hash": "6f2997cd02f66f8543a6dad1a6697344bce5426a2e29c9c08da5e7ac14e5c4a1",
+  "checked_at": "2026-07-17T01:06:49.916Z",
+  "content_updated_at": "2026-07-17T01:06:49.916Z",
+  "content_hash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
   "routes_checked": [
     "/electricity/retail-sales",
     "/international",
-    "/seds"
+    "/seds",
+    "/natural-gas/prod/sum",
+    "/natural-gas/cons/sum",
+    "/natural-gas/stor/wkly"
   ],
   "routes_succeeded": [
     "/electricity/retail-sales",
     "/international",
-    "/seds"
+    "/seds",
+    "/natural-gas/prod/sum",
+    "/natural-gas/cons/sum",
+    "/natural-gas/stor/wkly"
   ],
   "routes_failed": [],
   "refresh_status": "partial",
   "record_counts": {
-    "domestic": 86025,
+    "domestic": 102046,
     "international": 104407,
     "seds": 48046,
-    "total": 238478
+    "total": 254499
   },
   "directory_counts": {
     "plants": 15539
   },
   "change_counts": {
-    "added": 238478,
+    "added": 254499,
     "removed": 0,
     "changed": 0
   },
   "diff_summary": {
-    "routes": 3,
-    "facets": 7,
-    "measures": 20,
-    "frequencies": 7,
-    "units": 58,
-    "geographies": 369,
-    "coverage": 3
+    "routes": 6,
+    "facets": 8,
+    "measures": 13234,
+    "frequencies": 11,
+    "units": 78,
+    "geographies": 483,
+    "coverage": 4
   },
   "rollback_snapshot_reference": null,
   "update_schedule_state": "not_configured",
   "warnings": [
     "Phase 1B staging cache only; it is not active production metadata.",
-    "Domestic coverage is Electricity-only; full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
+    "Domestic coverage includes Electricity and Natural Gas; other Domestic product families remain outside this partial cache.",
+    "Full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
     "International dataFlagId is treated as an observation annotation, not candidate identity.",
     "Artifacts are gzip-compressed because uncompressed normalized files are not GitHub-safe."
   ],

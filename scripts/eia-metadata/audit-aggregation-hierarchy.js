@@ -23,16 +23,23 @@ const TRUSTED_PROVENANCE = new Set([
 export async function auditAggregationHierarchy(options = {}) {
   const buildDir = resolve(options.buildDir || DEFAULT_BUILD_DIR);
   const schemaDir = resolve(options.schemaDir || DEFAULT_SCHEMA_DIR);
-  const [manifest, routes, seriesSchema, routeSchema] = await Promise.all([
+  const [manifest, validation, routes, seriesSchema, routeSchema] = await Promise.all([
     readJson(join(buildDir, "manifest.json")),
+    readJson(join(buildDir, "validation-report.json")),
     readJson(join(buildDir, "routes.json")),
     readJson(join(schemaDir, "series.schema.json")),
     readJson(join(schemaDir, "route.schema.json"))
   ]);
 
   const artifactResults = {};
-  for (const [family, filename] of Object.entries(FAMILY_FILES)) {
-    artifactResults[family] = await scanCompressedSeries(join(buildDir, filename));
+  for (const [family, defaultFilename] of Object.entries(FAMILY_FILES)) {
+    const filenames = (validation.artifacts || [])
+      .filter(artifact => artifact.family === family)
+      .map(artifact => artifact.output);
+    const inspections = await Promise.all(
+      (filenames.length > 0 ? filenames : [defaultFilename]).map(filename => scanCompressedSeries(join(buildDir, filename)))
+    );
+    artifactResults[family] = combineInspections(inspections);
   }
 
   const combined = combineInspections(Object.values(artifactResults));

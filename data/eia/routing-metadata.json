@@ -2,9 +2,10 @@
   "schemaVersion": "1.0.0",
   "source": {
     "build": "phase1b",
-    "manifestContentHash": "6f2997cd02f66f8543a6dad1a6697344bce5426a2e29c9c08da5e7ac14e5c4a1",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
     "generatedFrom": [
       "domestic.jsonl.gz",
+      "natural-gas.jsonl.gz",
       "international.jsonl.gz",
       "seds.jsonl.gz",
       "routes.json"
@@ -23,6 +24,32 @@
         "quarterly"
       ],
       "defaultFrequency": "monthly"
+    },
+    {
+      "family": "domestic",
+      "route": "/natural-gas/prod/sum",
+      "frequencies": [
+        "annual",
+        "monthly"
+      ],
+      "defaultFrequency": "monthly"
+    },
+    {
+      "family": "domestic",
+      "route": "/natural-gas/cons/sum",
+      "frequencies": [
+        "annual",
+        "monthly"
+      ],
+      "defaultFrequency": "monthly"
+    },
+    {
+      "family": "domestic",
+      "route": "/natural-gas/stor/wkly",
+      "frequencies": [
+        "weekly"
+      ],
+      "defaultFrequency": "weekly"
     },
     {
       "family": "international",
@@ -2381,6 +2408,7 @@
       "code": "USA",
       "type": "national",
       "routeFamilies": [
+        "domestic",
         "international"
       ]
     },

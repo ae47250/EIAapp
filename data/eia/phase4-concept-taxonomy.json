@@ -1,9 +1,9 @@
 {
-  "version": "phase4-concepts-v1",
+  "version": "phase4-concepts-v2",
   "source": {
     "metadataBuild": "phase1b",
-    "manifestContentHash": "6f2997cd02f66f8543a6dad1a6697344bce5426a2e29c9c08da5e7ac14e5c4a1",
-    "controlledVocabulary": "phase4-routing-vocabulary-v1",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "controlledVocabulary": "phase4-routing-vocabulary-v4",
     "refreshPolicy": "Review this taxonomy whenever the local EIA metadata cache or routing vocabulary is intentionally rebuilt. Relationships are versioned and are never changed by a live query."
   },
   "productRelationships": {
@@ -12,7 +12,13 @@
       "solar": 0.9,
       "hydro": 0.9,
       "geothermal": 0.9,
-      "biofuels": 0.9
+      "biofuels": 0.9,
+      "marine": 0.9
+    },
+    "fossil fuels": {
+      "natural gas": 0.9,
+      "petroleum": 0.9,
+      "coal": 0.9
     },
     "total energy": {
       "natural gas": 0.75,
@@ -23,17 +29,7 @@
       "renewable": 0.75
     }
   },
-  "activityRelationships": {
-    "production": {
-      "generation": 0.9
-    },
-    "generation": {
-      "production": 0.9
-    },
-    "consumption": {
-      "sales": 0.7
-    }
-  },
+  "activityRelationships": {},
   "activityImpliedProducts": {
     "generation": ["electricity"],
     "capacity": ["electricity"]
@@ -81,6 +77,15 @@
       "candidateFrequency": "annual",
       "tier": "B",
       "reasonCode": "seds_annual_state_fallback"
+    },
+    {
+      "fromRoute": "international",
+      "toRoute": "international",
+      "geographyType": "country",
+      "requestedFrequencies": ["monthly", "quarterly"],
+      "candidateFrequency": "annual",
+      "tier": "B",
+      "reasonCode": "international_annual_frequency_fallback"
     }
   ]
 }

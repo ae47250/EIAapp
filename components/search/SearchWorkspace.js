@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 
 import { downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
+import CandidateGroups from "./CandidateGroups.js";
 import MatchingVariables from "./MatchingVariables.js";
 import RecentObservations from "./RecentObservations.js";
 import SearchForm from "./SearchForm.js";
@@ -35,12 +36,6 @@ export default function SearchWorkspace({ showLogout }) {
     try {
       const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
       const intent = interpretation.intent;
-      const missingFields = Array.isArray(intent.missingFields) ? intent.missingFields : [];
-      const needsTopicClarification = missingFields.some(field => field === "product" || field === "activity");
-      if (intent.needsClarification && needsTopicClarification) {
-        setStatus({ error: true, message: intent.clarificationMessage || "Please clarify the country, energy product, and activity." });
-        return;
-      }
       setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
       const params = appendIntentParams(new URLSearchParams({ q: originalQuery }), intent);
       const nextData = await fetchJson(`/api/search-eia?${params}`);
@@ -117,7 +112,11 @@ export default function SearchWorkspace({ showLogout }) {
   function hideEmptyVariable(variable) {
     setData(currentData => currentData ? {
       ...currentData,
-      variables: (currentData.variables || []).filter(candidate => !sameSeries(candidate, variable))
+      variables: (currentData.variables || []).filter(candidate => !sameSeries(candidate, variable)),
+      candidateGroups: (currentData.candidateGroups || []).map(group => ({
+        ...group,
+        candidates: group.candidates.filter(candidate => !sameSeries(candidate, variable))
+      })).filter(group => group.candidates.length > 0)
     } : currentData);
     setStatus({ message: "An EIA series with no observations was hidden." });
   }
@@ -126,6 +125,22 @@ export default function SearchWorkspace({ showLogout }) {
     if (nextData.needsCountry || nextData.needsClarification) {
       setData(null);
       setStatus({ error: true, message: nextData.userMessage || "Please include a country name." });
+      return;
+    }
+    if (nextData.mode === "candidate-selection") {
+      if (!nextData.selectedSeries && !(nextData.variables || []).length) {
+        setData(null);
+        setStatus({ error: true, message: nextData.userMessage || "No matching EIA series was found." });
+        return;
+      }
+      if (nextData.selectedSeries?.points?.length) {
+        seriesCache.current.set(seriesCacheKey(nextData.selectedSeries), nextData.selectedSeries);
+      }
+      const interpreter = nextData.intent?.interpreter
+        ? formatInterpreter(nextData.intent, nextData.query)
+        : "Search complete.";
+      setData(nextData);
+      setStatus({ message: `${interpreter} ${nextData.note || ""}`.trim() });
       return;
     }
     if (!nextData.selectedSeries?.points?.length) {
@@ -144,6 +159,8 @@ export default function SearchWorkspace({ showLogout }) {
 
   const series = data?.selectedSeries;
   const variables = data?.variables || [];
+  const candidateGroups = data?.candidateGroups || [];
+  const candidateMode = data?.mode === "candidate-selection";
 
   return (
     <main className="page">
@@ -177,7 +194,17 @@ export default function SearchWorkspace({ showLogout }) {
 
       <SearchStatus status={status} />
       {series ? <RecentObservations series={series} /> : null}
-      {series ? (
+      {candidateMode && candidateGroups.length ? (
+        <section className={`results-pair${series ? "" : " single-result"}`}>
+          <CandidateGroups
+            groups={candidateGroups}
+            warnings={data.userWarnings || []}
+            onSelect={selectSeries}
+            onDownload={downloadSeries}
+          />
+          {series ? <SelectedSeries series={series} source={data.source} /> : null}
+        </section>
+      ) : series ? (
         <section className={`results-pair${variables.length ? "" : " single-result"}`}>
           <MatchingVariables variables={variables} onSelect={selectSeries} onDownload={downloadSeries} />
           <SelectedSeries series={series} source={data.source} />
@@ -211,6 +238,14 @@ async function fetchJson(url) {
 }
 
 function buildSeriesUrl(variable, existingData) {
+  if (variable.candidateId) {
+    const params = new URLSearchParams({
+      q: String(existingData.intent?.originalQuery ?? existingData.query ?? ""),
+      candidateId: String(variable.candidateId)
+    });
+    appendIntentParams(params, existingData.intent);
+    return `/api/search-eia?${params}`;
+  }
   const params = new URLSearchParams({
     q: String(existingData.intent?.originalQuery ?? existingData.query ?? "brazil energy production"),
     country: String(variable.countryCode || existingData.country?.code || ""),
@@ -250,10 +285,12 @@ function formatInterpreter(intent, fallbackQuery) {
 }
 
 function seriesCacheKey(series) {
+  if (series?.candidateId) return `candidate:${series.candidateId}`;
   return [series?.countryCode, series?.productId, series?.activityId, series?.unitFacet, series?.frequency || "annual"].join("|");
 }
 
 function sameSeries(series, variable) {
+  if (series?.candidateId || variable?.candidateId) return Boolean(series?.candidateId) && series.candidateId === variable?.candidateId;
   return series &&
     series.countryCode === variable.countryCode &&
     series.productId === variable.productId &&

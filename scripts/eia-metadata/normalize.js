@@ -88,7 +88,9 @@ export function normalizeSeriesCandidate(input) {
 export function shouldIncludeBulkSeries(record, routeFamily) {
   const seriesId = String(record?.series_id || "");
   if (!seriesId) return false;
-  if (routeFamily === "domestic") return seriesId.startsWith("ELEC.") && !seriesId.startsWith("ELEC.PLANT.");
+  if (routeFamily === "domestic") {
+    return seriesId.startsWith("NG.") || seriesId.startsWith("ELEC.") && !seriesId.startsWith("ELEC.PLANT.");
+  }
   if (routeFamily === "international") return seriesId.startsWith("INTL.");
   if (routeFamily === "seds") return seriesId.startsWith("SEDS.");
   return false;
@@ -245,10 +247,10 @@ function buildBulkGeography(record, routeFamily) {
     record.iso3166 ||
     (routeFamily === "seds" ? /^SEDS\.[^.]+\.([^.]+)\./.exec(String(record.series_id || ""))?.[1] : null)
   );
-  if (!sourceCode) return null;
+  if (!sourceCode) return routeFamily === "domestic" ? inferDomesticNationalGeography(record) : null;
 
   if (routeFamily === "domestic") {
-    const code = sourceCode === "USA" ? "US" : sourceCode.replace(/^USA-/, "");
+    const code = sourceCode === "USA" ? "USA" : sourceCode.replace(/^USA-/, "");
     return {
       name: sourceCode === "USA" ? "United States" : extractDomesticGeographyName(record.name, code),
       code,
@@ -266,6 +268,8 @@ function buildBulkGeography(record, routeFamily) {
 }
 
 function extractDomesticGeographyName(name, fallback) {
+  const naturalGasPrefix = /^(.+?) Natural Gas\b/i.exec(String(name || ""));
+  if (naturalGasPrefix?.[1]) return naturalGasPrefix[1].trim();
   const parts = String(name || "").split(" : ").map(part => part.trim()).filter(Boolean);
   const ignored = /^(annual|quarterly|monthly|weekly|daily|all sectors|commercial|industrial|residential|transportation|electric power)$/i;
   for (let index = parts.length - 1; index >= 1; index -= 1) {
@@ -285,10 +289,20 @@ function extractTrailingGeographyName(name) {
 function inferConceptType(name) {
   const normalized = String(name || "").toLowerCase();
   if (normalized.includes("price") || normalized.includes("cost")) return "price";
-  if (normalized.includes("stock") || normalized.includes("inventory")) return "stock";
+  if (normalized.includes("stock") || normalized.includes("inventory") || normalized.includes("storage")) return "stock";
   if (normalized.includes("share") || normalized.includes("percent")) return "share";
   if (normalized.includes("rate")) return "rate";
   return "other";
+}
+
+function inferDomesticNationalGeography(record) {
+  const seriesId = String(record?.series_id || "");
+  const name = String(record?.name || "");
+  if (/_R48_/.test(seriesId) && /Lower 48 States/i.test(name)) {
+    return { name: "Lower 48 States", code: "USA", type: "national" };
+  }
+  if (/^U\.S\./i.test(name)) return { name: "United States", code: "USA", type: "national" };
+  return null;
 }
 
 function compactSeriesRecord(record) {

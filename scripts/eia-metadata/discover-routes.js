@@ -8,8 +8,21 @@ export const PHASE1A_FIXTURES = Object.freeze([
   new URL("../../tests/fixtures/eia/metadata/seds-route.json", import.meta.url)
 ]);
 
+export const PHASE4A_DOMESTIC_FIXTURES = Object.freeze([
+  new URL("../../tests/fixtures/eia/metadata/natural-gas-production-route.json", import.meta.url),
+  new URL("../../tests/fixtures/eia/metadata/natural-gas-consumption-route.json", import.meta.url),
+  new URL("../../tests/fixtures/eia/metadata/natural-gas-storage-route.json", import.meta.url)
+]);
+
 export async function loadPhase1aFixtures() {
   return Promise.all(PHASE1A_FIXTURES.map(async url => {
+    const fixture = JSON.parse(await readFile(url, "utf8"));
+    return { fixture, fixturePath: fileURLToPath(url) };
+  }));
+}
+
+export async function loadPhase4aDomesticFixtures() {
+  return Promise.all(PHASE4A_DOMESTIC_FIXTURES.map(async url => {
     const fixture = JSON.parse(await readFile(url, "utf8"));
     return { fixture, fixturePath: fileURLToPath(url) };
   }));

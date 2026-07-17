@@ -4,7 +4,8 @@ import { test } from "node:test";
 
 import {
   buildCapabilityReport,
-  loadPhase1aFixtures
+  loadPhase1aFixtures,
+  loadPhase4aDomesticFixtures
 } from "../scripts/eia-metadata/discover-routes.js";
 import {
   buildCandidateId,
@@ -59,6 +60,20 @@ test("official route fixtures normalize and validate deterministically", async (
   for (const record of result.route_records) {
     assert.deepEqual(validateRouteRecord(record), []);
     assert.match(record.metadata_hash, /^[a-f0-9]{64}$/);
+  }
+});
+
+test("Phase 4A natural-gas routes are official, key-free, and locally valid", async () => {
+  const entries = await loadPhase4aDomesticFixtures();
+  assert.deepEqual(entries.map(entry => entry.fixture.route), [
+    "/natural-gas/prod/sum",
+    "/natural-gas/cons/sum",
+    "/natural-gas/stor/wkly"
+  ]);
+  for (const { fixture } of entries) {
+    assert.equal(new URL(fixture.source_url).search, "");
+    assert.equal(/api_key/i.test(JSON.stringify(fixture)), false);
+    assert.deepEqual(validateRouteRecord(normalizeRouteFixture(fixture)), []);
   }
 });
 

@@ -56,7 +56,7 @@ test("validated high-confidence AI output uses only supported categories", () =>
   assert.equal(intent.needsClarification, false);
 });
 
-test("unsupported AI values are discarded and an invented country code is never accepted", () => {
+test("unsupported AI product and country are discarded while frequency is preserved", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "Zed energy consumption",
     countryName: "Zedland",
@@ -71,9 +71,32 @@ test("unsupported AI values are discarded and an invented country code is never 
   assert.equal(intent.countryCode, null);
   assert.equal(intent.product, "total energy");
   assert.equal(intent.activity, "consumption");
-  assert.equal(intent.frequency, "annual");
+  assert.equal(intent.frequency, "weekly");
   assert.equal(intent.needsClarification, true);
   assert.deepEqual(intent.missingFields, ["country"]);
+});
+
+test("validated AI arrays preserve order and prevent negated raw text from overriding intent", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Texas monthly natural gas production",
+    confidence: 0.96,
+    geographies: [{ value: "TX", confidence: 0.98 }],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.96 }],
+    exclusions: [{ type: "activity", value: "prices", confidence: 0.98 }],
+    unknownQualifiers: [],
+    fields: {
+      country: { rawValue: "Texas", value: "TX", confidence: 0.98 },
+      product: { rawValue: "nat gas", value: "natural gas", confidence: 0.96 },
+      activity: { rawValue: "prodction", value: "production", confidence: 0.96 },
+      sector: { rawValue: null, value: null, confidence: 0.96 },
+      frequency: { rawValue: "montly", value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, "plz shwo montly nat gas prodction in Texas, not prices");
+
+  assert.deepEqual(intent.conceptPairs.map(pair => pair.activity), ["production"]);
+  assert.deepEqual(intent.exclusions.map(item => `${item.type}:${item.value}`), ["activity:prices"]);
+  assert.ok(!intent.structuredIntent.mentions.concepts.some(mention => mention.value === "prices"));
+  assert.equal(intent.requestedFrequency, "monthly");
 });
 
 test("low-confidence AI output is rejected in favor of deterministic rules", () => {
@@ -239,6 +262,46 @@ test("AI receives both exact raw and lightly cleaned query forms", async () => {
     assert.equal(intent.fallback.used, false);
     assert.match(requestBody.input, /Raw query: "   montly  nat gas prodction usa   "/);
     assert.match(requestBody.input, /Lightly cleaned query: "montly nat gas prodction usa"/);
+    assert.doesNotMatch(requestBody.input, /Known geographies:/);
+    assert.doesNotMatch(requestBody.input, /Afghanistan=AFG/);
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalKey === undefined) delete process.env.OPENAI_API_KEY;
+    else process.env.OPENAI_API_KEY = originalKey;
+  }
+});
+
+test("raw-only evaluation omits the lightly cleaned query without changing local validation", async () => {
+  const originalKey = process.env.OPENAI_API_KEY;
+  const originalFetch = globalThis.fetch;
+  let requestBody;
+  process.env.OPENAI_API_KEY = "test-openai-key";
+  globalThis.fetch = async (_url, options) => {
+    requestBody = JSON.parse(options.body);
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        output_text: JSON.stringify({
+          correctedQuery: "California monthly electricity generation",
+          confidence: 0.96,
+          fields: {
+            country: { value: "CA", confidence: 0.98 },
+            product: { value: "electricity", confidence: 0.98 },
+            activity: { value: "generation", confidence: 0.98 },
+            frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+          }
+        })
+      })
+    };
+  };
+
+  try {
+    const intent = await interpretQuery("  California   monthly electricity generation  ", [], { includeCleanedQueryInPrompt: false });
+    assert.equal(intent.countryCode, "CA");
+    assert.equal(intent.route.family, "domestic");
+    assert.match(requestBody.input, /Interpret the exact raw query supplied below/);
+    assert.doesNotMatch(requestBody.input, /Lightly cleaned query:/);
   } finally {
     globalThis.fetch = originalFetch;
     if (originalKey === undefined) delete process.env.OPENAI_API_KEY;
@@ -318,6 +381,266 @@ test("AI-corrected concepts control routing instead of misspelled raw mentions",
   assert.equal(intent.product, "electricity");
   assert.equal(intent.activity, "generation");
   assert.equal(intent.route.family, "domestic");
+});
+
+test("AI cannot replace an explicit local geography or infer an unmentioned sector", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Iowa monthly wind net generation",
+    confidence: 0.98,
+    geographies: [{ value: "USA", confidence: 0.98 }],
+    conceptPairs: [
+      { order: 0, product: "renewable", activity: "generation", confidence: 0.98 },
+      { order: 1, product: "renewable", activity: "generation", confidence: 0.98 }
+    ],
+    fields: {
+      country: { value: "USA", confidence: 0.98 },
+      product: { value: "renewable", confidence: 0.98 },
+      activity: { value: "generation", confidence: 0.98 },
+      sector: { value: "electric power", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, "Iowa monthly wind net generation");
+
+  assert.equal(intent.countryCode, "IA");
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["IA"]);
+  assert.equal(intent.fields.country.validation, "fallback");
+  assert.equal(intent.product, "wind");
+  assert.equal(intent.fields.product.validation, "fallback");
+  assert.deepEqual(intent.validatedConceptPairs.map(pair => [pair.product, pair.activity]), [["wind", "generation"]]);
+  assert.equal(intent.sector, null);
+  assert.equal(intent.fields.sector.validation, "rejected");
+});
+
+test("an omitted optional sector does not trigger a clarification request", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "California monthly electricity generation",
+    confidence: 0.96,
+    fields: {
+      country: { value: "CA", confidence: 0.98 },
+      product: { value: "electricity", confidence: 0.98 },
+      activity: { value: "generation", confidence: 0.98 },
+      sector: { value: null, confidence: 0.9, ambiguityReason: "No sector was specified." },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, "California monthly electricity generation");
+
+  assert.equal(intent.sector, null);
+  assert.equal(intent.fields.sector.validation, "missing");
+  assert.equal(intent.needsClarification, false);
+  assert.equal(intent.clarificationMessage, null);
+});
+
+test("recognized broad products and ordered activities repair AI ambiguity without expansion", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Germany renewable energy production and consumption",
+    confidence: 0.91,
+    conceptPairs: [
+      { order: 0, product: null, activity: "consumption", confidence: 0.9 }
+    ],
+    fields: {
+      country: { value: "DEU", confidence: 0.98 },
+      product: {
+        value: null,
+        confidence: 0.6,
+        ambiguityReason: "Renewable energy contains several technologies.",
+        alternatives: ["wind", "solar", "hydro"]
+      },
+      activity: { value: null, confidence: 0.7, ambiguityReason: "Two activities were requested." },
+      frequency: { value: "annual", explicit: false, confidence: 0.9 }
+    }
+  }, "Germany renewable energy production and consumption");
+
+  assert.equal(intent.product, "renewable");
+  assert.equal(intent.fields.product.validation, "fallback");
+  assert.deepEqual(intent.validatedConceptPairs.map(pair => [pair.product, pair.activity]), [
+    ["renewable", "production"],
+    ["renewable", "consumption"]
+  ]);
+});
+
+test("an explicit query frequency cannot be weakened or changed by AI", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Brazil annual petroleum consumption",
+    confidence: 0.96,
+    fields: {
+      country: { value: "BRA", confidence: 0.98 },
+      product: { value: "petroleum", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: false, confidence: 0.98 }
+    }
+  }, "Brazil annual petroleum consumption");
+
+  assert.equal(intent.frequency, "annual");
+  assert.equal(intent.requestedFrequency, "annual");
+  assert.equal(intent.frequencyExplicit, true);
+  assert.equal(intent.fields.frequency.validation, "fallback");
+});
+
+test("compound carrier wording produces one validated concept pair", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Japan monthly solar electricity generation",
+    confidence: 0.97,
+    conceptPairs: [
+      { order: 0, product: "solar", activity: "generation", confidence: 0.97 },
+      { order: 1, product: "electricity", activity: "generation", confidence: 0.97 }
+    ],
+    fields: {
+      country: { value: "JPN", confidence: 0.98 },
+      product: { value: "solar", confidence: 0.98 },
+      activity: { value: "generation", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, "Japan monthly solar electricity generation");
+
+  assert.deepEqual(intent.validatedConceptPairs.map(pair => [pair.product, pair.activity]), [["solar", "generation"]]);
+  assert.deepEqual(intent.structuredIntent.conceptPairs.map(pair => [pair.product, pair.activity]), [["solar", "generation"]]);
+  assert.equal(intent.structuredIntent.product, "solar");
+});
+
+test("AI U.S. aliases cannot create a second noncanonical national geography", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Texas and United States monthly natural gas production",
+    confidence: 0.98,
+    geographies: [
+      { value: "Texas", confidence: 0.98 },
+      { value: "US", confidence: 0.98 }
+    ],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: null, confidence: 0.98 },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, "Texas and United States monthly natural gas production", [
+    { name: "United States", code: "US" },
+    { name: "United States", code: "USA" }
+  ]);
+
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["TX", "USA"]);
+});
+
+test("specific product context resolves AI ambiguity without broadening", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "United States weekly working gas in underground storage",
+    confidence: 0.95,
+    fields: {
+      country: { value: "USA", confidence: 0.98 },
+      product: {
+        value: null,
+        confidence: 0.7,
+        ambiguityReason: "Gas could refer to more than one product.",
+        alternatives: ["natural gas", "petroleum"]
+      },
+      activity: { value: "storage", confidence: 0.98 },
+      frequency: { value: "weekly", explicit: true, confidence: 0.98 }
+    }
+  }, "United States weekly working gas in underground storage");
+
+  assert.equal(intent.product, "natural gas");
+  assert.equal(intent.fields.product.validation, "fallback");
+  assert.equal(intent.fields.product.breadth, "specific");
+  assert.equal(intent.needsClarification, false);
+});
+
+test("recognized query phrases cannot become unknown qualifiers", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "New Mexico monthly marketed natural gas production",
+    confidence: 0.96,
+    fields: {
+      country: { value: "NM", confidence: 0.98 },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    },
+    unknownQualifiers: [
+      { value: "New Mexico", confidence: 0.95 },
+      { value: "marketed", confidence: 0.95 }
+    ]
+  }, "New Mexico monthly marketed natural gas production");
+
+  assert.deepEqual(intent.unknownQualifiers, []);
+  assert.equal(intent.needsClarification, false);
+});
+
+test("AI cannot collapse an unresolved broad product into one interpretation", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Texas gas",
+    confidence: 0.97,
+    conceptPairs: [{ order: 0, product: "natural gas", activity: null, confidence: 0.97 }],
+    fields: {
+      country: { value: "TX", confidence: 0.98 },
+      product: { value: "natural gas", confidence: 0.97 }
+    }
+  }, "Texas gas");
+
+  assert.equal(intent.product, null);
+  assert.deepEqual(intent.structuredIntent.productAlternatives, ["natural gas", "petroleum"]);
+  assert.equal(intent.validatedConceptPairs[0].product, null);
+});
+
+test("genuinely unknown source terms remain blocking qualifiers", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "California monthly electricity from moon",
+    confidence: 0.96,
+    conceptPairs: [{ product: null, activity: "generation", order: 0, confidence: 0.96 }],
+    fields: {
+      country: { value: "CA", confidence: 0.98 },
+      product: { value: "electricity", confidence: 0.98 },
+      activity: { value: "generation", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    },
+    unknownQualifiers: [{ value: "moon", confidence: 0.95 }]
+  }, "California monthly electricity from moon");
+
+  assert.equal(intent.activity, null);
+  assert.deepEqual(intent.validatedConceptPairs.map(pair => [pair.product, pair.activity]), [["electricity", null]]);
+  assert.deepEqual(intent.unknownQualifiers.map(item => item.value), ["moon"]);
+  assert.equal(intent.needsClarification, true);
+});
+
+test("filler words and negated concepts do not become blocking qualifiers", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "show monthly natural gas production in Texas, not prices",
+    confidence: 0.97,
+    fields: {
+      country: { value: "TX", confidence: 0.98 },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    },
+    exclusions: [],
+    unknownQualifiers: [
+      { value: "plz", confidence: 0.98 },
+      { value: "shwo", confidence: 0.98 },
+      { value: "not prices", confidence: 0.98 }
+    ]
+  }, "plz shwo montly nat gas prodction in Texas, not prices");
+
+  assert.deepEqual(intent.unknownQualifiers, []);
+  assert.deepEqual(intent.exclusions.map(item => [item.type, item.value]), [["activity", "prices"]]);
+  assert.equal(intent.blockingClarification, false);
+});
+
+test("an explicitly excluded product cannot become an approved positive AI field", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Brazil annual energy consumption excluding petroleum",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.98 }],
+    conceptPairs: [{ product: "total energy", activity: "consumption", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.98 },
+      product: { value: "petroleum", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 },
+      frequency: { value: "annual", explicit: true, confidence: 0.98 }
+    }
+  }, "Brazil annual energy consumption excluding petroleum");
+
+  assert.equal(intent.fields.product.validation, "fallback");
+  assert.equal(intent.fields.product.normalizedValue, "total energy");
+  assert.equal(intent.structuredIntent.product, "total energy");
+  assert.equal(intent.structuredIntent.productBreadth, "broad");
+  assert.ok(intent.exclusions.some(item => item.type === "product" && item.value === "petroleum"));
 });
 
 test("long AI interpretation respects the selected activity and ignores invented selection fields", () => {
