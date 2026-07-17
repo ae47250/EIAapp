@@ -16,16 +16,15 @@ test("Q03-Q14 deterministic remediation cohort", async () => {
   assert.match(top(results.get("Q05")).title, /generation.*Iowa.*wind/i);
   assert.equal(top(results.get("Q05")).ranking.components.measureOrAggregation.points, 0);
 
-  const q06 = results.get("Q06").retrievals[0];
-  assert.ok(q06.displayCandidates.slice(0, 3).every(candidate => candidate.ranking.reasonCodes.includes("aggregation_relation_unknown_no_verified_hierarchy")));
-  assert.ok(hasWarning(q06, "activity_missing_hierarchy_unknown"));
-  assert.ok(!hasWarning(q06, "requested_frequency_unavailable_seds_annual_fallback"));
+  const q06 = results.get("Q06");
+  assert.deepEqual(q06.retrievals, []);
+  assert.equal(q06.diagnostics.clarificationBlocked, true);
+  assert.equal(q06.diagnostics.rankingApplied, false);
 
-  const q07 = results.get("Q07").retrievals;
-  assert.deepEqual(q07.map(item => item.concept.product), ["natural gas", "petroleum"]);
-  assert.ok(q07.every(item => item.displayCandidates.length > 0));
-  assert.ok(q07.every(item => hasWarning(item, "ambiguous_product_interpretation")));
-  assert.ok(q07.every(item => hasWarning(item, "activity_missing_hierarchy_unknown")));
+  const q07 = results.get("Q07");
+  assert.deepEqual(q07.retrievals, []);
+  assert.equal(q07.diagnostics.clarificationBlocked, true);
+  assert.equal(q07.diagnostics.rankingApplied, false);
 
   assert.equal(top(results.get("Q08")).series_id, "NG.NW2_EPG0_SWO_R48_BCF.W");
   assert.equal(top(results.get("Q08")).frequency, "weekly");
@@ -55,10 +54,10 @@ test("Q03-Q14 deterministic remediation cohort", async () => {
   assert.ok(q13.displayCandidates.every(candidate => !/price|cost/i.test(candidate.title)));
   assert.ok(q13.displayCandidates.slice(0, 2).every(candidate => !candidate.ranking.signals.equivalentChoiceGroup));
 
-  const q14 = results.get("Q14").retrievals[0];
-  assert.deepEqual(q14.displayCandidates, []);
-  assert.deepEqual(q14.diagnostics.blockedByUnresolvedQualifiers, ["moon"]);
-  assert.ok(hasWarning(q14, "unresolved_qualifier_requires_clarification"));
+  const q14 = results.get("Q14");
+  assert.deepEqual(q14.retrievals, []);
+  assert.equal(q14.diagnostics.clarificationBlocked, true);
+  assert.ok(q14.diagnostics.clarificationReasons.includes("unresolved_qualifier"));
 });
 
 function top(result) {

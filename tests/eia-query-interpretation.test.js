@@ -611,6 +611,10 @@ test("AI cannot collapse an unresolved broad product into one interpretation", (
   assert.equal(intent.product, null);
   assert.deepEqual(intent.structuredIntent.productAlternatives, ["natural gas", "petroleum"]);
   assert.equal(intent.validatedConceptPairs[0].product, null);
+  assert.equal(intent.needsClarification, true);
+  assert.equal(intent.blockingClarification, true);
+  assert.equal(intent.structuredIntent.blockingClarification, true);
+  assert.ok(intent.missingFields.includes("activity"));
 });
 
 test("genuinely unknown source terms remain blocking qualifiers", () => {

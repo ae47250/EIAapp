@@ -62,41 +62,42 @@ test("uses labeled annual International fallbacks for unavailable country freque
   assert.ok(retrieval.userWarnings.some(warning => warning.code === "requested_frequency_unavailable_international_annual_fallback"));
 });
 
-test("does not label primary annual SEDS results as a frequency fallback", async () => {
-  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("California renewable energy"));
-  const retrieval = result.retrievals[0];
+test("blocks missing activity before local retrieval or ranking", async () => {
+  let retrievalCalls = 0;
+  let rankingCalls = 0;
+  const result = await buildLocalCandidatePipeline(interpretQueryWithRules("California renewable energy"), {
+    retrieveCandidates: async () => { retrievalCalls += 1; throw new Error("retrieval must not run"); },
+    rankCandidates: () => { rankingCalls += 1; throw new Error("ranking must not run"); }
+  });
 
+  assert.equal(retrievalCalls, 0);
+  assert.equal(rankingCalls, 0);
+  assert.deepEqual(result.retrievals, []);
   assert.equal(result.diagnostics.crossRouteFallback.attempted, false);
-  assert.ok(retrieval.displayCandidates.length > 0);
-  assert.ok(retrieval.userWarnings.some(warning => warning.code === "activity_missing_hierarchy_unknown"));
+  assert.equal(result.diagnostics.rankingApplied, false);
+  assert.equal(result.diagnostics.clarificationBlocked, true);
+  assert.ok(result.diagnostics.clarificationReasons.includes("missing_activity"));
   assert.equal(result.diagnostics.hierarchyEvidenceStatus, "none");
   assert.equal(result.diagnostics.verifiedHierarchyRelationshipCount, 0);
   assert.equal(result.diagnostics.hierarchyPreferenceApplied, false);
-  assert.ok(!retrieval.userWarnings.some(warning => warning.code === "requested_frequency_unavailable_seds_annual_fallback"));
-  assert.ok(retrieval.interpretationGroups.some(group => group.activity === "production"));
-  assert.ok(retrieval.interpretationGroups.some(group => group.activity === "consumption"));
-  assert.equal(retrieval.selectionPolicy.requiresExplicitSelection, true);
-  assert.equal(retrieval.selectionPolicy.autoSelectionAllowed, false);
 });
 
-test("keeps technical and expenditure candidates eligible without hierarchy preference", async () => {
+test("blocks ambiguous product alternatives when activity is also missing", async () => {
   const result = await buildLocalCandidatePipeline(interpretQueryWithRules("Texas gas"));
-  const naturalGas = result.retrievals.find(retrieval => retrieval.concept.product === "natural gas");
 
-  assert.ok(naturalGas.rankedCandidates.some(candidate => /factor for converting/i.test(candidate.title)));
-  assert.ok(naturalGas.rankedCandidates.some(candidate => /expenditures/i.test(candidate.title)));
-  assert.ok(naturalGas.rankedCandidates.every(candidate => candidate.ranking.components.measureOrAggregation.points === 0));
-  assert.ok(naturalGas.selectionPolicy.reasonCodes.includes("activity_not_explicit"));
+  assert.deepEqual(result.retrievals, []);
+  assert.equal(result.diagnostics.rankingApplied, false);
+  assert.equal(result.diagnostics.clarificationBlocked, true);
+  assert.ok(result.diagnostics.clarificationReasons.includes("missing_activity"));
 });
 
 test("asks for clarification instead of showing candidates for unresolved qualifiers", async () => {
   const result = await buildLocalCandidatePipeline(interpretQueryWithRules("California monthly electricity from moon"));
-  const retrieval = result.retrievals[0];
 
-  assert.equal(retrieval.emptyResult, true);
-  assert.deepEqual(retrieval.displayCandidates, []);
-  assert.ok(retrieval.userWarnings.some(warning => warning.code === "unresolved_qualifier_requires_clarification"));
-  assert.ok(!retrieval.userWarnings.some(warning => warning.code === "no_displayable_candidate"));
+  assert.deepEqual(result.retrievals, []);
+  assert.equal(result.diagnostics.rankingApplied, false);
+  assert.equal(result.diagnostics.clarificationBlocked, true);
+  assert.ok(result.diagnostics.clarificationReasons.includes("unresolved_qualifier"));
 });
 
 test("reports an empty result instead of silently selecting a substitute", async () => {

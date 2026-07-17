@@ -25,7 +25,7 @@ after(() => {
   restoreEnvironment(originalEnvironment);
 });
 
-test("candidate mode returns at most ten grouped choices without selecting or fetching observations", async () => {
+test("candidate mode blocks missing activity before ranking or observation retrieval", async () => {
   seriesRequests = 0;
   const response = await searchEia(new Request("https://example.test/api/search-eia?q=Texas%20gas"));
   const body = await response.json();
@@ -33,14 +33,30 @@ test("candidate mode returns at most ten grouped choices without selecting or fe
   assert.equal(response.status, 200);
   assert.equal(body.mode, "candidate-selection");
   assert.equal(body.selectedSeries, null);
-  assert.ok(body.variables.length > 1 && body.variables.length <= 10);
-  assert.equal(body.variables.length, body.diagnostics.displayedCandidateCount);
-  assert.ok(body.candidateGroups.every(group => group.technical === false));
-  assert.ok(body.userWarnings.some(warning => warning.code === "activity_missing_hierarchy_unknown"));
+  assert.deepEqual(body.variables, []);
+  assert.deepEqual(body.candidateGroups, []);
+  assert.equal(body.needsClarification, true);
+  assert.equal(body.intent.blockingClarification, true);
+  assert.equal(body.diagnostics.rankingApplied, false);
+  assert.equal(body.diagnostics.clarificationBlocked, true);
+  assert.ok(body.diagnostics.clarificationReasons.includes("missing_activity"));
   assert.equal(body.diagnostics.hierarchyEvidenceStatus, "none");
   assert.equal(body.diagnostics.verifiedHierarchyRelationshipCount, 0);
   assert.equal(body.diagnostics.hierarchyPreferenceApplied, false);
   assert.equal(body.diagnostics.semanticRerankingApplied, false);
+  assert.equal(seriesRequests, 0);
+});
+
+test("candidate IDs cannot bypass clarification", async () => {
+  seriesRequests = 0;
+  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Texas%20gas&candidateId=invented"));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.needsClarification, true);
+  assert.equal(body.diagnostics.clarificationBlocked, true);
+  assert.equal(body.selectedSeries, null);
+  assert.deepEqual(body.variables, []);
   assert.equal(seriesRequests, 0);
 });
 

@@ -155,6 +155,26 @@ test("unclear input asks for clarification before a broad EIA data request", asy
   assert.equal(broadDataRequests, 0);
 });
 
+test("legacy exact selectors cannot bypass clarification", async () => {
+  exactSeriesRequests = 0;
+  const url = new URL("https://example.test/api/search-eia");
+  url.searchParams.set("q", "Brazil energy");
+  url.searchParams.set("country", "BRA");
+  url.searchParams.set("productId", "44");
+  url.searchParams.set("activityId", "1");
+  url.searchParams.set("unit", "QBTU");
+
+  const response = await searchEia(new Request(url));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.needsClarification, true);
+  assert.equal(body.intent.blockingClarification, true);
+  assert.equal(body.selectedSeries, null);
+  assert.deepEqual(body.variables, []);
+  assert.equal(exactSeriesRequests, 0);
+});
+
 test("a transient EIA server error retries only the selected top series", async () => {
   globalThis.__EIA_APP_CACHE__?.clear();
   exactSeriesRequests = 0;
@@ -187,7 +207,7 @@ test("exact-series selection keeps the alternate-series response shape", async (
 
 test("an exact series with no observations is marked for the UI to hide", async () => {
   const url = new URL("https://example.test/api/search-eia");
-  url.searchParams.set("q", "Brazil empty series");
+  url.searchParams.set("q", "Brazil energy consumption empty series");
   url.searchParams.set("country", "BRA");
   url.searchParams.set("productId", "999");
   url.searchParams.set("activityId", "999");
