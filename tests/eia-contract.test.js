@@ -52,9 +52,9 @@ test("Next search route preserves the EIA response contract with a variable typo
     { period: "2023", value: 12.8 },
     { period: "2024", value: 13.5 }
   ]);
-  assert.equal(body.variables.length, 2);
+  assert.equal(body.variables.length, 1);
   assert.equal(body.variables[0].activityId, "1");
-  assert.equal(body.variables[1].coverage, "2023-2024 (2 obs.)");
+  assert.ok(body.variables.every(variable => variable.activity === "Production"));
   assert.equal(exactSeriesRequests, 1);
   assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
 });
@@ -139,6 +139,34 @@ test("legacy ranking ignores adversarial AI-corrected wording", async () => {
   assert.equal(body.intent.correctedQuery, "Brazil energy consumption");
   assert.equal(body.selectedSeries.activity, "Production");
   assert.equal(body.variables[0].activity, "Production");
+  assert.ok(body.variables.every(variable => variable.activity === "Production"));
+});
+
+test("legacy scoring cannot combine product and activity evidence across concept pairs", async () => {
+  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20total%20energy%20production%20and%20petroleum%20consumption"));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(body.intent.conceptPairs.map(pair => [pair.product, pair.activity]), [
+    ["total energy", "production"],
+    ["petroleum", "consumption"]
+  ]);
+  assert.equal(body.selectedSeries.activity, "Production");
+  assert.deepEqual(body.variables.map(variable => [variable.product, variable.activity]), [
+    ["Total primary energy", "Production"]
+  ]);
+});
+
+test("legacy scoring returns no result when available rows fail semantic eligibility", async () => {
+  exactSeriesRequests = 0;
+  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20electricity%20generation"));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.selectedSeries, null);
+  assert.deepEqual(body.variables, []);
+  assert.match(body.userMessage, /none matched the validated product and activity/i);
+  assert.equal(exactSeriesRequests, 0);
 });
 
 test("unclear input asks for clarification before a broad EIA data request", async () => {
