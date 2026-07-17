@@ -1,15 +1,18 @@
 # EIA Pipeline Promotion Signoff
 
-Status: **NOT APPROVED FOR PROMOTION**
+Status: **STEP 9 PREVIEW PROMOTION PASSED; APPROVED FOR STEP 10 LEGACY RETIREMENT**
 
-Implementation is complete behind a default-off feature flag. Promotion remains blocked on deployed preview latency and formal owner/reviewer signoff.
+Candidate mode passed the deployed preview, rollback, API, latency, and browser gates. Production remains unchanged.
 
 ## Source State
 
 - Branch: `codex/nextjs-eia-migration-login-toggle`
 - Base HEAD before this verified change set: `c3c0e18`
 - Upstream: `origin/codex/nextjs-eia-migration-login-toggle`
-- Working state: verified Phase 4/5 changes are ready for commit and preview deployment
+- Step 9 verified commit: `c022efa7d264c24b6e767073fc6114283fb40e51`
+- Step 9 verified deployment: `dpl_AEJGuQf8YcYdxymDSqP8ASwwXnqr`
+- Step 9 preview URL: `https://eiaappv20-mx72l5o1w-ea47243.vercel.app`
+- Working state: candidate mode restored to `on` for this branch's Preview environment after a successful rollback drill
 - Main branch: not used or modified
 
 ## Versioned Inputs
@@ -81,7 +84,13 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 | First full local HTTP route request | 3212 ms; above the proposed 3000 ms cold end-to-end target |
 | Browser screenshot run | PASS: desktop/mobile candidate states, Graph, and Excel verified |
 | Expanded 30-query live model cohort | PASS: 60/60 runs, 0 blocked, 0 errors |
-| Deployed Vercel preview | PENDING |
+| Deployed Vercel preview | PASS: READY on commit `c022efa` |
+| Preview OpenAI diagnostic | PASS: `gpt-5.4-mini`, HTTP 200 |
+| Preview representative cohort | PASS: 8/8 expected results, no automatic series selection |
+| Preview end-to-end p95 | PASS: 9.29 s including authenticated CLI overhead |
+| Explicit candidate selection | PASS: selector verified, 45 observations, 5.418 s |
+| Live rollback drill | PASS: flag off returned legacy; flag on restored candidate mode |
+| Visible browser flow | PASS: five choices, Graph loaded, 45-observation coverage, 0 console errors |
 
 The complete live report is `HOHO3.md` with SHA-256 `4224a967be3c5a7c74a84f258a4e26de8f4f80eb6b26c36b6a688aad114e3d2e`. Mini and nano produced the same validated intent, top-five order, and warnings for all 30 queries. Browser evidence is stored under `C:\Users\eiriksson\.codex\visualizations\2026\07\16\019f6b79-de2d-7d90-b44e-d014f6e28170\eia-promotion`.
 
@@ -158,9 +167,9 @@ The runner now contains Q15-Q30 for:
 | Warm local p95 | under 1 s | PASS locally; five runs 253-329 ms |
 | OpenAI intent p95 | under 10 s | PASS: mini 3.203 s; nano 4.538 s |
 | OpenAI hard timeout | no more than 30 s | PASS in configuration/test |
-| Preview end-to-end p95 | under 12 s | PENDING deployed preview |
+| Preview end-to-end p95 | under 12 s | PASS: 9.29 s across the eight-query cohort |
 
-The 3.212 s first local HTTP request is above the cold end-to-end target and must be evaluated on Vercel. Retrieval itself passed its separate sub-3-second test.
+The prior 3.212 s first local HTTP request was evaluated on Vercel. The deployed eight-query end-to-end p95 passed at 9.29 s, including authenticated CLI startup overhead.
 
 ## Promotion Procedure
 
@@ -182,7 +191,7 @@ The 3.212 s first local HTTP request is above the cold end-to-end target and mus
 
 ## Signoff
 
-- Project owner: ____________________  Date: __________  Decision: __________
+- Project owner: approved in task  Date: 2026-07-17  Decision: proceed to Step 10
 - Technical reviewer: _______________  Date: __________  Decision: __________
 
-Promotion decision: **PENDING**
+Promotion decision: **STEP 9 PASSED; PRODUCTION UNCHANGED; PROCEED TO STEP 10**
