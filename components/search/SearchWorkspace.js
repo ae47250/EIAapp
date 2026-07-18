@@ -10,7 +10,7 @@ import SearchForm from "./SearchForm.js";
 import SearchStatus from "./SearchStatus.js";
 import SelectedSeries from "./SelectedSeries.js";
 
-const DEFAULT_QUERY = "brazil energy production";
+const DEFAULT_QUERY = "brazil and japan electrciity consumption";
 
 export default function SearchWorkspace({ showLogout }) {
   const [query, setQuery] = useState(DEFAULT_QUERY);
@@ -247,7 +247,7 @@ function buildSeriesUrl(variable, existingData) {
     return `/api/search-eia?${params}`;
   }
   const params = new URLSearchParams({
-    q: String(existingData.intent?.originalQuery ?? existingData.query ?? "brazil energy production"),
+    q: String(existingData.intent?.originalQuery ?? existingData.query ?? DEFAULT_QUERY),
     country: String(variable.countryCode || existingData.country?.code || ""),
     productId: String(variable.productId || ""),
     activityId: String(variable.activityId || ""),

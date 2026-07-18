@@ -39,7 +39,7 @@ export default function CandidateGroups({ groups, warnings, onSelect, onDownload
                     <td className="variable-name">
                       {candidate.title}
                       {candidate.fallback ? <span className="candidate-badge fallback">Fallback</span> : null}
-                      <div className="muted">Semantic: {candidate.certainty?.semanticCompatibility || "unknown"}; aggregation: {candidate.certainty?.aggregationRelation || "unknown"}; hierarchy evidence: {candidate.certainty?.hierarchyEvidenceStatus || "none"}.</div>
+                      <div className="muted">{certaintySummary(candidate)}</div>
                     </td>
                     <td>{candidate.routeFamily} / {candidate.rankingTier}</td>
                     <td>{candidate.frequency}</td>
@@ -59,4 +59,14 @@ export default function CandidateGroups({ groups, warnings, onSelect, onDownload
 
 function titleCase(value) {
   return String(value || "").replace(/\b\w/g, character => character.toUpperCase());
+}
+
+function certaintySummary(candidate) {
+  const semanticMessage = candidate.certainty?.semanticCompatibility === "compatible"
+    ? "Matches your request."
+    : "Compatibility has not been verified.";
+  const aggregationMessage = candidate.certainty?.aggregationRelation === "verified_aggregate"
+    ? "Total/component relationship verified."
+    : "Total/component relationship not verified.";
+  return `${semanticMessage} ${aggregationMessage}`;
 }
