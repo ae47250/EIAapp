@@ -16,13 +16,13 @@ const registry = await readJson("../data/eia/aggregation-hierarchy-registry.json
 const manifest = await readJson("../data/eia/builds/phase1b/manifest.json");
 const artifact = await readJson("../data/eia/builds/phase1b/aggregation-hierarchy.generated.json");
 
-test("reviewed templates generate every eligible SEDS geography and remain production-inactive", async () => {
+test("reviewed templates generate every eligible SEDS geography under the approved production gate", async () => {
   const result = await auditAggregationHierarchyRegistry();
 
   assert.equal(result.registry_valid, true);
-  assert.equal(result.status, "preview_ready_production_inactive");
-  assert.equal(result.activation_ready, false);
-  assert.equal(result.public_ranking_enabled, false);
+  assert.equal(result.status, "production_ranking_approved");
+  assert.equal(result.activation_ready, true);
+  assert.equal(result.public_ranking_enabled, true);
   assert.equal(result.contribution_calculation_enabled, false);
   assert.equal(result.evidence.template_count, 2);
   assert.equal(result.evidence.relationship_count, 52);
@@ -32,7 +32,7 @@ test("reviewed templates generate every eligible SEDS geography and remain produ
   assert.equal(result.evidence.required_candidate_records, 311);
   assert.equal(result.evidence.excluded_geographies, 0);
   assert.equal(result.evidence.official_evidence_documents, 2);
-  assert.equal(result.safeguards.public_ranking_disconnected, true);
+  assert.equal(result.safeguards.public_ranking_governed_by_approved_post_ranker, true);
   assert.equal(result.safeguards.observation_shadow_complete, true);
   assert.equal(result.safeguards.incomplete_geographies_rejected, true);
   assert.deepEqual(result.errors, []);
@@ -102,13 +102,13 @@ test("an incomplete geography is excluded instead of receiving a partial relatio
   assert.deepEqual(generated.excludedGeographies[0].reasons, ["missing:ELISB"]);
 });
 
-test("public ranking cannot be enabled before shadow testing and activation approval", () => {
+test("production ranking cannot lose its explicit approval state", () => {
   const modified = structuredClone(registry);
-  modified.activation.publicRankingEnabled = true;
+  modified.activation.rankingActivationApproval = "pending";
 
   const errors = validateRegistryDocument(modified, { manifest });
 
-  assert.ok(errors.includes("public ranking must remain disabled before shadow approval"));
+  assert.ok(errors.includes("ranking activation approval must be explicit"));
 });
 
 test("a stale or tampered generated artifact is rejected", () => {

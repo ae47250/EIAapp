@@ -57,10 +57,10 @@ export async function auditAggregationHierarchyRegistry(options = {}) {
   return {
     phase: "11",
     gate: "generated_aggregation_hierarchy_registry",
-    status: registryValid ? "preview_ready_production_inactive" : "blocked",
+    status: registryValid ? "production_ranking_approved" : "blocked",
     registry_valid: registryValid,
-    activation_ready: false,
-    public_ranking_enabled: false,
+    activation_ready: registryValid && registry.activation?.rankingActivationApproval === "approved",
+    public_ranking_enabled: registry.activation?.publicRankingEnabled === true,
     contribution_calculation_enabled: false,
     source_build: committedArtifact.sourceBuild,
     evidence: {
@@ -76,7 +76,7 @@ export async function auditAggregationHierarchyRegistry(options = {}) {
       artifact_hash: committedArtifact.artifactHash
     },
     safeguards: {
-      public_ranking_disconnected: registry.activation?.publicRankingEnabled === false,
+      public_ranking_governed_by_approved_post_ranker: registry.activation?.publicRankingEnabled === true,
       observation_shadow_complete: registry.activation?.observationShadowEnabled === true,
       contribution_calculation_disconnected: registry.activation?.contributionCalculationEnabled === false,
       incomplete_geographies_rejected: true,
@@ -90,12 +90,12 @@ export async function auditAggregationHierarchyRegistry(options = {}) {
 export function validateRegistryDocument(registry, { manifest = null } = {}) {
   const errors = [];
   if (registry?.schemaVersion !== "2.0.0") errors.push("registry schemaVersion must be 2.0.0");
-  if (registry?.status !== "observation_validated_preview_approved") errors.push("registry must be observation_validated_preview_approved");
+  if (registry?.status !== "production_ranking_approved") errors.push("registry must be production_ranking_approved");
   if (!Array.isArray(registry?.templates) || registry.templates.length === 0) errors.push("registry must contain at least one reviewed template");
-  if (registry?.activation?.publicRankingEnabled !== false) errors.push("public ranking must remain disabled before shadow approval");
+  if (registry?.activation?.publicRankingEnabled !== true) errors.push("public ranking must be explicitly approved after Preview verification");
   if (registry?.activation?.contributionCalculationEnabled !== false) errors.push("contribution calculation must remain disabled before shadow approval");
   if (registry?.activation?.observationShadowEnabled !== true) errors.push("observation shadow must be complete before preview approval");
-  if (registry?.activation?.rankingActivationApproval !== "approved_preview_only") errors.push("ranking activation approval must remain approved_preview_only before production verification");
+  if (registry?.activation?.rankingActivationApproval !== "approved") errors.push("ranking activation approval must be explicit");
   if (manifest && registry?.reviewedAgainst?.buildVersion !== manifest.build_version) {
     errors.push("registry template build version does not match the active metadata manifest");
   }

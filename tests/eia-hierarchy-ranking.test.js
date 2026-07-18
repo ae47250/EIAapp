@@ -6,7 +6,7 @@ import { evaluateHierarchyRankingGate } from "../lib/sources/eia/hierarchy-ranki
 import { interpretQueryWithRules } from "../lib/sources/eia/interpret-query.js";
 import { buildRankedResultCertainty } from "../lib/sources/eia/result-certainty.js";
 
-test("validated observation and ranking evidence open preview but not production", () => {
+test("validated observation, ranking, and Preview evidence open production", () => {
   assert.deepEqual(evaluateHierarchyRankingGate("shadow"), { ready: true, reason: "evidence_validated" });
   assert.deepEqual(evaluateHierarchyRankingGate("on"), { ready: true, reason: "evidence_validated" });
 });
@@ -42,14 +42,11 @@ test("preview on mode applies only the verified aggregate tie-break", async () =
   assert.equal(result.retrievals[0].displayCandidates[0].ranking.tier, "A");
 });
 
-test("production remains blocked before preview verification approval", () => {
+test("production gate is approved after deployed Preview verification", () => {
   const previous = process.env.VERCEL_ENV;
   process.env.VERCEL_ENV = "production";
   try {
-    assert.deepEqual(evaluateHierarchyRankingGate("on"), {
-      ready: false,
-      reason: "production_activation_not_approved"
-    });
+    assert.deepEqual(evaluateHierarchyRankingGate("on"), { ready: true, reason: "evidence_validated" });
   } finally {
     if (previous === undefined) delete process.env.VERCEL_ENV;
     else process.env.VERCEL_ENV = previous;

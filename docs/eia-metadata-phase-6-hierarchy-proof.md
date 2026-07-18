@@ -1,6 +1,6 @@
 # EIA metadata Phase 6 aggregation-hierarchy proof
 
-Status: all 52 generated relationships passed live observation shadowing, and all 51 state/DC ranking cases passed non-visible ranking shadowing. Preview-only hierarchy ranking is approved; production ranking and contribution calculation remain disabled.
+Status: all 52 generated relationships passed live observation shadowing, all 51 state/DC ranking cases passed non-visible ranking shadowing, and the deployed Preview passed API and runtime verification. Production hierarchy ranking is approved behind an immediate environment-variable rollback; contribution calculation remains disabled.
 
 ## Objective
 
@@ -81,9 +81,9 @@ The Phase 1B build regenerates this derived artifact after normalizing and valid
 ## Safeguards
 
 1. Observation shadowing is complete and recorded in a reproducible report.
-2. Hierarchy ranking defaults to `off`; local and Preview may set `EIA_HIERARCHY_RANKING=on`.
+2. Hierarchy ranking defaults to `off`; approved environments must explicitly set `EIA_HIERARCHY_RANKING=on`.
 3. Contribution calculation is off.
-4. Production activation is blocked in code until Preview verification is recorded and separately approved.
+4. Production activation requires hash-locked observation evidence, hash-locked ranking-shadow evidence, recorded Preview verification, and explicit production approval.
 5. The base Phase 4 scorer remains unchanged; a governed post-ranking tie-break may move only a verified aggregate within an identical tier and score.
 6. Unsupported adapters are rejected.
 7. No live EIA or OpenAI call occurs during ordinary metadata generation or audit.
@@ -95,6 +95,7 @@ The Phase 1B build regenerates this derived artifact after normalizing and valid
 - Original embedded-metadata audit: valid and still blocked with zero hierarchy relationships.
 - Observation shadow: 52 passed, 0 blocked, 3,380 common periods, 0 formula mismatches, and 0 API failures.
 - Ranking shadow: 51 of 51 state/DC aggregates promoted to shadow top-one, with 0 visible changes and 0 control-case changes.
+- Vercel Preview `dpl_AvM6hiApYRdPcph5kDAuhnZFbiyo`: Texas aggregate and renewable/fossil controls passed; no Preview runtime errors were recorded.
 - Full repository test suite: 199 passed, 0 failed.
 - Next.js production build: passed.
 - JavaScript syntax and `git diff --check`: passed.
@@ -134,10 +135,17 @@ evidence SHA-256: a4838e45b876f8c99ef9596daa0439c3703076e7800f509af5328ae107fb1f
 
 The national U.S. relationship is observation-validated but is not ranking-active because current national total-energy intent routes to Domestic rather than SEDS. This pass does not change that route silently.
 
-## Next phase
+## Deployment gate
 
-Deploy the verified commit to Vercel Preview with `EIA_HIERARCHY_RANKING=on`, confirm the Texas aggregate and control searches through the deployed API, and inspect runtime errors. Only then may the production approval field change from `pending_preview_verification` to `approved`.
+Preview deployment `dpl_AvM6hiApYRdPcph5kDAuhnZFbiyo` verified:
+
+1. Texas total energy consumption returns `SEDS.TETCB.TX.A` first with `verified_aggregate` certainty.
+2. Texas renewable consumption remains `SEDS.RETCB.TX.A` with no hierarchy preference applied.
+3. Texas fossil-fuel consumption remains `SEDS.FFTCB.TX.A` with no hierarchy preference applied.
+4. Preview runtime error and fatal logs are empty.
+
+Production approval is now recorded. The rollback is immediate: remove or set `EIA_HIERARCHY_RANKING=off` and redeploy. This does not disable the candidate pipeline, change semantic eligibility, or revert metadata.
 
 ## Gate result
 
-Template generation, identity auditing, observation shadow, and ranking shadow are complete. Preview-only ranking is approved. Production hierarchy ranking and contribution calculation remain blocked pending deployed Preview verification.
+Template generation, identity auditing, observation shadow, ranking shadow, and Preview verification are complete. Production hierarchy ranking is approved for the narrow same-tier, same-score aggregate tie-break. Contribution calculation remains disabled, and the U.S. national route limitation remains explicit.
