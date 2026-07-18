@@ -5,6 +5,7 @@ import { GET as searchEia } from "../app/api/search-eia/route.js";
 
 const originalEnvironment = {
   EIA_API_KEY: process.env.EIA_API_KEY,
+  EIA_HIERARCHY_RANKING: process.env.EIA_HIERARCHY_RANKING,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   LOGIN_REQUIRED: process.env.LOGIN_REQUIRED
 };
@@ -58,6 +59,29 @@ test("the retired feature flag cannot switch the route back to legacy search", a
   } finally {
     if (previous === undefined) delete process.env.EIA_CANDIDATE_PIPELINE;
     else process.env.EIA_CANDIDATE_PIPELINE = previous;
+  }
+});
+
+test("preview hierarchy mode exposes only the observation-validated aggregate tie-break", async () => {
+  const previous = process.env.EIA_HIERARCHY_RANKING;
+  process.env.EIA_HIERARCHY_RANKING = "on";
+  try {
+    const response = await searchEia(new Request(
+      "https://example.test/api/search-eia?q=Texas%20total%20energy%20consumption"
+    ));
+    const body = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(body.variables[0].seriesId, "SEDS.TETCB.TX.A");
+    assert.equal(body.variables[0].certainty.aggregationRelation, "verified_aggregate");
+    assert.equal(body.variables[0].certainty.hierarchyEvidenceStatus, "observation_validated");
+    assert.equal(body.diagnostics.hierarchyRankingMode, "on");
+    assert.equal(body.diagnostics.hierarchyEvidenceStatus, "observation_validated");
+    assert.equal(body.diagnostics.verifiedHierarchyRelationshipCount, 52);
+    assert.equal(body.diagnostics.hierarchyPreferenceApplied, true);
+  } finally {
+    if (previous === undefined) delete process.env.EIA_HIERARCHY_RANKING;
+    else process.env.EIA_HIERARCHY_RANKING = previous;
   }
 });
 

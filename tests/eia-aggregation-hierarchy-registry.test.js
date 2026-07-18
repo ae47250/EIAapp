@@ -16,11 +16,11 @@ const registry = await readJson("../data/eia/aggregation-hierarchy-registry.json
 const manifest = await readJson("../data/eia/builds/phase1b/manifest.json");
 const artifact = await readJson("../data/eia/builds/phase1b/aggregation-hierarchy.generated.json");
 
-test("reviewed templates generate every eligible SEDS geography and remain inactive", async () => {
+test("reviewed templates generate every eligible SEDS geography and remain production-inactive", async () => {
   const result = await auditAggregationHierarchyRegistry();
 
   assert.equal(result.registry_valid, true);
-  assert.equal(result.status, "shadow_ready_inactive");
+  assert.equal(result.status, "preview_ready_production_inactive");
   assert.equal(result.activation_ready, false);
   assert.equal(result.public_ranking_enabled, false);
   assert.equal(result.contribution_calculation_enabled, false);
@@ -33,7 +33,7 @@ test("reviewed templates generate every eligible SEDS geography and remain inact
   assert.equal(result.evidence.excluded_geographies, 0);
   assert.equal(result.evidence.official_evidence_documents, 2);
   assert.equal(result.safeguards.public_ranking_disconnected, true);
-  assert.equal(result.safeguards.observation_shadow_pending, true);
+  assert.equal(result.safeguards.observation_shadow_complete, true);
   assert.equal(result.safeguards.incomplete_geographies_rejected, true);
   assert.deepEqual(result.errors, []);
 });
@@ -136,7 +136,7 @@ test("unapproved route adapters cannot generate inferred hierarchy", () => {
   assert.ok(validateRegistryDocument(modified, { manifest }).some(error => error.includes("adapter is not approved")));
 });
 
-test("the generated hierarchy stays disconnected from ranking configuration and runtime", async () => {
+test("base scoring and retrieval remain unchanged by governed hierarchy post-ranking", async () => {
   const [rankingConfig, localRanking, localRetrieval] = await Promise.all([
     readJson("../data/eia/phase4-ranking-config.json"),
     readFile(new URL("../lib/sources/eia/local-ranking.js", import.meta.url), "utf8"),

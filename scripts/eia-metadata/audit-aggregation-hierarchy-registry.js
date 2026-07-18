@@ -57,7 +57,7 @@ export async function auditAggregationHierarchyRegistry(options = {}) {
   return {
     phase: "11",
     gate: "generated_aggregation_hierarchy_registry",
-    status: registryValid ? "shadow_ready_inactive" : "blocked",
+    status: registryValid ? "preview_ready_production_inactive" : "blocked",
     registry_valid: registryValid,
     activation_ready: false,
     public_ranking_enabled: false,
@@ -77,7 +77,7 @@ export async function auditAggregationHierarchyRegistry(options = {}) {
     },
     safeguards: {
       public_ranking_disconnected: registry.activation?.publicRankingEnabled === false,
-      observation_shadow_pending: registry.activation?.observationShadowEnabled === false,
+      observation_shadow_complete: registry.activation?.observationShadowEnabled === true,
       contribution_calculation_disconnected: registry.activation?.contributionCalculationEnabled === false,
       incomplete_geographies_rejected: true,
       title_or_facet_inference_used: false,
@@ -90,12 +90,12 @@ export async function auditAggregationHierarchyRegistry(options = {}) {
 export function validateRegistryDocument(registry, { manifest = null } = {}) {
   const errors = [];
   if (registry?.schemaVersion !== "2.0.0") errors.push("registry schemaVersion must be 2.0.0");
-  if (registry?.status !== "research_reviewed_shadow_pending") errors.push("registry must remain research_reviewed_shadow_pending");
+  if (registry?.status !== "observation_validated_preview_approved") errors.push("registry must be observation_validated_preview_approved");
   if (!Array.isArray(registry?.templates) || registry.templates.length === 0) errors.push("registry must contain at least one reviewed template");
   if (registry?.activation?.publicRankingEnabled !== false) errors.push("public ranking must remain disabled before shadow approval");
   if (registry?.activation?.contributionCalculationEnabled !== false) errors.push("contribution calculation must remain disabled before shadow approval");
-  if (registry?.activation?.observationShadowEnabled !== false) errors.push("observation shadow must remain disabled until its runner is reviewed");
-  if (registry?.activation?.rankingActivationApproval !== "pending_after_shadow") errors.push("ranking activation approval must remain pending_after_shadow");
+  if (registry?.activation?.observationShadowEnabled !== true) errors.push("observation shadow must be complete before preview approval");
+  if (registry?.activation?.rankingActivationApproval !== "approved_preview_only") errors.push("ranking activation approval must remain approved_preview_only before production verification");
   if (manifest && registry?.reviewedAgainst?.buildVersion !== manifest.build_version) {
     errors.push("registry template build version does not match the active metadata manifest");
   }
