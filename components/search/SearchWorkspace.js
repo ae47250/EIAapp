@@ -229,7 +229,11 @@ export default function SearchWorkspace({ showLogout }) {
     <main className="page">
       <section className="hero">
         <div className="hero-heading">
-          <h1>Version 3.0: EIA AI Assisted Data Finder</h1>
+          <h1>
+            <span>Version 3.0:</span>
+            <br />
+            <span>EIA AI Assisted Data Finder</span>
+          </h1>
           {showLogout ? (
             <form className="logout-form" method="post" action="/api/logout">
               <button className="logout-button" type="submit">Logout</button>
