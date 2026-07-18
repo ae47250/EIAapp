@@ -1,8 +1,8 @@
 # EIA Pipeline Promotion Signoff
 
-Status: **STEP 9 PASSED; STEP 10 LOCAL LEGACY RETIREMENT PASSED; PREVIEW VERIFICATION PENDING**
+Status: **STEP 9 PASSED; STEP 10 LEGACY RETIREMENT PASSED**
 
-Candidate mode passed the Step 9 deployed preview, rollback, API, latency, and browser gates. Step 10 removes the legacy scorer and runtime dispatch locally. Production remains unchanged.
+Candidate mode passed the Step 9 deployed preview, rollback, API, latency, and browser gates. Step 10 removed the legacy scorer and runtime dispatch, passed local gates, and passed the deployed Preview API gates. Production remains unchanged.
 
 ## Source State
 
@@ -13,6 +13,9 @@ Candidate mode passed the Step 9 deployed preview, rollback, API, latency, and b
 - Step 9 verified deployment: `dpl_AEJGuQf8YcYdxymDSqP8ASwwXnqr`
 - Step 9 preview URL: `https://eiaappv20-mx72l5o1w-ea47243.vercel.app`
 - Step 10 base commit: `b097e17`
+- Step 10 verified commit: `6d6ae9f`
+- Step 10 verified deployment: `dpl_EUMKozjDx9e2URso7yVVEGor3fwd`
+- Step 10 verified preview URL: `https://eiaappv20-mv3051po9-ea47243.vercel.app`
 - Current branch behavior: candidate search is the only `/api/search-eia` path
 - Step 9 rollback drill state: candidate mode was restored to `on` after the historical flag test
 - Main branch: not used or modified
@@ -75,6 +78,10 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 | Step 10 full Node test suite | PASS: 176 passed, 0 failed |
 | Step 10 focused retirement tests | PASS: 24 passed, 0 failed |
 | Next.js production build | PASS: Next.js 16.2.10, all routes compiled |
+| Step 10 deployed Preview | PASS: READY on commit `6d6ae9f` |
+| Branch Preview candidate flag | PASS: branch-specific `EIA_CANDIDATE_PIPELINE` override removed |
+| Deployed candidate contract | PASS: five choices, no automatic selection, no hierarchy preference |
+| Deployed explicit selection | PASS: selector verified, same series ID, 45 observations |
 | Focused Step 8 tests | PASS: 34 passed, 0 failed |
 | Versioned Q01-Q14 top-five benchmark | PASS: 14/14 cases, including repeated deterministic runs |
 | Retired-flag non-interference | PASS: an obsolete `off` value cannot restore legacy search |
@@ -194,6 +201,6 @@ The prior 3.212 s first local HTTP request was evaluated on Vercel. The deployed
 ## Signoff
 
 - Project owner: approved in task  Date: 2026-07-17  Decision: execute Step 10 after Step 9 passes
-- Technical reviewer: local automated gates passed  Date: 2026-07-17  Decision: Preview verification required
+- Technical reviewer: local and deployed Preview gates passed  Date: 2026-07-17  Decision: Step 10 complete
 
-Promotion decision: **STEP 9 PASSED; STEP 10 LOCAL GATES PASSED; PRODUCTION UNCHANGED; PREVIEW PENDING**
+Promotion decision: **STEP 10 PASSED; LEGACY RETIRED ON THIS BRANCH; PRODUCTION UNCHANGED; STEP 11 REMAINS**
