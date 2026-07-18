@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "1.0.0",
-  "registryVersion": "phase6-research-v1",
+  "schemaVersion": "2.0.0",
+  "registryVersion": "phase11-template-v2",
   "status": "research_reviewed_shadow_pending",
-  "sourceBuild": {
+  "reviewedAgainst": {
     "buildVersion": "phase1b",
     "contentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028"
   },
@@ -20,61 +20,35 @@
     "owner": "project_owner"
   },
   "refreshPolicy": {
-    "onBuildHashChange": "block_until_candidate_ids_and_metadata_hashes_are_revalidated",
+    "onBuildHashChange": "regenerate_and_reaudit_all_exact_candidate_ids_and_metadata_hashes",
     "onEvidenceHashChange": "block_until_official_formula_is_reviewed_again",
     "onFormulaChange": "create_new_registry_version_and_repeat_shadow_testing"
   },
-  "relationships": [
+  "unsupportedRoutePolicy": {
+    "domestic": "requires_a_separate_approved_official_template_and_route_adapter",
+    "international": "requires_a_separate_approved_official_template_and_route_adapter"
+  },
+  "templates": [
     {
-      "relationshipId": "seds-texas-total-energy-consumption-annual-v1",
+      "templateId": "seds-state-dc-total-energy-consumption-annual-v1",
       "relationshipType": "verified_component",
       "status": "research_reviewed_shadow_pending",
-      "aggregate": {
-        "candidateId": "eia:1:aec9a47bb24a4b3218ab689cf8ebdbb4a5e805aa0622886da56f1a9c26466aca",
-        "seriesId": "SEDS.TETCB.TX.A",
-        "metadataHash": "472c9accd73e361ae1fe0c9a3ecea67d2286643017b7a643e3fcd03ffd6e8e0b"
+      "adapterId": "seds_series_code_geography",
+      "routeFamily": "seds",
+      "geographyScope": {
+        "selectorFacet": "stateId",
+        "includePattern": "^[A-Z]{2}$",
+        "excludeValues": ["US"],
+        "normalizedGeographyTypes": ["state"],
+        "description": "All states and the District of Columbia represented by exact SEDS stateId values"
       },
-      "components": [
-        {
-          "candidateId": "eia:1:1ba9e9b2a47cabf8a9986ec7d96e5ce550d2a1fc99bbb76dd0c1a5f4939fc973",
-          "seriesId": "SEDS.FFTCB.TX.A",
-          "metadataHash": "94f5c4755bddd247dde3eb43f376ae805b171c1d90467ac0bd2fac9117861c65"
-        },
-        {
-          "candidateId": "eia:1:5781f3315746ed15312ba27f4c779913e2b069785407347434fe9a5d3f5bfec4",
-          "seriesId": "SEDS.NUETB.TX.A",
-          "metadataHash": "c3b1e1199ba2805cf40077cfba695661988c359515e6f0d544802fcc95920928"
-        },
-        {
-          "candidateId": "eia:1:e108631fb090940748551f04e8e429b4066e4181506218e5d54e8b08a5b4d71d",
-          "seriesId": "SEDS.RETCB.TX.A",
-          "metadataHash": "142d39da3075ab0165a783759749a63b68ea78ce7c1bfd93c8943f4ca9c05c2d"
-        },
-        {
-          "candidateId": "eia:1:0a43d54d1d51cce9576ece880cf9d195bdeb0a2ae6732228db27bca620ef5ca7",
-          "seriesId": "SEDS.ELNIB.TX.A",
-          "metadataHash": "5fad6e14d07322ec2ad341c238690ce93bee46ecd5e20a33e84f2efa7968f017"
-        },
-        {
-          "candidateId": "eia:1:a41084a2c1935f22800db8c9bdcd52a37cc4f6860673de293b18f9517332065f",
-          "seriesId": "SEDS.ELISB.TX.A",
-          "metadataHash": "365e6f810ab32dd623ce6a936b646f59efb35521c9bb1e18c8a349f1c32e0387"
-        }
-      ],
+      "aggregateSeriesCode": "TETCB",
+      "componentSeriesCodes": ["FFTCB", "NUETB", "RETCB", "ELNIB", "ELISB"],
       "formula": {
         "expression": "TETCBZZ = FFTCBZZ + NUETBZZ + RETCBZZ + ELNIBZZ + ELISBZZ",
-        "aggregateSeriesId": "SEDS.TETCB.TX.A",
-        "componentSeriesIds": [
-          "SEDS.FFTCB.TX.A",
-          "SEDS.NUETB.TX.A",
-          "SEDS.RETCB.TX.A",
-          "SEDS.ELNIB.TX.A",
-          "SEDS.ELISB.TX.A"
-        ]
+        "geographyPlaceholder": "ZZ"
       },
       "compatibility": {
-        "routeFamily": "seds",
-        "geographyCode": "TX",
         "frequency": "annual",
         "unit": "Billion Btu",
         "signedComponentsAllowed": true,
@@ -85,7 +59,7 @@
           "url": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf",
           "sha256": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
           "bytes": 216575,
-          "locator": "Section 7, Total energy; TETCBZZ formula"
+          "locator": "Section 7, Total energy; state TETCBZZ formula"
         },
         {
           "url": "https://www.eia.gov/state/seds/sep_fuel/notes/use_a.pdf",
@@ -102,8 +76,58 @@
       },
       "review": {
         "formulaResearch": "complete",
-        "candidateIdentityReview": "complete",
-        "compatibilityReview": "complete",
+        "templateScopeReview": "complete",
+        "observationShadow": "pending",
+        "rankingActivationApproval": "pending_after_shadow"
+      }
+    },
+    {
+      "templateId": "seds-us-total-energy-consumption-annual-v1",
+      "relationshipType": "verified_component",
+      "status": "research_reviewed_shadow_pending",
+      "adapterId": "seds_series_code_geography",
+      "routeFamily": "seds",
+      "geographyScope": {
+        "selectorFacet": "stateId",
+        "includeValues": ["US"],
+        "normalizedGeographyCodes": ["USA"],
+        "description": "United States national SEDS series only"
+      },
+      "aggregateSeriesCode": "TETCB",
+      "componentSeriesCodes": ["FFTCB", "NUETB", "RETCB", "ELNIB"],
+      "formula": {
+        "expression": "TETCBUS = FFTCBUS + NUETBUS + RETCBUS + ELNIBUS",
+        "geographyPlaceholder": "US"
+      },
+      "compatibility": {
+        "frequency": "annual",
+        "unit": "Billion Btu",
+        "signedComponentsAllowed": true,
+        "roundingToleranceRequired": true
+      },
+      "officialEvidence": [
+        {
+          "url": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf",
+          "sha256": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
+          "bytes": 216575,
+          "locator": "Section 7, Total energy; United States TETCBUS formula"
+        },
+        {
+          "url": "https://www.eia.gov/state/seds/sep_fuel/notes/use_a.pdf",
+          "sha256": "58c8f4af8842cde6bd2de6b91e82ed2b87ea6f33d74baca3603321a572531adc",
+          "bytes": 915734,
+          "locator": "Appendix A, mnemonic series names and formulas"
+        }
+      ],
+      "provenance": {
+        "source": "EIA",
+        "selector_source": "official_combination_metadata",
+        "metadata_hash": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
+        "raw_metadata_reference": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf"
+      },
+      "review": {
+        "formulaResearch": "complete",
+        "templateScopeReview": "complete",
         "observationShadow": "pending",
         "rankingActivationApproval": "pending_after_shadow"
       }

@@ -221,6 +221,25 @@ test("generated Phase 1B artifacts remain valid staging metadata", async () => {
   assert.equal(report.production_activated, false);
   assert.equal(report.scope.comprehensive_domestic, false);
 
+  const hierarchyArtifact = JSON.parse(await readFile(
+    new URL("aggregation-hierarchy.generated.json", buildRoot),
+    "utf8"
+  ));
+  assert.equal(hierarchyArtifact.sourceBuild.contentHash, manifest.content_hash);
+  assert.equal(hierarchyArtifact.status, "shadow_ready_inactive");
+  assert.equal(hierarchyArtifact.counts.relationships, 52);
+  assert.equal(hierarchyArtifact.counts.componentEdges, 259);
+  assert.equal(hierarchyArtifact.activation.publicRankingEnabled, false);
+  assert.deepEqual(report.derived_artifacts, [{
+    output: "aggregation-hierarchy.generated.json",
+    status: "shadow_ready_inactive",
+    registry_version: hierarchyArtifact.registryVersion,
+    artifact_hash: hierarchyArtifact.artifactHash,
+    relationship_count: 52,
+    component_edges: 259,
+    public_ranking_enabled: false
+  }]);
+
   for (const artifact of report.artifacts) {
     assert.equal((await stat(new URL(artifact.output, buildRoot))).size, artifact.compressed_bytes);
     if (artifact.output === "natural-gas.jsonl.gz") assert.ok(artifact.missing_geographies > 0);

@@ -17,6 +17,10 @@ import { fileURLToPath } from "node:url";
 
 import { loadPhase1aFixtures, loadPhase4aDomesticFixtures } from "./discover-routes.js";
 import {
+  GENERATED_HIERARCHY_FILENAME,
+  writeAggregationHierarchyArtifact
+} from "./generate-aggregation-hierarchy.js";
+import {
   isElectricityPlantSeries,
   normalizeBulkSeries,
   normalizePlantDirectoryEntry,
@@ -164,6 +168,11 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
   const validatedPlantArtifact = { ...plantArtifact, ...plantValidation };
 
   await writeFile(join(stageDir, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  const hierarchyArtifact = await writeAggregationHierarchyArtifact({
+    buildDir: stageDir,
+    manifest,
+    validation: { artifacts: validationArtifacts }
+  });
   const validationReport = {
     phase: "1B",
     valid: true,
@@ -176,6 +185,15 @@ export async function buildPhase1bCache({ bulkDir, outputDir, checkedAt = new Da
       comprehensive_domestic: false
     },
     artifacts: validationArtifacts,
+    derived_artifacts: [{
+      output: GENERATED_HIERARCHY_FILENAME,
+      status: hierarchyArtifact.status,
+      registry_version: hierarchyArtifact.registryVersion,
+      artifact_hash: hierarchyArtifact.artifactHash,
+      relationship_count: hierarchyArtifact.counts.relationships,
+      component_edges: hierarchyArtifact.counts.componentEdges,
+      public_ranking_enabled: false
+    }],
     directories: [validatedPlantArtifact],
     totals: {
       records: counts.total,
