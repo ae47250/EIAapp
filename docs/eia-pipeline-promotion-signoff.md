@@ -1,8 +1,8 @@
 # EIA Pipeline Promotion Signoff
 
-Status: **STEP 9 PREVIEW PROMOTION PASSED; APPROVED FOR STEP 10 LEGACY RETIREMENT**
+Status: **STEP 9 PASSED; STEP 10 LOCAL LEGACY RETIREMENT PASSED; PREVIEW VERIFICATION PENDING**
 
-Candidate mode passed the deployed preview, rollback, API, latency, and browser gates. Production remains unchanged.
+Candidate mode passed the Step 9 deployed preview, rollback, API, latency, and browser gates. Step 10 removes the legacy scorer and runtime dispatch locally. Production remains unchanged.
 
 ## Source State
 
@@ -12,7 +12,9 @@ Candidate mode passed the deployed preview, rollback, API, latency, and browser 
 - Step 9 verified commit: `c022efa7d264c24b6e767073fc6114283fb40e51`
 - Step 9 verified deployment: `dpl_AEJGuQf8YcYdxymDSqP8ASwwXnqr`
 - Step 9 preview URL: `https://eiaappv20-mx72l5o1w-ea47243.vercel.app`
-- Working state: candidate mode restored to `on` for this branch's Preview environment after a successful rollback drill
+- Step 10 base commit: `b097e17`
+- Current branch behavior: candidate search is the only `/api/search-eia` path
+- Step 9 rollback drill state: candidate mode was restored to `on` after the historical flag test
 - Main branch: not used or modified
 
 ## Versioned Inputs
@@ -28,8 +30,8 @@ Candidate mode passed the deployed preview, rollback, API, latency, and browser 
 - Offline top-five benchmark: `1.0.0` (approved Q01-Q14 cohort)
 - Offline top-five benchmark SHA-256: `22f37d44a7cab54ce0ab9943de89d20545a81273b0a2f4939fb8ebd6d019977b`
 - Semantic reranking: disabled
-- Public feature flag: `EIA_CANDIDATE_PIPELINE`; only exact value `on` enables the new path
-- Default/rollback behavior: unset or any value other than `on` uses the unchanged legacy handler
+- Candidate pipeline flag: retired in Step 10; `EIA_CANDIDATE_PIPELINE` has no runtime effect
+- Rollback behavior: restore a previously verified deployment; no legacy runtime handler remains in this branch
 
 ## Artifact Hashes
 
@@ -60,9 +62,9 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 - [x] Wrong-frequency fallbacks remain separately labeled.
 - [x] Semantic reranking remains disabled and contributes no points.
 - [x] Login-off behavior remains covered by tests.
-- [x] Legacy API response shape remains covered with the feature flag off.
-- [x] Clarification blocks ranking with the candidate flag both off and on.
-- [x] Adversarial AI `correctedQuery` wording cannot change validated activity under either flag path.
+- [x] The candidate API response shape is covered without a runtime feature switch.
+- [x] Clarification blocks ranking before candidate retrieval and observation fetching.
+- [x] Adversarial AI `correctedQuery` wording cannot change validated candidate activity.
 - [x] Untrusted total, aggregate, component, parent, and child labels contribute no hierarchy preference.
 - [x] Exact Q01-Q14 top-five series IDs are frozen in a versioned offline benchmark.
 
@@ -70,11 +72,12 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 
 | Check | Result |
 | --- | --- |
-| Full Node test suite | PASS: 184 passed, 0 failed |
+| Step 10 full Node test suite | PASS: 176 passed, 0 failed |
+| Step 10 focused retirement tests | PASS: 24 passed, 0 failed |
 | Next.js production build | PASS: Next.js 16.2.10, all routes compiled |
 | Focused Step 8 tests | PASS: 34 passed, 0 failed |
 | Versioned Q01-Q14 top-five benchmark | PASS: 14/14 cases, including repeated deterministic runs |
-| Cross-flag safety contract | PASS: clarification and adversarial correction invariants with flag off/on |
+| Retired-flag non-interference | PASS: an obsolete `off` value cannot restore legacy search |
 | Hierarchy trap contract | PASS: labels and untrusted relationship-shaped fields do not affect ranking |
 | Q03-Q14 deterministic remediation test | PASS |
 | Cold local retrieval test | PASS: 1835.473 ms, budget below 3000 ms |
@@ -89,7 +92,7 @@ Compressed retrieval artifacts total approximately 28.6 MB. Vercel function size
 | Preview representative cohort | PASS: 8/8 expected results, no automatic series selection |
 | Preview end-to-end p95 | PASS: 9.29 s including authenticated CLI overhead |
 | Explicit candidate selection | PASS: selector verified, 45 observations, 5.418 s |
-| Live rollback drill | PASS: flag off returned legacy; flag on restored candidate mode |
+| Historical Step 9 live rollback drill | PASS: flag off returned legacy; flag on restored candidate mode before Step 10 removal |
 | Visible browser flow | PASS: five choices, Graph loaded, 45-observation coverage, 0 console errors |
 
 The complete live report is `HOHO3.md` with SHA-256 `4224a967be3c5a7c74a84f258a4e26de8f4f80eb6b26c36b6a688aad114e3d2e`. Mini and nano produced the same validated intent, top-five order, and warnings for all 30 queries. Browser evidence is stored under `C:\Users\eiriksson\.codex\visualizations\2026\07\16\019f6b79-de2d-7d90-b44e-d014f6e28170\eia-promotion`.
@@ -171,27 +174,26 @@ The runner now contains Q15-Q30 for:
 
 The prior 3.212 s first local HTTP request was evaluated on Vercel. The deployed eight-query end-to-end p95 passed at 9.29 s, including authenticated CLI startup overhead.
 
-## Promotion Procedure
+## Step 10 Preview Procedure
 
 1. Commit and push this branch without touching `main`.
-2. Deploy a preview with `EIA_CANDIDATE_PIPELINE=on`.
-3. Run the browser checklist and capture screenshots.
-4. Run the 30-query live model cohort and review the generated report.
-5. Measure cold, warm, OpenAI, and preview end-to-end latency.
-6. Record owner and technical-reviewer approval below.
-7. Deploy production with the feature flag still off.
-8. Set `EIA_CANDIDATE_PIPELINE=on` only after the production-off deployment is healthy, then redeploy.
+2. Remove the branch-specific Preview `EIA_CANDIDATE_PIPELINE` override.
+3. Deploy the candidate-only branch preview.
+4. Confirm an obsolete `EIA_CANDIDATE_PIPELINE=off` value cannot change route behavior.
+5. Verify clarification, candidate display, explicit Graph selection, XLSX metadata, and browser console state.
+6. Record the exact commit and deployment below.
+7. Keep production unchanged until a separately approved production migration.
 
 ## Rollback
 
-1. Set `EIA_CANDIDATE_PIPELINE=off` or remove it.
-2. Redeploy.
-3. Confirm `/api/search-eia` returns the legacy response contract.
-4. Do not modify or merge through `main` as part of rollback.
+1. Reassign the Preview alias to the previously verified Step 9 deployment or redeploy commit `c022efa`.
+2. Confirm the candidate-selection response contract and explicit-selection flow.
+3. Do not use an environment flag as a rollback mechanism; the legacy handler is retired.
+4. Do not modify or merge through `main` as part of Preview rollback.
 
 ## Signoff
 
-- Project owner: approved in task  Date: 2026-07-17  Decision: proceed to Step 10
-- Technical reviewer: _______________  Date: __________  Decision: __________
+- Project owner: approved in task  Date: 2026-07-17  Decision: execute Step 10 after Step 9 passes
+- Technical reviewer: local automated gates passed  Date: 2026-07-17  Decision: Preview verification required
 
-Promotion decision: **STEP 9 PASSED; PRODUCTION UNCHANGED; PROCEED TO STEP 10**
+Promotion decision: **STEP 9 PASSED; STEP 10 LOCAL GATES PASSED; PRODUCTION UNCHANGED; PREVIEW PENDING**

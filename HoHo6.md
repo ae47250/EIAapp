@@ -1,5 +1,9 @@
 # Raw-Only AI Input and Preserved Cleaned-Note Architecture Review
 
+## Implementation status update (2026-07-17)
+
+This document remains the historical read-only audit at commit `38e9659`. The current Step 10 branch has since retired the legacy search path: `/api/search-eia` always uses `candidate-search.js`, `lib/sources/eia/search.js` has been removed, and `EIA_CANDIDATE_PIPELINE` no longer controls runtime behavior. The local flag entry was also removed. References below to the legacy scorer, flag-off behavior, or a current legacy/candidate route switch describe the audited historical snapshot, not current HEAD. The raw-only AI input, preserved cleaned query, provenance, clarification, semantic eligibility, and corrected-query non-interference rules remain enforced by the candidate pipeline and its tests.
+
 ## Review scope
 
 This is a read-only architecture review of the EIA input-processing workflow on branch `codex/nextjs-eia-migration-login-toggle` at commit `38e9659` (`Use raw queries for AI interpretation`). No application or test code was changed as part of this review.

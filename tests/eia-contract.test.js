@@ -1,31 +1,25 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 
 import { GET as searchEia } from "../app/api/search-eia/route.js";
 import { GET as interpretQuery } from "../app/api/interpret-query/route.js";
 import { buildXlsx, workbookFileName } from "../lib/client/xlsx.js";
 
-const fixture = JSON.parse(readFileSync(new URL("./fixtures/eia-search.json", import.meta.url), "utf8"));
 const originalEnvironment = {
   EIA_API_KEY: process.env.EIA_API_KEY,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED,
-  EIA_CANDIDATE_PIPELINE: process.env.EIA_CANDIDATE_PIPELINE
+  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED
 };
 const originalFetch = globalThis.fetch;
-let exactSeriesRequests = 0;
 let openAiRequests = 0;
-let broadDataRequests = 0;
-let failNextExactRequest = false;
+let seriesRequests = 0;
 let lastOpenAiInput = "";
 
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
   process.env.LOGIN_REQUIRED = "off";
-  process.env.EIA_CANDIDATE_PIPELINE = "off";
   delete process.env.OPENAI_API_KEY;
-  globalThis.fetch = mockEiaFetch;
+  globalThis.fetch = mockFetch;
 });
 
 after(() => {
@@ -33,50 +27,21 @@ after(() => {
   restoreEnvironment(originalEnvironment);
 });
 
-test("Next search route preserves the EIA response contract with a variable typo", async () => {
-  exactSeriesRequests = 0;
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20enrgy%20production"));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.deepEqual(Object.keys(body), ["query", "country", "intent", "source", "selectedSeries", "variables", "note"]);
-  assert.equal(body.query, "Brazil enrgy production");
-  assert.deepEqual(body.country, { code: "BRA", name: "Brazil" });
-  assert.equal(body.intent.interpreter, "rules");
-  assert.equal(body.intent.countryCode, "BRA");
-  assert.equal(body.intent.activity, "production");
-  assert.equal(body.selectedSeries.title, "Total primary energy - Production");
-  assert.deepEqual(body.selectedSeries.coverage, { start: "2022", end: "2024", count: 3 });
-  assert.deepEqual(body.selectedSeries.points, [
-    { period: "2022", value: 12.1 },
-    { period: "2023", value: 12.8 },
-    { period: "2024", value: 13.5 }
-  ]);
-  assert.equal(body.variables.length, 1);
-  assert.equal(body.variables[0].activityId, "1");
-  assert.ok(body.variables.every(variable => variable.activity === "Production"));
-  assert.equal(body.variables[0].certainty.semanticCompatibility, "compatible");
-  assert.equal(body.variables[0].certainty.frequencyRelation, "defaulted");
-  assert.equal(body.variables[0].certainty.aggregationRelation, "unknown");
-  assert.equal(body.variables[0].certainty.hierarchyEvidenceStatus, "none");
-  assert.deepEqual(body.selectedSeries.certainty, body.variables[0].certainty);
-  assert.equal(exactSeriesRequests, 1);
-  assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
-});
-
 test("full staged workflow preserves exact raw input and separate cleaned text", async () => {
   process.env.OPENAI_API_KEY = "fixture-openai-key";
   openAiRequests = 0;
   lastOpenAiInput = "";
   try {
-    const raw = "  Brazil\u00a0  enrgy\nproduction  ";
+    const raw = "  Brazil\u00a0  annual petroleum\nconsumption  ";
     const interpretationUrl = new URL("https://example.test/api/interpret-query");
     interpretationUrl.searchParams.set("q", raw);
     const interpretationResponse = await interpretQuery(new Request(interpretationUrl));
     const { intent } = await interpretationResponse.json();
+
+    assert.equal(interpretationResponse.status, 200);
     assert.equal(intent.interpreter, "openai");
     assert.equal(intent.originalQuery, raw);
-    assert.equal(intent.cleanedQuery, "Brazil enrgy production");
+    assert.equal(intent.cleanedQuery, "Brazil annual petroleum consumption");
     assert.match(lastOpenAiInput, new RegExp(`Raw query: ${escapeRegExp(JSON.stringify(raw))}`));
     assert.doesNotMatch(lastOpenAiInput, /Lightly cleaned query:/);
     assert.equal(openAiRequests, 1);
@@ -95,221 +60,88 @@ test("full staged workflow preserves exact raw input and separate cleaned text",
       ambiguity: intent.ambiguity,
       fallback: intent.fallback
     }));
-    url.searchParams.set("intentCorrectedQuery", intent.correctedQuery);
-    url.searchParams.set("intentInterpreter", intent.interpreter);
-    url.searchParams.set("intentCountryCode", intent.countryCode);
-    url.searchParams.set("intentProduct", intent.product);
-    url.searchParams.set("intentActivity", intent.activity);
-    url.searchParams.set("intentFrequency", intent.frequency);
     const response = await searchEia(new Request(url));
     const body = await response.json();
 
     assert.equal(response.status, 200);
+    assert.equal(body.mode, "candidate-selection");
+    assert.equal(body.query, "Brazil annual petroleum consumption");
     assert.equal(body.intent.interpreter, "openai");
     assert.equal(body.intent.originalQuery, raw);
-    assert.equal(body.intent.cleanedQuery, "Brazil enrgy production");
+    assert.equal(body.intent.cleanedQuery, "Brazil annual petroleum consumption");
     assert.equal(body.intent.correctedQuerySource, "ai");
     assert.equal(body.intent.fields.product.validation, "approved");
     assert.equal(body.intent.fields.product.fallbackUsed, false);
+    assert.ok(body.variables.length > 0);
+    assert.equal(body.selectedSeries, null);
     assert.equal(openAiRequests, 1);
   } finally {
     delete process.env.OPENAI_API_KEY;
   }
 });
 
-test("legacy ranking ignores adversarial AI-corrected wording", async () => {
-  const raw = "Brazil energy production";
-  const url = new URL("https://example.test/api/search-eia");
-  url.searchParams.set("q", raw);
-  url.searchParams.set("intentReady", "1");
-  url.searchParams.set("intentPayload", JSON.stringify({
-    originalQuery: raw,
-    cleanedQuery: raw,
-    correctedQuery: "Brazil energy consumption",
-    interpreter: "openai",
-    confidence: 0.98,
-    fields: {
-      country: { value: "BRA", confidence: 0.98 },
-      product: { value: "total energy", confidence: 0.98 },
-      activity: { value: "production", confidence: 0.98 },
-      frequency: { value: "annual", explicit: false, confidence: 0.98 }
-    }
-  }));
+test("candidate selection and browser-side XLSX export retain verified metadata", async () => {
+  const query = "Brazil annual petroleum consumption";
+  const initialResponse = await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`));
+  const initial = await initialResponse.json();
+  const candidate = initial.variables[0];
 
-  const response = await searchEia(new Request(url));
-  const body = await response.json();
+  assert.equal(initialResponse.status, 200);
+  assert.equal(initial.mode, "candidate-selection");
+  assert.equal(initial.selectedSeries, null);
+  assert.ok(candidate);
 
-  assert.equal(response.status, 200);
-  assert.equal(body.intent.activity, "production");
-  assert.equal(body.intent.correctedQuery, "Brazil energy consumption");
-  assert.equal(body.selectedSeries.activity, "Production");
-  assert.equal(body.variables[0].activity, "Production");
-  assert.ok(body.variables.every(variable => variable.activity === "Production"));
-});
-
-test("legacy scoring cannot combine product and activity evidence across concept pairs", async () => {
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20total%20energy%20production%20and%20petroleum%20consumption"));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.deepEqual(body.intent.conceptPairs.map(pair => [pair.product, pair.activity]), [
-    ["total energy", "production"],
-    ["petroleum", "consumption"]
-  ]);
-  assert.equal(body.selectedSeries.activity, "Production");
-  assert.deepEqual(body.variables.map(variable => [variable.product, variable.activity]), [
-    ["Total primary energy", "Production"]
-  ]);
-});
-
-test("legacy scoring returns no result when available rows fail semantic eligibility", async () => {
-  exactSeriesRequests = 0;
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20electricity%20generation"));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.selectedSeries, null);
-  assert.deepEqual(body.variables, []);
-  assert.match(body.userMessage, /none matched the validated product and activity/i);
-  assert.equal(exactSeriesRequests, 0);
-});
-
-test("unclear input asks for clarification before a broad EIA data request", async () => {
-  broadDataRequests = 0;
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20numbers"));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.needsClarification, true);
-  assert.deepEqual(body.intent.missingFields, ["product", "activity"]);
-  assert.equal(body.selectedSeries, null);
-  assert.deepEqual(body.variables, []);
-  assert.match(body.userMessage, /product and activity/i);
-  assert.equal(broadDataRequests, 0);
-});
-
-test("legacy exact selectors cannot bypass clarification", async () => {
-  exactSeriesRequests = 0;
-  const url = new URL("https://example.test/api/search-eia");
-  url.searchParams.set("q", "Brazil energy");
-  url.searchParams.set("country", "BRA");
-  url.searchParams.set("productId", "44");
-  url.searchParams.set("activityId", "1");
-  url.searchParams.set("unit", "QBTU");
-
-  const response = await searchEia(new Request(url));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.needsClarification, true);
-  assert.equal(body.intent.blockingClarification, true);
-  assert.equal(body.selectedSeries, null);
-  assert.deepEqual(body.variables, []);
-  assert.equal(exactSeriesRequests, 0);
-});
-
-test("a transient EIA server error retries only the selected top series", async () => {
-  globalThis.__EIA_APP_CACHE__?.clear();
-  exactSeriesRequests = 0;
-  failNextExactRequest = true;
-
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20energy%20production"));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.selectedSeries.activityId, "1");
-  assert.equal(exactSeriesRequests, 2);
-});
-
-test("exact-series selection keeps the alternate-series response shape", async () => {
-  const url = new URL("https://example.test/api/search-eia");
-  url.searchParams.set("q", "Brazil energy consumption");
-  url.searchParams.set("country", "BRA");
-  url.searchParams.set("productId", "44");
-  url.searchParams.set("activityId", "2");
-  url.searchParams.set("unit", "QBTU");
-  const response = await searchEia(new Request(url));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.deepEqual(Object.keys(body), ["query", "country", "intent", "source", "selectedSeries", "variables", "note"]);
-  assert.equal(body.selectedSeries.activity, "Consumption");
-  assert.equal(body.selectedSeries.latestPeriod, "2024");
-  assert.deepEqual(body.variables, []);
-});
-
-test("an exact series with no observations is marked for the UI to hide", async () => {
-  const url = new URL("https://example.test/api/search-eia");
-  url.searchParams.set("q", "Brazil energy consumption empty series");
-  url.searchParams.set("country", "BRA");
-  url.searchParams.set("productId", "999");
-  url.searchParams.set("activityId", "999");
-  url.searchParams.set("unit", "QBTU");
-  const response = await searchEia(new Request(url));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.selectedSeries, null);
-  assert.equal(body.emptySeries, true);
-});
-
-test("a legacy EIA entity returns a clear historical-data notice", async () => {
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Former%20Czechoslovakia%20energy%20production"));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.country.name, "Former Czechoslovakia");
-  assert.equal(body.selectedSeries, null);
-  assert.equal(body.legacyEntity, true);
-  assert.match(body.userMessage, /historical EIA entity/i);
-});
-
-test("browser-side XLSX export retains All_Data and Metadata sheets", async () => {
-  const response = await searchEia(new Request("https://example.test/api/search-eia?q=Brazil%20energy%20production"));
-  const body = await response.json();
+  seriesRequests = 0;
+  const selectionUrl = new URL("https://example.test/api/search-eia");
+  selectionUrl.searchParams.set("q", query);
+  selectionUrl.searchParams.set("candidateId", candidate.candidateId);
+  const selectionResponse = await searchEia(new Request(selectionUrl));
+  const body = await selectionResponse.json();
   const workbookText = new TextDecoder().decode(await buildXlsx(body.selectedSeries).arrayBuffer());
 
+  assert.equal(selectionResponse.status, 200);
+  assert.equal(seriesRequests, 1);
+  assert.equal(body.selectedSeries.selectorVerified, true);
+  assert.equal(body.selectedSeries.seriesId, candidate.seriesId);
   assert.match(workbookText, /All_Data/);
   assert.match(workbookText, /Metadata/);
   assert.match(workbookText, /Observation period/);
-  assert.match(workbookText, /Total primary energy - Production/);
-  assert.equal(workbookFileName(body.selectedSeries), "Brazil_Primary_Energy_Production.xlsx");
+  assert.ok(workbookText.includes(candidate.title));
+  assert.ok(workbookText.includes(candidate.seriesId));
+  assert.equal(workbookFileName(body.selectedSeries), "Brazil_Petroleum_Consumption.xlsx");
+  assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
 });
 
-async function mockEiaFetch(input, options = {}) {
+async function mockFetch(input, options = {}) {
   const url = new URL(String(input));
   if (url.hostname === "api.openai.com") {
     openAiRequests += 1;
     lastOpenAiInput = JSON.parse(options.body).input;
     return jsonResponse({
       output_text: JSON.stringify({
-        correctedQuery: "Brazil energy production",
+        correctedQuery: "Brazil annual petroleum consumption",
         countryName: "Brazil",
         countryCode: "BRA",
-        product: "total energy",
-        activity: "production",
+        product: "petroleum",
+        activity: "consumption",
         frequency: "annual",
         confidence: 0.98
       })
     });
   }
-  if (url.pathname.endsWith("/facet/countryRegionId/")) return jsonResponse(fixture.countries);
-
-  const countryCode = url.searchParams.get("facets[countryRegionId][]");
-  const activityId = url.searchParams.get("facets[activityId][]");
-  if (activityId) exactSeriesRequests += 1;
-  else if (countryCode) broadDataRequests += 1;
-  if (activityId && failNextExactRequest) {
-    failNextExactRequest = false;
-    return new Response("<html><h1>502 Bad Gateway</h1></html>", {
-      status: 502,
-      headers: { "Content-Type": "text/html" }
+  if (url.pathname.includes("/v2/seriesid/")) {
+    seriesRequests += 1;
+    assert.equal(url.searchParams.get("api_key"), "fixture-eia-key");
+    return jsonResponse({
+      response: {
+        data: [
+          { period: "2024", countryRegionId: "BRA", consumption: "11.25", "consumption-units": "quadrillion Btu" },
+          { period: "2023", countryRegionId: "BRA", consumption: "10.5", "consumption-units": "quadrillion Btu" }
+        ]
+      }
     });
   }
-  const rows = countryCode === "CSK"
-    ? [{ period: "2024", value: "NA", countryRegionId: "CSK", productId: "44", activityId: "1", unit: "QBTU" }]
-    : activityId ? fixture.exactRows[activityId] || [] : fixture.broadRows;
-  return jsonResponse({ response: { data: rows } });
+  throw new Error(`Unexpected network request: ${url}`);
 }
 
 function escapeRegExp(value) {

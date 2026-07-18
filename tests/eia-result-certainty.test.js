@@ -3,7 +3,6 @@ import { test } from "node:test";
 
 import {
   RESULT_CERTAINTY_VERSION,
-  buildLegacyResultCertainty,
   buildRankedResultCertainty
 } from "../lib/sources/eia/result-certainty.js";
 
@@ -37,9 +36,8 @@ test("ranked certainty reports every result dimension independently", () => {
   });
 });
 
-test("fallback and legacy certainty never turn unknown aggregation into exactness", () => {
+test("fallback certainty never turns unknown aggregation into exactness", () => {
   const explicitIntent = { frequencyExplicit: true, structuredIntent: { conceptPairStatus: "validated" } };
-  const defaultedIntent = { frequencyExplicit: false, structuredIntent: { conceptPairStatus: "validated" } };
   const fallback = buildRankedResultCertainty(explicitIntent, {
     ranking: {
       tier: "B",
@@ -49,12 +47,8 @@ test("fallback and legacy certainty never turn unknown aggregation into exactnes
       signals: { semanticFloorPassed: true }
     }
   });
-  const legacy = buildLegacyResultCertainty(defaultedIntent);
 
   assert.equal(fallback.frequencyRelation, "approved_fallback");
   assert.equal(fallback.presentationClass, "compatible_fallback");
   assert.equal(fallback.aggregationRelation, "unknown");
-  assert.equal(legacy.frequencyRelation, "defaulted");
-  assert.equal(legacy.aggregationRelation, "unknown");
-  assert.equal(legacy.hierarchyEvidenceStatus, "none");
 });

@@ -6,8 +6,7 @@ import { GET as searchEia } from "../app/api/search-eia/route.js";
 const originalEnvironment = {
   EIA_API_KEY: process.env.EIA_API_KEY,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED,
-  EIA_CANDIDATE_PIPELINE: process.env.EIA_CANDIDATE_PIPELINE
+  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED
 };
 const originalFetch = globalThis.fetch;
 let seriesRequests = 0;
@@ -15,7 +14,6 @@ let seriesRequests = 0;
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
   process.env.LOGIN_REQUIRED = "off";
-  process.env.EIA_CANDIDATE_PIPELINE = "on";
   delete process.env.OPENAI_API_KEY;
   globalThis.fetch = mockFetch;
 });
@@ -45,6 +43,22 @@ test("candidate mode blocks missing activity before ranking or observation retri
   assert.equal(body.diagnostics.hierarchyPreferenceApplied, false);
   assert.equal(body.diagnostics.semanticRerankingApplied, false);
   assert.equal(seriesRequests, 0);
+});
+
+test("the retired feature flag cannot switch the route back to legacy search", async () => {
+  const previous = process.env.EIA_CANDIDATE_PIPELINE;
+  process.env.EIA_CANDIDATE_PIPELINE = "off";
+  try {
+    const response = await searchEia(new Request("https://example.test/api/search-eia?q=Texas%20gas"));
+    const body = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(body.mode, "candidate-selection");
+    assert.equal(body.diagnostics.clarificationBlocked, true);
+  } finally {
+    if (previous === undefined) delete process.env.EIA_CANDIDATE_PIPELINE;
+    else process.env.EIA_CANDIDATE_PIPELINE = previous;
+  }
 });
 
 test("candidate IDs cannot bypass clarification", async () => {
@@ -96,6 +110,38 @@ test("a candidate ID that was not displayed is rejected before any EIA request",
   assert.equal(response.status, 400);
   assert.match(body.error, /not valid/i);
   assert.equal(seriesRequests, 0);
+});
+
+test("AI corrected wording cannot override the validated activity used for candidates", async () => {
+  const raw = "Brazil energy production";
+  const url = new URL("https://example.test/api/search-eia");
+  url.searchParams.set("q", raw);
+  url.searchParams.set("intentReady", "1");
+  url.searchParams.set("intentPayload", JSON.stringify({
+    originalQuery: raw,
+    cleanedQuery: raw,
+    correctedQuery: "Brazil energy consumption",
+    correctedQuerySource: "ai",
+    interpreter: "openai",
+    confidence: 0.98,
+    fields: {
+      country: { value: "BRA", confidence: 0.98 },
+      product: { value: "total energy", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 },
+      frequency: { value: "annual", explicit: false, confidence: 0.98 }
+    }
+  }));
+
+  const response = await searchEia(new Request(url));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.mode, "candidate-selection");
+  assert.equal(body.intent.activity, "production");
+  assert.equal(body.intent.correctedQuery, "Brazil energy consumption");
+  assert.ok(body.variables.length > 0);
+  assert.ok(body.variables.every(variable => variable.activity === "production"));
+  assert.ok(body.variables.every(variable => !/consumption/i.test(variable.title)));
 });
 
 async function mockFetch(input) {

@@ -92,14 +92,18 @@ Flow:
 ```text
 SearchWorkspace
   -> /api/search-eia?q=...
-  -> lib/sources/eia/search.js
+  -> lib/sources/eia/candidate-search.js
   -> lib/sources/eia/interpret-query.js
   -> OpenAI interpretation when configured, otherwise rule fallback
-  -> official EIA API
-  -> matching variables, selected series, chart, and XLSX export
+  -> local metadata retrieval and deterministic ranking
+  -> validated candidate choices with no automatic series selection
+  -> official EIA API only after the user selects a candidate
+  -> chart and XLSX export
 ```
 
-The current HTTP response shape is protected by `tests/eia-contract.test.js`. It checks country metadata, variable ranking, chronological observations, alternate-series selection, secret removal, and the `All_Data` and `Metadata` workbook sheets.
+Candidate search is the only `/api/search-eia` path. The retired `EIA_CANDIDATE_PIPELINE` value has no runtime effect. Rollback requires reverting to a previously verified deployment rather than changing an environment flag.
+
+The current HTTP response shape is protected by `tests/eia-contract.test.js` and `tests/eia-candidate-api.test.js`. They check raw/cleaned input preservation, clarification blocking, corrected-query non-interference, explicit verified selection, chronological observations, secret removal, and the `All_Data` and `Metadata` workbook sheets.
 
 Migration parity tests use correctly spelled country names with minor variable-name typos, for example:
 

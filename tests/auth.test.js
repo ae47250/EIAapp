@@ -5,9 +5,9 @@ import { randomBytes } from "node:crypto";
 import loginHandler, { resetLoginAttemptsForTests } from "../lib/server/login.js";
 import logoutHandler from "../lib/server/logout.js";
 import openaiDiagnosticHandler from "../lib/server/openai-diagnostic.js";
+import searchEiaHandler from "../lib/sources/eia/candidate-search.js";
 import interpretQueryHandler from "../lib/sources/eia/interpret-query.js";
 import plantMetadataHandler from "../lib/sources/eia/plant-metadata.js";
-import searchEiaHandler from "../lib/sources/eia/search.js";
 import { proxy as middleware } from "../proxy.js";
 import {
   INVALID_CREDENTIALS_MESSAGE,
