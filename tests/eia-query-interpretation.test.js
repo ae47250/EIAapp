@@ -706,6 +706,309 @@ test("an unsupported geography-like token is not rescued by an unrelated AI clai
   assert.ok(intent.missingFields.includes("country"));
 });
 
+test("bounded AI product corrections validate against the approved product vocabulary", () => {
+  const cases = [
+    ["electrciity", "electricity"],
+    ["petrolium", "petroleum"],
+    ["nucelar", "nuclear"]
+  ];
+
+  for (const [rawProduct, product] of cases) {
+    const raw = `Brazil ${rawProduct} consumption`;
+    const intent = validateAiInterpretation({
+      correctedQuery: `Brazil ${product} consumption`,
+      confidence: 0.98,
+      geographies: [{ value: "Brazil", confidence: 0.99 }],
+      conceptPairs: [{ product, activity: "consumption", order: 0, confidence: 0.98 }],
+      fields: {
+        country: { value: "Brazil", confidence: 0.99 },
+        product: { rawValue: rawProduct, value: product, confidence: 0.98 },
+        activity: { value: "consumption", confidence: 0.98 }
+      }
+    }, raw);
+
+    assert.equal(intent.originalQuery, raw);
+    assert.equal(intent.product, product);
+    assert.equal(intent.fields.product.validation, "approved");
+    assert.equal(intent.fields.product.validationEvidenceSource, "ai_proposed_deterministically_verified");
+    assert.deepEqual(intent.fields.product.correction, {
+      from: rawProduct,
+      to: product,
+      editDistance: rawProduct === "petrolium" ? 1 : 2
+    });
+    assert.equal(intent.needsClarification, false);
+  }
+});
+
+test("bounded AI activity corrections validate against the approved activity vocabulary", () => {
+  const cases = [
+    ["consumtion", "consumption"],
+    ["prodction", "production"],
+    ["generaton", "generation"]
+  ];
+
+  for (const [rawActivity, activity] of cases) {
+    const raw = `Brazil electricity ${rawActivity}`;
+    const intent = validateAiInterpretation({
+      correctedQuery: `Brazil electricity ${activity}`,
+      confidence: 0.98,
+      geographies: [{ value: "Brazil", confidence: 0.99 }],
+      conceptPairs: [{ product: "electricity", activity, order: 0, confidence: 0.98 }],
+      fields: {
+        country: { value: "Brazil", confidence: 0.99 },
+        product: { value: "electricity", confidence: 0.98 },
+        activity: { rawValue: rawActivity, value: activity, confidence: 0.98 }
+      }
+    }, raw);
+
+    assert.equal(intent.activity, activity);
+    assert.equal(intent.fields.activity.validationEvidenceSource, "ai_proposed_deterministically_verified");
+    assert.equal(intent.fields.activity.correction.from, rawActivity);
+    assert.equal(intent.fields.activity.correction.to, activity);
+    assert.equal(intent.needsClarification, false);
+  }
+});
+
+test("bounded AI sector corrections validate against the approved sector vocabulary", () => {
+  const cases = [
+    ["residental", "residential"],
+    ["commerical", "commercial"],
+    ["industiral", "industrial"],
+    ["transportaion", "transportation"],
+    ["electric powre", "electric power"]
+  ];
+
+  for (const [rawSector, sector] of cases) {
+    const raw = `Brazil electricity consumption ${rawSector} sector`;
+    const intent = validateAiInterpretation({
+      correctedQuery: `Brazil electricity consumption ${sector} sector`,
+      confidence: 0.98,
+      geographies: [{ value: "Brazil", confidence: 0.99 }],
+      conceptPairs: [{ product: "electricity", activity: "consumption", order: 0, confidence: 0.98 }],
+      fields: {
+        country: { value: "Brazil", confidence: 0.99 },
+        product: { value: "electricity", confidence: 0.98 },
+        activity: { value: "consumption", confidence: 0.98 },
+        sector: { rawValue: rawSector, value: sector, confidence: 0.98 }
+      }
+    }, raw);
+
+    assert.equal(intent.sector, sector);
+    assert.equal(intent.fields.sector.validationEvidenceSource, "ai_proposed_deterministically_verified");
+    assert.equal(intent.fields.sector.correction.from, rawSector);
+    assert.equal(intent.fields.sector.correction.to, sector);
+  }
+});
+
+test("bounded AI frequency corrections validate against the approved frequency vocabulary", () => {
+  const cases = [
+    ["daly", "daily"],
+    ["wekly", "weekly"],
+    ["montly", "monthly"],
+    ["quartely", "quarterly"],
+    ["anual", "annual"]
+  ];
+
+  for (const [rawFrequency, frequency] of cases) {
+    const raw = `Brazil ${rawFrequency} electricity consumption`;
+    const intent = validateAiInterpretation({
+      correctedQuery: `Brazil ${frequency} electricity consumption`,
+      confidence: 0.98,
+      geographies: [{ value: "Brazil", confidence: 0.99 }],
+      conceptPairs: [{ product: "electricity", activity: "consumption", order: 0, confidence: 0.98 }],
+      fields: {
+        country: { value: "Brazil", confidence: 0.99 },
+        product: { value: "electricity", confidence: 0.98 },
+        activity: { value: "consumption", confidence: 0.98 },
+        frequency: { rawValue: rawFrequency, value: frequency, explicit: true, confidence: 0.98 }
+      }
+    }, raw);
+
+    assert.equal(intent.frequency, frequency);
+    assert.equal(intent.requestedFrequency, frequency);
+    assert.equal(intent.frequencyExplicit, true);
+    assert.equal(intent.fields.frequency.validationEvidenceSource, "ai_proposed_deterministically_verified");
+    assert.equal(intent.fields.frequency.correction.from, rawFrequency);
+    assert.equal(intent.fields.frequency.correction.to, frequency);
+  }
+});
+
+test("multiple approved vocabulary corrections can be validated in one raw query", () => {
+  const raw = "Brazil montly electrciity consumtion residental sector";
+  const intent = validateAiInterpretation({
+    correctedQuery: "Brazil monthly electricity consumption residential sector",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    conceptPairs: [{ product: "electricity", activity: "consumption", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "electricity", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 },
+      sector: { value: "residential", confidence: 0.98 },
+      frequency: { value: "monthly", explicit: true, confidence: 0.98 }
+    }
+  }, raw);
+
+  assert.equal(intent.originalQuery, raw);
+  assert.equal(intent.product, "electricity");
+  assert.equal(intent.activity, "consumption");
+  assert.equal(intent.sector, "residential");
+  assert.equal(intent.frequency, "monthly");
+  assert.deepEqual(intent.validatedCorrections.map(item => [item.type, item.from, item.to]), [
+    ["frequency", "montly", "monthly"],
+    ["product", "electrciity", "electricity"],
+    ["activity", "consumtion", "consumption"],
+    ["sector", "residental", "residential"]
+  ]);
+  assert.equal(intent.needsClarification, false);
+});
+
+test("semantic typo validation rejects low-confidence, unsupported, and tied AI corrections", () => {
+  const lowConfidence = validateAiInterpretation({
+    correctedQuery: "Brazil electricity consumption",
+    confidence: 0.95,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "electricity", confidence: 0.55 },
+      activity: { value: "consumption", confidence: 0.98 }
+    }
+  }, "Brazil electrciity consumption");
+  assert.equal(lowConfidence.product, null);
+  assert.ok(lowConfidence.missingFields.includes("product"));
+
+  const unsupported = validateAiInterpretation({
+    correctedQuery: "Brazil electricity consumption",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "electricity", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 }
+    }
+  }, "Brazil moon consumption");
+  assert.equal(unsupported.product, null);
+  assert.ok(unsupported.missingFields.includes("product"));
+
+  const tiedSector = validateAiInterpretation({
+    correctedQuery: "Brazil electricity consumption electric power sector",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "electricity", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 },
+      sector: { value: "electric power", confidence: 0.98 }
+    }
+  }, "Brazil electricity consumption utilty sector");
+  assert.equal(tiedSector.sector, null);
+  assert.equal(tiedSector.fields.sector.correction, undefined);
+});
+
+test("verified corrections preserve exact negations and corrected excluded products", () => {
+  for (const marker of ["not", "without", "excluding"]) {
+    const raw = `Brazil energy consumption ${marker} petrolium`;
+    const intent = validateAiInterpretation({
+      correctedQuery: `Brazil energy consumption ${marker} petroleum`,
+      confidence: 0.98,
+      geographies: [{ value: "Brazil", confidence: 0.99 }],
+      conceptPairs: [{ product: "total energy", activity: "consumption", order: 0, confidence: 0.98 }],
+      exclusions: [{ type: "product", value: "petroleum", confidence: 0.98 }],
+      fields: {
+        country: { value: "Brazil", confidence: 0.99 },
+        product: { value: "total energy", confidence: 0.98 },
+        activity: { value: "consumption", confidence: 0.98 }
+      }
+    }, raw);
+
+    assert.equal(intent.originalQuery, raw);
+    assert.equal(intent.product, "total energy");
+    assert.ok(intent.normalizedQuery.includes(marker));
+    assert.ok(intent.exclusions.some(item => item.type === "product" && item.value === "petroleum"));
+    assert.ok(intent.exclusions.find(item => item.value === "petroleum").corrections.some(item => item.from === "petrolium"));
+    assert.ok(intent.conceptPairs.every(pair => pair.product !== "petroleum"));
+  }
+});
+
+test("AI correction cannot remove a raw negation or make its excluded product positive", () => {
+  const raw = "Brazil energy consumption not petrolium";
+  const intent = validateAiInterpretation({
+    correctedQuery: "Brazil petroleum consumption",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    conceptPairs: [{ product: "petroleum", activity: "consumption", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "petroleum", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 }
+    }
+  }, raw);
+
+  assert.equal(intent.originalQuery, raw);
+  assert.ok(intent.normalizedQuery.includes("not petroleum"));
+  assert.equal(intent.product, "total energy");
+  assert.equal(intent.fields.product.normalizedValue, "total energy");
+  assert.ok(intent.exclusions.some(item => item.type === "product" && item.value === "petroleum"));
+  assert.ok(intent.conceptPairs.every(pair => pair.product !== "petroleum"));
+});
+
+test("broad energy and a corrected exclusion stay consistent before browser resubmission", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Brazil energy consumption not petroleum",
+    confidence: 0.9,
+    geographies: [{ value: "Brazil", confidence: 0.98 }],
+    conceptPairs: [{ product: null, activity: "consumption", order: 0, confidence: 0.9 }],
+    exclusions: [{ type: "product", value: "petroleum", confidence: 0.9 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.98 },
+      product: {
+        value: null,
+        confidence: 0.7,
+        ambiguityReason: "Energy is broad.",
+        alternatives: ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable"]
+      },
+      activity: { value: "consumption", confidence: 0.95 },
+      frequency: { value: "annual", explicit: false, confidence: 0.8 }
+    }
+  }, "Brazil energy consumption not petrolium");
+
+  assert.equal(intent.product, "total energy");
+  assert.equal(intent.fields.product.validation, "fallback");
+  assert.ok(intent.exclusions.some(item => item.type === "product" && item.value === "petroleum"));
+  assert.equal(intent.needsClarification, false);
+});
+
+test("a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Brazil energy consumption without petroleum",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    conceptPairs: [{ product: "total energy", activity: "consumption", order: 0, confidence: 0.98 }],
+    exclusions: [{ type: "product", value: "petroleum", confidence: 0.98 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "total energy", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 }
+    }
+  }, "Brazil energy consumption witout petroleum");
+
+  assert.ok(intent.exclusions.some(item => item.type === "product" && item.value === "petroleum"));
+  assert.ok(intent.validatedCorrections.some(item => item.type === "negation" && item.from === "witout" && item.to === "without"));
+
+  const invented = validateAiInterpretation({
+    correctedQuery: "Brazil energy consumption without petroleum",
+    confidence: 0.98,
+    geographies: [{ value: "Brazil", confidence: 0.99 }],
+    exclusions: [{ type: "product", value: "petroleum", confidence: 0.98 }],
+    fields: {
+      country: { value: "Brazil", confidence: 0.99 },
+      product: { value: "total energy", confidence: 0.98 },
+      activity: { value: "consumption", confidence: 0.98 }
+    }
+  }, "Brazil energy consumption petroleum");
+  assert.deepEqual(invented.exclusions, []);
+});
+
 test("specific product context resolves AI ambiguity without broadening", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "United States weekly working gas in underground storage",

@@ -14,6 +14,7 @@ const originalFetch = globalThis.fetch;
 let openAiRequests = 0;
 let seriesRequests = 0;
 let lastOpenAiInput = "";
+let openAiResponseOverride = null;
 
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
@@ -80,6 +81,75 @@ test("full staged workflow preserves exact raw input and separate cleaned text",
   }
 });
 
+test("full staged workflow retains a verified electricity typo correction through browser resubmission", async () => {
+  process.env.OPENAI_API_KEY = "fixture-openai-key";
+  openAiRequests = 0;
+  openAiResponseOverride = {
+    correctedQuery: "Brazil and Japan electricity consumption",
+    confidence: 0.98,
+    geographies: [
+      { value: "Brazil", confidence: 0.99 },
+      { value: "Japan", confidence: 0.99 }
+    ],
+    conceptPairs: [{ product: "electricity", activity: "consumption", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { rawValue: "Brazil and Japan", value: null, confidence: 0.9, ambiguityReason: "Multiple explicit geographies." },
+      product: { rawValue: "electrciity", value: "electricity", confidence: 0.98 },
+      activity: { rawValue: "consumption", value: "consumption", confidence: 0.98 },
+      frequency: { rawValue: null, value: "annual", explicit: false, confidence: 0.9 }
+    }
+  };
+  try {
+    const raw = "brazil and japan electrciity consumption";
+    const interpretationUrl = new URL("https://example.test/api/interpret-query");
+    interpretationUrl.searchParams.set("q", raw);
+    const interpretationResponse = await interpretQuery(new Request(interpretationUrl));
+    const { intent } = await interpretationResponse.json();
+
+    assert.equal(interpretationResponse.status, 200);
+    assert.equal(intent.originalQuery, raw);
+    assert.equal(intent.product, "electricity");
+    assert.equal(intent.activity, "consumption");
+    assert.deepEqual(intent.validatedGeographies.map(geography => geography.code), ["BRA", "JPN"]);
+    assert.equal(intent.fields.product.validationEvidenceSource, "ai_proposed_deterministically_verified");
+    assert.deepEqual(intent.fields.product.correction, { from: "electrciity", to: "electricity", editDistance: 2 });
+    assert.equal(intent.needsClarification, false);
+
+    const url = new URL("https://example.test/api/search-eia");
+    url.searchParams.set("q", raw);
+    url.searchParams.set("intentReady", "1");
+    url.searchParams.set("intentPayload", JSON.stringify({
+      originalQuery: intent.originalQuery,
+      cleanedQuery: intent.cleanedQuery,
+      correctedQuery: intent.correctedQuery,
+      correctedQuerySource: intent.correctedQuerySource,
+      interpreter: intent.interpreter,
+      confidence: intent.confidence,
+      fields: intent.fields,
+      ambiguity: intent.ambiguity,
+      fallback: intent.fallback
+    }));
+    const response = await searchEia(new Request(url));
+    const body = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(body.intent.originalQuery, raw);
+    assert.equal(body.intent.product, "electricity");
+    assert.equal(body.intent.activity, "consumption");
+    assert.deepEqual(body.intent.validatedGeographies.map(geography => geography.code), ["BRA", "JPN"]);
+    assert.equal(body.intent.fields.product.validationEvidenceSource, "ai_proposed_deterministically_verified");
+    assert.equal(body.needsClarification, false);
+    assert.ok(body.variables.length >= 2);
+    assert.ok(body.variables.every(variable => variable.product === "electricity"));
+    assert.ok(body.variables.every(variable => variable.activity === "consumption"));
+    assert.deepEqual(new Set(body.variables.map(variable => variable.geography?.code)), new Set(["BRA", "JPN"]));
+    assert.equal(openAiRequests, 1);
+  } finally {
+    openAiResponseOverride = null;
+    delete process.env.OPENAI_API_KEY;
+  }
+});
+
 test("candidate selection and browser-side XLSX export retain verified metadata", async () => {
   const query = "Brazil annual petroleum consumption";
   const initialResponse = await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`));
@@ -118,7 +188,7 @@ async function mockFetch(input, options = {}) {
     openAiRequests += 1;
     lastOpenAiInput = JSON.parse(options.body).input;
     return jsonResponse({
-      output_text: JSON.stringify({
+      output_text: JSON.stringify(openAiResponseOverride || {
         correctedQuery: "Brazil annual petroleum consumption",
         countryName: "Brazil",
         countryCode: "BRA",
