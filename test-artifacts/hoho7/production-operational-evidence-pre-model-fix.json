@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-07-17T23:24:25-04:00",
+  "deployment": {
+    "projectId": "prj_8JHACiECxwtCEc0fVzX3CH8wxud4",
+    "deploymentId": "dpl_AKznpzzof7fSABULVeRpQMVGa2Qc",
+    "deploymentUrl": "https://eiaappv20-eeci14fld-ea47243.vercel.app",
+    "publicUrl": "https://eiaappv20.vercel.app",
+    "commit": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+    "deployedAt": "2026-07-17T21:46:43.479-04:00",
+    "model": "openai/gpt-5.4-nano",
+    "modelDiagnostic": "configured-but-invalid-for-direct-openai-api-http-400"
+  },
+  "diagnostic": {
+    "endpoint": "/api/openai-diagnostic",
+    "applicationHttpStatus": 500,
+    "openaiConfigured": true,
+    "configuredModel": "openai/gpt-5.4-nano",
+    "upstreamOpenAiStatus": 400,
+    "conclusion": "The provider-prefixed model identifier is invalid for the direct OpenAI Responses API call."
+  },
+  "runtimeLogs": {
+    "errorClusters": 0,
+    "status500Entries": 1,
+    "entry": "GET /api/openai-diagnostic 500",
+    "note": "The search endpoint catches interpretation failure and returns HTTP 200 using deterministic fallback, so the OpenAI 400 does not appear as a search-route 500."
+  }
+}

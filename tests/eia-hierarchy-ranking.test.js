@@ -66,6 +66,18 @@ test("non-total intents are ineligible and retain deterministic top five", async
   assert.equal(shadow.retrievals[0].hierarchyRanking.reason, "intent_not_eligible");
 });
 
+test("specific source energy consumption cannot activate total-energy hierarchy", async () => {
+  for (const [term, product] of [["nuclear", "nuclear"], ["solar", "solar"]]) {
+    const intent = interpretQueryWithRules(`Texas ${term} energy consumption`);
+    const result = await buildLocalCandidatePipeline(intent, { hierarchyMode: "on" });
+    const displayed = result.retrievals.flatMap(item => item.displayCandidates || []);
+
+    assert.deepEqual(intent.conceptPairs.map(pair => pair.product), [product]);
+    assert.equal(result.diagnostics.hierarchyPreferenceApplied, false);
+    assert.ok(displayed.every(candidate => candidate.series_id !== "SEDS.TETCB.TX.A"));
+  }
+});
+
 test("activated aggregate certainty is explicit and removes the unknown warning", () => {
   const certainty = buildRankedResultCertainty(
     { frequencyExplicit: false },

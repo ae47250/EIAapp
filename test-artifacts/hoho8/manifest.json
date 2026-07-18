@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmarkVersion": "hoho8-release-candidate-v1",
+  "preparedAt": "2026-07-18T06:26:10.971Z",
+  "purpose": "Blinded release-candidate versus deployed-Production development comparison",
+  "repository": {
+    "branch": "codex/nextjs-eia-migration-login-toggle",
+    "head": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+    "workingTree": "M data/eia/phase4-concept-taxonomy.json\n M data/eia/phase4-routing-config.json\n M lib/sources/eia/intent-routing.js\n M lib/sources/eia/result-certainty.js\n M tests/eia-candidate-api.test.js\n M tests/eia-hierarchy-ranking.test.js\n M tests/eia-intent-routing.test.js\n M tests/eia-query-interpretation.test.js\n M tests/eia-result-certainty.test.js\n?? hoho7.md\n?? hoho7HR.md\n?? scripts/eia-benchmark/\n?? test-artifacts/\n?? tests/hoho7-benchmark.test.js\n?? tests/hoho8-benchmark.test.js",
+    "workingTreeDiffHash": "cb3c153481eacd4a5acf02d6a3f95cb949fb890022849a9ce80785e5e9bc2ab0"
+  },
+  "production": {
+    "deploymentId": "dpl_Dmk429PgEW67i4WjaLPNaXnuBcxr",
+    "publicUrl": "https://eiaappv20.vercel.app",
+    "commit": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+    "model": "gpt-5.4-nano-2026-03-17"
+  },
+  "candidate": {
+    "head": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+    "workingTreeDiffHash": "cb3c153481eacd4a5acf02d6a3f95cb949fb890022849a9ce80785e5e9bc2ab0",
+    "model": "gpt-5.4-nano-2026-03-17",
+    "hierarchyRanking": "on",
+    "semanticReranking": "off"
+  },
+  "corpus": {
+    "developmentQueries": 53,
+    "inheritedHoHo7Queries": 50,
+    "targetedQueries": 3,
+    "sealedHoldoutQueries": 150,
+    "holdoutExecuted": false
+  },
+  "liveCallPlan": {
+    "initialCandidateCalls": 53,
+    "initialProductionCalls": 53,
+    "repetitions": "two additional calls per arm only for semantic, ranking, or operational differences"
+  },
+  "artifactRoot": "test-artifacts/hoho8"
+}

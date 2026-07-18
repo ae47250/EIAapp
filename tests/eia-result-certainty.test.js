@@ -7,8 +7,9 @@ import {
 } from "../lib/sources/eia/result-certainty.js";
 
 test("ranked certainty reports every result dimension independently", () => {
-  const intent = { frequencyExplicit: true, structuredIntent: { conceptPairStatus: "validated" } };
+  const intent = { frequencyExplicit: true, route: { family: "seds" }, structuredIntent: { conceptPairStatus: "validated" } };
   const certainty = buildRankedResultCertainty(intent, {
+    route_family: "seds",
     ranking: {
       tier: "A",
       reasonCodes: ["frequency_exact", "requested_date_covered"],
@@ -17,7 +18,7 @@ test("ranked certainty reports every result dimension independently", () => {
         unit: { maximum: 5, compatibility: 1 },
         requestedDateCoverage: { maximum: 4, compatibility: 1 }
       },
-      signals: { semanticFloorPassed: true }
+      signals: { semanticFloorPassed: true, approvedFallback: "seds_annual_state_fallback" }
     }
   });
 
@@ -26,6 +27,7 @@ test("ranked certainty reports every result dimension independently", () => {
     intentStatus: "resolved",
     semanticCompatibility: "compatible",
     conceptPairStatus: "validated",
+    routeRelation: "exact",
     frequencyRelation: "exact",
     unitRelation: "exact",
     coverageRelation: "covered",
@@ -37,11 +39,12 @@ test("ranked certainty reports every result dimension independently", () => {
 });
 
 test("fallback certainty never turns unknown aggregation into exactness", () => {
-  const explicitIntent = { frequencyExplicit: true, structuredIntent: { conceptPairStatus: "validated" } };
+  const explicitIntent = { frequencyExplicit: true, route: { family: "domestic" }, structuredIntent: { conceptPairStatus: "validated" } };
   const fallback = buildRankedResultCertainty(explicitIntent, {
+    route_family: "seds",
     ranking: {
       tier: "B",
-      reasonCodes: ["frequency_fallback"],
+      reasonCodes: ["frequency_fallback", "cross_route_seds_annual_fallback"],
       warnings: ["wrong_frequency_fallback"],
       components: { unit: { maximum: 0 }, requestedDateCoverage: { maximum: 0 } },
       signals: { semanticFloorPassed: true }
@@ -49,6 +52,16 @@ test("fallback certainty never turns unknown aggregation into exactness", () => 
   });
 
   assert.equal(fallback.frequencyRelation, "approved_fallback");
+  assert.equal(fallback.routeRelation, "approved_fallback");
   assert.equal(fallback.presentationClass, "compatible_fallback");
   assert.equal(fallback.aggregationRelation, "unknown");
+});
+
+test("route certainty does not call an unapproved route mismatch equivalent", () => {
+  const certainty = buildRankedResultCertainty(
+    { route: { family: "domestic" } },
+    { route_family: "international", ranking: { reasonCodes: [], components: {}, signals: {} } }
+  );
+
+  assert.equal(certainty.routeRelation, "incompatible");
 });

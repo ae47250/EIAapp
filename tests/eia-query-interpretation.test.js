@@ -103,6 +103,27 @@ test("validated AI arrays preserve order and prevent negated raw text from overr
   assert.equal(intent.requestedFrequency, "monthly");
 });
 
+test("AI cannot reintroduce a false total-energy pair inside a specific source phrase", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Texas solar energy consumption",
+    confidence: 0.97,
+    geographies: [{ value: "TX", confidence: 0.98 }],
+    conceptPairs: [
+      { product: "solar", activity: "consumption", order: 0, confidence: 0.97 },
+      { product: "total energy", activity: "consumption", order: 1, confidence: 0.97 }
+    ],
+    fields: {
+      country: { value: "TX", confidence: 0.98 },
+      product: { value: "solar", confidence: 0.97 },
+      activity: { value: "consumption", confidence: 0.97 },
+      frequency: { value: "annual", explicit: false, confidence: 0.9 }
+    }
+  }, "Texas solar energy consumption");
+
+  assert.deepEqual(intent.validatedConceptPairs.map(pair => [pair.product, pair.activity]), [["solar", "consumption"]]);
+  assert.deepEqual(intent.conceptPairs.map(pair => [pair.product, pair.activity]), [["solar", "consumption"]]);
+});
+
 test("low-confidence AI output is rejected in favor of deterministic rules", () => {
   const parsed = {
     correctedQuery: "United States energy consumption",

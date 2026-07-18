@@ -1,5 +1,5 @@
 {
-  "version": "phase4-routing-vocabulary-v5",
+  "version": "phase4-routing-vocabulary-v6",
   "source": {
     "metadataBuild": "phase1b",
     "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
@@ -56,6 +56,9 @@
     "czech republic": "CZE",
     "czechia": "CZE",
     "dc": "DC"
+  },
+  "geographyDisambiguation": {
+    "internationalHints": ["international", "foreign", "country", "countries", "outside the united states", "outside the us"]
   },
   "weakActivityHints": {
     "from": {
@@ -294,6 +297,12 @@
       "carrier": "electricity",
       "activity": "generation",
       "preferSpecificProduct": true
+    },
+    {
+      "carrier": "total energy",
+      "genericTerms": ["energy"],
+      "preferSpecificProduct": true,
+      "requireAdjacentSpecificProduct": true
     }
   ]
 }

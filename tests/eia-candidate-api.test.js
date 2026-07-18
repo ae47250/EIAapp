@@ -85,6 +85,18 @@ test("preview hierarchy mode exposes only the observation-validated aggregate ti
   }
 });
 
+test("certainty labels an approved cross-route fallback without calling it exact", async () => {
+  const response = await searchEia(new Request(
+    "https://example.test/api/search-eia?q=Texas%20monthly%20total%20energy%20consumption"
+  ));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.ok(body.variables.length > 0);
+  assert.ok(body.variables.every(candidate => candidate.routeFamily === "seds"));
+  assert.ok(body.variables.every(candidate => candidate.certainty.routeRelation === "approved_fallback"));
+});
+
 test("candidate IDs cannot bypass clarification", async () => {
   seriesRequests = 0;
   const response = await searchEia(new Request("https://example.test/api/search-eia?q=Texas%20gas&candidateId=invented"));
@@ -103,9 +115,10 @@ test("explicit selection reruns validation and fetches only the verified series 
   const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
   const candidate = initial.variables[0];
   assert.equal(Object.hasOwn(candidate, "equivalentChoiceGroup"), false);
-  assert.equal(initial.diagnostics.resultCertaintyVersion, "1.0.0");
+  assert.equal(initial.diagnostics.resultCertaintyVersion, "1.1.0");
   assert.equal(candidate.certainty.semanticCompatibility, "compatible");
   assert.equal(candidate.certainty.conceptPairStatus, "validated");
+  assert.equal(candidate.certainty.routeRelation, "exact");
   assert.equal(candidate.certainty.aggregationRelation, "unknown");
   assert.equal(candidate.certainty.hierarchyEvidenceStatus, "none");
   seriesRequests = 0;

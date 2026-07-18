@@ -99,6 +99,46 @@ test("preserves only governed product and activity pair scopes", () => {
   assert.ok(!unresolved.ambiguity.reasons.includes("activity_or_scope_missing"));
 });
 
+test("treats a specific source followed by energy as one product", () => {
+  const cases = [
+    ["nuclear", "nuclear"],
+    ["solar", "solar"],
+    ["coal", "coal"],
+    ["petroleum", "petroleum"],
+    ["hydroelectric", "hydro"],
+    ["wind", "wind"],
+    ["geothermal", "geothermal"],
+    ["biofuels", "biofuels"],
+    ["renewable", "renewable"],
+    ["fossil fuel", "fossil fuels"],
+    ["natural gas", "natural gas"],
+    ["electricity", "electricity"]
+  ];
+
+  for (const [term, product] of cases) {
+    const intent = interpretQueryWithRules(`Texas ${term} energy consumption`);
+    assert.deepEqual(intent.conceptPairs.map(pair => [pair.product, pair.activity]), [[product, "consumption"]]);
+  }
+
+  const separate = interpretQueryWithRules("Texas coal prices and energy consumption");
+  assert.deepEqual(separate.conceptPairs.map(pair => [pair.product, pair.activity]), [
+    ["coal", "prices"],
+    ["total energy", "consumption"]
+  ]);
+});
+
+test("uses context to distinguish the state and country named Georgia", () => {
+  const codes = query => interpretQueryWithRules(query).structuredIntent.geographies.map(item => item.code);
+
+  assert.deepEqual(codes("Georgia natural gas production"), ["GA"]);
+  assert.deepEqual(codes("Georgia and Alabama natural gas production"), ["GA", "AL"]);
+  assert.deepEqual(codes("Georgia and France natural gas production"), ["GEO", "FRA"]);
+  assert.deepEqual(codes("Georgia and United States natural gas production"), ["GA", "USA"]);
+  assert.deepEqual(codes("international Georgia natural gas production"), ["GEO"]);
+  assert.deepEqual(codes("foreign Georgia natural gas production"), ["GEO"]);
+  assert.deepEqual(codes("Georgia country natural gas production"), ["GEO"]);
+});
+
 test("routes mixed U.S. and foreign-country requests through International", () => {
   const intent = interpretQueryWithRules("United States then Canada annual natural gas production");
 
