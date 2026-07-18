@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "EIA++ AI Assisted Data Extraction Tool",
+  title: "Version 3.0: EIA AI Assisted Data Finder",
   description: "AI-assisted search and export for EIA international energy data."
 };
 
