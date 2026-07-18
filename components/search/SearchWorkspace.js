@@ -2,12 +2,14 @@
 
 import { useRef, useState } from "react";
 
-import { downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
+import { downloadComparisonWorkbook, downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
 import CandidateGroups from "./CandidateGroups.js";
+import ComparisonGroups from "./ComparisonGroups.js";
 import MatchingVariables from "./MatchingVariables.js";
 import RecentObservations from "./RecentObservations.js";
 import SearchForm from "./SearchForm.js";
 import SearchStatus from "./SearchStatus.js";
+import SelectedComparison from "./SelectedComparison.js";
 import SelectedSeries from "./SelectedSeries.js";
 
 const DEFAULT_QUERY = "brazil and japan electrciity consumption";
@@ -82,6 +84,63 @@ export default function SearchWorkspace({ showLogout }) {
     }
   }
 
+  async function selectComparison(definition) {
+    const existingData = data || {};
+    setStatus({ message: `Loading ${definition.title} for every requested country...` });
+    try {
+      const comparisons = await loadComparisons([definition], existingData);
+      applySearchResult({
+        ...existingData,
+        selectedComparison: comparisons[0] || null,
+        selectedComparisons: comparisons
+      });
+    } catch (error) {
+      setStatus({ error: true, message: error.message });
+    }
+  }
+
+  async function downloadComparison(definition) {
+    setStatus({ message: `Loading ${definition.title} for Excel...` });
+    try {
+      const comparisons = await loadComparisons([definition], data || {});
+      downloadComparisonWorkbook(comparisons);
+      setStatus({ message: "Comparison Excel download started." });
+    } catch (error) {
+      setStatus({ error: true, message: error.message });
+    }
+  }
+
+  async function downloadAllComparisons() {
+    const definitions = data?.comparisonDefinitions || [];
+    if (!definitions.length) return;
+    setStatus({ message: "Loading every ranked variable and country for Excel..." });
+    try {
+      const comparisons = await loadComparisons(definitions, data || {});
+      downloadComparisonWorkbook(comparisons);
+      setStatus({ message: "Combined comparison Excel download started." });
+    } catch (error) {
+      setStatus({ error: true, message: error.message });
+    }
+  }
+
+  async function loadComparisons(definitions, existingData) {
+    const key = `definitions:${definitions.map(definition => definition.definitionId).sort().join("|")}`;
+    const cached = seriesCache.current.get(key);
+    if (cached) return await cached;
+    const request = fetchJson(buildComparisonUrl(definitions, existingData)).then(result => {
+      const comparisons = result.selectedComparisons || [result.selectedComparison].filter(Boolean);
+      seriesCache.current.set(key, comparisons);
+      return comparisons;
+    });
+    seriesCache.current.set(key, request);
+    try {
+      return await request;
+    } catch (error) {
+      if (seriesCache.current.get(key) === request) seriesCache.current.delete(key);
+      throw error;
+    }
+  }
+
   async function loadSeries(variable, existingData) {
     const current = existingData.selectedSeries;
     if (sameSeries(current, variable)) return current;
@@ -128,7 +187,8 @@ export default function SearchWorkspace({ showLogout }) {
       return;
     }
     if (nextData.mode === "candidate-selection") {
-      if (!nextData.selectedSeries && !(nextData.variables || []).length) {
+      const hasComparison = Boolean(nextData.selectedComparison || (nextData.comparisonDefinitions || []).length);
+      if (!nextData.selectedSeries && !(nextData.variables || []).length && !hasComparison) {
         setData(null);
         setStatus({ error: true, message: nextData.userMessage || "No matching EIA series was found." });
         return;
@@ -160,6 +220,9 @@ export default function SearchWorkspace({ showLogout }) {
   const series = data?.selectedSeries;
   const variables = data?.variables || [];
   const candidateGroups = data?.candidateGroups || [];
+  const comparisonDefinitions = data?.comparisonDefinitions || [];
+  const selectedComparison = data?.selectedComparison;
+  const comparisonMode = data?.comparisonMode === true;
   const candidateMode = data?.mode === "candidate-selection";
 
   return (
@@ -194,7 +257,17 @@ export default function SearchWorkspace({ showLogout }) {
 
       <SearchStatus status={status} />
       {series ? <RecentObservations series={series} /> : null}
-      {candidateMode && candidateGroups.length ? (
+      {candidateMode && comparisonMode && comparisonDefinitions.length ? (
+        <section className={`results-pair${selectedComparison ? "" : " single-result"}`}>
+          <ComparisonGroups
+            definitions={comparisonDefinitions}
+            onSelect={selectComparison}
+            onDownload={downloadComparison}
+            onDownloadAll={downloadAllComparisons}
+          />
+          {selectedComparison ? <SelectedComparison comparison={selectedComparison} source={data.source} /> : null}
+        </section>
+      ) : candidateMode && candidateGroups.length ? (
         <section className={`results-pair${series ? "" : " single-result"}`}>
           <CandidateGroups
             groups={candidateGroups}
@@ -257,6 +330,16 @@ function buildSeriesUrl(variable, existingData) {
   return `/api/search-eia?${params}`;
 }
 
+function buildComparisonUrl(definitions, existingData) {
+  const params = new URLSearchParams({
+    q: String(existingData.intent?.originalQuery ?? existingData.query ?? DEFAULT_QUERY)
+  });
+  if (definitions.length === 1) params.set("definitionId", definitions[0].definitionId);
+  else params.set("definitionIds", definitions.map(definition => definition.definitionId).join(","));
+  appendIntentParams(params, existingData.intent);
+  return `/api/search-eia?${params}`;
+}
+
 function appendIntentParams(params, intent) {
   if (!intent) return params;
   params.set("intentReady", "1");
@@ -268,6 +351,15 @@ function appendIntentParams(params, intent) {
     interpreter: intent.interpreter,
     confidence: intent.confidence,
     fields: intent.fields,
+    geographies: intent.validatedGeographies || intent.geographies,
+    geographyEvidence: intent.geographyEvidence,
+    geographyConflicts: intent.geographyConflicts,
+    conceptPairs: intent.conceptPairs,
+    exclusions: intent.exclusions,
+    unknownQualifiers: intent.unknownQualifiers,
+    frequencyExplicit: intent.frequencyExplicit,
+    requestedFrequency: intent.requestedFrequency,
+    multiCountryComparison: intent.multiCountryComparison,
     ambiguity: intent.ambiguity,
     fallback: intent.fallback
   }));

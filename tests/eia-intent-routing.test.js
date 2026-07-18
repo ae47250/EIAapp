@@ -224,3 +224,30 @@ test("preserves a requested unsupported frequency instead of silently replacing 
   assert.equal(intent.validation.frequency, "unsupported");
   assert.equal(intent.validation.frequencySupportedByRoute, false);
 });
+
+test("marks two or more validated countries as a multi-country comparison", () => {
+  const intent = buildStructuredIntent({}, "Brazil, Japan, and Germany electricity generation");
+
+  assert.equal(intent.multiCountryComparison.active, true);
+  assert.equal(intent.multiCountryComparison.status, "active");
+  assert.deepEqual(intent.multiCountryComparison.geographyCodes, ["BRA", "JPN", "DEU"]);
+  assert.equal(intent.multiCountryComparison.routeFamily, "international");
+});
+
+test("does not mark a state and country request as a multi-country comparison", () => {
+  const intent = buildStructuredIntent({}, "Texas and Brazil electricity generation");
+
+  assert.equal(intent.multiCountryComparison.active, false);
+  assert.equal(intent.multiCountryComparison.status, "not_eligible");
+});
+
+test("canonicalizes electricity production to generation without changing the query", () => {
+  const query = "Brazil, Japan, and Germany electricity production";
+  const intent = buildStructuredIntent({}, query);
+
+  assert.equal(intent.originalQuery, query);
+  assert.equal(intent.activity, "generation");
+  assert.deepEqual(intent.conceptPairs.map(pair => [pair.product, pair.activity]), [["electricity", "generation"]]);
+  assert.equal(intent.conceptPairs[0].originalActivity, "production");
+  assert.equal(intent.provenance.canonicalizations[0].rule, "electricity_production_to_generation");
+});

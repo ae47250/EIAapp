@@ -761,10 +761,15 @@ test("bounded AI activity corrections validate against the approved activity voc
       }
     }, raw);
 
-    assert.equal(intent.activity, activity);
+    const canonicalActivity = activity === "production" ? "generation" : activity;
+    assert.equal(intent.activity, canonicalActivity);
     assert.equal(intent.fields.activity.validationEvidenceSource, "ai_proposed_deterministically_verified");
     assert.equal(intent.fields.activity.correction.from, rawActivity);
     assert.equal(intent.fields.activity.correction.to, activity);
+    if (activity === "production") {
+      assert.equal(intent.conceptPairs[0].originalActivity, "production");
+      assert.equal(intent.conceptPairs[0].activityNormalization, "electricity_production_to_generation");
+    }
     assert.equal(intent.needsClarification, false);
   }
 });

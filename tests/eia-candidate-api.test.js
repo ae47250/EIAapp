@@ -11,6 +11,11 @@ const originalEnvironment = {
 };
 const originalFetch = globalThis.fetch;
 let seriesRequests = 0;
+let activeSeriesRequests = 0;
+let maximumActiveSeriesRequests = 0;
+let delaySeriesRequests = false;
+let emptySeriesIds = new Set();
+let failedSeriesIds = new Set();
 
 before(() => {
   process.env.EIA_API_KEY = "fixture-eia-key";
@@ -114,6 +119,9 @@ test("explicit selection reruns validation and fetches only the verified series 
   const query = "Brazil annual petroleum consumption";
   const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
   const candidate = initial.variables[0];
+  assert.equal(initial.comparisonMode, false);
+  assert.deepEqual(initial.comparisonDefinitions, []);
+  assert.ok(initial.candidateGroups.length > 0);
   assert.equal(Object.hasOwn(candidate, "equivalentChoiceGroup"), false);
   assert.equal(initial.diagnostics.resultCertaintyVersion, "1.1.0");
   assert.equal(candidate.certainty.semanticCompatibility, "compatible");
@@ -181,25 +189,113 @@ test("AI corrected wording cannot override the validated activity used for candi
   assert.ok(body.variables.every(variable => !/consumption/i.test(variable.title)));
 });
 
+test("multi-country responses rank definitions first without fetching observations", async () => {
+  seriesRequests = 0;
+  const query = "Brazil, Japan, and Germany electricity production";
+  const response = await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`));
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(body.comparisonMode, true);
+  assert.deepEqual(body.variables, []);
+  assert.deepEqual(body.candidateGroups, []);
+  assert.equal(body.comparisonDefinitions.length, 5);
+  assert.deepEqual(body.comparisonDefinitions.map(definition => definition.rank), [1, 2, 3, 4, 5]);
+  assert.ok(body.comparisonDefinitions.every(definition => definition.countries.length === 3));
+  assert.equal(body.diagnostics.rankingUnit, "variable_definition");
+  assert.equal(seriesRequests, 0);
+});
+
+test("definition selection preserves missing and failed countries as warnings", async () => {
+  const query = "Brazil, Japan, and Germany electricity production";
+  const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
+  const definition = initial.comparisonDefinitions[0];
+  const japan = definition.countries.find(country => country.geography.code === "JPN");
+  const germany = definition.countries.find(country => country.geography.code === "DEU");
+  emptySeriesIds = new Set([japan.seriesId]);
+  failedSeriesIds = new Set([germany.seriesId]);
+  seriesRequests = 0;
+  try {
+    const url = new URL("https://example.test/api/search-eia");
+    url.searchParams.set("q", query);
+    url.searchParams.set("definitionId", definition.definitionId);
+    const response = await searchEia(new Request(url));
+    const body = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(seriesRequests, 3);
+    assert.equal(body.selectedComparison.definitionId, definition.definitionId);
+    assert.equal(body.selectedComparison.countries.find(country => country.geography.code === "BRA").status, "comparable");
+    assert.equal(body.selectedComparison.countries.find(country => country.geography.code === "JPN").status, "missing_observations");
+    assert.equal(body.selectedComparison.countries.find(country => country.geography.code === "JPN").series, null);
+    assert.equal(body.selectedComparison.countries.find(country => country.geography.code === "DEU").warningType, "observation_fetch_failed");
+    assert.equal(body.selectedComparison.countries.find(country => country.geography.code === "DEU").series, null);
+    assert.equal(body.selectedComparison.availableCountryCount, 1);
+    assert.equal(body.selectedComparison.missingCountryCount, 2);
+  } finally {
+    emptySeriesIds = new Set();
+    failedSeriesIds = new Set();
+  }
+});
+
+test("combined definition selection fetches all countries with bounded concurrency", async () => {
+  const query = "Brazil, Japan, and Germany electricity generation";
+  const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
+  seriesRequests = 0;
+  activeSeriesRequests = 0;
+  maximumActiveSeriesRequests = 0;
+  delaySeriesRequests = true;
+  try {
+    const url = new URL("https://example.test/api/search-eia");
+    url.searchParams.set("q", query);
+    url.searchParams.set("definitionIds", initial.comparisonDefinitions.map(definition => definition.definitionId).join(","));
+    const response = await searchEia(new Request(url));
+    const body = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(body.selectedComparisons.length, 5);
+    assert.equal(seriesRequests, 15);
+    assert.ok(maximumActiveSeriesRequests > 1);
+    assert.ok(maximumActiveSeriesRequests <= 4);
+    assert.ok(body.selectedComparisons.every(definition => definition.countries.length === 3));
+  } finally {
+    delaySeriesRequests = false;
+  }
+});
+
 async function mockFetch(input) {
   const url = new URL(String(input));
   if (url.pathname.includes("/v2/seriesid/")) {
     seriesRequests += 1;
+    activeSeriesRequests += 1;
+    maximumActiveSeriesRequests = Math.max(maximumActiveSeriesRequests, activeSeriesRequests);
     assert.equal(url.searchParams.get("api_key"), "fixture-eia-key");
-    return jsonResponse({
-      response: {
-        data: [
-          { period: "2024", countryRegionId: "BRA", consumption: "11.25", "consumption-units": "quadrillion Btu" },
-          { period: "2023", countryRegionId: "BRA", consumption: "10.5", "consumption-units": "quadrillion Btu" }
-        ]
-      }
-    });
+    const seriesId = decodeURIComponent(url.pathname.split("/").filter(Boolean).at(-1));
+    try {
+      if (delaySeriesRequests) await new Promise(resolve => setTimeout(resolve, 10));
+      if (failedSeriesIds.has(seriesId)) return jsonResponse({ error: "fixture failure" }, 503);
+      if (emptySeriesIds.has(seriesId)) return jsonResponse({ response: { data: [] } });
+      const electricityGeneration = /INTL\..+-12-/.test(seriesId);
+      return jsonResponse({
+        response: {
+          data: electricityGeneration ? [
+            { period: "2024", value: "11.25", "value-units": "billion kilowatthours" },
+            { period: "2023", value: "10.5", "value-units": "billion kilowatthours" }
+          ] : [
+            { period: "2024", countryRegionId: "BRA", consumption: "11.25", "consumption-units": "quadrillion Btu" },
+            { period: "2023", countryRegionId: "BRA", consumption: "10.5", "consumption-units": "quadrillion Btu" }
+          ]
+        }
+      });
+    } finally {
+      activeSeriesRequests -= 1;
+    }
   }
   throw new Error(`Unexpected network request: ${url}`);
 }
 
-function jsonResponse(body) {
-  return new Response(JSON.stringify(body), { status: 200, headers: { "Content-Type": "application/json" } });
+function jsonResponse(body, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
 }
 
 function restoreEnvironment(values) {

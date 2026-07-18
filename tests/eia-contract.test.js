@@ -3,7 +3,12 @@ import { after, before, test } from "node:test";
 
 import { GET as searchEia } from "../app/api/search-eia/route.js";
 import { GET as interpretQuery } from "../app/api/interpret-query/route.js";
-import { buildXlsx, workbookFileName } from "../lib/client/xlsx.js";
+import {
+  buildComparisonXlsx,
+  buildXlsx,
+  comparisonWorkbookFileName,
+  workbookFileName
+} from "../lib/client/xlsx.js";
 
 const originalEnvironment = {
   EIA_API_KEY: process.env.EIA_API_KEY,
@@ -58,6 +63,11 @@ test("full staged workflow preserves exact raw input and separate cleaned text",
       interpreter: intent.interpreter,
       confidence: intent.confidence,
       fields: intent.fields,
+      geographies: intent.validatedGeographies,
+      geographyEvidence: intent.geographyEvidence,
+      conceptPairs: intent.conceptPairs,
+      exclusions: intent.exclusions,
+      unknownQualifiers: intent.unknownQualifiers,
       ambiguity: intent.ambiguity,
       fallback: intent.fallback
     }));
@@ -126,6 +136,11 @@ test("full staged workflow retains a verified electricity typo correction throug
       interpreter: intent.interpreter,
       confidence: intent.confidence,
       fields: intent.fields,
+      geographies: intent.validatedGeographies,
+      geographyEvidence: intent.geographyEvidence,
+      conceptPairs: intent.conceptPairs,
+      exclusions: intent.exclusions,
+      unknownQualifiers: intent.unknownQualifiers,
       ambiguity: intent.ambiguity,
       fallback: intent.fallback
     }));
@@ -139,10 +154,14 @@ test("full staged workflow retains a verified electricity typo correction throug
     assert.deepEqual(body.intent.validatedGeographies.map(geography => geography.code), ["BRA", "JPN"]);
     assert.equal(body.intent.fields.product.validationEvidenceSource, "ai_proposed_deterministically_verified");
     assert.equal(body.needsClarification, false);
-    assert.ok(body.variables.length >= 2);
-    assert.ok(body.variables.every(variable => variable.product === "electricity"));
-    assert.ok(body.variables.every(variable => variable.activity === "consumption"));
-    assert.deepEqual(new Set(body.variables.map(variable => variable.geography?.code)), new Set(["BRA", "JPN"]));
+    assert.equal(body.comparisonMode, true);
+    assert.deepEqual(body.variables, []);
+    assert.ok(body.comparisonDefinitions.length >= 1 && body.comparisonDefinitions.length <= 5);
+    assert.ok(body.comparisonDefinitions.every(definition => definition.definition.product === "electricity"));
+    assert.ok(body.comparisonDefinitions.every(definition => definition.definition.activity === "consumption"));
+    assert.ok(body.comparisonDefinitions.every(definition =>
+      new Set(definition.countries.map(country => country.geography.code)).size === 2
+    ));
     assert.equal(openAiRequests, 1);
   } finally {
     openAiResponseOverride = null;
@@ -179,6 +198,34 @@ test("candidate selection and browser-side XLSX export retain verified metadata"
   assert.ok(workbookText.includes(candidate.title));
   assert.ok(workbookText.includes(candidate.seriesId));
   assert.equal(workbookFileName(body.selectedSeries), "Brazil_Petroleum_Consumption.xlsx");
+  assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
+});
+
+test("combined comparison XLSX includes all definitions, countries, statuses, and warning fields", async () => {
+  const query = "Brazil, Japan, and Germany electricity generation";
+  const initial = await (await searchEia(new Request(`https://example.test/api/search-eia?q=${encodeURIComponent(query)}`))).json();
+  const url = new URL("https://example.test/api/search-eia");
+  url.searchParams.set("q", query);
+  url.searchParams.set("definitionIds", initial.comparisonDefinitions.map(definition => definition.definitionId).join(","));
+  seriesRequests = 0;
+  const response = await searchEia(new Request(url));
+  const body = await response.json();
+  const workbookText = new TextDecoder().decode(await buildComparisonXlsx(body.selectedComparisons).arrayBuffer());
+
+  assert.equal(response.status, 200);
+  assert.equal(seriesRequests, 15);
+  assert.equal(body.selectedComparisons.length, 5);
+  assert.match(workbookText, /All_Data/);
+  assert.match(workbookText, /Variables/);
+  assert.match(workbookText, /Comparability/);
+  assert.match(workbookText, /Warnings/);
+  assert.match(workbookText, /Notes/);
+  assert.match(workbookText, /Comparability status/);
+  assert.match(workbookText, /Warning details/);
+  assert.match(workbookText, /Brazil/);
+  assert.match(workbookText, /Japan/);
+  assert.match(workbookText, /Germany/);
+  assert.equal(comparisonWorkbookFileName(body.selectedComparisons), "EIA_Comparison_Brazil_Japan_Germany.xlsx");
   assert.equal(JSON.stringify(body).includes("fixture-eia-key"), false);
 });
 

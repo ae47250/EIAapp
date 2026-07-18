@@ -142,6 +142,24 @@ test("candidate orchestration is repeatable for identical input and metadata", a
   assert.deepEqual(stableResult(first), stableResult(second));
 });
 
+test("retrieves every comparison country and ranks five shared definitions", async () => {
+  const result = await buildLocalCandidatePipeline(
+    interpretQueryWithRules("Brazil, Japan, and Germany electricity production")
+  );
+
+  assert.equal(result.comparisonMode, true);
+  assert.deepEqual(result.diagnostics.multiCountryComparison.requestedGeographyCodes, ["BRA", "JPN", "DEU"]);
+  assert.deepEqual(result.diagnostics.multiCountryComparison.retrievedGeographyCodes, ["BRA", "JPN", "DEU"]);
+  assert.deepEqual(result.diagnostics.multiCountryComparison.missingRetrievalGeographyCodes, []);
+  assert.equal(result.diagnostics.multiCountryComparison.rankingUnit, "variable_definition");
+  assert.equal(result.comparisonDefinitions.length, 5);
+  assert.deepEqual(result.comparisonDefinitions.map(definition => definition.rank), [1, 2, 3, 4, 5]);
+  assert.ok(result.comparisonDefinitions.every(definition => definition.countries.length === 3));
+  assert.ok(result.comparisonDefinitions.every(definition => definition.countries.every(country => country.status === "comparable")));
+  assert.match(result.comparisonDefinitions[0].title, /electricity net generation/i);
+  assert.ok(result.comparisonDefinitions[0].countries.every(country => /INTL\.2-12-(BRA|JPN|DEU)-BKWH\.A/.test(country.seriesId)));
+});
+
 function emptyRetrievalResult(routeFamily, geography, product, activity, frequency) {
   return {
     schemaVersion: "1.0.0",
