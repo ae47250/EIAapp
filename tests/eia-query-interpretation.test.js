@@ -575,6 +575,137 @@ test("AI U.S. aliases cannot create a second noncanonical national geography", (
   assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["TX", "USA"]);
 });
 
+test("explicit deterministic geographies survive low AI confidence and omission", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Georgia and France natural gas production",
+    confidence: 0.92,
+    geographies: [
+      { value: "Georgia", confidence: 0.55 },
+      { value: "France", confidence: 0.98 }
+    ],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.97 }],
+    fields: {
+      country: { rawValue: "Georgia and France", value: null, confidence: 0.2, ambiguityReason: "Multiple geographies." },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 },
+      frequency: { value: "annual", explicit: false, confidence: 0.8 }
+    }
+  }, "Georgia and France natural gas production");
+
+  assert.deepEqual(intent.validatedGeographies.map(geography => geography.code), ["GEO", "FRA"]);
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["GEO", "FRA"]);
+  assert.deepEqual(intent.geographyEvidence.map(item => item.source), ["raw_exact_deterministic", "raw_exact_deterministic"]);
+  assert.equal(intent.geographyEvidence[0].resolutionRule, "contextual_state_country");
+  assert.equal(intent.needsClarification, false);
+});
+
+test("context resolves Georgia as a state beside Texas", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Georgia and Texas natural gas production",
+    confidence: 0.95,
+    geographies: [
+      { value: "Georgia", confidence: 0.55 },
+      { value: "Texas", confidence: 0.98 }
+    ],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: null, confidence: 0.4, ambiguityReason: "Multiple geographies." },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 }
+    }
+  }, "Georgia and Texas natural gas production");
+
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["GA", "TX"]);
+  assert.equal(intent.geographyEvidence[0].resolutionRule, "contextual_state_country");
+});
+
+test("AI geography corrections require bounded spelling evidence and official metadata", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Georgia France natural gas production",
+    confidence: 0.96,
+    geographies: [
+      { value: "Georgia", confidence: 0.96 },
+      { value: "France", confidence: 0.96 }
+    ],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: null, confidence: 0.4, ambiguityReason: "Multiple geographies." },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 }
+    }
+  }, "gorgia frans natural gas production");
+
+  assert.equal(intent.originalQuery, "gorgia frans natural gas production");
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["GEO", "FRA"]);
+  assert.deepEqual(intent.geographyEvidence.map(item => item.source), [
+    "ai_proposed_deterministically_verified",
+    "ai_proposed_deterministically_verified"
+  ]);
+  assert.deepEqual(intent.geographyEvidence.map(item => item.correction.from), ["gorgia", "frans"]);
+  assert.equal(intent.needsClarification, false);
+});
+
+test("bounded metadata matching recovers a country typo omitted by AI", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "France natural gas production",
+    confidence: 0.94,
+    geographies: [{ value: "France", confidence: 0.98 }],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: "France", confidence: 0.98 },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 }
+    }
+  }, "gorgia frans natural gas production");
+
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["GEO", "FRA"]);
+  assert.equal(intent.geographyEvidence[0].source, "deterministic_metadata_spelling_match");
+  assert.equal(intent.geographyEvidence[0].correction.from, "gorgia");
+  assert.equal(intent.geographyEvidence[1].source, "ai_proposed_deterministically_verified");
+  assert.equal(intent.needsClarification, false);
+});
+
+test("explicit deterministic geography wins and records an AI conflict", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "Georgia and France natural gas production",
+    confidence: 0.96,
+    geographies: [
+      { value: "GA", confidence: 0.96 },
+      { value: "France", confidence: 0.98 }
+    ],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: null, confidence: 0.4, ambiguityReason: "Multiple geographies." },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 }
+    }
+  }, "Georgia and France natural gas production");
+
+  assert.deepEqual(intent.structuredIntent.geographies.map(geography => geography.code), ["GEO", "FRA"]);
+  assert.equal(intent.geographyEvidence[0].conflictStatus, "conflict");
+  assert.deepEqual(intent.geographyConflicts[0].aiClaims[0].candidateCodes, ["GA"]);
+  assert.equal(intent.structuredIntent.validation.geographyConflicts.length, 1);
+});
+
+test("an unsupported geography-like token is not rescued by an unrelated AI claim", () => {
+  const intent = validateAiInterpretation({
+    correctedQuery: "France natural gas production",
+    confidence: 0.96,
+    geographies: [{ value: "France", confidence: 0.98 }],
+    conceptPairs: [{ product: "natural gas", activity: "production", order: 0, confidence: 0.98 }],
+    fields: {
+      country: { value: "France", confidence: 0.98 },
+      product: { value: "natural gas", confidence: 0.98 },
+      activity: { value: "production", confidence: 0.98 }
+    }
+  }, "dffdd natural gas production");
+
+  assert.deepEqual(intent.validatedGeographies, []);
+  assert.equal(intent.country, null);
+  assert.equal(intent.needsClarification, true);
+  assert.ok(intent.missingFields.includes("country"));
+});
+
 test("specific product context resolves AI ambiguity without broadening", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "United States weekly working gas in underground storage",
