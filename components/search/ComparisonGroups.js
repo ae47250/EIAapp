@@ -22,14 +22,25 @@ export default function ComparisonGroups({ definitions, onSelect, onDownload, on
               </div>
             </div>
             <div className="variable-actions">
-              <button className="ghost-button graph-button" type="button" onClick={() => onSelect(definition)}>Graph</button>
-              <button className="ghost-button" type="button" onClick={() => onDownload(definition)}>Excel</button>
+              <button className="ghost-button graph-button" type="button" onClick={() => onSelect(definition)}>Graph all countries</button>
+              <button className="ghost-button" type="button" onClick={() => onDownload(definition)}>Excel all countries</button>
             </div>
           </div>
           <div className="comparison-country-list">
+            <div className="comparison-country-header" aria-hidden="true">
+              <span>Country</span>
+              <span>Identified series</span>
+              <span>Status</span>
+              <span>Coverage</span>
+              <span>Units</span>
+            </div>
             {definition.countries.map(country => (
               <div className={`comparison-country-row status-${country.status}`} key={country.geography.code}>
                 <strong>{country.geography.name}</strong>
+                <span className="comparison-series">
+                  <span>{country.title || definition.title}</span>
+                  <code>{country.seriesId || "Series unavailable"}</code>
+                </span>
                 <span>{statusLabel(country.status)}</span>
                 <span>{country.coverage}</span>
                 <span>{country.unit || "Unit unavailable"}</span>
