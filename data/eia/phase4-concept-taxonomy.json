@@ -1,0 +1,91 @@
+{
+  "version": "phase4-concepts-v2",
+  "source": {
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "controlledVocabulary": "phase4-routing-vocabulary-v6",
+    "refreshPolicy": "Review this taxonomy whenever the local EIA metadata cache or routing vocabulary is intentionally rebuilt. Relationships are versioned and are never changed by a live query."
+  },
+  "productRelationships": {
+    "renewable": {
+      "wind": 0.9,
+      "solar": 0.9,
+      "hydro": 0.9,
+      "geothermal": 0.9,
+      "biofuels": 0.9,
+      "marine": 0.9
+    },
+    "fossil fuels": {
+      "natural gas": 0.9,
+      "petroleum": 0.9,
+      "coal": 0.9
+    },
+    "total energy": {
+      "natural gas": 0.75,
+      "petroleum": 0.75,
+      "electricity": 0.75,
+      "coal": 0.75,
+      "nuclear": 0.75,
+      "renewable": 0.75
+    }
+  },
+  "activityRelationships": {},
+  "activityImpliedProducts": {
+    "generation": ["electricity"],
+    "capacity": ["electricity"]
+  },
+  "candidateDetectionExcludedTerms": {
+    "productOrScope": ["energy", "power"],
+    "activity": ["use", "cost"]
+  },
+  "compatibilityCaps": [
+    {
+      "dimension": "product",
+      "requested": "renewable",
+      "candidateContainsAll": ["renewable", "nuclear"],
+      "maximum": 0.55,
+      "reasonCode": "mixed_renewable_nuclear_scope"
+    },
+    {
+      "dimension": "activity",
+      "requested": "generation",
+      "candidateContainsAll": ["generation", "consumption"],
+      "maximum": 0.55,
+      "reasonCode": "mixed_generation_consumption_activity"
+    },
+    {
+      "dimension": "activity",
+      "requested": "production",
+      "candidateContainsAll": ["production", "consumption"],
+      "maximum": 0.55,
+      "reasonCode": "mixed_production_consumption_activity"
+    },
+    {
+      "dimension": "activity",
+      "requested": "consumption",
+      "candidateContainsAll": ["consumption", "generation"],
+      "maximum": 0.55,
+      "reasonCode": "mixed_consumption_generation_activity"
+    }
+  ],
+  "approvedFallbacks": [
+    {
+      "fromRoute": "domestic",
+      "toRoute": "seds",
+      "geographyType": "state",
+      "requestedFrequencies": ["monthly", "quarterly"],
+      "candidateFrequency": "annual",
+      "tier": "B",
+      "reasonCode": "seds_annual_state_fallback"
+    },
+    {
+      "fromRoute": "international",
+      "toRoute": "international",
+      "geographyType": "country",
+      "requestedFrequencies": ["monthly", "quarterly"],
+      "candidateFrequency": "annual",
+      "tier": "B",
+      "reasonCode": "international_annual_frequency_fallback"
+    }
+  ]
+}

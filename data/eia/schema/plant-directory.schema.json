@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eia-app.local/schema/plant-directory.schema.json",
+  "title": "Compact EIA electricity plant directory entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "plant_id",
+    "name",
+    "aliases",
+    "series_count",
+    "lookup_mode",
+    "metadata_hash",
+    "raw_metadata_reference"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "source": { "const": "EIA" },
+    "plant_id": { "type": "string", "pattern": "^[0-9]+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "state_code": { "type": "string", "pattern": "^[A-Z]{2}$" },
+    "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+    "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+    "series_count": { "type": "integer", "minimum": 1 },
+    "lookup_mode": { "const": "official_eia_api_v2_on_demand" },
+    "metadata_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "raw_metadata_reference": { "type": "string", "format": "uri" }
+  }
+}

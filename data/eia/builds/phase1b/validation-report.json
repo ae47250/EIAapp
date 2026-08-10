@@ -1,0 +1,111 @@
+{
+  "phase": "1B",
+  "valid": true,
+  "checked_at": "2026-07-17T01:06:49.916Z",
+  "production_activated": false,
+  "scope": {
+    "domestic": "Electricity and Natural Gas bulk series plus a compact plant directory; full ELEC.PLANT series are on-demand only",
+    "international": "All INTL bulk series",
+    "seds": "All SEDS bulk series",
+    "comprehensive_domestic": false
+  },
+  "artifacts": [
+    {
+      "family": "domestic",
+      "output": "domestic.jsonl.gz",
+      "source_url": "https://www.eia.gov/opendata/bulk/ELEC.zip",
+      "records": 86025,
+      "excluded_records": 679219,
+      "content_hash": "041812b5f6c08e40f4d50d970df5964a0fab1cd1a9a8fc351632daafe4b1518c",
+      "compressed_bytes": 9160882,
+      "facets": 1,
+      "measures": 18,
+      "frequencies": 3,
+      "units": 11,
+      "geographies": 62,
+      "missing_geographies": 0,
+      "errors": []
+    },
+    {
+      "family": "domestic",
+      "output": "natural-gas.jsonl.gz",
+      "source_url": "https://www.eia.gov/opendata/bulk/NG.zip",
+      "records": 16021,
+      "excluded_records": 0,
+      "content_hash": "1fc5701929af9ea4aa011f544509a939a7bcb99029284b542c2596e3d6904d7d",
+      "compressed_bytes": 1912689,
+      "facets": 1,
+      "measures": 13214,
+      "frequencies": 4,
+      "units": 20,
+      "geographies": 114,
+      "missing_geographies": 731,
+      "errors": []
+    },
+    {
+      "family": "international",
+      "output": "international.jsonl.gz",
+      "source_url": "https://www.eia.gov/opendata/bulk/INTL.zip",
+      "records": 104407,
+      "excluded_records": 0,
+      "content_hash": "ced61a2f074a720b72d6a0d06604efbca2f8710614381438a5970bd6a15abb95",
+      "compressed_bytes": 12218366,
+      "facets": 4,
+      "measures": 1,
+      "frequencies": 3,
+      "units": 17,
+      "geographies": 253,
+      "missing_geographies": 0,
+      "errors": []
+    },
+    {
+      "family": "seds",
+      "output": "seds.jsonl.gz",
+      "source_url": "https://www.eia.gov/opendata/bulk/SEDS.zip",
+      "records": 48046,
+      "excluded_records": 0,
+      "content_hash": "94cac14f30e4043496531640606366ff5c4c231cfa54b72ca251b5e4bd3eda2b",
+      "compressed_bytes": 5322629,
+      "facets": 2,
+      "measures": 1,
+      "frequencies": 1,
+      "units": 30,
+      "geographies": 54,
+      "missing_geographies": 0,
+      "errors": []
+    }
+  ],
+  "derived_artifacts": [
+    {
+      "output": "aggregation-hierarchy.generated.json",
+      "status": "shadow_ready_inactive",
+      "registry_version": "phase11-template-v2",
+      "artifact_hash": "35e04fcb1201668e8a97ef99b43037ec28e82a44c1e2761951dcf90a51b79367",
+      "relationship_count": 52,
+      "component_edges": 259,
+      "public_ranking_enabled": false
+    }
+  ],
+  "directories": [
+    {
+      "family": "plant_directory",
+      "output": "plants.jsonl.gz",
+      "source_url": "https://www.eia.gov/opendata/bulk/ELEC.zip",
+      "records": 15539,
+      "source_records": 679219,
+      "content_hash": "d41e5f66fa9b030c1e491a38ff54e2a2b734635139c9a7cb245decd0aee99c88",
+      "compressed_bytes": 1042940,
+      "missing_states": 31,
+      "missing_coordinates": 291,
+      "lookup_mode": "official_eia_api_v2_on_demand",
+      "errors": []
+    }
+  ],
+  "totals": {
+    "records": 254499,
+    "excluded_records": 679219,
+    "directory_records": 15539,
+    "compressed_bytes": 29657506
+  },
+  "errors": []
+}

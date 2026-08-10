@@ -1,0 +1,308 @@
+{
+  "version": "phase4-routing-vocabulary-v6",
+  "source": {
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "refreshPolicy": "Regenerate this file when the local EIA metadata cache is intentionally rebuilt; no live EIA lookup is performed during routing or ranking.",
+    "coverageWarning": "Domestic coverage includes Electricity and the validated Natural Gas bulk index. Other Domestic product families remain outside the local cache."
+  },
+  "routePriority": ["domestic", "international", "seds"],
+  "routeProfiles": {
+    "domestic": {
+      "label": "Domestic EIA",
+      "description": "U.S. domestic EIA metadata for Electricity and Natural Gas, including state and U.S. generation, production, consumption, storage, sales, customers, prices, capacity, and plant-related electricity records.",
+      "geographyTypes": ["state", "national"],
+      "frequencies": ["annual", "monthly", "quarterly", "weekly"],
+      "defaultFrequency": "monthly",
+      "stateNonAnnualPrimary": true,
+      "conceptHints": ["electricity", "natural gas", "generation", "production", "consumption", "storage", "capacity", "plant", "sales", "customers"],
+      "stateElectricityConceptHints": ["electricity", "generation", "capacity", "plant", "sales", "customers"]
+    },
+    "international": {
+      "label": "International",
+      "description": "Country and world-region EIA metadata for production, consumption, imports, exports, and energy products such as petroleum, natural gas, electricity, renewables, coal, nuclear, and total energy.",
+      "geographyTypes": ["country", "region"],
+      "frequencies": ["annual", "monthly", "quarterly"],
+      "defaultFrequency": "monthly",
+      "conceptHints": ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable", "hydro", "solar", "wind", "geothermal", "biofuels", "total energy", "consumption", "production", "imports", "exports", "prices"]
+    },
+    "seds": {
+      "label": "SEDS",
+      "description": "State Energy Data System metadata for annual U.S. state energy-system series such as total energy consumption, production, prices, expenditures, and sector energy use.",
+      "geographyTypes": ["state"],
+      "frequencies": ["annual"],
+      "defaultFrequency": "annual",
+      "stateAnnualConceptHints": ["total energy", "consumption", "production", "prices", "expenditures"]
+    }
+  },
+  "geographyAliases": {
+    "us": "USA",
+    "u s": "USA",
+    "usa": "USA",
+    "america": "USA",
+    "united states": "USA",
+    "uk": "GBR",
+    "britain": "GBR",
+    "great britain": "GBR",
+    "united kingdom": "GBR",
+    "uae": "ARE",
+    "emirates": "ARE",
+    "south korea": "KOR",
+    "north korea": "PRK",
+    "russia": "RUS",
+    "iran": "IRN",
+    "venezuela": "VEN",
+    "vietnam": "VNM",
+    "czech republic": "CZE",
+    "czechia": "CZE",
+    "dc": "DC"
+  },
+  "geographyDisambiguation": {
+    "internationalHints": ["international", "foreign", "country", "countries", "outside the united states", "outside the us"]
+  },
+  "weakActivityHints": {
+    "from": {
+      "activity": "production",
+      "productOverrides": {
+        "electricity": "generation"
+      },
+      "reasonCode": "activity_inferred_from_preposition",
+      "warning": "No explicit activity was found. The word 'from' was treated as a weak source/production hint for ranking only."
+    }
+  },
+  "vocabulary": {
+    "products": {
+      "natural gas": {
+        "terms": ["natural gas plant liquids", "natural gas liquids", "dry natural gas", "marketed natural gas", "natural gas", "nat gas"],
+        "broadTerms": ["natural gas", "nat gas"],
+        "lexicalQualifiers": {
+          "natural gas plant liquids": ["natural gas plant liquids", "natural gas liquids"],
+          "dry natural gas": ["dry natural gas", "natural gas dry"],
+          "marketed natural gas": ["marketed natural gas", "natural gas marketed"]
+        },
+        "ambiguity": "specific"
+      },
+      "petroleum": {
+        "terms": ["petroleum and other liquids", "liquid fuels", "refined petroleum", "crude oil", "petroleum", "gasoline", "diesel", "crude", "oil"],
+        "broadTerms": ["petroleum and other liquids", "liquid fuels", "petroleum", "oil"],
+        "lexicalQualifiers": {
+          "refined petroleum": ["refined petroleum", "petroleum products refined"],
+          "crude oil": ["crude oil", "crude petroleum"],
+          "gasoline": ["gasoline"],
+          "diesel": ["diesel"]
+        },
+        "ambiguity": "specific"
+      },
+      "electricity": {
+        "terms": ["electricity", "electric power", "power"],
+        "ambiguity": "specific"
+      },
+      "coal": {
+        "terms": ["coal"],
+        "ambiguity": "specific"
+      },
+      "nuclear": {
+        "terms": ["nuclear"],
+        "ambiguity": "specific"
+      },
+      "renewable": {
+        "terms": ["renewable energy", "renewables", "renewable"],
+        "broadTerms": ["renewable energy", "renewables", "renewable"],
+        "lexicalQualifiers": {
+          "noncombustible renewable": ["noncombustible renewable", "renewable noncombustible"],
+          "combustible renewable": ["combustible renewable", "renewable combustible"]
+        },
+        "ambiguity": "broad",
+        "alternatives": ["wind", "solar", "hydro", "geothermal", "biofuels"]
+      },
+      "fossil fuels": {
+        "terms": ["fossil fuel", "fossil fuels"],
+        "ambiguity": "broad",
+        "alternatives": ["natural gas", "petroleum", "coal"]
+      },
+      "hydro": {
+        "terms": ["hydroelectric", "hydropower", "hydro"],
+        "ambiguity": "specific"
+      },
+      "solar": {
+        "terms": ["solar"],
+        "ambiguity": "specific"
+      },
+      "wind": {
+        "terms": ["wind"],
+        "ambiguity": "specific"
+      },
+      "geothermal": {
+        "terms": ["geothermal", "geotherm"],
+        "ambiguity": "specific"
+      },
+      "biofuels": {
+        "terms": ["biofuels", "biofuel", "biomass"],
+        "ambiguity": "specific"
+      },
+      "marine": {
+        "terms": ["tide and wave", "tidal", "wave energy", "marine energy"],
+        "ambiguity": "specific"
+      },
+      "total energy": {
+        "terms": ["primary energy", "total energy", "all energy", "energy"],
+        "ambiguity": "broad",
+        "alternatives": ["natural gas", "petroleum", "electricity", "coal", "nuclear", "renewable"]
+      }
+    },
+    "activities": {
+      "consumption": {
+        "terms": ["consumption", "consumed", "consume", "usage", "demand", "use"]
+      },
+      "production": {
+        "terms": ["production", "produced", "produce", "supply", "output"]
+      },
+      "generation": {
+        "terms": ["electricity generation", "power generation", "net generation", "generation", "generated"],
+        "titleOrMeasureRequired": true,
+        "titleOrMeasureTerms": ["net generation"]
+      },
+      "imports": {
+        "terms": ["imports", "imported", "import"]
+      },
+      "exports": {
+        "terms": ["exports", "exported", "export"]
+      },
+      "reserves": {
+        "terms": ["reserves", "reserve"]
+      },
+      "capacity": {
+        "terms": ["capacity"]
+      },
+      "storage": {
+        "terms": ["underground storage", "working gas", "inventories", "inventory", "stocks", "stock", "storage"],
+        "conceptType": "stock"
+      },
+      "prices": {
+        "terms": ["prices", "price", "cost"],
+        "conceptType": "price"
+      },
+      "expenditures": {
+        "terms": ["expenditures", "expenditure", "spending"],
+        "conceptType": "flow"
+      }
+    },
+    "scopes": {
+      "plant": {
+        "terms": ["power plant", "electric plant", "plant", "facility"]
+      },
+      "sales": {
+        "terms": ["retail sales", "electricity sales", "sales"]
+      },
+      "customers": {
+        "terms": ["customer accounts", "customers", "customer"]
+      },
+      "process fuel": {
+        "terms": ["process fuel", "process fuels", "intermediate products", "no direct fuel costs", "no direct cost"]
+      }
+    },
+    "sectors": {
+      "residential": { "terms": ["residential"] },
+      "commercial": { "terms": ["commercial"] },
+      "industrial": { "terms": ["industrial"] },
+      "transportation": { "terms": ["transportation"] },
+      "electric power": { "terms": ["electric power", "utility"] },
+      "utility": { "terms": ["utility"] }
+    },
+    "units": {
+      "btu": { "terms": ["btu", "quadrillion btu", "million btu"] },
+      "kwh": { "terms": ["kwh", "kilowatthours", "kilowatt hours"] },
+      "barrels": { "terms": ["barrels", "barrels per day"] },
+      "cubic feet": { "terms": ["cubic feet", "cf", "bcf"] },
+      "dollars": { "terms": ["dollars", "price", "cost"] },
+      "megawatts": { "terms": ["megawatts", "mw"] }
+    },
+    "frequencies": {
+      "daily": { "terms": ["daily", "days", "day"] },
+      "weekly": { "terms": ["weekly", "weeks", "week"] },
+      "monthly": { "terms": ["monthly", "months", "month"] },
+      "quarterly": { "terms": ["quarterly", "quarters", "quarter"] },
+      "annual": { "terms": ["annually", "annual", "yearly", "years", "year"] }
+    },
+    "ambiguousProducts": {
+      "gas": {
+        "alternatives": ["natural gas", "petroleum"],
+        "reason": "The product term may refer to more than one approved energy-product family.",
+        "contexts": [
+          { "value": "natural gas", "terms": ["pipeline", "storage", "withdrawals", "withdrawal", "dry gas", "marketed production", "underground storage", "lng"] },
+          { "value": "petroleum", "terms": ["pump price", "pump prices", "motor fuel", "retail gasoline", "regular grade", "highway use", "gasoline consumption"] }
+        ]
+      }
+    },
+    "negationMarkers": ["not", "no", "without", "exclude", "excluding", "except"],
+    "unknownQualifierConnectors": ["from", "using", "via", "source"]
+  },
+  "candidatePresentation": {
+    "activityOrder": ["production", "consumption", "generation", "imports", "exports", "storage", "capacity", "prices", "expenditures", "sales", "reserves", "other"],
+    "activityLabels": {
+      "production": "Production",
+      "consumption": "Consumption",
+      "generation": "Generation",
+      "imports": "Imports",
+      "exports": "Exports",
+      "storage": "Storage",
+      "capacity": "Capacity",
+      "prices": "Prices",
+      "expenditures": "Expenditures",
+      "sales": "Sales",
+      "reserves": "Reserves",
+      "other": "Other measures"
+    },
+    "measureTypes": {
+      "technical": {
+        "label": "Technical measures",
+        "terms": ["conversion factor", "factor for converting", "heat content", "thermal conversion"],
+        "technical": true
+      },
+      "expenditures": {
+        "label": "Expenditures",
+        "activityValues": ["expenditures"],
+        "terms": ["expenditures", "expenditure", "spending"],
+        "defaultActivity": "expenditures"
+      },
+      "price": {
+        "label": "Price",
+        "activityValues": ["prices"],
+        "conceptTypes": ["price"],
+        "defaultActivity": "prices"
+      },
+      "stock": {
+        "label": "Stock or storage level",
+        "activityValues": ["storage", "reserves"],
+        "conceptTypes": ["stock"],
+        "defaultActivity": "storage"
+      },
+      "capacity": {
+        "label": "Capacity",
+        "activityValues": ["capacity"],
+        "terms": ["capacity"],
+        "defaultActivity": "capacity"
+      },
+      "quantity": {
+        "label": "Energy or physical quantity",
+        "activityValues": ["production", "consumption", "generation", "imports", "exports", "sales"]
+      },
+      "other": {
+        "label": "Other measure"
+      }
+    }
+  },
+  "compoundProductRules": [
+    {
+      "carrier": "electricity",
+      "activity": "generation",
+      "preferSpecificProduct": true
+    },
+    {
+      "carrier": "total energy",
+      "genericTerms": ["energy"],
+      "preferSpecificProduct": true,
+      "requireAdjacentSpecificProduct": true
+    }
+  ]
+}

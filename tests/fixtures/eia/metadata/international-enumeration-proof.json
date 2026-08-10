@@ -1,0 +1,141 @@
+{
+  "fixture_version": "1.0.0",
+  "captured_at": "2026-07-16T04:34:35Z",
+  "source": "EIA API v2 and EIA bulk manifest",
+  "api_version": "2.1.13",
+  "route_family": "international",
+  "route": "/international",
+  "evidence": {
+    "facet_endpoints": [
+      {
+        "facet": "productId",
+        "source_url": "https://api.eia.gov/v2/international/facet/productId/",
+        "total_facets": 18,
+        "sample": {
+          "id": "5",
+          "name": "Petroleum and other liquids"
+        }
+      },
+      {
+        "facet": "activityId",
+        "source_url": "https://api.eia.gov/v2/international/facet/activityId/",
+        "total_facets": 4,
+        "sample": {
+          "id": "2",
+          "name": "Consumption"
+        }
+      },
+      {
+        "facet": "countryRegionId",
+        "source_url": "https://api.eia.gov/v2/international/facet/countryRegionId/",
+        "total_facets": 268,
+        "sample": {
+          "id": "ABW",
+          "name": "Aruba"
+        }
+      },
+      {
+        "facet": "countryRegionTypeId",
+        "source_url": "https://api.eia.gov/v2/international/facet/countryRegionTypeId/",
+        "total_facets": 2,
+        "sample": {
+          "id": "c",
+          "name": "Country"
+        }
+      },
+      {
+        "facet": "dataFlagId",
+        "source_url": "https://api.eia.gov/v2/international/facet/dataFlagId/",
+        "total_facets": 9,
+        "sample": {
+          "id": "1",
+          "name": "Data are unavailable (permanently)"
+        }
+      },
+      {
+        "facet": "unit",
+        "source_url": "https://api.eia.gov/v2/international/facet/unit/",
+        "total_facets": 3,
+        "sample": {
+          "id": "MBBL",
+          "name": "millions barrels"
+        }
+      }
+    ],
+    "conditional_facet_probe": {
+      "facet": "productId",
+      "filter": {
+        "countryRegionId": "BRA"
+      },
+      "source_url": "https://api.eia.gov/v2/international/facet/productId/?facets%5BcountryRegionId%5D%5B%5D=BRA",
+      "unfiltered_total_facets": 18,
+      "filtered_total_facets": 18
+    },
+    "active_snapshot": {
+      "source_url": "https://api.eia.gov/v2/international/data/?frequency=annual&start=2024&end=2024&length=1",
+      "frequency": "annual",
+      "period": "2024",
+      "measurement_columns_requested": [],
+      "total_rows": 84623,
+      "sample_selector": {
+        "productId": "1",
+        "activityId": "8",
+        "countryRegionId": "ABW",
+        "countryRegionTypeId": "c",
+        "dataFlagId": null,
+        "unit": "MMTCD"
+      }
+    },
+    "observation_index_scans": [
+      {
+        "frequency": "monthly",
+        "source_url": "https://api.eia.gov/v2/international/data/?frequency=monthly&length=1",
+        "total_rows": 686629,
+        "sample_row_bytes": 368,
+        "rough_uncompressed_bytes": 252679472
+      },
+      {
+        "frequency": "quarterly",
+        "source_url": "https://api.eia.gov/v2/international/data/?frequency=quarterly&length=1",
+        "total_rows": 205475,
+        "sample_row_bytes": 368,
+        "rough_uncompressed_bytes": 75614800
+      },
+      {
+        "frequency": "annual",
+        "source_url": "https://api.eia.gov/v2/international/data/?frequency=annual&length=1",
+        "total_rows": 4289734,
+        "sample_row_bytes": 326,
+        "rough_uncompressed_bytes": 1398453284
+      }
+    ],
+    "series_id_probe": {
+      "series_id": "INTL.44-1-BRA-QBTU.A",
+      "source_url": "https://api.eia.gov/v2/seriesid/INTL.44-1-BRA-QBTU.A?length=1",
+      "api_version": "2.1.13",
+      "resolved_route": "/international",
+      "frequency": "annual",
+      "total_periods": 45,
+      "returned_measure": "value",
+      "measurement_value_omitted": true,
+      "sample_selector": {
+        "productId": "44",
+        "activityId": "1",
+        "countryRegionId": "BRA",
+        "countryRegionTypeId": "c",
+        "dataFlagId": null,
+        "unit": "QBTU"
+      }
+    },
+    "bulk_file": {
+      "data_set": "INTL",
+      "title": "International Energy Data",
+      "manifest_url": "https://api.eia.gov/bulk/manifest.txt",
+      "access_url": "https://www.eia.gov/opendata/bulk/INTL.zip",
+      "last_updated": "2026-07-02T16:19:06-04:00",
+      "content_length_bytes": 25297221,
+      "route_native": false,
+      "downloaded": false
+    }
+  }
+}

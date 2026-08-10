@@ -1,0 +1,57 @@
+[
+  {
+    "queryId": "H7-D002",
+    "arm": "B_ON",
+    "stage": "ranking",
+    "failure": "The verified annual aggregate displaced one member of the previously human-reviewed top five for a monthly request that fell back to annual SEDS.",
+    "severity": "material",
+    "evidence": "top=SEDS.TETCB.TX.A; hierarchyApplied=true",
+    "promotionImpact": "Requires blinded human adjudication; do not label better or worse automatically.",
+    "likelyCause": "The approved aggregate tie-break also applies to annual candidates reached through a frequency fallback.",
+    "recommendedFollowUp": "Have humans adjudicate the monthly fallback presentation and add a regression expectation before any code change."
+  },
+  {
+    "queryId": "H7-D033",
+    "arm": "B_ON",
+    "stage": "concept-pair construction / semantic eligibility",
+    "failure": "The overlapping phrase 'nuclear energy consumption' created an additional total-energy pair and ranked the total-energy aggregate ahead of the requested nuclear component.",
+    "severity": "critical",
+    "evidence": "conceptPairs include nuclear/consumption and total energy/consumption; top series SEDS.TETCB.TX.A",
+    "promotionImpact": "Blocks the semantic-safety gate until repaired and regression-tested.",
+    "likelyCause": "Overlapping phrase extraction treated 'energy consumption' as an independent total-energy concept inside 'nuclear energy consumption'.",
+    "recommendedFollowUp": "Prevent contained generic phrases from creating unrelated concept pairs, then add adversarial parser and eligibility tests."
+  },
+  {
+    "queryId": "H7-D041",
+    "arm": "B_ON",
+    "stage": "clarification / geography resolution",
+    "failure": "The ambiguous geography name Georgia was silently resolved to the U.S. state and ranked without clarification.",
+    "severity": "critical",
+    "evidence": "route=seds; top=SEDS.NGMPB.GA.A",
+    "promotionImpact": "Blocks the ambiguity-safety gate until a governed state/country clarification is added and tested.",
+    "likelyCause": "The deterministic geography resolver prefers the U.S. postal/state interpretation without preserving the country alternative.",
+    "recommendedFollowUp": "Add governed state/country ambiguity evidence and require clarification when both interpretations are viable."
+  },
+  {
+    "queryId": null,
+    "arm": "B_ON",
+    "stage": "result-certainty classification",
+    "failure": "Result certainty does not expose an explicit route-relation classification.",
+    "severity": "material",
+    "evidence": "0/147 displayed candidates contain certainty.routeRelation; candidate.route is present only as metadata",
+    "promotionImpact": "The completed-architecture claim that route certainty is reported separately is not currently true.",
+    "likelyCause": "The certainty schema omits routeRelation even though the candidate retains a route-family value.",
+    "recommendedFollowUp": "Add and test an explicit route-relation field without inferring equivalence across route families."
+  },
+  {
+    "queryId": null,
+    "arm": "B_ON",
+    "stage": "rollback / architecture discrepancy",
+    "failure": "The prompt describes candidate mode as awaiting gradual promotion, but the repository has already retired the candidate/legacy feature flag and legacy runtime.",
+    "severity": "documentary",
+    "evidence": "EIA_CANDIDATE_PIPELINE has no runtime effect; README and promotion signoff require deployment rollback",
+    "promotionImpact": "Not a code defect, but the benchmark must use deployment rollback rather than claim a flag off-switch exists.",
+    "likelyCause": "Legacy retirement intentionally replaced the feature-flag rollback path.",
+    "recommendedFollowUp": "Keep the discrepancy documented and verify rollback by restoring a previously approved deployment."
+  }
+]

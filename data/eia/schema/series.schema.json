@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eia-app.local/schema/series.schema.json",
+  "title": "Normalized selectable EIA series candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "series_id",
+    "source",
+    "route_family",
+    "selector",
+    "selector_source",
+    "title",
+    "frequency",
+    "is_active",
+    "metadata_hash",
+    "raw_metadata_reference"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "candidate_id": { "type": "string", "pattern": "^eia:1:[a-f0-9]{64}$" },
+    "series_id": { "type": ["string", "null"] },
+    "source": { "const": "EIA" },
+    "route_family": { "enum": ["domestic", "international", "seds"] },
+    "selector": { "$ref": "#/$defs/selector" },
+    "selector_source": {
+      "enum": [
+        "official_series_metadata",
+        "official_combination_metadata",
+        "recorded_observation_fixture"
+      ]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "geography": { "anyOf": [{ "$ref": "#/$defs/geography" }, { "type": "null" }] },
+    "activity": { "type": ["string", "null"] },
+    "product_or_scope": { "type": ["string", "null"] },
+    "sector": { "type": ["string", "null"] },
+    "concept_type": {
+      "enum": ["flow", "stock", "price", "share", "index", "rate", "other", null]
+    },
+    "frequency": { "type": "string", "minLength": 1 },
+    "unit": { "type": ["string", "null"] },
+    "unit_family": { "type": ["string", "null"] },
+    "unit_scale": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "date_start": { "type": ["string", "null"] },
+    "date_end": { "type": ["string", "null"] },
+    "is_active": { "type": "boolean" },
+    "metadata_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "raw_metadata_reference": { "type": "string", "format": "uri" },
+    "normalization_warnings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route", "measure", "frequency", "facets"],
+      "properties": {
+        "route": { "type": "string", "pattern": "^/[a-z0-9][a-z0-9/-]*$" },
+        "measure": { "type": "string", "minLength": 1 },
+        "frequency": { "type": "string", "minLength": 1 },
+        "facets": {
+          "type": "object",
+          "propertyNames": { "type": "string", "minLength": 1 },
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "geography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "code", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "code": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["country", "state", "region", "national", "other"] }
+      }
+    }
+  }
+}

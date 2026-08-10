@@ -1,0 +1,1982 @@
+{
+  "deterministic": {
+    "generatedAt": "2026-07-18T03:05:41.498Z",
+    "developmentQueries": 50,
+    "deterministicRuns": 100,
+    "repeatability": {
+      "passed": true,
+      "failures": 0,
+      "rate": 1
+    },
+    "sharedPoolRanking": {
+      "attempted": 39,
+      "compatible": 39,
+      "incompatible": 0,
+      "changed": 21,
+      "clarificationSkipped": 11
+    },
+    "hierarchySweep": {
+      "targets": 52,
+      "passed": 52,
+      "failed": 0,
+      "eligibleStateAndDcTargets": 51,
+      "routeLimitedNationalTargets": 1
+    },
+    "objectiveDraft": {
+      "cases": 50,
+      "allDraftChecksPassed": 47,
+      "casesWithDraftMismatch": 3,
+      "note": "Draft objective mismatches are diagnostic until human gold approval."
+    }
+  },
+  "live": {
+    "baseline": {
+      "expected": 50,
+      "captured": 50,
+      "success": 50,
+      "clarification": 10,
+      "emptyTopFive": 38,
+      "p50LatencyMs": 3017.429,
+      "p95LatencyMs": 4786.86
+    },
+    "currentHierarchyOff": {
+      "expected": 50,
+      "captured": 50,
+      "success": 50,
+      "clarification": 11,
+      "emptyTopFive": 15,
+      "p50LatencyMs": 2955.309,
+      "p95LatencyMs": 4187.703
+    },
+    "currentHierarchyOn": {
+      "expected": 50,
+      "captured": 50,
+      "success": 50,
+      "clarification": 11,
+      "emptyTopFive": 15,
+      "p50LatencyMs": 2955.309,
+      "p95LatencyMs": 4187.703
+    },
+    "production": {
+      "expected": 50,
+      "captured": 50,
+      "success": 50,
+      "clarification": 11,
+      "emptyTopFive": 15,
+      "p50LatencyMs": 3654.219,
+      "p95LatencyMs": 5780.66
+    },
+    "apiUsage": {
+      "baseline": {
+        "files": [
+          "api-usage-baseline-r1.json",
+          "api-usage-baseline-r2.json",
+          "api-usage-baseline-r3.json"
+        ],
+        "calls": 150,
+        "successes": 150,
+        "failures": 0,
+        "inputTokens": 74592,
+        "outputTokens": 58545,
+        "estimatedCostUsd": 0.0881
+      },
+      "current": {
+        "files": [
+          "api-usage-current-r1.json",
+          "api-usage-current-r2.json",
+          "api-usage-current-r3.json"
+        ],
+        "calls": 150,
+        "successes": 150,
+        "failures": 0,
+        "inputTokens": 74592,
+        "outputTokens": 58003,
+        "estimatedCostUsd": 0.087422
+      }
+    },
+    "objectiveDraftChecks": {
+      "baseline": {
+        "cases": 50,
+        "passedCases": 19,
+        "mismatchedCases": 31,
+        "checks": 251,
+        "passedChecks": 208,
+        "passRate": 0.8287
+      },
+      "currentHierarchyOff": {
+        "cases": 50,
+        "passedCases": 39,
+        "mismatchedCases": 11,
+        "checks": 301,
+        "passedChecks": 281,
+        "passRate": 0.9336
+      },
+      "currentHierarchyOn": {
+        "cases": 50,
+        "passedCases": 47,
+        "mismatchedCases": 3,
+        "checks": 301,
+        "passedChecks": 294,
+        "passRate": 0.9767
+      },
+      "production": {
+        "cases": 50,
+        "passedCases": 47,
+        "mismatchedCases": 3,
+        "checks": 301,
+        "passedChecks": 294,
+        "passRate": 0.9767
+      }
+    },
+    "routeCounts": {
+      "baseline": {
+        "international": 48,
+        "none": 2
+      },
+      "currentHierarchyOn": {
+        "domestic": 14,
+        "seds": 25,
+        "international": 11
+      },
+      "production": {
+        "domestic": 13,
+        "seds": 26,
+        "international": 11
+      }
+    },
+    "productionInterpreterCounts": {
+      "openai": 49,
+      "rules": 1
+    },
+    "currentProductionDifferenceIds": [
+      "H7-D002",
+      "H7-D016",
+      "H7-D019",
+      "H7-D020",
+      "H7-D022",
+      "H7-D041",
+      "H7-D046",
+      "H7-D050"
+    ],
+    "certaintyCompleteness": {
+      "currentHierarchyOn": {
+        "candidates": 147,
+        "complete": 0,
+        "fields": [
+          "semanticCompatibility",
+          "routeRelation",
+          "frequencyRelation",
+          "unitRelation",
+          "coverageRelation",
+          "aggregationRelation",
+          "hierarchyEvidenceStatus",
+          "presentationClass"
+        ],
+        "fieldComplete": {
+          "semanticCompatibility": 147,
+          "routeRelation": 0,
+          "frequencyRelation": 147,
+          "unitRelation": 147,
+          "coverageRelation": 147,
+          "aggregationRelation": 147,
+          "hierarchyEvidenceStatus": 147,
+          "presentationClass": 147
+        },
+        "missingFields": [
+          "routeRelation"
+        ]
+      },
+      "production": {
+        "candidates": 141,
+        "complete": 0,
+        "fields": [
+          "semanticCompatibility",
+          "routeRelation",
+          "frequencyRelation",
+          "unitRelation",
+          "coverageRelation",
+          "aggregationRelation",
+          "hierarchyEvidenceStatus",
+          "presentationClass"
+        ],
+        "fieldComplete": {
+          "semanticCompatibility": 141,
+          "routeRelation": 0,
+          "frequencyRelation": 141,
+          "unitRelation": 141,
+          "coverageRelation": 141,
+          "aggregationRelation": 141,
+          "hierarchyEvidenceStatus": 141,
+          "presentationClass": 141
+        },
+        "missingFields": [
+          "routeRelation"
+        ]
+      }
+    },
+    "controlledRepetitions": {
+      "baseline": {
+        "expectedObservations": 150,
+        "capturedObservations": 150,
+        "queriesWithThreeObservations": 50,
+        "stableQueries": 49,
+        "variableQueryIds": [
+          "H7-D041"
+        ],
+        "perQuery": [
+          {
+            "queryId": "H7-D001",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D002",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D003",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D004",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D005",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D006",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D007",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D008",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D009",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D010",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D011",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D012",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D013",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D014",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D015",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D016",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D017",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D018",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D019",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D020",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D021",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D022",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D023",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D024",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D025",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D026",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D027",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D028",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D029",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D030",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D031",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D032",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D033",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D034",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D035",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D036",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D037",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D038",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D039",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D040",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D041",
+            "observations": 3,
+            "uniqueSignatures": 2
+          },
+          {
+            "queryId": "H7-D042",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D043",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D044",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D045",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D046",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D047",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D048",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D049",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D050",
+            "observations": 3,
+            "uniqueSignatures": 1
+          }
+        ]
+      },
+      "currentHierarchyOn": {
+        "expectedObservations": 150,
+        "capturedObservations": 150,
+        "queriesWithThreeObservations": 50,
+        "stableQueries": 50,
+        "variableQueryIds": [],
+        "perQuery": [
+          {
+            "queryId": "H7-D001",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D002",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D003",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D004",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D005",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D006",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D007",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D008",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D009",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D010",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D011",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D012",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D013",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D014",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D015",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D016",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D017",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D018",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D019",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D020",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D021",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D022",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D023",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D024",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D025",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D026",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D027",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D028",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D029",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D030",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D031",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D032",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D033",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D034",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D035",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D036",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D037",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D038",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D039",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D040",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D041",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D042",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D043",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D044",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D045",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D046",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D047",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D048",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D049",
+            "observations": 3,
+            "uniqueSignatures": 1
+          },
+          {
+            "queryId": "H7-D050",
+            "observations": 3,
+            "uniqueSignatures": 1
+          }
+        ]
+      }
+    },
+    "selectiveProductionRepetitions": [
+      {
+        "queryId": "H7-D002",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D016",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D018",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D019",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D020",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D022",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D033",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D041",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 2,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": false
+      },
+      {
+        "queryId": "H7-D046",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D048",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      },
+      {
+        "queryId": "H7-D050",
+        "repetitions": {
+          "current": 3,
+          "baseline": 3,
+          "production": 3
+        },
+        "uniqueSignatures": {
+          "current": 1,
+          "baseline": 1,
+          "production": 1
+        },
+        "productionUniqueIntentSignatures": 1,
+        "productionFinalStable": true,
+        "productionIntentStable": true,
+        "stable": true
+      }
+    ],
+    "requestEvidence": {
+      "baseline": {
+        "calls": 150,
+        "successfulCalls": 150,
+        "responseModels": [
+          "gpt-5.4-nano-2026-03-17"
+        ],
+        "promptHashes": 50,
+        "requestBodyHashes": 50,
+        "requestIdsCaptured": 150,
+        "requestParameterShapes": [
+          "{\"model\":\"gpt-5.4-nano-2026-03-17\"}"
+        ]
+      },
+      "current": {
+        "calls": 150,
+        "successfulCalls": 150,
+        "responseModels": [
+          "gpt-5.4-nano-2026-03-17"
+        ],
+        "promptHashes": 50,
+        "requestBodyHashes": 50,
+        "requestIdsCaptured": 150,
+        "requestParameterShapes": [
+          "{\"model\":\"gpt-5.4-nano-2026-03-17\"}"
+        ]
+      }
+    },
+    "stageChecks": {
+      "baseline": {
+        "original-query-byte-preserved": {
+          "checks": 50,
+          "passed": 50,
+          "failed": 0
+        },
+        "clarification": {
+          "checks": 50,
+          "passed": 48,
+          "failed": 2
+        },
+        "geography": {
+          "checks": 44,
+          "passed": 43,
+          "failed": 1
+        },
+        "concept-pairs": {
+          "checks": 38,
+          "passed": 38,
+          "failed": 0
+        },
+        "required-top-five": {
+          "checks": 11,
+          "passed": 0,
+          "failed": 11
+        },
+        "route": {
+          "checks": 24,
+          "passed": 6,
+          "failed": 18
+        },
+        "frequency": {
+          "checks": 16,
+          "passed": 16,
+          "failed": 0
+        },
+        "clarification-blocks-ranking": {
+          "checks": 4,
+          "passed": 4,
+          "failed": 0
+        },
+        "required-top-one": {
+          "checks": 11,
+          "passed": 0,
+          "failed": 11
+        },
+        "forbidden-top-five": {
+          "checks": 3,
+          "passed": 3,
+          "failed": 0
+        }
+      },
+      "currentHierarchyOff": {
+        "original-query-byte-preserved": {
+          "checks": 50,
+          "passed": 50,
+          "failed": 0
+        },
+        "clarification": {
+          "checks": 50,
+          "passed": 49,
+          "failed": 1
+        },
+        "geography": {
+          "checks": 44,
+          "passed": 44,
+          "failed": 0
+        },
+        "concept-pairs": {
+          "checks": 38,
+          "passed": 38,
+          "failed": 0
+        },
+        "required-top-five": {
+          "checks": 11,
+          "passed": 11,
+          "failed": 0
+        },
+        "hierarchy-preference": {
+          "checks": 50,
+          "passed": 41,
+          "failed": 9
+        },
+        "route": {
+          "checks": 24,
+          "passed": 24,
+          "failed": 0
+        },
+        "frequency": {
+          "checks": 16,
+          "passed": 16,
+          "failed": 0
+        },
+        "clarification-blocks-ranking": {
+          "checks": 4,
+          "passed": 3,
+          "failed": 1
+        },
+        "required-top-one": {
+          "checks": 11,
+          "passed": 2,
+          "failed": 9
+        },
+        "forbidden-top-five": {
+          "checks": 3,
+          "passed": 3,
+          "failed": 0
+        }
+      },
+      "currentHierarchyOn": {
+        "original-query-byte-preserved": {
+          "checks": 50,
+          "passed": 50,
+          "failed": 0
+        },
+        "clarification": {
+          "checks": 50,
+          "passed": 49,
+          "failed": 1
+        },
+        "geography": {
+          "checks": 44,
+          "passed": 44,
+          "failed": 0
+        },
+        "concept-pairs": {
+          "checks": 38,
+          "passed": 38,
+          "failed": 0
+        },
+        "required-top-five": {
+          "checks": 11,
+          "passed": 10,
+          "failed": 1
+        },
+        "hierarchy-preference": {
+          "checks": 50,
+          "passed": 48,
+          "failed": 2
+        },
+        "route": {
+          "checks": 24,
+          "passed": 24,
+          "failed": 0
+        },
+        "frequency": {
+          "checks": 16,
+          "passed": 16,
+          "failed": 0
+        },
+        "clarification-blocks-ranking": {
+          "checks": 4,
+          "passed": 3,
+          "failed": 1
+        },
+        "required-top-one": {
+          "checks": 11,
+          "passed": 10,
+          "failed": 1
+        },
+        "forbidden-top-five": {
+          "checks": 3,
+          "passed": 2,
+          "failed": 1
+        }
+      },
+      "production": {
+        "original-query-byte-preserved": {
+          "checks": 50,
+          "passed": 50,
+          "failed": 0
+        },
+        "clarification": {
+          "checks": 50,
+          "passed": 49,
+          "failed": 1
+        },
+        "geography": {
+          "checks": 44,
+          "passed": 44,
+          "failed": 0
+        },
+        "concept-pairs": {
+          "checks": 38,
+          "passed": 38,
+          "failed": 0
+        },
+        "required-top-five": {
+          "checks": 11,
+          "passed": 10,
+          "failed": 1
+        },
+        "hierarchy-preference": {
+          "checks": 50,
+          "passed": 48,
+          "failed": 2
+        },
+        "route": {
+          "checks": 24,
+          "passed": 24,
+          "failed": 0
+        },
+        "frequency": {
+          "checks": 16,
+          "passed": 16,
+          "failed": 0
+        },
+        "clarification-blocks-ranking": {
+          "checks": 4,
+          "passed": 3,
+          "failed": 1
+        },
+        "required-top-one": {
+          "checks": 11,
+          "passed": 10,
+          "failed": 1
+        },
+        "forbidden-top-five": {
+          "checks": 3,
+          "passed": 2,
+          "failed": 1
+        }
+      }
+    },
+    "categoryChecks": {
+      "baseline": {
+        "domestic": {
+          "cases": 11,
+          "passedCases": 3,
+          "checks": 52,
+          "passedChecks": 43
+        },
+        "electricity": {
+          "cases": 7,
+          "passedCases": 2,
+          "checks": 34,
+          "passedChecks": 29
+        },
+        "frequency": {
+          "cases": 4,
+          "passedCases": 2,
+          "checks": 20,
+          "passedChecks": 17
+        },
+        "seds": {
+          "cases": 16,
+          "passedCases": 0,
+          "checks": 106,
+          "passedChecks": 79
+        },
+        "frequency-fallback": {
+          "cases": 2,
+          "passedCases": 0,
+          "checks": 10,
+          "passedChecks": 8
+        },
+        "total-energy": {
+          "cases": 9,
+          "passedCases": 0,
+          "checks": 60,
+          "passedChecks": 44
+        },
+        "natural-gas": {
+          "cases": 8,
+          "passedCases": 1,
+          "checks": 41,
+          "passedChecks": 33
+        },
+        "production": {
+          "cases": 2,
+          "passedCases": 0,
+          "checks": 11,
+          "passedChecks": 8
+        },
+        "sector": {
+          "cases": 2,
+          "passedCases": 0,
+          "checks": 10,
+          "passedChecks": 8
+        },
+        "renewable": {
+          "cases": 2,
+          "passedCases": 0,
+          "checks": 13,
+          "passedChecks": 10
+        },
+        "clarification": {
+          "cases": 12,
+          "passedCases": 10,
+          "checks": 38,
+          "passedChecks": 36
+        },
+        "missing-activity": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "ambiguous-product": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "storage": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 5,
+          "passedChecks": 4
+        },
+        "international": {
+          "cases": 10,
+          "passedCases": 6,
+          "checks": 50,
+          "passedChecks": 46
+        },
+        "petroleum": {
+          "cases": 4,
+          "passedCases": 3,
+          "checks": 20,
+          "passedChecks": 19
+        },
+        "consumption": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 5,
+          "passedChecks": 4
+        },
+        "multiple-concept-pairs": {
+          "cases": 4,
+          "passedCases": 3,
+          "checks": 17,
+          "passedChecks": 16
+        },
+        "multiple-geographies": {
+          "cases": 2,
+          "passedCases": 1,
+          "checks": 10,
+          "passedChecks": 9
+        },
+        "misspelling": {
+          "cases": 2,
+          "passedCases": 0,
+          "checks": 10,
+          "passedChecks": 8
+        },
+        "exclusion": {
+          "cases": 3,
+          "passedCases": 2,
+          "checks": 13,
+          "passedChecks": 12
+        },
+        "unsupported-qualifier": {
+          "cases": 4,
+          "passedCases": 3,
+          "checks": 15,
+          "passedChecks": 14
+        },
+        "no-result": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 7,
+          "passedChecks": 7
+        },
+        "pair-scope": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "shared-activity": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "unresolved-pair-scope": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 4,
+          "passedChecks": 3
+        },
+        "adversarial": {
+          "cases": 2,
+          "passedCases": 0,
+          "checks": 7,
+          "passedChecks": 5
+        },
+        "hierarchy-eligible": {
+          "cases": 8,
+          "passedCases": 0,
+          "checks": 56,
+          "passedChecks": 40
+        },
+        "verified-relationship-route-limited": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 6,
+          "passedChecks": 5
+        },
+        "hierarchy-component-control": {
+          "cases": 3,
+          "passedCases": 0,
+          "checks": 24,
+          "passedChecks": 18
+        },
+        "fossil-fuel": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 8,
+          "passedChecks": 6
+        },
+        "nuclear": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 8,
+          "passedChecks": 6
+        },
+        "hierarchy-route-control": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 4,
+          "passedChecks": 3
+        },
+        "exact-identifier": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 3,
+          "passedChecks": 3
+        },
+        "unit": {
+          "cases": 2,
+          "passedCases": 1,
+          "checks": 10,
+          "passedChecks": 9
+        },
+        "clear": {
+          "cases": 3,
+          "passedCases": 3,
+          "checks": 15,
+          "passedChecks": 15
+        },
+        "ambiguous-geography": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 3,
+          "passedChecks": 2
+        },
+        "missing-geography": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "missing-product": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 3,
+          "passedChecks": 3
+        },
+        "date-coverage": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 5,
+          "passedChecks": 4
+        },
+        "shared-product": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        }
+      },
+      "currentHierarchyOn": {
+        "domestic": {
+          "cases": 11,
+          "passedCases": 11,
+          "checks": 63,
+          "passedChecks": 63
+        },
+        "electricity": {
+          "cases": 7,
+          "passedCases": 7,
+          "checks": 41,
+          "passedChecks": 41
+        },
+        "frequency": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 24,
+          "passedChecks": 24
+        },
+        "seds": {
+          "cases": 16,
+          "passedCases": 14,
+          "checks": 122,
+          "passedChecks": 117
+        },
+        "frequency-fallback": {
+          "cases": 2,
+          "passedCases": 1,
+          "checks": 12,
+          "passedChecks": 10
+        },
+        "total-energy": {
+          "cases": 9,
+          "passedCases": 8,
+          "checks": 69,
+          "passedChecks": 67
+        },
+        "natural-gas": {
+          "cases": 8,
+          "passedCases": 8,
+          "checks": 49,
+          "passedChecks": 49
+        },
+        "production": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 13,
+          "passedChecks": 13
+        },
+        "sector": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "renewable": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 15,
+          "passedChecks": 15
+        },
+        "clarification": {
+          "cases": 12,
+          "passedCases": 11,
+          "checks": 50,
+          "passedChecks": 48
+        },
+        "missing-activity": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 16,
+          "passedChecks": 16
+        },
+        "ambiguous-product": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 7,
+          "passedChecks": 7
+        },
+        "storage": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 6,
+          "passedChecks": 6
+        },
+        "international": {
+          "cases": 10,
+          "passedCases": 10,
+          "checks": 60,
+          "passedChecks": 60
+        },
+        "petroleum": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 24,
+          "passedChecks": 24
+        },
+        "consumption": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 6,
+          "passedChecks": 6
+        },
+        "multiple-concept-pairs": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 21,
+          "passedChecks": 21
+        },
+        "multiple-geographies": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "misspelling": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "exclusion": {
+          "cases": 3,
+          "passedCases": 3,
+          "checks": 16,
+          "passedChecks": 16
+        },
+        "unsupported-qualifier": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 19,
+          "passedChecks": 19
+        },
+        "no-result": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 9,
+          "passedChecks": 9
+        },
+        "pair-scope": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "shared-activity": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "unresolved-pair-scope": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "adversarial": {
+          "cases": 2,
+          "passedCases": 1,
+          "checks": 9,
+          "passedChecks": 7
+        },
+        "hierarchy-eligible": {
+          "cases": 8,
+          "passedCases": 8,
+          "checks": 64,
+          "passedChecks": 64
+        },
+        "verified-relationship-route-limited": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 7,
+          "passedChecks": 7
+        },
+        "hierarchy-component-control": {
+          "cases": 3,
+          "passedCases": 2,
+          "checks": 27,
+          "passedChecks": 24
+        },
+        "fossil-fuel": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 9,
+          "passedChecks": 9
+        },
+        "nuclear": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 9,
+          "passedChecks": 6
+        },
+        "hierarchy-route-control": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "exact-identifier": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "unit": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "clear": {
+          "cases": 3,
+          "passedCases": 3,
+          "checks": 18,
+          "passedChecks": 18
+        },
+        "ambiguous-geography": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 4,
+          "passedChecks": 2
+        },
+        "missing-geography": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "missing-product": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "date-coverage": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 6,
+          "passedChecks": 6
+        },
+        "shared-product": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        }
+      },
+      "production": {
+        "domestic": {
+          "cases": 11,
+          "passedCases": 11,
+          "checks": 63,
+          "passedChecks": 63
+        },
+        "electricity": {
+          "cases": 7,
+          "passedCases": 7,
+          "checks": 41,
+          "passedChecks": 41
+        },
+        "frequency": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 24,
+          "passedChecks": 24
+        },
+        "seds": {
+          "cases": 16,
+          "passedCases": 14,
+          "checks": 122,
+          "passedChecks": 117
+        },
+        "frequency-fallback": {
+          "cases": 2,
+          "passedCases": 1,
+          "checks": 12,
+          "passedChecks": 10
+        },
+        "total-energy": {
+          "cases": 9,
+          "passedCases": 8,
+          "checks": 69,
+          "passedChecks": 67
+        },
+        "natural-gas": {
+          "cases": 8,
+          "passedCases": 8,
+          "checks": 49,
+          "passedChecks": 49
+        },
+        "production": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 13,
+          "passedChecks": 13
+        },
+        "sector": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "renewable": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 15,
+          "passedChecks": 15
+        },
+        "clarification": {
+          "cases": 12,
+          "passedCases": 11,
+          "checks": 50,
+          "passedChecks": 48
+        },
+        "missing-activity": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 16,
+          "passedChecks": 16
+        },
+        "ambiguous-product": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 7,
+          "passedChecks": 7
+        },
+        "storage": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 6,
+          "passedChecks": 6
+        },
+        "international": {
+          "cases": 10,
+          "passedCases": 10,
+          "checks": 60,
+          "passedChecks": 60
+        },
+        "petroleum": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 24,
+          "passedChecks": 24
+        },
+        "consumption": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 6,
+          "passedChecks": 6
+        },
+        "multiple-concept-pairs": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 21,
+          "passedChecks": 21
+        },
+        "multiple-geographies": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "misspelling": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "exclusion": {
+          "cases": 3,
+          "passedCases": 3,
+          "checks": 16,
+          "passedChecks": 16
+        },
+        "unsupported-qualifier": {
+          "cases": 4,
+          "passedCases": 4,
+          "checks": 19,
+          "passedChecks": 19
+        },
+        "no-result": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 9,
+          "passedChecks": 9
+        },
+        "pair-scope": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "shared-activity": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "unresolved-pair-scope": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "adversarial": {
+          "cases": 2,
+          "passedCases": 1,
+          "checks": 9,
+          "passedChecks": 7
+        },
+        "hierarchy-eligible": {
+          "cases": 8,
+          "passedCases": 8,
+          "checks": 64,
+          "passedChecks": 64
+        },
+        "verified-relationship-route-limited": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 7,
+          "passedChecks": 7
+        },
+        "hierarchy-component-control": {
+          "cases": 3,
+          "passedCases": 2,
+          "checks": 27,
+          "passedChecks": 24
+        },
+        "fossil-fuel": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 9,
+          "passedChecks": 9
+        },
+        "nuclear": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 9,
+          "passedChecks": 6
+        },
+        "hierarchy-route-control": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "exact-identifier": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "unit": {
+          "cases": 2,
+          "passedCases": 2,
+          "checks": 12,
+          "passedChecks": 12
+        },
+        "clear": {
+          "cases": 3,
+          "passedCases": 3,
+          "checks": 18,
+          "passedChecks": 18
+        },
+        "ambiguous-geography": {
+          "cases": 1,
+          "passedCases": 0,
+          "checks": 4,
+          "passedChecks": 2
+        },
+        "missing-geography": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        },
+        "missing-product": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 4,
+          "passedChecks": 4
+        },
+        "date-coverage": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 6,
+          "passedChecks": 6
+        },
+        "shared-product": {
+          "cases": 1,
+          "passedCases": 1,
+          "checks": 5,
+          "passedChecks": 5
+        }
+      }
+    },
+    "routeChecks": {
+      "baseline": {
+        "international": {
+          "cases": 48,
+          "clarification": 8,
+          "emptyTopFive": 36
+        },
+        "none": {
+          "cases": 2,
+          "clarification": 2,
+          "emptyTopFive": 2
+        }
+      },
+      "currentHierarchyOn": {
+        "domestic": {
+          "cases": 14,
+          "clarification": 4,
+          "emptyTopFive": 7
+        },
+        "seds": {
+          "cases": 25,
+          "clarification": 6,
+          "emptyTopFive": 6
+        },
+        "international": {
+          "cases": 11,
+          "clarification": 1,
+          "emptyTopFive": 2
+        }
+      },
+      "production": {
+        "domestic": {
+          "cases": 13,
+          "clarification": 4,
+          "emptyTopFive": 7
+        },
+        "seds": {
+          "cases": 26,
+          "clarification": 6,
+          "emptyTopFive": 6
+        },
+        "international": {
+          "cases": 11,
+          "clarification": 1,
+          "emptyTopFive": 2
+        }
+      }
+    },
+    "acceptedWorkflowObservations": 372,
+    "priorProductionObservations": 56,
+    "totalLiveWorkflowObservations": 428,
+    "changedCases": 50,
+    "unchangedControlCases": 0,
+    "humanReviewCases": 50
+  }
+}

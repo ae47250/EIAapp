@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "2.0.0",
+  "registryVersion": "phase11-template-v2",
+  "status": "production_ranking_approved",
+  "reviewedAgainst": {
+    "buildVersion": "phase1b",
+    "contentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028"
+  },
+  "activation": {
+    "registryAuditEnabled": true,
+    "observationShadowEnabled": true,
+    "publicRankingEnabled": true,
+    "contributionCalculationEnabled": false,
+    "rankingActivationApproval": "approved"
+  },
+  "review": {
+    "researchApproval": "approved_in_task",
+    "technicalReview": "completed",
+    "reviewedAt": "2026-07-17",
+    "owner": "project_owner"
+  },
+  "refreshPolicy": {
+    "onBuildHashChange": "regenerate_and_reaudit_all_exact_candidate_ids_and_metadata_hashes",
+    "onEvidenceHashChange": "block_until_official_formula_is_reviewed_again",
+    "onFormulaChange": "create_new_registry_version_and_repeat_shadow_testing"
+  },
+  "unsupportedRoutePolicy": {
+    "domestic": "requires_a_separate_approved_official_template_and_route_adapter",
+    "international": "requires_a_separate_approved_official_template_and_route_adapter"
+  },
+  "templates": [
+    {
+      "templateId": "seds-state-dc-total-energy-consumption-annual-v1",
+      "relationshipType": "verified_component",
+      "status": "research_reviewed_shadow_pending",
+      "adapterId": "seds_series_code_geography",
+      "routeFamily": "seds",
+      "geographyScope": {
+        "selectorFacet": "stateId",
+        "includePattern": "^[A-Z]{2}$",
+        "excludeValues": ["US"],
+        "normalizedGeographyTypes": ["state"],
+        "description": "All states and the District of Columbia represented by exact SEDS stateId values"
+      },
+      "aggregateSeriesCode": "TETCB",
+      "componentSeriesCodes": ["FFTCB", "NUETB", "RETCB", "ELNIB", "ELISB"],
+      "formula": {
+        "expression": "TETCBZZ = FFTCBZZ + NUETBZZ + RETCBZZ + ELNIBZZ + ELISBZZ",
+        "geographyPlaceholder": "ZZ"
+      },
+      "compatibility": {
+        "frequency": "annual",
+        "unit": "Billion Btu",
+        "signedComponentsAllowed": true,
+        "roundingToleranceRequired": true
+      },
+      "officialEvidence": [
+        {
+          "url": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf",
+          "sha256": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
+          "bytes": 216575,
+          "locator": "Section 7, Total energy; state TETCBZZ formula"
+        },
+        {
+          "url": "https://www.eia.gov/state/seds/sep_fuel/notes/use_a.pdf",
+          "sha256": "58c8f4af8842cde6bd2de6b91e82ed2b87ea6f33d74baca3603321a572531adc",
+          "bytes": 915734,
+          "locator": "Appendix A, mnemonic series names and formulas"
+        }
+      ],
+      "provenance": {
+        "source": "EIA",
+        "selector_source": "official_combination_metadata",
+        "metadata_hash": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
+        "raw_metadata_reference": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf"
+      },
+      "review": {
+        "formulaResearch": "complete",
+        "templateScopeReview": "complete",
+        "observationShadow": "complete",
+        "rankingActivationApproval": "approved"
+      }
+    },
+    {
+      "templateId": "seds-us-total-energy-consumption-annual-v1",
+      "relationshipType": "verified_component",
+      "status": "research_reviewed_shadow_pending",
+      "adapterId": "seds_series_code_geography",
+      "routeFamily": "seds",
+      "geographyScope": {
+        "selectorFacet": "stateId",
+        "includeValues": ["US"],
+        "normalizedGeographyCodes": ["USA"],
+        "description": "United States national SEDS series only"
+      },
+      "aggregateSeriesCode": "TETCB",
+      "componentSeriesCodes": ["FFTCB", "NUETB", "RETCB", "ELNIB"],
+      "formula": {
+        "expression": "TETCBUS = FFTCBUS + NUETBUS + RETCBUS + ELNIBUS",
+        "geographyPlaceholder": "US"
+      },
+      "compatibility": {
+        "frequency": "annual",
+        "unit": "Billion Btu",
+        "signedComponentsAllowed": true,
+        "roundingToleranceRequired": true
+      },
+      "officialEvidence": [
+        {
+          "url": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf",
+          "sha256": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
+          "bytes": 216575,
+          "locator": "Section 7, Total energy; United States TETCBUS formula"
+        },
+        {
+          "url": "https://www.eia.gov/state/seds/sep_fuel/notes/use_a.pdf",
+          "sha256": "58c8f4af8842cde6bd2de6b91e82ed2b87ea6f33d74baca3603321a572531adc",
+          "bytes": 915734,
+          "locator": "Appendix A, mnemonic series names and formulas"
+        }
+      ],
+      "provenance": {
+        "source": "EIA",
+        "selector_source": "official_combination_metadata",
+        "metadata_hash": "52d29510bbe395ea431110d9fd1071fb8722c4936fc45e0bf3417edff24468c8",
+        "raw_metadata_reference": "https://www.eia.gov/state/seds/sep_use/notes/use_tot.pdf"
+      },
+      "review": {
+        "formulaResearch": "complete",
+        "templateScopeReview": "complete",
+        "observationShadow": "complete",
+        "rankingActivationApproval": "approved"
+      }
+    }
+  ]
+}

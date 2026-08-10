@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmarkVersion": "hoho7-v1",
+  "benchmarkStartedAt": "2026-07-18T05:04:36.747Z",
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.18.0",
+    "cwd": "C:\\Users\\eiriksson\\Documents\\EIA Version 2.5"
+  },
+  "arms": {
+    "A": {
+      "label": "historical-native-legacy",
+      "commit": "8f2cb495519db8d60072032a1dc8a2e93c65cef8",
+      "candidateFlag": "off",
+      "metadata": "native baseline snapshot"
+    },
+    "B_OFF": {
+      "label": "current-candidate-hierarchy-off",
+      "commit": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+      "hierarchyMode": "off"
+    },
+    "B_ON": {
+      "label": "current-candidate-hierarchy-on",
+      "commit": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+      "hierarchyMode": "on"
+    },
+    "C": {
+      "label": "current-production-black-box",
+      "projectId": "prj_8JHACiECxwtCEc0fVzX3CH8wxud4",
+      "deploymentId": "dpl_Dmk429PgEW67i4WjaLPNaXnuBcxr",
+      "deploymentUrl": "https://eiaappv20-844hw6nfq-ea47243.vercel.app",
+      "publicUrl": "https://eiaappv20.vercel.app",
+      "commit": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+      "deployedAt": "2026-07-18T04:29:10.312Z",
+      "model": "gpt-5.4-nano-2026-03-17",
+      "modelDiagnostic": "configured-valid-for-direct-openai-api-http-200"
+    }
+  },
+  "repository": {
+    "branch": "codex/nextjs-eia-migration-login-toggle",
+    "head": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+    "workingTreeAtBenchmarkStart": "clean",
+    "workingTreeAtManifestRefresh": "?? hoho7.md\n?? hoho7HR.md\n?? scripts/eia-benchmark/\n?? test-artifacts/\n?? tests/hoho7-benchmark.test.js",
+    "upstream": "origin/codex/nextjs-eia-migration-login-toggle"
+  },
+  "baseline": {
+    "commit": "8f2cb495519db8d60072032a1dc8a2e93c65cef8",
+    "subject": "Track corrected query provenance",
+    "committedAt": "2026-07-17T16:26:41-04:00",
+    "selectionReason": "last trusted commit before the clarification, semantic-eligibility, legacy-retirement, certainty, and hierarchy implementation sequence",
+    "buildStatus": "pending"
+  },
+  "production": {
+    "projectId": "prj_8JHACiECxwtCEc0fVzX3CH8wxud4",
+    "deploymentId": "dpl_Dmk429PgEW67i4WjaLPNaXnuBcxr",
+    "deploymentUrl": "https://eiaappv20-844hw6nfq-ea47243.vercel.app",
+    "publicUrl": "https://eiaappv20.vercel.app",
+    "commit": "d5c65af1ac8046e0c44dc6f64444a0f8d559449d",
+    "deployedAt": "2026-07-18T04:29:10.312Z",
+    "model": "gpt-5.4-nano-2026-03-17",
+    "modelDiagnostic": "configured-valid-for-direct-openai-api-http-200",
+    "candidatePipeline": "sole-runtime-path",
+    "candidateFlag": "retired-no-runtime-effect",
+    "hierarchyRanking": "on-verified-by-production-response",
+    "semanticReranking": "off",
+    "modelEvidence": "authenticated /api/openai-diagnostic response; no secret value was exposed"
+  },
+  "model": {
+    "controlledSnapshot": "gpt-5.4-nano-2026-03-17",
+    "availabilityPreflight": "passed-model-list-2026-07-17",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoningEffort": "omitted-application-does-not-set",
+    "temperature": "omitted-application-does-not-set",
+    "maximumOutputTokens": "omitted-application-does-not-set",
+    "structuredOutputSchema": "none-json-instructions-validated-locally",
+    "pricingUsdPerMillionTokens": {
+      "input": 0.2,
+      "output": 1.25
+    },
+    "pricingSource": "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
+  },
+  "featureFlags": {
+    "candidatePipeline": "retired",
+    "hierarchyRankingControlledArms": [
+      "off",
+      "on"
+    ],
+    "semanticReranking": "off",
+    "hierarchyContributionCalculation": "disabled"
+  },
+  "versions": {
+    "candidatePipeline": "phase4a-v6",
+    "hierarchyRanking": "phase11-hierarchy-ranking-v1",
+    "ranking": "phase4-v8",
+    "taxonomy": "phase4-concepts-v2",
+    "semanticReranking": "phase5-v2"
+  },
+  "hashes": {
+    "queryBank": "89d6e6506692043a60f8e615828cda0d9c1ea299f6c2c15514d895dbeee250a1",
+    "currentMetadataManifest": "ed34c7ab75d2a20fc22ae8c4a82039cbfd845c4f23caf4c6441211e9eaa26934",
+    "currentRoutingMetadata": "5b4d8f0a14bdf346ba4a3caebd1f25018aa5608012bde048cdef470ca3bae376",
+    "hierarchyRegistry": "a44188680ea441f15d097aa460f7d2ca82c1f732f633f018567b394bda8770c6",
+    "generatedHierarchy": "abeee636d73db0fb0c8159ca53c8f9df7eb89bba3d474a67240a8b16ea52f8b8",
+    "currentInterpretationSource": "25e684e3eb1c60607422c3cefa9bd099d20076e00d939525f22871c6aa7b821c",
+    "baselineInterpretationSource": "d50af781da479269da4216fae51bdd5aa02f5cb14a95c8b11b8aaaf2c411a5db",
+    "baselineMetadataManifest": "ed34c7ab75d2a20fc22ae8c4a82039cbfd845c4f23caf4c6441211e9eaa26934",
+    "benchmarkRunner": "b532d45f100d8a38e7e14dd3615512ded7b4752f1e6637006466173f4a341ccc",
+    "benchmarkCorpusSource": "7e0946e59f16ad2bd278f232789aefcf25e2f2958801fb7cf08e30094c4db9c9"
+  },
+  "corpus": {
+    "version": "hoho7-v1",
+    "hash": "89d6e6506692043a60f8e615828cda0d9c1ea299f6c2c15514d895dbeee250a1",
+    "counts": {
+      "total": 200,
+      "development": 50,
+      "holdout": 150
+    },
+    "development": "open diagnostic set",
+    "holdout": "sealed and not executed during this pass",
+    "goldStatus": "14 human-reviewed records; remaining objective records are drafts pending human approval"
+  },
+  "liveCallEstimate": {
+    "initialControlledCalls": 100,
+    "initialProductionCalls": 50,
+    "totalInitialWorkflowCalls": 150,
+    "estimatedInputTokensPerControlledCall": 8000,
+    "estimatedOutputTokensPerControlledCall": 800,
+    "estimatedControlledCostUsd": 0.26,
+    "conservativeEstimatedProductionCostUsd": 0.75,
+    "estimatedInitialTotalCostUsd": 1.01,
+    "hardLimits": {
+      "workflowCalls": 500,
+      "estimatedDirectOpenAiCostUsd": 10
+    }
+  },
+  "artifacts": {
+    "root": "test-artifacts/hoho7"
+  }
+}

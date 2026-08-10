@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import { after, before, beforeEach, test } from "node:test";
 import { randomBytes } from "node:crypto";
 
-import loginHandler, { resetLoginAttemptsForTests } from "../api/login.js";
-import logoutHandler from "../api/logout.js";
-import interpretQueryHandler from "../api/interpret-query.js";
-import openaiDiagnosticHandler from "../api/openai-diagnostic.js";
-import searchEiaHandler from "../api/search-eia.js";
-import middleware from "../middleware.js";
+import loginHandler, { resetLoginAttemptsForTests } from "../lib/server/login.js";
+import logoutHandler from "../lib/server/logout.js";
+import openaiDiagnosticHandler from "../lib/server/openai-diagnostic.js";
+import searchEiaHandler from "../lib/sources/eia/candidate-search.js";
+import interpretQueryHandler from "../lib/sources/eia/interpret-query.js";
+import plantMetadataHandler from "../lib/sources/eia/plant-metadata.js";
+import { proxy as middleware } from "../proxy.js";
 import {
   INVALID_CREDENTIALS_MESSAGE,
   SESSION_COOKIE_NAME,
@@ -23,6 +24,7 @@ const originalEnvironment = {
   APP_USERNAME: process.env.APP_USERNAME,
   APP_PASSWORD_HASH: process.env.APP_PASSWORD_HASH,
   SESSION_SECRET: process.env.SESSION_SECRET,
+  LOGIN_REQUIRED: process.env.LOGIN_REQUIRED,
   NODE_ENV: process.env.NODE_ENV,
   VERCEL_ENV: process.env.VERCEL_ENV
 };
@@ -44,6 +46,7 @@ beforeEach(() => {
   process.env.APP_PASSWORD_HASH = passwordHash;
   process.env.SESSION_SECRET = sessionSecret;
   process.env.NODE_ENV = "test";
+  delete process.env.LOGIN_REQUIRED;
   delete process.env.VERCEL_ENV;
   resetLoginAttemptsForTests();
 });
@@ -110,10 +113,30 @@ test("unauthenticated protected-page requests redirect to login", async () => {
   assert.equal(location.searchParams.get("returnTo"), "/index.html?view=recent");
 });
 
+test("LOGIN_REQUIRED=off bypasses page and API authentication", async () => {
+  process.env.LOGIN_REQUIRED = "OFF";
+
+  const pageResponse = await middleware(new Request("https://example.test/"));
+  assert.equal(pageResponse.headers.get("x-middleware-next"), "1");
+  assert.equal(pageResponse.headers.get("set-cookie"), null);
+
+  const handlers = [searchEiaHandler, interpretQueryHandler, plantMetadataHandler, openaiDiagnosticHandler];
+  for (const handler of handlers) {
+    const res = createMockResponse();
+    await handler(createRequest({ method: "POST" }), res);
+    assert.equal(res.statusCode, 405);
+  }
+
+  process.env.LOGIN_REQUIRED = "false";
+  const failSafeResponse = await middleware(new Request("https://example.test/"));
+  assert.equal(failSafeResponse.status, 302);
+});
+
 test("every private API handler rejects requests without a session", async () => {
   const handlers = [
     ["search-eia", searchEiaHandler],
     ["interpret-query", interpretQueryHandler],
+    ["plant-metadata", plantMetadataHandler],
     ["openai-diagnostic", openaiDiagnosticHandler]
   ];
 
@@ -125,10 +148,22 @@ test("every private API handler rejects requests without a session", async () =>
   }
 });
 
-test("routing middleware rejects unauthenticated API requests", async () => {
+test("proxy passes API requests to handlers for direct authorization", async () => {
   const response = await middleware(new Request("https://example.test/api/search-eia?q=test"));
-  assert.equal(response.status, 401);
-  assert.deepEqual(await response.json(), { error: "Authentication required." });
+  assert.equal(response.headers.get("x-middleware-next"), "1");
+});
+
+test("proxy does not refresh sessions on public login and logout routes", async () => {
+  const token = createSessionToken();
+  const cookie = createSessionCookie(token).split(";")[0];
+
+  for (const pathname of ["/api/login", "/api/logout"]) {
+    const response = await middleware(new Request(`https://example.test${pathname}`, {
+      headers: { cookie }
+    }));
+    assert.equal(response.headers.get("x-middleware-next"), "1");
+    assert.equal(response.headers.get("set-cookie"), null);
+  }
 });
 
 test("logout deletes the session cookie and redirects to login", () => {
