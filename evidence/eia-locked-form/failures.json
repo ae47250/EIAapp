@@ -1,0 +1,2494 @@
+[
+  {
+    "run": "live-first",
+    "id": "O7",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "natural gas production and consumption in Texas annually",
+    "stage": "fact check",
+    "kind": "interpretation",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "natural gas",
+          "activity": "production",
+          "quoted_words": "natural gas production"
+        },
+        {
+          "product": "natural gas",
+          "activity": "consumption",
+          "quoted_words": "natural gas consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": true,
+        "quoted_words": "annually"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "errors": [
+      "quote_not_in_query"
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "O7",
+    "repeat": 1,
+    "attempt": 1,
+    "query": "natural gas production and consumption in Texas annually",
+    "stage": "fact check",
+    "kind": "interpretation",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "natural gas",
+          "activity": "production",
+          "quoted_words": "natural gas production"
+        },
+        {
+          "product": "natural gas",
+          "activity": "consumption",
+          "quoted_words": "natural gas consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": true,
+        "quoted_words": "annually"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "errors": [
+      "quote_not_in_query"
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "O5",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "energy consumption icealnd",
+    "stage": "meaning",
+    "kind": "interpretation",
+    "modelForm": {
+      "geographies": [],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "total energy",
+          "activity": "consumption",
+          "quoted_words": "energy consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [
+        "icealnd"
+      ],
+      "clarification": {
+        "needed": true,
+        "about": "geography",
+        "options": [
+          {
+            "label": "Iceland",
+            "value": "ISL | Iceland | country"
+          }
+        ]
+      }
+    },
+    "errors": [
+      "geographies_or_order",
+      "unexpected_unsupported_words",
+      "clarification_needed",
+      "unexpected_clarification_details"
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "O8",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "monthly electricity consumption in California",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "CA | California | US state",
+          "quoted_words": "California"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "monthly",
+        "explicit": true,
+        "quoted_words": "monthly"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is carbon intensity, not electricity consumption; a frequency-fallback label does not fix the measure mismatch.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+        "seriesId": "SEDS.CDTCR.CA.A",
+        "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+        "product": "electricity",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "California",
+          "code": "CA",
+          "type": "state"
+        },
+        "routeFamily": "seds",
+        "frequency": "annual",
+        "unit": "Metric tons CO2 per billion Btu",
+        "coverage": "1960 to 2024",
+        "dateStart": "1960",
+        "dateEnd": "2024",
+        "rankingTier": "B",
+        "score": 87.3,
+        "reasons": [
+          "tier_B",
+          "source_pool_fallback",
+          "seds_annual_state_fallback",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "wrong_frequency_fallback",
+          "product_exact_electricity",
+          "product_extra_concept_penalty",
+          "activity_exact_consumption",
+          "activity_extra_concept_penalty",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_electricity",
+          "lexical_title_consumption",
+          "frequency_fallback",
+          "frequency_mismatch_fallback",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "seds_annual_state_fallback",
+          "wrong_frequency_fallback",
+          "product_contains_unrequested_concepts",
+          "activity_contains_unrequested_concepts",
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "approved_fallback",
+          "frequencyRelation": "approved_fallback",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_fallback",
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": true
+      }
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "F1",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "coal production in germany, not poland",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "DEU | Germany | country",
+          "quoted_words": "germany"
+        }
+      ],
+      "excluded_geographies": [
+        {
+          "geography": "POL | Poland | country",
+          "quoted_words": "not poland"
+        }
+      ],
+      "topics": [
+        {
+          "product": "coal",
+          "activity": "production",
+          "quoted_words": "coal production"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is metallurgical coal, a subcategory rather than total coal production.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+        "seriesId": "INTL.130-1-DEU-MT.A",
+        "title": "Metallurgical coal production, Germany, Annual",
+        "product": "coal",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "Germany",
+          "code": "DEU",
+          "type": "other"
+        },
+        "routeFamily": "international",
+        "frequency": "annual",
+        "unit": "1000 metric tons",
+        "coverage": "1980 to 2024",
+        "dateStart": "1980",
+        "dateEnd": "2024",
+        "rankingTier": "A",
+        "score": 76.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_coal",
+          "activity_exact_production",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_coal",
+          "lexical_title_production",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "F2",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "MEX | Mexico | country",
+          "quoted_words": "Mexico"
+        },
+        {
+          "geography": "CAN | Canada | country",
+          "quoted_words": "Canada"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "petroleum",
+          "activity": "exports",
+          "quoted_words": "exports more petroleum"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First comparison is crude oil including lease condensate exports, a narrower petroleum component rather than the requested petroleum aggregate.",
+    "firstDisplayed": {
+      "definitionId": "eia-definition:1:4fd41286b9f3f67ee0fac0ca1ab2a9fac58f7bf8391a438c3a83bff6062f841e",
+      "rank": 1,
+      "title": "Crude oil including lease condensate exports",
+      "semanticScore": 41.8,
+      "rankingTier": "A",
+      "rankingReasonCodes": [
+        "tier_A",
+        "source_pool_primary",
+        "route_family_validated",
+        "geography_validated",
+        "selector_geography_validated",
+        "product_or_scope_hard_gate_passed",
+        "activity_hard_gate_passed",
+        "frequency_validated",
+        "product_exact_petroleum",
+        "activity_exact_exports",
+        "aggregation_relation_unknown_no_verified_hierarchy",
+        "lexical_title_exports",
+        "frequency_exact",
+        "current_active",
+        "availability_present"
+      ],
+      "availableCountryCount": 2,
+      "requestedCountryCount": 2,
+      "definition": {
+        "product": "petroleum",
+        "activity": "exports",
+        "sector": null,
+        "scope": null,
+        "frequency": "annual",
+        "unit": {
+          "family": "thousand barrels per day",
+          "baseUnit": "thousand barrels per day"
+        },
+        "grossNetTreatment": "unspecified",
+        "source": "eia",
+        "methodology": null
+      },
+      "countries": [
+        {
+          "geography": {
+            "name": "Mexico",
+            "code": "MEX",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:04c828f0a69bdc8dbab5415b9d4611bf372107b85a79ea03304d2be20191759a",
+          "seriesId": "INTL.57-4-MEX-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Mexico, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        },
+        {
+          "geography": {
+            "name": "Canada",
+            "code": "CAN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:c577bbb09bdeb05740afd210506f5fc6cdaab1c97d9122f326a30bb7d958ed83",
+          "seriesId": "INTL.57-4-CAN-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Canada, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        }
+      ],
+      "warnings": []
+    }
+  },
+  {
+    "run": "live-first",
+    "id": "F10",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "electricity consumption in Georgia and Florida",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "GA | Georgia | US state",
+          "quoted_words": "Georgia"
+        },
+        {
+          "geography": "FL | Florida | US state",
+          "quoted_words": "Florida"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed result for either requested state in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-first",
+    "id": "F12",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "Texas electricity consumption annual",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": true,
+        "quoted_words": "annual"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed annual electricity-consumption result for Texas in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-first",
+    "id": "F14",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "renewable generation in Texas except hydro",
+    "stage": "meaning",
+    "kind": "interpretation",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "renewable",
+          "activity": "generation",
+          "quoted_words": "renewable generation"
+        }
+      ],
+      "excluded_topics": [
+        {
+          "product": "hydro",
+          "activity": "generation",
+          "sector": null,
+          "quoted_words": "hydro"
+        }
+      ],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "errors": [
+      "excluded_topics"
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "O8",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "monthly electricity consumption in California",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "CA | California | US state",
+          "quoted_words": "California"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "monthly",
+        "explicit": true,
+        "quoted_words": "monthly"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is carbon intensity, not electricity consumption; a frequency-fallback label does not fix the measure mismatch.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+        "seriesId": "SEDS.CDTCR.CA.A",
+        "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+        "product": "electricity",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "California",
+          "code": "CA",
+          "type": "state"
+        },
+        "routeFamily": "seds",
+        "frequency": "annual",
+        "unit": "Metric tons CO2 per billion Btu",
+        "coverage": "1960 to 2024",
+        "dateStart": "1960",
+        "dateEnd": "2024",
+        "rankingTier": "B",
+        "score": 87.3,
+        "reasons": [
+          "tier_B",
+          "source_pool_fallback",
+          "seds_annual_state_fallback",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "wrong_frequency_fallback",
+          "product_exact_electricity",
+          "product_extra_concept_penalty",
+          "activity_exact_consumption",
+          "activity_extra_concept_penalty",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_electricity",
+          "lexical_title_consumption",
+          "frequency_fallback",
+          "frequency_mismatch_fallback",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "seds_annual_state_fallback",
+          "wrong_frequency_fallback",
+          "product_contains_unrequested_concepts",
+          "activity_contains_unrequested_concepts",
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "approved_fallback",
+          "frequencyRelation": "approved_fallback",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_fallback",
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": true
+      }
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "F1",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "coal production in germany, not poland",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "DEU | Germany | country",
+          "quoted_words": "germany"
+        }
+      ],
+      "excluded_geographies": [
+        {
+          "geography": "POL | Poland | country",
+          "quoted_words": "not poland"
+        }
+      ],
+      "topics": [
+        {
+          "product": "coal",
+          "activity": "production",
+          "quoted_words": "coal production"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is metallurgical coal, a subcategory rather than total coal production.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+        "seriesId": "INTL.130-1-DEU-MT.A",
+        "title": "Metallurgical coal production, Germany, Annual",
+        "product": "coal",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "Germany",
+          "code": "DEU",
+          "type": "other"
+        },
+        "routeFamily": "international",
+        "frequency": "annual",
+        "unit": "1000 metric tons",
+        "coverage": "1980 to 2024",
+        "dateStart": "1980",
+        "dateEnd": "2024",
+        "rankingTier": "A",
+        "score": 76.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_coal",
+          "activity_exact_production",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_coal",
+          "lexical_title_production",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  },
+  {
+    "run": "live-first",
+    "id": "F2",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "MEX | Mexico | country",
+          "quoted_words": "Mexico"
+        },
+        {
+          "geography": "CAN | Canada | country",
+          "quoted_words": "Canada"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "petroleum",
+          "activity": "exports",
+          "quoted_words": "exports more petroleum"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First comparison is crude oil including lease condensate exports, a narrower petroleum component rather than the requested petroleum aggregate.",
+    "firstDisplayed": {
+      "definitionId": "eia-definition:1:4fd41286b9f3f67ee0fac0ca1ab2a9fac58f7bf8391a438c3a83bff6062f841e",
+      "rank": 1,
+      "title": "Crude oil including lease condensate exports",
+      "semanticScore": 41.8,
+      "rankingTier": "A",
+      "rankingReasonCodes": [
+        "tier_A",
+        "source_pool_primary",
+        "route_family_validated",
+        "geography_validated",
+        "selector_geography_validated",
+        "product_or_scope_hard_gate_passed",
+        "activity_hard_gate_passed",
+        "frequency_validated",
+        "product_exact_petroleum",
+        "activity_exact_exports",
+        "aggregation_relation_unknown_no_verified_hierarchy",
+        "lexical_title_exports",
+        "frequency_exact",
+        "current_active",
+        "availability_present"
+      ],
+      "availableCountryCount": 2,
+      "requestedCountryCount": 2,
+      "definition": {
+        "product": "petroleum",
+        "activity": "exports",
+        "sector": null,
+        "scope": null,
+        "frequency": "annual",
+        "unit": {
+          "family": "thousand barrels per day",
+          "baseUnit": "thousand barrels per day"
+        },
+        "grossNetTreatment": "unspecified",
+        "source": "eia",
+        "methodology": null
+      },
+      "countries": [
+        {
+          "geography": {
+            "name": "Mexico",
+            "code": "MEX",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:04c828f0a69bdc8dbab5415b9d4611bf372107b85a79ea03304d2be20191759a",
+          "seriesId": "INTL.57-4-MEX-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Mexico, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        },
+        {
+          "geography": {
+            "name": "Canada",
+            "code": "CAN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:c577bbb09bdeb05740afd210506f5fc6cdaab1c97d9122f326a30bb7d958ed83",
+          "seriesId": "INTL.57-4-CAN-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Canada, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        }
+      ],
+      "warnings": []
+    }
+  },
+  {
+    "run": "live-first",
+    "id": "F10",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "electricity consumption in Georgia and Florida",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "GA | Georgia | US state",
+          "quoted_words": "Georgia"
+        },
+        {
+          "geography": "FL | Florida | US state",
+          "quoted_words": "Florida"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed result for either requested state in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-first",
+    "id": "F12",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "Texas electricity consumption annual",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": true,
+        "quoted_words": "annual"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed annual electricity-consumption result for Texas in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-first",
+    "id": "F14",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "renewable generation in Texas except hydro",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "renewable",
+          "activity": "generation",
+          "quoted_words": "renewable generation"
+        }
+      ],
+      "excluded_topics": [
+        {
+          "product": "hydro",
+          "activity": null,
+          "sector": null,
+          "quoted_words": "except hydro"
+        }
+      ],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is other biomass for electric utility non-cogen, a fuel and sector slice rather than all renewable generation excluding hydro. Its displayed geography name is also incorrect although code TX is retained.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:e0d77f25f0014b50a25bb60eda11b012c9b8bbe11263348913b4ba00d3fb2c9b",
+        "seriesId": "ELEC.GEN.WAS-TX-2.A",
+        "title": "Net generation : Texas : electric utility non-cogen : other biomass : annual",
+        "product": "renewable",
+        "activity": "generation",
+        "measureType": "quantity",
+        "geography": {
+          "name": "other biomass",
+          "code": "TX",
+          "type": "state"
+        },
+        "routeFamily": "domestic",
+        "frequency": "annual",
+        "unit": "thousand megawatthours",
+        "coverage": "2001 to 2026",
+        "dateStart": "2001",
+        "dateEnd": "2026",
+        "rankingTier": "A",
+        "score": 73.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "negation_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_renewable",
+          "activity_exact_generation",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_description_renewable",
+          "lexical_title_generation",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  },
+  {
+    "run": "live-tuned",
+    "id": "O8",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "monthly electricity consumption in California",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "CA | California | US state",
+          "quoted_words": "California"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "monthly",
+        "explicit": true,
+        "quoted_words": "monthly"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is carbon intensity, not electricity consumption; a frequency-fallback label does not fix the measure mismatch.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+        "seriesId": "SEDS.CDTCR.CA.A",
+        "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+        "product": "electricity",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "California",
+          "code": "CA",
+          "type": "state"
+        },
+        "routeFamily": "seds",
+        "frequency": "annual",
+        "unit": "Metric tons CO2 per billion Btu",
+        "coverage": "1960 to 2024",
+        "dateStart": "1960",
+        "dateEnd": "2024",
+        "rankingTier": "B",
+        "score": 87.3,
+        "reasons": [
+          "tier_B",
+          "source_pool_fallback",
+          "seds_annual_state_fallback",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "wrong_frequency_fallback",
+          "product_exact_electricity",
+          "product_extra_concept_penalty",
+          "activity_exact_consumption",
+          "activity_extra_concept_penalty",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_electricity",
+          "lexical_title_consumption",
+          "frequency_fallback",
+          "frequency_mismatch_fallback",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "seds_annual_state_fallback",
+          "wrong_frequency_fallback",
+          "product_contains_unrequested_concepts",
+          "activity_contains_unrequested_concepts",
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "approved_fallback",
+          "frequencyRelation": "approved_fallback",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_fallback",
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": true
+      }
+    ]
+  },
+  {
+    "run": "live-tuned",
+    "id": "F1",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "coal production in germany, not poland",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "DEU | Germany | country",
+          "quoted_words": "germany"
+        }
+      ],
+      "excluded_geographies": [
+        {
+          "geography": "POL | Poland | country",
+          "quoted_words": "not poland"
+        }
+      ],
+      "topics": [
+        {
+          "product": "coal",
+          "activity": "production",
+          "quoted_words": "coal production"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is metallurgical coal, a subcategory rather than total coal production.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+        "seriesId": "INTL.130-1-DEU-MT.A",
+        "title": "Metallurgical coal production, Germany, Annual",
+        "product": "coal",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "Germany",
+          "code": "DEU",
+          "type": "other"
+        },
+        "routeFamily": "international",
+        "frequency": "annual",
+        "unit": "1000 metric tons",
+        "coverage": "1980 to 2024",
+        "dateStart": "1980",
+        "dateEnd": "2024",
+        "rankingTier": "A",
+        "score": 76.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_coal",
+          "activity_exact_production",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_coal",
+          "lexical_title_production",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  },
+  {
+    "run": "live-tuned",
+    "id": "F2",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "MEX | Mexico | country",
+          "quoted_words": "Mexico"
+        },
+        {
+          "geography": "CAN | Canada | country",
+          "quoted_words": "Canada"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "petroleum",
+          "activity": "exports",
+          "quoted_words": "exports more petroleum"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First comparison is crude oil including lease condensate exports, a narrower petroleum component rather than the requested petroleum aggregate.",
+    "firstDisplayed": {
+      "definitionId": "eia-definition:1:4fd41286b9f3f67ee0fac0ca1ab2a9fac58f7bf8391a438c3a83bff6062f841e",
+      "rank": 1,
+      "title": "Crude oil including lease condensate exports",
+      "semanticScore": 41.8,
+      "rankingTier": "A",
+      "rankingReasonCodes": [
+        "tier_A",
+        "source_pool_primary",
+        "route_family_validated",
+        "geography_validated",
+        "selector_geography_validated",
+        "product_or_scope_hard_gate_passed",
+        "activity_hard_gate_passed",
+        "frequency_validated",
+        "product_exact_petroleum",
+        "activity_exact_exports",
+        "aggregation_relation_unknown_no_verified_hierarchy",
+        "lexical_title_exports",
+        "frequency_exact",
+        "current_active",
+        "availability_present"
+      ],
+      "availableCountryCount": 2,
+      "requestedCountryCount": 2,
+      "definition": {
+        "product": "petroleum",
+        "activity": "exports",
+        "sector": null,
+        "scope": null,
+        "frequency": "annual",
+        "unit": {
+          "family": "thousand barrels per day",
+          "baseUnit": "thousand barrels per day"
+        },
+        "grossNetTreatment": "unspecified",
+        "source": "eia",
+        "methodology": null
+      },
+      "countries": [
+        {
+          "geography": {
+            "name": "Mexico",
+            "code": "MEX",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:04c828f0a69bdc8dbab5415b9d4611bf372107b85a79ea03304d2be20191759a",
+          "seriesId": "INTL.57-4-MEX-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Mexico, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        },
+        {
+          "geography": {
+            "name": "Canada",
+            "code": "CAN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:c577bbb09bdeb05740afd210506f5fc6cdaab1c97d9122f326a30bb7d958ed83",
+          "seriesId": "INTL.57-4-CAN-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Canada, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        }
+      ],
+      "warnings": []
+    }
+  },
+  {
+    "run": "live-tuned",
+    "id": "F10",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "electricity consumption in Georgia and Florida",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "GA | Georgia | US state",
+          "quoted_words": "Georgia"
+        },
+        {
+          "geography": "FL | Florida | US state",
+          "quoted_words": "Florida"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed result for either requested state in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-tuned",
+    "id": "F12",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "Texas electricity consumption annual",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": true,
+        "quoted_words": "annual"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed annual electricity-consumption result for Texas in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-tuned",
+    "id": "F14",
+    "repeat": 1,
+    "attempt": 0,
+    "query": "renewable generation in Texas except hydro",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "renewable",
+          "activity": "generation",
+          "quoted_words": "renewable generation"
+        }
+      ],
+      "excluded_topics": [
+        {
+          "product": "hydro",
+          "activity": null,
+          "sector": null,
+          "quoted_words": "hydro"
+        }
+      ],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is other biomass for electric utility non-cogen, a fuel and sector slice rather than all renewable generation excluding hydro. Its displayed geography name is also incorrect although code TX is retained.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:e0d77f25f0014b50a25bb60eda11b012c9b8bbe11263348913b4ba00d3fb2c9b",
+        "seriesId": "ELEC.GEN.WAS-TX-2.A",
+        "title": "Net generation : Texas : electric utility non-cogen : other biomass : annual",
+        "product": "renewable",
+        "activity": "generation",
+        "measureType": "quantity",
+        "geography": {
+          "name": "other biomass",
+          "code": "TX",
+          "type": "state"
+        },
+        "routeFamily": "domestic",
+        "frequency": "annual",
+        "unit": "thousand megawatthours",
+        "coverage": "2001 to 2026",
+        "dateStart": "2001",
+        "dateEnd": "2026",
+        "rankingTier": "A",
+        "score": 73.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "negation_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_renewable",
+          "activity_exact_generation",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_description_renewable",
+          "lexical_title_generation",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  },
+  {
+    "run": "live-tuned",
+    "id": "O8",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "monthly electricity consumption in California",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "CA | California | US state",
+          "quoted_words": "California"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "monthly",
+        "explicit": true,
+        "quoted_words": "monthly"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is carbon intensity, not electricity consumption; a frequency-fallback label does not fix the measure mismatch.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+        "seriesId": "SEDS.CDTCR.CA.A",
+        "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+        "product": "electricity",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "California",
+          "code": "CA",
+          "type": "state"
+        },
+        "routeFamily": "seds",
+        "frequency": "annual",
+        "unit": "Metric tons CO2 per billion Btu",
+        "coverage": "1960 to 2024",
+        "dateStart": "1960",
+        "dateEnd": "2024",
+        "rankingTier": "B",
+        "score": 87.3,
+        "reasons": [
+          "tier_B",
+          "source_pool_fallback",
+          "seds_annual_state_fallback",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "wrong_frequency_fallback",
+          "product_exact_electricity",
+          "product_extra_concept_penalty",
+          "activity_exact_consumption",
+          "activity_extra_concept_penalty",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_electricity",
+          "lexical_title_consumption",
+          "frequency_fallback",
+          "frequency_mismatch_fallback",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "seds_annual_state_fallback",
+          "wrong_frequency_fallback",
+          "product_contains_unrequested_concepts",
+          "activity_contains_unrequested_concepts",
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "approved_fallback",
+          "frequencyRelation": "approved_fallback",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_fallback",
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": true
+      }
+    ]
+  },
+  {
+    "run": "live-tuned",
+    "id": "F1",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "coal production in germany, not poland",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "DEU | Germany | country",
+          "quoted_words": "germany"
+        }
+      ],
+      "excluded_geographies": [
+        {
+          "geography": "POL | Poland | country",
+          "quoted_words": "poland"
+        }
+      ],
+      "topics": [
+        {
+          "product": "coal",
+          "activity": "production",
+          "quoted_words": "coal production"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is metallurgical coal, a subcategory rather than total coal production.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+        "seriesId": "INTL.130-1-DEU-MT.A",
+        "title": "Metallurgical coal production, Germany, Annual",
+        "product": "coal",
+        "activity": "production",
+        "measureType": "quantity",
+        "geography": {
+          "name": "Germany",
+          "code": "DEU",
+          "type": "other"
+        },
+        "routeFamily": "international",
+        "frequency": "annual",
+        "unit": "1000 metric tons",
+        "coverage": "1980 to 2024",
+        "dateStart": "1980",
+        "dateEnd": "2024",
+        "rankingTier": "A",
+        "score": 76.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_coal",
+          "activity_exact_production",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_coal",
+          "lexical_title_production",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  },
+  {
+    "run": "live-tuned",
+    "id": "F2",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "MEX | Mexico | country",
+          "quoted_words": "Mexico"
+        },
+        {
+          "geography": "CAN | Canada | country",
+          "quoted_words": "Canada"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "petroleum",
+          "activity": "exports",
+          "quoted_words": "exports more petroleum"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First comparison is crude oil including lease condensate exports, a narrower petroleum component rather than the requested petroleum aggregate.",
+    "firstDisplayed": {
+      "definitionId": "eia-definition:1:4fd41286b9f3f67ee0fac0ca1ab2a9fac58f7bf8391a438c3a83bff6062f841e",
+      "rank": 1,
+      "title": "Crude oil including lease condensate exports",
+      "semanticScore": 41.8,
+      "rankingTier": "A",
+      "rankingReasonCodes": [
+        "tier_A",
+        "source_pool_primary",
+        "route_family_validated",
+        "geography_validated",
+        "selector_geography_validated",
+        "product_or_scope_hard_gate_passed",
+        "activity_hard_gate_passed",
+        "frequency_validated",
+        "product_exact_petroleum",
+        "activity_exact_exports",
+        "aggregation_relation_unknown_no_verified_hierarchy",
+        "lexical_title_exports",
+        "frequency_exact",
+        "current_active",
+        "availability_present"
+      ],
+      "availableCountryCount": 2,
+      "requestedCountryCount": 2,
+      "definition": {
+        "product": "petroleum",
+        "activity": "exports",
+        "sector": null,
+        "scope": null,
+        "frequency": "annual",
+        "unit": {
+          "family": "thousand barrels per day",
+          "baseUnit": "thousand barrels per day"
+        },
+        "grossNetTreatment": "unspecified",
+        "source": "eia",
+        "methodology": null
+      },
+      "countries": [
+        {
+          "geography": {
+            "name": "Mexico",
+            "code": "MEX",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:04c828f0a69bdc8dbab5415b9d4611bf372107b85a79ea03304d2be20191759a",
+          "seriesId": "INTL.57-4-MEX-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Mexico, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        },
+        {
+          "geography": {
+            "name": "Canada",
+            "code": "CAN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "candidateId": "eia:1:c577bbb09bdeb05740afd210506f5fc6cdaab1c97d9122f326a30bb7d958ed83",
+          "seriesId": "INTL.57-4-CAN-TBPD.A",
+          "title": "Crude oil including lease condensate exports, Canada, Annual",
+          "product": "petroleum",
+          "activity": "exports",
+          "routeFamily": "international",
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "dateStart": "1980",
+          "dateEnd": "2020",
+          "coverage": "1980 to 2020",
+          "status": "comparable",
+          "warning": null,
+          "unitConversion": {
+            "required": false,
+            "originalUnit": "thousand barrels per day",
+            "comparisonUnit": "thousand barrels per day",
+            "factor": 1
+          },
+          "certainty": {
+            "schemaVersion": "1.1.0",
+            "intentStatus": "resolved",
+            "semanticCompatibility": "compatible",
+            "conceptPairStatus": "validated",
+            "routeRelation": "exact",
+            "frequencyRelation": "defaulted",
+            "unitRelation": "not_requested",
+            "coverageRelation": "not_requested",
+            "aggregationRelation": "unknown",
+            "hierarchyEvidenceStatus": "none",
+            "presentationClass": "compatible_candidate",
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ]
+          }
+        }
+      ],
+      "warnings": []
+    }
+  },
+  {
+    "run": "live-tuned",
+    "id": "F10",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "electricity consumption in Georgia and Florida",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "GA | Georgia | US state",
+          "quoted_words": "Georgia"
+        },
+        {
+          "geography": "FL | Florida | US state",
+          "quoted_words": "Florida"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed result for either requested state in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-tuned",
+    "id": "F12",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "Texas electricity consumption annual",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "quoted_words": "electricity consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": true,
+        "quoted_words": "annual"
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "No displayed annual electricity-consumption result for Texas in the tested cache/routes. This does not establish absence from all EIA sources.",
+    "firstDisplayed": []
+  },
+  {
+    "run": "live-tuned",
+    "id": "F14",
+    "repeat": 2,
+    "attempt": 0,
+    "query": "renewable generation in Texas except hydro",
+    "stage": "retrieval/ranking",
+    "kind": "retrieval",
+    "modelForm": {
+      "geographies": [
+        {
+          "geography": "TX | Texas | US state",
+          "quoted_words": "Texas"
+        }
+      ],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "renewable",
+          "activity": "generation",
+          "quoted_words": "renewable generation"
+        }
+      ],
+      "excluded_topics": [
+        {
+          "product": "hydro",
+          "activity": null,
+          "sector": null,
+          "quoted_words": "except hydro"
+        }
+      ],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": false,
+        "about": null,
+        "options": []
+      }
+    },
+    "reason": "First result is other biomass for electric utility non-cogen, a fuel and sector slice rather than all renewable generation excluding hydro. Its displayed geography name is also incorrect although code TX is retained.",
+    "firstDisplayed": [
+      {
+        "candidateId": "eia:1:e0d77f25f0014b50a25bb60eda11b012c9b8bbe11263348913b4ba00d3fb2c9b",
+        "seriesId": "ELEC.GEN.WAS-TX-2.A",
+        "title": "Net generation : Texas : electric utility non-cogen : other biomass : annual",
+        "product": "renewable",
+        "activity": "generation",
+        "measureType": "quantity",
+        "geography": {
+          "name": "other biomass",
+          "code": "TX",
+          "type": "state"
+        },
+        "routeFamily": "domestic",
+        "frequency": "annual",
+        "unit": "thousand megawatthours",
+        "coverage": "2001 to 2026",
+        "dateStart": "2001",
+        "dateEnd": "2026",
+        "rankingTier": "A",
+        "score": 73.5,
+        "reasons": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "negation_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_renewable",
+          "activity_exact_generation",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_description_renewable",
+          "lexical_title_generation",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "warnings": [
+          "aggregation_relationship_not_verified"
+        ],
+        "certainty": {
+          "schemaVersion": "1.1.0",
+          "intentStatus": "resolved",
+          "semanticCompatibility": "compatible",
+          "conceptPairStatus": "validated",
+          "routeRelation": "exact",
+          "frequencyRelation": "defaulted",
+          "unitRelation": "not_requested",
+          "coverageRelation": "not_requested",
+          "aggregationRelation": "unknown",
+          "hierarchyEvidenceStatus": "none",
+          "presentationClass": "compatible_candidate",
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        "fallback": false
+      }
+    ]
+  }
+]

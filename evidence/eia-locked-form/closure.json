@@ -1,0 +1,49 @@
+{
+  "base": "b7b119333dd111b9b2deea12acf1df68a1c2674d",
+  "branch": "codex/eia-locked-form",
+  "checkpointBeforeClosureCommit": "9ca704829767a895feb19a9014a28a10b8615215",
+  "commitsBeforeClosure": [
+    "07f57ffe4b982f5ac7ed7f7f409a8db03ab5734c test: freeze locked-form requirements schema and meaning scorer",
+    "3c93efb6c0e581c8ea427018b5cf19d179e87f57 test: record cached data-picking ceiling and approved measurement bases",
+    "a187941ae39a7589b8329468025a264af46d451c feat: replace AI interpretation with enforced locked forms",
+    "ac34411c90fc56adc2e8c8ddd015901f754ff197 test: record bounded Luna evaluation budget and runner",
+    "677c72ed884fb9c7795cd649476d5c98ea7d1c1b test: make the single general-rule prompt revision for E6",
+    "9ca704829767a895feb19a9014a28a10b8615215 test: record revised-run budget and cache-write accounting"
+  ],
+  "checks": {
+    "baseline": "621 total,620 pass,1 skip",
+    "final": "284/284 pass",
+    "retainedTests": 204,
+    "retiredOldContractTests": 417,
+    "newTests": 80,
+    "rulesDifferentialQueries": 332,
+    "rulesDifferences": 0,
+    "build": "passed",
+    "schemaLimits": "passed",
+    "frozenArtifacts": "all unchanged except one authorized E6 instruction revision",
+    "secretScan": "zero validated credential findings; two non-boundary substrings inside OpenAI encrypted_content were false positives, not matches to the existing key; raw records unchanged; no values printed"
+  },
+  "paidCalls": 101,
+  "generationCostUSD": 0.01568702,
+  "officialFirstRun": "FAIL",
+  "tunedSameQueries": "48/48, not independent",
+  "excluded": {
+    "docs/eia-interpretation-audit.md": "pre-existing private audit; untouched, unstaged; remains authoritative in the worktree",
+    "node_modules/": "generated dependencies, left in place; not copied or staged",
+    ".next/": "generated build output/cache, left in place; not copied or staged",
+    "credentials": "existing Downloads key and any environment/auth files remain in place; not copied/staged"
+  },
+  "externalActions": "local commits only; no push, merge, deploy, Vercel changes or production model/settings change",
+  "browser": "original prompt tested; 2 success,1 correctly blocked model failure; no console warnings/errors; local server stopped",
+  "limitations": [
+    "First run failed frozen no-unexpected-clarification gate",
+    "Tuned responses are exposed cases, not an independent holdout",
+    "Revised prompt not browser-retested",
+    "Production default gpt-5.4-mini untested",
+    "Six retrieval failures intentionally parked",
+    "No live EIA observation fetch, graph or export validation in this job",
+    "Token-count endpoint returns no billing field; reserves included but not represented as observed charges"
+  ],
+  "redactions": "Copied text logs replace home/worktree absolute paths with placeholders and strip trailing whitespace; raw logs remain in /private/tmp. Raw evaluation records remain unchanged.",
+  "durableCopy": "~/Documents/EIAapp-Evidence/20261028/locked-form/final-<final-commit>/; per-file verification and FINAL-STATE.json written after commit."
+}

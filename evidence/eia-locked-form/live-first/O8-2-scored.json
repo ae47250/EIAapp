@@ -1,0 +1,1293 @@
+{
+  "id": "O8",
+  "repeat": 2,
+  "query": "monthly electricity consumption in California",
+  "attempts": [
+    {
+      "id": "O8",
+      "repeat": 2,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "CA"
+        ],
+        "rawGeographies": [
+          "CA | California | US state"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": false,
+        "reason": "First result is carbon intensity, not electricity consumption; a frequency-fallback label does not fix the measure mismatch.",
+        "first": [
+          {
+            "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+            "seriesId": "SEDS.CDTCR.CA.A",
+            "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+            "product": "electricity",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Metric tons CO2 per billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "B",
+            "score": 87.3,
+            "reasons": [
+              "tier_B",
+              "source_pool_fallback",
+              "seds_annual_state_fallback",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "wrong_frequency_fallback",
+              "product_exact_electricity",
+              "product_extra_concept_penalty",
+              "activity_exact_consumption",
+              "activity_extra_concept_penalty",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "lexical_title_consumption",
+              "frequency_fallback",
+              "frequency_mismatch_fallback",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "seds_annual_state_fallback",
+              "wrong_frequency_fallback",
+              "product_contains_unrequested_concepts",
+              "activity_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "approved_fallback",
+              "frequencyRelation": "approved_fallback",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_fallback",
+              "warnings": [
+                "seds_annual_state_fallback",
+                "wrong_frequency_fallback",
+                "product_contains_unrequested_concepts",
+                "activity_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": true
+          }
+        ]
+      },
+      "elapsedMs": 2277,
+      "usage": {
+        "input_tokens": 5494,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 5491
+        },
+        "output_tokens": 105,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 5599
+      },
+      "costUSD": 0.00010771000000000001,
+      "costUpperUSD": 0.000107785,
+      "responseId": "resp_0481e35ba5861e91006ae26f15447887d2938a53b0b3174b71",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "monthly electricity consumption in California",
+        "intent": {
+          "originalQuery": "monthly electricity consumption in California",
+          "cleanedQuery": "monthly electricity consumption in California",
+          "normalizedQuery": "monthly electricity consumption in California",
+          "correctedQuery": "monthly electricity consumption in California",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "CA | California | US state",
+                "quoted_words": "California"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "electricity",
+                "activity": "consumption",
+                "quoted_words": "electricity consumption"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "monthly",
+              "explicit": true,
+              "quoted_words": "monthly"
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "California",
+            "code": "CA",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          },
+          "countryCode": "CA",
+          "validatedGeographies": [
+            {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "electricity",
+              "activity": "consumption",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "monthly",
+          "requestedFrequency": "monthly",
+          "frequencyExplicit": true,
+          "fields": {
+            "country": {
+              "normalizedValue": "CA",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "electricity",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "consumption",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "monthly",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": true
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "electricity",
+              "activity": "consumption",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [],
+            "routeFamily": "domestic",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "monthly electricity consumption in California",
+            "normalizedQuery": "monthly electricity consumption in california",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "California",
+                    "code": "CA",
+                    "type": "state",
+                    "routeFamilies": [
+                      "domestic",
+                      "seds"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "electricity",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "consumption",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "frequency",
+                  "value": "monthly",
+                  "source": "validated_interpreter"
+                }
+              ]
+            },
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "California",
+                "code": "CA",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            ],
+            "product": "electricity",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "consumption",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "electricity",
+                "activity": "consumption",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [],
+              "routeFamily": "domestic",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "monthly",
+            "requestedFrequency": "monthly",
+            "frequencyExplicit": true,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly",
+                "weekly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "none",
+              "reasons": []
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "CA",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "validated_interpreter",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "domestic",
+            "label": "Domestic EIA",
+            "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly",
+              "weekly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "none",
+            "reasons": []
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [
+          {
+            "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+            "seriesId": "SEDS.CDTCR.CA.A",
+            "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+            "product": "electricity",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Metric tons CO2 per billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "B",
+            "score": 87.3,
+            "reasons": [
+              "tier_B",
+              "source_pool_fallback",
+              "seds_annual_state_fallback",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "wrong_frequency_fallback",
+              "product_exact_electricity",
+              "product_extra_concept_penalty",
+              "activity_exact_consumption",
+              "activity_extra_concept_penalty",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "lexical_title_consumption",
+              "frequency_fallback",
+              "frequency_mismatch_fallback",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "seds_annual_state_fallback",
+              "wrong_frequency_fallback",
+              "product_contains_unrequested_concepts",
+              "activity_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "approved_fallback",
+              "frequencyRelation": "approved_fallback",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_fallback",
+              "warnings": [
+                "seds_annual_state_fallback",
+                "wrong_frequency_fallback",
+                "product_contains_unrequested_concepts",
+                "activity_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": true
+          },
+          {
+            "candidateId": "eia:1:9c3e57b5d05953fc8b99a0b4c311fc8d974f55bc49e0472984b763487684a146",
+            "seriesId": "SEDS.ESSCB.CA.A",
+            "title": "Electricity total consumption adjusted for process fuel, California",
+            "product": "electricity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1970 to 2024",
+            "dateStart": "1970",
+            "dateEnd": "2024",
+            "rankingTier": "B",
+            "score": 89.9,
+            "reasons": [
+              "tier_B",
+              "source_pool_fallback",
+              "seds_annual_state_fallback",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "wrong_frequency_fallback",
+              "product_exact_electricity",
+              "product_extra_concept_penalty",
+              "activity_exact_consumption",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "lexical_title_consumption",
+              "frequency_fallback",
+              "frequency_mismatch_fallback",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "seds_annual_state_fallback",
+              "wrong_frequency_fallback",
+              "product_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "approved_fallback",
+              "frequencyRelation": "approved_fallback",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_fallback",
+              "warnings": [
+                "seds_annual_state_fallback",
+                "wrong_frequency_fallback",
+                "product_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": true
+          },
+          {
+            "candidateId": "eia:1:d44619cc4b9d0c3bee148ec3190d781686a9c3aeddd2fe82f428fb35bff8e822",
+            "seriesId": "SEDS.TEEIB.CA.A",
+            "title": "Total energy consumption in the electric power sector plus net imports of electricity into the United States, California",
+            "product": "electricity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "B",
+            "score": 87.3,
+            "reasons": [
+              "tier_B",
+              "source_pool_fallback",
+              "seds_annual_state_fallback",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "wrong_frequency_fallback",
+              "product_exact_electricity",
+              "product_extra_concept_penalty",
+              "activity_exact_consumption",
+              "activity_extra_concept_penalty",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "lexical_title_consumption",
+              "frequency_fallback",
+              "frequency_mismatch_fallback",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "seds_annual_state_fallback",
+              "wrong_frequency_fallback",
+              "product_contains_unrequested_concepts",
+              "activity_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "approved_fallback",
+              "frequencyRelation": "approved_fallback",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_fallback",
+              "warnings": [
+                "seds_annual_state_fallback",
+                "wrong_frequency_fallback",
+                "product_contains_unrequested_concepts",
+                "activity_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": true
+          },
+          {
+            "candidateId": "eia:1:98726ea6e9a5236689338347cc4898e494bc4a709d35c0762d79c04a5e12714b",
+            "seriesId": "SEDS.ESTCB.CA.A",
+            "title": "Electricity total consumption (electricity sales to ultimate customers), California",
+            "product": "electricity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "B",
+            "score": 81.7,
+            "reasons": [
+              "tier_B",
+              "source_pool_fallback",
+              "seds_annual_state_fallback",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "wrong_frequency_fallback",
+              "product_exact_electricity",
+              "product_extra_concept_penalty",
+              "activity_exact_consumption",
+              "activity_extra_concept_penalty",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "lexical_title_consumption",
+              "frequency_fallback",
+              "frequency_mismatch_fallback",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "seds_annual_state_fallback",
+              "wrong_frequency_fallback",
+              "product_contains_unrequested_concepts",
+              "activity_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "approved_fallback",
+              "frequencyRelation": "approved_fallback",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_fallback",
+              "warnings": [
+                "seds_annual_state_fallback",
+                "wrong_frequency_fallback",
+                "product_contains_unrequested_concepts",
+                "activity_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": true
+          },
+          {
+            "candidateId": "eia:1:84f855baf0fd3521c1a399d48133fe3c34b3ea2d8f6ff18157011f5f2e763ad3",
+            "seriesId": "SEDS.ESTPP.CA.A",
+            "title": "Electricity total consumption (electricity sales to ultimate customers) per capita, California",
+            "product": "electricity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Kilowatthours",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "B",
+            "score": 81.7,
+            "reasons": [
+              "tier_B",
+              "source_pool_fallback",
+              "seds_annual_state_fallback",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "wrong_frequency_fallback",
+              "product_exact_electricity",
+              "product_extra_concept_penalty",
+              "activity_exact_consumption",
+              "activity_extra_concept_penalty",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "lexical_title_consumption",
+              "frequency_fallback",
+              "frequency_mismatch_fallback",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "seds_annual_state_fallback",
+              "wrong_frequency_fallback",
+              "product_contains_unrequested_concepts",
+              "activity_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "approved_fallback",
+              "frequencyRelation": "approved_fallback",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_fallback",
+              "warnings": [
+                "seds_annual_state_fallback",
+                "wrong_frequency_fallback",
+                "product_contains_unrequested_concepts",
+                "activity_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": true
+          }
+        ],
+        "candidateGroups": [
+          {
+            "id": "CA:electricity:production:quantity",
+            "label": "Production: Energy or physical quantity",
+            "product": "electricity",
+            "activity": "production",
+            "measureType": "quantity",
+            "technical": false,
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "warnings": [
+              {
+                "code": "requested_frequency_unavailable_seds_annual_fallback",
+                "message": "No valid monthly electricity consumption series was found for California. Annual SEDS alternatives are shown as clearly labeled fallbacks."
+              }
+            ],
+            "candidates": [
+              {
+                "candidateId": "eia:1:61b432c5de4e1b1b53e209a0a4d3d5b035ee25e3bb4f10ec7e41ac49afad017f",
+                "seriesId": "SEDS.CDTCR.CA.A",
+                "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+                "product": "electricity",
+                "activity": "production",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "California",
+                  "code": "CA",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Metric tons CO2 per billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "B",
+                "score": 87.3,
+                "reasons": [
+                  "tier_B",
+                  "source_pool_fallback",
+                  "seds_annual_state_fallback",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "wrong_frequency_fallback",
+                  "product_exact_electricity",
+                  "product_extra_concept_penalty",
+                  "activity_exact_consumption",
+                  "activity_extra_concept_penalty",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "lexical_title_consumption",
+                  "frequency_fallback",
+                  "frequency_mismatch_fallback",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "seds_annual_state_fallback",
+                  "wrong_frequency_fallback",
+                  "product_contains_unrequested_concepts",
+                  "activity_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "approved_fallback",
+                  "frequencyRelation": "approved_fallback",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_fallback",
+                  "warnings": [
+                    "seds_annual_state_fallback",
+                    "wrong_frequency_fallback",
+                    "product_contains_unrequested_concepts",
+                    "activity_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": true
+              }
+            ]
+          },
+          {
+            "id": "CA:electricity:consumption:quantity",
+            "label": "Consumption: Energy or physical quantity",
+            "product": "electricity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "technical": false,
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "warnings": [
+              {
+                "code": "requested_frequency_unavailable_seds_annual_fallback",
+                "message": "No valid monthly electricity consumption series was found for California. Annual SEDS alternatives are shown as clearly labeled fallbacks."
+              }
+            ],
+            "candidates": [
+              {
+                "candidateId": "eia:1:9c3e57b5d05953fc8b99a0b4c311fc8d974f55bc49e0472984b763487684a146",
+                "seriesId": "SEDS.ESSCB.CA.A",
+                "title": "Electricity total consumption adjusted for process fuel, California",
+                "product": "electricity",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "California",
+                  "code": "CA",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1970 to 2024",
+                "dateStart": "1970",
+                "dateEnd": "2024",
+                "rankingTier": "B",
+                "score": 89.9,
+                "reasons": [
+                  "tier_B",
+                  "source_pool_fallback",
+                  "seds_annual_state_fallback",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "wrong_frequency_fallback",
+                  "product_exact_electricity",
+                  "product_extra_concept_penalty",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "lexical_title_consumption",
+                  "frequency_fallback",
+                  "frequency_mismatch_fallback",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "seds_annual_state_fallback",
+                  "wrong_frequency_fallback",
+                  "product_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "approved_fallback",
+                  "frequencyRelation": "approved_fallback",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_fallback",
+                  "warnings": [
+                    "seds_annual_state_fallback",
+                    "wrong_frequency_fallback",
+                    "product_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": true
+              },
+              {
+                "candidateId": "eia:1:d44619cc4b9d0c3bee148ec3190d781686a9c3aeddd2fe82f428fb35bff8e822",
+                "seriesId": "SEDS.TEEIB.CA.A",
+                "title": "Total energy consumption in the electric power sector plus net imports of electricity into the United States, California",
+                "product": "electricity",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "California",
+                  "code": "CA",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "B",
+                "score": 87.3,
+                "reasons": [
+                  "tier_B",
+                  "source_pool_fallback",
+                  "seds_annual_state_fallback",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "wrong_frequency_fallback",
+                  "product_exact_electricity",
+                  "product_extra_concept_penalty",
+                  "activity_exact_consumption",
+                  "activity_extra_concept_penalty",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "lexical_title_consumption",
+                  "frequency_fallback",
+                  "frequency_mismatch_fallback",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "seds_annual_state_fallback",
+                  "wrong_frequency_fallback",
+                  "product_contains_unrequested_concepts",
+                  "activity_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "approved_fallback",
+                  "frequencyRelation": "approved_fallback",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_fallback",
+                  "warnings": [
+                    "seds_annual_state_fallback",
+                    "wrong_frequency_fallback",
+                    "product_contains_unrequested_concepts",
+                    "activity_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": true
+              },
+              {
+                "candidateId": "eia:1:98726ea6e9a5236689338347cc4898e494bc4a709d35c0762d79c04a5e12714b",
+                "seriesId": "SEDS.ESTCB.CA.A",
+                "title": "Electricity total consumption (electricity sales to ultimate customers), California",
+                "product": "electricity",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "California",
+                  "code": "CA",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "B",
+                "score": 81.7,
+                "reasons": [
+                  "tier_B",
+                  "source_pool_fallback",
+                  "seds_annual_state_fallback",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "wrong_frequency_fallback",
+                  "product_exact_electricity",
+                  "product_extra_concept_penalty",
+                  "activity_exact_consumption",
+                  "activity_extra_concept_penalty",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "lexical_title_consumption",
+                  "frequency_fallback",
+                  "frequency_mismatch_fallback",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "seds_annual_state_fallback",
+                  "wrong_frequency_fallback",
+                  "product_contains_unrequested_concepts",
+                  "activity_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "approved_fallback",
+                  "frequencyRelation": "approved_fallback",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_fallback",
+                  "warnings": [
+                    "seds_annual_state_fallback",
+                    "wrong_frequency_fallback",
+                    "product_contains_unrequested_concepts",
+                    "activity_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": true
+              },
+              {
+                "candidateId": "eia:1:84f855baf0fd3521c1a399d48133fe3c34b3ea2d8f6ff18157011f5f2e763ad3",
+                "seriesId": "SEDS.ESTPP.CA.A",
+                "title": "Electricity total consumption (electricity sales to ultimate customers) per capita, California",
+                "product": "electricity",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "California",
+                  "code": "CA",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Kilowatthours",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "B",
+                "score": 81.7,
+                "reasons": [
+                  "tier_B",
+                  "source_pool_fallback",
+                  "seds_annual_state_fallback",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "wrong_frequency_fallback",
+                  "product_exact_electricity",
+                  "product_extra_concept_penalty",
+                  "activity_exact_consumption",
+                  "activity_extra_concept_penalty",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "lexical_title_consumption",
+                  "frequency_fallback",
+                  "frequency_mismatch_fallback",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "seds_annual_state_fallback",
+                  "wrong_frequency_fallback",
+                  "product_contains_unrequested_concepts",
+                  "activity_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "approved_fallback",
+                  "frequencyRelation": "approved_fallback",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_fallback",
+                  "warnings": [
+                    "seds_annual_state_fallback",
+                    "wrong_frequency_fallback",
+                    "product_contains_unrequested_concepts",
+                    "activity_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": true
+              }
+            ]
+          }
+        ],
+        "comparisonDefinitions": [],
+        "userWarnings": [
+          {
+            "code": "requested_frequency_unavailable_seds_annual_fallback",
+            "message": "No valid monthly electricity consumption series was found for California. Annual SEDS alternatives are shown as clearly labeled fallbacks."
+          }
+        ],
+        "needsClarification": false,
+        "userMessage": null,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 5,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "Choose Graph or Excel for one of the 5 displayed series. No series was selected automatically."
+      }
+    }
+  ],
+  "events": []
+}

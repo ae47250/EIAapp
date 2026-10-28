@@ -125,10 +125,6 @@ async function mockFetch(input, options = {}) {
   throw new Error(`Unexpected network request: ${url}`);
 }
 
-function escapeRegExp(value) {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
 function jsonResponse(body) {
   return new Response(JSON.stringify(body), {
     status: 200,

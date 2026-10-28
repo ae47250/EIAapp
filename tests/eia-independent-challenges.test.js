@@ -11,8 +11,7 @@ function fixture(name) {
   return JSON.parse(readFileSync(new URL(`./fixtures/eia/${name}.json`, import.meta.url)));
 }
 const cases = fixture('independent-challenges').cases;
-const adjudications = fixture('challenge-route-adjudication').claims;
-const scopeCases = fixture('scope-evidence-legacy').review;
+
 cases.push(...fixture('review-regressions').cases.map((item, index) => ({
   id: `review-${index + 1}`,
   q: item.q,
@@ -38,43 +37,6 @@ after(() => {
   }
   assert.equal(fetches, 0, 'No model or source API calls are permitted');
 });
-
-function signature(intent) {
-  const structured = intent.structuredIntent;
-  return {
-    codes: structured.geographies.map(g => g.code),
-    frequency: intent.frequency,
-    explicit: intent.frequencyExplicit,
-    sector: intent.sector,
-    route: structured.route.family,
-    pairs: structured.conceptPairs.map(p => ({ product: p.product, activity: p.activity })),
-    clarify: intent.needsClarification
-  };
-}
-function injected(expected) {
-  const field = value => ({ value, confidence: 0.99 });
-  return {
-    confidence: 0.99,
-    geographies: (expected.codes || []).map(field),
-    conceptPairs: expected.pairs?.map((pair, order) => ({ ...pair, order, confidence: 0.99 })),
-    fields: {
-      country: field(expected.codes?.[0]),
-      product: field(expected.pairs?.[0]?.product),
-      activity: field(expected.pairs?.[0]?.activity),
-      frequency: { ...field(expected.frequency), explicit: expected.explicit },
-      sector: field(expected.sector)
-    }
-  };
-}
-const sourceRecords = new Map();
-function sourceRecord(family, seriesId) {
-  if (!sourceRecords.has(family)) {
-    const artifacts = family === 'domestic' ? ['domestic', 'natural-gas'] : [family];
-    const records = artifacts.flatMap(name => gunzipSync(readFileSync(new URL(`../data/eia/builds/phase1b/${name}.jsonl.gz`, import.meta.url))).toString().trim().split('\n').map(JSON.parse));
-    sourceRecords.set(family, new Map(records.map(record => [record.series_id, record])));
-  }
-  return sourceRecords.get(family).get(seriesId);
-}
 
 test('public cap shares slots across requests and discloses overflow without dropping intent', async () => {
   const q = 'electricity generation Alabama Alaska Arizona Arkansas California Colorado Connecticut Delaware Florida Georgia Hawaii';

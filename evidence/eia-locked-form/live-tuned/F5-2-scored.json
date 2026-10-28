@@ -1,0 +1,668 @@
+{
+  "id": "F5",
+  "repeat": 2,
+  "query": "can you show us wind capacity in Denmark",
+  "attempts": [
+    {
+      "id": "F5",
+      "repeat": 2,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "DNK"
+        ],
+        "rawGeographies": [
+          "DNK | Denmark | country"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": true,
+        "reason": "First displayed result/definition matches requested geography, product and activity; comparison has all requested geographies. Explicitly labelled frequency fallback is accepted where used.",
+        "first": [
+          {
+            "candidateId": "eia:1:9d22f27e7bf005dc136e2188ccebcc4dedd4729d7decdcbf5a318f46f1c5d182",
+            "seriesId": "INTL.37-7-DNK-MK.A",
+            "title": "Wind electricity installed capacity, Denmark, Annual",
+            "product": "wind",
+            "activity": "capacity",
+            "measureType": "capacity",
+            "geography": {
+              "name": "Denmark",
+              "code": "DNK",
+              "type": "other"
+            },
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "million kilowatts",
+            "coverage": "1980 to 2024",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "rankingTier": "C",
+            "score": 77.6,
+            "reasons": [
+              "tier_C",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_wind",
+              "product_extra_concept_penalty",
+              "activity_exact_capacity",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_wind",
+              "lexical_title_capacity",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "product_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "product_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ]
+      },
+      "elapsedMs": 4066,
+      "usage": {
+        "input_tokens": 5571,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 5568
+        },
+        "output_tokens": 139,
+        "output_tokens_details": {
+          "reasoning_tokens": 35
+        },
+        "total_tokens": 5710
+      },
+      "costUSD": 0.00012548,
+      "costUpperUSD": 0.000125555,
+      "responseId": "resp_0ef94c8cb681656d006ae271146f5887d2ac30a1773b7004ed",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "can you show us wind capacity in Denmark",
+        "intent": {
+          "originalQuery": "can you show us wind capacity in Denmark",
+          "cleanedQuery": "can you show us wind capacity in Denmark",
+          "normalizedQuery": "can you show us wind capacity in Denmark",
+          "correctedQuery": "can you show us wind capacity in Denmark",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "DNK | Denmark | country",
+                "quoted_words": "Denmark"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "wind",
+                "activity": "capacity",
+                "quoted_words": "wind capacity"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Denmark",
+            "code": "DNK",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "countryCode": "DNK",
+          "validatedGeographies": [
+            {
+              "name": "Denmark",
+              "code": "DNK",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "wind",
+          "activity": "capacity",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "wind",
+              "activity": "capacity",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "DNK",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "wind",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "capacity",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "wind",
+              "activity": "capacity",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [
+              "DNK"
+            ],
+            "routeFamily": "international",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "can you show us wind capacity in Denmark",
+            "normalizedQuery": "can you show us wind capacity in denmark",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Denmark",
+                    "code": "DNK",
+                    "type": "country",
+                    "routeFamilies": [
+                      "international"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "wind",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "capacity",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "Denmark",
+              "code": "DNK",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Denmark",
+                "code": "DNK",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            ],
+            "product": "wind",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "capacity",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "wind",
+                "activity": "capacity",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [
+                "DNK"
+              ],
+              "routeFamily": "international",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "none",
+              "reasons": []
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "DNK",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "international",
+            "label": "International",
+            "reason": "A non-U.S. country or multi-country request uses International.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "none",
+            "reasons": []
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [
+          {
+            "candidateId": "eia:1:9d22f27e7bf005dc136e2188ccebcc4dedd4729d7decdcbf5a318f46f1c5d182",
+            "seriesId": "INTL.37-7-DNK-MK.A",
+            "title": "Wind electricity installed capacity, Denmark, Annual",
+            "product": "wind",
+            "activity": "capacity",
+            "measureType": "capacity",
+            "geography": {
+              "name": "Denmark",
+              "code": "DNK",
+              "type": "other"
+            },
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "million kilowatts",
+            "coverage": "1980 to 2024",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "rankingTier": "C",
+            "score": 77.6,
+            "reasons": [
+              "tier_C",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_wind",
+              "product_extra_concept_penalty",
+              "activity_exact_capacity",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_wind",
+              "lexical_title_capacity",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "product_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "product_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ],
+        "candidateGroups": [
+          {
+            "id": "DNK:wind:capacity:capacity",
+            "label": "Capacity",
+            "product": "wind",
+            "activity": "capacity",
+            "measureType": "capacity",
+            "technical": false,
+            "geography": {
+              "name": "Denmark",
+              "code": "DNK",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "warnings": [],
+            "candidates": [
+              {
+                "candidateId": "eia:1:9d22f27e7bf005dc136e2188ccebcc4dedd4729d7decdcbf5a318f46f1c5d182",
+                "seriesId": "INTL.37-7-DNK-MK.A",
+                "title": "Wind electricity installed capacity, Denmark, Annual",
+                "product": "wind",
+                "activity": "capacity",
+                "measureType": "capacity",
+                "geography": {
+                  "name": "Denmark",
+                  "code": "DNK",
+                  "type": "other"
+                },
+                "routeFamily": "international",
+                "frequency": "annual",
+                "unit": "million kilowatts",
+                "coverage": "1980 to 2024",
+                "dateStart": "1980",
+                "dateEnd": "2024",
+                "rankingTier": "C",
+                "score": 77.6,
+                "reasons": [
+                  "tier_C",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_wind",
+                  "product_extra_concept_penalty",
+                  "activity_exact_capacity",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_wind",
+                  "lexical_title_capacity",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "product_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "product_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              }
+            ]
+          }
+        ],
+        "comparisonDefinitions": [],
+        "userWarnings": [],
+        "needsClarification": false,
+        "userMessage": null,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 1,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "Choose Graph or Excel for one of the 1 displayed series. No series was selected automatically."
+      }
+    }
+  ],
+  "events": []
+}
