@@ -316,3 +316,62 @@ If implementation choices differ:
 5. Ask only if ambiguity materially changes the result.
 
 Do not guess silently when source, variable, unit, frequency, or coverage ambiguity affects results.
+
+
+---
+
+## EIAapp Execution and Evidence Guardrails
+
+Supplement existing guidance; explicit user authorization determines scope.
+
+### Outcome and scope
+Success means useful, compatible data or necessary clarification with understandable choices. Passing tests, JSON and candidate lists alone do not establish success.
+Maintain one objective, authorized scope and completion criteria. Check whether another agent already started or completed the work. Backlog unrelated findings.
+
+### State and preservation
+Inspect applicable instructions, branch, commit, uncommitted changes and relevant evidence. Identify the deployed version when relevant. Never substitute stale work for current work.
+Before substantial changes, establish a verified durable checkpoint within authorization. Preserve irreplaceable evidence outside temporary directories. Report remote-backup gaps. Authorized WIP preservation need not wait for passing tests; disclose failures. Never include credentials or private evidence.
+
+### Research and native capabilities
+Inspect current official OpenAI, EIA and Vercel documentation and relevant code as applicable. Use original papers for research claims. Check versions, applicability and exact support; cite material recommendations. Defaults, snippets and AI reports do not prove suitability.
+Evaluate native capabilities before custom logic, including Structured Outputs, schema support, model compatibility, refusals and incomplete responses. Schema compliance does not guarantee meaning.
+Use code for reliable bookkeeping such as locating quoted text; handle repeated and ambiguous matches explicitly.
+
+### Requirements and shared causes
+Reconcile intended behavior, prompt, schema, metadata, clarification and expected answers before implementation or paid testing. Freeze consistent expectations. Version changes and preserve historical results. Never redefine success to raise scores.
+Correct shared causes rather than individual queries. Avoid growing phrase whitelists or rules silently overriding correct meaning. Reassess the design when successive fixes expose the same failure class.
+
+### Verification and cost
+Check the relevant request-to-data flow, including clarification, browser resubmission, routing, compatible series and observations/display/export.
+Separate meaning, structure, evidence, availability and app behavior. Distinguish injected tests, real-model calls, offline replay and live-browser checks. Disclose unrun checks. Exposed challenges become regressions, not untouched holdouts.
+Finish when agreed criteria are met; avoid endless review cycles.
+Before paid calls, verify model IDs, supported settings and prices. Justify reasoning effort, validate scorers and calculate maximum cost including reasoning tokens and bounded retries. Distinguish maximum from expected spending. Stay within authorized ceilings. Preserve outputs and usage; never retry wrong answers to improve scores.
+
+### Access, authorization and reporting
+Reuse working authentication. Never request plaintext keys, copy credentials into evidence or create replacement keys merely because environments differ. State access limitations promptly.
+Do not merge, deploy, switch live models or broaden cleanup without authorization. Check dependencies before deletion.
+Distinguish proposed, implemented, tested, committed, pushed and deployed. Report outcome, checks, tested identity, blockers and next action. Separate verified evidence, reports, calculations and inference. Correct defective guidance rather than substituting assurances.
+
+---
+
+## Search and Candidate Discovery
+
+1. Separate interpretation, metadata discovery, candidate validation and observation retrieval. Search hits are candidates, not verified answers.
+
+2. Preserve the interpreted request separately from keyword queries. Respect the search tool's matching behavior; retain geography, exclusions, frequency and other constraints.
+
+3. Resolve supplied identifiers against authoritative metadata first. Never silently replace an unrecognized identifier with a loose text match.
+
+4. Search approved names, descriptions, routes and relevant filter values. Inspect full shortlisted metadata; titles and snippets are insufficient.
+
+5. Check measure, product, activity, geography, units and frequency compatibility before ranking. Prefer exact requested concepts. Clearly label alternatives, breakdowns and substitutions.
+
+6. Use bounded fallback searches: supported terminology, catalog browsing or broader keywords. Never silently relax actual user constraints. Record changed searches.
+
+7. Report searched coverage, unavailable metadata, limits and truncation. No match within searched coverage does not establish that the source has no data.
+
+8. Treat fuzzy scores as retrieval signals, not correctness probabilities. Calibrate thresholds on relevant and irrelevant cases; reassess after index or algorithm changes.
+
+9. Verify route/series, filters, units, frequency and coverage before fetching. Track pagination and observation completeness separately from search relevance.
+
+10. When materially different interpretations remain, offer focused, metadata-supported clarification choices and free text.
