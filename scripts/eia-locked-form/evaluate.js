@@ -42,7 +42,8 @@ for(let repeat=1;repeat<=2;repeat++) for(const k of keys){
   const rightData=scoreRightData(body,k,ceiling.find(r=>r.id===k.id));
   const usage=attempt.response?.usage||{};
   const cached=usage.input_tokens_details?.cached_tokens||0;
-  const costUSD=((usage.input_tokens||0)-cached)*0.10/1e6+cached*0.01/1e6+(usage.output_tokens||0)*0.50/1e6;
+  const cacheWrite=usage.input_tokens_details?.cache_write_tokens||0;
+  const costUSD=((usage.input_tokens||0)-cached-cacheWrite)*0.10/1e6+cacheWrite*0.125/1e6+cached*0.01/1e6+(usage.output_tokens||0)*0.50/1e6;
   const costUpperUSD=((usage.input_tokens||0)-cached)*0.125/1e6+cached*0.01/1e6+(usage.output_tokens||0)*0.50/1e6;
   scored.push({id:k.id,repeat,attempt:attempt.attempt,meaning,checksPassed,clarificationNeeded:body.intent.needsClarification,
    rightData,elapsedMs:attempt.elapsedMs,usage,costUSD,costUpperUSD,responseId:attempt.response?.id||null,model:attempt.response?.model||null,public:body});
