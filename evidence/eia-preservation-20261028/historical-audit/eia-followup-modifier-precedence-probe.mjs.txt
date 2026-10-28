@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const {getNegationScope}=await import(root+'/lib/sources/eia/intent-routing.js');
+const m=JSON.parse(readFileSync(root+'/data/eia/routing-metadata.json'));
+const v=JSON.parse(readFileSync(root+'/data/eia/phase4-routing-config.json')).vocabulary;
+const content=[...new Set([...m.geographies.filter(g=>g.name.toLowerCase().endsWith('ly')).map(g=>g.name.toLowerCase()),...Object.values(v).filter(x=>x&&typeof x==='object'&&!Array.isArray(x)).flatMap(items=>Object.values(items).flatMap(o=>o?.terms||[]).filter(t=>t.endsWith('ly')))])];
+const results=[];
+for(const term of content){const q=`not ${term} sure`;const scope=getNegationScope(q,4,q);assert.equal(scope,0);results.push({term,expectedScope:0,scope});}
+for(const term of ['entirely','completely','actually','particularly','really','exactly','at all','very','so','quite','fully']){const q=`not ${term} sure about usa energy consumption`;const scope=getNegationScope(q,q.indexOf('usa'),q);assert.equal(scope,null);results.push({term,expectedScope:null,scope});}
+writeFileSync('/private/tmp/eia-followup-modifier-precedence-results.json',JSON.stringify(results,null,2));
+console.log(JSON.stringify({cases:results.length,passed:results.length,contentGuards:content}));

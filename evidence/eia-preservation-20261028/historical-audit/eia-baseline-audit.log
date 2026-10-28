@@ -1,0 +1,838 @@
+✖ frozen D01: energy consumption Iceland (22.068875ms)
+✖ frozen D02: energy consumption Ireland (6.661ms)
+✔ frozen D03: energy consumption Finland (8.25625ms)
+✔ frozen D04: energy consumption Poland (7.491458ms)
+✖ frozen D05: energy consumption Austria (5.690042ms)
+✖ frozen D06: energy consumption Australia (5.426417ms)
+✖ frozen D07: energy consumption Niger (5.170625ms)
+✔ frozen D08: energy consumption Nigeria (12.496458ms)
+✔ frozen D09: energy consumption Guinea (7.587625ms)
+✔ frozen D10: energy consumption Equatorial Guinea (9.175ms)
+✔ frozen D11: energy consumption Guinea-Bissau (8.730083ms)
+✔ frozen D12: energy consumption New Zealand (8.538125ms)
+✔ frozen D13: energy consumption United Kingdom (9.133958ms)
+✖ frozen D14: energy consumption Gambia, The (5.910333ms)
+✖ frozen D15: energy consumption Germany, East (1.091834ms)
+✖ frozen D16: energy consumption Germany, West (1.13675ms)
+✔ frozen D17: energy consumption uk (6.776083ms)
+✔ frozen D18: energy consumption u.s. (7.018333ms)
+✔ frozen D19: energy consumption uae (7.1045ms)
+✔ frozen D20: energy consumption Czechia (7.705833ms)
+✖ frozen D21: energy consumption south korea (5.428958ms)
+✔ frozen D22: energy consumption icealnd (8.0285ms)
+✔ frozen D23: energy consumption Irelxnd (7.722292ms)
+✔ frozen D24: energy consumption Iland (0.030083ms)
+✖ frozen D25: energy consumption Iceland not Ireland (1.06875ms)
+✖ frozen D26: energy consumption Iceland excluding Ireland (1.169666ms)
+✖ frozen D27: energy consumption Iceland without Ireland (1.127334ms)
+✖ frozen D28: energy consumption Iceland except Ireland (1.247792ms)
+✖ frozen D29: energy consumption France not Canada or Mexico (1.109709ms)
+✖ frozen D30: energy consumption not Ireland but Iceland (1.063375ms)
+✖ frozen D31: energy consumption excluding Ireland (0.961375ms)
+✖ frozen D32: please show the energy consumption for Iceland (1.0935ms)
+✖ frozen D33: show the energy consumption in the United States (1.240875ms)
+✖ frozen D34: energy consumption east of France (0.932625ms)
+✖ frozen D35: energy consumption west of Canada (0.951583ms)
+✔ frozen D36: Georgia energy consumption (7.342833ms)
+✔ frozen D37: Georgia and France energy consumption (9.415542ms)
+✔ frozen D38: Georgia and Alabama energy consumption (10.021042ms)
+✔ frozen D39: Georgia and United States energy consumption (11.111583ms)
+✔ frozen D40: international Georgia energy consumption (9.534958ms)
+✔ frozen D41: international Georgia and United States energy consumption (11.998042ms)
+✖ frozen D42: France then Iceland then Ireland energy consumption (8.595125ms)
+✖ frozen D43: Canada natural gas imports and exports (6.439875ms)
+✔ frozen D44: Brazil petroleum and natural gas consumption (9.916416ms)
+✔ frozen D45: Texas coal production and natural gas consumption (12.209459ms)
+✔ frozen D46: Texas coal and natural gas production and consumption (11.91825ms)
+✖ frozen D47: gas consumption in the United States (1.102542ms)
+✔ frozen D48: United States natural gas consumption (8.656708ms)
+✖ frozen D49: United States gasoline consumption (0.898417ms)
+✖ frozen D50: United States total energy consumption (0.845208ms)
+✔ frozen D51: France weekly solar electricity generation (373.117209ms)
+✔ frozen D52: Texas monthly residential natural gas consumption (17.380875ms)
+✔ frozen D53: France quarterly petroleum consumption (13.211542ms)
+✔ frozen D54: France annual energy consumption (9.649459ms)
+✖ frozen D55: France energy consumption (4.728708ms)
+✔ frozen D56: France energy consumption (7.517792ms)
+✖ every approved complete geography name survives exact and fuzzy competition (10.933958ms)
+✖ supported aliases remain ordered and wording adds no countries (4.5075ms)
+✖ seed 47250: exact, excluded and filler invariants (5.479083ms)
+✖ builder preserves comma-bearing official geography labels and product punctuation (0.675292ms)
+✔ seed 47250: spelling ties may remain unresolved and exact names win (566.20275ms)
+✖ complete candidate labels retain raw artifact hashes and narrower coverage (56.005792ms)
+ℹ tests 62
+ℹ suites 0
+ℹ pass 31
+ℹ fail 31
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1426.814459
+
+✖ failing tests:
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D01: energy consumption Iceland (22.068875ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'IRL'
+  -   'ISL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'IRL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D02: energy consumption Ireland (6.661ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'ISL'
+  -   'IRL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ISL' ],
+    expected: [ 'IRL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D05: energy consumption Austria (5.690042ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'AUS'
+  -   'AUT'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'AUS' ],
+    expected: [ 'AUT' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D06: energy consumption Australia (5.426417ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'AUT'
+  -   'AUS'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'AUT' ],
+    expected: [ 'AUS' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D07: energy consumption Niger (5.170625ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'NGA'
+  -   'NER'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'NGA' ],
+    expected: [ 'NER' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D14: energy consumption Gambia, The (5.910333ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'ZMB',
+      'GMB'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ZMB', 'GMB' ],
+    expected: [ 'GMB' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D15: energy consumption Germany, East (1.091834ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'DEU',
+      'DDR'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'DEU', 'DDR' ],
+    expected: [ 'DDR' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D16: energy consumption Germany, West (1.13675ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'DEU',
+      'DEUW'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'DEU', 'DEUW' ],
+    expected: [ 'DEUW' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D21: energy consumption south korea (5.428958ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'PRK'
+  -   'KOR'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'PRK' ],
+    expected: [ 'KOR' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D25: energy consumption Iceland not Ireland (1.06875ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+      'ISL',
+  +   'IRL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ISL', 'IRL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D26: energy consumption Iceland excluding Ireland (1.169666ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+      'ISL',
+  +   'IRL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ISL', 'IRL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D27: energy consumption Iceland without Ireland (1.127334ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+      'ISL',
+  +   'IRL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ISL', 'IRL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D28: energy consumption Iceland except Ireland (1.247792ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+      'ISL',
+  +   'IRL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ISL', 'IRL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D29: energy consumption France not Canada or Mexico (1.109709ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+      'FRA',
+  +   'CAN',
+  +   'MEX'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'FRA', 'CAN', 'MEX' ],
+    expected: [ 'FRA' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D30: energy consumption not Ireland but Iceland (1.063375ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'IRL',
+      'ISL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'IRL', 'ISL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D31: energy consumption excluding Ireland (0.961375ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+  + [
+  +   'IRL'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'IRL' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D32: please show the energy consumption for Iceland (1.0935ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'GMB',
+      'ISL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'GMB', 'ISL' ],
+    expected: [ 'ISL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D33: show the energy consumption in the United States (1.240875ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'GMB',
+      'USA'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'GMB', 'USA' ],
+    expected: [ 'USA' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D34: energy consumption east of France (0.932625ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'DDR',
+      'FRA'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'DDR', 'FRA' ],
+    expected: [ 'FRA' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D35: energy consumption west of Canada (0.951583ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'DEUW',
+      'CAN'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'DEUW', 'CAN' ],
+    expected: [ 'CAN' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D42: France then Iceland then Ireland energy consumption (8.595125ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+      'FRA',
+  +   'GMB',
+      'ISL',
+      'IRL'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'FRA', 'GMB', 'ISL', 'IRL' ],
+    expected: [ 'FRA', 'ISL', 'IRL' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D43: Canada natural gas imports and exports (6.439875ms)
+  AssertionError [ERR_ASSERTION]: injected geography
+  + actual - expected
+  
+    [
+  +   'PAN'
+  -   'CAN'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'PAN' ],
+    expected: [ 'CAN' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D47: gas consumption in the United States (1.102542ms)
+  AssertionError [ERR_ASSERTION]: rules geography
+  + actual - expected
+  
+    [
+  +   'GMB',
+      'USA'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'GMB', 'USA' ],
+    expected: [ 'USA' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D49: United States gasoline consumption (0.898417ms)
+  AssertionError [ERR_ASSERTION]: rules route
+  + actual - expected
+  
+  + 'domestic'
+  - 'international'
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:35:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'domestic',
+    expected: 'international',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D50: United States total energy consumption (0.845208ms)
+  AssertionError [ERR_ASSERTION]: rules route
+  + actual - expected
+  
+  + 'domestic'
+  - 'international'
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:35:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'domestic',
+    expected: 'international',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:26:34
+✖ frozen D55: France energy consumption (4.728708ms)
+  AssertionError [ERR_ASSERTION]: injected frequency
+  + actual - expected
+  
+  + 'monthly'
+  - 'annual'
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:34:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'monthly',
+    expected: 'annual',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:51:1
+✖ every approved complete geography name survives exact and fuzzy competition (10.933958ms)
+  AssertionError [ERR_ASSERTION]: please show the energy consumption for Afghanistan
+  + actual - expected
+  
+    [
+  +   'GMB',
+      'AFG'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:55:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'GMB', 'AFG' ],
+    expected: [ 'AFG' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:57:1
+✖ supported aliases remain ordered and wording adds no countries (4.5075ms)
+  AssertionError [ERR_ASSERTION]: please show the energy consumption for us
+  + actual - expected
+  
+    [
+  +   'GMB',
+      'USA'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:58:226)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'GMB', 'USA' ],
+    expected: [ 'USA' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:61:1
+✖ seed 47250: exact, excluded and filler invariants (5.479083ms)
+  AssertionError [ERR_ASSERTION]: please show energy consumption Maldives not Argentina
+  + actual - expected
+  
+    [
+      'MDV',
+  +   'ARG'
+    ]
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:67:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'MDV', 'ARG' ],
+    expected: [ 'MDV' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:70:1
+✖ builder preserves comma-bearing official geography labels and product punctuation (0.675292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'The'
+  - 'Gambia, The'
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:73:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'The',
+    expected: 'Gambia, The',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:96:1
+✖ complete candidate labels retain raw artifact hashes and narrower coverage (56.005792ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(p.retrievals[0].displayCandidates.every(c=>c.geography.name==='Gambia, The' && c.metadata_hash))
+  
+      at TestContext.<anonymous> (file:///private/var/folders/bc/77hnjmp1433bxls6cbq9g9pm0000gn/T/eia-audit-base-BLQ31I/tests/eia-interpretation-audit.test.js:99:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

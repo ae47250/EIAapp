@@ -1,0 +1,2253 @@
+{
+  "version": "semantic-scorer-v2",
+  "frozenAt": "2026-10-28T11:38:46.000Z",
+  "derivedFrom": "Original frozen meanings and approved metadata, plus explicit user scorer-correction instructions. Fixtures labelled before implementing v2 scorer.",
+  "rules": [
+    "US and USA are equivalent only when metadata identifies the same national entity. State/country collisions remain distinct.",
+    "Ordered geography and pair arrays are authoritative. Null singular summaries are allowed when arrays preserve meaning; nonnull contradictory summaries still fail. A summary may name a requested member without changing array order.",
+    "Missing frequency defaults to annual and missing explicit to false. Explicitly requested monthly/annual must still match. No unstated sector.",
+    "Semantic extraction reads existing nested value fields without rewriting answers; their structural violations remain contract failures. No extraction or repair of malformed/fenced/concatenated JSON.",
+    "Offsets are judged only by the unchanged source-evidence validator. Semantic scope decisions use literal scope text/status; wrong offsets alone do not imply wrong meaning.",
+    "Geography exclusions can be semantically expressed in scopes or flat lists even if their shape violates the output contract. Excluded countries in positive arrays or requested scopes remain failures.",
+    "No arbitrary geography/product/activity exceptions. Country/state interpretation follows foreign-country/international context for ambiguous names.",
+    "Gas must remain unresolved and specifically distinguish natural gas from gasoline/petrol. Guesses or generic gas-related ambiguity fail.",
+    "Truncations, API failures and malformed/nonobject JSON are labelled ungradable, retained in every scheduled denominator, and separated from observed semantic mistakes.",
+    "Contract metrics retain original strict JSON/shape/source-span checks. No app repair upgrades model grades."
+  ],
+  "cases": [
+    {
+      "name": "valid_frozen_meaning_1",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_2",
+      "case": {
+        "id": 2,
+        "query": "total energyy consumption usa",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Same meaning as #1; obvious energy spelling error."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption usa\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energyy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energyy consumption usa\",\"scopes\":[{\"start\":0,\"end\":29,\"text\":\"total energyy consumption usa\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_3",
+      "case": {
+        "id": 3,
+        "query": "brazil and japan electrciity consumption",
+        "expected": {
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for Brazil then Japan; preserve both countries despite the electricity typo."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"brazil and japan electricity consumption\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"BRA\",\"value\":\"BRA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electrciity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"BRA\",\"confidence\":0.99},{\"value\":\"JPN\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"brazil and japan electrciity consumption\",\"scopes\":[{\"start\":0,\"end\":40,\"text\":\"brazil and japan electrciity consumption\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_4",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_5",
+      "case": {
+        "id": 5,
+        "query": "energy consumption icealnd",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption with an unambiguous transposition spelling error; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption icealnd\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption icealnd\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_6",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\"not ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_7",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"TX\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":\"production\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99},{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_8",
+      "case": {
+        "id": 8,
+        "query": "monthly electricity consumption in California",
+        "expected": {
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "monthly",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "California state electricity consumption, monthly explicitly requested; no sector stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"monthly electricity consumption in California\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"CA\",\"value\":\"CA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"monthly\",\"value\":\"monthly\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"CA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"monthly electricity consumption in California\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"monthly electricity consumption in California\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_9",
+      "case": {
+        "id": 9,
+        "query": "electricity consumption in Georgia and France",
+        "expected": {
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"electricity consumption in Georgia and France\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"GEO\",\"value\":\"GEO\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"GEO\",\"confidence\":0.99},{\"value\":\"FRA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"electricity consumption in Georgia and France\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"electricity consumption in Georgia and France\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "valid_frozen_meaning_10",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Natural gas or gasoline?\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Does gas mean natural gas or gasoline?\",\"alternatives\":[\"natural gas\",\"petroleum\"]},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_country_summary_preserves_array_1",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_country_summary_preserves_array_3",
+      "case": {
+        "id": 3,
+        "query": "brazil and japan electrciity consumption",
+        "expected": {
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for Brazil then Japan; preserve both countries despite the electricity typo."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"brazil and japan electricity consumption\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"BRA\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electrciity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"BRA\",\"confidence\":0.99},{\"value\":\"JPN\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"brazil and japan electrciity consumption\",\"scopes\":[{\"start\":0,\"end\":40,\"text\":\"brazil and japan electrciity consumption\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_country_summary_preserves_array_7",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":\"production\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99},{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_country_summary_preserves_array_8",
+      "case": {
+        "id": 8,
+        "query": "monthly electricity consumption in California",
+        "expected": {
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "monthly",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "California state electricity consumption, monthly explicitly requested; no sector stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"monthly electricity consumption in California\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"CA\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"monthly\",\"value\":\"monthly\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"CA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"monthly electricity consumption in California\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"monthly electricity consumption in California\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_country_summary_preserves_array_9",
+      "case": {
+        "id": 9,
+        "query": "electricity consumption in Georgia and France",
+        "expected": {
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"electricity consumption in Georgia and France\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"GEO\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"GEO\",\"confidence\":0.99},{\"value\":\"FRA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"electricity consumption in Georgia and France\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"electricity consumption in Georgia and France\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_country_summary_preserves_array_10",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Natural gas or gasoline?\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Does gas mean natural gas or gasoline?\",\"alternatives\":[\"natural gas\",\"petroleum\"]},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "null_activity_summary_keeps_both_activities",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"TX\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99},{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "summary_can_name_second_requested_activity",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"TX\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99},{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "same_national_entity_US",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"US\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"US\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "same_national_entity_USA",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "same_national_entity_United States",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"United States\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"United States\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "wrong_offsets_correct_meaning",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":29,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": false,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "wrong_exclusion_offsets_correct_meaning",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":2,\"end\":29,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"},{\"start\":29,\"end\":40,\"text\":\"not ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "spans": false,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "georgia_explicit_country_annotation",
+      "case": {
+        "id": 9,
+        "query": "electricity consumption in Georgia and France",
+        "expected": {
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"electricity consumption in Georgia and France\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"GEO\",\"value\":\"GEO\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"Georgia (country)\",\"confidence\":0.99},{\"value\":\"FRA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"electricity consumption in Georgia and France\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"electricity consumption in Georgia and France\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "missing_frequency_defaults_annual",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "missing_annual_explicit_defaults_false",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "nested_pair_values_meaning_is_readable_but_wrong_shape",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":{\"value\":\"total energy\"},\"activity\":{\"value\":\"consumption\"},\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "geography_exclusion_semantic_vs_schema",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[{\"type\":\"geography\",\"value\":\"Ireland\",\"confidence\":0.99}],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\"not ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": false,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "conceptType_geo_exclusion_does_not_invent_second_exclusion",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[{\"type\":\"conceptType\",\"value\":\"Ireland\",\"confidence\":0.99}],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\"not ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "wrong_country",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"IRL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"IRL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "contradictory_country_summary",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"IRL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "state_array_national_summary_contradicts",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":\"production\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99},{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "missing_second_activity",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"TX\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":\"production\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "null_summary_cannot_rescue_missing_activity",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"TX\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "contradictory_activity_summary",
+      "case": {
+        "id": 7,
+        "query": "natural gas production and consumption in Texas annually",
+        "expected": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"natural gas production and consumption in Texas annually\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"TX\",\"value\":\"TX\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"natural gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"production\",\"value\":\"prices\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"annual\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"TX\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"production\",\"order\":0,\"confidence\":0.99},{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"natural gas production and consumption in Texas annually\",\"scopes\":[{\"start\":0,\"end\":56,\"text\":\"natural gas production and consumption in Texas annually\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "contradictory_product_summary",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"coal\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "reversed_country_order",
+      "case": {
+        "id": 3,
+        "query": "brazil and japan electrciity consumption",
+        "expected": {
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for Brazil then Japan; preserve both countries despite the electricity typo."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"brazil and japan electricity consumption\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"BRA\",\"value\":\"BRA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electrciity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"JPN\",\"confidence\":0.99},{\"value\":\"BRA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"brazil and japan electrciity consumption\",\"scopes\":[{\"start\":0,\"end\":40,\"text\":\"brazil and japan electrciity consumption\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "georgia_wrong_state_beside_france",
+      "case": {
+        "id": 9,
+        "query": "electricity consumption in Georgia and France",
+        "expected": {
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"electricity consumption in Georgia and France\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"GEO\",\"value\":\"GA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"GA\",\"confidence\":0.99},{\"value\":\"FRA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"electricity consumption in Georgia and France\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"electricity consumption in Georgia and France\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "georgia_no_foreign_hint_is_state",
+      "case": {
+        "id": 9,
+        "query": "electricity consumption in Georgia",
+        "expected": {
+          "geographies": [
+            "GA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"electricity consumption in Georgia and France\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"GEO\",\"value\":\"Georgia\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"Georgia\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"electricity consumption in Georgia\",\"scopes\":[{\"start\":0,\"end\":34,\"text\":\"electricity consumption in Georgia\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "georgia_country_without_foreign_hint_is_wrong",
+      "case": {
+        "id": 9,
+        "query": "electricity consumption in Georgia",
+        "expected": {
+          "geographies": [
+            "GA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"electricity consumption in Georgia and France\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"GEO\",\"value\":\"GEO\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"GEO\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"electricity consumption in Georgia\",\"scopes\":[{\"start\":0,\"end\":34,\"text\":\"electricity consumption in Georgia\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "negated_country_becomes_positive",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99},{\"value\":\"IRL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\"not ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "missed_exclusion",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "excluded_positive_country",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"excluded\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\"not ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "excluded_geography_in_requested_scope",
+      "case": {
+        "id": 6,
+        "query": "energy consumption iceland not ireland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland not ireland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":27,\"text\":\"energy consumption iceland \",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\"not ireland\",\"status\":\"requested\",\"target\":\"data\",\"operator\":{\"start\":27,\"end\":30,\"text\":\"not\"}}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "requested_metadata_hidden_as_context",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"context\",\"target\":\"knowledge\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "unnecessary_unresolved_clear_request",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"unresolved\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "unsupported_product_exclusion",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[{\"type\":\"product\",\"value\":\"coal\",\"confidence\":0.9}],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "gas_natural_gas_guess",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Natural gas or gasoline?\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":\"natural gas\",\"confidence\":0.99,\"ambiguityReason\":\"Does gas mean natural gas or gasoline?\",\"alternatives\":[\"natural gas\",\"petroleum\"]},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"natural gas\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "gas_gasoline_guess",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Natural gas or gasoline?\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":\"petroleum\",\"confidence\":0.99,\"ambiguityReason\":\"Does gas mean natural gas or gasoline?\",\"alternatives\":[\"natural gas\",\"petroleum\"]},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"petroleum\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "gas_vague_clarification_is_not_required_choice",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Ambiguous gas\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Which gas-related product?\"},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "gas_null_pair_with_specific_choice",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Natural gas or gasoline?\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Does gas mean natural gas or gasoline?\",\"alternatives\":[\"natural gas\",\"petroleum\"]},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":null,\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "missing_consumption_in_gas_request",
+      "case": {
+        "id": 10,
+        "query": "gas consumption in the United States",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": true,
+          "product": null,
+          "activity": "consumption",
+          "ambiguity": "natural gas versus gasoline; no unsupported choice"
+        },
+        "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"gas consumption in the United States\",\"confidence\":0.99,\"ambiguity\":\"Natural gas or gasoline?\",\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"gas\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Does gas mean natural gas or gasoline?\",\"alternatives\":[\"natural gas\",\"petroleum\"]},\"activity\":{\"rawValue\":\"consumption\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[],\"exclusions\":[],\"unknownQualifiers\":[\"gas\"],\"requestEvidence\":{\"version\":1,\"query\":\"gas consumption in the United States\",\"scopes\":[{\"start\":0,\"end\":3,\"text\":\"gas\",\"status\":\"unresolved\",\"target\":\"unknown\"},{\"start\":3,\"end\":36,\"text\":\" consumption in the United States\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "unstated_sector_invented",
+      "case": {
+        "id": 4,
+        "query": "energy consumption iceland",
+        "expected": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "Iceland total energy consumption; Ireland is not requested."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"energy consumption iceland\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"ISL\",\"value\":\"ISL\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":\"industrial\",\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"ISL\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland\",\"scopes\":[{\"start\":0,\"end\":26,\"text\":\"energy consumption iceland\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "wrong_frequency",
+      "case": {
+        "id": 8,
+        "query": "monthly electricity consumption in California",
+        "expected": {
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "monthly",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "California state electricity consumption, monthly explicitly requested; no sector stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"monthly electricity consumption in California\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"CA\",\"value\":\"CA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"monthly\",\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"CA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"monthly electricity consumption in California\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"monthly electricity consumption in California\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "explicit_monthly_falsely_defaulted",
+      "case": {
+        "id": 8,
+        "query": "monthly electricity consumption in California",
+        "expected": {
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "monthly",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "California state electricity consumption, monthly explicitly requested; no sector stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"monthly electricity consumption in California\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"CA\",\"value\":\"CA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":\"monthly\",\"value\":\"monthly\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"CA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"monthly electricity consumption in California\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"monthly electricity consumption in California\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "missing_monthly_frequency_is_not_annual_request",
+      "case": {
+        "id": 8,
+        "query": "monthly electricity consumption in California",
+        "expected": {
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "monthly",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "California state electricity consumption, monthly explicitly requested; no sector stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"monthly electricity consumption in California\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"CA\",\"value\":\"CA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"electricity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"}},\"geographies\":[{\"value\":\"CA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"monthly electricity consumption in California\",\"scopes\":[{\"start\":0,\"end\":45,\"text\":\"monthly electricity consumption in California\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "contract": false,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "unstated_annual_falsely_explicit",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":true}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "incorrect"
+      }
+    },
+    {
+      "name": "model_confidence_does_not_change_meaning",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": true,
+        "json": true,
+        "contract": true,
+        "status": "correct"
+      }
+    },
+    {
+      "name": "fenced_json_is_ungradable_without_repair",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "```json\n{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}\n```"
+      },
+      "expected": {
+        "semantic": false,
+        "json": false,
+        "contract": false,
+        "status": "ungradable"
+      }
+    },
+    {
+      "name": "malformed_json_is_ungradable",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "{\"fields\":"
+      },
+      "expected": {
+        "semantic": false,
+        "json": false,
+        "contract": false,
+        "status": "ungradable"
+      }
+    },
+    {
+      "name": "array_is_not_interpretation",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "completed",
+        "output_text": "[]"
+      },
+      "expected": {
+        "semantic": false,
+        "json": false,
+        "contract": false,
+        "status": "ungradable"
+      }
+    },
+    {
+      "name": "truncated_is_ungradable_not_semantic_mistake",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "status": "incomplete",
+        "incomplete_details": {
+          "reason": "max_output_tokens"
+        },
+        "output_text": "{\"correctedQuery\":\"total energy consumption united states\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"USA\",\"value\":\"USA\",\"confidence\":0.99,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"total energy\",\"value\":\"total energy\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Unstated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":0.99,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"USA\",\"confidence\":0.99}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":0,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"total energy consumption united states\",\"scopes\":[{\"start\":0,\"end\":38,\"text\":\"total energy consumption united states\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+      },
+      "expected": {
+        "semantic": false,
+        "json": true,
+        "status": "ungradable"
+      }
+    },
+    {
+      "name": "api_error_is_ungradable",
+      "case": {
+        "id": 1,
+        "query": "total energy consumption united states",
+        "expected": {
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "exclusions": [],
+          "clarification": false
+        },
+        "meaning": "United States national total energy consumption; no sector or frequency stated."
+      },
+      "response": {
+        "error": {
+          "code": "insufficient_quota"
+        }
+      },
+      "expected": {
+        "semantic": false,
+        "json": false,
+        "status": "ungradable"
+      }
+    }
+  ]
+}

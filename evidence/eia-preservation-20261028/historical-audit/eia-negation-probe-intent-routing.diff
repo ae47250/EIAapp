@@ -1,0 +1,227 @@
+--- lib/sources/eia/intent-routing.js	2026-10-27 13:17:07
++++ /private/tmp/eia-negation-design-probe/lib/sources/eia/intent-routing.js	2026-10-27 17:24:43
+@@ -29,8 +29,9 @@
+     : baseIntent?.correctedQuery || baseIntent?.cleanedQuery || originalQuery;
+   const normalizedQuery = normalizeText(authoritativeQuery);
+   const scannedGeographies = findGeographyMentions(normalizedQuery, originalQuery);
+-  const scannedConcepts = findConceptMentions(normalizedQuery).filter(mention => getNegationScope(normalizedQuery, mention.index, originalQuery) === null);
+-  const scannedFrequencies = findFrequencyMentions(normalizedQuery);
++  const negation = resolveNegation(normalizedQuery, originalQuery);
++  const scannedConcepts = findConceptMentions(normalizedQuery).filter(mention => negation.at(mention.index).status === "positive");
++  const scannedFrequencies = findFrequencyMentions(normalizedQuery).filter(mention => negation.at(mention.index).status === "positive");
+   const exclusions = normalizeExclusions(baseIntent?.exclusions);
+   const unknownQualifiers = normalizeUnknownQualifiers(baseIntent?.unknownQualifiers);
+   const geographyMentions = selectGeographyMentions(baseIntent, scannedGeographies, authoritativeAi);
+@@ -56,7 +57,7 @@
+   const product = firstMentionValue(conceptMentions, "product") || approvedFieldValue(baseIntent, "product") || null;
+   const interpretedActivity = firstMentionValue(conceptMentions, "activity") || approvedFieldValue(baseIntent, "activity") || null;
+   const activity = canonicalizeActivity(product, interpretedActivity);
+-  const sector = approvedFieldValue(baseIntent, "sector") || firstRuleValue(normalizedQuery, SECTOR_RULES) || null;
++  const sector = approvedFieldValue(baseIntent, "sector") || firstRuleValue(negation.positiveQuery, SECTOR_RULES) || null;
+   const conceptPairResolution = buildOrderedConceptPairs(baseIntent, conceptMentions, product, interpretedActivity, normalizedQuery);
+   const inheritedPairs = Array.isArray(baseIntent?.validatedConceptPairs) ? baseIntent.validatedConceptPairs : [];
+   const conceptPairs = conceptPairResolution.pairs.map((pair, index) => canonicalizeConceptPair(pair, inheritedPairs[index]));
+@@ -68,6 +69,7 @@
+   const multiCountryComparison = buildMultiCountryComparisonStatus(geographyMentions, route);
+   const frequency = validateFrequency(effectiveFrequency, route.family, explicitFrequency || Boolean(baseIntent?.frequencyExplicit));
+   const ambiguityReasons = buildAmbiguityReasons(geographyMentions, conceptMentions, conceptPairs, conceptPairResolution, route, baseIntent?.fields, unknownQualifiers);
++  if (negation.unresolved.length) ambiguityReasons.push("negation_scope_unresolved");
+   const fallbackReasons = [...interpreterFallbackReasons, ...route.fallbackReasons, ...frequency.fallbackReasons];
+   const controlledProductAlternatives = product
+     ? ROUTING_CONFIG.vocabulary?.products?.[product]?.alternatives || []
+@@ -75,6 +77,7 @@
+ 
+   return {
+     schemaVersion: "2.1.0",
++    unresolvedNegation: negation.unresolved,
+     originalQuery,
+     normalizedQuery,
+     mentions: {
+@@ -473,7 +476,7 @@
+   return [...new Set(forms.filter(Boolean))];
+ }
+ 
+-export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {
++function collectGeographyMatches(normalizedQuery, originalQuery = "", additionalGeographies = []) {
+   const matches = [];
+   for (const geography of [...ROUTING_METADATA.geographies, ...additionalGeographies.filter(item => !geographyByCode.has(item.code))]) {
+     for (const name of geographyNameForms(geography.name)) {
+@@ -487,6 +490,12 @@
+     const geography = geographyByCode.get(code);
+     if (geography) addPhraseMatch(matches, normalizedQuery, alias, { ...geography, matchPriority: 10 });
+   }
++  return matches;
++}
++
++export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {
++  const matches = collectGeographyMatches(normalizedQuery, originalQuery, additionalGeographies);
++  const negation = resolveNegation(normalizedQuery, originalQuery);
+   // Remove excluded spans before context resolution: a negated country is not evidence for country scope.
+   const complete = matches.filter(match => !matches.some(other => other.length > match.length
+     && other.index <= match.index && other.index + other.length >= match.index + match.length));
+@@ -498,7 +507,7 @@
+     return scope !== null && !conceptScopes.has(scope);
+   }).map(match => match.code));
+   const positive = complete.filter(match => !excludedCodes.has(match.code)
+-    && getNegationScope(normalizedQuery, match.index, originalQuery) === null
++    && negation.at(match.index).status === "positive"
+     && !isRequestPronoun(normalizedQuery, match, originalQuery, complete));
+   return selectOrderedMentions(disambiguateStateCountryMatches(positive, normalizedQuery), "geography");
+ }
+@@ -522,61 +531,106 @@
+         || (hasOtherGeography && requestVerb && !/^(and|or|versus|vs)$/.test(after || ""))));
+ }
+ 
+-export function getNegationScope(query, index, originalQuery = query) {
+-  // Token positions are shared with normalized matching, but sentence punctuation
+-  // and affirmative/negative commands retain their scope in the original text.
+-  const target = query.slice(0, index).trim().split(/\s+/).filter(Boolean).length;
+-  const rawOriginal = String(originalQuery || query).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ");
+-  const original = rawOriginal.toLowerCase();
+-  const words = rawOriginal.match(/[a-z0-9]+/gi) || [];
+-  const tokens = [...original.matchAll(/[a-z0-9]+|[;.!?]/g)].map(match => match[0]);
+-  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
+-  let scope = null;
+-  let wordIndex = 0;
++// Decisions are about mentions, not the unbounded suffix after a negation word.
++// Unknown attachment is a third state: it is neither positive request evidence
++// nor an instruction to exclude data.
++export function resolveNegation(query, originalQuery = query) {
++  const normalized = normalizeText(query);
++  const words = [...normalized.matchAll(/[a-z0-9]+/g)];
++  const raw = String(originalQuery || query).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ");
++  const rawWords = [...raw.matchAll(/[a-z0-9]+/gi)];
++  const tokens = words.map(word => word[0]);
++  const states = tokens.map(() => ({ status: "positive", scope: null }));
++  const unresolved = [];
++  const data = [
++    ...findConceptMentions(normalized),
++    ...collectGeographyMatches(normalized, raw),
++    ...[...SECTOR_RULES, ...FREQUENCY_RULES].flatMap(rule => rule.terms.flatMap(term => {
++      const matches = [];
++      addPhraseMatch(matches, normalized, term, { value: rule.value });
++      return matches;
++    }))
++  ];
++  const dataHeads = new Set(data.map(mention => words.findIndex(word => word.index === mention.index)).filter(index => index >= 0));
++  const dataEnds = new Map(data.map(mention => {
++    const start = words.findIndex(word => word.index === mention.index);
++    return [start, start + normalizeText(mention.text).split(" ").length];
++  }));
++  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
++  const knowledge = new Set(["sure", "certain", "aware", "know", "knowing", "understand", "understanding", "idea", "certainty", "knowledge"]);
++  const actions = new Set(["show", "include", "including", "exclude", "excluding"]);
++  const joiners = new Set(["a", "an", "the", "in", "for", "of", "from", "to"]);
++  const boundaries = new Set();
++  for (let i = 1; i < rawWords.length; i++) {
++    const between = raw.slice(rawWords[i - 1].index + rawWords[i - 1][0].length, rawWords[i].index);
++    if (/[;!?]/.test(between) || (/\./.test(between)
++      && !(/^\d+$/.test(rawWords[i - 1][0]) && /^\d+$/.test(rawWords[i][0]))
++      && rawWords[i - 1][0].length > 1)) boundaries.add(i);
++  }
++  const isContraction = index => /n$/i.test(rawWords[index]?.[0] || "") && tokens[index + 1] === "t"
++    && /['’]/.test(raw.slice(rawWords[index].index, rawWords[index + 1].index));
+   for (let i = 0; i < tokens.length; i++) {
+-    const token = tokens[i];
+-    if (/^[;.!?]$/.test(token)) {
+-      if (token !== "." || (tokens[i - 1] || "").length > 1) scope = null;
+-      continue;
+-    }
+-    if (wordIndex >= target) break;
+-    if (markers.has(token)) {
+-      // Negating knowledge/certainty does not negate the data being asked about.
+-      // Continue scanning so a later explicit exclusion still opens its own scope.
+-      if (token === "not" && tokens[i + 1] === "only") scope = null;
+-      else if (!isUncertaintyPredicate(tokens, i)) scope = wordIndex;
++    const contraction = isContraction(i);
++    if (!markers.has(tokens[i]) && !contraction) continue;
++    // A literal negation inside an approved compound belongs to that compound.
++    if (dataHeads.has(i) && dataEnds.get(i) > i + 1) continue;
++    const start = i + (contraction ? 2 : 1);
++    if (tokens[i] === "not" && ["only", "just"].includes(tokens[start])) continue;
++    let end = start;
++    while (end < tokens.length && !boundaries.has(end) && !["but", "instead", "rather"].includes(tokens[end])) end++;
++    let head = start;
++    while (head < end && !dataHeads.has(head) && !knowledge.has(tokens[head]) && !actions.has(tokens[head]) && !markers.has(tokens[head])) head++;
++    const bridge = tokens.slice(start, head);
++    let status = "unresolved";
++    let target = "unknown";
++    let objectStart = head;
++    if (head < end && dataHeads.has(head)) {
++      target = "data";
++      if (bridge.every(token => joiners.has(token))) status = "excluded";
++    } else if (head < end && knowledge.has(tokens[head])) {
++      target = "knowledge";
++      status = "positive";
++      // Uncertainty about performing a request is not an established request.
++      let next = head + 1;
++      while (next < end && !dataHeads.has(next) && !actions.has(tokens[next]) && !markers.has(tokens[next])) next++;
++      if (actions.has(tokens[next])) { status = "unresolved"; target = "action"; objectStart = next; }
++    } else if (head < end && actions.has(tokens[head])) {
++      target = "action";
++      if (bridge.length === 0) {
++        // Negating an exclusion action does not enact that exclusion.
++        status = ["exclude", "excluding"].includes(tokens[head]) ? "positive" : "excluded";
++      }
++      objectStart = head + 1;
++    } else if (["exclude", "excluding", "except", "without"].includes(tokens[i]) && head < end && bridge.length === 0) {
++      status = "excluded";
+     }
+-    else if (["but", "instead", "rather"].includes(token)) scope = null;
+-    else if (["show", "include"].includes(token) && scope !== null) {
+-      // A new command follows a completed excluded subject, not merely an adverb.
+-      // The span starts after the latest negation marker, so it has no nested negation.
+-      const subject = words.slice(scope + 1, wordIndex).join(" ");
+-      const normalizedSubject = normalizeText(subject);
+-      if (findConceptMentions(normalizedSubject).length || findGeographyMentions(normalizedSubject, subject).length) scope = null;
+-    }
+-    wordIndex++;
++    // A new negation or a fresh command after a completed object starts its own scope.
++    let sawData = false;
++    for (let j = objectStart; j < end; j++) {
++      if (j > objectStart && (markers.has(tokens[j]) || isContraction(j) || (sawData && actions.has(tokens[j])))) { end = j; break; }
++      if (dataHeads.has(j)) sawData = true;
++    }
++    if (status !== "positive") {
++      for (let j = start; j < end; j++) states[j] = { status, scope: i };
++      if (status === "unresolved") unresolved.push({ scope: i, target, text: tokens.slice(i, end).join(" ") });
++    }
++    // Nested action negators have already been composed with this operator.
++    if (head < end && actions.has(tokens[head])) i = head;
+   }
+-  return scope;
++  return {
++    states,
++    unresolved,
++    positiveQuery: tokens.filter((_, index) => states[index].status === "positive").join(" "),
++    at(index) {
++      const wordIndex = words.findIndex(word => word.index === index);
++      return states[wordIndex] || { status: "positive", scope: null };
++    }
++  };
+ }
+ 
+-function isUncertaintyPredicate(tokens, index) {
+-  const predicate = tokens.slice(index + 1).join(" ");
+-  if (tokens[index] === "not") {
+-    // Predicate modifiers may be degree words, productive -ly adverbs, or "at all".
+-    // Stop at other content words: an exclusion command must not reach a later
+-    // certainty word and be reclassified as uncertainty.
+-    const match = predicate.match(/^((?:(?:[a-z]+ly|very|so|too|quite|rather|yet|that|as|more|less|at all) )*)(?:sure|certain|aware|know|knowing|understand|understanding)\b/);
+-    if (!match) return false;
+-    const modifiers = match[1].trim();
+-    // Known data entities take precedence over an adverb-shaped spelling.
+-    if (findConceptMentions(modifiers).length || firstRuleValue(modifiers, FREQUENCY_RULES)
+-      || firstRuleValue(modifiers, SECTOR_RULES)) return false;
+-    const geographyTerms = [...ROUTING_METADATA.geographies.flatMap(item => geographyNameForms(item.name)), ...GEOGRAPHY_ALIASES.keys()];
+-    return !geographyTerms.some(term => hasPhrase(modifiers, normalizeText(term)));
+-  }
+-  if (tokens[index] === "no") return /^(?:idea|certainty|knowledge)\b/.test(predicate);
+-  if (tokens[index] === "without") return /^(?:knowing|understanding)\b/.test(predicate);
+-  return false;
++export function getNegationScope(query, index, originalQuery = query) {
++  const decision = resolveNegation(query, originalQuery).at(index);
++  return decision.status === "excluded" ? decision.scope : null;
+ }
+ 
+ function disambiguateStateCountryMatches(matches, normalizedQuery) {

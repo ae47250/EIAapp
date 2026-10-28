@@ -1,0 +1,1196 @@
+{
+  "queryId": 3,
+  "initial": {
+    "interpreter": "rules",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "deterministic_rules",
+      "reasons": [
+        "openai_invalid_json",
+        "product_from_deterministic_fallback"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "brazil and japan electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "initialFull": {
+    "originalQuery": "brazil and japan electrciity consumption",
+    "cleanedQuery": "brazil and japan electrciity consumption",
+    "correctedQuery": "brazil and japan electrciity consumption",
+    "correctedQuerySource": "unchanged",
+    "normalizedQuery": "brazil and japan electrciity consumption",
+    "interpreter": "rules",
+    "interpretationMethod": "deterministic_fallback",
+    "mode": "multiple",
+    "country": {
+      "name": "Brazil",
+      "code": "BRA",
+      "type": "country",
+      "routeFamilies": [
+        "international"
+      ]
+    },
+    "countryCode": "BRA",
+    "validatedGeographies": [
+      {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      {
+        "name": "Japan",
+        "code": "JPN",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "brazil",
+        "index": 0,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "deterministic_only",
+        "aiClaims": []
+      },
+      {
+        "name": "Japan",
+        "code": "JPN",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "japan",
+        "index": 11,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "deterministic_only",
+        "aiClaims": []
+      }
+    ],
+    "geographyConflicts": [],
+    "extraCountriesIgnored": [
+      {
+        "name": "Japan",
+        "code": "JPN",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      }
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "requestedFrequency": null,
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.65,
+    "fields": {
+      "country": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": "BRA",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "openai_invalid_json",
+        "fallbackMethod": "deterministic_rules",
+        "reason": null,
+        "breadth": "specific",
+        "alternatives": []
+      },
+      "product": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 0.25,
+        "fallbackUsed": true,
+        "fallbackReason": "openai_invalid_json",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "No approved product was found.",
+        "breadth": "unknown",
+        "alternatives": []
+      },
+      "activity": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": "consumption",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "openai_invalid_json",
+        "fallbackMethod": "deterministic_rules",
+        "reason": null,
+        "breadth": "specific",
+        "alternatives": []
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 0.25,
+        "fallbackUsed": true,
+        "fallbackReason": "openai_invalid_json",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "No approved sector was found.",
+        "breadth": "unknown",
+        "alternatives": []
+      },
+      "frequency": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": "annual",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "openai_invalid_json",
+        "fallbackMethod": "deterministic_rules",
+        "reason": null,
+        "breadth": "specific",
+        "alternatives": [],
+        "explicit": false
+      }
+    },
+    "fallback": {
+      "used": true,
+      "method": "deterministic_rules",
+      "reasons": [
+        "openai_invalid_json",
+        "product_from_deterministic_fallback"
+      ]
+    },
+    "cleanedKeywords": "electrciity",
+    "needsClarification": true,
+    "blockingClarification": true,
+    "conceptPairStatus": "missing",
+    "missingFields": [
+      "product"
+    ],
+    "ambiguousFields": [],
+    "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+    "conceptPairs": [],
+    "multiCountryComparison": {
+      "active": true,
+      "status": "active",
+      "geographyCodes": [
+        "BRA",
+        "JPN"
+      ],
+      "routeFamily": "international",
+      "reason": "two_or_more_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "brazil and japan electrciity consumption",
+      "normalizedQuery": "brazil and japan electrciity consumption",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 0,
+            "text": "brazil",
+            "source": "query",
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          },
+          {
+            "index": 11,
+            "text": "japan",
+            "source": "query",
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 29,
+            "text": "consumption",
+            "type": "activity",
+            "value": "consumption"
+          }
+        ],
+        "frequencies": []
+      },
+      "geography": {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "product": null,
+      "productBreadth": "unknown",
+      "productAlternatives": [],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [],
+      "conceptPairStatus": "missing",
+      "conceptPairRule": null,
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "BRA",
+          "JPN"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "product": {
+            "validation": "missing",
+            "confidence": 0.25,
+            "fallbackUsed": true
+          },
+          "activity": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.25,
+            "fallbackUsed": true
+          },
+          "frequency": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies",
+          "product_or_scope_missing"
+        ]
+      },
+      "fallback": {
+        "used": true,
+        "reasons": [
+          "product_from_deterministic_fallback"
+        ]
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "query",
+          "query"
+        ],
+        "geographyEvidence": [
+          {
+            "code": "BRA",
+            "rawText": "brazil",
+            "source": "query",
+            "conflictStatus": "none"
+          },
+          {
+            "code": "JPN",
+            "rawText": "japan",
+            "source": "query",
+            "conflictStatus": "none"
+          }
+        ],
+        "concepts": [],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "default",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "bounded_deterministic_grammar"
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [
+        "product"
+      ],
+      "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+      "requestEvidence": {
+        "version": 1,
+        "query": "brazil and japan electrciity consumption",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 40,
+            "text": "brazil and japan electrciity consumption",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        },
+        "product": {
+          "validation": "missing",
+          "confidence": 0.25,
+          "fallbackUsed": true
+        },
+        "activity": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 0.25,
+          "fallbackUsed": true
+        },
+        "frequency": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "multiple_geographies",
+        "product_or_scope_missing"
+      ]
+    },
+    "validatedCorrections": [],
+    "evidenceQuery": "brazil and japan electrciity consumption",
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "brazil and japan electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [],
+      "unresolved": 0
+    }
+  },
+  "serialized": "q=brazil+and+japan+electrciity+consumption&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A40%2C%22text%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%7D%2C%22originalQuery%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22cleanedQuery%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22correctedQuery%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22correctedQuerySource%22%3A%22unchanged%22%2C%22interpreter%22%3A%22rules%22%2C%22confidence%22%3A0.65%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22BRA%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22openai_invalid_json%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3Anull%2C%22breadth%22%3A%22specific%22%2C%22alternatives%22%3A%5B%5D%7D%2C%22product%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A0.25%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22openai_invalid_json%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22No+approved+product+was+found.%22%2C%22breadth%22%3A%22unknown%22%2C%22alternatives%22%3A%5B%5D%7D%2C%22activity%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22consumption%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22openai_invalid_json%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3Anull%2C%22breadth%22%3A%22specific%22%2C%22alternatives%22%3A%5B%5D%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A0.25%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22openai_invalid_json%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22breadth%22%3A%22unknown%22%2C%22alternatives%22%3A%5B%5D%7D%2C%22frequency%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22annual%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22openai_invalid_json%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3Anull%2C%22breadth%22%3A%22specific%22%2C%22alternatives%22%3A%5B%5D%2C%22explicit%22%3Afalse%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22Brazil%22%2C%22code%22%3A%22BRA%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%2C%7B%22name%22%3A%22Japan%22%2C%22code%22%3A%22JPN%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22Brazil%22%2C%22code%22%3A%22BRA%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22brazil%22%2C%22index%22%3A0%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22aiClaims%22%3A%5B%5D%7D%2C%7B%22name%22%3A%22Japan%22%2C%22code%22%3A%22JPN%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22japan%22%2C%22index%22%3A11%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22aiClaims%22%3A%5B%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Afalse%2C%22requestedFrequency%22%3Anull%2C%22multiCountryComparison%22%3A%7B%22active%22%3Atrue%2C%22status%22%3A%22active%22%2C%22geographyCodes%22%3A%5B%22BRA%22%2C%22JPN%22%5D%2C%22routeFamily%22%3A%22international%22%2C%22reason%22%3A%22two_or_more_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22multiple_geographies%22%2C%22product_or_scope_missing%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Atrue%2C%22method%22%3A%22deterministic_rules%22%2C%22reasons%22%3A%5B%22openai_invalid_json%22%2C%22product_from_deterministic_fallback%22%5D%7D%7D&intentCorrectedQuery=brazil+and+japan+electrciity+consumption&intentCorrectedQuerySource=unchanged&intentInterpreter=rules&intentCountryCode=BRA&intentProduct=&intentActivity=consumption&intentFrequency=annual&intentConfidence=0.65",
+  "normalized": {
+    "interpreter": "rules",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "deterministic_rules",
+      "reasons": [
+        "submitted_rule_intent",
+        "product_from_deterministic_fallback"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "brazil and japan electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "international",
+    "retrievals": [],
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "rankingApplied": false,
+      "semanticRerankingApplied": false,
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "missing_product",
+        "multiple_geographies",
+        "product_or_scope_missing"
+      ],
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "international",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    }
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": false,
+    "query": "brazil and japan electrciity consumption",
+    "intent": {
+      "originalQuery": "brazil and japan electrciity consumption",
+      "cleanedQuery": "brazil and japan electrciity consumption",
+      "correctedQuery": "brazil and japan electrciity consumption",
+      "correctedQuerySource": "unchanged",
+      "normalizedQuery": "brazil and japan electrciity consumption",
+      "interpreter": "rules",
+      "interpretationMethod": "deterministic_fallback",
+      "mode": "multiple",
+      "country": {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "countryCode": "BRA",
+      "validatedGeographies": [
+        {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "brazil",
+          "index": 0,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "deterministic_only",
+          "aiClaims": []
+        },
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "japan",
+          "index": 11,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "deterministic_only",
+          "aiClaims": []
+        }
+      ],
+      "geographyConflicts": [],
+      "extraCountriesIgnored": [
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "product": null,
+      "activity": "consumption",
+      "sector": null,
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.65,
+      "fields": {
+        "country": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": "BRA",
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true,
+          "fallbackReason": "submitted_rule_intent",
+          "fallbackMethod": "deterministic_rules",
+          "reason": null,
+          "breadth": "specific",
+          "alternatives": []
+        },
+        "product": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 0.25,
+          "fallbackUsed": true,
+          "fallbackReason": "submitted_rule_intent",
+          "fallbackMethod": "deterministic_rules",
+          "reason": "No approved product was found.",
+          "breadth": "unknown",
+          "alternatives": []
+        },
+        "activity": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": "consumption",
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true,
+          "fallbackReason": "submitted_rule_intent",
+          "fallbackMethod": "deterministic_rules",
+          "reason": null,
+          "breadth": "specific",
+          "alternatives": []
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 0.25,
+          "fallbackUsed": true,
+          "fallbackReason": "submitted_rule_intent",
+          "fallbackMethod": "deterministic_rules",
+          "reason": "No approved sector was found.",
+          "breadth": "unknown",
+          "alternatives": []
+        },
+        "frequency": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": "annual",
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true,
+          "fallbackReason": "submitted_rule_intent",
+          "fallbackMethod": "deterministic_rules",
+          "reason": null,
+          "breadth": "specific",
+          "alternatives": [],
+          "explicit": false
+        }
+      },
+      "fallback": {
+        "used": true,
+        "method": "deterministic_rules",
+        "reasons": [
+          "submitted_rule_intent",
+          "product_from_deterministic_fallback"
+        ]
+      },
+      "cleanedKeywords": "electrciity",
+      "needsClarification": true,
+      "blockingClarification": true,
+      "conceptPairStatus": "missing",
+      "missingFields": [
+        "product"
+      ],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+      "conceptPairs": [],
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "BRA",
+          "JPN"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "brazil and japan electrciity consumption",
+        "normalizedQuery": "brazil and japan electrciity consumption",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": "brazil",
+              "source": "query",
+              "geography": {
+                "name": "Brazil",
+                "code": "BRA",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            },
+            {
+              "index": 11,
+              "text": "japan",
+              "source": "query",
+              "geography": {
+                "name": "Japan",
+                "code": "JPN",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 29,
+              "text": "consumption",
+              "type": "activity",
+              "value": "consumption"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Brazil",
+            "code": "BRA",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          {
+            "name": "Japan",
+            "code": "JPN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          }
+        ],
+        "product": null,
+        "productBreadth": "unknown",
+        "productAlternatives": [],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [],
+        "conceptPairStatus": "missing",
+        "conceptPairRule": null,
+        "multiCountryComparison": {
+          "active": true,
+          "status": "active",
+          "geographyCodes": [
+            "BRA",
+            "JPN"
+          ],
+          "routeFamily": "international",
+          "reason": "two_or_more_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "fallback",
+              "confidence": 0.65,
+              "fallbackUsed": true
+            },
+            "product": {
+              "validation": "missing",
+              "confidence": 0.25,
+              "fallbackUsed": true
+            },
+            "activity": {
+              "validation": "fallback",
+              "confidence": 0.65,
+              "fallbackUsed": true
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 0.25,
+              "fallbackUsed": true
+            },
+            "frequency": {
+              "validation": "fallback",
+              "confidence": 0.65,
+              "fallbackUsed": true
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "multiple_geographies",
+            "product_or_scope_missing"
+          ]
+        },
+        "fallback": {
+          "used": true,
+          "reasons": [
+            "product_from_deterministic_fallback"
+          ]
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "query",
+            "query"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "BRA",
+              "rawText": "brazil",
+              "source": "query",
+              "conflictStatus": "none"
+            },
+            {
+              "code": "JPN",
+              "rawText": "japan",
+              "source": "query",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "bounded_deterministic_grammar"
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [
+          "product"
+        ],
+        "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+        "requestEvidence": {
+          "version": 1,
+          "query": "brazil and japan electrciity consumption",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 40,
+              "text": "brazil and japan electrciity consumption",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        },
+        "scopeValidation": {
+          "source": "rules",
+          "issues": [],
+          "unresolved": 0
+        }
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "product": {
+            "validation": "missing",
+            "confidence": 0.25,
+            "fallbackUsed": true
+          },
+          "activity": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.25,
+            "fallbackUsed": true
+          },
+          "frequency": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies",
+          "product_or_scope_missing"
+        ]
+      },
+      "validatedCorrections": [],
+      "evidenceQuery": "brazil and japan electrciity consumption",
+      "requestEvidence": {
+        "version": 1,
+        "query": "brazil and japan electrciity consumption",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 40,
+            "text": "brazil and japan electrciity consumption",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [],
+    "userWarnings": [],
+    "needsClarification": true,
+    "userMessage": "Please clarify the product. Example: United States total energy consumption.",
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "missing_product",
+        "multiple_geographies",
+        "product_or_scope_missing"
+      ],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 0,
+      "rankingUnit": "country_series"
+    },
+    "note": "No observations were fetched."
+  },
+  "final": {
+    "interpreter": "rules",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "deterministic_rules",
+      "reasons": [
+        "submitted_rule_intent",
+        "product_from_deterministic_fallback"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "brazil and japan electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

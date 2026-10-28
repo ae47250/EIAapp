@@ -1,0 +1,7 @@
+import {interpretQueryWithRules} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+import {buildLocalCandidatePipeline} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/candidate-pipeline.js';
+// Frozen before execution: three explicit pairs must remain visible as three available kinds of comparison,
+// or a limit/unavailability warning must disclose any omitted pair. This is analogous to the public cap fix.
+const q='Canada and Mexico natural gas production, natural gas consumption, and electricity generation';
+const i=interpretQueryWithRules(q); const p=await buildLocalCandidatePipeline(i);
+console.log(JSON.stringify({q,pairs:i.structuredIntent.conceptPairs.map(x=>[x.product,x.activity]),requests:p.retrievals.map(r=>({geo:r.geography.code,product:r.concept.product,activity:r.concept.activity,available:r.displayCandidates.length,warnings:r.userWarnings})),definitions:p.comparisonDefinitions.map(d=>({product:d.signature.product,activity:d.signature.activity,title:d.title,available:d.availableCountryCount})),warnings:p.userWarnings}));

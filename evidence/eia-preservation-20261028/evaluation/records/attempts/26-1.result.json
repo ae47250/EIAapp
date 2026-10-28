@@ -1,0 +1,195 @@
+{
+  "scheduledId": 26,
+  "queryId": 6,
+  "repeat": 2,
+  "model": "gpt-6-luna",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:08:58.926Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "175b0a81db6eb77a59fbf4d8c4de61ebecd2348239bb4665266638cb78cd18a6",
+  "promptSHA256": "ced126ad529c301184040cb13574f71438ba82ee2c16f38360c2bff515c2838b",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.003298,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:08:45 GMT",
+    "openai-processing-ms": "3441",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999796",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "1ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 796,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 347,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1143
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:09:02.520Z",
+  "elapsedMs": 3593.854500000016,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "{\"correctedQuery\":\"energy consumption Iceland, not Ireland\",\"confidence\":0.98,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"iceland\",\"value\":\"Iceland\",\"confidence\":1,\"ambiguityReason\":null},\"product\":{\"rawValue\":\"energy\",\"value\":\"total energy\",\"confidence\":0.72,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":1,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":1,\"ambiguityReason\":null},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":1,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"Iceland\",\"confidence\":1}],\"conceptPairs\":[{\"product\":\"total energy\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.72}],\"exclusions\":[{\"type\":\"conceptType\",\"value\":\"Ireland\",\"confidence\":1}],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"energy consumption iceland not ireland\",\"scopes\":[{\"start\":0,\"end\":6,\"text\":\"energy\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":7,\"end\":17,\"text\":\"consumption\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":18,\"end\":25,\"text\":\"iceland\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":26,\"end\":29,\"text\":\"not\",\"status\":\"context\",\"target\":\"data\"},{\"start\":30,\"end\":36,\"text\":\"ireland\",\"status\":\"excluded\",\"target\":\"data\",\"operator\":{\"start\":26,\"end\":29,\"text\":\"not\"}}]}}",
+    "parsed": {
+      "correctedQuery": "energy consumption Iceland, not Ireland",
+      "confidence": 0.98,
+      "ambiguity": null,
+      "fields": {
+        "country": {
+          "rawValue": "iceland",
+          "value": "Iceland",
+          "confidence": 1,
+          "ambiguityReason": null
+        },
+        "product": {
+          "rawValue": "energy",
+          "value": "total energy",
+          "confidence": 0.72,
+          "ambiguityReason": null
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 1,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 1,
+          "ambiguityReason": null
+        },
+        "frequency": {
+          "rawValue": null,
+          "value": "annual",
+          "confidence": 1,
+          "ambiguityReason": null,
+          "explicit": false
+        }
+      },
+      "geographies": [
+        {
+          "value": "Iceland",
+          "confidence": 1
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "total energy",
+          "activity": "consumption",
+          "order": 1,
+          "confidence": 0.72
+        }
+      ],
+      "exclusions": [
+        {
+          "type": "conceptType",
+          "value": "Ireland",
+          "confidence": 1
+        }
+      ],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "energy consumption iceland not ireland",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 6,
+            "text": "energy",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 7,
+            "end": 17,
+            "text": "consumption",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 18,
+            "end": 25,
+            "text": "iceland",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 26,
+            "end": 29,
+            "text": "not",
+            "status": "context",
+            "target": "data"
+          },
+          {
+            "start": 30,
+            "end": 36,
+            "text": "ireland",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 26,
+              "end": 29,
+              "text": "not"
+            }
+          }
+        ]
+      }
+    },
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "unsupported_flat_exclusions"
+      ],
+      "signature": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [
+          "IRL"
+        ],
+        "clarification": false,
+        "unknownQualifiers": []
+      }
+    },
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": true,
+      "spans": false,
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    }
+  },
+  "replayFile": "attempts/26-1.replay.json"
+}

@@ -1,0 +1,76 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
+import { runInNewContext } from 'node:vm';
+import { createHash } from 'node:crypto';
+import assert from 'node:assert/strict';
+const root = process.env.EIA_REVIEW_ROOT || '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const fixturePath = process.env.EIA_CHALLENGES || '/private/tmp/eia-followup-independent-challenges.json';
+const fixture = JSON.parse(readFileSync(fixturePath));
+const { interpretQuery, normalizeSubmittedIntent, interpretQueryWithRules } = await import(root + '/lib/sources/eia/interpret-query.js');
+const { GET } = await import(root + '/app/api/search-eia/route.js');
+const workspace = readFileSync(root + '/components/search/SearchWorkspace.js', 'utf8');
+const start = workspace.indexOf('function appendIntentParams(');
+const end = workspace.indexOf('\nfunction formatInterpreter(', start);
+assert.ok(start >= 0 && end > start);
+const serializer = workspace.slice(start, end);
+const appendIntentParams = runInNewContext('(' + serializer + ')');
+const routing = JSON.parse(readFileSync(root + '/data/eia/routing-metadata.json'));
+const records = new Map(['international', 'domestic', 'natural-gas', 'seds'].flatMap(family => gunzipSync(readFileSync(root + `/data/eia/builds/phase1b/${family}.jsonl.gz`)).toString().trim().split('\n').map(line => {const record = JSON.parse(line);return [record.series_id,record];})));
+process.env.LOGIN_REQUIRED = 'off';
+process.env.OPENAI_API_KEY = 'injected-offline-fixture-not-a-key';
+delete process.env.EIA_API_KEY;
+let injected, calls = 0;
+globalThis.fetch = async (url, options) => {
+  assert.equal(url, 'https://api.openai.com/v1/responses');
+  assert.equal(options.method, 'POST');
+  calls++;
+  return Response.json({output_text: JSON.stringify(injected)});
+};
+const unique = a => [...new Set(a)];
+const field = value => ({value, confidence: .99});
+function model(c) {
+ return {confidence:.99,geographies:c.geographies.map(field),conceptPairs:c.products.flatMap(product => c.activities.map(activity=>({product,activity,confidence:.99}))).map((p,order)=>({...p,order})),fields:{country:field(c.geographies[0]),product:field(c.products[0]),activity:field(c.activities[0]),sector:field(null),frequency:{...field(c.frequency),explicit:c.frequencyExplicit}},exclusions:[...c.excludedProducts.map(value=>({type:'product',value,confidence:.99})),...c.excludedActivities.map(value=>({type:'activity',value,confidence:.99}))]};
+}
+function meaning(intent) {
+ return {geographies:intent.structuredIntent.geographies.map(g=>g.code),products:unique(intent.structuredIntent.conceptPairs.map(p=>p.product)),activities:unique(intent.structuredIntent.conceptPairs.map(p=>p.activity)),frequency:intent.frequency,frequencyExplicit:intent.frequencyExplicit,excludedProducts:intent.exclusions.filter(e=>e.type==='product').map(e=>e.value),excludedActivities:intent.exclusions.filter(e=>e.type==='activity').map(e=>e.value)};
+}
+function check(c,intent,phase,errors) {
+ const actual=meaning(intent);
+ for(const key of Object.keys(actual)) {
+  try { assert.deepEqual(actual[key],c[key]); } catch {errors.push({phase,key,expected:c[key],actual:actual[key]});}
+ }
+ for(const code of c.excludedGeographies) if(actual.geographies.includes(code))errors.push({phase,key:'excludedGeographies',unexpected:code});
+ if(intent.interpreter !== 'openai' && phase !== 'rules')errors.push({phase,key:'interpreter',expected:'openai',actual:intent.interpreter});
+ return {...actual,needsClarification:intent.needsClarification,pairStatus:intent.structuredIntent.conceptPairStatus,route:intent.structuredIntent.route};
+}
+const results=[];
+for(const item of fixture.cases) {
+ const c={...fixture.defaults,...item};
+ const errors=[];
+ injected=model(c);
+ const rules=check(c,interpretQueryWithRules(c.query),'rules',errors);
+ const intent=await interpretQuery(c.query);
+ const interpreted=check(c,intent,'interpretQuery',errors);
+ const params=appendIntentParams(new URLSearchParams({q:c.query}),intent);
+ const serialized=check(c,normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')),params.get('q')),'browser-serialization',errors);
+ const response=await GET(new Request('http://offline.invalid/api/search-eia?'+params));
+ const body=await response.json();
+ assert.equal(response.status,200);
+ const searched=check(c,body.intent,'public-search-GET',errors);
+ const candidates=[...(body.variables||[]),...(body.comparisonDefinitions||[]).flatMap(d=>d.countries.filter(x=>x.seriesId))];
+ for(const candidate of candidates) {
+  const record=records.get(candidate.seriesId);
+  if(!record){errors.push({phase:'candidate-provenance',seriesId:candidate.seriesId,error:'missing archive record'});continue;}
+  for(const [publicField,rawField] of [['unit','unit'],['dateStart','date_start'],['dateEnd','date_end']]) if(candidate[publicField]!==record[rawField])errors.push({phase:'candidate-provenance',seriesId:candidate.seriesId,key:publicField,expected:record[rawField],actual:candidate[publicField]});
+  if(!c.geographies.includes(candidate.geography.code)) errors.push({phase:'candidate-geography',seriesId:candidate.seriesId,actual:candidate.geography});
+  const canonical=routing.geographies.find(g=>g.code===candidate.geography.code);
+  if(canonical && candidate.geography.name!==canonical.name)errors.push({phase:'candidate-label',expected:canonical.name,actual:candidate.geography.name});
+ }
+ if(body.selectedSeries!==null) errors.push({phase:'public-search-GET',key:'selectedSeries',actual:body.selectedSeries});
+ const result={id:c.id,query:c.query,expected:c,injected,errors,rules,interpreted,serialized,searched,publicResult:{variables:body.variables?.length,comparisonDefinitions:body.comparisonDefinitions?.length,needsClarification:body.needsClarification,candidates:candidates.map(x=>({seriesId:x.seriesId,geography:x.geography,unit:x.unit,dateStart:x.dateStart,dateEnd:x.dateEnd})),userWarnings:body.userWarnings}};
+ results.push(result);
+ console.log(JSON.stringify({id:c.id,errors,candidateCount:candidates.length,needsClarification:body.needsClarification}));
+}
+const report={root,fixtureSha256:createHash('sha256').update(readFileSync(fixturePath)).digest('hex'),serializerSha256:createHash('sha256').update(serializer).digest('hex'),fetchCalls:calls,externalFetches:0,cases:results.length,passed:results.filter(r=>!r.errors.length).length,results};
+writeFileSync(process.env.EIA_REVIEW_OUTPUT || '/private/tmp/eia-followup-independent-results.json',JSON.stringify(report,null,2));
+console.log('TOTAL '+JSON.stringify({cases:report.cases,passed:report.passed,fetchCalls:calls,externalFetches:0}));

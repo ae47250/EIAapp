@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+import {validateAiInterpretation,normalizeSubmittedIntent} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+const query="Show coal production for Canada. I'm not convinced petroleum consumption for Mexico is higher; show both.";
+const boundary=query.indexOf("I'm"),op=query.indexOf('not'),end=query.indexOf(';');
+const p={confidence:.95,fields:{country:{value:'CAN',confidence:.95},product:{value:'coal',confidence:.95},activity:{value:'production',confidence:.95},frequency:{value:'annual',confidence:.95,explicit:false}},geographies:[{value:'CAN',confidence:.95}],conceptPairs:[{product:'coal',activity:'production',confidence:.95}],requestEvidence:{version:1,query,scopes:[{start:0,end:boundary,text:query.slice(0,boundary),status:'requested',target:'data'},{start:boundary,end,text:query.slice(boundary,end),status:'excluded',target:'data',operator:{start:op,end:op+3,text:'not'}},{start:end,end:query.length,text:query.slice(end),status:'context',target:'action'}]}};
+const x=validateAiInterpretation(p,query), y=normalizeSubmittedIntent({...x,geographies:x.validatedGeographies},query);
+const report={classification:'Known design limit: valid spans and metadata cannot prove arbitrary semantic scope. This deliberately wrong model proposal is not a request to expand predicate lists.',query,input:p,output:{blocked:x.needsClarification,geographies:x.validatedGeographies.map(g=>g.code),exclusions:x.exclusions,scopeValidation:x.scopeValidation},resubmitted:{blocked:y.needsClarification,geographies:y.validatedGeographies.map(g=>g.code),scopeValidation:y.scopeValidation}};
+fs.writeFileSync('/private/tmp/eia-scope-contract-independent-semantic-limit.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));

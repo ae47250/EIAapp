@@ -1,0 +1,101 @@
+// Decisions are about mentions, not the unbounded suffix after a negation word.
+// Unknown attachment is a third state: it is neither positive request evidence
+// nor an instruction to exclude data.
+export function resolveNegation(query, originalQuery = query) {
+  const normalized = normalizeText(query);
+  const words = [...normalized.matchAll(/[a-z0-9]+/g)];
+  const raw = String(originalQuery || query).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ");
+  const rawWords = [...raw.matchAll(/[a-z0-9]+/gi)];
+  const tokens = words.map(word => word[0]);
+  const states = tokens.map(() => ({ status: "positive", scope: null }));
+  const unresolved = [];
+  const data = [
+    ...findConceptMentions(normalized),
+    ...collectGeographyMatches(normalized, raw),
+    ...[...SECTOR_RULES, ...FREQUENCY_RULES].flatMap(rule => rule.terms.flatMap(term => {
+      const matches = [];
+      addPhraseMatch(matches, normalized, term, { value: rule.value });
+      return matches;
+    }))
+  ];
+  const dataHeads = new Set(data.map(mention => words.findIndex(word => word.index === mention.index)).filter(index => index >= 0));
+  const dataEnds = new Map(data.map(mention => {
+    const start = words.findIndex(word => word.index === mention.index);
+    return [start, start + normalizeText(mention.text).split(" ").length];
+  }));
+  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
+  const knowledge = new Set(["sure", "certain", "aware", "know", "knowing", "understand", "understanding", "idea", "certainty", "knowledge"]);
+  const actions = new Set(["show", "include", "including", "exclude", "excluding"]);
+  const joiners = new Set(["a", "an", "the", "in", "for", "of", "from", "to"]);
+  const boundaries = new Set();
+  for (let i = 1; i < rawWords.length; i++) {
+    const between = raw.slice(rawWords[i - 1].index + rawWords[i - 1][0].length, rawWords[i].index);
+    if (/[;!?]/.test(between) || (/\./.test(between)
+      && !(/^\d+$/.test(rawWords[i - 1][0]) && /^\d+$/.test(rawWords[i][0]))
+      && rawWords[i - 1][0].length > 1)) boundaries.add(i);
+  }
+  const isContraction = index => /n$/i.test(rawWords[index]?.[0] || "") && tokens[index + 1] === "t"
+    && /['’]/.test(raw.slice(rawWords[index].index, rawWords[index + 1].index));
+  for (let i = 0; i < tokens.length; i++) {
+    const contraction = isContraction(i);
+    if (!markers.has(tokens[i]) && !contraction) continue;
+    // A literal negation inside an approved compound belongs to that compound.
+    if (dataHeads.has(i) && dataEnds.get(i) > i + 1) continue;
+    const start = i + (contraction ? 2 : 1);
+    if (tokens[i] === "not" && ["only", "just"].includes(tokens[start])) continue;
+    let end = start;
+    while (end < tokens.length && !boundaries.has(end) && !["but", "instead", "rather"].includes(tokens[end])) end++;
+    let head = start;
+    while (head < end && !dataHeads.has(head) && !knowledge.has(tokens[head]) && !actions.has(tokens[head]) && !markers.has(tokens[head])) head++;
+    const bridge = tokens.slice(start, head);
+    let status = "unresolved";
+    let target = "unknown";
+    let objectStart = head;
+    if (head < end && dataHeads.has(head)) {
+      target = "data";
+      if (bridge.every(token => joiners.has(token))) status = "excluded";
+    } else if (head < end && knowledge.has(tokens[head])) {
+      target = "knowledge";
+      status = "positive";
+      // Uncertainty about performing a request is not an established request.
+      let next = head + 1;
+      while (next < end && !dataHeads.has(next) && !actions.has(tokens[next]) && !markers.has(tokens[next])) next++;
+      if (actions.has(tokens[next])) { status = "unresolved"; target = "action"; objectStart = next; }
+    } else if (head < end && actions.has(tokens[head])) {
+      target = "action";
+      if (bridge.length === 0) {
+        // Negating an exclusion action does not enact that exclusion.
+        status = ["exclude", "excluding"].includes(tokens[head]) ? "positive" : "excluded";
+      }
+      objectStart = head + 1;
+    } else if (["exclude", "excluding", "except", "without"].includes(tokens[i]) && head < end && bridge.length === 0) {
+      status = "excluded";
+    }
+    // A new negation or a fresh command after a completed object starts its own scope.
+    let sawData = false;
+    for (let j = objectStart; j < end; j++) {
+      if (j > objectStart && (markers.has(tokens[j]) || isContraction(j) || (sawData && actions.has(tokens[j])))) { end = j; break; }
+      if (dataHeads.has(j)) sawData = true;
+    }
+    if (status !== "positive") {
+      for (let j = start; j < end; j++) states[j] = { status, scope: i };
+      if (status === "unresolved") unresolved.push({ scope: i, target, text: tokens.slice(i, end).join(" ") });
+    }
+    // Nested action negators have already been composed with this operator.
+    if (head < end && actions.has(tokens[head])) i = head;
+  }
+  return {
+    states,
+    unresolved,
+    positiveQuery: tokens.filter((_, index) => states[index].status === "positive").join(" "),
+    at(index) {
+      const wordIndex = words.findIndex(word => word.index === index);
+      return states[wordIndex] || { status: "positive", scope: null };
+    }
+  };
+}
+
+export function getNegationScope(query, index, originalQuery = query) {
+  const decision = resolveNegation(query, originalQuery).at(index);
+  return decision.status === "excluded" ? decision.scope : null;
+}

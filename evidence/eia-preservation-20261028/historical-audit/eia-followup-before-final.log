@@ -1,0 +1,6594 @@
+TAP version 13
+# Subtest: follow-up name-0: energy consumption in Gambia, The
+ok 1 - follow-up name-0: energy consumption in Gambia, The
+  ---
+  duration_ms: 443.429666
+  type: 'test'
+  ...
+# Subtest: follow-up name-1: energy consumption in The Gambia
+not ok 2 - follow-up name-1: energy consumption in The Gambia
+  ---
+  duration_ms: 98.989375
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-candidates","error":"The expression evaluated to a falsy value:\n\n  assert.ok(expected.codes.includes(candidate.geography.code))\n","series":["INTL.44-2-ZMB-MTOE.A","INTL.4411-2-ZMB-QBTU.A","INTL.4413-2-ZMB-QBTU.A","INTL.4415-2-ZMB-QBTU.A","INTL.4417-2-ZMB-QBTU.A"]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'The expression evaluated to a falsy value:\n' +
+    +       '\n' +
+    +       '  assert.ok(expected.codes.includes(candidate.geography.code))\n',
+    +     phase: 'public-candidates',
+    +     series: [
+    +       'INTL.44-2-ZMB-MTOE.A',
+    +       'INTL.4411-2-ZMB-QBTU.A',
+    +       'INTL.4413-2-ZMB-QBTU.A',
+    +       'INTL.4415-2-ZMB-QBTU.A',
+    +       'INTL.4417-2-ZMB-QBTU.A'
+    +     ]
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'GMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: |-
+        The expression evaluated to a falsy value:
+        
+          assert.ok(expected.codes.includes(candidate.geography.code))
+        
+      series:
+        0: 'INTL.44-2-ZMB-MTOE.A'
+        1: 'INTL.4411-2-ZMB-QBTU.A'
+        2: 'INTL.4413-2-ZMB-QBTU.A'
+        3: 'INTL.4415-2-ZMB-QBTU.A'
+        4: 'INTL.4417-2-ZMB-QBTU.A'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up name-2: energy consumption in Gambia
+not ok 3 - follow-up name-2: energy consumption in Gambia
+  ---
+  duration_ms: 76.082333
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-candidates","error":"The expression evaluated to a falsy value:\n\n  assert.ok(expected.codes.includes(candidate.geography.code))\n","series":["INTL.44-2-ZMB-MTOE.A","INTL.4411-2-ZMB-QBTU.A","INTL.4413-2-ZMB-QBTU.A","INTL.4415-2-ZMB-QBTU.A","INTL.4417-2-ZMB-QBTU.A"]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'The expression evaluated to a falsy value:\n' +
+    +       '\n' +
+    +       '  assert.ok(expected.codes.includes(candidate.geography.code))\n',
+    +     phase: 'public-candidates',
+    +     series: [
+    +       'INTL.44-2-ZMB-MTOE.A',
+    +       'INTL.4411-2-ZMB-QBTU.A',
+    +       'INTL.4413-2-ZMB-QBTU.A',
+    +       'INTL.4415-2-ZMB-QBTU.A',
+    +       'INTL.4417-2-ZMB-QBTU.A'
+    +     ]
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'GMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: |-
+        The expression evaluated to a falsy value:
+        
+          assert.ok(expected.codes.includes(candidate.geography.code))
+        
+      series:
+        0: 'INTL.44-2-ZMB-MTOE.A'
+        1: 'INTL.4411-2-ZMB-QBTU.A'
+        2: 'INTL.4413-2-ZMB-QBTU.A'
+        3: 'INTL.4415-2-ZMB-QBTU.A'
+        4: 'INTL.4417-2-ZMB-QBTU.A'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up name-3: energy consumption in THE GAMBIA
+not ok 4 - follow-up name-3: energy consumption in THE GAMBIA
+  ---
+  duration_ms: 75.103917
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-candidates","error":"The expression evaluated to a falsy value:\n\n  assert.ok(expected.codes.includes(candidate.geography.code))\n","series":["INTL.44-2-ZMB-MTOE.A","INTL.4411-2-ZMB-QBTU.A","INTL.4413-2-ZMB-QBTU.A","INTL.4415-2-ZMB-QBTU.A","INTL.4417-2-ZMB-QBTU.A"]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'The expression evaluated to a falsy value:\n' +
+    +       '\n' +
+    +       '  assert.ok(expected.codes.includes(candidate.geography.code))\n',
+    +     phase: 'public-candidates',
+    +     series: [
+    +       'INTL.44-2-ZMB-MTOE.A',
+    +       'INTL.4411-2-ZMB-QBTU.A',
+    +       'INTL.4413-2-ZMB-QBTU.A',
+    +       'INTL.4415-2-ZMB-QBTU.A',
+    +       'INTL.4417-2-ZMB-QBTU.A'
+    +     ]
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'GMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: |-
+        The expression evaluated to a falsy value:
+        
+          assert.ok(expected.codes.includes(candidate.geography.code))
+        
+      series:
+        0: 'INTL.44-2-ZMB-MTOE.A'
+        1: 'INTL.4411-2-ZMB-QBTU.A'
+        2: 'INTL.4413-2-ZMB-QBTU.A'
+        3: 'INTL.4415-2-ZMB-QBTU.A'
+        4: 'INTL.4417-2-ZMB-QBTU.A'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up name-4: energy consumption in The Bahamas
+ok 5 - follow-up name-4: energy consumption in The Bahamas
+  ---
+  duration_ms: 72.310542
+  type: 'test'
+  ...
+# Subtest: follow-up name-5: energy consumption in Bahamas
+not ok 6 - follow-up name-5: energy consumption in Bahamas
+  ---
+  duration_ms: 14.131875
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'BHS'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up name-6: energy consumption in Bahamas, The
+not ok 7 - follow-up name-6: energy consumption in Bahamas, The
+  ---
+  duration_ms: 14.506125
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'BHS'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up name-7: energy consumption in Germany, East
+ok 8 - follow-up name-7: energy consumption in Germany, East
+  ---
+  duration_ms: 73.604959
+  type: 'test'
+  ...
+# Subtest: follow-up name-8: energy consumption in East Germany
+not ok 9 - follow-up name-8: energy consumption in East Germany
+  ---
+  duration_ms: 73.178917
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["DDR"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["DDR"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["DDR"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["DDR"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DDR'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DDR'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DDR'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DDR'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'DDR'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up name-9: energy consumption in Germany, West
+ok 10 - follow-up name-9: energy consumption in Germany, West
+  ---
+  duration_ms: 74.718459
+  type: 'test'
+  ...
+# Subtest: follow-up name-10: energy consumption in West Germany
+not ok 11 - follow-up name-10: energy consumption in West Germany
+  ---
+  duration_ms: 72.125167
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["DEUW"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["DEUW"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["DEUW"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["DEUW"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["DEU"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEUW'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEUW'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEUW'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEU'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'DEUW'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'DEUW'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'DEU'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up external-uncertainty: I'm not sure what's available for USA energy consumption
+not ok 12 - follow-up external-uncertainty: I'm not sure what's available for USA energy consumption
+  ---
+  duration_ms: 20.726375
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-12: I am not certain whether data exists for France energy consumption
+not ok 13 - follow-up uncertainty-12: I am not certain whether data exists for France energy consumption
+  ---
+  duration_ms: 21.750875
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["FRA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["FRA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["FRA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["FRA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'FRA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'FRA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'FRA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'FRA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'FRA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-13: I don't know what's available for Canada energy consumption
+ok 14 - follow-up uncertainty-13: I don't know what's available for Canada energy consumption
+  ---
+  duration_ms: 78.032875
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-14: I'm not really sure what's available for USA energy consumption
+not ok 15 - follow-up uncertainty-14: I'm not really sure what's available for USA energy consumption
+  ---
+  duration_ms: 21.735333
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-15: We aren't sure about USA energy consumption
+ok 16 - follow-up uncertainty-15: We aren't sure about USA energy consumption
+  ---
+  duration_ms: 76.885333
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-16: I have no idea what is available for USA energy consumption
+not ok 17 - follow-up uncertainty-16: I have no idea what is available for USA energy consumption
+  ---
+  duration_ms: 20.888959
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-17: I'm unsure about France energy consumption
+ok 18 - follow-up uncertainty-17: I'm unsure about France energy consumption
+  ---
+  duration_ms: 75.534542
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-18: Without knowing what data is available for USA energy consumption
+not ok 19 - follow-up uncertainty-18: Without knowing what data is available for USA energy consumption
+  ---
+  duration_ms: 21.429125
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-19: I do not know whether there is data for Canada energy consumption
+not ok 20 - follow-up uncertainty-19: I do not know whether there is data for Canada energy consumption
+  ---
+  duration_ms: 21.71125
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["CAN"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["CAN"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["CAN"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["CAN"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'CAN'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'CAN'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'CAN'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'CAN'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'CAN'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-20: I am not yet certain about USA energy consumption
+not ok 21 - follow-up uncertainty-20: I am not yet certain about USA energy consumption
+  ---
+  duration_ms: 17.558
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-21: I am not aware of data for USA energy consumption
+not ok 22 - follow-up uncertainty-21: I am not aware of data for USA energy consumption
+  ---
+  duration_ms: 17.165458
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up variant-ordered: energy consumption in The Gambia and Zambia
+not ok 23 - follow-up variant-ordered: energy consumption in The Gambia and Zambia
+  ---
+  duration_ms: 138.308583
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["GMB","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["GMB","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["NAM","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["GMB","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["NAM","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["GMB","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["NAM","ZMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'NAM',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'NAM',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'NAM',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB',
+    +         'ZMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'GMB'
+          1: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+          0: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'NAM'
+          1: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'NAM'
+          1: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'NAM'
+          1: 'ZMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up variant-exclusion: energy consumption in The Gambia not Zambia
+not ok 24 - follow-up variant-exclusion: energy consumption in The Gambia not Zambia
+  ---
+  duration_ms: 78.00925
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["NAM"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["NAM"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":["NAM"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]}},{"phase":"public-candidates","error":"The expression evaluated to a falsy value:\n\n  assert.ok(expected.codes.includes(candidate.geography.code))\n","series":["INTL.44-2-NAM-MTOE.A","INTL.4411-2-NAM-QBTU.A","INTL.4413-2-NAM-QBTU.A","INTL.4415-2-NAM-QBTU.A","INTL.4417-2-NAM-QBTU.A"]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'NAM'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'NAM'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: false,
+    +       codes: [
+    +         'NAM'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'The expression evaluated to a falsy value:\n' +
+    +       '\n' +
+    +       '  assert.ok(expected.codes.includes(candidate.geography.code))\n',
+    +     phase: 'public-candidates',
+    +     series: [
+    +       'INTL.44-2-NAM-MTOE.A',
+    +       'INTL.4411-2-NAM-QBTU.A',
+    +       'INTL.4413-2-NAM-QBTU.A',
+    +       'INTL.4415-2-NAM-QBTU.A',
+    +       'INTL.4417-2-NAM-QBTU.A'
+    +     ]
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'GMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'NAM'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'NAM'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+          0: 'NAM'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: |-
+        The expression evaluated to a falsy value:
+        
+          assert.ok(expected.codes.includes(candidate.geography.code))
+        
+      series:
+        0: 'INTL.44-2-NAM-MTOE.A'
+        1: 'INTL.4411-2-NAM-QBTU.A'
+        2: 'INTL.4413-2-NAM-QBTU.A'
+        3: 'INTL.4415-2-NAM-QBTU.A'
+        4: 'INTL.4417-2-NAM-QBTU.A'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up reverse-exclusion: energy consumption in Zambia not The Gambia
+ok 25 - follow-up reverse-exclusion: energy consumption in Zambia not The Gambia
+  ---
+  duration_ms: 74.698875
+  type: 'test'
+  ...
+# Subtest: follow-up bahamas-exclusion: energy consumption Bahamas not The Gambia
+not ok 26 - follow-up bahamas-exclusion: energy consumption Bahamas not The Gambia
+  ---
+  duration_ms: 17.833458
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["BHS"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'BHS'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'BHS'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-exclusion: I'm not sure what's available for USA energy consumption, not Canada
+not ok 27 - follow-up uncertainty-exclusion: I'm not sure what's available for USA energy consumption, not Canada
+  ---
+  duration_ms: 22.119375
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up uncertainty-product-exclusion: I'm not sure what's available for USA energy consumption, not coal
+not ok 28 - follow-up uncertainty-product-exclusion: I'm not sure what's available for USA energy consumption, not coal
+  ---
+  duration_ms: 23.644875
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[["product","coal"]]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"],["product","coal"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[["product","coal"]]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"],["product","coal"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[["product","coal"]]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"],["product","coal"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[["product","coal"]]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"],["product","coal"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ],
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ],
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ],
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ],
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'coal'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+          0:
+            0: 'product'
+            1: 'coal'
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+          2:
+            0: 'product'
+            1: 'coal'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+          2:
+            0: 'product'
+            1: 'coal'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+          2:
+            0: 'product'
+            1: 'coal'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+          2:
+            0: 'product'
+            1: 'coal'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up actual-activity-exclusion: USA energy consumption, not production
+ok 29 - follow-up actual-activity-exclusion: USA energy consumption, not production
+  ---
+  duration_ms: 77.820583
+  type: 'test'
+  ...
+# Subtest: follow-up actual-command-exclusion: USA energy consumption; do not include coal production
+ok 30 - follow-up actual-command-exclusion: USA energy consumption; do not include coal production
+  ---
+  duration_ms: 104.586833
+  type: 'test'
+  ...
+# Subtest: follow-up actual-no-exclusion: USA energy consumption, no coal
+ok 31 - follow-up actual-no-exclusion: USA energy consumption, no coal
+  ---
+  duration_ms: 73.9865
+  type: 'test'
+  ...
+# Subtest: follow-up actual-without-exclusion: USA energy consumption without coal
+ok 32 - follow-up actual-without-exclusion: USA energy consumption without coal
+  ---
+  duration_ms: 74.354458
+  type: 'test'
+  ...
+# Subtest: follow-up not-only: not only USA but also Canada energy consumption
+ok 33 - follow-up not-only: not only USA but also Canada energy consumption
+  ---
+  duration_ms: 139.420042
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-country-variant: I'm not sure what's available for The Gambia energy consumption
+not ok 34 - follow-up uncertainty-country-variant: I'm not sure what's available for The Gambia energy consumption
+  ---
+  duration_ms: 21.978125
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["GMB"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["product","total energy"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'total energy'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'GMB'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'total energy',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'GMB'
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: 'total energy'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'total energy'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up explicit-frequency: I am not certain about monthly USA natural gas consumption
+not ok 35 - follow-up explicit-frequency: I am not certain about monthly USA natural gas consumption
+  ---
+  duration_ms: 20.999666
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,null]],"frequency":"monthly","explicit":true,"sector":null,"clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"monthly","explicit":true,"sector":null,"clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           null,
+    +           null
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: true,
+    +       frequency: 'monthly',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'natural gas'
+            1: 'consumption'
+        frequency: 'monthly'
+        explicit: true
+        sector: ~
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: ~
+        frequency: 'monthly'
+        explicit: true
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'monthly'
+        explicit: true
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'monthly'
+        explicit: true
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'monthly'
+        explicit: true
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up sector: I am not sure about USA residential natural gas consumption
+not ok 36 - follow-up sector: I am not sure about USA residential natural gas consumption
+  ---
+  duration_ms: 20.869208
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,null]],"frequency":"annual","explicit":false,"sector":"residential","clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["natural gas","consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":false,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":"residential","clarify":true,"exclusions":[["product","natural gas"],["activity","consumption"]]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           null
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'product',
+    +           'natural gas'
+    +         ],
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     expected: {
+    +       clarify: false,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           'natural gas',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: 'residential'
+    +     },
+    +     phase: 'public-search'
+    +   },
+    +   {
+    +     error: 'Expected cached source candidates',
+    +     phase: 'public-candidates',
+    +     series: []
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: 'natural gas'
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: 'residential'
+        clarify: false
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: ~
+        frequency: 'annual'
+        explicit: false
+        sector: 'residential'
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: 'residential'
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: 'residential'
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: 'residential'
+        clarify: true
+        exclusions:
+          0:
+            0: 'product'
+            1: 'natural gas'
+          1:
+            0: 'activity'
+            1: 'consumption'
+    4:
+      phase: 'public-candidates'
+      error: 'Expected cached source candidates'
+      series:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: follow-up ambiguous-product: I'm not sure what's available for USA gas consumption
+not ok 37 - follow-up ambiguous-product: I'm not sure what's available for USA gas consumption
+  ---
+  duration_ms: 16.989875
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"rules","expected":{"codes":["USA"],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,null]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["activity","consumption"]]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["activity","consumption"]]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["activity","consumption"]]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]},"actual":{"codes":[],"pairs":[[null,"consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[["activity","consumption"]]}}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           null
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: true,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'rules'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: true,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'interpretQuery'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: true,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'browser-serialization'
+    +   },
+    +   {
+    +     actual: {
+    +       clarify: true,
+    +       codes: [],
+    +       exclusions: [
+    +         [
+    +           'activity',
+    +           'consumption'
+    +         ]
+    +       ],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     expected: {
+    +       clarify: true,
+    +       codes: [
+    +         'USA'
+    +       ],
+    +       exclusions: [],
+    +       explicit: false,
+    +       frequency: 'annual',
+    +       pairs: [
+    +         [
+    +           null,
+    +           'consumption'
+    +         ]
+    +       ],
+    +       sector: null
+    +     },
+    +     phase: 'public-search'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'rules'
+      expected:
+        codes:
+          0: 'USA'
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: ~
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'activity'
+            1: 'consumption'
+    1:
+      phase: 'interpretQuery'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'activity'
+            1: 'consumption'
+    2:
+      phase: 'browser-serialization'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'activity'
+            1: 'consumption'
+    3:
+      phase: 'public-search'
+      expected: <Circular>
+      actual:
+        codes:
+        pairs:
+          0:
+            0: ~
+            1: 'consumption'
+        frequency: 'annual'
+        explicit: false
+        sector: ~
+        clarify: true
+        exclusions:
+          0:
+            0: 'activity'
+            1: 'consumption'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-followup-regressions.test.js:87:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 13
+# fail 24
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3123.195709

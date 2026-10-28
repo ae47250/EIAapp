@@ -60,7 +60,7 @@ test("validated high-confidence AI output uses only supported categories", () =>
   assert.equal(intent.needsClarification, false);
 });
 
-test("unsupported AI product and country are discarded while frequency is preserved", () => {
+test("unsupported AI fields cannot replace an unstated annual frequency", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "Zed energy consumption",
     countryName: "Zedland",
@@ -75,7 +75,9 @@ test("unsupported AI product and country are discarded while frequency is preser
   assert.equal(intent.countryCode, null);
   assert.equal(intent.product, "total energy");
   assert.equal(intent.activity, "consumption");
-  assert.equal(intent.frequency, "weekly");
+  assert.equal(intent.frequency, "annual");
+  assert.equal(intent.frequencyExplicit, false);
+  assert.equal(intent.requestedFrequency, null);
   assert.equal(intent.needsClarification, true);
   assert.deepEqual(intent.missingFields, ["country"]);
 });
@@ -191,7 +193,7 @@ test("AI-corrected text cannot manufacture sector evidence absent from the raw q
   assert.equal(intent.fields.sector.resolutionSource, "unresolved");
 });
 
-test("cross-family ambiguity stays broad for later candidate retrieval", () => {
+test("cross-family ambiguous product retains alternatives and requires clarification", () => {
   const intent = validateAiInterpretation({
     correctedQuery: "gas prices in the United States",
     confidence: 0.85,
@@ -209,8 +211,9 @@ test("cross-family ambiguity stays broad for later candidate retrieval", () => {
   assert.deepEqual(intent.fields.product.alternatives, ["natural gas", "petroleum"]);
   assert.equal(intent.structuredIntent.productBreadth, "ambiguous");
   assert.deepEqual(intent.structuredIntent.productAlternatives, ["natural gas", "petroleum"]);
-  assert.equal(intent.needsClarification, false);
-  assert.equal(intent.clarificationMessage, null);
+  assert.equal(intent.needsClarification, true);
+  assert.equal(intent.blockingClarification, true);
+  assert.match(intent.clarificationMessage, /natural gas.*gasoline/);
 });
 
 test("deterministic gas fallback is phrase-first and context-aware", () => {

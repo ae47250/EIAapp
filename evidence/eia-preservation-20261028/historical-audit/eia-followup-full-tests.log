@@ -1,0 +1,2542 @@
+TAP version 13
+# Subtest: successful login creates an HTTP-only 20-minute sliding session
+ok 1 - successful login creates an HTTP-only 20-minute sliding session
+  ---
+  duration_ms: 96.28425
+  type: 'test'
+  ...
+# Subtest: incorrect username and password return the same generic response
+ok 2 - incorrect username and password return the same generic response
+  ---
+  duration_ms: 89.573
+  type: 'test'
+  ...
+# Subtest: unauthenticated protected-page requests redirect to login
+ok 3 - unauthenticated protected-page requests redirect to login
+  ---
+  duration_ms: 0.58425
+  type: 'test'
+  ...
+# Subtest: LOGIN_REQUIRED=off bypasses page and API authentication
+ok 4 - LOGIN_REQUIRED=off bypasses page and API authentication
+  ---
+  duration_ms: 0.650542
+  type: 'test'
+  ...
+# Subtest: every private API handler rejects requests without a session
+ok 5 - every private API handler rejects requests without a session
+  ---
+  duration_ms: 0.202708
+  type: 'test'
+  ...
+# Subtest: proxy passes API requests to handlers for direct authorization
+ok 6 - proxy passes API requests to handlers for direct authorization
+  ---
+  duration_ms: 0.161083
+  type: 'test'
+  ...
+# Subtest: proxy does not refresh sessions on public login and logout routes
+ok 7 - proxy does not refresh sessions on public login and logout routes
+  ---
+  duration_ms: 0.237375
+  type: 'test'
+  ...
+# Subtest: logout deletes the session cookie and redirects to login
+ok 8 - logout deletes the session cookie and redirects to login
+  ---
+  duration_ms: 0.126792
+  type: 'test'
+  ...
+# Subtest: expired, malformed, and tampered session cookies are rejected
+ok 9 - expired, malformed, and tampered session cookies are rejected
+  ---
+  duration_ms: 0.184917
+  type: 'test'
+  ...
+# Subtest: missing required environment variables fail securely
+ok 10 - missing required environment variables fail securely
+  ---
+  duration_ms: 0.137833
+  type: 'test'
+  ...
+# Subtest: unsafe return URLs are replaced with the internal root
+ok 11 - unsafe return URLs are replaced with the internal root
+  ---
+  duration_ms: 46.064708
+  type: 'test'
+  ...
+# Subtest: production session cookies include Secure
+ok 12 - production session cookies include Secure
+  ---
+  duration_ms: 0.278083
+  type: 'test'
+  ...
+# Subtest: login attempts are throttled per function instance
+ok 13 - login attempts are throttled per function instance
+  ---
+  duration_ms: 241.20175
+  type: 'test'
+  ...
+# Subtest: an explicit aggregate-component relationship with official provenance is accepted
+ok 14 - an explicit aggregate-component relationship with official provenance is accepted
+  ---
+  duration_ms: 0.801459
+  type: 'test'
+  ...
+# Subtest: a relationship cannot be verified without the cache candidate-ID registry
+ok 15 - a relationship cannot be verified without the cache candidate-ID registry
+  ---
+  duration_ms: 0.098667
+  type: 'test'
+  ...
+# Subtest: aggregate wording in titles is not relationship evidence
+ok 16 - aggregate wording in titles is not relationship evidence
+  ---
+  duration_ms: 0.358584
+  type: 'test'
+  ...
+# Subtest: independent route facets are not accepted as a component hierarchy
+ok 17 - independent route facets are not accepted as a component hierarchy
+  ---
+  duration_ms: 0.068833
+  type: 'test'
+  ...
+# Subtest: unofficial, missing, self-referential, and duplicate relationships are rejected
+ok 18 - unofficial, missing, self-referential, and duplicate relationships are rejected
+  ---
+  duration_ms: 0.133542
+  type: 'test'
+  ...
+# Subtest: the complete Phase 1B cache has no verified aggregation hierarchy
+ok 19 - the complete Phase 1B cache has no verified aggregation hierarchy
+  ---
+  duration_ms: 2118.737666
+  type: 'test'
+  ...
+# Subtest: reviewed templates generate every eligible SEDS geography under the approved production gate
+ok 20 - reviewed templates generate every eligible SEDS geography under the approved production gate
+  ---
+  duration_ms: 571.19825
+  type: 'test'
+  ...
+# Subtest: Texas remains an exact regression canary rather than a manual registry entry
+ok 21 - Texas remains an exact regression canary rather than a manual registry entry
+  ---
+  duration_ms: 0.188417
+  type: 'test'
+  ...
+# Subtest: all 51 state and district relationships are unique and use the five-component formula
+ok 22 - all 51 state and district relationships are unique and use the five-component formula
+  ---
+  duration_ms: 0.096292
+  type: 'test'
+  ...
+# Subtest: the United States uses its separate four-component official formula
+ok 23 - the United States uses its separate four-component official formula
+  ---
+  duration_ms: 0.058125
+  type: 'test'
+  ...
+# Subtest: generation is deterministic for the same registry and metadata build
+ok 24 - generation is deterministic for the same registry and metadata build
+  ---
+  duration_ms: 1297.349292
+  type: 'test'
+  ...
+# Subtest: an incomplete geography is excluded instead of receiving a partial relationship
+ok 25 - an incomplete geography is excluded instead of receiving a partial relationship
+  ---
+  duration_ms: 0.346166
+  type: 'test'
+  ...
+# Subtest: production ranking cannot lose its explicit approval state
+ok 26 - production ranking cannot lose its explicit approval state
+  ---
+  duration_ms: 0.183916
+  type: 'test'
+  ...
+# Subtest: a stale or tampered generated artifact is rejected
+ok 27 - a stale or tampered generated artifact is rejected
+  ---
+  duration_ms: 2.02175
+  type: 'test'
+  ...
+# Subtest: unapproved route adapters cannot generate inferred hierarchy
+ok 28 - unapproved route adapters cannot generate inferred hierarchy
+  ---
+  duration_ms: 0.3585
+  type: 'test'
+  ...
+# Subtest: base scoring and retrieval remain unchanged by governed hierarchy post-ranking
+ok 29 - base scoring and retrieval remain unchanged by governed hierarchy post-ranking
+  ---
+  duration_ms: 2.899209
+  type: 'test'
+  ...
+# Subtest: common periods pass within a precision-derived rounding bound
+ok 30 - common periods pass within a precision-derived rounding bound
+  ---
+  duration_ms: 6.6525
+  type: 'test'
+  ...
+# Subtest: formula mismatches block the relationship
+ok 31 - formula mismatches block the relationship
+  ---
+  duration_ms: 0.232625
+  type: 'test'
+  ...
+# Subtest: missing series, incomplete periods, and duplicate observations are explicit
+ok 32 - missing series, incomplete periods, and duplicate observations are explicit
+  ---
+  duration_ms: 0.353166
+  type: 'test'
+  ...
+# Subtest: zero aggregates are recorded without dividing contributions
+ok 33 - zero aggregates are recorded without dividing contributions
+  ---
+  duration_ms: 0.171375
+  type: 'test'
+  ...
+# Subtest: bounded fetch sends one six-series request and stores no API key
+ok 34 - bounded fetch sends one six-series request and stores no API key
+  ---
+  duration_ms: 0.372209
+  type: 'test'
+  ...
+# Subtest: API failures block activation and are redacted in a reproducible report
+ok 35 - API failures block activation and are redacted in a reproducible report
+  ---
+  duration_ms: 0.492083
+  type: 'test'
+  ...
+# Subtest: candidate mode blocks missing activity before ranking or observation retrieval
+ok 36 - candidate mode blocks missing activity before ranking or observation retrieval
+  ---
+  duration_ms: 28.47075
+  type: 'test'
+  ...
+# Subtest: the retired feature flag cannot switch the route back to legacy search
+ok 37 - the retired feature flag cannot switch the route back to legacy search
+  ---
+  duration_ms: 5.865916
+  type: 'test'
+  ...
+# Subtest: preview hierarchy mode exposes only the observation-validated aggregate tie-break
+ok 38 - preview hierarchy mode exposes only the observation-validated aggregate tie-break
+  ---
+  duration_ms: 589.429292
+  type: 'test'
+  ...
+# Subtest: certainty labels an approved cross-route fallback without calling it exact
+ok 39 - certainty labels an approved cross-route fallback without calling it exact
+  ---
+  duration_ms: 1425.231
+  type: 'test'
+  ...
+# Subtest: candidate IDs cannot bypass clarification
+ok 40 - candidate IDs cannot bypass clarification
+  ---
+  duration_ms: 14.419708
+  type: 'test'
+  ...
+# Subtest: explicit selection reruns validation and fetches only the verified series ID
+ok 41 - explicit selection reruns validation and fetches only the verified series ID
+  ---
+  duration_ms: 565.175666
+  type: 'test'
+  ...
+# Subtest: a candidate ID that was not displayed is rejected before any EIA request
+ok 42 - a candidate ID that was not displayed is rejected before any EIA request
+  ---
+  duration_ms: 55.890542
+  type: 'test'
+  ...
+# Subtest: AI corrected wording cannot override the validated activity used for candidates
+ok 43 - AI corrected wording cannot override the validated activity used for candidates
+  ---
+  duration_ms: 76.757291
+  type: 'test'
+  ...
+# Subtest: multi-country responses rank definitions first without fetching observations
+ok 44 - multi-country responses rank definitions first without fetching observations
+  ---
+  duration_ms: 118.058041
+  type: 'test'
+  ...
+# Subtest: definition selection preserves missing and failed countries as warnings
+ok 45 - definition selection preserves missing and failed countries as warnings
+  ---
+  duration_ms: 241.620459
+  type: 'test'
+  ...
+# Subtest: combined definition selection fetches all countries with bounded concurrency
+ok 46 - combined definition selection fetches all countries with bounded concurrency
+  ---
+  duration_ms: 279.639708
+  type: 'test'
+  ...
+# Subtest: adds separately retrieved annual SEDS fallbacks when monthly Domestic results fail
+ok 47 - adds separately retrieved annual SEDS fallbacks when monthly Domestic results fail
+  ---
+  duration_ms: 1450.672542
+  type: 'test'
+  ...
+# Subtest: does not retrieve SEDS when a valid Domestic result already exists
+ok 48 - does not retrieve SEDS when a valid Domestic result already exists
+  ---
+  duration_ms: 668.866125
+  type: 'test'
+  ...
+# Subtest: labels narrower national coverage when metadata uses the same geography code
+ok 49 - labels narrower national coverage when metadata uses the same geography code
+  ---
+  duration_ms: 20.559166
+  type: 'test'
+  ...
+# Subtest: uses labeled annual International fallbacks for unavailable country frequencies
+ok 50 - uses labeled annual International fallbacks for unavailable country frequencies
+  ---
+  duration_ms: 436.945958
+  type: 'test'
+  ...
+# Subtest: blocks missing activity before local retrieval or ranking
+ok 51 - blocks missing activity before local retrieval or ranking
+  ---
+  duration_ms: 12.758
+  type: 'test'
+  ...
+# Subtest: blocks ambiguous product alternatives when activity is also missing
+ok 52 - blocks ambiguous product alternatives when activity is also missing
+  ---
+  duration_ms: 2.038459
+  type: 'test'
+  ...
+# Subtest: blocks unresolved product and activity pairing before retrieval or ranking
+ok 53 - blocks unresolved product and activity pairing before retrieval or ranking
+  ---
+  duration_ms: 1.591875
+  type: 'test'
+  ...
+# Subtest: asks for clarification instead of showing candidates for unresolved qualifiers
+ok 54 - asks for clarification instead of showing candidates for unresolved qualifiers
+  ---
+  duration_ms: 1.943834
+  type: 'test'
+  ...
+# Subtest: reports an empty result instead of silently selecting a substitute
+ok 55 - reports an empty result instead of silently selecting a substitute
+  ---
+  duration_ms: 1.568416
+  type: 'test'
+  ...
+# Subtest: candidate orchestration is repeatable for identical input and metadata
+ok 56 - candidate orchestration is repeatable for identical input and metadata
+  ---
+  duration_ms: 1822.152875
+  type: 'test'
+  ...
+# Subtest: retrieves every comparison country and ranks five shared definitions
+ok 57 - retrieves every comparison country and ranks five shared definitions
+  ---
+  duration_ms: 451.3095
+  type: 'test'
+  ...
+# Subtest: multi-country choices expose identified series and explicit actions
+ok 58 - multi-country choices expose identified series and explicit actions
+  ---
+  duration_ms: 0.353375
+  type: 'test'
+  ...
+# Subtest: full staged workflow preserves exact raw input and separate cleaned text
+ok 59 - full staged workflow preserves exact raw input and separate cleaned text
+  ---
+  duration_ms: 671.704167
+  type: 'test'
+  ...
+# Subtest: full staged workflow retains a verified electricity typo correction through browser resubmission
+ok 60 - full staged workflow retains a verified electricity typo correction through browser resubmission
+  ---
+  duration_ms: 97.135333
+  type: 'test'
+  ...
+# Subtest: candidate selection and browser-side XLSX export retain verified metadata
+ok 61 - candidate selection and browser-side XLSX export retain verified metadata
+  ---
+  duration_ms: 129.05025
+  type: 'test'
+  ...
+# Subtest: combined comparison XLSX includes all definitions, countries, statuses, and warning fields
+ok 62 - combined comparison XLSX includes all definitions, countries, statuses, and warning fields
+  ---
+  duration_ms: 374.81075
+  type: 'test'
+  ...
+# Subtest: follow-up name-0: energy consumption in Gambia, The
+ok 63 - follow-up name-0: energy consumption in Gambia, The
+  ---
+  duration_ms: 777.360042
+  type: 'test'
+  ...
+# Subtest: follow-up name-1: energy consumption in The Gambia
+ok 64 - follow-up name-1: energy consumption in The Gambia
+  ---
+  duration_ms: 182.430583
+  type: 'test'
+  ...
+# Subtest: follow-up name-2: energy consumption in Gambia
+ok 65 - follow-up name-2: energy consumption in Gambia
+  ---
+  duration_ms: 83.976333
+  type: 'test'
+  ...
+# Subtest: follow-up name-3: energy consumption in THE GAMBIA
+ok 66 - follow-up name-3: energy consumption in THE GAMBIA
+  ---
+  duration_ms: 95.876709
+  type: 'test'
+  ...
+# Subtest: follow-up name-4: energy consumption in The Bahamas
+ok 67 - follow-up name-4: energy consumption in The Bahamas
+  ---
+  duration_ms: 90.495125
+  type: 'test'
+  ...
+# Subtest: follow-up name-5: energy consumption in Bahamas
+ok 68 - follow-up name-5: energy consumption in Bahamas
+  ---
+  duration_ms: 85.584666
+  type: 'test'
+  ...
+# Subtest: follow-up name-6: energy consumption in Bahamas, The
+ok 69 - follow-up name-6: energy consumption in Bahamas, The
+  ---
+  duration_ms: 83.53175
+  type: 'test'
+  ...
+# Subtest: follow-up name-7: energy consumption in Germany, East
+ok 70 - follow-up name-7: energy consumption in Germany, East
+  ---
+  duration_ms: 98.50075
+  type: 'test'
+  ...
+# Subtest: follow-up name-8: energy consumption in East Germany
+ok 71 - follow-up name-8: energy consumption in East Germany
+  ---
+  duration_ms: 85.445167
+  type: 'test'
+  ...
+# Subtest: follow-up name-9: energy consumption in Germany, West
+ok 72 - follow-up name-9: energy consumption in Germany, West
+  ---
+  duration_ms: 93.437458
+  type: 'test'
+  ...
+# Subtest: follow-up name-10: energy consumption in West Germany
+ok 73 - follow-up name-10: energy consumption in West Germany
+  ---
+  duration_ms: 89.921917
+  type: 'test'
+  ...
+# Subtest: follow-up external-uncertainty: I'm not sure what's available for USA energy consumption
+ok 74 - follow-up external-uncertainty: I'm not sure what's available for USA energy consumption
+  ---
+  duration_ms: 98.094292
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-12: I am not certain whether data exists for France energy consumption
+ok 75 - follow-up uncertainty-12: I am not certain whether data exists for France energy consumption
+  ---
+  duration_ms: 92.649542
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-13: I don't know what's available for Canada energy consumption
+ok 76 - follow-up uncertainty-13: I don't know what's available for Canada energy consumption
+  ---
+  duration_ms: 97.38225
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-14: I'm not really sure what's available for USA energy consumption
+ok 77 - follow-up uncertainty-14: I'm not really sure what's available for USA energy consumption
+  ---
+  duration_ms: 95.350041
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-15: We aren't sure about USA energy consumption
+ok 78 - follow-up uncertainty-15: We aren't sure about USA energy consumption
+  ---
+  duration_ms: 94.13575
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-16: I have no idea what is available for USA energy consumption
+ok 79 - follow-up uncertainty-16: I have no idea what is available for USA energy consumption
+  ---
+  duration_ms: 96.485541
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-17: I'm unsure about France energy consumption
+ok 80 - follow-up uncertainty-17: I'm unsure about France energy consumption
+  ---
+  duration_ms: 87.392375
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-18: Without knowing what data is available for USA energy consumption
+ok 81 - follow-up uncertainty-18: Without knowing what data is available for USA energy consumption
+  ---
+  duration_ms: 94.068375
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-19: I do not know whether there is data for Canada energy consumption
+ok 82 - follow-up uncertainty-19: I do not know whether there is data for Canada energy consumption
+  ---
+  duration_ms: 93.5835
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-20: I am not yet certain about USA energy consumption
+ok 83 - follow-up uncertainty-20: I am not yet certain about USA energy consumption
+  ---
+  duration_ms: 98.778041
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-21: I am not aware of data for USA energy consumption
+ok 84 - follow-up uncertainty-21: I am not aware of data for USA energy consumption
+  ---
+  duration_ms: 96.83625
+  type: 'test'
+  ...
+# Subtest: follow-up variant-ordered: energy consumption in The Gambia and Zambia
+ok 85 - follow-up variant-ordered: energy consumption in The Gambia and Zambia
+  ---
+  duration_ms: 154.569125
+  type: 'test'
+  ...
+# Subtest: follow-up variant-exclusion: energy consumption in The Gambia not Zambia
+ok 86 - follow-up variant-exclusion: energy consumption in The Gambia not Zambia
+  ---
+  duration_ms: 90.543458
+  type: 'test'
+  ...
+# Subtest: follow-up reverse-exclusion: energy consumption in Zambia not The Gambia
+ok 87 - follow-up reverse-exclusion: energy consumption in Zambia not The Gambia
+  ---
+  duration_ms: 85.703834
+  type: 'test'
+  ...
+# Subtest: follow-up bahamas-exclusion: energy consumption Bahamas not The Gambia
+ok 88 - follow-up bahamas-exclusion: energy consumption Bahamas not The Gambia
+  ---
+  duration_ms: 90.411625
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-exclusion: I'm not sure what's available for USA energy consumption, not Canada
+ok 89 - follow-up uncertainty-exclusion: I'm not sure what's available for USA energy consumption, not Canada
+  ---
+  duration_ms: 99.020459
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-product-exclusion: I'm not sure what's available for USA energy consumption, not coal
+ok 90 - follow-up uncertainty-product-exclusion: I'm not sure what's available for USA energy consumption, not coal
+  ---
+  duration_ms: 93.416
+  type: 'test'
+  ...
+# Subtest: follow-up actual-activity-exclusion: USA energy consumption, not production
+ok 91 - follow-up actual-activity-exclusion: USA energy consumption, not production
+  ---
+  duration_ms: 87.343042
+  type: 'test'
+  ...
+# Subtest: follow-up actual-command-exclusion: USA energy consumption; do not include coal production
+ok 92 - follow-up actual-command-exclusion: USA energy consumption; do not include coal production
+  ---
+  duration_ms: 125.176417
+  type: 'test'
+  ...
+# Subtest: follow-up actual-no-exclusion: USA energy consumption, no coal
+ok 93 - follow-up actual-no-exclusion: USA energy consumption, no coal
+  ---
+  duration_ms: 84.424625
+  type: 'test'
+  ...
+# Subtest: follow-up actual-without-exclusion: USA energy consumption without coal
+ok 94 - follow-up actual-without-exclusion: USA energy consumption without coal
+  ---
+  duration_ms: 84.612125
+  type: 'test'
+  ...
+# Subtest: follow-up not-only: not only USA but also Canada energy consumption
+ok 95 - follow-up not-only: not only USA but also Canada energy consumption
+  ---
+  duration_ms: 160.904959
+  type: 'test'
+  ...
+# Subtest: follow-up uncertainty-country-variant: I'm not sure what's available for The Gambia energy consumption
+ok 96 - follow-up uncertainty-country-variant: I'm not sure what's available for The Gambia energy consumption
+  ---
+  duration_ms: 92.184084
+  type: 'test'
+  ...
+# Subtest: follow-up explicit-frequency: I am not certain about monthly USA natural gas consumption
+ok 97 - follow-up explicit-frequency: I am not certain about monthly USA natural gas consumption
+  ---
+  duration_ms: 499.489667
+  type: 'test'
+  ...
+# Subtest: follow-up sector: I am not sure about USA residential natural gas consumption
+ok 98 - follow-up sector: I am not sure about USA residential natural gas consumption
+  ---
+  duration_ms: 187.623
+  type: 'test'
+  ...
+# Subtest: follow-up ambiguous-product: I'm not sure what's available for USA gas consumption
+ok 99 - follow-up ambiguous-product: I'm not sure what's available for USA gas consumption
+  ---
+  duration_ms: 19.303375
+  type: 'test'
+  ...
+# Subtest: validated observation, ranking, and Preview evidence open production
+ok 100 - validated observation, ranking, and Preview evidence open production
+  ---
+  duration_ms: 0.65675
+  type: 'test'
+  ...
+# Subtest: shadow mode promotes the verified Texas aggregate without changing visible order
+ok 101 - shadow mode promotes the verified Texas aggregate without changing visible order
+  ---
+  duration_ms: 2533.756125
+  type: 'test'
+  ...
+# Subtest: preview on mode applies only the verified aggregate tie-break
+ok 102 - preview on mode applies only the verified aggregate tie-break
+  ---
+  duration_ms: 246.97825
+  type: 'test'
+  ...
+# Subtest: production gate is approved after deployed Preview verification
+ok 103 - production gate is approved after deployed Preview verification
+  ---
+  duration_ms: 0.128375
+  type: 'test'
+  ...
+# Subtest: non-total intents are ineligible and retain deterministic top five
+ok 104 - non-total intents are ineligible and retain deterministic top five
+  ---
+  duration_ms: 255.502875
+  type: 'test'
+  ...
+# Subtest: specific source energy consumption cannot activate total-energy hierarchy
+ok 105 - specific source energy consumption cannot activate total-energy hierarchy
+  ---
+  duration_ms: 85.603333
+  type: 'test'
+  ...
+# Subtest: activated aggregate certainty is explicit and removes the unknown warning
+ok 106 - activated aggregate certainty is explicit and removes the unknown warning
+  ---
+  duration_ms: 0.216917
+  type: 'test'
+  ...
+# Subtest: blind-01: Show marketed natural gas production in Texas.
+ok 107 - blind-01: Show marketed natural gas production in Texas.
+  ---
+  duration_ms: 514.857583
+  type: 'test'
+  ...
+# Subtest: blind-02: Annual electricity retail sales in Texas.
+ok 108 - blind-02: Annual electricity retail sales in Texas.
+  ---
+  duration_ms: 942.781708
+  type: 'test'
+  ...
+# Subtest: blind-03: Coal production in Wyoming.
+ok 109 - blind-03: Coal production in Wyoming.
+  ---
+  duration_ms: 391.426958
+  type: 'test'
+  ...
+# Subtest: blind-04: Annual crude oil production in the United States.
+ok 110 - blind-04: Annual crude oil production in the United States.
+  ---
+  duration_ms: 635.645791
+  type: 'test'
+  ...
+# Subtest: blind-05: Monthly industrial electricity prices in Texas.
+ok 111 - blind-05: Monthly industrial electricity prices in Texas.
+  ---
+  duration_ms: 483.612083
+  type: 'test'
+  ...
+# Subtest: blind-06: Coal production in Papua New Guinea, Equatorial Guinea, and Guinea, in that order.
+ok 112 - blind-06: Coal production in Papua New Guinea, Equatorial Guinea, and Guinea, in that order.
+  ---
+  duration_ms: 23.867792
+  type: 'test'
+  ...
+# Subtest: blind-07: Compare natural gas production in Guinea-Bissau and Guinea.
+ok 113 - blind-07: Compare natural gas production in Guinea-Bissau and Guinea.
+  ---
+  duration_ms: 17.5155
+  type: 'test'
+  ...
+# Subtest: blind-08: Coal consumption in Nigeria and Niger.
+ok 114 - blind-08: Coal consumption in Nigeria and Niger.
+  ---
+  duration_ms: 14.230833
+  type: 'test'
+  ...
+# Subtest: blind-09: Natural gas consumption in West Virginia and Virginia.
+ok 115 - blind-09: Natural gas consumption in West Virginia and Virginia.
+  ---
+  duration_ms: 17.396709
+  type: 'test'
+  ...
+# Subtest: blind-10: Natural gas production in New Mexico.
+ok 116 - blind-10: Natural gas production in New Mexico.
+  ---
+  duration_ms: 13.321417
+  type: 'test'
+  ...
+# Subtest: blind-11: Natural gas production in the United Arab Emirates and Ukraine.
+ok 117 - blind-11: Natural gas production in the United Arab Emirates and Ukraine.
+  ---
+  duration_ms: 19.359334
+  type: 'test'
+  ...
+# Subtest: blind-12: Coal production in Gambia, The; then The Bahamas.
+ok 118 - blind-12: Coal production in Gambia, The; then The Bahamas.
+  ---
+  duration_ms: 16.090167
+  type: 'test'
+  ...
+# Subtest: blind-13: Total energy production in Germany, West; then Germany, East.
+ok 119 - blind-13: Total energy production in Germany, West; then Germany, East.
+  ---
+  duration_ms: 19.78225
+  type: 'test'
+  ...
+# Subtest: blind-14: Coal consumption in Samoa and American Samoa.
+ok 120 - blind-14: Coal consumption in Samoa and American Samoa.
+  ---
+  duration_ms: 15.581541
+  type: 'test'
+  ...
+# Subtest: blind-15: Coal production in the UK, Czech Republic, and United Kingdom.
+ok 121 - blind-15: Coal production in the UK, Czech Republic, and United Kingdom.
+  ---
+  duration_ms: 20.314666
+  type: 'test'
+  ...
+# Subtest: blind-16: Natural gas consumption in the U.S. Virgin Islands.
+ok 122 - blind-16: Natural gas consumption in the U.S. Virgin Islands.
+  ---
+  duration_ms: 15.933292
+  type: 'test'
+  ...
+# Subtest: blind-17: Coal production in Peru, excluding Canada, Chile, and Brazil.
+ok 123 - blind-17: Coal production in Peru, excluding Canada, Chile, and Brazil.
+  ---
+  duration_ms: 16.097916
+  type: 'test'
+  ...
+# Subtest: blind-18: Coal consumption: not Canada or Mexico, but Argentina.
+ok 124 - blind-18: Coal consumption: not Canada or Mexico, but Argentina.
+  ---
+  duration_ms: 16.840416
+  type: 'test'
+  ...
+# Subtest: blind-19: Natural gas production for Texas only, not California, Oklahoma, or Louisiana.
+ok 125 - blind-19: Natural gas production for Texas only, not California, Oklahoma, or Louisiana.
+  ---
+  duration_ms: 19.031708
+  type: 'test'
+  ...
+# Subtest: blind-20: Exclude Guinea and Guinea-Bissau; show coal production for Papua New Guinea.
+ok 126 - blind-20: Exclude Guinea and Guinea-Bissau; show coal production for Papua New Guinea.
+  ---
+  duration_ms: 22.647333
+  type: 'test'
+  ...
+# Subtest: blind-21: Natural gas production for the UK, without France or Germany.
+ok 127 - blind-21: Natural gas production for the UK, without France or Germany.
+  ---
+  duration_ms: 16.663458
+  type: 'test'
+  ...
+# Subtest: blind-22: Natural gas consumption in Georgia.
+ok 128 - blind-22: Natural gas consumption in Georgia.
+  ---
+  duration_ms: 12.502208
+  type: 'test'
+  ...
+# Subtest: blind-23: Natural gas consumption in Georgia and Armenia.
+ok 129 - blind-23: Natural gas consumption in Georgia and Armenia.
+  ---
+  duration_ms: 15.403791
+  type: 'test'
+  ...
+# Subtest: blind-24: Natural gas consumption in the country Georgia.
+ok 130 - blind-24: Natural gas consumption in the country Georgia.
+  ---
+  duration_ms: 14.19725
+  type: 'test'
+  ...
+# Subtest: blind-25: Compare international natural gas consumption in Georgia and the United States.
+ok 131 - blind-25: Compare international natural gas consumption in Georgia and the United States.
+  ---
+  duration_ms: 20.134625
+  type: 'test'
+  ...
+# Subtest: blind-26: Natural gas consumption in Georgia, excluding Armenia.
+ok 132 - blind-26: Natural gas consumption in Georgia, excluding Armenia.
+  ---
+  duration_ms: 14.842084
+  type: 'test'
+  ...
+# Subtest: blind-27: International natural gas consumption in Georgia, excluding the United States.
+ok 133 - blind-27: International natural gas consumption in Georgia, excluding the United States.
+  ---
+  duration_ms: 18.103959
+  type: 'test'
+  ...
+# Subtest: blind-28: Natural gas consumption in Georgia, the United States, and Armenia.
+ok 134 - blind-28: Natural gas consumption in Georgia, the United States, and Armenia.
+  ---
+  duration_ms: 18.65475
+  type: 'test'
+  ...
+# Subtest: blind-29: Can you show us coal production in Peru for my report?
+ok 135 - blind-29: Can you show us coal production in Peru for my report?
+  ---
+  duration_ms: 438.557708
+  type: 'test'
+  ...
+# Subtest: blind-30: Please show me natural gas production in Texas, or put it in a simple table.
+ok 136 - blind-30: Please show me natural gas production in Texas, or put it in a simple table.
+  ---
+  duration_ms: 24.559584
+  type: 'test'
+  ...
+# Subtest: blind-31: I would like natural gas production in Oman; please make the result easy for us to read.
+ok 137 - blind-31: I would like natural gas production in Oman; please make the result easy for us to read.
+  ---
+  duration_ms: 21.801583
+  type: 'test'
+  ...
+# Subtest: blind-32: For Mexico, then Canada, show crude oil production and natural gas consumption.
+ok 138 - blind-32: For Mexico, then Canada, show crude oil production and natural gas consumption.
+  ---
+  duration_ms: 24.227666
+  type: 'test'
+  ...
+# Subtest: blind-33: For France and Germany, show both natural gas production and natural gas consumption.
+ok 139 - blind-33: For France and Germany, show both natural gas production and natural gas consumption.
+  ---
+  duration_ms: 22.017833
+  type: 'test'
+  ...
+# Subtest: blind-34: Wind electricity generation and solar electricity generation in California.
+ok 140 - blind-34: Wind electricity generation and solar electricity generation in California.
+  ---
+  duration_ms: 19.7565
+  type: 'test'
+  ...
+# Subtest: blind-35: In Texas, show natural gas production, natural gas consumption, and electricity generation.
+ok 141 - blind-35: In Texas, show natural gas production, natural gas consumption, and electricity generation.
+  ---
+  duration_ms: 26.28
+  type: 'test'
+  ...
+# Subtest: blind-36: Coal and natural gas production and consumption for Canada and Mexico.
+ok 142 - blind-36: Coal and natural gas production and consumption for Canada and Mexico.
+  ---
+  duration_ms: 17.934583
+  type: 'test'
+  ...
+# Subtest: blind-37: Quarterly coal production in Canada.
+ok 143 - blind-37: Quarterly coal production in Canada.
+  ---
+  duration_ms: 157.783084
+  type: 'test'
+  ...
+# Subtest: blind-38: Daily coal production in Wyoming.
+ok 144 - blind-38: Daily coal production in Wyoming.
+  ---
+  duration_ms: 376.297
+  type: 'test'
+  ...
+# Subtest: blind-39: Weekly natural gas underground storage in the United States.
+ok 145 - blind-39: Weekly natural gas underground storage in the United States.
+  ---
+  duration_ms: 17.061458
+  type: 'test'
+  ...
+# Subtest: blind-40: Gas prices in Texas.
+ok 146 - blind-40: Gas prices in Texas.
+  ---
+  duration_ms: 9.450208
+  type: 'test'
+  ...
+# Subtest: blind-41: Pipeline gas production in Texas.
+ok 147 - blind-41: Pipeline gas production in Texas.
+  ---
+  duration_ms: 11.619833
+  type: 'test'
+  ...
+# Subtest: blind-42: Monthly residential electricity prices in Texas, in dollars per kilowatt hour.
+ok 148 - blind-42: Monthly residential electricity prices in Texas, in dollars per kilowatt hour.
+  ---
+  duration_ms: 415.557917
+  type: 'test'
+  ...
+# Subtest: blind-43: Natural gas production in Canada, in megawatts.
+ok 149 - blind-43: Natural gas production in Canada, in megawatts.
+  ---
+  duration_ms: 791.288459
+  type: 'test'
+  ...
+# Subtest: blind-44: Natural gas production in Californa.
+ok 150 - blind-44: Natural gas production in Californa.
+  ---
+  duration_ms: 13.846959
+  type: 'test'
+  ...
+# Subtest: blind-45: Annual industrial total energy consumption in California.
+ok 151 - blind-45: Annual industrial total energy consumption in California.
+  ---
+  duration_ms: 442.843083
+  type: 'test'
+  ...
+# Subtest: review-1: Georgia energy consumption and Georgia production
+ok 152 - review-1: Georgia energy consumption and Georgia production
+  ---
+  duration_ms: 14.0625
+  type: 'test'
+  ...
+# Subtest: review-2: Not Canada; France energy consumption
+ok 153 - review-2: Not Canada; France energy consumption
+  ---
+  duration_ms: 11.088625
+  type: 'test'
+  ...
+# Subtest: review-3: Show energy consumption in France; exclude Canada; include Germany
+ok 154 - review-3: Show energy consumption in France; exclude Canada; include Germany
+  ---
+  duration_ms: 15.711917
+  type: 'test'
+  ...
+# Subtest: review-4: Show energy consumption in France to us.
+ok 155 - review-4: Show energy consumption in France to us.
+  ---
+  duration_ms: 12.437
+  type: 'test'
+  ...
+# Subtest: review-5: Can you compare energy consumption for us in Iceland?
+ok 156 - review-5: Can you compare energy consumption for us in Iceland?
+  ---
+  duration_ms: 13.237792
+  type: 'test'
+  ...
+# Subtest: review-6: Natural gas production and consumption of natural gas in Canada
+ok 157 - review-6: Natural gas production and consumption of natural gas in Canada
+  ---
+  duration_ms: 15.723417
+  type: 'test'
+  ...
+# Subtest: review-7: Electricity generation from wind and solar in California
+ok 158 - review-7: Electricity generation from wind and solar in California
+  ---
+  duration_ms: 15.328291
+  type: 'test'
+  ...
+# Subtest: review-8: Natural gas and electricity consumption in the United States
+ok 159 - review-8: Natural gas and electricity consumption in the United States
+  ---
+  duration_ms: 15.698416
+  type: 'test'
+  ...
+# Subtest: review-9: Energy consumption in France, not energy consumption in Canada
+ok 160 - review-9: Energy consumption in France, not energy consumption in Canada
+  ---
+  duration_ms: 14.585166
+  type: 'test'
+  ...
+# Subtest: review-10: Energy consumption in France & Canada; show US production
+ok 161 - review-10: Energy consumption in France & Canada; show US production
+  ---
+  duration_ms: 16.176875
+  type: 'test'
+  ...
+# Subtest: review-11: Energy consumption in France and Canada; show US production
+ok 162 - review-11: Energy consumption in France and Canada; show US production
+  ---
+  duration_ms: 16.142833
+  type: 'test'
+  ...
+# Subtest: review-12: Georgia energy consumption, not Georgia production
+ok 163 - review-12: Georgia energy consumption, not Georgia production
+  ---
+  duration_ms: 12.391166
+  type: 'test'
+  ...
+# Subtest: review-13: Please present energy consumption for Peru
+ok 164 - review-13: Please present energy consumption for Peru
+  ---
+  duration_ms: 12.1835
+  type: 'test'
+  ...
+# Subtest: review-14: Show energy consumption for Peru in a simple chart
+ok 165 - review-14: Show energy consumption for Peru in a simple chart
+  ---
+  duration_ms: 12.484292
+  type: 'test'
+  ...
+# Subtest: review-15: Please compare annual energy consumption in Peru over time
+ok 166 - review-15: Please compare annual energy consumption in Peru over time
+  ---
+  duration_ms: 14.802875
+  type: 'test'
+  ...
+# Subtest: review-16: Energy consumption in Oman compared with Peru
+ok 167 - review-16: Energy consumption in Oman compared with Peru
+  ---
+  duration_ms: 12.699417
+  type: 'test'
+  ...
+# Subtest: review-17: Energy consumption in France; do not show Canada
+ok 168 - review-17: Energy consumption in France; do not show Canada
+  ---
+  duration_ms: 17.008625
+  type: 'test'
+  ...
+# Subtest: review-18: Energy consumption in France, not including Canada
+ok 169 - review-18: Energy consumption in France, not including Canada
+  ---
+  duration_ms: 12.940333
+  type: 'test'
+  ...
+# Subtest: review-19: Show energy consumption in France without including Canada
+ok 170 - review-19: Show energy consumption in France without including Canada
+  ---
+  duration_ms: 14.070416
+  type: 'test'
+  ...
+# Subtest: review-20: Natural gas consumption in Canada, not natural gas production in Canada
+ok 171 - review-20: Natural gas consumption in Canada, not natural gas production in Canada
+  ---
+  duration_ms: 16.212875
+  type: 'test'
+  ...
+# Subtest: review-21: Show not only coal production but also coal consumption in Canada
+ok 172 - review-21: Show not only coal production but also coal consumption in Canada
+  ---
+  duration_ms: 16.3565
+  type: 'test'
+  ...
+# Subtest: review-22: Compare natural gas consumption in France to us consumption
+ok 173 - review-22: Compare natural gas consumption in France to us consumption
+  ---
+  duration_ms: 15.007125
+  type: 'test'
+  ...
+# Subtest: review-23: France energy consumption, not Canada. Germany energy consumption
+ok 174 - review-23: France energy consumption, not Canada. Germany energy consumption
+  ---
+  duration_ms: 16.570666
+  type: 'test'
+  ...
+# Subtest: review-24: France energy consumption, not Caneda. Germany energy consumption
+ok 175 - review-24: France energy consumption, not Caneda. Germany energy consumption
+  ---
+  duration_ms: 17.60225
+  type: 'test'
+  ...
+# Subtest: review-25: Electricity generation from wind in California
+ok 176 - review-25: Electricity generation from wind in California
+  ---
+  duration_ms: 12.502542
+  type: 'test'
+  ...
+# Subtest: review-26: Electricity generation from coal in Texas
+ok 177 - review-26: Electricity generation from coal in Texas
+  ---
+  duration_ms: 11.830417
+  type: 'test'
+  ...
+# Subtest: review-27: Energy consumption in France; please do not ever show Canada
+ok 178 - review-27: Energy consumption in France; please do not ever show Canada
+  ---
+  duration_ms: 17.53625
+  type: 'test'
+  ...
+# Subtest: review-28: Energy consumption in France; do not also include Canada
+ok 179 - review-28: Energy consumption in France; do not also include Canada
+  ---
+  duration_ms: 17.108834
+  type: 'test'
+  ...
+# Subtest: review-29: Energy consumption in France, excluding Canada, show Germany
+ok 180 - review-29: Energy consumption in France, excluding Canada, show Germany
+  ---
+  duration_ms: 21.949583
+  type: 'test'
+  ...
+# Subtest: review-30: Canada and Mexico natural gas production, natural gas consumption, and electricity generation
+ok 181 - review-30: Canada and Mexico natural gas production, natural gas consumption, and electricity generation
+  ---
+  duration_ms: 23.777291
+  type: 'test'
+  ...
+# Subtest: public search preserves injected interpretation through the actual browser serializer without network access
+ok 182 - public search preserves injected interpretation through the actual browser serializer without network access
+  ---
+  duration_ms: 1423.116041
+  type: 'test'
+  ...
+# Subtest: public cap shares slots across requests and discloses overflow without dropping intent
+ok 183 - public cap shares slots across requests and discloses overflow without dropping intent
+  ---
+  duration_ms: 1587.540917
+  type: 'test'
+  ...
+# Subtest: comparison definition cap represents each requested pair and discloses excess requests
+ok 184 - comparison definition cap represents each requested pair and discloses excess requests
+  ---
+  duration_ms: 898.078375
+  type: 'test'
+  ...
+# Subtest: routes a country request to International with validated monthly frequency
+ok 185 - routes a country request to International with validated monthly frequency
+  ---
+  duration_ms: 16.428792
+  type: 'test'
+  ...
+# Subtest: routes annual state total-energy requests to SEDS
+ok 186 - routes annual state total-energy requests to SEDS
+  ---
+  duration_ms: 3.045708
+  type: 'test'
+  ...
+# Subtest: routes state electricity requests to Domestic EIA
+ok 187 - routes state electricity requests to Domestic EIA
+  ---
+  duration_ms: 4.044958
+  type: 'test'
+  ...
+# Subtest: blocks an unresolved source qualifier instead of inferring an activity
+ok 188 - blocks an unresolved source qualifier instead of inferring an activity
+  ---
+  duration_ms: 2.976125
+  type: 'test'
+  ...
+# Subtest: routes explicit plant requests to Domestic EIA without retrieving plant candidates
+ok 189 - routes explicit plant requests to Domestic EIA without retrieving plant candidates
+  ---
+  duration_ms: 1.734166
+  type: 'test'
+  ...
+# Subtest: preserves geography and concept mention order
+ok 190 - preserves geography and concept mention order
+  ---
+  duration_ms: 0.800583
+  type: 'test'
+  ...
+# Subtest: preserves only governed product and activity pair scopes
+ok 191 - preserves only governed product and activity pair scopes
+  ---
+  duration_ms: 4.173292
+  type: 'test'
+  ...
+# Subtest: treats a specific source followed by energy as one product
+ok 192 - treats a specific source followed by energy as one product
+  ---
+  duration_ms: 22.948417
+  type: 'test'
+  ...
+# Subtest: uses context to distinguish the state and country named Georgia
+ok 193 - uses context to distinguish the state and country named Georgia
+  ---
+  duration_ms: 16.275
+  type: 'test'
+  ...
+# Subtest: routes mixed U.S. and foreign-country requests through International
+ok 194 - routes mixed U.S. and foreign-country requests through International
+  ---
+  duration_ms: 1.649583
+  type: 'test'
+  ...
+# Subtest: canonicalizes U.S. aliases to the governed national geography
+ok 195 - canonicalizes U.S. aliases to the governed national geography
+  ---
+  duration_ms: 0.100917
+  type: 'test'
+  ...
+# Subtest: routes nonannual U.S. state requests to Domestic before SEDS fallback
+ok 196 - routes nonannual U.S. state requests to Domestic before SEDS fallback
+  ---
+  duration_ms: 1.292
+  type: 'test'
+  ...
+# Subtest: represents missing geography and deterministic route fallback
+ok 197 - represents missing geography and deterministic route fallback
+  ---
+  duration_ms: 1.189375
+  type: 'test'
+  ...
+# Subtest: rejects unknown geography text because it is absent from local metadata
+ok 198 - rejects unknown geography text because it is absent from local metadata
+  ---
+  duration_ms: 0.512542
+  type: 'test'
+  ...
+# Subtest: does not mistake lowercase filler words for three-letter country codes
+ok 199 - does not mistake lowercase filler words for three-letter country codes
+  ---
+  duration_ms: 1.15325
+  type: 'test'
+  ...
+# Subtest: accepts an explicitly uppercase local metadata country code
+ok 200 - accepts an explicitly uppercase local metadata country code
+  ---
+  duration_ms: 1.829333
+  type: 'test'
+  ...
+# Subtest: preserves sector, ordered repeated activities, explicit frequency, and negation
+ok 201 - preserves sector, ordered repeated activities, explicit frequency, and negation
+  ---
+  duration_ms: 22.860917
+  type: 'test'
+  ...
+# Subtest: does not reinterpret an explicit sector phrase as a second product
+ok 202 - does not reinterpret an explicit sector phrase as a second product
+  ---
+  duration_ms: 2.389625
+  type: 'test'
+  ...
+# Subtest: preserves a requested unsupported frequency instead of silently replacing it
+ok 203 - preserves a requested unsupported frequency instead of silently replacing it
+  ---
+  duration_ms: 0.632542
+  type: 'test'
+  ...
+# Subtest: marks two or more validated countries as a multi-country comparison
+ok 204 - marks two or more validated countries as a multi-country comparison
+  ---
+  duration_ms: 1.8685
+  type: 'test'
+  ...
+# Subtest: does not mark a state and country request as a multi-country comparison
+ok 205 - does not mark a state and country request as a multi-country comparison
+  ---
+  duration_ms: 0.762083
+  type: 'test'
+  ...
+# Subtest: canonicalizes electricity production to generation without changing the query
+ok 206 - canonicalizes electricity production to generation without changing the query
+  ---
+  duration_ms: 0.663
+  type: 'test'
+  ...
+# Subtest: frozen D01: energy consumption Iceland
+ok 207 - frozen D01: energy consumption Iceland
+  ---
+  duration_ms: 34.449083
+  type: 'test'
+  ...
+# Subtest: frozen D02: energy consumption Ireland
+ok 208 - frozen D02: energy consumption Ireland
+  ---
+  duration_ms: 22.929125
+  type: 'test'
+  ...
+# Subtest: frozen D03: energy consumption Finland
+ok 209 - frozen D03: energy consumption Finland
+  ---
+  duration_ms: 14.542625
+  type: 'test'
+  ...
+# Subtest: frozen D04: energy consumption Poland
+ok 210 - frozen D04: energy consumption Poland
+  ---
+  duration_ms: 11.502416
+  type: 'test'
+  ...
+# Subtest: frozen D05: energy consumption Austria
+ok 211 - frozen D05: energy consumption Austria
+  ---
+  duration_ms: 11.729458
+  type: 'test'
+  ...
+# Subtest: frozen D06: energy consumption Australia
+ok 212 - frozen D06: energy consumption Australia
+  ---
+  duration_ms: 15.244
+  type: 'test'
+  ...
+# Subtest: frozen D07: energy consumption Niger
+ok 213 - frozen D07: energy consumption Niger
+  ---
+  duration_ms: 14.619125
+  type: 'test'
+  ...
+# Subtest: frozen D08: energy consumption Nigeria
+ok 214 - frozen D08: energy consumption Nigeria
+  ---
+  duration_ms: 24.319291
+  type: 'test'
+  ...
+# Subtest: frozen D09: energy consumption Guinea
+ok 215 - frozen D09: energy consumption Guinea
+  ---
+  duration_ms: 17.7445
+  type: 'test'
+  ...
+# Subtest: frozen D10: energy consumption Equatorial Guinea
+ok 216 - frozen D10: energy consumption Equatorial Guinea
+  ---
+  duration_ms: 20.325875
+  type: 'test'
+  ...
+# Subtest: frozen D11: energy consumption Guinea-Bissau
+ok 217 - frozen D11: energy consumption Guinea-Bissau
+  ---
+  duration_ms: 19.152792
+  type: 'test'
+  ...
+# Subtest: frozen D12: energy consumption New Zealand
+ok 218 - frozen D12: energy consumption New Zealand
+  ---
+  duration_ms: 21.155209
+  type: 'test'
+  ...
+# Subtest: frozen D13: energy consumption United Kingdom
+ok 219 - frozen D13: energy consumption United Kingdom
+  ---
+  duration_ms: 20.046625
+  type: 'test'
+  ...
+# Subtest: frozen D14: energy consumption Gambia, The
+ok 220 - frozen D14: energy consumption Gambia, The
+  ---
+  duration_ms: 11.8105
+  type: 'test'
+  ...
+# Subtest: frozen D15: energy consumption Germany, East
+ok 221 - frozen D15: energy consumption Germany, East
+  ---
+  duration_ms: 20.527125
+  type: 'test'
+  ...
+# Subtest: frozen D16: energy consumption Germany, West
+ok 222 - frozen D16: energy consumption Germany, West
+  ---
+  duration_ms: 15.7765
+  type: 'test'
+  ...
+# Subtest: frozen D17: energy consumption uk
+ok 223 - frozen D17: energy consumption uk
+  ---
+  duration_ms: 9.915417
+  type: 'test'
+  ...
+# Subtest: frozen D18: energy consumption u.s.
+ok 224 - frozen D18: energy consumption u.s.
+  ---
+  duration_ms: 20.515917
+  type: 'test'
+  ...
+# Subtest: frozen D19: energy consumption uae
+ok 225 - frozen D19: energy consumption uae
+  ---
+  duration_ms: 12.775958
+  type: 'test'
+  ...
+# Subtest: frozen D20: energy consumption Czechia
+ok 226 - frozen D20: energy consumption Czechia
+  ---
+  duration_ms: 28.871208
+  type: 'test'
+  ...
+# Subtest: frozen D21: energy consumption south korea
+ok 227 - frozen D21: energy consumption south korea
+  ---
+  duration_ms: 31.191583
+  type: 'test'
+  ...
+# Subtest: frozen D22: energy consumption icealnd
+ok 228 - frozen D22: energy consumption icealnd
+  ---
+  duration_ms: 36.042084
+  type: 'test'
+  ...
+# Subtest: frozen D23: energy consumption Irelxnd
+ok 229 - frozen D23: energy consumption Irelxnd
+  ---
+  duration_ms: 21.375875
+  type: 'test'
+  ...
+# Subtest: frozen D24: energy consumption Iland
+ok 230 - frozen D24: energy consumption Iland # SKIP Ambiguous spelling; no unique geography expectation. Do not force a country.
+  ---
+  duration_ms: 0.067084
+  type: 'test'
+  ...
+# Subtest: frozen D25: energy consumption Iceland not Ireland
+ok 231 - frozen D25: energy consumption Iceland not Ireland
+  ---
+  duration_ms: 19.678375
+  type: 'test'
+  ...
+# Subtest: frozen D26: energy consumption Iceland excluding Ireland
+ok 232 - frozen D26: energy consumption Iceland excluding Ireland
+  ---
+  duration_ms: 24.000667
+  type: 'test'
+  ...
+# Subtest: frozen D27: energy consumption Iceland without Ireland
+ok 233 - frozen D27: energy consumption Iceland without Ireland
+  ---
+  duration_ms: 29.706792
+  type: 'test'
+  ...
+# Subtest: frozen D28: energy consumption Iceland except Ireland
+ok 234 - frozen D28: energy consumption Iceland except Ireland
+  ---
+  duration_ms: 30.537291
+  type: 'test'
+  ...
+# Subtest: frozen D29: energy consumption France not Canada or Mexico
+ok 235 - frozen D29: energy consumption France not Canada or Mexico
+  ---
+  duration_ms: 27.03325
+  type: 'test'
+  ...
+# Subtest: frozen D30: energy consumption not Ireland but Iceland
+ok 236 - frozen D30: energy consumption not Ireland but Iceland
+  ---
+  duration_ms: 16.667666
+  type: 'test'
+  ...
+# Subtest: frozen D31: energy consumption excluding Ireland
+ok 237 - frozen D31: energy consumption excluding Ireland
+  ---
+  duration_ms: 21.08075
+  type: 'test'
+  ...
+# Subtest: frozen D32: please show the energy consumption for Iceland
+ok 238 - frozen D32: please show the energy consumption for Iceland
+  ---
+  duration_ms: 32.095042
+  type: 'test'
+  ...
+# Subtest: frozen D33: show the energy consumption in the United States
+ok 239 - frozen D33: show the energy consumption in the United States
+  ---
+  duration_ms: 28.2655
+  type: 'test'
+  ...
+# Subtest: frozen D34: energy consumption east of France
+ok 240 - frozen D34: energy consumption east of France
+  ---
+  duration_ms: 27.329417
+  type: 'test'
+  ...
+# Subtest: frozen D35: energy consumption west of Canada
+ok 241 - frozen D35: energy consumption west of Canada
+  ---
+  duration_ms: 13.2615
+  type: 'test'
+  ...
+# Subtest: frozen D36: Georgia energy consumption
+ok 242 - frozen D36: Georgia energy consumption
+  ---
+  duration_ms: 24.788167
+  type: 'test'
+  ...
+# Subtest: frozen D37: Georgia and France energy consumption
+ok 243 - frozen D37: Georgia and France energy consumption
+  ---
+  duration_ms: 24.550542
+  type: 'test'
+  ...
+# Subtest: frozen D38: Georgia and Alabama energy consumption
+ok 244 - frozen D38: Georgia and Alabama energy consumption
+  ---
+  duration_ms: 20.964541
+  type: 'test'
+  ...
+# Subtest: frozen D39: Georgia and United States energy consumption
+ok 245 - frozen D39: Georgia and United States energy consumption
+  ---
+  duration_ms: 19.781
+  type: 'test'
+  ...
+# Subtest: frozen D40: international Georgia energy consumption
+ok 246 - frozen D40: international Georgia energy consumption
+  ---
+  duration_ms: 14.372458
+  type: 'test'
+  ...
+# Subtest: frozen D41: international Georgia and United States energy consumption
+ok 247 - frozen D41: international Georgia and United States energy consumption
+  ---
+  duration_ms: 32.051833
+  type: 'test'
+  ...
+# Subtest: frozen D42: France then Iceland then Ireland energy consumption
+ok 248 - frozen D42: France then Iceland then Ireland energy consumption
+  ---
+  duration_ms: 21.666583
+  type: 'test'
+  ...
+# Subtest: frozen D43: Canada natural gas imports and exports
+ok 249 - frozen D43: Canada natural gas imports and exports
+  ---
+  duration_ms: 42.387416
+  type: 'test'
+  ...
+# Subtest: frozen D44: Brazil petroleum and natural gas consumption
+ok 250 - frozen D44: Brazil petroleum and natural gas consumption
+  ---
+  duration_ms: 51.994041
+  type: 'test'
+  ...
+# Subtest: frozen D45: Texas coal production and natural gas consumption
+ok 251 - frozen D45: Texas coal production and natural gas consumption
+  ---
+  duration_ms: 37.927042
+  type: 'test'
+  ...
+# Subtest: frozen D46: Texas coal and natural gas production and consumption
+ok 252 - frozen D46: Texas coal and natural gas production and consumption
+  ---
+  duration_ms: 35.335708
+  type: 'test'
+  ...
+# Subtest: frozen D47: gas consumption in the United States
+ok 253 - frozen D47: gas consumption in the United States
+  ---
+  duration_ms: 15.564916
+  type: 'test'
+  ...
+# Subtest: frozen D48: United States natural gas consumption
+ok 254 - frozen D48: United States natural gas consumption
+  ---
+  duration_ms: 30.11225
+  type: 'test'
+  ...
+# Subtest: frozen D49: United States gasoline consumption
+ok 255 - frozen D49: United States gasoline consumption
+  ---
+  duration_ms: 18.371042
+  type: 'test'
+  ...
+# Subtest: frozen D50: United States total energy consumption
+ok 256 - frozen D50: United States total energy consumption
+  ---
+  duration_ms: 955.028541
+  type: 'test'
+  ...
+# Subtest: frozen D51: France weekly solar electricity generation
+ok 257 - frozen D51: France weekly solar electricity generation
+  ---
+  duration_ms: 27.879334
+  type: 'test'
+  ...
+# Subtest: frozen D52: Texas monthly residential natural gas consumption
+ok 258 - frozen D52: Texas monthly residential natural gas consumption
+  ---
+  duration_ms: 14.916541
+  type: 'test'
+  ...
+# Subtest: frozen D53: France quarterly petroleum consumption
+ok 259 - frozen D53: France quarterly petroleum consumption
+  ---
+  duration_ms: 14.443667
+  type: 'test'
+  ...
+# Subtest: frozen D54: France annual energy consumption
+ok 260 - frozen D54: France annual energy consumption
+  ---
+  duration_ms: 13.049333
+  type: 'test'
+  ...
+# Subtest: frozen D55: France energy consumption
+ok 261 - frozen D55: France energy consumption
+  ---
+  duration_ms: 10.311792
+  type: 'test'
+  ...
+# Subtest: frozen D56: France energy consumption
+ok 262 - frozen D56: France energy consumption
+  ---
+  duration_ms: 10.089833
+  type: 'test'
+  ...
+# Subtest: every approved complete geography name survives exact and fuzzy competition
+ok 263 - every approved complete geography name survives exact and fuzzy competition
+  ---
+  duration_ms: 6000.249458
+  type: 'test'
+  ...
+# Subtest: supported aliases remain ordered and wording adds no countries
+ok 264 - supported aliases remain ordered and wording adds no countries
+  ---
+  duration_ms: 107.696959
+  type: 'test'
+  ...
+# Subtest: seed 47250: exact, excluded and filler invariants
+ok 265 - seed 47250: exact, excluded and filler invariants
+  ---
+  duration_ms: 991.792667
+  type: 'test'
+  ...
+# Subtest: builder preserves comma-bearing official geography labels and product punctuation
+ok 266 - builder preserves comma-bearing official geography labels and product punctuation
+  ---
+  duration_ms: 1.008125
+  type: 'test'
+  ...
+# Subtest: seed 47250: spelling ties may remain unresolved and exact names win
+ok 267 - seed 47250: spelling ties may remain unresolved and exact names win
+  ---
+  duration_ms: 758.413334
+  type: 'test'
+  ...
+# Subtest: complete candidate labels retain raw artifact hashes and narrower coverage
+ok 268 - complete candidate labels retain raw artifact hashes and narrower coverage
+  ---
+  duration_ms: 65.23825
+  type: 'test'
+  ...
+# Subtest: bounded retrieval leaves room for every valid activity in a multiple-request search
+ok 269 - bounded retrieval leaves room for every valid activity in a multiple-request search
+  ---
+  duration_ms: 968.6755
+  type: 'test'
+  ...
+# Subtest: official source and description product evidence prevent inexact scopes from scoring as exact
+ok 270 - official source and description product evidence prevent inexact scopes from scoring as exact
+  ---
+  duration_ms: 260.516333
+  type: 'test'
+  ...
+# Subtest: live comparison keeps the original cohort and expands to forty curated expected outcomes
+ok 271 - live comparison keeps the original cohort and expands to forty curated expected outcomes
+  ---
+  duration_ms: 3.84375
+  type: 'test'
+  ...
+# Subtest: curated benchmark grading reports exact agreement and field-level disagreement
+ok 272 - curated benchmark grading reports exact agreement and field-level disagreement
+  ---
+  duration_ms: 0.163083
+  type: 'test'
+  ...
+# Subtest: benchmark statistics retain failed query IDs and fields
+ok 273 - benchmark statistics retain failed query IDs and fields
+  ---
+  duration_ms: 0.130583
+  type: 'test'
+  ...
+# Subtest: intent summaries retain field-level provenance
+ok 274 - intent summaries retain field-level provenance
+  ---
+  duration_ms: 0.110042
+  type: 'test'
+  ...
+# Subtest: provenance statistics separate acceptance, rejection, repair, and visible failure
+ok 275 - provenance statistics separate acceptance, rejection, repair, and visible failure
+  ---
+  duration_ms: 0.175541
+  type: 'test'
+  ...
+# Subtest: raw AI disagreement can disappear after local validation
+ok 276 - raw AI disagreement can disappear after local validation
+  ---
+  duration_ms: 0.126084
+  type: 'test'
+  ...
+# Subtest: deterministic ranking meets the graded baseline metrics on representative cases
+ok 277 - deterministic ranking meets the graded baseline metrics on representative cases
+  ---
+  duration_ms: 38.000916
+  type: 'test'
+  ...
+# Subtest: wrong-frequency candidates stay in fallback and are still auditable
+ok 278 - wrong-frequency candidates stay in fallback and are still auditable
+  ---
+  duration_ms: 2.528167
+  type: 'test'
+  ...
+# Subtest: selector geography mismatches are excluded before scoring
+ok 279 - selector geography mismatches are excluded before scoring
+  ---
+  duration_ms: 1.961833
+  type: 'test'
+  ...
+# Subtest: broad renewable queries keep several options in the top ranks and stay deterministic
+ok 280 - broad renewable queries keep several options in the top ranks and stay deterministic
+  ---
+  duration_ms: 15.842416
+  type: 'test'
+  ...
+# Subtest: requested-date coverage and currentness outrank stale non-covering records
+ok 281 - requested-date coverage and currentness outrank stale non-covering records
+  ---
+  duration_ms: 2.839167
+  type: 'test'
+  ...
+# Subtest: hierarchy-like labels receive no aggregation points or verified relationship claims
+ok 282 - hierarchy-like labels receive no aggregation points or verified relationship claims
+  ---
+  duration_ms: 3.484416
+  type: 'test'
+  ...
+# Subtest: hierarchy labels and untrusted relationship-shaped fields cannot influence tie order
+ok 283 - hierarchy labels and untrusted relationship-shaped fields cannot influence tie order
+  ---
+  duration_ms: 5.336125
+  type: 'test'
+  ...
+# Subtest: unresolved intent cannot reach ranking directly
+ok 284 - unresolved intent cannot reach ranking directly
+  ---
+  duration_ms: 7.140917
+  type: 'test'
+  ...
+# Subtest: unrequested lexical qualifiers do not create a narrower-or-broader ranking preference
+ok 285 - unrequested lexical qualifiers do not create a narrower-or-broader ranking preference
+  ---
+  duration_ms: 3.704875
+  type: 'test'
+  ...
+# Subtest: the Phase 3 output shape remains compatible with the ranker
+ok 286 - the Phase 3 output shape remains compatible with the ranker
+  ---
+  duration_ms: 693.389792
+  type: 'test'
+  ...
+# Subtest: assigns exact, approved-fallback, and related candidates to tiers A, B, and C
+ok 287 - assigns exact, approved-fallback, and related candidates to tiers A, B, and C
+  ---
+  duration_ms: 18.982834
+  type: 'test'
+  ...
+# Subtest: semantic floors reject mixed or contradictory concepts before display
+ok 288 - semantic floors reject mixed or contradictory concepts before display
+  ---
+  duration_ms: 3.593416
+  type: 'test'
+  ...
+# Subtest: an activity contradiction fails the activity floor even when query words appear in the title
+ok 289 - an activity contradiction fails the activity floor even when query words appear in the title
+  ---
+  duration_ms: 1.962042
+  type: 'test'
+  ...
+# Subtest: allows only the configured annual SEDS fallback for a nonannual state request
+ok 290 - allows only the configured annual SEDS fallback for a nonannual state request
+  ---
+  duration_ms: 1.845084
+  type: 'test'
+  ...
+# Subtest: scores only requested constraints and exposes a reproducible 0-100 composition
+ok 291 - scores only requested constraints and exposes a reproducible 0-100 composition
+  ---
+  duration_ms: 1.962458
+  type: 'test'
+  ...
+# Subtest: fielded IDF gives title matches more credit than normalized-field-only matches
+ok 292 - fielded IDF gives title matches more credit than normalized-field-only matches
+  ---
+  duration_ms: 2.309834
+  type: 'test'
+  ...
+# Subtest: groups unit variants into one display family and can return fewer than five results
+ok 293 - groups unit variants into one display family and can return fewer than five results
+  ---
+  duration_ms: 2.429958
+  type: 'test'
+  ...
+# Subtest: parses compact EIA year-month coverage and removes duplicate selectors deterministically
+ok 294 - parses compact EIA year-month coverage and removes duplicate selectors deterministically
+  ---
+  duration_ms: 1.999042
+  type: 'test'
+  ...
+# Subtest: accepts official EIA coverage dates for every supported frequency
+ok 295 - accepts official EIA coverage dates for every supported frequency
+  ---
+  duration_ms: 10.000458
+  type: 'test'
+  ...
+# Subtest: retrieves relevant International candidates from the local Phase 1b index
+ok 296 - retrieves relevant International candidates from the local Phase 1b index
+  ---
+  duration_ms: 751.547917
+  type: 'test'
+  ...
+# Subtest: hard-gates route family, geography, and explicit frequency
+ok 297 - hard-gates route family, geography, and explicit frequency
+  ---
+  duration_ms: 633.517167
+  type: 'test'
+  ...
+# Subtest: retrieves SEDS total-energy candidates for the requested state
+ok 298 - retrieves SEDS total-energy candidates for the requested state
+  ---
+  duration_ms: 596.501459
+  type: 'test'
+  ...
+# Subtest: broad renewable intent retrieves several approved product options
+ok 299 - broad renewable intent retrieves several approved product options
+  ---
+  duration_ms: 450.523208
+  type: 'test'
+  ...
+# Subtest: nonannual state total-energy requests do not fall into SEDS annual candidates
+ok 300 - nonannual state total-energy requests do not fall into SEDS annual candidates
+  ---
+  duration_ms: 527.068917
+  type: 'test'
+  ...
+# Subtest: unresolved intent cannot reach retrieval directly
+ok 301 - unresolved intent cannot reach retrieval directly
+  ---
+  duration_ms: 15.805875
+  type: 'test'
+  ...
+# Subtest: deduplicates canonical selectors and excludes explicit activity mismatches
+ok 302 - deduplicates canonical selectors and excludes explicit activity mismatches
+  ---
+  duration_ms: 0.805167
+  type: 'test'
+  ...
+# Subtest: stops at the hard 50-candidate limit without padding or ranking
+ok 303 - stops at the hard 50-candidate limit without padding or ranking
+  ---
+  duration_ms: 14.210959
+  type: 'test'
+  ...
+# Subtest: preserves geography and concept request order
+ok 304 - preserves geography and concept request order
+  ---
+  duration_ms: 1.269209
+  type: 'test'
+  ...
+# Subtest: returns repeatable candidate identities and retrieval reasons
+ok 305 - returns repeatable candidate identities and retrieval reasons
+  ---
+  duration_ms: 409.856958
+  type: 'test'
+  ...
+# Subtest: reports the validated index version and rejects a mismatched intent version
+ok 306 - reports the validated index version and rejects a mismatched intent version
+  ---
+  duration_ms: 46.708292
+  type: 'test'
+  ...
+# Subtest: rejects missing geography and route-family mismatch
+ok 307 - rejects missing geography and route-family mismatch
+  ---
+  duration_ms: 0.162416
+  type: 'test'
+  ...
+# Subtest: cold local retrieval stays within the Phase 3 latency budget
+ok 308 - cold local retrieval stays within the Phase 3 latency budget
+  ---
+  duration_ms: 385.504416
+  type: 'test'
+  ...
+# Subtest: bulk adapters produce deterministic valid records without observations
+ok 309 - bulk adapters produce deterministic valid records without observations
+  ---
+  duration_ms: 2.105625
+  type: 'test'
+  ...
+# Subtest: family adapters preserve the required retrieval selectors
+ok 310 - family adapters preserve the required retrieval selectors
+  ---
+  duration_ms: 0.52075
+  type: 'test'
+  ...
+# Subtest: facility-level Electricity records are explicitly excluded
+ok 311 - facility-level Electricity records are explicitly excluded
+  ---
+  duration_ms: 0.054167
+  type: 'test'
+  ...
+# Subtest: plant records normalize to a compact on-demand directory entry
+ok 312 - plant records normalize to a compact on-demand directory entry
+  ---
+  duration_ms: 0.318292
+  type: 'test'
+  ...
+# Subtest: invalid or cross-family series IDs are rejected
+ok 313 - invalid or cross-family series IDs are rejected
+  ---
+  duration_ms: 0.183125
+  type: 'test'
+  ...
+# Subtest: staging activation atomically preserves the previous build
+ok 314 - staging activation atomically preserves the previous build
+  ---
+  duration_ms: 5.691958
+  type: 'test'
+  ...
+# Subtest: failed activation restores the previous build
+ok 315 - failed activation restores the previous build
+  ---
+  duration_ms: 1.847166
+  type: 'test'
+  ...
+# Subtest: generated Phase 1B artifacts remain valid staging metadata
+ok 316 - generated Phase 1B artifacts remain valid staging metadata
+  ---
+  duration_ms: 128.398917
+  type: 'test'
+  ...
+# Subtest: Phase 1A schemas use JSON Schema 2020-12 and reject unknown fields
+ok 317 - Phase 1A schemas use JSON Schema 2020-12 and reject unknown fields
+  ---
+  duration_ms: 3.441041
+  type: 'test'
+  ...
+# Subtest: recorded route fixtures cover all three families without exposing an API key
+ok 318 - recorded route fixtures cover all three families without exposing an API key
+  ---
+  duration_ms: 1.530833
+  type: 'test'
+  ...
+# Subtest: official route fixtures normalize and validate deterministically
+ok 319 - official route fixtures normalize and validate deterministically
+  ---
+  duration_ms: 10.17375
+  type: 'test'
+  ...
+# Subtest: Phase 4A natural-gas routes are official, key-free, and locally valid
+ok 320 - Phase 4A natural-gas routes are official, key-free, and locally valid
+  ---
+  duration_ms: 0.746917
+  type: 'test'
+  ...
+# Subtest: route normalization ignores object-property ordering
+ok 321 - route normalization ignores object-property ordering
+  ---
+  duration_ms: 0.484167
+  type: 'test'
+  ...
+# Subtest: route metadata reports capabilities but does not claim valid series combinations
+ok 322 - route metadata reports capabilities but does not claim valid series combinations
+  ---
+  duration_ms: 0.880709
+  type: 'test'
+  ...
+# Subtest: candidate identity is stable across facet ordering
+ok 323 - candidate identity is stable across facet ordering
+  ---
+  duration_ms: 0.281791
+  type: 'test'
+  ...
+# Subtest: an explicitly sourced selector produces a valid candidate record
+ok 324 - an explicitly sourced selector produces a valid candidate record
+  ---
+  duration_ms: 0.316958
+  type: 'test'
+  ...
+# Subtest: route facet definitions alone cannot create a series candidate
+ok 325 - route facet definitions alone cannot create a series candidate
+  ---
+  duration_ms: 0.225584
+  type: 'test'
+  ...
+# Subtest: manifest validation catches inconsistent totals and failed complete builds
+ok 326 - manifest validation catches inconsistent totals and failed complete builds
+  ---
+  duration_ms: 0.253334
+  type: 'test'
+  ...
+# Subtest: Phase 1A.2 fixtures are sanitized and cover the three route families
+ok 327 - Phase 1A.2 fixtures are sanitized and cover the three route families
+  ---
+  duration_ms: 5.978375
+  type: 'test'
+  ...
+# Subtest: conditional facet requests do not expose relationships
+ok 328 - conditional facet requests do not expose relationships
+  ---
+  duration_ms: 0.819541
+  type: 'test'
+  ...
+# Subtest: independent facet products overgenerate international and SEDS selectors
+ok 329 - independent facet products overgenerate international and SEDS selectors
+  ---
+  duration_ms: 1.567125
+  type: 'test'
+  ...
+# Subtest: representative bulk series IDs round-trip to the expected v2 routes
+ok 330 - representative bulk series IDs round-trip to the expected v2 routes
+  ---
+  duration_ms: 0.998125
+  type: 'test'
+  ...
+# Subtest: complete no-value observation enumeration has a measured high cost
+ok 331 - complete no-value observation enumeration has a measured high cost
+  ---
+  duration_ms: 0.470875
+  type: 'test'
+  ...
+# Subtest: Phase 1A.2 stops at the review gate before Phase 1B
+ok 332 - Phase 1A.2 stops at the review gate before Phase 1B
+  ---
+  duration_ms: 0.44825
+  type: 'test'
+  ...
+# Subtest: canonical definition signatures omit geography and retain semantic selector facets
+ok 333 - canonical definition signatures omit geography and retain semantic selector facets
+  ---
+  duration_ms: 6.575375
+  type: 'test'
+  ...
+# Subtest: definition IDs are stable across country and object key order
+ok 334 - definition IDs are stable across country and object key order
+  ---
+  duration_ms: 0.448083
+  type: 'test'
+  ...
+# Subtest: meaningful definition differences produce different IDs
+ok 335 - meaningful definition differences produce different IDs
+  ---
+  duration_ms: 0.114833
+  type: 'test'
+  ...
+# Subtest: groups and ranks a definition once while retaining unavailable countries
+ok 336 - groups and ranks a definition once while retaining unavailable countries
+  ---
+  duration_ms: 1.581625
+  type: 'test'
+  ...
+# Subtest: definition ranking is independent of requested country order
+ok 337 - definition ranking is independent of requested country order
+  ---
+  duration_ms: 0.718917
+  type: 'test'
+  ...
+# Subtest: validates hard comparability mismatches and safe unit conversion
+ok 338 - validates hard comparability mismatches and safe unit conversion
+  ---
+  duration_ms: 0.127333
+  type: 'test'
+  ...
+# Subtest: Q03-Q14 deterministic remediation cohort
+ok 339 - Q03-Q14 deterministic remediation cohort
+  ---
+  duration_ms: 2095.476334
+  type: 'test'
+  ...
+# Subtest: local plant search returns compact matches without calling EIA
+ok 340 - local plant search returns compact matches without calling EIA
+  ---
+  duration_ms: 76.991375
+  type: 'test'
+  ...
+# Subtest: exact plant IDs resolve only from the local directory
+ok 341 - exact plant IDs resolve only from the local directory
+  ---
+  duration_ms: 58.426458
+  type: 'test'
+  ...
+# Subtest: live lookup uses the verified plant facet and returns only the latest period
+ok 342 - live lookup uses the verified plant facet and returns only the latest period
+  ---
+  duration_ms: 10.999375
+  type: 'test'
+  ...
+# Subtest: successful live metadata is cached by plant ID
+ok 343 - successful live metadata is cached by plant ID
+  ---
+  duration_ms: 0.454291
+  type: 'test'
+  ...
+# Subtest: API name search remains local and reports that no live lookup occurred
+ok 344 - API name search remains local and reports that no live lookup occurred
+  ---
+  duration_ms: 46.336208
+  type: 'test'
+  ...
+# Subtest: mechanical cleanup preserves raw input separately and performs no semantic correction
+ok 345 - mechanical cleanup preserves raw input separately and performs no semantic correction
+  ---
+  duration_ms: 18.91425
+  type: 'test'
+  ...
+# Subtest: rules recover the requested country, product, activity, and annual default from messy input
+ok 346 - rules recover the requested country, product, activity, and annual default from messy input
+  ---
+  duration_ms: 2.7505
+  type: 'test'
+  ...
+# Subtest: rules normalize supported production and consumption typos without broad fuzzy guessing
+ok 347 - rules normalize supported production and consumption typos without broad fuzzy guessing
+  ---
+  duration_ms: 11.475292
+  type: 'test'
+  ...
+# Subtest: validated high-confidence AI output uses only supported categories
+ok 348 - validated high-confidence AI output uses only supported categories
+  ---
+  duration_ms: 13.855334
+  type: 'test'
+  ...
+# Subtest: unsupported AI fields cannot replace an unstated annual frequency
+ok 349 - unsupported AI fields cannot replace an unstated annual frequency
+  ---
+  duration_ms: 15.78475
+  type: 'test'
+  ...
+# Subtest: validated AI arrays preserve order and prevent negated raw text from overriding intent
+ok 350 - validated AI arrays preserve order and prevent negated raw text from overriding intent
+  ---
+  duration_ms: 19.920292
+  type: 'test'
+  ...
+# Subtest: AI cannot reintroduce a false total-energy pair inside a specific source phrase
+ok 351 - AI cannot reintroduce a false total-energy pair inside a specific source phrase
+  ---
+  duration_ms: 10.761833
+  type: 'test'
+  ...
+# Subtest: low-confidence AI output is rejected in favor of deterministic rules
+ok 352 - low-confidence AI output is rejected in favor of deterministic rules
+  ---
+  duration_ms: 0.081791
+  type: 'test'
+  ...
+# Subtest: submitted intent cannot introduce an unknown country code
+ok 353 - submitted intent cannot introduce an unknown country code
+  ---
+  duration_ms: 5.602417
+  type: 'test'
+  ...
+# Subtest: AI-corrected product cannot override conflicting raw-derived evidence
+ok 354 - AI-corrected product cannot override conflicting raw-derived evidence
+  ---
+  duration_ms: 8.325875
+  type: 'test'
+  ...
+# Subtest: AI-corrected text cannot manufacture sector evidence absent from the raw query
+ok 355 - AI-corrected text cannot manufacture sector evidence absent from the raw query
+  ---
+  duration_ms: 5.583417
+  type: 'test'
+  ...
+# Subtest: cross-family ambiguous product retains alternatives and requires clarification
+ok 356 - cross-family ambiguous product retains alternatives and requires clarification
+  ---
+  duration_ms: 5.481709
+  type: 'test'
+  ...
+# Subtest: deterministic gas fallback is phrase-first and context-aware
+ok 357 - deterministic gas fallback is phrase-first and context-aware
+  ---
+  duration_ms: 4.482292
+  type: 'test'
+  ...
+# Subtest: broad approved product families retain narrower options without forced selection
+ok 358 - broad approved product families retain narrower options without forced selection
+  ---
+  duration_ms: 1.293541
+  type: 'test'
+  ...
+# Subtest: AI-provided ambiguity uses the same approved-alternatives model for any product term
+ok 359 - AI-provided ambiguity uses the same approved-alternatives model for any product term
+  ---
+  duration_ms: 6.217959
+  type: 'test'
+  ...
+# Subtest: AI timeout is configured for thirty seconds
+ok 360 - AI timeout is configured for thirty seconds
+  ---
+  duration_ms: 0.064
+  type: 'test'
+  ...
+# Subtest: ordinary lowercase three-letter words are not accepted as country codes
+ok 361 - ordinary lowercase three-letter words are not accepted as country codes
+  ---
+  duration_ms: 1.995667
+  type: 'test'
+  ...
+# Subtest: AI receives only the exact raw query while cleaned text remains available locally
+ok 362 - AI receives only the exact raw query while cleaned text remains available locally
+  ---
+  duration_ms: 12.868375
+  type: 'test'
+  ...
+# Subtest: raw-only interpretation preserves exact raw and cleaned forms through staged normalization
+ok 363 - raw-only interpretation preserves exact raw and cleaned forms through staged normalization
+  ---
+  duration_ms: 22.21925
+  type: 'test'
+  ...
+# Subtest: AI request failure uses deterministic fallback with provenance
+ok 364 - AI request failure uses deterministic fallback with provenance
+  ---
+  duration_ms: 5.184667
+  type: 'test'
+  ...
+# Subtest: unsupported AI category and invented series ID are rejected
+ok 365 - unsupported AI category and invented series ID are rejected
+  ---
+  duration_ms: 8.100375
+  type: 'test'
+  ...
+# Subtest: clean state request validates every AI field without fallback
+ok 366 - clean state request validates every AI field without fallback
+  ---
+  duration_ms: 10.493625
+  type: 'test'
+  ...
+# Subtest: AI-corrected concepts control routing instead of misspelled raw mentions
+ok 367 - AI-corrected concepts control routing instead of misspelled raw mentions
+  ---
+  duration_ms: 11.081625
+  type: 'test'
+  ...
+# Subtest: AI cannot replace an explicit local geography or infer an unmentioned sector
+ok 368 - AI cannot replace an explicit local geography or infer an unmentioned sector
+  ---
+  duration_ms: 11.9145
+  type: 'test'
+  ...
+# Subtest: an omitted optional sector does not trigger a clarification request
+ok 369 - an omitted optional sector does not trigger a clarification request
+  ---
+  duration_ms: 6.63775
+  type: 'test'
+  ...
+# Subtest: recognized broad products and ordered activities repair AI ambiguity without expansion
+ok 370 - recognized broad products and ordered activities repair AI ambiguity without expansion
+  ---
+  duration_ms: 17.747625
+  type: 'test'
+  ...
+# Subtest: an explicit query frequency cannot be weakened or changed by AI
+ok 371 - an explicit query frequency cannot be weakened or changed by AI
+  ---
+  duration_ms: 12.422208
+  type: 'test'
+  ...
+# Subtest: compound carrier wording produces one validated concept pair
+ok 372 - compound carrier wording produces one validated concept pair
+  ---
+  duration_ms: 10.114917
+  type: 'test'
+  ...
+# Subtest: AI U.S. aliases cannot create a second noncanonical national geography
+ok 373 - AI U.S. aliases cannot create a second noncanonical national geography
+  ---
+  duration_ms: 10.234375
+  type: 'test'
+  ...
+# Subtest: explicit deterministic geographies survive low AI confidence and omission
+ok 374 - explicit deterministic geographies survive low AI confidence and omission
+  ---
+  duration_ms: 12.549375
+  type: 'test'
+  ...
+# Subtest: context resolves Georgia as a state beside Texas
+ok 375 - context resolves Georgia as a state beside Texas
+  ---
+  duration_ms: 9.0985
+  type: 'test'
+  ...
+# Subtest: AI geography corrections require bounded spelling evidence and official metadata
+ok 376 - AI geography corrections require bounded spelling evidence and official metadata
+  ---
+  duration_ms: 8.69725
+  type: 'test'
+  ...
+# Subtest: bounded metadata matching recovers a country typo omitted by AI
+ok 377 - bounded metadata matching recovers a country typo omitted by AI
+  ---
+  duration_ms: 18.257125
+  type: 'test'
+  ...
+# Subtest: explicit deterministic geography wins and records an AI conflict
+ok 378 - explicit deterministic geography wins and records an AI conflict
+  ---
+  duration_ms: 20.481292
+  type: 'test'
+  ...
+# Subtest: an unsupported geography-like token is not rescued by an unrelated AI claim
+ok 379 - an unsupported geography-like token is not rescued by an unrelated AI claim
+  ---
+  duration_ms: 8.021875
+  type: 'test'
+  ...
+# Subtest: bounded AI product corrections validate against the approved product vocabulary
+ok 380 - bounded AI product corrections validate against the approved product vocabulary
+  ---
+  duration_ms: 20.900958
+  type: 'test'
+  ...
+# Subtest: bounded AI activity corrections validate against the approved activity vocabulary
+ok 381 - bounded AI activity corrections validate against the approved activity vocabulary
+  ---
+  duration_ms: 30.461375
+  type: 'test'
+  ...
+# Subtest: bounded AI sector corrections validate against the approved sector vocabulary
+ok 382 - bounded AI sector corrections validate against the approved sector vocabulary
+  ---
+  duration_ms: 78.812375
+  type: 'test'
+  ...
+# Subtest: bounded AI frequency corrections validate against the approved frequency vocabulary
+ok 383 - bounded AI frequency corrections validate against the approved frequency vocabulary
+  ---
+  duration_ms: 54.296709
+  type: 'test'
+  ...
+# Subtest: multiple approved vocabulary corrections can be validated in one raw query
+ok 384 - multiple approved vocabulary corrections can be validated in one raw query
+  ---
+  duration_ms: 10.000125
+  type: 'test'
+  ...
+# Subtest: semantic typo validation rejects low-confidence, unsupported, and tied AI corrections
+ok 385 - semantic typo validation rejects low-confidence, unsupported, and tied AI corrections
+  ---
+  duration_ms: 36.136666
+  type: 'test'
+  ...
+# Subtest: verified corrections preserve exact negations and corrected excluded products
+ok 386 - verified corrections preserve exact negations and corrected excluded products
+  ---
+  duration_ms: 33.229083
+  type: 'test'
+  ...
+# Subtest: AI correction cannot remove a raw negation or make its excluded product positive
+ok 387 - AI correction cannot remove a raw negation or make its excluded product positive
+  ---
+  duration_ms: 10.084417
+  type: 'test'
+  ...
+# Subtest: broad energy and a corrected exclusion stay consistent before browser resubmission
+ok 388 - broad energy and a corrected exclusion stay consistent before browser resubmission
+  ---
+  duration_ms: 8.415291
+  type: 'test'
+  ...
+# Subtest: a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion
+ok 389 - a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion
+  ---
+  duration_ms: 28.092167
+  type: 'test'
+  ...
+# Subtest: specific product context resolves AI ambiguity without broadening
+ok 390 - specific product context resolves AI ambiguity without broadening
+  ---
+  duration_ms: 15.200292
+  type: 'test'
+  ...
+# Subtest: recognized query phrases cannot become unknown qualifiers
+ok 391 - recognized query phrases cannot become unknown qualifiers
+  ---
+  duration_ms: 7.56775
+  type: 'test'
+  ...
+# Subtest: AI cannot collapse an unresolved broad product into one interpretation
+ok 392 - AI cannot collapse an unresolved broad product into one interpretation
+  ---
+  duration_ms: 3.765541
+  type: 'test'
+  ...
+# Subtest: AI cannot resolve unsupported product and activity pairing scope
+ok 393 - AI cannot resolve unsupported product and activity pairing scope
+  ---
+  duration_ms: 8.242084
+  type: 'test'
+  ...
+# Subtest: genuinely unknown source terms remain blocking qualifiers
+ok 394 - genuinely unknown source terms remain blocking qualifiers
+  ---
+  duration_ms: 6.538083
+  type: 'test'
+  ...
+# Subtest: filler words and negated concepts do not become blocking qualifiers
+ok 395 - filler words and negated concepts do not become blocking qualifiers
+  ---
+  duration_ms: 12.850709
+  type: 'test'
+  ...
+# Subtest: an explicitly excluded product cannot become an approved positive AI field
+ok 396 - an explicitly excluded product cannot become an approved positive AI field
+  ---
+  duration_ms: 15.006084
+  type: 'test'
+  ...
+# Subtest: long AI interpretation respects the selected activity and ignores invented selection fields
+ok 397 - long AI interpretation respects the selected activity and ignores invented selection fields
+  ---
+  duration_ms: 18.096875
+  type: 'test'
+  ...
+# Subtest: unrelated natural wording near gasoline does not become natural gas
+ok 398 - unrelated natural wording near gasoline does not become natural gas
+  ---
+  duration_ms: 1.45875
+  type: 'test'
+  ...
+# Subtest: invalid AI JSON and timeout both fall back with distinct reasons
+ok 399 - invalid AI JSON and timeout both fall back with distinct reasons
+  ---
+  duration_ms: 5.800334
+  type: 'test'
+  ...
+# Subtest: top-five benchmark retains the approved human-reviewed Q01-Q14 contract
+ok 400 - top-five benchmark retains the approved human-reviewed Q01-Q14 contract
+  ---
+  duration_ms: 0.616834
+  type: 'test'
+  ...
+# Subtest: candidate pipeline matches exact top-five, clarification, and zero-hierarchy expectations
+ok 401 - candidate pipeline matches exact top-five, clarification, and zero-hierarchy expectations
+  ---
+  duration_ms: 4367.571875
+  type: 'test'
+  ...
+# Subtest: ranked certainty reports every result dimension independently
+ok 402 - ranked certainty reports every result dimension independently
+  ---
+  duration_ms: 0.708958
+  type: 'test'
+  ...
+# Subtest: fallback certainty never turns unknown aggregation into exactness
+ok 403 - fallback certainty never turns unknown aggregation into exactness
+  ---
+  duration_ms: 0.089875
+  type: 'test'
+  ...
+# Subtest: route certainty does not call an unapproved route mismatch equivalent
+ok 404 - route certainty does not call an unapproved route mismatch equivalent
+  ---
+  duration_ms: 0.060042
+  type: 'test'
+  ...
+# Subtest: candidate labels do not create a protected aggregate status
+ok 405 - candidate labels do not create a protected aggregate status
+  ---
+  duration_ms: 1.161625
+  type: 'test'
+  ...
+# Subtest: ambiguous close same-tier families receive a validated shadow order only
+ok 406 - ambiguous close same-tier families receive a validated shadow order only
+  ---
+  duration_ms: 1.166709
+  type: 'test'
+  ...
+# Subtest: unknown IDs and incomplete orders are rejected without changing deterministic output
+ok 407 - unknown IDs and incomplete orders are rejected without changing deterministic output
+  ---
+  duration_ms: 0.204791
+  type: 'test'
+  ...
+# Subtest: AI timeout, failure, invalid JSON, and low confidence preserve deterministic ranking
+ok 408 - AI timeout, failure, invalid JSON, and low confidence preserve deterministic ranking
+  ---
+  duration_ms: 0.645583
+  type: 'test'
+  ...
+# Subtest: off mode is an immediate rollback and never invokes AI
+ok 409 - off mode is an immediate rollback and never invokes AI
+  ---
+  duration_ms: 0.13425
+  type: 'test'
+  ...
+# Subtest: conditional and always-AI evaluation policies report different invocation behavior
+ok 410 - conditional and always-AI evaluation policies report different invocation behavior
+  ---
+  duration_ms: 0.18375
+  type: 'test'
+  ...
+# Subtest: trigger requires ambiguity, credible same-tier families, and a close score gap
+ok 411 - trigger requires ambiguity, credible same-tier families, and a close score gap
+  ---
+  duration_ms: 0.091333
+  type: 'test'
+  ...
+# Subtest: request contains raw text, structured intent, and only known eligible families
+ok 412 - request contains raw text, structured intent, and only known eligible families
+  ---
+  duration_ms: 0.434458
+  type: 'test'
+  ...
+# Subtest: validated shadow ordering can improve a graded offline case without changing live order
+ok 413 - validated shadow ordering can improve a graded offline case without changing live order
+  ---
+  duration_ms: 0.273292
+  type: 'test'
+  ...
+# Subtest: response validation accepts only a complete permutation of known family IDs
+ok 414 - response validation accepts only a complete permutation of known family IDs
+  ---
+  duration_ms: 0.11125
+  type: 'test'
+  ...
+# Subtest: response validation accepts a complete permutation inside a JSON code fence
+ok 415 - response validation accepts a complete permutation inside a JSON code fence
+  ---
+  duration_ms: 0.198625
+  type: 'test'
+  ...
+# Subtest: Vercel search function traces every runtime candidate-pipeline artifact
+ok 416 - Vercel search function traces every runtime candidate-pipeline artifact
+  ---
+  duration_ms: 2.029292
+  type: 'test'
+  ...
+# Subtest: HoHo7 freezes 50 development and 150 unique sealed holdout queries
+ok 417 - HoHo7 freezes 50 development and 150 unique sealed holdout queries
+  ---
+  duration_ms: 1.433833
+  type: 'test'
+  ...
+# Subtest: HoHo7 represents all 52 reviewed SEDS targets without inventing national route eligibility
+ok 418 - HoHo7 represents all 52 reviewed SEDS targets without inventing national route eligibility
+  ---
+  duration_ms: 0.273208
+  type: 'test'
+  ...
+# Subtest: HoHo7 hierarchy isolation preserves raw input and does not replace requested components
+ok 419 - HoHo7 hierarchy isolation preserves raw input and does not replace requested components
+  ---
+  duration_ms: 893.714709
+  type: 'test'
+  ...
+# Subtest: HoHo8 ignores certainty-only additions when selecting human review cases
+ok 420 - HoHo8 ignores certainty-only additions when selecting human review cases
+  ---
+  duration_ms: 0.558708
+  type: 'test'
+  ...
+# Subtest: HoHo8 detects semantic and visible-ranking differences independently
+ok 421 - HoHo8 detects semantic and visible-ranking differences independently
+  ---
+  duration_ms: 0.102458
+  type: 'test'
+  ...
+# Subtest: HoHo8 detects an objective geography failure even when both arms match
+ok 422 - HoHo8 detects an objective geography failure even when both arms match
+  ---
+  duration_ms: 0.413541
+  type: 'test'
+  ...
+1..422
+# tests 422
+# suites 0
+# pass 421
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 11407.523375

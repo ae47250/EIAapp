@@ -1,0 +1,67 @@
+{
+  "frozen_matrix": "/private/tmp/eia-scope-contract-independent-matrix.json",
+  "frozen_matrix_sha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0",
+  "status": "Architecture review only. No challenge execution, repo edits, live/paid calls, commits, or deployment.",
+  "minimum_contract_invariants": [
+    "Raw scope spans are sufficient if local scanning owns mention identity, category, approved metadata value, and ordering.",
+    "Version and exact original query binding; finite integer UTF-16 offsets; exact source slices; nonoverlapping complete token coverage; no multiword metadata mention split between scopes.",
+    "Every recognized data mention belongs to a requested, excluded, or unresolved data disposition. Context/knowledge cannot silently conceal recognized data.",
+    "Negative operator reference is exact and bounded; span validity proves cited text only and cannot prove semantic attachment.",
+    "Preserve source positions and clause boundaries in projections; concatenating affirmative fragments can invent pairings or geography contexts.",
+    "Metadata normalization and source ordering remain local. Do not accept model category/code fields as authority.",
+    "Unsupported pair-scoped or per-clause constraints must block for clarification while retaining established requested fields.",
+    "Malformed/old/missing browser evidence follows explicit safe reparse/clarification; derived browser fields never override raw evidence.",
+    "Evidence-based intentional empty arrays/nulls must remain empty through structured routing; distinguish them from absent evidence.",
+    "New unresolved/invalid evidence flags must feed the existing candidate-pipeline clarification gate.",
+    "Direct exclusion checks may veto only locally supported unambiguous patterns; unsupported grammar clarifies. Span/metadata validation does not establish semantic correctness."
+  ],
+  "implementation_review_locations": [
+    {
+      "path": "lib/sources/eia/interpret-query.js",
+      "reasons": [
+        "OpenAI prompt + initial evidence validation",
+        "normalizeSubmittedIntent resubmission",
+        "rules-only conservative fallback",
+        "addClarificationState gate",
+        "frequency cannot select excluded raw frequency"
+      ]
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "reasons": [
+        "Raw rescans can resurrect excluded/unresolved geography/concept/sector/frequency",
+        "Authoritative evidence must bypass raw scan fallback where empty intentionally",
+        "Preserve geography context and pair ordering"
+      ]
+    },
+    {
+      "path": "components/search/SearchWorkspace.js",
+      "reasons": [
+        "appendIntentParams must serialize exact source evidence for search/selection flows"
+      ]
+    },
+    {
+      "path": "lib/sources/eia/candidate-search.js",
+      "reasons": [
+        "Read-only review of parseSubmittedIntent compatibility and 12000-byte JSON payload ceiling; no endpoint redesign required"
+      ]
+    }
+  ],
+  "existing_policy_adjudications": [
+    {
+      "case": "M17",
+      "observation": "Frozen metadata-only expectation treats bare Georgia as unresolved. Current architecture deliberately defaults bare Georgia to US state unless country/foreign-country context exists. Parent should classify this case as a requirements-policy dispute if preserving existing default is intended, not silently amend the frozen expectation."
+    },
+    {
+      "case": "M25",
+      "observation": "Existing retrieval constructs geography x concept pairs under one frequency. This case calls for safe clarification rather than expanding retrieval scope."
+    }
+  ],
+  "pitfalls": [
+    "A complete source partition can still be semantically wrong or hide material content under context; independent meaning tests remain essential.",
+    "Passing synthetic valid-contract tests proves the validator can carry intended model output, not that the live model reliably produces that output.",
+    "Exclusions of frequency/geography/pairs are not all represented by the existing type/value global exclusions. Preserve via explicit filtering or clarification rather than inventing retrieval behavior.",
+    "The browser payload parser rejects JSON over 12000 characters and then uses legacy fields. New evidence must remain within this boundary or fail clearly to conservative clarification.",
+    "Do not automatically resubmit model-corrected text as the new evidence source; raw text offsets and exact original query must survive unchanged."
+  ]
+}

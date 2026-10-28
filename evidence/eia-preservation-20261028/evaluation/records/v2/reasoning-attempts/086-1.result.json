@@ -1,0 +1,239 @@
+{
+  "scheduledId": 86,
+  "queryId": 9,
+  "repeat": 2,
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "positionInBlock": 1,
+  "attempt": 1,
+  "startedAt": "2026-10-28T12:02:31.403Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "dc50178347330575f1149737181fa8da616008c56b8bf2a8bad7026b9c3507a8",
+  "promptSHA256": "a2a7d6829a568af4694a8ac05bfa9d71a1f383483c6b31997165caac57a2237b",
+  "timeoutMs": 300000,
+  "reservedAttemptUSD": 0.017634,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 12:02:22 GMT",
+    "openai-processing-ms": "7971",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999321",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "4ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "completedAt": "2026-10-28T12:02:39.634Z",
+  "elapsedMs": 8231.030707999947,
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "incompleteDetails": null,
+  "usage": {
+    "input_tokens": 797,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 822,
+    "output_tokens_details": {
+      "reasoning_tokens": 278
+    },
+    "total_tokens": 1619
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "truncated": false,
+  "reasoningTokens": 278,
+  "tokenCostUSD": 0.0004907,
+  "grade": {
+    "version": 2,
+    "semantic": {
+      "pass": true,
+      "gradable": true,
+      "status": "correct",
+      "errors": [],
+      "signature": {
+        "geographies": [
+          "GEO",
+          "FRA"
+        ],
+        "pairs": [
+          [
+            "electricity",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": [],
+        "scopeDispositions": [
+          {
+            "identity": "activity:consumption",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:FRA",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:GEO",
+            "status": "requested"
+          },
+          {
+            "identity": "product:electricity",
+            "status": "requested"
+          }
+        ]
+      }
+    },
+    "strictJSON": true,
+    "shape": true,
+    "sourceSpans": false,
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": true,
+      "spans": false,
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    "usable": false,
+    "truncated": false,
+    "original": {
+      "text": "{\n  \"correctedQuery\": \"electricity consumption in Georgia and France\",\n  \"confidence\": 1.0,\n  \"ambiguity\": [\n    \"Two countries are requested, so the singular country summary is null.\"\n  ],\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"Georgia and France\",\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": \"The query names two countries; both are preserved in geographies.\"\n    },\n    \"product\": {\n      \"rawValue\": \"electricity\",\n      \"value\": \"electricity\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": \"No sector is explicitly stated.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 1.0,\n      \"explicit\": false,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Georgia\",\n      \"confidence\": 1.0\n    },\n    {\n      \"value\": \"France\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"electricity\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 1.0\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"electricity consumption in Georgia and France\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 23,\n        \"text\": \"electricity consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 23,\n        \"end\": 27,\n        \"text\": \" in \",\n        \"status\": \"context\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 27,\n        \"end\": 45,\n        \"text\": \"Georgia and France\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "correctedQuery": "electricity consumption in Georgia and France",
+        "confidence": 1,
+        "ambiguity": [
+          "Two countries are requested, so the singular country summary is null."
+        ],
+        "fields": {
+          "country": {
+            "rawValue": "Georgia and France",
+            "value": null,
+            "confidence": 1,
+            "ambiguityReason": "The query names two countries; both are preserved in geographies."
+          },
+          "product": {
+            "rawValue": "electricity",
+            "value": "electricity",
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 1,
+            "ambiguityReason": "No sector is explicitly stated."
+          },
+          "frequency": {
+            "rawValue": null,
+            "value": "annual",
+            "confidence": 1,
+            "explicit": false,
+            "ambiguityReason": null
+          }
+        },
+        "geographies": [
+          {
+            "value": "Georgia",
+            "confidence": 1
+          },
+          {
+            "value": "France",
+            "confidence": 1
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "electricity",
+            "activity": "consumption",
+            "order": 1,
+            "confidence": 1
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "requestEvidence": {
+          "version": 1,
+          "query": "electricity consumption in Georgia and France",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 23,
+              "text": "electricity consumption",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 23,
+              "end": 27,
+              "text": " in ",
+              "status": "context",
+              "target": "data"
+            },
+            {
+              "start": 27,
+              "end": 45,
+              "text": "Georgia and France",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        }
+      },
+      "semantic": {
+        "pass": false,
+        "errors": [
+          "country_summary_contradiction"
+        ],
+        "signature": {
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "clarification": false,
+          "unknownQualifiers": []
+        }
+      },
+      "contract": {
+        "pass": false,
+        "json": true,
+        "shape": true,
+        "spans": false,
+        "errors": [
+          "data_cannot_be_context"
+        ]
+      }
+    }
+  },
+  "replayFile": "reasoning-attempts/086-1.replay.json",
+  "unknownCostUpperBoundUSD": 0,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null
+}

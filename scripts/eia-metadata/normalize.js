@@ -1,10 +1,14 @@
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { loadPhase1aFixtures } from "./discover-routes.js";
 
 const SCHEMA_VERSION = "1.0.0";
+// Approved complete names preserve embedded commas. Match by code and title suffix,
+// so product punctuation cannot be mistaken for part of the geography.
+const APPROVED_GEOGRAPHIES = JSON.parse(readFileSync(new URL("../../data/eia/routing-metadata.json", import.meta.url), "utf8")).geographies;
 const TRUSTED_SELECTOR_SOURCES = new Set([
   "official_series_metadata",
   "official_combination_metadata",
@@ -252,14 +256,14 @@ function buildBulkGeography(record, routeFamily) {
   if (routeFamily === "domestic") {
     const code = sourceCode === "USA" ? "USA" : sourceCode.replace(/^USA-/, "");
     return {
-      name: sourceCode === "USA" ? "United States" : extractDomesticGeographyName(record.name, code),
+      name: sourceCode === "USA" ? "United States" : extractDomesticGeographyName(record.name, code, record.series_id),
       code,
       type: sourceCode === "USA" ? "national" : /^[A-Z]{2}$/.test(code) ? "state" : "region"
     };
   }
 
   const code = routeFamily === "seds" ? sourceCode.replace(/^USA-/, "") : sourceCode;
-  const name = extractTrailingGeographyName(record.name) || code;
+  const name = extractTrailingGeographyName(record.name, code) || code;
   return {
     name,
     code,
@@ -267,7 +271,10 @@ function buildBulkGeography(record, routeFamily) {
   };
 }
 
-function extractDomesticGeographyName(name, fallback) {
+function extractDomesticGeographyName(name, fallback, seriesId) {
+  const stateCode = /^NG\.[^._]+_S([A-Z]{2})_[^._]+\.[AQMWD]$/.exec(String(seriesId || ""))?.[1];
+  const state = APPROVED_GEOGRAPHIES.find(g => g.type === "state" && g.code === fallback);
+  if (stateCode === fallback && state && String(name || "").toLowerCase().startsWith(state.name.toLowerCase() + " ")) return state.name;
   const naturalGasPrefix = /^(.+?) Natural Gas\b/i.exec(String(name || ""));
   if (naturalGasPrefix?.[1]) return naturalGasPrefix[1].trim();
   const parts = String(name || "").split(" : ").map(part => part.trim()).filter(Boolean);
@@ -278,7 +285,12 @@ function extractDomesticGeographyName(name, fallback) {
   return fallback;
 }
 
-function extractTrailingGeographyName(name) {
+export function extractTrailingGeographyName(name, code) {
+  const title = String(name || "").replace(/,\s*(annual|quarterly|monthly|weekly|daily)\s*$/i, "").trim();
+  const approved = APPROVED_GEOGRAPHIES.filter(geography => geography.code === code
+    && title.toLowerCase().endsWith(", " + geography.name.toLowerCase()))
+    .sort((left, right) => right.name.length - left.name.length)[0];
+  if (approved) return approved.name;
   const parts = String(name || "").split(",").map(part => part.trim()).filter(Boolean);
   if (parts.length < 2) return null;
   return /^(annual|quarterly|monthly|weekly|daily)$/i.test(parts.at(-1))

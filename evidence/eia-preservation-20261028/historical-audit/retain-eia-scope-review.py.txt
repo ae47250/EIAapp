@@ -1,0 +1,156 @@
+from pathlib import Path
+import json
+r=Path('/private/tmp/eia-scope-contract-independent-runner.mjs').read_text()
+# Keep the independent findings oracle and literal integrity mutations, not its observed results.
+helpers=r[r.index('function summarized('):r.index('const results={')]
+mutation=r[r.index('function mutation('):r.index('for(const challenge of matrix.integrity_cases)')]
+header='''import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import { before, after, test } from 'node:test';
+import { createHash } from 'node:crypto';
+import { interpretQuery, interpretQueryWithRules, normalizeSubmittedIntent, validateAiInterpretation } from '../lib/sources/eia/interpret-query.js';
+import { validateRequestEvidence } from '../lib/sources/eia/request-evidence.js';
+import { listRequestEvidenceMentions } from '../lib/sources/eia/intent-routing.js';
+import { GET as searchGET } from '../app/api/search-eia/route.js';
+
+// Frozen by a fresh reviewer before implementation or development-case access.
+// Exposed cases are now regressions. Original meanings and literal payloads are unchanged.
+const matrixBytes = fs.readFileSync(new URL('./fixtures/eia/scope-independent-matrix.json', import.meta.url));
+const matrix = JSON.parse(matrixBytes);
+const frozen = JSON.parse(fs.readFileSync(new URL('./fixtures/eia/scope-independent-payloads.json', import.meta.url)));
+assert.equal(createHash('sha256').update(matrixBytes).digest('hex'), frozen.matrixHash);
+const source = fs.readFileSync(new URL('../components/search/SearchWorkspace.js', import.meta.url), 'utf8');
+const appendIntentParams = vm.runInNewContext(`(${source.slice(source.indexOf('function appendIntentParams('), source.indexOf('\\nfunction formatInterpreter('))})`);
+const clone = value => JSON.parse(JSON.stringify(value));
+const payload = c => clone(frozen.payloads.find(p => p.id === c.id).payload);
+const caseById = Object.fromEntries(matrix.meaning_cases.map(c => [c.id, c]));
+let activePayload;
+let modelCalls = 0;
+const savedFetch = globalThis.fetch;
+const savedEnv = Object.fromEntries(['LOGIN_REQUIRED', 'OPENAI_API_KEY', 'EIA_API_KEY'].map(k => [k, process.env[k]]));
+before(() => {
+  process.env.LOGIN_REQUIRED = 'off';
+  process.env.OPENAI_API_KEY = 'offline-test';
+  delete process.env.EIA_API_KEY;
+  globalThis.fetch = async (url, options) => {
+    assert.equal(url, 'https://api.openai.com/v1/responses', 'No external transport is allowed');
+    assert.equal(options.method, 'POST');
+    modelCalls++;
+    return Response.json({ output_text: JSON.stringify(activePayload) });
+  };
+});
+after(() => {
+  globalThis.fetch = savedFetch;
+  for (const [key, value] of Object.entries(savedEnv)) {
+    if (value === undefined) delete process.env[key]; else process.env[key] = value;
+  }
+  assert.equal(modelCalls, 44, 'Each meaning/integrity case must exercise the injected model exactly once');
+});
+'''
+body='''
+function assertBlockedResult(result) {
+  assert.equal(result.status, 200);
+  assert.equal(result.intent.needsClarification, true);
+  assert.equal(result.intent.blockingClarification, true);
+  assert.equal(result.variables + result.definitions, 0, 'Unresolved meaning must never select candidates');
+}
+for (const c of matrix.meaning_cases) test(`independent scope meaning ${c.id}: ${c.query}`, async () => {
+  activePayload = payload(c);
+  const intent = await interpretQuery(c.query);
+  assert.equal(intent.interpreter, 'openai');
+  const params = inputParams(intent, c.query);
+  const normalized = normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')), c.query);
+  const result = await route(params);
+  assert.equal(result.status, 200);
+  for (const actual of [intent, normalized, result.intent]) {
+    assert.deepEqual(findings(c, actual), [], 'Frozen semantic assertions');
+    assert.deepEqual(actual.requestEvidence, intent.requestEvidence, 'Evidence survives every boundary');
+    assert.equal(actual.blockingClarification, actual.needsClarification);
+  }
+  assert.ok(params.get('intentPayload').length < 12000);
+  if (intent.needsClarification) assertBlockedResult(result);
+  const rules = interpretQueryWithRules(c.query);
+  if (c.id === 'M17') {
+    // Explicit adjudication: existing bare-Georgia policy selects the state. The
+    // original reviewer ambiguity and model unresolved proposal remain frozen.
+    assert.deepEqual(rules.validatedGeographies.map(g => g.code), ['GA']);
+  } else if (findings(c, rules).length) {
+    // Approved conservative fallback: unsupported grammar can remain in source
+    // scopes instead of normalized fields, but cannot execute incomplete intent.
+    assert.equal(rules.needsClarification, true);
+    assert.equal(rules.requestEvidence.query, c.query);
+    const p = inputParams(rules, c.query);
+    assertBlockedResult(await route(p));
+  }
+});
+for (const challenge of matrix.integrity_cases) test(`independent scope integrity ${challenge.id}: ${challenge.expect}`, async () => {
+  const c = caseById[challenge.seed];
+  const { p, q } = mutation(challenge.id, payload(c), c);
+  activePayload = p;
+  const initial = await interpretQuery(q);
+  const normalized = normalizeSubmittedIntent(JSON.parse(inputParams(initial, q).get('intentPayload')), q);
+  const result = await route(new URLSearchParams({ q, intentReady: '1', intentPayload: JSON.stringify({ ...p, interpreter: 'openai' }) }));
+  assert.equal(result.status, 200);
+  assert.deepEqual(normalized.requestEvidence, initial.requestEvidence);
+  const repaired = ['I03', 'I04', 'I10', 'I13', 'I14'];
+  if (repaired.includes(challenge.id)) {
+    for (const actual of [initial, normalized, result.intent]) assert.deepEqual(findings(c, actual), []);
+    assert.equal(initial.needsClarification, false, 'Valid source evidence must survive forged derived arrays or safe legacy rebuilding');
+  } else {
+    assert.equal(initial.needsClarification, true);
+    assert.equal(normalized.needsClarification, true);
+    assertBlockedResult(result);
+    if (['I11', 'I16'].includes(challenge.id)) assert.deepEqual(findings(c, initial), [], 'Known parts survive pair or unknown-product clarification');
+  }
+});
+const targeted = [
+ { id: 'approved-internal-no-1', query: 'Show annual electricity generation in Texas with no direct fuel costs.', blocked: false },
+ { id: 'approved-internal-no-2', query: 'Show annual electricity generation in Texas with no direct cost.', blocked: false },
+ { id: 'internal-scope-overflow', query: 'Show natural gas production for Canada. ' + 'not coal; '.repeat(19), blocked: true },
+ { id: 'rules-independent-requests', query: 'Show coal production for Canada. Also show monthly electricity consumption for Texas.', blocked: true },
+ { id: 'scope-only-process-fuel', query: 'Show electricity generation in Texas, not process fuel.', blocked: false },
+ { id: 'scope-only-plant', query: 'Show electricity generation in Texas, excluding plant.', blocked: false }
+];
+for (const c of targeted) test(`independent exposed counterexample ${c.id}`, async () => {
+  const intent = interpretQueryWithRules(c.query);
+  assert.equal(intent.needsClarification, c.blocked);
+  assert.ok(intent.requestEvidence.scopes.length <= 32);
+  const result = await route(inputParams(intent, c.query));
+  assert.equal(result.status, 200);
+  assert.equal(result.intent.needsClarification, c.blocked);
+  if (c.blocked) assertBlockedResult(result);
+});
+for (const variant of [0, 2, 'unknown-status']) test(`unknown evidence contract ${variant} requires clarification`, () => {
+  const c = caseById.M04;
+  const p = payload(c);
+  if (variant === 'unknown-status') p.requestEvidence.scopes[1].status = 'ignored';
+  else p.requestEvidence.version = variant;
+  const result = validateAiInterpretation(p, c.query);
+  assert.equal(result.needsClarification, true);
+  assert.equal(normalizeSubmittedIntent(result, c.query).needsClarification, true);
+});
+test('unknown excluded target and an operator after its data cannot silently authorize omission', () => {
+  const unknown = payload(caseById.M26);
+  const s = unknown.requestEvidence.scopes[1];
+  s.status = 'excluded'; s.target = 'data';
+  const start = unknown.requestEvidence.query.indexOf('not');
+  s.operator = { start, end: start + 3, text: 'not' };
+  const q = 'Show coal production for Canada and petroleum consumption for Mexico, no certainty needed.';
+  const split = q.indexOf(' and petroleum');
+  const neg = q.indexOf('no certainty');
+  const trailing = { ...payload(caseById.M04), requestEvidence: { version: 1, query: q, scopes: [
+    { start: 0, end: split, text: q.slice(0, split), status: 'requested', target: 'data' },
+    { start: split, end: q.length, text: q.slice(split), status: 'excluded', target: 'data', operator: { start: neg, end: neg + 2, text: 'no' } }
+  ] } };
+  for (const p of [unknown, trailing]) {
+    const query = p.requestEvidence.query;
+    const checked = validateRequestEvidence(p.requestEvidence, query, listRequestEvidenceMentions(query));
+    assert.equal(checked.valid, false);
+    const x = validateAiInterpretation(p, query);
+    assert.equal(x.needsClarification, true);
+    assert.equal(normalizeSubmittedIntent(x, query).needsClarification, true);
+  }
+});
+'''
+Path('/private/tmp/eia-scope-independent.test.js').write_text(header+helpers+mutation+body)

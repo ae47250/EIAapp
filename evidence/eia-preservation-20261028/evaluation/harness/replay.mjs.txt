@@ -1,0 +1,96 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {interpretQuery,validateAiInterpretation,normalizeSubmittedIntent} from '../snapshot/lib/sources/eia/interpret-query.js';
+import {validateRequestEvidence} from '../snapshot/lib/sources/eia/request-evidence.js';
+import {listRequestEvidenceMentions} from '../snapshot/lib/sources/eia/intent-routing.js';
+import {GET} from '../snapshot/app/api/search-eia/route.js';
+import {buildLocalCandidatePipeline} from '../snapshot/lib/sources/eia/candidate-pipeline.js';
+const root=new URL('../',import.meta.url);
+export const frozen=JSON.parse(fs.readFileSync(new URL('records/frozen-evaluation.json',root)));
+const prompts=JSON.parse(fs.readFileSync(new URL('records/prompts.json',root))).prompts;
+const ui=fs.readFileSync(new URL('snapshot/components/search/SearchWorkspace.js',root),'utf8');
+const serializer=vm.runInNewContext(`(${ui.slice(ui.indexOf('function appendIntentParams('),ui.indexOf('\nfunction formatInterpreter('))})`);
+const metadata=JSON.parse(fs.readFileSync(new URL('snapshot/data/eia/routing-metadata.json',root)));
+const vocabulary=JSON.parse(fs.readFileSync(new URL('snapshot/data/eia/phase4-routing-config.json',root))).vocabulary;
+const arr=x=>Array.isArray(x)?x:[];
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const norm=x=>String(x??'').trim().toLowerCase().replace(/[_-]/g,' ').replace(/\s+/g,' ');
+const canonical=(type,value)=>{if(value==null)return null;const key=Object.keys(vocabulary[type]).find(k=>norm(k)===norm(value));if(key)return key;return Object.entries(vocabulary[type]).find(([k,v])=>(v.terms||[]).some(t=>norm(t)===norm(value)))?.[0]||String(value);};
+function geography(value,query){if(value==null)return null;const n=norm(value);if(n==='georgia')return /\bfrance\b/i.test(query)?'GEO':'GA';const found=metadata.geographies.find(g=>norm(g.code)===n||norm(g.name)===n);return found?.code||({us:'USA',usa:'USA','united states of america':'USA'})[n]||String(value);}
+export function extractText(data){if(typeof data?.output_text==='string')return data.output_text;return (Array.isArray(data?.output)?data.output:[]).flatMap(i=>Array.isArray(i.content)?i.content:[]).map(p=>p.text||p.output_text||'').join('\n').trim();}
+export function gradeOriginal(data,c){
+ const text=extractText(data);let parsed=null;const errors=[];
+ try{parsed=JSON.parse(text);if(!parsed||typeof parsed!=='object'||Array.isArray(parsed))throw Error('object required');}catch{errors.push('original_output_not_strict_JSON_object');}
+ if(errors.length)return {text,parsed:null,semantic:{pass:false,errors:['no_original_JSON_interpretation'],signature:null},contract:{pass:false,json:false,shape:false,spans:false,errors}};
+ const f=parsed.fields||{};const e=c.expected;
+ const meaning={geographies:(Array.isArray(parsed.geographies)?parsed.geographies:[]).map(g=>geography(g?.value,c.query)),pairs:(Array.isArray(parsed.conceptPairs)?parsed.conceptPairs:[]).map(p=>[canonical('products',p?.product),canonical('activities',p?.activity)]),sector:canonical('sectors',f.sector?.value),frequency:canonical('frequencies',f.frequency?.value),frequencyExplicit:f.frequency?.explicit,excludedGeographies:[],clarification:false,unknownQualifiers:parsed.unknownQualifiers};
+ const semanticErrors=[];
+ if(!same(meaning.geographies,e.geographies))semanticErrors.push('geographies_or_order');
+ if(e.clarification){
+  const reasons=JSON.stringify({ambiguity:parsed.ambiguity,product:f.product,unknownQualifiers:parsed.unknownQualifiers,scopes:parsed.requestEvidence?.scopes});
+  const explicitChoice=/natural[ -]gas/i.test(reasons)&&/gasoline|petrol(?!eum)/i.test(reasons);
+  meaning.clarification=f.product?.value===null&&explicitChoice;
+  if(!meaning.clarification)semanticErrors.push('gas_choice_not_clearly_clarified');
+  if(meaning.pairs.some(p=>p[0]!==null||p[1]!=='consumption'))semanticErrors.push('guessed_product_or_lost_consumption');
+  if(canonical('activities',f.activity?.value)!=='consumption')semanticErrors.push('consumption_lost');
+ }else{
+  if(!same(meaning.pairs,e.pairs))semanticErrors.push('product_activity_pairs_or_order');
+  if(canonical('products',f.product?.value)!==e.pairs[0][0]||canonical('activities',f.activity?.value)!==e.pairs[0][1])semanticErrors.push('compatibility_summary_contradiction');
+  meaning.clarification=arr(parsed.requestEvidence?.scopes).some(s=>s?.status==='unresolved');
+  if(meaning.clarification)semanticErrors.push('unnecessary_clarification');
+ }
+ if(geography(f.country?.value,c.query)!==e.geographies[0])semanticErrors.push('country_summary_contradiction');
+ if(meaning.sector!==null)semanticErrors.push('unstated_sector');
+ if(meaning.frequency!==e.frequency||meaning.frequencyExplicit!==e.frequencyExplicit)semanticErrors.push('frequency_or_explicit_flag');
+ if(Array.isArray(parsed.exclusions)&&parsed.exclusions.length)semanticErrors.push('unsupported_flat_exclusions');
+ if(!e.clarification&&Array.isArray(parsed.unknownQualifiers)&&parsed.unknownQualifiers.length)semanticErrors.push('invented_unresolved_qualifier');
+ const scopes=parsed.requestEvidence?.scopes;
+ if(Array.isArray(scopes)){
+  for(const s of scopes){
+   if(s?.status==='excluded'){
+    if(c.id===6&&/\bireland\b/i.test(s.text)&&!/(iceland|energy|consumption)/i.test(s.text))meaning.excludedGeographies.push('IRL');
+    else semanticErrors.push('unsupported_excluded_scope');
+   }
+   if(s?.status==='context'&&/(energyy?|electrciity|electricity|gas|production|consumption|brazil|japan|iceland|icealnd|ireland|texas|california|georgia|france|united states|usa|monthly|annually)/i.test(s.text||''))semanticErrors.push('requested_data_hidden_in_context');
+  }
+  if(!same(meaning.excludedGeographies,e.excludedGeographies))semanticErrors.push('missing_or_extra_geography_exclusion');
+ }else if(e.excludedGeographies.length)semanticErrors.push('missing_geography_exclusion_evidence');
+ for(const key of ['correctedQuery','confidence','ambiguity','fields','geographies','conceptPairs','exclusions','unknownQualifiers','requestEvidence'])if(!Object.hasOwn(parsed,key))errors.push('missing_'+key);
+ const confidence=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0&&x<=1;
+ if(typeof parsed.correctedQuery!=='string'||!confidence(parsed.confidence))errors.push('invalid_summary_shape');
+ for(const [key,category]of Object.entries({country:null,product:'products',activity:'activities',sector:'sectors',frequency:'frequencies'})){
+  const field=f[key];if(!field||typeof field!=='object'||!['rawValue','value','confidence','ambiguityReason'].every(k=>Object.hasOwn(field,k))||!confidence(field.confidence))errors.push('invalid_field_'+key);
+  if(field?.value!=null&&category&&!Object.hasOwn(vocabulary[category],field.value))errors.push('noncanonical_field_'+key);
+ }
+ if(typeof f.frequency?.explicit!=='boolean')errors.push('missing_frequency_explicit');
+ for(const key of ['geographies','conceptPairs','exclusions','unknownQualifiers'])if(!Array.isArray(parsed[key]))errors.push('nonarray_'+key);
+ for(const g of arr(parsed.geographies))if(!g||typeof g.value!=='string'||!confidence(g.confidence)||!metadata.geographies.some(m=>m.code===g.value||norm(m.name)===norm(g.value)))errors.push('invalid_geography_item');
+ for(const p of arr(parsed.conceptPairs))if(!p||!Number.isInteger(p.order)||!confidence(p.confidence)||(p.product!==null&&!Object.hasOwn(vocabulary.products,p.product))||(p.activity!==null&&!Object.hasOwn(vocabulary.activities,p.activity)))errors.push('invalid_pair_item');
+ for(const x of arr(parsed.exclusions))if(!x||!['product','activity','sector','conceptType'].includes(x.type)||typeof x.value!=='string'||!confidence(x.confidence))errors.push('invalid_exclusion_item');
+ if((arr(parsed.unknownQualifiers)).some(x=>typeof x!=='string'))errors.push('invalid_unknown_item');
+ const shape=errors.length===0;
+ let spanResult;try{spanResult=validateRequestEvidence(parsed.requestEvidence,c.query,listRequestEvidenceMentions(c.query));}catch(error){spanResult={valid:false,errors:['span_validator_exception']};}
+ errors.push(...(spanResult.errors||[]));
+ return {text,parsed,semantic:{pass:semanticErrors.length===0,errors:[...new Set(semanticErrors)],signature:meaning},contract:{pass:errors.length===0,json:true,shape,spans:spanResult.valid,errors:[...new Set(errors)]}};
+}
+export function summarize(intent){if(!intent)return null;const s=intent.structuredIntent||intent;return {interpreter:intent.interpreter,geographies:s.geographies?.map(g=>g.code)||[],pairs:s.conceptPairs?.map(p=>[p.product,p.activity])||[],product:intent.product,activity:intent.activity,sector:s.sector,frequency:s.frequency,frequencyExplicit:s.frequencyExplicit,exclusions:s.exclusions,needsClarification:intent.needsClarification,blockingClarification:intent.blockingClarification,route:s.route,frequencyStatus:s.frequencyStatus,clarificationMessage:intent.clarificationMessage,unknownQualifiers:s.unknownQualifiers,fallback:intent.fallback,scopeValidation:intent.scopeValidation,requestEvidence:intent.requestEvidence};}
+export async function replayOriginal(responseText,c,{status=200}={}){
+ const savedFetch=globalThis.fetch;const saved=Object.fromEntries(['OPENAI_API_KEY','EIA_API_KEY','OPENAI_MODEL','LOGIN_REQUIRED'].map(k=>[k,process.env[k]]));let intercepted=0,unexpected=0;
+ process.env.OPENAI_API_KEY='offline-response-replay';delete process.env.EIA_API_KEY;delete process.env.OPENAI_MODEL;process.env.LOGIN_REQUIRED='off';
+ globalThis.fetch=async(url,options)=>{if(url!=='https://api.openai.com/v1/responses'){unexpected++;throw Error('Network forbidden in offline replay');}intercepted++;assert.equal(intercepted,1,'No extra model call is allowed');assert.equal(JSON.parse(options.body).input,prompts.find(p=>p.queryId===c.id).input);return new Response(responseText,{status,headers:{'content-type':'application/json'}});};
+ const result={queryId:c.id};
+ try{
+  let data;try{data=JSON.parse(responseText)}catch{};
+  let strict;try{strict=JSON.parse(extractText(data))}catch{};
+  if(strict){try{result.directValidation=summarize(validateAiInterpretation(strict,c.query));}catch(error){result.directValidationError={name:error.name,message:error.message};}}
+  const intent=await interpretQuery(c.query);result.initial=summarize(intent);result.initialFull=intent;
+  const params=serializer(new URLSearchParams({q:c.query}),intent);result.serialized=params.toString();
+  const normalized=normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')),c.query);result.normalized=summarize(normalized);
+  result.evidencePreserved=same(intent.requestEvidence,normalized.requestEvidence);
+  try{const p=await buildLocalCandidatePipeline(normalized);result.pipeline=p;}catch(error){result.pipelineError={name:error.name,code:error.code,message:error.message};}
+  const response=await GET(new Request('https://offline.invalid/api/search-eia?'+params));result.publicStatus=response.status;result.public=await response.json();
+  result.final=summarize(result.public.intent);result.interceptedModelCalls=intercepted;result.actualExternalCalls=unexpected;assert.equal(intercepted,1);assert.equal(unexpected,0);
+  return result;
+ }finally{globalThis.fetch=savedFetch;for(const[k,v]of Object.entries(saved)){if(v===undefined)delete process.env[k];else process.env[k]=v;}}
+}

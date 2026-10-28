@@ -1,0 +1,187 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+
+const wd = '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const base = '5b60a094ecd10e1ca80492bc8558652768d93366';
+const output = '<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/negation-target/EIAapp_Review_Bundle.zip';
+fs.mkdirSync(path.dirname(output), {recursive:true});
+if (fs.existsSync(output)) throw new Error('Requested ZIP already exists; refusing to overwrite it.');
+const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const git = args => execFileSync('git', args, { cwd: wd, maxBuffer: 32 * 1024 * 1024 });
+const initialStatus = git(['status', '--porcelain=v1', '-z', '--untracked-files=all']);
+const head = git(['rev-parse', 'HEAD']).toString().trim();
+const branch = git(['branch', '--show-current']).toString().trim();
+if (head !== base || branch !== 'codex/eia-interpretation-audit') throw new Error('Worktree identity differs from the reviewed base/branch.');
+const tracked = git(['diff', '--name-only', '-z', base]).toString().split('\0').filter(Boolean).sort();
+const untracked = git(['ls-files', '--others', '--exclude-standard', '-z']).toString().split('\0').filter(Boolean).sort();
+const changed = [...new Set([...tracked, ...untracked])].sort();
+const stageRoot = fs.mkdtempSync('/private/tmp/eia-review-bundle-');
+const stage = path.join(stageRoot, 'bundle');
+fs.mkdirSync(stage);
+const entries = [], redactions = [], missing = [];
+const credentialPatterns = [
+  ['private-key', /-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----[\s\S]*?-----END (?:[A-Z ]+ )?PRIVATE KEY-----/g],
+  ['openai-token', /\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{20,}\b/g],
+  ['github-token', /\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,})\b/g],
+  ['aws-access-key', /\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/g],
+  ['slack-token', /\bxox[baprs]-[A-Za-z0-9-]{20,}\b/g],
+  ['jwt', /\beyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{12,}\.[A-Za-z0-9_-]{12,}\b/g],
+  ['bearer-token', /\bBearer[ \t]+[A-Za-z0-9._~+\/-]{20,}={0,2}/gi],
+  ['credential-literal', /\b(?:OPENAI_API_KEY|EIA_API_KEY|FRED_API_KEY|AWS_SECRET_ACCESS_KEY|ACCESS_TOKEN|CLIENT_SECRET|api[_-]?key|password)\s*["']?\s*[:=]\s*["'][A-Za-z0-9+/_=-]{20,}["']/gi]
+];
+function safeName(name) {
+  if (path.isAbsolute(name) || name.split('/').some(p => p === '..' || p === 'node_modules' || p === '.git' || /^\.env(?:\.|$)/.test(p))) throw new Error('Excluded or unsafe archive path: ' + name);
+}
+function scan(bytes, name, redact = false) {
+  let text = bytes.toString('utf8');
+  for (const [kind, pattern] of credentialPatterns) {
+    // Reviewed, deliberately fake transport sentinel used only by the archived offline probe.
+    const found = [...text.matchAll(pattern)].filter(match => !(kind === 'credential-literal' && /^OPENAI_API_KEY\s*=\s*'(?:injected-offline-fixture-not-a-key|offline-independent-injection)'$/.test(match[0])));
+    if (!found.length) continue;
+    if (!redact) throw new Error(`Secret-pattern review needed: ${name}; category=${kind}; count=${found.length}. Values withheld.`);
+    text = text.replace(pattern, '[REDACTED_CREDENTIAL]');
+    redactions.push({ file: name, kind, occurrences: found.length });
+  }
+  if (redact) {
+    const count = (text.match(/\/Users\/[^/\s"'<>]+/g) || []).length;
+    if (count) {
+      text = text.replace(/\/Users\/[^/\s"'<>]+/g, '<HOME>');
+      redactions.push({ file: name, kind: 'local-home-path', occurrences: count });
+    }
+    const pattern = /(?:\/private)?\/var\/folders\/[^\s"'<>]+\/T\/eia-audit-base-[A-Za-z0-9_-]+/g;
+    const countBase = (text.match(pattern) || []).length;
+    if (countBase) {
+      text = text.replace(pattern, '<BASELINE>');
+      redactions.push({ file: name, kind: 'temporary-baseline-path', occurrences: countBase });
+    }
+    return Buffer.from(text);
+  }
+  return bytes;
+}
+function put(name, data, category, source = null, redact = false) {
+  safeName(name);
+  const original = Buffer.isBuffer(data) ? data : Buffer.from(data);
+  const bytes = /\.png$/.test(name) ? original : scan(original, name, redact);
+  const destination = path.join(stage, name);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, bytes);
+  entries.push({ path: name, category, bytes: bytes.length, sha256: sha(bytes), ...(source ? { source, originalSha256: sha(original) } : {}) });
+}
+function copy(source, name, category, redact = false) {
+  if (!fs.existsSync(source)) { missing.push({ item: name, reason: 'Source record unavailable at packaging time' }); return; }
+  if (!fs.lstatSync(source).isFile()) throw new Error('Not a regular file: ' + name);
+  put(name, fs.readFileSync(source), category, source.startsWith(wd + '/') ? source.slice(wd.length + 1) : path.basename(source), redact);
+}
+for (const relative of changed) copy(path.join(wd, relative), 'files/' + relative, untracked.includes(relative) ? 'new-worktree-file' : 'modified-tracked-file');
+const trackedPatch = git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-textconv', base, '--']);
+put('diff/tracked-changes.patch', trackedPatch, 'tracked-diff');
+let completePatch = trackedPatch;
+for (const relative of untracked) {
+  const result = spawnSync('git', ['diff', '--no-index', '--binary', '--full-index', '--no-ext-diff', '--no-textconv', '--', '/dev/null', relative], { cwd: wd, maxBuffer: 32 * 1024 * 1024 });
+  if (result.status !== 1 || result.error) throw new Error('Unable to create new-file patch: ' + relative);
+  completePatch = Buffer.concat([completePatch, result.stdout]);
+}
+put('diff/complete-changes.patch', completePatch, 'tracked-and-new-file-diff');
+for (const file of ['AGENTS.md', 'package.json', 'package-lock.json']) copy(path.join(wd, file), 'context/' + file, 'unchanged-reproduction-context');
+
+const records = [
+  ['eia-followup-before-final.log', 'followup'],
+  ['eia-followup-final-focused-tests.log', 'followup'],
+  ['eia-followup-final-tests.log', 'followup'],
+  ['eia-followup-final-build.log', 'followup'],
+  ['eia-followup-final-static-checks.json', 'followup'],
+  ['eia-followup-expectations.json', 'followup'],
+  ['eia-followup-after.log', 'followup'],
+  ['eia-followup-full-tests.log', 'followup'],
+  ['eia-followup-build.log', 'followup'],
+  ['eia-followup-static-checks.json', 'followup'],
+  ['eia-followup-freeze.json', 'followup'],
+  ['eia-followup-freeze-final.json', 'followup'],
+  ['eia-followup-state-check.json', 'followup'],
+  ['eia-followup-independent-challenges.json', 'followup'],
+  ['eia-followup-independent-review.md', 'followup'],
+  ['eia-final-tests.log', 'tests'],
+  ['eia-original-suite.log', 'baseline'],
+  ['eia-baseline-final-audit.log', 'baseline'],
+  ['eia-build-final.log', 'build'],
+  ['eia-independent-reviewed-final-tree.log', 'review'],
+  ['eia-independent-initial.log', 'review'],
+  ['eia-blind-challenges.json', 'review'],
+  ['eia-challenge-adjudication.json', 'review'],
+  ['eia-independent-final-boundary.mjs', 'review'],
+  ['eia-independent-pool-review-final.json', 'review']
+];
+for (const name of fs.readdirSync('/private/tmp').filter(name => /^eia-followup-(?:independent|supplemental|content-collision|geography|modifier-precedence|exact-pairs|final-guards|reviewed-(?:initial|modifier|final)-production|final-incremental|final-git-state).*\.(?:json|md|mjs|log|patch|diff)$/.test(name))) {
+  if (!records.some(([existing]) => existing === name)) records.push([name, 'followup']);
+}
+for (const name of fs.readdirSync('/private/tmp').filter(name => /^eia-negation-.*\.(?:json|md|mjs|log|patch|diff|txt)$/.test(name))) {
+  if (!records.some(([existing]) => existing === name) && !['eia-negation-bundle-inventory.txt','eia-negation-final-audit.md'].includes(name)) records.push([name, name === 'eia-negation-resolution.txt' ? 'rejected-prototype' : 'negation']);
+}
+for (const name of ['intent-routing.js', 'interpret-query.js']) copy('/private/tmp/eia-negation-design-probe/lib/sources/eia/' + name, 'evidence/rejected-prototype/lib/sources/eia/' + name, 'rejected-prototype-not-final-source');
+copy('/private/tmp/eia-negation-current-state/independent-current-state-review.md', 'evidence/negation/independent-current-state-review.md', 'independent-current-state-review');
+for (const [name, category] of records) copy('/private/tmp/' + name, `evidence/${category}/${name}`, 'verification-record', name.endsWith('.log'));
+const review = JSON.parse(fs.readFileSync(path.join(wd, 'tests/fixtures/eia/review-regressions.json')));
+for (const source of review.sources) {
+  const original = '/private/tmp/' + source.file;
+  if (fs.existsSync(original) && sha(fs.readFileSync(original)) !== source.sha256) throw new Error('Frozen review source hash mismatch: ' + source.file);
+  copy(original, 'evidence/review/' + source.file, 'frozen-review-source');
+}
+copy('<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/eia-clarification.png', 'evidence/browser/eia-clarification.png', 'browser-evidence');
+put('evidence/review/prior-review-message.md', `# Prior audit independent review — conversation record\n\nPackaging-time transcription of the final message received from reviewer /root/independent_diff_review in the completed EIA audit. This is not a new review or an original on-disk transcript export.\n\n> No remaining actionable findings in the final reviewed production diff.\n>\n> - Independent checks: 298 tests: 297 passed, 1 disputed-case skip; syntax and diff checks passed.\n> - Frozen counterexamples: all 29 interpretation/submission cases pass. The additional two-country comparison now includes all three requested pairs.\n> - Retrieval: the Texas total natural-gas consumption series reaches displayed results. Validation thresholds remain intact.\n> - Scope: no query/geography-specific exceptions, new dependencies, model changes, UI/auth changes, or raw metadata rewrites found.\n> - Limits: existing 10-candidate and 5-definition limits remain, with explicit overflow warnings. Live models, observations, and deployment were not tested.\n>\n> Production diff SHA-256: 176eb4e9fd390e77ad5d0ae50f79592b80df7d92ee021e68809af80698615499.\n>\n> I made no repository edits or Git writes. Subsequent production changes require another review pass.\n`, 'review-conversation-transcription');
+
+// Verify the complete patch independently against base blobs, without writing to the repository.
+const replay = path.join(stageRoot, 'patch-replay');
+fs.mkdirSync(replay);
+for (const relative of tracked) {
+  const destination = path.join(replay, relative);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, git(['show', `${base}:${relative}`]));
+}
+execFileSync('git', ['apply', '--binary', '--whitespace=nowarn', path.join(stage, 'diff/complete-changes.patch')], { cwd: replay });
+for (const relative of changed) if (sha(fs.readFileSync(path.join(replay, relative))) !== sha(fs.readFileSync(path.join(wd, relative)))) throw new Error('Complete patch replay mismatch: ' + relative);
+
+const absentRecords = [
+  'There is no successful final negation correction or all-green current test record: current source still fails 29 retained regressions. The disposable prototype was rejected, not applied.',
+  'A prior audit reviewer final message lacked a standalone original file; a labeled conversation transcription is retained. The current independent design/prototype/state reviews have standalone files.',
+  'No new rendered-browser console/network capture was made; current boundary tests execute the actual browser serializer and public route with injected responses. The prior screenshot is historical.',
+  'Live model, live EIA observations/exports, deployed-commit verification and full source-cache regeneration were not performed. Required source ZIP archives remain absent as recorded in the audit.'
+];
+put('REDACTIONS.md', `# Secret scan and redactions\n\nAll selected text payloads were inspected for private keys, OpenAI/GitHub/AWS/Slack credentials, JWTs, bearer credentials and secret-like literal assignments. No credential values are printed in scan output. Exact source/configuration/test/fixture/audit copies and patches were preserved unchanged; a source credential finding would have stopped packaging. No credential-like secret was found in those files. The deliberately fake API-key sentinel in the independent offline probe was reviewed and retained as test data; it cannot call the provider because fetch is intercepted. This pattern scan is bounded evidence, not a guarantee against every possible secret format.\n\nLog redactions made for external sharing:\n\n${redactions.length ? redactions.map(r => `- ${r.file}: ${r.kind}; ${r.occurrences} occurrence(s).`).join('\n') : '- None.'}\n\nLocal-home and temporary-baseline path substitutions remove local path identifiers; they do not alter assertions, results or counts. Original and bundled record SHA-256 values are in MANIFEST.json. Non-log review helper scripts remain byte-for-byte archival records and retain their original import paths. Reproduce checks using the repository tests instead.\n`, 'packaging-report');
+const inventoryContext = {
+  base, head, branch, trackedCount: tracked.length, untrackedCount: untracked.length, changedCount: changed.length,
+  fileTable: changed.map(p => `| ${untracked.includes(p) ? 'New / untracked' : 'Modified / tracked'} | ${p} |`).join('\n'),
+  evidenceList: entries.filter(e => e.path.startsWith('evidence/')).map(e => '- ' + e.path).join('\n'),
+  missingList: [...missing.map(m => `${m.item}: ${m.reason}`), ...absentRecords].map(m => '- ' + m).join('\n'),
+  syntaxCommands: changed.filter(p => p.endsWith('.js')).map(p => 'node --check ' + p).join('\n')
+};
+put('INVENTORY.md', fs.readFileSync('/private/tmp/eia-negation-bundle-inventory.txt','utf8').replace(/\{\{(\w+)\}\}/g, (_, key) => {
+  if (!(key in inventoryContext)) throw new Error('Unknown inventory key: '+key);
+  return inventoryContext[key];
+}), 'packaging-inventory');
+put('SHA256SUMS.txt', [...entries].sort((a,b) => a.path.localeCompare(b.path)).map(e => `${e.sha256}  ${e.path}\n`).join(''), 'payload-checksums');
+const manifest = { version: 1, baseCommit: base, headCommit: head, branch, trackedModifiedFiles: tracked, newFiles: untracked, exactFinalFileCopies: changed.length, patchReplay: 'passed: all final copies reproduced from base blobs plus complete patch', missingRecords: [...missing, ...absentRecords], redactions, exclusions: ['credentials', '.env files', 'node_modules', '.git', 'generated build files', 'unrelated files'], manifestCoverage: 'All ZIP file entries except MANIFEST.json itself', files: [...entries].sort((a,b) => a.path.localeCompare(b.path)) };
+fs.writeFileSync(path.join(stage, 'MANIFEST.json'), JSON.stringify(manifest, null, 2) + '\n');
+execFileSync('/usr/bin/zip', ['-q', '-r', output, '.'], { cwd: stage });
+
+// Reopen the finished ZIP and validate its actual byte contents, not only the staging folder.
+execFileSync('/usr/bin/unzip', ['-tq', output]);
+const zippedNames = execFileSync('/usr/bin/unzip', ['-Z1', output], { encoding: 'utf8' }).trim().split('\n').filter(n => !n.endsWith('/')).sort();
+const expectedNames = [...entries.map(e => e.path), 'MANIFEST.json'].sort();
+if (JSON.stringify(zippedNames) !== JSON.stringify(expectedNames)) throw new Error('ZIP actual inventory mismatch');
+for (const name of zippedNames) safeName(name);
+const zippedManifest = JSON.parse(execFileSync('/usr/bin/unzip', ['-p', output, 'MANIFEST.json']).toString());
+for (const entry of zippedManifest.files) {
+  const bytes = execFileSync('/usr/bin/unzip', ['-p', output, entry.path], { maxBuffer: 32 * 1024 * 1024 });
+  if (bytes.length !== entry.bytes || sha(bytes) !== entry.sha256) throw new Error('ZIP byte/hash mismatch: ' + entry.path);
+  if (!entry.path.endsWith('.png')) scan(bytes, entry.path);
+}
+for (const relative of changed) {
+  const bytes = execFileSync('/usr/bin/unzip', ['-p', output, 'files/' + relative], { maxBuffer: 32 * 1024 * 1024 });
+  if (sha(bytes) !== sha(fs.readFileSync(path.join(wd, relative)))) throw new Error('ZIP final-copy mismatch: ' + relative);
+}
+if (!initialStatus.equals(git(['status', '--porcelain=v1', '-z', '--untracked-files=all']))) throw new Error('Repository status changed while packaging');
+const summary = { zip: output, sha256: sha(fs.readFileSync(output)), bytes: fs.statSync(output).size, archiveFiles: zippedNames.length, trackedModifiedCopies: tracked.length, newFileCopies: untracked.length, verification: 'ZIP reopened; CRC, exact inventory, every payload hash, all changed/new source copies, complete patch replay, secret-pattern rescan and unchanged Git status passed', credentialRedactions: redactions.filter(r => !r.kind.endsWith('-path')).reduce((s,r) => s+r.occurrences,0), pathRedactionOccurrences: redactions.filter(r => r.kind.endsWith('-path')).reduce((s,r) => s+r.occurrences,0), missingRequestedFileRecords: missing, missingStandaloneRecords: absentRecords };
+fs.writeFileSync(output.replace(/\.zip$/, '.verification.json'), JSON.stringify(summary,null,2)+'\n');
+console.log(JSON.stringify(summary,null,2));

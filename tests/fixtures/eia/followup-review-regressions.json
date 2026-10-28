@@ -1,0 +1,964 @@
+{
+  "sources": [
+    {
+      "file": "eia-followup-independent-challenges.json",
+      "sha256": "c60cf4a533abb90b78bd5acb3700eb25d4d0fc4ce7d59994304b2b46ff0bec46"
+    },
+    {
+      "file": "eia-followup-supplemental-challenges.json",
+      "sha256": "c95fb84bf374f58c7f71127895b2380e106e6d8266a8734e6559ee491879bd4e"
+    },
+    {
+      "file": "eia-followup-content-collision-challenges.json",
+      "sha256": "0278d29855fd862b7a5c9cd360480f302c676e2d4e9d0b116f0768d325e67723"
+    },
+    {
+      "file": "eia-followup-content-collision-extra.json",
+      "sha256": "cd8553b10facb829f0674cc5fb87efa752df43720546d200a3a3d0fb29acc7d9"
+    },
+    {
+      "file": "eia-followup-final-guards.json",
+      "sha256": "e4d59f7dc446d4d2910bae03bce5d5f685e0e664bcde019ba36c8d842ff8e350"
+    }
+  ],
+  "adjudication": {
+    "id": "independent-positive-order-preserved",
+    "reason": "Multiple products and activities without explicit pairing have unresolved pairing under the preserved existing contract; clarify instead of assuming a Cartesian product. Keep geography and all concept mentions. Original frozen expectation and observed failure remain in independent evidence."
+  },
+  "cases": [
+    {
+      "id": "independent-gambia-reported",
+      "q": "energy consumption in The Gambia",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-gambia-canonical",
+      "q": "energy consumption in Gambia, The",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-gambia-bare",
+      "q": "energy consumption in Gambia",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-zambia-independent",
+      "q": "energy consumption in Zambia",
+      "expected": {
+        "codes": [
+          "ZMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-gambia-zambia-ordered",
+      "q": "Compare energy consumption in The Gambia, Zambia and Canada",
+      "expected": {
+        "codes": [
+          "GMB",
+          "ZMB",
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-bahamas-article",
+      "q": "energy consumption in The Bahamas",
+      "expected": {
+        "codes": [
+          "BHS"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-bahamas-bare",
+      "q": "energy consumption in Bahamas",
+      "expected": {
+        "codes": [
+          "BHS"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-long-country-protection",
+      "q": "energy consumption in Papua New Guinea and Guinea-Bissau",
+      "expected": {
+        "codes": [
+          "PNG",
+          "GNB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-usa-uncertainty-reported",
+      "q": "I'm not sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-gambia-uncertainty-generalized",
+      "q": "I'm not certain whether energy consumption is available for The Gambia",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-canada-uncertainty-monthly",
+      "q": "I don't know whether monthly natural gas consumption is available for Canada",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ],
+        "frequency": "monthly",
+        "explicit": true,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-usa-uncertainty-explicit-annual",
+      "q": "I'm not sure what annual USA energy consumption data is available",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": true,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-genuine-geography-exclusion",
+      "q": "energy consumption in Canada, not USA",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-genuine-product-exclusion",
+      "q": "USA natural gas consumption, not petroleum",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "petroleum"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-genuine-activity-exclusion",
+      "q": "USA energy consumption, not production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-uncertainty-with-exclusion",
+      "q": "I'm not sure what's available for USA natural gas consumption, not petroleum production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "petroleum"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-positive-order-preserved",
+      "q": "I'm not sure what's available for Canada and The Gambia: coal and natural gas consumption and production",
+      "expected": {
+        "codes": [
+          "CAN",
+          "GMB"
+        ],
+        "pairs": [],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": true,
+        "exclusions": []
+      },
+      "unresolvedPairing": {
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ]
+      }
+    },
+    {
+      "id": "independent-uncertainty-no-country-substitution",
+      "q": "I'm not sure whether quarterly energy consumption exists for The Gambia, not Zambia",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "quarterly",
+        "explicit": true,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-cannot-tell",
+      "q": "I cannot tell what USA energy consumption data is available",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-no-idea",
+      "q": "I have no idea what energy consumption data is available for Canada",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-modifier-0",
+      "q": "I'm not at all sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-modifier-1",
+      "q": "I'm not very sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-modifier-2",
+      "q": "I'm not so sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-modifier-3",
+      "q": "I'm not particularly sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-modifier-4",
+      "q": "I'm not exactly sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-uncertainty-modifier-5",
+      "q": "I'm not actually sure what's available for USA energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-ordered-explicit-pairs",
+      "q": "I'm not sure what's available for Canada and The Gambia: coal consumption and natural gas production",
+      "expected": {
+        "codes": [
+          "CAN",
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "coal",
+            "consumption"
+          ],
+          [
+            "natural gas",
+            "production"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-ordered-multiple-activities",
+      "q": "I'm not sure what's available for Canada and The Gambia: energy consumption and production",
+      "expected": {
+        "codes": [
+          "CAN",
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ],
+          [
+            "total energy",
+            "production"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-italy-actual-exclusion-confirmation",
+      "q": "Canada energy consumption, not Italy, sure?",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-italy-actual-exclusion-certainty",
+      "q": "Canada energy consumption, not Italy, certainly not USA",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-italy-punctuation-control",
+      "q": "Canada energy consumption, not Italy. Sure?",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-genuine-certainty-ordinary",
+      "q": "I'm not entirely sure about Canada energy consumption",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-supply-actual-exclusion",
+      "q": "USA energy consumption, not supply, sure?",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-italy-exclusion-understand",
+      "q": "Canada energy consumption, not Italy, understand?",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-supply-exclusion-understand",
+      "q": "USA energy consumption, not supply, understand?",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-0",
+      "q": "USA energy consumption; do not actually include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-1",
+      "q": "USA energy consumption; do not particularly include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-2",
+      "q": "USA energy consumption; do not really include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-3",
+      "q": "USA energy consumption; do not entirely include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-modified-uncertainty-and-negative",
+      "q": "I'm not at all sure what's available for USA energy consumption, not actually coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-state-country-alias-control",
+      "q": "I'm not particularly sure what's available for Georgia and Canada energy consumption",
+      "expected": {
+        "codes": [
+          "GEO",
+          "CAN"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    },
+    {
+      "id": "independent-request-pronoun-control",
+      "q": "Tell us about energy consumption in The Gambia",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": []
+      }
+    }
+  ]
+}

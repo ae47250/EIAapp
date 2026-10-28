@@ -1,0 +1,178 @@
+{
+  "scheduledId": 39,
+  "queryId": 10,
+  "repeat": 2,
+  "model": "gpt-6-luna",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:10:06.042Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "9062dceb3c76f39bf7ca142243adb5ee6c6c01acd7e24f918b504d74f0b3ad7a",
+  "promptSHA256": "712851d9f5452682772d1c0d194129d197bff135b703c9dfa7ac15679da1ee98",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.003298,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:09:54 GMT",
+    "openai-processing-ms": "4551",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999612",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "2ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 796,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 531,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1327
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:10:10.750Z",
+  "elapsedMs": 4707.503792000003,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "{\n  \"correctedQuery\": \"natural gas consumption in the United States\",\n  \"confidence\": 0.98,\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"the United States\",\n      \"value\": \"United States\",\n      \"confidence\": 0.99,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"gas\",\n      \"value\": \"natural gas\",\n      \"confidence\": 0.9,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 0.99,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": \"No sector is stated.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 1.0,\n      \"explicit\": false,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"United States\",\n      \"confidence\": 0.99\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"natural gas\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 0.95\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"gas consumption in the United States\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 3,\n        \"text\": \"gas\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 3,\n        \"end\": 15,\n        \"text\": \" consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 15,\n        \"end\": 18,\n        \"text\": \" in \",\n        \"status\": \"context\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 18,\n        \"end\": 29,\n        \"text\": \"the United States\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+    "parsed": {
+      "correctedQuery": "natural gas consumption in the United States",
+      "confidence": 0.98,
+      "ambiguity": null,
+      "fields": {
+        "country": {
+          "rawValue": "the United States",
+          "value": "United States",
+          "confidence": 0.99,
+          "ambiguityReason": null
+        },
+        "product": {
+          "rawValue": "gas",
+          "value": "natural gas",
+          "confidence": 0.9,
+          "ambiguityReason": null
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 0.99,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 1,
+          "ambiguityReason": "No sector is stated."
+        },
+        "frequency": {
+          "rawValue": null,
+          "value": "annual",
+          "confidence": 1,
+          "explicit": false,
+          "ambiguityReason": null
+        }
+      },
+      "geographies": [
+        {
+          "value": "United States",
+          "confidence": 0.99
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "natural gas",
+          "activity": "consumption",
+          "order": 1,
+          "confidence": 0.95
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "gas consumption in the United States",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 3,
+            "text": "gas",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 3,
+            "end": 15,
+            "text": " consumption",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 15,
+            "end": 18,
+            "text": " in ",
+            "status": "context",
+            "target": "data"
+          },
+          {
+            "start": 18,
+            "end": 29,
+            "text": "the United States",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      }
+    },
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "geographies_or_order",
+        "gas_choice_not_clearly_clarified",
+        "guessed_product_or_lost_consumption",
+        "country_summary_contradiction"
+      ],
+      "signature": {
+        "geographies": [
+          "US"
+        ],
+        "pairs": [
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": []
+      }
+    },
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": true,
+      "spans": false,
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    }
+  },
+  "replayFile": "attempts/39-1.replay.json"
+}

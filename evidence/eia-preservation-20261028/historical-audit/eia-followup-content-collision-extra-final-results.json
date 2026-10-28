@@ -1,0 +1,702 @@
+{
+  "root": "<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp",
+  "fixtureSha256": "cd8553b10facb829f0674cc5fb87efa752df43720546d200a3a3d0fb29acc7d9",
+  "serializerSha256": "8ff40e400974decdd031c75af952c71054376ce73bea9df640f77304bff92baf",
+  "fetchCalls": 3,
+  "externalFetches": 0,
+  "cases": 3,
+  "passed": 3,
+  "results": [
+    {
+      "id": "supply-actual-exclusion",
+      "query": "USA energy consumption, not supply, sure?",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "id": "supply-actual-exclusion",
+        "query": "USA energy consumption, not supply, sure?",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": [
+          {
+            "type": "activity",
+            "value": "production",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "errors": [],
+      "rules": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 5,
+        "comparisonDefinitions": 0,
+        "needsClarification": false,
+        "candidates": [
+          {
+            "seriesId": "INTL.44-2-USA-MTOE.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "million metric tons of oil equivalent",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4411-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4413-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4415-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4417-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          }
+        ],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "italy-exclusion-understand",
+      "query": "Canada energy consumption, not Italy, understand?",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [
+          "ITA"
+        ],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "italy-exclusion-understand",
+        "query": "Canada energy consumption, not Italy, understand?",
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "CAN",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "CAN",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [],
+      "rules": {
+        "geographies": [
+          "CAN"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [
+          "CAN"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [
+          "CAN"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [
+          "CAN"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 5,
+        "comparisonDefinitions": 0,
+        "needsClarification": false,
+        "candidates": [
+          {
+            "seriesId": "INTL.44-2-CAN-MTOE.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "other"
+            },
+            "unit": "million metric tons of oil equivalent",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4411-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4413-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4415-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4417-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          }
+        ],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "supply-exclusion-understand",
+      "query": "USA energy consumption, not supply, understand?",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "id": "supply-exclusion-understand",
+        "query": "USA energy consumption, not supply, understand?",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": [
+          {
+            "type": "activity",
+            "value": "production",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "errors": [],
+      "rules": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [
+          "production"
+        ],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 5,
+        "comparisonDefinitions": 0,
+        "needsClarification": false,
+        "candidates": [
+          {
+            "seriesId": "INTL.44-2-USA-MTOE.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "million metric tons of oil equivalent",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4411-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4413-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4415-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4417-2-USA-QBTU.A",
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "other"
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          }
+        ],
+        "userWarnings": []
+      }
+    }
+  ]
+}

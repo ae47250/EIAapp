@@ -1,0 +1,1664 @@
+{
+  "version": 1,
+  "baseCommit": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "headCommit": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "branch": "codex/eia-interpretation-audit",
+  "trackedModifiedFiles": [
+    "components/search/SearchWorkspace.js",
+    "data/eia/phase4-routing-config.json",
+    "data/eia/routing-metadata.json",
+    "lib/sources/eia/candidate-search.js",
+    "lib/sources/eia/intent-routing.js",
+    "lib/sources/eia/interpret-query.js",
+    "lib/sources/eia/local-ranking.js",
+    "lib/sources/eia/local-retrieval.js",
+    "lib/sources/eia/multi-country-comparison.js",
+    "scripts/eia-metadata/normalize.js",
+    "tests/eia-query-interpretation.test.js"
+  ],
+  "newFiles": [
+    "docs/eia-interpretation-audit.md",
+    "lib/sources/eia/request-evidence.js",
+    "tests/eia-followup-regressions.test.js",
+    "tests/eia-independent-challenges.test.js",
+    "tests/eia-interpretation-audit.test.js",
+    "tests/eia-negation-independent.test.js",
+    "tests/eia-negation-target.test.js",
+    "tests/eia-scope-evidence.test.js",
+    "tests/eia-scope-independent.test.js",
+    "tests/eia-scope-metadata-labels.test.js",
+    "tests/fixtures/eia/challenge-route-adjudication.json",
+    "tests/fixtures/eia/followup-regressions.json",
+    "tests/fixtures/eia/followup-review-regressions.json",
+    "tests/fixtures/eia/independent-challenges.json",
+    "tests/fixtures/eia/interpretation-audit.json",
+    "tests/fixtures/eia/negation-independent.json",
+    "tests/fixtures/eia/negation-target.json",
+    "tests/fixtures/eia/review-regressions.json",
+    "tests/fixtures/eia/scope-evidence-legacy.json",
+    "tests/fixtures/eia/scope-evidence-regressions.json",
+    "tests/fixtures/eia/scope-independent-matrix.json",
+    "tests/fixtures/eia/scope-independent-payloads.json"
+  ],
+  "exactFinalFileCopies": 33,
+  "patchReplay": "passed: all final copies reproduced from base blobs plus complete patch",
+  "missingRecords": [
+    "No live-model accuracy evaluation or live EIA observation/export run was performed. The known structurally valid bad-model counterexample is retained, not repaired by a predicate exception.",
+    "No new rendered-browser console/network capture was made. Current tests execute the actual browser serializer and public route with injected responses; the earlier screenshot is historical.",
+    "Full source-cache regeneration was unavailable because the original source ZIP archives are absent. Normalization is tested offline against archived metadata, including2655 simple state-series records.",
+    "Deployed-commit identity is unknown; no deployment or production check was authorized.",
+    "A prior original-audit reviewer final message lacked a standalone original file; a labelled conversation transcription is retained. The current final independent review has its own standalone record."
+  ],
+  "redactions": [
+    {
+      "file": "evidence/followup/eia-followup-before-final.log",
+      "kind": "local-home-path",
+      "occurrences": 48
+    },
+    {
+      "file": "evidence/baseline/eia-baseline-final-audit.log",
+      "kind": "temporary-baseline-path",
+      "occurrences": 87
+    },
+    {
+      "file": "evidence/review/eia-independent-initial.log",
+      "kind": "local-home-path",
+      "occurrences": 15
+    },
+    {
+      "file": "evidence/negation/eia-negation-independent-retained-tests.log",
+      "kind": "local-home-path",
+      "occurrences": 22
+    },
+    {
+      "file": "evidence/negation/eia-negation-target-before.log",
+      "kind": "local-home-path",
+      "occurrences": 36
+    },
+    {
+      "file": "evidence/negation/eia-negation-target-current-full-tests.log",
+      "kind": "local-home-path",
+      "occurrences": 58
+    },
+    {
+      "file": "evidence/negation/eia-negation-target-final-tests.log",
+      "kind": "local-home-path",
+      "occurrences": 18
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-focused-v3.log",
+      "kind": "local-home-path",
+      "occurrences": 10
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-initial-existing.log",
+      "kind": "local-home-path",
+      "occurrences": 6
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-initial-full.log",
+      "kind": "local-home-path",
+      "occurrences": 168
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-label-tests-final-v2.log",
+      "kind": "local-home-path",
+      "occurrences": 2
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-label-tests-final.log",
+      "kind": "local-home-path",
+      "occurrences": 2
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-label-tests.log",
+      "kind": "local-home-path",
+      "occurrences": 8
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-migrated-full-v1.log",
+      "kind": "local-home-path",
+      "occurrences": 4
+    },
+    {
+      "file": "evidence/scope-contract/eia-scope-contract-primary-initial.log",
+      "kind": "local-home-path",
+      "occurrences": 2
+    }
+  ],
+  "exclusions": [
+    "credentials",
+    ".env files",
+    "node_modules",
+    ".git",
+    "generated build files",
+    "unrelated files"
+  ],
+  "manifestCoverage": "All ZIP file entries except MANIFEST.json itself",
+  "files": [
+    {
+      "path": "context/AGENTS.md",
+      "category": "unchanged-reproduction-context",
+      "bytes": 7742,
+      "sha256": "7cc12a30a75c9044e3276b05c8536f3bae420232f5c8093c0fcee73bce760ae3",
+      "source": "AGENTS.md",
+      "originalSha256": "7cc12a30a75c9044e3276b05c8536f3bae420232f5c8093c0fcee73bce760ae3"
+    },
+    {
+      "path": "context/package-lock.json",
+      "category": "unchanged-reproduction-context",
+      "bytes": 30748,
+      "sha256": "4cadf2372ef0ac7ced800cd281fad844e4c20a9f49cae7698fb8421f6fb72f17",
+      "source": "package-lock.json",
+      "originalSha256": "4cadf2372ef0ac7ced800cd281fad844e4c20a9f49cae7698fb8421f6fb72f17"
+    },
+    {
+      "path": "context/package.json",
+      "category": "unchanged-reproduction-context",
+      "bytes": 364,
+      "sha256": "a5036939f0d8f0231da982d7e6bc257cec424a7eeb7300c4abb2b5064e1939bd",
+      "source": "package.json",
+      "originalSha256": "a5036939f0d8f0231da982d7e6bc257cec424a7eeb7300c4abb2b5064e1939bd"
+    },
+    {
+      "path": "diff/complete-changes.patch",
+      "category": "tracked-and-new-file-diff",
+      "bytes": 765199,
+      "sha256": "9b31ff106ab38c0fa8c5d8e18e351153d07f79c20574419e4a8ab5a204fc7509"
+    },
+    {
+      "path": "diff/tracked-changes.patch",
+      "category": "tracked-diff",
+      "bytes": 65565,
+      "sha256": "f536b003086728374331a087cc86907570d3925ca4af18fd900af76dc42ab062"
+    },
+    {
+      "path": "evidence/baseline/eia-baseline-final-audit.log",
+      "category": "verification-record",
+      "bytes": 120085,
+      "sha256": "e78804c4cb87acca7f698283749f1695fc027a11939079fbbdceb218086b35fa",
+      "source": "eia-baseline-final-audit.log",
+      "originalSha256": "f7156dd2e6c01aefa74d608ddc9401a39aedffd909ef6539df395a34ebed52b6"
+    },
+    {
+      "path": "evidence/baseline/eia-original-suite.log",
+      "category": "verification-record",
+      "bytes": 21249,
+      "sha256": "71b2239fb2df78600f8e454a29998d084149e02e9247dbf889569fc2d12713f4",
+      "source": "eia-original-suite.log",
+      "originalSha256": "71b2239fb2df78600f8e454a29998d084149e02e9247dbf889569fc2d12713f4"
+    },
+    {
+      "path": "evidence/browser/eia-clarification.png",
+      "category": "browser-evidence",
+      "bytes": 80199,
+      "sha256": "5e7dbe0fb7130a8bffbd2c0bf8304bff830d086ed3a66f54ad9e32f7351a469a",
+      "source": "eia-clarification.png",
+      "originalSha256": "5e7dbe0fb7130a8bffbd2c0bf8304bff830d086ed3a66f54ad9e32f7351a469a"
+    },
+    {
+      "path": "evidence/build/eia-build-final.log",
+      "category": "verification-record",
+      "bytes": 701,
+      "sha256": "d6d77814aafad78e7155c6a7ba5fdc72a4490b0d3375b25611f47e76fe160ed0",
+      "source": "eia-build-final.log",
+      "originalSha256": "d6d77814aafad78e7155c6a7ba5fdc72a4490b0d3375b25611f47e76fe160ed0"
+    },
+    {
+      "path": "evidence/followup/eia-followup-after.log",
+      "category": "verification-record",
+      "bytes": 8152,
+      "sha256": "7162eda996d408069a3992cc0fae66464349c6c92cb1c2373a83171739d54962",
+      "source": "eia-followup-after.log",
+      "originalSha256": "7162eda996d408069a3992cc0fae66464349c6c92cb1c2373a83171739d54962"
+    },
+    {
+      "path": "evidence/followup/eia-followup-before-final.log",
+      "category": "verification-record",
+      "bytes": 191594,
+      "sha256": "75ee871647eb791e4b42e3766c64e5e36e1187d740a9fb482be95c30cf319fac",
+      "source": "eia-followup-before-final.log",
+      "originalSha256": "23f33f961acb377a29e924c9a267b30e0773f23120fdd702ae592d4078f9fde1"
+    },
+    {
+      "path": "evidence/followup/eia-followup-build.log",
+      "category": "verification-record",
+      "bytes": 701,
+      "sha256": "ac42e4561b3f060ec97ffb68d17d5e3a8cc090d07ec859f9ac3d7e698a8a469d",
+      "source": "eia-followup-build.log",
+      "originalSha256": "ac42e4561b3f060ec97ffb68d17d5e3a8cc090d07ec859f9ac3d7e698a8a469d"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-challenges.json",
+      "category": "verification-record",
+      "bytes": 1791,
+      "sha256": "0278d29855fd862b7a5c9cd360480f302c676e2d4e9d0b116f0768d325e67723",
+      "source": "eia-followup-content-collision-challenges.json",
+      "originalSha256": "0278d29855fd862b7a5c9cd360480f302c676e2d4e9d0b116f0768d325e67723"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-extra-final-results.json",
+      "category": "verification-record",
+      "bytes": 18574,
+      "sha256": "d11f7af1f13eb81c5009a2b6ebbc64664ecf27c781c0844c35486aa01d25d5c9",
+      "source": "eia-followup-content-collision-extra-final-results.json",
+      "originalSha256": "d11f7af1f13eb81c5009a2b6ebbc64664ecf27c781c0844c35486aa01d25d5c9"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-extra-final.log",
+      "category": "verification-record",
+      "bytes": 344,
+      "sha256": "b322f9e5cdfe26b49cdcd2a331112b37581f1ad61a2577fe729b1174b27a0768",
+      "source": "eia-followup-content-collision-extra-final.log",
+      "originalSha256": "b322f9e5cdfe26b49cdcd2a331112b37581f1ad61a2577fe729b1174b27a0768"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-extra-results.json",
+      "category": "verification-record",
+      "bytes": 30488,
+      "sha256": "0388092482e5b3161f45326583008b102b966b9f4d81a29c997ae95411b7a3f5",
+      "source": "eia-followup-content-collision-extra-results.json",
+      "originalSha256": "0388092482e5b3161f45326583008b102b966b9f4d81a29c997ae95411b7a3f5"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-extra.json",
+      "category": "verification-record",
+      "bytes": 1577,
+      "sha256": "cd8553b10facb829f0674cc5fb87efa752df43720546d200a3a3d0fb29acc7d9",
+      "source": "eia-followup-content-collision-extra.json",
+      "originalSha256": "cd8553b10facb829f0674cc5fb87efa752df43720546d200a3a3d0fb29acc7d9"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-extra.log",
+      "category": "verification-record",
+      "bytes": 3414,
+      "sha256": "3f01c12e144913da3b3d00f32bc7d8e9575c61f0eb63a1300cb176d507bc56ca",
+      "source": "eia-followup-content-collision-extra.log",
+      "originalSha256": "3f01c12e144913da3b3d00f32bc7d8e9575c61f0eb63a1300cb176d507bc56ca"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-final-results.json",
+      "category": "verification-record",
+      "bytes": 23789,
+      "sha256": "9f8181551c9f82f61c72b38430567d6a2cb3ec603f54a4b09b20fbdfa59a64b5",
+      "source": "eia-followup-content-collision-final-results.json",
+      "originalSha256": "9f8181551c9f82f61c72b38430567d6a2cb3ec603f54a4b09b20fbdfa59a64b5"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-final.log",
+      "category": "verification-record",
+      "bytes": 454,
+      "sha256": "e2e4c21184183c5641d968f32657920d22714bd292db3d4c243c95545db36f28",
+      "source": "eia-followup-content-collision-final.log",
+      "originalSha256": "e2e4c21184183c5641d968f32657920d22714bd292db3d4c243c95545db36f28"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision-results.json",
+      "category": "verification-record",
+      "bytes": 29179,
+      "sha256": "64722e0f79aa027d2e550aadff2dfa8011d01240ea24e4701f7647cefcfdbdf0",
+      "source": "eia-followup-content-collision-results.json",
+      "originalSha256": "64722e0f79aa027d2e550aadff2dfa8011d01240ea24e4701f7647cefcfdbdf0"
+    },
+    {
+      "path": "evidence/followup/eia-followup-content-collision.log",
+      "category": "verification-record",
+      "bytes": 1896,
+      "sha256": "6888465bc1cdbd620e697b59a498fe3fca3d47b5898a99b4fd754b3bbe2670c3",
+      "source": "eia-followup-content-collision.log",
+      "originalSha256": "6888465bc1cdbd620e697b59a498fe3fca3d47b5898a99b4fd754b3bbe2670c3"
+    },
+    {
+      "path": "evidence/followup/eia-followup-exact-pairs-probe.mjs",
+      "category": "verification-record",
+      "bytes": 2775,
+      "sha256": "7ef3eebbedf914025f4d4cf271f3a4936a3d423caff060ac9e5932f5e45b6d21",
+      "source": "eia-followup-exact-pairs-probe.mjs",
+      "originalSha256": "7ef3eebbedf914025f4d4cf271f3a4936a3d423caff060ac9e5932f5e45b6d21"
+    },
+    {
+      "path": "evidence/followup/eia-followup-exact-pairs-results.json",
+      "category": "verification-record",
+      "bytes": 887,
+      "sha256": "1b8ab5610b3112c77ff916f746ca60eaccc1ed767c1e22867431467da0ed6219",
+      "source": "eia-followup-exact-pairs-results.json",
+      "originalSha256": "1b8ab5610b3112c77ff916f746ca60eaccc1ed767c1e22867431467da0ed6219"
+    },
+    {
+      "path": "evidence/followup/eia-followup-exact-pairs.log",
+      "category": "verification-record",
+      "bytes": 65,
+      "sha256": "05fa899891602168849f7d852d3641c7e70f9d73aa1eeb750a836a7c298623e3",
+      "source": "eia-followup-exact-pairs.log",
+      "originalSha256": "05fa899891602168849f7d852d3641c7e70f9d73aa1eeb750a836a7c298623e3"
+    },
+    {
+      "path": "evidence/followup/eia-followup-expectations.json",
+      "category": "verification-record",
+      "bytes": 16297,
+      "sha256": "0f93c69ecd9cd4cbe8ada3fff95cb6c72aff78725e25b8990ec77899bf0320ff",
+      "source": "eia-followup-expectations.json",
+      "originalSha256": "0f93c69ecd9cd4cbe8ada3fff95cb6c72aff78725e25b8990ec77899bf0320ff"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-build.log",
+      "category": "verification-record",
+      "bytes": 701,
+      "sha256": "02f82c27a3eaabc583310304cbf77e7902bcd18b09162a81c89b109750c18254",
+      "source": "eia-followup-final-build.log",
+      "originalSha256": "02f82c27a3eaabc583310304cbf77e7902bcd18b09162a81c89b109750c18254"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-focused-tests.log",
+      "category": "verification-record",
+      "bytes": 20125,
+      "sha256": "887be2b7a7fc6637e649fff53ec0538068a880981cc0aee12c36329adf09bff2",
+      "source": "eia-followup-final-focused-tests.log",
+      "originalSha256": "887be2b7a7fc6637e649fff53ec0538068a880981cc0aee12c36329adf09bff2"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-git-state.json",
+      "category": "verification-record",
+      "bytes": 1052,
+      "sha256": "99aae3048a6ee7e0c248ea600ad5cc1e8ce6ed4dbf259d0d32fa3504f9945057",
+      "source": "eia-followup-final-git-state.json",
+      "originalSha256": "99aae3048a6ee7e0c248ea600ad5cc1e8ce6ed4dbf259d0d32fa3504f9945057"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-guards-results.json",
+      "category": "verification-record",
+      "bytes": 47052,
+      "sha256": "7909ede6d43ca44e48bf3bc58d2349236060abe5c9cf5209aa0194e284c28515",
+      "source": "eia-followup-final-guards-results.json",
+      "originalSha256": "7909ede6d43ca44e48bf3bc58d2349236060abe5c9cf5209aa0194e284c28515"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-guards.json",
+      "category": "verification-record",
+      "bytes": 2742,
+      "sha256": "e4d59f7dc446d4d2910bae03bce5d5f685e0e664bcde019ba36c8d842ff8e350",
+      "source": "eia-followup-final-guards.json",
+      "originalSha256": "e4d59f7dc446d4d2910bae03bce5d5f685e0e664bcde019ba36c8d842ff8e350"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-guards.log",
+      "category": "verification-record",
+      "bytes": 696,
+      "sha256": "6bbcfd2cba41ee6417f3c1c82912dbc9815c22233ec512e7b1cf8ffce1644258",
+      "source": "eia-followup-final-guards.log",
+      "originalSha256": "6bbcfd2cba41ee6417f3c1c82912dbc9815c22233ec512e7b1cf8ffce1644258"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-incremental.diff",
+      "category": "verification-record",
+      "bytes": 5544,
+      "sha256": "b24454e618f3090bfc19aaa4a6bc708e39398300a48361330256bd4c66d9fdf1",
+      "source": "eia-followup-final-incremental.diff",
+      "originalSha256": "b24454e618f3090bfc19aaa4a6bc708e39398300a48361330256bd4c66d9fdf1"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-static-checks.json",
+      "category": "verification-record",
+      "bytes": 965,
+      "sha256": "1d24d04b9844b4e3023682b0a5d85df71ef7b5c754cfb2630bd305b6e777dda2",
+      "source": "eia-followup-final-static-checks.json",
+      "originalSha256": "1d24d04b9844b4e3023682b0a5d85df71ef7b5c754cfb2630bd305b6e777dda2"
+    },
+    {
+      "path": "evidence/followup/eia-followup-final-tests.log",
+      "category": "verification-record",
+      "bytes": 98900,
+      "sha256": "b262a13d3e247b0b1820e7f9c5f82548d3a29d2d962748449e0391c7ce2e91d4",
+      "source": "eia-followup-final-tests.log",
+      "originalSha256": "b262a13d3e247b0b1820e7f9c5f82548d3a29d2d962748449e0391c7ce2e91d4"
+    },
+    {
+      "path": "evidence/followup/eia-followup-freeze-final.json",
+      "category": "verification-record",
+      "bytes": 306,
+      "sha256": "e2782c255d44065167436f7ba0600a398d4e2d65a93f0c8094f1e13f09557efb",
+      "source": "eia-followup-freeze-final.json",
+      "originalSha256": "e2782c255d44065167436f7ba0600a398d4e2d65a93f0c8094f1e13f09557efb"
+    },
+    {
+      "path": "evidence/followup/eia-followup-freeze.json",
+      "category": "verification-record",
+      "bytes": 195,
+      "sha256": "7e8dbdad7bd98cc194113f40b73ccfc8b9176425def77262a91dbbd01ca46464",
+      "source": "eia-followup-freeze.json",
+      "originalSha256": "7e8dbdad7bd98cc194113f40b73ccfc8b9176425def77262a91dbbd01ca46464"
+    },
+    {
+      "path": "evidence/followup/eia-followup-full-tests.log",
+      "category": "verification-record",
+      "bytes": 86891,
+      "sha256": "903068ea9d53cf2d3d10e37bf58ccecf5102f1225e1a775bbd96e10847a9375f",
+      "source": "eia-followup-full-tests.log",
+      "originalSha256": "903068ea9d53cf2d3d10e37bf58ccecf5102f1225e1a775bbd96e10847a9375f"
+    },
+    {
+      "path": "evidence/followup/eia-followup-geography-probe.log",
+      "category": "verification-record",
+      "bytes": 45,
+      "sha256": "0bb2fd8c7438e5031feffade7349a215a756f8792d3f9f43a9fbdd4d48b4d85a",
+      "source": "eia-followup-geography-probe.log",
+      "originalSha256": "0bb2fd8c7438e5031feffade7349a215a756f8792d3f9f43a9fbdd4d48b4d85a"
+    },
+    {
+      "path": "evidence/followup/eia-followup-geography-probe.mjs",
+      "category": "verification-record",
+      "bytes": 2252,
+      "sha256": "997fbf6b73199fa1282e9f1807c006302656f0a2537db2ae01827e2de0858943",
+      "source": "eia-followup-geography-probe.mjs",
+      "originalSha256": "997fbf6b73199fa1282e9f1807c006302656f0a2537db2ae01827e2de0858943"
+    },
+    {
+      "path": "evidence/followup/eia-followup-geography-results.json",
+      "category": "verification-record",
+      "bytes": 1836,
+      "sha256": "ade91212fc1479eba51a9a77aa8d024306002304d1e3d5c1954bda48fb327ce0",
+      "source": "eia-followup-geography-results.json",
+      "originalSha256": "ade91212fc1479eba51a9a77aa8d024306002304d1e3d5c1954bda48fb327ce0"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-adjudication.md",
+      "category": "verification-record",
+      "bytes": 2144,
+      "sha256": "1d168f6ce0ecb63757aaa023ee493f41b595db725a643e0e4824a1c599b0f250",
+      "source": "eia-followup-independent-adjudication.md",
+      "originalSha256": "1d168f6ce0ecb63757aaa023ee493f41b595db725a643e0e4824a1c599b0f250"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-challenges.json",
+      "category": "verification-record",
+      "bytes": 3749,
+      "sha256": "c60cf4a533abb90b78bd5acb3700eb25d4d0fc4ce7d59994304b2b46ff0bec46",
+      "source": "eia-followup-independent-challenges.json",
+      "originalSha256": "c60cf4a533abb90b78bd5acb3700eb25d4d0fc4ce7d59994304b2b46ff0bec46"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-final-probe.log",
+      "category": "verification-record",
+      "bytes": 2628,
+      "sha256": "66a3530c4e48f66c2c1d5cf56de48a87ab2bfeb6b6bdcb2b8c1ca2301b074437",
+      "source": "eia-followup-independent-final-probe.log",
+      "originalSha256": "66a3530c4e48f66c2c1d5cf56de48a87ab2bfeb6b6bdcb2b8c1ca2301b074437"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-final-results.json",
+      "category": "verification-record",
+      "bytes": 126562,
+      "sha256": "15510f2409a8b1895bae5d480dac31fdafce6f2760c354d4cc943d2279df2cef",
+      "source": "eia-followup-independent-final-results.json",
+      "originalSha256": "15510f2409a8b1895bae5d480dac31fdafce6f2760c354d4cc943d2279df2cef"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-probe.log",
+      "category": "verification-record",
+      "bytes": 2628,
+      "sha256": "66a3530c4e48f66c2c1d5cf56de48a87ab2bfeb6b6bdcb2b8c1ca2301b074437",
+      "source": "eia-followup-independent-probe.log",
+      "originalSha256": "66a3530c4e48f66c2c1d5cf56de48a87ab2bfeb6b6bdcb2b8c1ca2301b074437"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-probe.mjs",
+      "category": "verification-record",
+      "bytes": 6652,
+      "sha256": "805e54a67d29275896eaafe1545288411d25df6e3f0872987532c147c4095c5f",
+      "source": "eia-followup-independent-probe.mjs",
+      "originalSha256": "805e54a67d29275896eaafe1545288411d25df6e3f0872987532c147c4095c5f"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-results.json",
+      "category": "verification-record",
+      "bytes": 126562,
+      "sha256": "15510f2409a8b1895bae5d480dac31fdafce6f2760c354d4cc943d2279df2cef",
+      "source": "eia-followup-independent-results.json",
+      "originalSha256": "15510f2409a8b1895bae5d480dac31fdafce6f2760c354d4cc943d2279df2cef"
+    },
+    {
+      "path": "evidence/followup/eia-followup-independent-review.md",
+      "category": "verification-record",
+      "bytes": 13187,
+      "sha256": "383b25b339fcd28c7972abe6eec9a613531ebd219974e1cb0cb43fca54ff36c8",
+      "source": "eia-followup-independent-review.md",
+      "originalSha256": "383b25b339fcd28c7972abe6eec9a613531ebd219974e1cb0cb43fca54ff36c8"
+    },
+    {
+      "path": "evidence/followup/eia-followup-modifier-precedence-probe.mjs",
+      "category": "verification-record",
+      "bytes": 1389,
+      "sha256": "cde41ca1121c7ba4d9d533599b55eec986b6196de990c34ba6d0170686ec8da5",
+      "source": "eia-followup-modifier-precedence-probe.mjs",
+      "originalSha256": "cde41ca1121c7ba4d9d533599b55eec986b6196de990c34ba6d0170686ec8da5"
+    },
+    {
+      "path": "evidence/followup/eia-followup-modifier-precedence-results.json",
+      "category": "verification-record",
+      "bytes": 1409,
+      "sha256": "0e14e0b2d751a40a3a827159e395f4f5e1ec9916df55228341f2a8e6e85947f4",
+      "source": "eia-followup-modifier-precedence-results.json",
+      "originalSha256": "0e14e0b2d751a40a3a827159e395f4f5e1ec9916df55228341f2a8e6e85947f4"
+    },
+    {
+      "path": "evidence/followup/eia-followup-modifier-precedence.log",
+      "category": "verification-record",
+      "bytes": 119,
+      "sha256": "4fd5595f2915fb848f87676abf15b1168229c1e2e1c96f4eb67e14b70ce3ad16",
+      "source": "eia-followup-modifier-precedence.log",
+      "originalSha256": "4fd5595f2915fb848f87676abf15b1168229c1e2e1c96f4eb67e14b70ce3ad16"
+    },
+    {
+      "path": "evidence/followup/eia-followup-reviewed-final-production.patch",
+      "category": "verification-record",
+      "bytes": 45246,
+      "sha256": "47f033d852c9dd9edb60465870342db7808b8a6fa37e844007b8b79c3c7eadee",
+      "source": "eia-followup-reviewed-final-production.patch",
+      "originalSha256": "47f033d852c9dd9edb60465870342db7808b8a6fa37e844007b8b79c3c7eadee"
+    },
+    {
+      "path": "evidence/followup/eia-followup-reviewed-initial-production.patch",
+      "category": "verification-record",
+      "bytes": 44461,
+      "sha256": "87234103f9face7f8bb658bf1dd5325b65406a381575c188d9aa6023457d6179",
+      "source": "eia-followup-reviewed-initial-production.patch",
+      "originalSha256": "87234103f9face7f8bb658bf1dd5325b65406a381575c188d9aa6023457d6179"
+    },
+    {
+      "path": "evidence/followup/eia-followup-reviewed-modifier-production.patch",
+      "category": "verification-record",
+      "bytes": 44707,
+      "sha256": "fe919571ef60c5afc3df67aea6c50299726caee351f6da28ac715191fe4ad2a5",
+      "source": "eia-followup-reviewed-modifier-production.patch",
+      "originalSha256": "fe919571ef60c5afc3df67aea6c50299726caee351f6da28ac715191fe4ad2a5"
+    },
+    {
+      "path": "evidence/followup/eia-followup-state-check.json",
+      "category": "verification-record",
+      "bytes": 1549,
+      "sha256": "7b33ef116c14b9d04d01025a3b923905ed8c64fdb16e62247babf9711380e34f",
+      "source": "eia-followup-state-check.json",
+      "originalSha256": "7b33ef116c14b9d04d01025a3b923905ed8c64fdb16e62247babf9711380e34f"
+    },
+    {
+      "path": "evidence/followup/eia-followup-static-checks.json",
+      "category": "verification-record",
+      "bytes": 965,
+      "sha256": "54e7de14db033c8e42bfe818a955fd83de74d34cfeeb3270c15bff362f6bd7c4",
+      "source": "eia-followup-static-checks.json",
+      "originalSha256": "54e7de14db033c8e42bfe818a955fd83de74d34cfeeb3270c15bff362f6bd7c4"
+    },
+    {
+      "path": "evidence/followup/eia-followup-supplemental-challenges.json",
+      "category": "verification-record",
+      "bytes": 2650,
+      "sha256": "c95fb84bf374f58c7f71127895b2380e106e6d8266a8734e6559ee491879bd4e",
+      "source": "eia-followup-supplemental-challenges.json",
+      "originalSha256": "c95fb84bf374f58c7f71127895b2380e106e6d8266a8734e6559ee491879bd4e"
+    },
+    {
+      "path": "evidence/followup/eia-followup-supplemental-final-probe.log",
+      "category": "verification-record",
+      "bytes": 791,
+      "sha256": "1678659dab43fa594080e47fb5a071774cbc3ba47f62b9cd36f40d88ab1e6679",
+      "source": "eia-followup-supplemental-final-probe.log",
+      "originalSha256": "1678659dab43fa594080e47fb5a071774cbc3ba47f62b9cd36f40d88ab1e6679"
+    },
+    {
+      "path": "evidence/followup/eia-followup-supplemental-final-results.json",
+      "category": "verification-record",
+      "bytes": 53837,
+      "sha256": "22a843405bbd775f371a2ae8611706c9a258b0b113a52b3e0a75765c118abc21",
+      "source": "eia-followup-supplemental-final-results.json",
+      "originalSha256": "22a843405bbd775f371a2ae8611706c9a258b0b113a52b3e0a75765c118abc21"
+    },
+    {
+      "path": "evidence/followup/eia-followup-supplemental-probe.log",
+      "category": "verification-record",
+      "bytes": 8015,
+      "sha256": "ef5a119655232e4e3ecfda83b72d2181f78dd44871ac063050b12332be30e5f8",
+      "source": "eia-followup-supplemental-probe.log",
+      "originalSha256": "ef5a119655232e4e3ecfda83b72d2181f78dd44871ac063050b12332be30e5f8"
+    },
+    {
+      "path": "evidence/followup/eia-followup-supplemental-results.json",
+      "category": "verification-record",
+      "bytes": 59315,
+      "sha256": "ff458d35f4643dcc17729d186f66aa163a3bba86c5cdcc99c2805f205492f9a4",
+      "source": "eia-followup-supplemental-results.json",
+      "originalSha256": "ff458d35f4643dcc17729d186f66aa163a3bba86c5cdcc99c2805f205492f9a4"
+    },
+    {
+      "path": "evidence/negation/eia-negation-closure-byte-comparison.json",
+      "category": "verification-record",
+      "bytes": 5238,
+      "sha256": "d2b1bcb8459b80e8146e001b9488eb7de321dff9de8d20a249c07dce8078cf79",
+      "source": "eia-negation-closure-byte-comparison.json",
+      "originalSha256": "d2b1bcb8459b80e8146e001b9488eb7de321dff9de8d20a249c07dce8078cf79"
+    },
+    {
+      "path": "evidence/negation/eia-negation-closure-git-comparison.json",
+      "category": "verification-record",
+      "bytes": 572,
+      "sha256": "aaf1191b193fc8527ff4e91f6c28d8375a23f8c915811073af0ac3af0b0010a0",
+      "source": "eia-negation-closure-git-comparison.json",
+      "originalSha256": "aaf1191b193fc8527ff4e91f6c28d8375a23f8c915811073af0ac3af0b0010a0"
+    },
+    {
+      "path": "evidence/negation/eia-negation-command-adjudication.json",
+      "category": "verification-record",
+      "bytes": 5833,
+      "sha256": "3f140e1e92b7b42dd6f3fb707a067ddc4a17d84542bdbe7f9154c7398990a59e",
+      "source": "eia-negation-command-adjudication.json",
+      "originalSha256": "3f140e1e92b7b42dd6f3fb707a067ddc4a17d84542bdbe7f9154c7398990a59e"
+    },
+    {
+      "path": "evidence/negation/eia-negation-decision.md",
+      "category": "verification-record",
+      "bytes": 10113,
+      "sha256": "09d191d87299212d9b874f4d1722976319f9df8fe1b0866baeb82fa947af699b",
+      "source": "eia-negation-decision.md",
+      "originalSha256": "09d191d87299212d9b874f4d1722976319f9df8fe1b0866baeb82fa947af699b"
+    },
+    {
+      "path": "evidence/negation/eia-negation-design-probe-results.log",
+      "category": "verification-record",
+      "bytes": 18231,
+      "sha256": "39e396af64f9e7021ea7da482dc3abbd0a7ed23cc643e221752b8e53fb4f4bfa",
+      "source": "eia-negation-design-probe-results.log",
+      "originalSha256": "39e396af64f9e7021ea7da482dc3abbd0a7ed23cc643e221752b8e53fb4f4bfa"
+    },
+    {
+      "path": "evidence/negation/eia-negation-final-checks.mjs",
+      "category": "verification-record",
+      "bytes": 2701,
+      "sha256": "82c83ae7d2bfeb5655739532803125e3b71f0857366075afc09c8732492ba7e6",
+      "source": "eia-negation-final-checks.mjs",
+      "originalSha256": "82c83ae7d2bfeb5655739532803125e3b71f0857366075afc09c8732492ba7e6"
+    },
+    {
+      "path": "evidence/negation/eia-negation-freeze.mjs",
+      "category": "verification-record",
+      "bytes": 4738,
+      "sha256": "fba7e946f836df961ca368739aba12496b50ca75fd4d1da15a759435e54538c2",
+      "source": "eia-negation-freeze.mjs",
+      "originalSha256": "fba7e946f836df961ca368739aba12496b50ca75fd4d1da15a759435e54538c2"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-baseline-evidence.json",
+      "category": "verification-record",
+      "bytes": 207953,
+      "sha256": "27265984b632dc31eba9d06c97683cb1ac02b35fbeb59753ab08e56b4ff14386",
+      "source": "eia-negation-independent-baseline-evidence.json",
+      "originalSha256": "27265984b632dc31eba9d06c97683cb1ac02b35fbeb59753ab08e56b4ff14386"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-cases.json",
+      "category": "verification-record",
+      "bytes": 10973,
+      "sha256": "5c911f9c2b7b47748f510eed4031cf1b49423ac1e39519764b8a691215c003ff",
+      "source": "eia-negation-independent-cases.json",
+      "originalSha256": "5c911f9c2b7b47748f510eed4031cf1b49423ac1e39519764b8a691215c003ff"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-design-review.md",
+      "category": "verification-record",
+      "bytes": 7671,
+      "sha256": "5840e3de1ab5964c0b304ac523e6664d0e56e7d253831686017474f56c07b266",
+      "source": "eia-negation-independent-design-review.md",
+      "originalSha256": "5840e3de1ab5964c0b304ac523e6664d0e56e7d253831686017474f56c07b266"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-prototype-evidence.json",
+      "category": "verification-record",
+      "bytes": 186939,
+      "sha256": "3791902ef503f1410f1f0e5f464a107c151a69abd0252b1ce112ce478049da79",
+      "source": "eia-negation-independent-prototype-evidence.json",
+      "originalSha256": "3791902ef503f1410f1f0e5f464a107c151a69abd0252b1ce112ce478049da79"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-prototype-supplemental-evidence.json",
+      "category": "verification-record",
+      "bytes": 66441,
+      "sha256": "a3e54140ea00da0d82d29f0b22ae61597588670c1070a261b84f111ab06839a0",
+      "source": "eia-negation-independent-prototype-supplemental-evidence.json",
+      "originalSha256": "a3e54140ea00da0d82d29f0b22ae61597588670c1070a261b84f111ab06839a0"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-retained-tests.log",
+      "category": "verification-record",
+      "bytes": 49895,
+      "sha256": "7f7d962c5d2f635a34f63ea3a2c89f3084621016577c192c8cd979932c7f8224",
+      "source": "eia-negation-independent-retained-tests.log",
+      "originalSha256": "97c2754e44089a0c8d1b1e4c3468b0f0c9601e3a62a98779595d0362babafb4f"
+    },
+    {
+      "path": "evidence/negation/eia-negation-independent-runner.mjs",
+      "category": "verification-record",
+      "bytes": 8156,
+      "sha256": "384fc7e23ff8234ccb045b1f8b97d29687ae194d10418743b65d34e4c352f9c8",
+      "source": "eia-negation-independent-runner.mjs",
+      "originalSha256": "384fc7e23ff8234ccb045b1f8b97d29687ae194d10418743b65d34e4c352f9c8"
+    },
+    {
+      "path": "evidence/negation/eia-negation-probe-intent-routing.diff",
+      "category": "verification-record",
+      "bytes": 13794,
+      "sha256": "57591bad29011dfb45b959518902144f68a4aecfc8235e4739b24249b5056549",
+      "source": "eia-negation-probe-intent-routing.diff",
+      "originalSha256": "57591bad29011dfb45b959518902144f68a4aecfc8235e4739b24249b5056549"
+    },
+    {
+      "path": "evidence/negation/eia-negation-probe-interpret-query.diff",
+      "category": "verification-record",
+      "bytes": 7693,
+      "sha256": "2a4e04ac7c35a9b9c9f812ab4ee1153609c4ea89d5884ba59017ed3ad42e5d12",
+      "source": "eia-negation-probe-interpret-query.diff",
+      "originalSha256": "2a4e04ac7c35a9b9c9f812ab4ee1153609c4ea89d5884ba59017ed3ad42e5d12"
+    },
+    {
+      "path": "evidence/negation/eia-negation-probe-runner.mjs",
+      "category": "verification-record",
+      "bytes": 8133,
+      "sha256": "98924448d5e743e46ede0eb15ebab9cdfcc682628a5c6c835a03974f28fb0f28",
+      "source": "eia-negation-probe-runner.mjs",
+      "originalSha256": "98924448d5e743e46ede0eb15ebab9cdfcc682628a5c6c835a03974f28fb0f28"
+    },
+    {
+      "path": "evidence/negation/eia-negation-probe-supplemental-cases.json",
+      "category": "verification-record",
+      "bytes": 4913,
+      "sha256": "e5112cf50cd260dd1a936290d7b5aeb9516d7a61eecaa6a1b6f24af8e12e8fba",
+      "source": "eia-negation-probe-supplemental-cases.json",
+      "originalSha256": "e5112cf50cd260dd1a936290d7b5aeb9516d7a61eecaa6a1b6f24af8e12e8fba"
+    },
+    {
+      "path": "evidence/negation/eia-negation-probe-supplemental-runner.mjs",
+      "category": "verification-record",
+      "bytes": 8140,
+      "sha256": "9fde4f9dda35648dd2505997622ec8c1ed4540289060f5def49807cfd828bc2e",
+      "source": "eia-negation-probe-supplemental-runner.mjs",
+      "originalSha256": "9fde4f9dda35648dd2505997622ec8c1ed4540289060f5def49807cfd828bc2e"
+    },
+    {
+      "path": "evidence/negation/eia-negation-prototype-final-review.md",
+      "category": "verification-record",
+      "bytes": 14232,
+      "sha256": "76f9293b2b053a866255b7fe23b78fb9f1d042aed5ff7d8b149f6d1a3dd9238a",
+      "source": "eia-negation-prototype-final-review.md",
+      "originalSha256": "76f9293b2b053a866255b7fe23b78fb9f1d042aed5ff7d8b149f6d1a3dd9238a"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-before.log",
+      "category": "verification-record",
+      "bytes": 111440,
+      "sha256": "69dbdc2cbf2433691c3d1388e8a2f14c186231e1e2e3b769ae360214d40f15b3",
+      "source": "eia-negation-target-before.log",
+      "originalSha256": "082ab975803cfa6d8d1c37ec887190fbb8e11f49eacadf230aca272d7f132a30"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-current-full-tests.log",
+      "category": "verification-record",
+      "bytes": 260115,
+      "sha256": "c499cd9240992294ff0c7c4dbafa7ff994c03e7b569c78097ec1eaa21dbdc5cd",
+      "source": "eia-negation-target-current-full-tests.log",
+      "originalSha256": "6b337b11fa3ce261552c26a189e37bccf4c72384e1e8e4fe34e04b8201a8af06"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-final-build.log",
+      "category": "verification-record",
+      "bytes": 701,
+      "sha256": "cfbff03d39181ab49ae2814b799bd0fd705a852a114b84140f1dd7d192b49134",
+      "source": "eia-negation-target-final-build.log",
+      "originalSha256": "cfbff03d39181ab49ae2814b799bd0fd705a852a114b84140f1dd7d192b49134"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-final-static-state.json",
+      "category": "verification-record",
+      "bytes": 5955,
+      "sha256": "05b6eb43c16210b05f83c91f1c449f9d4267d1348b3f882a11e71257f6fee08e",
+      "source": "eia-negation-target-final-static-state.json",
+      "originalSha256": "05b6eb43c16210b05f83c91f1c449f9d4267d1348b3f882a11e71257f6fee08e"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-final-tests.log",
+      "category": "verification-record",
+      "bytes": 124821,
+      "sha256": "f90bb382e53d27940c4c265e568155b686e973f3fea4573c663ec96cad51185f",
+      "source": "eia-negation-target-final-tests.log",
+      "originalSha256": "1f1a01a55eb16a34ddc5e5c550af1fbd19be82d42c1a7aec0d3a1806ec18e323"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-matrix.json",
+      "category": "verification-record",
+      "bytes": 16556,
+      "sha256": "e36b72f26bde670855b9c246919726926c4849798bb21c1b1d3aae9617cf52ae",
+      "source": "eia-negation-target-matrix.json",
+      "originalSha256": "e36b72f26bde670855b9c246919726926c4849798bb21c1b1d3aae9617cf52ae"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-starting-state.json",
+      "category": "verification-record",
+      "bytes": 4229,
+      "sha256": "aebf6d42efd26e64102c64ea39ef4eb39abc0b48b8e73bfddfee65a761940139",
+      "source": "eia-negation-target-starting-state.json",
+      "originalSha256": "aebf6d42efd26e64102c64ea39ef4eb39abc0b48b8e73bfddfee65a761940139"
+    },
+    {
+      "path": "evidence/negation/eia-negation-target-starting.patch",
+      "category": "verification-record",
+      "bytes": 47652,
+      "sha256": "c4feae63a6c8c250c16e29bb0996d8bb3856b45d389c854130c0ef2d45fb811d",
+      "source": "eia-negation-target-starting.patch",
+      "originalSha256": "c4feae63a6c8c250c16e29bb0996d8bb3856b45d389c854130c0ef2d45fb811d"
+    },
+    {
+      "path": "evidence/negation/independent-current-state-review.md",
+      "category": "independent-current-state-review",
+      "bytes": 3652,
+      "sha256": "f1fcc220a227c825d73690cbcfa446c5c7c8c517e27eebcd82e79df3d24a0736",
+      "source": "independent-current-state-review.md",
+      "originalSha256": "f1fcc220a227c825d73690cbcfa446c5c7c8c517e27eebcd82e79df3d24a0736"
+    },
+    {
+      "path": "evidence/rejected-prototype/eia-negation-resolution.txt",
+      "category": "verification-record",
+      "bytes": 5418,
+      "sha256": "00ca2883f744d8b7bfe0579b05676a2ee2ec68e8e890aa17ee6708a56bdea460",
+      "source": "eia-negation-resolution.txt",
+      "originalSha256": "00ca2883f744d8b7bfe0579b05676a2ee2ec68e8e890aa17ee6708a56bdea460"
+    },
+    {
+      "path": "evidence/rejected-prototype/lib/sources/eia/intent-routing.js",
+      "category": "rejected-prototype-not-final-source",
+      "bytes": 45079,
+      "sha256": "5a72a80dcf08d81429869454a0647fa0d344dea1e39d6a285fb409080388c1c3",
+      "source": "intent-routing.js",
+      "originalSha256": "5a72a80dcf08d81429869454a0647fa0d344dea1e39d6a285fb409080388c1c3"
+    },
+    {
+      "path": "evidence/rejected-prototype/lib/sources/eia/interpret-query.js",
+      "category": "rejected-prototype-not-final-source",
+      "bytes": 69380,
+      "sha256": "1cc651c4ae0dd696c42b79f9c6242268ced17e5a2c4e0d0a35b2242f58d19177",
+      "source": "interpret-query.js",
+      "originalSha256": "1cc651c4ae0dd696c42b79f9c6242268ced17e5a2c4e0d0a35b2242f58d19177"
+    },
+    {
+      "path": "evidence/review/eia-blind-challenges.json",
+      "category": "verification-record",
+      "bytes": 36223,
+      "sha256": "1caf5edccda8e4e9a81fb3f79f5cb5df584ff04ac7dcc8f9942db91d189d8a30",
+      "source": "eia-blind-challenges.json",
+      "originalSha256": "1caf5edccda8e4e9a81fb3f79f5cb5df584ff04ac7dcc8f9942db91d189d8a30"
+    },
+    {
+      "path": "evidence/review/eia-challenge-adjudication.json",
+      "category": "verification-record",
+      "bytes": 44024,
+      "sha256": "da51d7ee620516520490c09c8521a0c644714e7da67f56522e7561569dd3756b",
+      "source": "eia-challenge-adjudication.json",
+      "originalSha256": "da51d7ee620516520490c09c8521a0c644714e7da67f56522e7561569dd3756b"
+    },
+    {
+      "path": "evidence/review/eia-independent-comparison-boundary.mjs",
+      "category": "frozen-review-source",
+      "bytes": 1140,
+      "sha256": "b1d8c4fada6d029dfd91149f353e67afb44f958ed66a5cecf11556e0ef8246cb",
+      "source": "eia-independent-comparison-boundary.mjs",
+      "originalSha256": "b1d8c4fada6d029dfd91149f353e67afb44f958ed66a5cecf11556e0ef8246cb"
+    },
+    {
+      "path": "evidence/review/eia-independent-final-boundary.mjs",
+      "category": "verification-record",
+      "bytes": 2633,
+      "sha256": "bf987941bf910eb63bd7fa29e774f30f1ab1703fcd38016c31734388ee815c0e",
+      "source": "eia-independent-final-boundary.mjs",
+      "originalSha256": "bf987941bf910eb63bd7fa29e774f30f1ab1703fcd38016c31734388ee815c0e"
+    },
+    {
+      "path": "evidence/review/eia-independent-initial.log",
+      "category": "verification-record",
+      "bytes": 29517,
+      "sha256": "3b149ef3a81c8dab66cbac62414bf9bd78ed97e1c3228cad9af2101de1cfa93e",
+      "source": "eia-independent-initial.log",
+      "originalSha256": "aae0697872ae82558e44a24602aab0774279e0163449ddd39bc69586862b19a7"
+    },
+    {
+      "path": "evidence/review/eia-independent-pool-review-final.json",
+      "category": "verification-record",
+      "bytes": 11172,
+      "sha256": "9d1eee47638798f949ddf28a2faede9ed5cbbb0d569c1aa4daa3822164c08c6d",
+      "source": "eia-independent-pool-review-final.json",
+      "originalSha256": "9d1eee47638798f949ddf28a2faede9ed5cbbb0d569c1aa4daa3822164c08c6d"
+    },
+    {
+      "path": "evidence/review/eia-independent-review-carrier.mjs",
+      "category": "frozen-review-source",
+      "bytes": 901,
+      "sha256": "aac1e25fac31ea0074f06d485f5ba99010651d1bbc3c9e7f539b17bf93eed16e",
+      "source": "eia-independent-review-carrier.mjs",
+      "originalSha256": "aac1e25fac31ea0074f06d485f5ba99010651d1bbc3c9e7f539b17bf93eed16e"
+    },
+    {
+      "path": "evidence/review/eia-independent-review-cases.mjs",
+      "category": "frozen-review-source",
+      "bytes": 2123,
+      "sha256": "5512bb15bc7cbad1c37c9bda9b3ca47c76a9c482b14c7237f28e01f2e461bf22",
+      "source": "eia-independent-review-cases.mjs",
+      "originalSha256": "5512bb15bc7cbad1c37c9bda9b3ca47c76a9c482b14c7237f28e01f2e461bf22"
+    },
+    {
+      "path": "evidence/review/eia-independent-review-correction-scope.mjs",
+      "category": "frozen-review-source",
+      "bytes": 1061,
+      "sha256": "7eca474a6d7df0160958793e3a15b44ef965c13bac995c264cedcbdf25edf4d3",
+      "source": "eia-independent-review-correction-scope.mjs",
+      "originalSha256": "7eca474a6d7df0160958793e3a15b44ef965c13bac995c264cedcbdf25edf4d3"
+    },
+    {
+      "path": "evidence/review/eia-independent-review-more.mjs",
+      "category": "frozen-review-source",
+      "bytes": 1579,
+      "sha256": "32d75b053776b0cb25598544ca42a4b803482d45410b3a0926cca6ebc20da8d5",
+      "source": "eia-independent-review-more.mjs",
+      "originalSha256": "32d75b053776b0cb25598544ca42a4b803482d45410b3a0926cca6ebc20da8d5"
+    },
+    {
+      "path": "evidence/review/eia-independent-review-negation-adverbs.mjs",
+      "category": "frozen-review-source",
+      "bytes": 992,
+      "sha256": "a2188f2a7a6dd1b86ec4f559e842d44358d96ce6658221e2c791fe6dff47728f",
+      "source": "eia-independent-review-negation-adverbs.mjs",
+      "originalSha256": "a2188f2a7a6dd1b86ec4f559e842d44358d96ce6658221e2c791fe6dff47728f"
+    },
+    {
+      "path": "evidence/review/eia-independent-review-negation-v2.mjs",
+      "category": "frozen-review-source",
+      "bytes": 1812,
+      "sha256": "faecfdd7657a54ef7ce1d6edefe7d8db1df66c185e17da3dd29a1522e4385901",
+      "source": "eia-independent-review-negation-v2.mjs",
+      "originalSha256": "faecfdd7657a54ef7ce1d6edefe7d8db1df66c185e17da3dd29a1522e4385901"
+    },
+    {
+      "path": "evidence/review/eia-independent-reviewed-final-tree.log",
+      "category": "verification-record",
+      "bytes": 25128,
+      "sha256": "26258755a7f79d1575504d7a220453f8613b20881e3c184d48a1fe5bcc2f06e2",
+      "source": "eia-independent-reviewed-final-tree.log",
+      "originalSha256": "26258755a7f79d1575504d7a220453f8613b20881e3c184d48a1fe5bcc2f06e2"
+    },
+    {
+      "path": "evidence/review/prior-review-message.md",
+      "category": "review-conversation-transcription",
+      "bytes": 1201,
+      "sha256": "793975afc5577c8f7f62a566640ff46dc48f904f7d47c71f43cac4b5e9de22d6"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-existing-v2.log",
+      "category": "verification-record",
+      "bytes": 12082,
+      "sha256": "719bf56a51502696ffa3aaf18552cdcd0d7697d90c5caf43d9eda20858162db2",
+      "source": "eia-scope-contract-existing-v2.log",
+      "originalSha256": "719bf56a51502696ffa3aaf18552cdcd0d7697d90c5caf43d9eda20858162db2"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-build.log",
+      "category": "verification-record",
+      "bytes": 701,
+      "sha256": "e6ea2e1b60aabaf2ff683e67d8c4e0079c1b0b06129f3527c618d75f38132b25",
+      "source": "eia-scope-contract-final-build.log",
+      "originalSha256": "e6ea2e1b60aabaf2ff683e67d8c4e0079c1b0b06129f3527c618d75f38132b25"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-diff-inventory.json",
+      "category": "verification-record",
+      "bytes": 1878,
+      "sha256": "0604105d40157f991a434e2dfe6dd178e5d78d9670476aad9faa166a358636c4",
+      "source": "eia-scope-contract-final-diff-inventory.json",
+      "originalSha256": "0604105d40157f991a434e2dfe6dd178e5d78d9670476aad9faa166a358636c4"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-diff-review.json",
+      "category": "verification-record",
+      "bytes": 13891,
+      "sha256": "1c5b295031d8d5f12f1de2c1c89d933f675bf6a1bf35d4effb74ce015221a6e1",
+      "source": "eia-scope-contract-final-diff-review.json",
+      "originalSha256": "1c5b295031d8d5f12f1de2c1c89d933f675bf6a1bf35d4effb74ce015221a6e1"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-file-hashes.json",
+      "category": "verification-record",
+      "bytes": 4044,
+      "sha256": "2819d77ec9670236c7a014fe7231effe945b7c840c642dfb6fc13475b886cf87",
+      "source": "eia-scope-contract-final-file-hashes.json",
+      "originalSha256": "2819d77ec9670236c7a014fe7231effe945b7c840c642dfb6fc13475b886cf87"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-migration-tests.log",
+      "category": "verification-record",
+      "bytes": 23836,
+      "sha256": "c4a04905433d47dcb1845b9b7606753ac70d0fe737517e857835deb440f20b18",
+      "source": "eia-scope-contract-final-migration-tests.log",
+      "originalSha256": "c4a04905433d47dcb1845b9b7606753ac70d0fe737517e857835deb440f20b18"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-retained-tests.log",
+      "category": "verification-record",
+      "bytes": 7028,
+      "sha256": "86c12a7cff4486ac2e2cf7827d0f2585148fdd1344a20fddb0da8f61e0832b1e",
+      "source": "eia-scope-contract-final-retained-tests.log",
+      "originalSha256": "86c12a7cff4486ac2e2cf7827d0f2585148fdd1344a20fddb0da8f61e0832b1e"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-static-checks.json",
+      "category": "verification-record",
+      "bytes": 9699,
+      "sha256": "1da7811312c6b6245a7898b137ebca30aeaee3f1447829cd9efe0a2054ad1a09",
+      "source": "eia-scope-contract-final-static-checks.json",
+      "originalSha256": "1da7811312c6b6245a7898b137ebca30aeaee3f1447829cd9efe0a2054ad1a09"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-final-tests.log",
+      "category": "verification-record",
+      "bytes": 142765,
+      "sha256": "b34b1eeb210e649e9b795332b6e6d999c390a8691f0bf8055bc63244d45ba285",
+      "source": "eia-scope-contract-final-tests.log",
+      "originalSha256": "b34b1eeb210e649e9b795332b6e6d999c390a8691f0bf8055bc63244d45ba285"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-focused-v3.log",
+      "category": "verification-record",
+      "bytes": 26240,
+      "sha256": "0e2d90594b605c1db0cac3351d97d0311e8b7963d3dd5db974394d88240d6f82",
+      "source": "eia-scope-contract-focused-v3.log",
+      "originalSha256": "413485c4b503969729a946a09848058c9684cd1c7bca766058cd02106cb793c1"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-final-review.json",
+      "category": "verification-record",
+      "bytes": 4069,
+      "sha256": "9fc9b3a4cde19da5e2483e2b1f04f4e2d983190b1177a0ecda4b2e3aa2090a0b",
+      "source": "eia-scope-contract-independent-final-review.json",
+      "originalSha256": "9fc9b3a4cde19da5e2483e2b1f04f4e2d983190b1177a0ecda4b2e3aa2090a0b"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-freeze.py",
+      "category": "verification-record",
+      "bytes": 13594,
+      "sha256": "1f0a10b16f8392e50dd577b12cccb61dfbeaecd3e36c18b5cc855c69d1ee7f8a",
+      "source": "eia-scope-contract-independent-freeze.py",
+      "originalSha256": "1f0a10b16f8392e50dd577b12cccb61dfbeaecd3e36c18b5cc855c69d1ee7f8a"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-matrix.json",
+      "category": "verification-record",
+      "bytes": 24043,
+      "sha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0",
+      "source": "eia-scope-contract-independent-matrix.json",
+      "originalSha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-matrix.sha256",
+      "category": "verification-record",
+      "bytes": 122,
+      "sha256": "280f82c332bb56c4ad961881ea5771de04b19c68ea4e4e6aa462064eadbecd25",
+      "source": "eia-scope-contract-independent-matrix.sha256",
+      "originalSha256": "280f82c332bb56c4ad961881ea5771de04b19c68ea4e4e6aa462064eadbecd25"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-payloads.json",
+      "category": "verification-record",
+      "bytes": 68226,
+      "sha256": "0de352d4ee655f56aec878fc7c5e9e979c392a779753930e5c0ac9ff9dc85fe5",
+      "source": "eia-scope-contract-independent-payloads.json",
+      "originalSha256": "0de352d4ee655f56aec878fc7c5e9e979c392a779753930e5c0ac9ff9dc85fe5"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-payloads.sha256",
+      "category": "verification-record",
+      "bytes": 65,
+      "sha256": "9f1e5818645daedef67548839a30d820253ad9ba7aeee23e1a6cf4df6d518c30",
+      "source": "eia-scope-contract-independent-payloads.sha256",
+      "originalSha256": "9f1e5818645daedef67548839a30d820253ad9ba7aeee23e1a6cf4df6d518c30"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-probes-r2.log",
+      "category": "verification-record",
+      "bytes": 9838,
+      "sha256": "9152f3b10bfacaee6e88ca065070cf865a42f070b168bdf5f7ef32b500b2fa9a",
+      "source": "eia-scope-contract-independent-probes-r2.log",
+      "originalSha256": "9152f3b10bfacaee6e88ca065070cf865a42f070b168bdf5f7ef32b500b2fa9a"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-probes-r4.log",
+      "category": "verification-record",
+      "bytes": 9838,
+      "sha256": "9152f3b10bfacaee6e88ca065070cf865a42f070b168bdf5f7ef32b500b2fa9a",
+      "source": "eia-scope-contract-independent-probes-r4.log",
+      "originalSha256": "9152f3b10bfacaee6e88ca065070cf865a42f070b168bdf5f7ef32b500b2fa9a"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-probes.json",
+      "category": "verification-record",
+      "bytes": 16780,
+      "sha256": "bec4c969986b54b23342b33fa27380a468dc344a6eb30619841a1b8de7165233",
+      "source": "eia-scope-contract-independent-probes.json",
+      "originalSha256": "bec4c969986b54b23342b33fa27380a468dc344a6eb30619841a1b8de7165233"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-probes.log",
+      "category": "verification-record",
+      "bytes": 11674,
+      "sha256": "0a6d263ba3565374022090b125fa0f5683a1bd1fe7438042a905b4de1661502e",
+      "source": "eia-scope-contract-independent-probes.log",
+      "originalSha256": "0a6d263ba3565374022090b125fa0f5683a1bd1fe7438042a905b4de1661502e"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-probes.mjs",
+      "category": "verification-record",
+      "bytes": 3486,
+      "sha256": "bc1d1e50e74f8a4987ec6fabbf24e9eb8e0f2a2f2c67d82e8dfaec3a65f826f8",
+      "source": "eia-scope-contract-independent-probes.mjs",
+      "originalSha256": "bc1d1e50e74f8a4987ec6fabbf24e9eb8e0f2a2f2c67d82e8dfaec3a65f826f8"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-results-r1.json",
+      "category": "verification-record",
+      "bytes": 337477,
+      "sha256": "cff14b67ae46aecb9454073c7be7bff66ab34dc6f4557152d5b409b44dd586ed",
+      "source": "eia-scope-contract-independent-results-r1.json",
+      "originalSha256": "cff14b67ae46aecb9454073c7be7bff66ab34dc6f4557152d5b409b44dd586ed"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-results-r2.json",
+      "category": "verification-record",
+      "bytes": 340944,
+      "sha256": "046de37a62c82a22dbee8594c31092d337ffea7c0480784495b8d68ef5e3f81b",
+      "source": "eia-scope-contract-independent-results-r2.json",
+      "originalSha256": "046de37a62c82a22dbee8594c31092d337ffea7c0480784495b8d68ef5e3f81b"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-results-r3.json",
+      "category": "verification-record",
+      "bytes": 344976,
+      "sha256": "5130b058a2d9b6e07093062697fad2d5b93e272d6f36f0577c20d07b5e7851bf",
+      "source": "eia-scope-contract-independent-results-r3.json",
+      "originalSha256": "5130b058a2d9b6e07093062697fad2d5b93e272d6f36f0577c20d07b5e7851bf"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-results-r4.json",
+      "category": "verification-record",
+      "bytes": 344976,
+      "sha256": "d39887abfa140d187a1d3127d043c8aa44f1e47f73261ade35fad34a4aa5c85e",
+      "source": "eia-scope-contract-independent-results-r4.json",
+      "originalSha256": "d39887abfa140d187a1d3127d043c8aa44f1e47f73261ade35fad34a4aa5c85e"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-results.json",
+      "category": "verification-record",
+      "bytes": 344976,
+      "sha256": "d39887abfa140d187a1d3127d043c8aa44f1e47f73261ade35fad34a4aa5c85e",
+      "source": "eia-scope-contract-independent-results.json",
+      "originalSha256": "d39887abfa140d187a1d3127d043c8aa44f1e47f73261ade35fad34a4aa5c85e"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-review.json",
+      "category": "verification-record",
+      "bytes": 4559,
+      "sha256": "4e0a2a3f2d60a5346817aafa19fa1045cfda022fcfe64d4f97b4f1e2b3c9e0ff",
+      "source": "eia-scope-contract-independent-review.json",
+      "originalSha256": "4e0a2a3f2d60a5346817aafa19fa1045cfda022fcfe64d4f97b4f1e2b3c9e0ff"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-run-r2.log",
+      "category": "verification-record",
+      "bytes": 7756,
+      "sha256": "4e902031f209df10242195309ec7a564f334dc56d73cf7199bce9ff6783aee4a",
+      "source": "eia-scope-contract-independent-run-r2.log",
+      "originalSha256": "4e902031f209df10242195309ec7a564f334dc56d73cf7199bce9ff6783aee4a"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-run-r3.log",
+      "category": "verification-record",
+      "bytes": 7681,
+      "sha256": "01b6d168ace28d5e071bdead8779ab4f2566843b656bf6dfff797b3bf27d8460",
+      "source": "eia-scope-contract-independent-run-r3.log",
+      "originalSha256": "01b6d168ace28d5e071bdead8779ab4f2566843b656bf6dfff797b3bf27d8460"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-run-r4.log",
+      "category": "verification-record",
+      "bytes": 7681,
+      "sha256": "e0f690ce044420ac000f839310f6649e471ce7c1310b3f342919843d71d41dd2",
+      "source": "eia-scope-contract-independent-run-r4.log",
+      "originalSha256": "e0f690ce044420ac000f839310f6649e471ce7c1310b3f342919843d71d41dd2"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-run.log",
+      "category": "verification-record",
+      "bytes": 7879,
+      "sha256": "de778597fe15b4ac9fcae6ef5e9d4157b381d36d56c34711ceb1dfcf054b9a58",
+      "source": "eia-scope-contract-independent-run.log",
+      "originalSha256": "de778597fe15b4ac9fcae6ef5e9d4157b381d36d56c34711ceb1dfcf054b9a58"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-runner.mjs",
+      "category": "verification-record",
+      "bytes": 17814,
+      "sha256": "536c579e2d5287ebb26e4989ac0bf958f72a8a0845316cebc0de37c8a85a2d20",
+      "source": "eia-scope-contract-independent-runner.mjs",
+      "originalSha256": "536c579e2d5287ebb26e4989ac0bf958f72a8a0845316cebc0de37c8a85a2d20"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-semantic-limit.json",
+      "category": "verification-record",
+      "bytes": 2534,
+      "sha256": "a468fb8ce0562c9e6c4097fc36e17eaeb958ddfe657bfab7b04b852b0e00f6dd",
+      "source": "eia-scope-contract-independent-semantic-limit.json",
+      "originalSha256": "a468fb8ce0562c9e6c4097fc36e17eaeb958ddfe657bfab7b04b852b0e00f6dd"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-semantic-limit.mjs",
+      "category": "verification-record",
+      "bytes": 1826,
+      "sha256": "e5d55913752d960b3bab6e6bfe3a2e26ed357131b6071c6e6e4db1d1edab2655",
+      "source": "eia-scope-contract-independent-semantic-limit.mjs",
+      "originalSha256": "e5d55913752d960b3bab6e6bfe3a2e26ed357131b6071c6e6e4db1d1edab2655"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-summary-r2.json",
+      "category": "verification-record",
+      "bytes": 5223,
+      "sha256": "ec63e4d0f663d5a601540ee57199481bdd5354f87164de97950d8f6f90f1c2f5",
+      "source": "eia-scope-contract-independent-summary-r2.json",
+      "originalSha256": "ec63e4d0f663d5a601540ee57199481bdd5354f87164de97950d8f6f90f1c2f5"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-targeted-final.json",
+      "category": "verification-record",
+      "bytes": 3836,
+      "sha256": "9f503d3af53360f472c7da2eb9131ab66c28a38206084989542d38603b05f966",
+      "source": "eia-scope-contract-independent-targeted-final.json",
+      "originalSha256": "9f503d3af53360f472c7da2eb9131ab66c28a38206084989542d38603b05f966"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-independent-targeted-final.mjs",
+      "category": "verification-record",
+      "bytes": 2298,
+      "sha256": "8054a9aea3135746a363c03370ee4a84185994c28ffbf940876bf75bcaac6a51",
+      "source": "eia-scope-contract-independent-targeted-final.mjs",
+      "originalSha256": "8054a9aea3135746a363c03370ee4a84185994c28ffbf940876bf75bcaac6a51"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-initial-existing.log",
+      "category": "verification-record",
+      "bytes": 14785,
+      "sha256": "5fb35352fe53dd026ed107b4790f1a213da67ceddbe5eb6af8e4ed7559620538",
+      "source": "eia-scope-contract-initial-existing.log",
+      "originalSha256": "a41941f1bb2e8c9ba3b3e5d39e324bdc8860b4c2da5ba78013d68f8a7c5a0793"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-initial-full.log",
+      "category": "verification-record",
+      "bytes": 589809,
+      "sha256": "c1a166df81d4ae1d0f0a8bb27dd8f1980f62149ebb6965f607a49464aa607b86",
+      "source": "eia-scope-contract-initial-full.log",
+      "originalSha256": "4a6770ca943f480e5895be81275f642fa955f9522f29e0b60e444d11e07684d5"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-label-tests-final-v2.log",
+      "category": "verification-record",
+      "bytes": 1559,
+      "sha256": "611053c3c6f15fbeafd522fe49c9922702573114e46657c47cb516a89f23df0e",
+      "source": "eia-scope-contract-label-tests-final-v2.log",
+      "originalSha256": "7bc81f5c4ad5b3bf793cd167817acd7e0faa62eaa4110c4baf651077d6ec580c"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-label-tests-final.log",
+      "category": "verification-record",
+      "bytes": 1794,
+      "sha256": "485d1dd6ca0b5ee09e1e59f8a78d890e182fa7e86094c6b17f2cf9a6ee3038d2",
+      "source": "eia-scope-contract-label-tests-final.log",
+      "originalSha256": "f8a23d2b5d4267097bbe2c25c4ca732aeac36860f4898de69955ed4021b38d2f"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-label-tests.log",
+      "category": "verification-record",
+      "bytes": 3501,
+      "sha256": "7a027794b99f2fe1f98598f084756ee8017ad06d58528c4a3eb27e1997f473b7",
+      "source": "eia-scope-contract-label-tests.log",
+      "originalSha256": "2e47cbf5bc01f0c112682153e4cbf38fb6ac8c97ebac8a6e4bbc50fdebfcd6db"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-migrated-full-v1.log",
+      "category": "verification-record",
+      "bytes": 130059,
+      "sha256": "98c2fe15224b21d2819a6263157fd7a81bf301414fb46c4a75262612c2984f3b",
+      "source": "eia-scope-contract-migrated-full-v1.log",
+      "originalSha256": "41f81973b0edeb778cae40aa747ecf6eee044be8b241de8482e69f06de22fb86"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-primary-initial.log",
+      "category": "verification-record",
+      "bytes": 10689,
+      "sha256": "7d6a656dd1ce52a6fbe9d01f648e9da6774b6944ab6da0826bab8e285a6d827f",
+      "source": "eia-scope-contract-primary-initial.log",
+      "originalSha256": "1da8c405af72d3a81558af3520544d6bb69459a23b7eaf08482fe24aef673742"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-retained-tests.log",
+      "category": "verification-record",
+      "bytes": 15903,
+      "sha256": "64080016fc5f24527da319b3f7a4d761968f8f397e84087153276baeaa60c6d0",
+      "source": "eia-scope-contract-retained-tests.log",
+      "originalSha256": "64080016fc5f24527da319b3f7a4d761968f8f397e84087153276baeaa60c6d0"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-spec.json",
+      "category": "verification-record",
+      "bytes": 2833,
+      "sha256": "98bf762c4a11b1d38a1337264388e74a5228f2132573a26b8a510ea43b4cf8eb",
+      "source": "eia-scope-contract-spec.json",
+      "originalSha256": "98bf762c4a11b1d38a1337264388e74a5228f2132573a26b8a510ea43b4cf8eb"
+    },
+    {
+      "path": "evidence/scope-contract/eia-scope-contract-start.json",
+      "category": "verification-record",
+      "bytes": 3990,
+      "sha256": "b7c9b11cf230856307d97a83e93d2250ab5201837bd600a568b502f2503dbbe3",
+      "source": "eia-scope-contract-start.json",
+      "originalSha256": "b7c9b11cf230856307d97a83e93d2250ab5201837bd600a568b502f2503dbbe3"
+    },
+    {
+      "path": "evidence/tests/eia-final-tests.log",
+      "category": "verification-record",
+      "bytes": 32529,
+      "sha256": "b25c1c732b074ca5b78452f149c35ca7efa6543dbcf3818efd671d5fd9e40a61",
+      "source": "eia-final-tests.log",
+      "originalSha256": "b25c1c732b074ca5b78452f149c35ca7efa6543dbcf3818efd671d5fd9e40a61"
+    },
+    {
+      "path": "files/components/search/SearchWorkspace.js",
+      "category": "modified-tracked-file",
+      "bytes": 16209,
+      "sha256": "26ccb47d5f182a66414ba35b2fe6b449075163e22112864c29a01852215049f8",
+      "source": "components/search/SearchWorkspace.js",
+      "originalSha256": "26ccb47d5f182a66414ba35b2fe6b449075163e22112864c29a01852215049f8"
+    },
+    {
+      "path": "files/data/eia/phase4-routing-config.json",
+      "category": "modified-tracked-file",
+      "bytes": 12107,
+      "sha256": "c20f43fb9738a95e229d460e0d8b49913a6526420bfa0bab58dd5b14240c123e",
+      "source": "data/eia/phase4-routing-config.json",
+      "originalSha256": "c20f43fb9738a95e229d460e0d8b49913a6526420bfa0bab58dd5b14240c123e"
+    },
+    {
+      "path": "files/data/eia/routing-metadata.json",
+      "category": "modified-tracked-file",
+      "bytes": 49863,
+      "sha256": "8cee62e497af1701405a86561a9a9dd9ba39f607ac092820ccd1a09aa8306558",
+      "source": "data/eia/routing-metadata.json",
+      "originalSha256": "8cee62e497af1701405a86561a9a9dd9ba39f607ac092820ccd1a09aa8306558"
+    },
+    {
+      "path": "files/docs/eia-interpretation-audit.md",
+      "category": "new-worktree-file",
+      "bytes": 51366,
+      "sha256": "3206cdd659908acc6aedf359e8940585dd1d703459fd4b75c4294744f999f652",
+      "source": "docs/eia-interpretation-audit.md",
+      "originalSha256": "3206cdd659908acc6aedf359e8940585dd1d703459fd4b75c4294744f999f652"
+    },
+    {
+      "path": "files/lib/sources/eia/candidate-search.js",
+      "category": "modified-tracked-file",
+      "bytes": 24447,
+      "sha256": "5e155ea1154c27a24af1b504f345331a71582365c67f32bc89054ffba2cca5ef",
+      "source": "lib/sources/eia/candidate-search.js",
+      "originalSha256": "5e155ea1154c27a24af1b504f345331a71582365c67f32bc89054ffba2cca5ef"
+    },
+    {
+      "path": "files/lib/sources/eia/intent-routing.js",
+      "category": "modified-tracked-file",
+      "bytes": 41975,
+      "sha256": "d95587c9a82ede0b59d35bd815a109ce5be156dd8d9b0c230762a5244d3abebf",
+      "source": "lib/sources/eia/intent-routing.js",
+      "originalSha256": "d95587c9a82ede0b59d35bd815a109ce5be156dd8d9b0c230762a5244d3abebf"
+    },
+    {
+      "path": "files/lib/sources/eia/interpret-query.js",
+      "category": "modified-tracked-file",
+      "bytes": 79983,
+      "sha256": "a55399e13c702c9ac8d7856758dbd9883cdbcd8620a2c4e7cd6b8ed5f9ac4a14",
+      "source": "lib/sources/eia/interpret-query.js",
+      "originalSha256": "a55399e13c702c9ac8d7856758dbd9883cdbcd8620a2c4e7cd6b8ed5f9ac4a14"
+    },
+    {
+      "path": "files/lib/sources/eia/local-ranking.js",
+      "category": "modified-tracked-file",
+      "bytes": 40384,
+      "sha256": "1eadc7aa26240e2e1ebe73c2b7ef2306b0ef7a2de1b727e4248be97935e10252",
+      "source": "lib/sources/eia/local-ranking.js",
+      "originalSha256": "1eadc7aa26240e2e1ebe73c2b7ef2306b0ef7a2de1b727e4248be97935e10252"
+    },
+    {
+      "path": "files/lib/sources/eia/local-retrieval.js",
+      "category": "modified-tracked-file",
+      "bytes": 25791,
+      "sha256": "e3c5a7f5d3805e4cd9f3e777f4be58bb1b0ae85819a038c3e43b11bd0a079fb3",
+      "source": "lib/sources/eia/local-retrieval.js",
+      "originalSha256": "e3c5a7f5d3805e4cd9f3e777f4be58bb1b0ae85819a038c3e43b11bd0a079fb3"
+    },
+    {
+      "path": "files/lib/sources/eia/multi-country-comparison.js",
+      "category": "modified-tracked-file",
+      "bytes": 14378,
+      "sha256": "d9f8e8c7ae35b0d6e2032623afb9925ce4bdf91ec3e83a1fc28c0a17fb83fcfb",
+      "source": "lib/sources/eia/multi-country-comparison.js",
+      "originalSha256": "d9f8e8c7ae35b0d6e2032623afb9925ce4bdf91ec3e83a1fc28c0a17fb83fcfb"
+    },
+    {
+      "path": "files/lib/sources/eia/request-evidence.js",
+      "category": "new-worktree-file",
+      "bytes": 8529,
+      "sha256": "d5e370c70355a8438c6a44a720943a4f3724af0c8419b13fa0fc74f2feb0b9e6",
+      "source": "lib/sources/eia/request-evidence.js",
+      "originalSha256": "d5e370c70355a8438c6a44a720943a4f3724af0c8419b13fa0fc74f2feb0b9e6"
+    },
+    {
+      "path": "files/scripts/eia-metadata/normalize.js",
+      "category": "modified-tracked-file",
+      "bytes": 17184,
+      "sha256": "5847618f0816ef62c5507d56c018ee0d15c9bdb10895efe576e05ba2435dd3b7",
+      "source": "scripts/eia-metadata/normalize.js",
+      "originalSha256": "5847618f0816ef62c5507d56c018ee0d15c9bdb10895efe576e05ba2435dd3b7"
+    },
+    {
+      "path": "files/tests/eia-followup-regressions.test.js",
+      "category": "new-worktree-file",
+      "bytes": 6122,
+      "sha256": "52131e0f95fa752d52fef95322f72c3d7f2cf6e39524b06a3900e9989246d78c",
+      "source": "tests/eia-followup-regressions.test.js",
+      "originalSha256": "52131e0f95fa752d52fef95322f72c3d7f2cf6e39524b06a3900e9989246d78c"
+    },
+    {
+      "path": "files/tests/eia-independent-challenges.test.js",
+      "category": "new-worktree-file",
+      "bytes": 11157,
+      "sha256": "9e8a8bf8f2b1a614bcbc7fbf563b6583b4e54f05996af95d96a5cbb1bc505f91",
+      "source": "tests/eia-independent-challenges.test.js",
+      "originalSha256": "9e8a8bf8f2b1a614bcbc7fbf563b6583b4e54f05996af95d96a5cbb1bc505f91"
+    },
+    {
+      "path": "files/tests/eia-interpretation-audit.test.js",
+      "category": "new-worktree-file",
+      "bytes": 10395,
+      "sha256": "fdcb537dab7033e6861e91bdc0463479be8a6b51004d29982d763803bf922ba0",
+      "source": "tests/eia-interpretation-audit.test.js",
+      "originalSha256": "fdcb537dab7033e6861e91bdc0463479be8a6b51004d29982d763803bf922ba0"
+    },
+    {
+      "path": "files/tests/eia-negation-independent.test.js",
+      "category": "new-worktree-file",
+      "bytes": 8173,
+      "sha256": "4091ffba05fd68b03e441daf0e5df47b33516fb7423bc2726f243f1a9673ed9c",
+      "source": "tests/eia-negation-independent.test.js",
+      "originalSha256": "4091ffba05fd68b03e441daf0e5df47b33516fb7423bc2726f243f1a9673ed9c"
+    },
+    {
+      "path": "files/tests/eia-negation-target.test.js",
+      "category": "new-worktree-file",
+      "bytes": 6319,
+      "sha256": "4c47acaecc8f9d25e54b13ce0f02f81d380e44b1ad2ce835c3e4aad08a77e9b3",
+      "source": "tests/eia-negation-target.test.js",
+      "originalSha256": "4c47acaecc8f9d25e54b13ce0f02f81d380e44b1ad2ce835c3e4aad08a77e9b3"
+    },
+    {
+      "path": "files/tests/eia-query-interpretation.test.js",
+      "category": "modified-tracked-file",
+      "bytes": 53771,
+      "sha256": "fbee4ab70107e1a04acd87fbd9a6758c701e4f8a6b922beb44d0c5fd6f8d8634",
+      "source": "tests/eia-query-interpretation.test.js",
+      "originalSha256": "fbee4ab70107e1a04acd87fbd9a6758c701e4f8a6b922beb44d0c5fd6f8d8634"
+    },
+    {
+      "path": "files/tests/eia-scope-evidence.test.js",
+      "category": "new-worktree-file",
+      "bytes": 6278,
+      "sha256": "736a02e519dadb90b03f6f338adab374af12ea7d4e481fcc3433e17add9ecb5b",
+      "source": "tests/eia-scope-evidence.test.js",
+      "originalSha256": "736a02e519dadb90b03f6f338adab374af12ea7d4e481fcc3433e17add9ecb5b"
+    },
+    {
+      "path": "files/tests/eia-scope-independent.test.js",
+      "category": "new-worktree-file",
+      "bytes": 13703,
+      "sha256": "037662f8580b152093726b338ac18f4732814bd4cf4cb3e9bbfb544fbcd71670",
+      "source": "tests/eia-scope-independent.test.js",
+      "originalSha256": "037662f8580b152093726b338ac18f4732814bd4cf4cb3e9bbfb544fbcd71670"
+    },
+    {
+      "path": "files/tests/eia-scope-metadata-labels.test.js",
+      "category": "new-worktree-file",
+      "bytes": 4303,
+      "sha256": "c2bb97f818f01a81bc1e3865a9732ac982c89b456010782c3470d0932144e584",
+      "source": "tests/eia-scope-metadata-labels.test.js",
+      "originalSha256": "c2bb97f818f01a81bc1e3865a9732ac982c89b456010782c3470d0932144e584"
+    },
+    {
+      "path": "files/tests/fixtures/eia/challenge-route-adjudication.json",
+      "category": "new-worktree-file",
+      "bytes": 44024,
+      "sha256": "da51d7ee620516520490c09c8521a0c644714e7da67f56522e7561569dd3756b",
+      "source": "tests/fixtures/eia/challenge-route-adjudication.json",
+      "originalSha256": "da51d7ee620516520490c09c8521a0c644714e7da67f56522e7561569dd3756b"
+    },
+    {
+      "path": "files/tests/fixtures/eia/followup-regressions.json",
+      "category": "new-worktree-file",
+      "bytes": 16374,
+      "sha256": "0f803a903f73313fc21a5e1f54600bacc8baf19423672327698b52da87d2c643",
+      "source": "tests/fixtures/eia/followup-regressions.json",
+      "originalSha256": "0f803a903f73313fc21a5e1f54600bacc8baf19423672327698b52da87d2c643"
+    },
+    {
+      "path": "files/tests/fixtures/eia/followup-review-regressions.json",
+      "category": "new-worktree-file",
+      "bytes": 21806,
+      "sha256": "ec6e7863daa27e4887d0d9655d9bd228884af3d6b6a7824aba342c5efb4e04a5",
+      "source": "tests/fixtures/eia/followup-review-regressions.json",
+      "originalSha256": "ec6e7863daa27e4887d0d9655d9bd228884af3d6b6a7824aba342c5efb4e04a5"
+    },
+    {
+      "path": "files/tests/fixtures/eia/independent-challenges.json",
+      "category": "new-worktree-file",
+      "bytes": 36223,
+      "sha256": "1caf5edccda8e4e9a81fb3f79f5cb5df584ff04ac7dcc8f9942db91d189d8a30",
+      "source": "tests/fixtures/eia/independent-challenges.json",
+      "originalSha256": "1caf5edccda8e4e9a81fb3f79f5cb5df584ff04ac7dcc8f9942db91d189d8a30"
+    },
+    {
+      "path": "files/tests/fixtures/eia/interpretation-audit.json",
+      "category": "new-worktree-file",
+      "bytes": 49745,
+      "sha256": "8d35ff3775ddbc89916035b512eb26f9a7ac19ed10255f49cf4dfd16404c115d",
+      "source": "tests/fixtures/eia/interpretation-audit.json",
+      "originalSha256": "8d35ff3775ddbc89916035b512eb26f9a7ac19ed10255f49cf4dfd16404c115d"
+    },
+    {
+      "path": "files/tests/fixtures/eia/negation-independent.json",
+      "category": "new-worktree-file",
+      "bytes": 10973,
+      "sha256": "5c911f9c2b7b47748f510eed4031cf1b49423ac1e39519764b8a691215c003ff",
+      "source": "tests/fixtures/eia/negation-independent.json",
+      "originalSha256": "5c911f9c2b7b47748f510eed4031cf1b49423ac1e39519764b8a691215c003ff"
+    },
+    {
+      "path": "files/tests/fixtures/eia/negation-target.json",
+      "category": "new-worktree-file",
+      "bytes": 16556,
+      "sha256": "e36b72f26bde670855b9c246919726926c4849798bb21c1b1d3aae9617cf52ae",
+      "source": "tests/fixtures/eia/negation-target.json",
+      "originalSha256": "e36b72f26bde670855b9c246919726926c4849798bb21c1b1d3aae9617cf52ae"
+    },
+    {
+      "path": "files/tests/fixtures/eia/review-regressions.json",
+      "category": "new-worktree-file",
+      "bytes": 7308,
+      "sha256": "2994d714bc27b4b63901de6a115d9a951e08803517f7c64fdabfa1b01057b991",
+      "source": "tests/fixtures/eia/review-regressions.json",
+      "originalSha256": "2994d714bc27b4b63901de6a115d9a951e08803517f7c64fdabfa1b01057b991"
+    },
+    {
+      "path": "files/tests/fixtures/eia/scope-evidence-legacy.json",
+      "category": "new-worktree-file",
+      "bytes": 197157,
+      "sha256": "f9fae8ff19a879153be6e60bb046d2b150af8d7e1c9d1b8d78cd6ab14ef217a7",
+      "source": "tests/fixtures/eia/scope-evidence-legacy.json",
+      "originalSha256": "f9fae8ff19a879153be6e60bb046d2b150af8d7e1c9d1b8d78cd6ab14ef217a7"
+    },
+    {
+      "path": "files/tests/fixtures/eia/scope-evidence-regressions.json",
+      "category": "new-worktree-file",
+      "bytes": 51710,
+      "sha256": "921e306ce08eb8ab1802ab4083a650da748052df4e410e7784de2d9fdae7fc03",
+      "source": "tests/fixtures/eia/scope-evidence-regressions.json",
+      "originalSha256": "921e306ce08eb8ab1802ab4083a650da748052df4e410e7784de2d9fdae7fc03"
+    },
+    {
+      "path": "files/tests/fixtures/eia/scope-independent-matrix.json",
+      "category": "new-worktree-file",
+      "bytes": 24043,
+      "sha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0",
+      "source": "tests/fixtures/eia/scope-independent-matrix.json",
+      "originalSha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0"
+    },
+    {
+      "path": "files/tests/fixtures/eia/scope-independent-payloads.json",
+      "category": "new-worktree-file",
+      "bytes": 68226,
+      "sha256": "0de352d4ee655f56aec878fc7c5e9e979c392a779753930e5c0ac9ff9dc85fe5",
+      "source": "tests/fixtures/eia/scope-independent-payloads.json",
+      "originalSha256": "0de352d4ee655f56aec878fc7c5e9e979c392a779753930e5c0ac9ff9dc85fe5"
+    },
+    {
+      "path": "INVENTORY.md",
+      "category": "packaging-inventory",
+      "bytes": 19331,
+      "sha256": "e226dbee824c5f7cdfed0c4c1e251c8fc58428f7cb6fad05ea5f9d4b32ce348f"
+    },
+    {
+      "path": "REDACTIONS.md",
+      "category": "packaging-report",
+      "bytes": 2545,
+      "sha256": "6e086a03d5c27f6401cd611b60da69c5c29fb6d4ce604dad168992314cb22940"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "category": "payload-checksums",
+      "bytes": 23086,
+      "sha256": "6d04fb19fb9a8139b1e8b58a33bb2625a8097eebdde160eb1beb6d7c34feaaf2"
+    }
+  ]
+}

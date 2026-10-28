@@ -1,0 +1,29 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+import {execFileSync} from 'node:child_process';
+import {interpretQueryWithRules,validateAiInterpretation,normalizeSubmittedIntent} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+// Expectations are copied from the independently frozen scripts, without adjusting them to outputs.
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const sources=['cases','more','negation-v2','correction-scope','carrier','negation-adverbs'];
+const source=readFileSync(root+'/components/search/SearchWorkspace.js','utf8');
+const serialize=runInNewContext(`(${source.slice(source.indexOf('function appendIntentParams('),source.indexOf('\nfunction formatInterpreter('))})`);
+const sig=i=>({codes:i.structuredIntent.geographies.map(g=>g.code),pairs:i.structuredIntent.conceptPairs.map(p=>[p.product,p.activity]),frequency:i.frequency,explicit:i.frequencyExplicit,sector:i.sector,clarify:i.needsClarification});
+const errors=[];let count=0;
+for(const s of sources){
+ const lines=execFileSync(process.execPath,[`/tmp/eia-independent-review-${s}.mjs`],{encoding:'utf8'}).trim().split('\n').map(JSON.parse);
+ for(const c of lines){
+  count++;
+  const e=Array.isArray(c.expected)?(Array.isArray(c.expected[0])?{pairs:c.expected}:{codes:c.expected}):c.expected;
+  const rule=interpretQueryWithRules(c.q);
+  const ai={confidence:.99,geographies:(e.codes||rule.structuredIntent.geographies.map(g=>g.code)).map(value=>({value,confidence:.99})),conceptPairs:(e.pairs||rule.structuredIntent.conceptPairs.map(p=>[p.product,p.activity])).map(([product,activity],order)=>({product,activity,order,confidence:.99})),fields:{country:{value:(e.codes||[])[0],confidence:.99},product:{value:(e.pairs||[])[0]?.[0]||rule.product,confidence:.99},activity:{value:(e.pairs||[])[0]?.[1]||rule.activity,confidence:.99}}};
+  for(const [mode,i] of [['rules',rule],['injected',validateAiInterpretation(ai,c.q)]]){
+   const actual=sig(i);
+   for(const k of ['codes','pairs'])if(e[k])try{assert.deepEqual(actual[k],e[k]);}catch{errors.push({q:c.q,mode,field:k,expected:e[k],actual:actual[k]});}
+   const params=serialize(new URLSearchParams({q:c.q}),i);const submitted=normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')),c.q);
+   try{assert.deepEqual(sig(submitted),actual);}catch{errors.push({q:c.q,mode,field:'browser resubmission',before:actual,after:sig(submitted)});}
+  }
+ }
+}
+console.log(JSON.stringify({cases:count,errors}));
+if(errors.length)process.exitCode=1;

@@ -1,0 +1,2356 @@
+{
+  "root": "<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp",
+  "fixtureSha256": "c95fb84bf374f58c7f71127895b2380e106e6d8266a8734e6559ee491879bd4e",
+  "serializerSha256": "8ff40e400974decdd031c75af952c71054376ce73bea9df640f77304bff92baf",
+  "fetchCalls": 8,
+  "externalFetches": 0,
+  "cases": 8,
+  "passed": 2,
+  "results": [
+    {
+      "id": "uncertainty-modifier-0",
+      "query": "I'm not at all sure what's available for USA energy consumption",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "uncertainty-modifier-0",
+        "query": "I'm not at all sure what's available for USA energy consumption",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [
+        {
+          "phase": "rules",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "rules",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        }
+      ],
+      "rules": {
+        "geographies": [],
+        "products": [],
+        "activities": [],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "missing",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 0,
+        "needsClarification": true,
+        "candidates": [],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "uncertainty-modifier-1",
+      "query": "I'm not very sure what's available for USA energy consumption",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "uncertainty-modifier-1",
+        "query": "I'm not very sure what's available for USA energy consumption",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [
+        {
+          "phase": "rules",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "rules",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        }
+      ],
+      "rules": {
+        "geographies": [],
+        "products": [],
+        "activities": [],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "missing",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 0,
+        "needsClarification": true,
+        "candidates": [],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "uncertainty-modifier-2",
+      "query": "I'm not so sure what's available for USA energy consumption",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "uncertainty-modifier-2",
+        "query": "I'm not so sure what's available for USA energy consumption",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [
+        {
+          "phase": "rules",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "rules",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        }
+      ],
+      "rules": {
+        "geographies": [],
+        "products": [],
+        "activities": [],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "missing",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 0,
+        "needsClarification": true,
+        "candidates": [],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "uncertainty-modifier-3",
+      "query": "I'm not particularly sure what's available for USA energy consumption",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "uncertainty-modifier-3",
+        "query": "I'm not particularly sure what's available for USA energy consumption",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [
+        {
+          "phase": "rules",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "rules",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        }
+      ],
+      "rules": {
+        "geographies": [],
+        "products": [],
+        "activities": [],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "missing",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 0,
+        "needsClarification": true,
+        "candidates": [],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "uncertainty-modifier-4",
+      "query": "I'm not exactly sure what's available for USA energy consumption",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "uncertainty-modifier-4",
+        "query": "I'm not exactly sure what's available for USA energy consumption",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [
+        {
+          "phase": "rules",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "rules",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        }
+      ],
+      "rules": {
+        "geographies": [],
+        "products": [],
+        "activities": [],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "missing",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 0,
+        "needsClarification": true,
+        "candidates": [],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "uncertainty-modifier-5",
+      "query": "I'm not actually sure what's available for USA energy consumption",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "uncertainty-modifier-5",
+        "query": "I'm not actually sure what's available for USA energy consumption",
+        "geographies": [
+          "USA"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [
+        {
+          "phase": "rules",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "rules",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "rules",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "interpretQuery",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "browser-serialization",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedProducts",
+          "expected": [],
+          "actual": [
+            "total energy"
+          ]
+        },
+        {
+          "phase": "public-search-GET",
+          "key": "excludedActivities",
+          "expected": [],
+          "actual": [
+            "consumption"
+          ]
+        }
+      ],
+      "rules": {
+        "geographies": [],
+        "products": [],
+        "activities": [],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "missing",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [
+          "total energy"
+        ],
+        "excludedActivities": [
+          "consumption"
+        ],
+        "needsClarification": true,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A request without routable geography defaults to International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 0,
+        "needsClarification": true,
+        "candidates": [],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "ordered-explicit-pairs",
+      "query": "I'm not sure what's available for Canada and The Gambia: coal consumption and natural gas production",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "ordered-explicit-pairs",
+        "query": "I'm not sure what's available for Canada and The Gambia: coal consumption and natural gas production",
+        "geographies": [
+          "CAN",
+          "GMB"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "CAN",
+            "confidence": 0.99
+          },
+          {
+            "value": "GMB",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "coal",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          },
+          {
+            "product": "coal",
+            "activity": "production",
+            "confidence": 0.99,
+            "order": 1
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 2
+          },
+          {
+            "product": "natural gas",
+            "activity": "production",
+            "confidence": 0.99,
+            "order": 3
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "CAN",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "coal",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [],
+      "rules": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 5,
+        "needsClarification": false,
+        "candidates": [
+          {
+            "seriesId": "INTL.7-2-CAN-MT.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "1000 metric tons",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.7-2-GMB-MT.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "1000 metric tons",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.3-1-CAN-BCF.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "billion cubic feet",
+            "dateStart": "1980",
+            "dateEnd": "2017"
+          },
+          {
+            "seriesId": "INTL.3-1-GMB-BCF.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "billion cubic feet",
+            "dateStart": "1980",
+            "dateEnd": "2017"
+          },
+          {
+            "seriesId": "INTL.130-2-CAN-MT.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "1000 metric tons",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.130-2-GMB-MT.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "1000 metric tons",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.48-1-CAN-BCF.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "billion cubic feet",
+            "dateStart": "1990",
+            "dateEnd": "2015"
+          },
+          {
+            "seriesId": "INTL.48-1-GMB-BCF.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "billion cubic feet",
+            "dateStart": "1990",
+            "dateEnd": "2015"
+          },
+          {
+            "seriesId": "INTL.4411-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4411-2-GMB-QBTU.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          }
+        ],
+        "userWarnings": []
+      }
+    },
+    {
+      "id": "ordered-multiple-activities",
+      "query": "I'm not sure what's available for Canada and The Gambia: energy consumption and production",
+      "expected": {
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "excludedGeographies": [],
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "id": "ordered-multiple-activities",
+        "query": "I'm not sure what's available for Canada and The Gambia: energy consumption and production",
+        "geographies": [
+          "CAN",
+          "GMB"
+        ]
+      },
+      "injected": {
+        "confidence": 0.99,
+        "geographies": [
+          {
+            "value": "CAN",
+            "confidence": 0.99
+          },
+          {
+            "value": "GMB",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "confidence": 0.99,
+            "order": 0
+          },
+          {
+            "product": "total energy",
+            "activity": "production",
+            "confidence": 0.99,
+            "order": 1
+          }
+        ],
+        "fields": {
+          "country": {
+            "value": "CAN",
+            "confidence": 0.99
+          },
+          "product": {
+            "value": "total energy",
+            "confidence": 0.99
+          },
+          "activity": {
+            "value": "consumption",
+            "confidence": 0.99
+          },
+          "sector": {
+            "value": null,
+            "confidence": 0.99
+          },
+          "frequency": {
+            "value": "annual",
+            "confidence": 0.99,
+            "explicit": false
+          }
+        },
+        "exclusions": []
+      },
+      "errors": [],
+      "rules": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "interpreted": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "serialized": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "searched": {
+        "geographies": [
+          "CAN",
+          "GMB"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption",
+          "production"
+        ],
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedProducts": [],
+        "excludedActivities": [],
+        "needsClarification": false,
+        "pairStatus": "validated",
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        }
+      },
+      "publicResult": {
+        "variables": 0,
+        "comparisonDefinitions": 5,
+        "needsClarification": false,
+        "candidates": [
+          {
+            "seriesId": "INTL.4415-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4415-2-GMB-QBTU.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4411-1-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4411-1-GMB-QBTU.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.44-2-CAN-MTOE.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "million metric tons of oil equivalent",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.44-2-GMB-MTOE.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "million metric tons of oil equivalent",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4413-1-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4413-1-GMB-QBTU.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4417-2-CAN-QBTU.A",
+            "geography": {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          },
+          {
+            "seriesId": "INTL.4417-2-GMB-QBTU.A",
+            "geography": {
+              "name": "Gambia, The",
+              "code": "GMB",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "unit": "quadrillion Btu",
+            "dateStart": "1980",
+            "dateEnd": "2024"
+          }
+        ],
+        "userWarnings": []
+      }
+    }
+  ]
+}

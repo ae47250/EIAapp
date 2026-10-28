@@ -1,0 +1,244 @@
+{
+  "scheduledId": 57,
+  "queryId": 2,
+  "repeat": 1,
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "positionInBlock": 0,
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:55:34.094Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "c087dcf280dceff4e1dac7f5b756c6d464588f9c8f51283f6ec2dd4a7f301aaf",
+  "promptSHA256": "f1b370d91b5f1bcee3ea50d55bca97bc9fdeffa738e05a1698e58f06dd1eba6c",
+  "timeoutMs": 300000,
+  "reservedAttemptUSD": 0.017634,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:55:24 GMT",
+    "openai-processing-ms": "6806",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999417",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "3ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "completedAt": "2026-10-28T11:55:41.072Z",
+  "elapsedMs": 6977.298500000004,
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "incompleteDetails": null,
+  "usage": {
+    "input_tokens": 795,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 726,
+    "output_tokens_details": {
+      "reasoning_tokens": 254
+    },
+    "total_tokens": 1521
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "truncated": false,
+  "reasoningTokens": 254,
+  "tokenCostUSD": 0.0004425,
+  "grade": {
+    "version": 2,
+    "semantic": {
+      "pass": true,
+      "gradable": true,
+      "status": "correct",
+      "errors": [],
+      "signature": {
+        "geographies": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": [],
+        "scopeDispositions": [
+          {
+            "identity": "activity:consumption",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:USA",
+            "status": "requested"
+          }
+        ]
+      }
+    },
+    "strictJSON": true,
+    "shape": false,
+    "sourceSpans": false,
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": false,
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item",
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    "usable": false,
+    "truncated": false,
+    "original": {
+      "text": "{\n  \"correctedQuery\": \"total energy consumption United States\",\n  \"confidence\": \"high\",\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"usa\",\n      \"value\": \"United States\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"total energyy\",\n      \"value\": \"total energy\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": \"high\",\n      \"explicit\": false,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"United States\",\n      \"confidence\": \"high\"\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"total energy\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": \"high\"\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"total energyy consumption usa\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 14,\n        \"text\": \"total energyy\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 15,\n        \"end\": 26,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 27,\n        \"end\": 30,\n        \"text\": \"usa\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "correctedQuery": "total energy consumption United States",
+        "confidence": "high",
+        "ambiguity": null,
+        "fields": {
+          "country": {
+            "rawValue": "usa",
+            "value": "United States",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energyy",
+            "value": "total energy",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": null,
+            "value": "annual",
+            "confidence": "high",
+            "explicit": false,
+            "ambiguityReason": null
+          }
+        },
+        "geographies": [
+          {
+            "value": "United States",
+            "confidence": "high"
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 1,
+            "confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "requestEvidence": {
+          "version": 1,
+          "query": "total energyy consumption usa",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 14,
+              "text": "total energyy",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 15,
+              "end": 26,
+              "text": "consumption",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 27,
+              "end": 30,
+              "text": "usa",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        }
+      },
+      "semantic": {
+        "pass": false,
+        "errors": [
+          "geographies_or_order",
+          "country_summary_contradiction"
+        ],
+        "signature": {
+          "geographies": [
+            "US"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "clarification": false,
+          "unknownQualifiers": []
+        }
+      },
+      "contract": {
+        "pass": false,
+        "json": true,
+        "shape": false,
+        "spans": false,
+        "errors": [
+          "invalid_summary_shape",
+          "invalid_field_country",
+          "invalid_field_product",
+          "invalid_field_activity",
+          "invalid_field_sector",
+          "invalid_field_frequency",
+          "invalid_geography_item",
+          "invalid_pair_item",
+          "invalid_source_scope",
+          "uncovered_source_text",
+          "split_or_uncovered_metadata_mention"
+        ]
+      }
+    }
+  },
+  "replayFile": "reasoning-attempts/057-1.replay.json",
+  "unknownCostUpperBoundUSD": 0,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null
+}

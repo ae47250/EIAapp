@@ -1,0 +1,280 @@
+{
+  "scheduledId": 102,
+  "queryId": 7,
+  "repeat": 2,
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "positionInBlock": 1,
+  "attempt": 1,
+  "startedAt": "2026-10-28T12:07:03.073Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "24b7e3c12fb3257dcb29823dbd597317b1f3030d07209f5db1c22cf297a438cf",
+  "promptSHA256": "81df73713c7b616d4b7333fade7aa0e4088f539454647f28deb1c1b522336a5b",
+  "timeoutMs": 300000,
+  "reservedAttemptUSD": 0.017634,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 12:06:54 GMT",
+    "openai-processing-ms": "8205",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999217",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "4ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "completedAt": "2026-10-28T12:07:11.446Z",
+  "elapsedMs": 8372.347582999966,
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "incompleteDetails": null,
+  "usage": {
+    "input_tokens": 798,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 926,
+    "output_tokens_details": {
+      "reasoning_tokens": 376
+    },
+    "total_tokens": 1724
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "truncated": false,
+  "reasoningTokens": 376,
+  "tokenCostUSD": 0.0005428,
+  "grade": {
+    "version": 2,
+    "semantic": {
+      "pass": false,
+      "gradable": true,
+      "status": "incorrect",
+      "errors": [
+        "country_summary_contradiction"
+      ],
+      "signature": {
+        "geographies": [
+          "TX"
+        ],
+        "pairs": [
+          [
+            "natural gas",
+            "production"
+          ],
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": true,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": [],
+        "scopeDispositions": [
+          {
+            "identity": "activity:consumption",
+            "status": "requested"
+          },
+          {
+            "identity": "activity:production",
+            "status": "requested"
+          },
+          {
+            "identity": "frequency:annual",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:TX",
+            "status": "requested"
+          },
+          {
+            "identity": "product:natural gas",
+            "status": "requested"
+          }
+        ]
+      }
+    },
+    "strictJSON": true,
+    "shape": false,
+    "sourceSpans": false,
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": false,
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item",
+        "data_cannot_be_context",
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    "usable": false,
+    "truncated": false,
+    "original": {
+      "text": "{\n  \"correctedQuery\": \"natural gas production and consumption in Texas annually\",\n  \"confidence\": \"high\",\n  \"ambiguity\": [],\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"Texas\",\n      \"value\": \"United States\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"natural gas\",\n      \"value\": \"natural gas\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"production and consumption\",\n      \"value\": \"production\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": \"annually\",\n      \"value\": \"annual\",\n      \"confidence\": \"high\",\n      \"explicit\": true,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Texas\",\n      \"confidence\": \"high\"\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"natural gas\",\n      \"activity\": \"production\",\n      \"order\": 1,\n      \"confidence\": \"high\"\n    },\n    {\n      \"product\": \"natural gas\",\n      \"activity\": \"consumption\",\n      \"order\": 2,\n      \"confidence\": \"high\"\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"natural gas production and consumption in Texas annually\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 38,\n        \"text\": \"natural gas production and consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 38,\n        \"end\": 42,\n        \"text\": \" in \",\n        \"status\": \"context\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 42,\n        \"end\": 47,\n        \"text\": \"Texas\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 47,\n        \"end\": 57,\n        \"text\": \" annually\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "correctedQuery": "natural gas production and consumption in Texas annually",
+        "confidence": "high",
+        "ambiguity": [],
+        "fields": {
+          "country": {
+            "rawValue": "Texas",
+            "value": "United States",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "natural gas",
+            "value": "natural gas",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "production and consumption",
+            "value": "production",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annually",
+            "value": "annual",
+            "confidence": "high",
+            "explicit": true,
+            "ambiguityReason": null
+          }
+        },
+        "geographies": [
+          {
+            "value": "Texas",
+            "confidence": "high"
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "natural gas",
+            "activity": "production",
+            "order": 1,
+            "confidence": "high"
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption",
+            "order": 2,
+            "confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "requestEvidence": {
+          "version": 1,
+          "query": "natural gas production and consumption in Texas annually",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 38,
+              "text": "natural gas production and consumption",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 38,
+              "end": 42,
+              "text": " in ",
+              "status": "context",
+              "target": "data"
+            },
+            {
+              "start": 42,
+              "end": 47,
+              "text": "Texas",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 47,
+              "end": 57,
+              "text": " annually",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        }
+      },
+      "semantic": {
+        "pass": false,
+        "errors": [
+          "country_summary_contradiction"
+        ],
+        "signature": {
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "clarification": false,
+          "unknownQualifiers": []
+        }
+      },
+      "contract": {
+        "pass": false,
+        "json": true,
+        "shape": false,
+        "spans": false,
+        "errors": [
+          "invalid_summary_shape",
+          "invalid_field_country",
+          "invalid_field_product",
+          "invalid_field_activity",
+          "invalid_field_sector",
+          "invalid_field_frequency",
+          "invalid_geography_item",
+          "invalid_pair_item",
+          "data_cannot_be_context",
+          "invalid_source_scope",
+          "uncovered_source_text",
+          "split_or_uncovered_metadata_mention"
+        ]
+      }
+    }
+  },
+  "replayFile": "reasoning-attempts/102-1.replay.json",
+  "unknownCostUpperBoundUSD": 0,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null
+}

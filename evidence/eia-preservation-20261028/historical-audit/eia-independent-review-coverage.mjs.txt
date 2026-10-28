@@ -1,0 +1,9 @@
+import {interpretQueryWithRules} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+import {buildLocalCandidatePipeline} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/candidate-pipeline.js';
+// Frozen acceptance: marketed natural gas must preserve marketed-production specificity. An explicit
+// unit difference must be disclosed. Route comparisons below are diagnostics, not route-name oracles.
+for(const q of ['Show marketed natural gas production in Texas.','Monthly residential electricity prices in Texas, in dollars per kilowatt hour.','Natural gas production in Canada, in megawatts.']){
+ const i=interpretQueryWithRules(q);const variants=[[i.structuredIntent.route.family,i]];
+ if(q.includes('marketed'))variants.push(['domestic',{...i,structuredIntent:{...i.structuredIntent,route:{...i.structuredIntent.route,family:'domestic'}}}]);
+ for(const [route,intent] of variants){const p=await buildLocalCandidatePipeline(intent);console.log(JSON.stringify({q,route,unit:intent.structuredIntent.unit,clarify:intent.needsClarification,retrievals:p.retrievals.map(r=>({concept:r.concept,presentation:r.presentation,warning:r.warnings,display:r.displayCandidates.slice(0,5).map(c=>({id:c.series_id,title:c.title,unit:c.unit,certainty:c.certainty,ranking:c.ranking?.tier,qualifier:c.ranking?.signals?.lexicalQualifiers}))}))}));}
+}

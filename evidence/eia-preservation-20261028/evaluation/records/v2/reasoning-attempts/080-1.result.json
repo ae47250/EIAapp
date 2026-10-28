@@ -1,0 +1,232 @@
+{
+  "scheduledId": 80,
+  "queryId": 10,
+  "repeat": 1,
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "positionInBlock": 3,
+  "attempt": 1,
+  "startedAt": "2026-10-28T12:01:14.043Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "6356475d29deeb660ef2218c340eacc1327a354ef871b8c9c8f0f50aecf03c01",
+  "promptSHA256": "712851d9f5452682772d1c0d194129d197bff135b703c9dfa7ac15679da1ee98",
+  "timeoutMs": 300000,
+  "reservedAttemptUSD": 0.017634,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 12:01:11 GMT",
+    "openai-processing-ms": "12683",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999112",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "5ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "completedAt": "2026-10-28T12:01:28.307Z",
+  "elapsedMs": 14263.29008299997,
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "incompleteDetails": null,
+  "usage": {
+    "input_tokens": 796,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1031,
+    "output_tokens_details": {
+      "reasoning_tokens": 480
+    },
+    "total_tokens": 1827
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "truncated": false,
+  "reasoningTokens": 480,
+  "tokenCostUSD": 0.0005951,
+  "grade": {
+    "version": 2,
+    "semantic": {
+      "pass": false,
+      "gradable": true,
+      "status": "incorrect",
+      "errors": [
+        "gas_choice_not_clearly_clarified"
+      ],
+      "signature": {
+        "geographies": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            null,
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": [],
+        "scopeDispositions": [
+          {
+            "identity": "activity:consumption",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:USA",
+            "status": "requested"
+          }
+        ]
+      }
+    },
+    "strictJSON": true,
+    "shape": true,
+    "sourceSpans": true,
+    "contract": {
+      "pass": true,
+      "json": true,
+      "shape": true,
+      "spans": true,
+      "errors": []
+    },
+    "usable": false,
+    "truncated": false,
+    "original": {
+      "text": "{\n  \"correctedQuery\": \"gas consumption in the United States\",\n  \"confidence\": 0.9,\n  \"ambiguity\": [\n    \"“Gas” does not identify a specific allowed energy product.\"\n  ],\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"United States\",\n      \"value\": \"United States\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"gas\",\n      \"value\": null,\n      \"confidence\": 0.55,\n      \"ambiguityReason\": \"“Gas” could refer to more than one energy product.\"\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null,\n      \"explicit\": false\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"United States\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": null,\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 0.55\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"gas consumption in the United States\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 4,\n        \"text\": \"gas \",\n        \"status\": \"unresolved\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 4,\n        \"end\": 16,\n        \"text\": \"consumption \",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 16,\n        \"end\": 23,\n        \"text\": \"in the \",\n        \"status\": \"context\",\n        \"target\": \"unknown\"\n      },\n      {\n        \"start\": 23,\n        \"end\": 36,\n        \"text\": \"United States\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "correctedQuery": "gas consumption in the United States",
+        "confidence": 0.9,
+        "ambiguity": [
+          "“Gas” does not identify a specific allowed energy product."
+        ],
+        "fields": {
+          "country": {
+            "rawValue": "United States",
+            "value": "United States",
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "gas",
+            "value": null,
+            "confidence": 0.55,
+            "ambiguityReason": "“Gas” could refer to more than one energy product."
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": null,
+            "value": "annual",
+            "confidence": 1,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "United States",
+            "confidence": 1
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": null,
+            "activity": "consumption",
+            "order": 1,
+            "confidence": 0.55
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "requestEvidence": {
+          "version": 1,
+          "query": "gas consumption in the United States",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 4,
+              "text": "gas ",
+              "status": "unresolved",
+              "target": "data"
+            },
+            {
+              "start": 4,
+              "end": 16,
+              "text": "consumption ",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 16,
+              "end": 23,
+              "text": "in the ",
+              "status": "context",
+              "target": "unknown"
+            },
+            {
+              "start": 23,
+              "end": 36,
+              "text": "United States",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        }
+      },
+      "semantic": {
+        "pass": false,
+        "errors": [
+          "geographies_or_order",
+          "gas_choice_not_clearly_clarified",
+          "country_summary_contradiction"
+        ],
+        "signature": {
+          "geographies": [
+            "US"
+          ],
+          "pairs": [
+            [
+              null,
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [],
+          "clarification": false,
+          "unknownQualifiers": []
+        }
+      },
+      "contract": {
+        "pass": true,
+        "json": true,
+        "shape": true,
+        "spans": true,
+        "errors": []
+      }
+    }
+  },
+  "replayFile": "reasoning-attempts/080-1.replay.json",
+  "unknownCostUpperBoundUSD": 0,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null
+}

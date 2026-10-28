@@ -1,0 +1,33 @@
+{
+  "reviewBase": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "frozenBefore": "Reading implementation diffs or development tests",
+  "metadata": {
+    "routingMetadata": "data/eia/routing-metadata.json",
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "geographies": {"GMB":"Gambia, The","ZMB":"Zambia","BHS":"The Bahamas","CAN":"Canada","USA":"United States","PNG":"Papua New Guinea","GNB":"Guinea-Bissau","GIN":"Guinea","GEO":"Georgia"}
+  },
+  "defaults": {"frequency":"annual","frequencyExplicit":false,"products":["total energy"],"activities":["consumption"],"excludedGeographies":[],"excludedProducts":[],"excludedActivities":[]},
+  "cases": [
+    {"id":"gambia-reported","query":"energy consumption in The Gambia","geographies":["GMB"]},
+    {"id":"gambia-canonical","query":"energy consumption in Gambia, The","geographies":["GMB"]},
+    {"id":"gambia-bare","query":"energy consumption in Gambia","geographies":["GMB"]},
+    {"id":"zambia-independent","query":"energy consumption in Zambia","geographies":["ZMB"]},
+    {"id":"gambia-zambia-ordered","query":"Compare energy consumption in The Gambia, Zambia and Canada","geographies":["GMB","ZMB","CAN"]},
+    {"id":"bahamas-article","query":"energy consumption in The Bahamas","geographies":["BHS"]},
+    {"id":"bahamas-bare","query":"energy consumption in Bahamas","geographies":["BHS"]},
+    {"id":"long-country-protection","query":"energy consumption in Papua New Guinea and Guinea-Bissau","geographies":["PNG","GNB"]},
+    {"id":"usa-uncertainty-reported","query":"I'm not sure what's available for USA energy consumption","geographies":["USA"]},
+    {"id":"gambia-uncertainty-generalized","query":"I'm not certain whether energy consumption is available for The Gambia","geographies":["GMB"]},
+    {"id":"canada-uncertainty-monthly","query":"I don't know whether monthly natural gas consumption is available for Canada","geographies":["CAN"],"products":["natural gas"],"frequency":"monthly","frequencyExplicit":true},
+    {"id":"usa-uncertainty-explicit-annual","query":"I'm not sure what annual USA energy consumption data is available","geographies":["USA"],"frequency":"annual","frequencyExplicit":true},
+    {"id":"genuine-geography-exclusion","query":"energy consumption in Canada, not USA","geographies":["CAN"],"excludedGeographies":["USA"]},
+    {"id":"genuine-product-exclusion","query":"USA natural gas consumption, not petroleum","geographies":["USA"],"products":["natural gas"],"excludedProducts":["petroleum"]},
+    {"id":"genuine-activity-exclusion","query":"USA energy consumption, not production","geographies":["USA"],"excludedActivities":["production"]},
+    {"id":"uncertainty-with-exclusion","query":"I'm not sure what's available for USA natural gas consumption, not petroleum production","geographies":["USA"],"products":["natural gas"],"excludedProducts":["petroleum"],"excludedActivities":["production"]},
+    {"id":"positive-order-preserved","query":"I'm not sure what's available for Canada and The Gambia: coal and natural gas consumption and production","geographies":["CAN","GMB"],"products":["coal","natural gas"],"activities":["consumption","production"]},
+    {"id":"uncertainty-no-country-substitution","query":"I'm not sure whether quarterly energy consumption exists for The Gambia, not Zambia","geographies":["GMB"],"excludedGeographies":["ZMB"],"frequency":"quarterly","frequencyExplicit":true},
+    {"id":"uncertainty-cannot-tell","query":"I cannot tell what USA energy consumption data is available","geographies":["USA"]},
+    {"id":"uncertainty-no-idea","query":"I have no idea what energy consumption data is available for Canada","geographies":["CAN"]}
+  ]
+}

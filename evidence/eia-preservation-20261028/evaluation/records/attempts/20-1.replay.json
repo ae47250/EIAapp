@@ -1,0 +1,1396 @@
+{
+  "queryId": 10,
+  "directValidation": {
+    "interpreter": "openai",
+    "geographies": [
+      "USA"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A U.S. non-electricity request uses the available International metadata.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "frequency_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "gas consumption in the United States",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "gas consumption in the United States",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initial": {
+    "interpreter": "openai",
+    "geographies": [
+      "USA"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A U.S. non-electricity request uses the available International metadata.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "frequency_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "gas consumption in the United States",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "gas consumption in the United States",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initialFull": {
+    "originalQuery": "gas consumption in the United States",
+    "cleanedQuery": "gas consumption in the United States",
+    "correctedQuery": "natural gas consumption in the United States",
+    "correctedQuerySource": "ai",
+    "normalizedQuery": "gas consumption in the united states",
+    "interpreter": "openai",
+    "interpretationMethod": "ai_primary",
+    "country": {
+      "name": "United States",
+      "code": "USA",
+      "type": "national",
+      "routeFamilies": [
+        "domestic",
+        "international",
+        "seds"
+      ]
+    },
+    "countryCode": "USA",
+    "validatedGeographies": [
+      {
+        "name": "United States",
+        "code": "USA",
+        "type": "national",
+        "routeFamilies": [
+          "domestic",
+          "international",
+          "seds"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "United States",
+        "code": "USA",
+        "type": "national",
+        "routeFamilies": [
+          "domestic",
+          "international",
+          "seds"
+        ],
+        "rawText": "united states",
+        "index": 23,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "contextual_state_country",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "United States",
+            "confidence": 0.98,
+            "candidateCodes": [
+              "USA",
+              "US"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographyConflicts": [],
+    "validatedCorrections": [],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "requestedFrequency": null,
+    "frequencyExplicit": false,
+    "validatedConceptPairs": [
+      {
+        "order": 0,
+        "product": null,
+        "activity": "consumption",
+        "originalActivity": null,
+        "activityNormalization": null,
+        "confidence": 0.72,
+        "source": "validated_interpreter"
+      }
+    ],
+    "conceptPairStatus": "partial",
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.95,
+    "fields": {
+      "country": {
+        "rawValue": "United States",
+        "aiValue": "United States",
+        "normalizedValue": "USA",
+        "validation": "approved",
+        "confidence": 0.98,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "USA",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "product": {
+        "rawValue": "gas",
+        "aiValue": "natural gas",
+        "normalizedValue": null,
+        "validation": "ambiguous",
+        "confidence": 0.72,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "The product term may refer to more than one approved energy-product family.",
+        "alternatives": [
+          "natural gas",
+          "petroleum"
+        ],
+        "deterministicValue": null,
+        "conflictStatus": "unsupported_ai_claim",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "breadth": "ambiguous"
+      },
+      "activity": {
+        "rawValue": "consumption",
+        "aiValue": "consumption",
+        "normalizedValue": "consumption",
+        "validation": "approved",
+        "confidence": 0.98,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "consumption",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 0.2,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "No approved sector was found.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "frequency": {
+        "rawValue": null,
+        "aiValue": "annual",
+        "normalizedValue": "annual",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "frequency_ai_ambiguous",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "No frequency stated; defaulted to annual with frequency.explicit=false.",
+        "alternatives": [],
+        "deterministicValue": "annual",
+        "conflictStatus": "unsupported_ai_claim",
+        "resolutionSource": "deterministic_fallback",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "explicit": false
+      }
+    },
+    "aiAmbiguity": null,
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "frequency_ai_ambiguous"
+      ]
+    },
+    "cleanedKeywords": "",
+    "needsClarification": true,
+    "blockingClarification": true,
+    "missingFields": [],
+    "ambiguousFields": [
+      "product"
+    ],
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": null,
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 0.72
+      }
+    ],
+    "multiCountryComparison": {
+      "active": false,
+      "status": "not_applicable",
+      "geographyCodes": [
+        "USA"
+      ],
+      "routeFamily": "international",
+      "reason": "fewer_than_two_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "gas consumption in the United States",
+      "normalizedQuery": "gas consumption in the united states",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 23,
+            "text": "united states",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "United States",
+              "code": "USA",
+              "type": "national",
+              "routeFamilies": [
+                "domestic",
+                "international",
+                "seds"
+              ],
+              "rawText": "united states",
+              "index": 23,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "contextual_state_country",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "United States",
+                  "confidence": 0.98,
+                  "candidateCodes": [
+                    "USA",
+                    "US"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "national",
+              "routeFamilies": [
+                "domestic",
+                "international",
+                "seds"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": []
+      },
+      "geography": {
+        "name": "United States",
+        "code": "USA",
+        "type": "national",
+        "routeFamilies": [
+          "domestic",
+          "international",
+          "seds"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ]
+        }
+      ],
+      "product": null,
+      "productBreadth": "ambiguous",
+      "productAlternatives": [
+        "natural gas",
+        "petroleum"
+      ],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": null,
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.72
+        }
+      ],
+      "conceptPairStatus": "partial",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "USA"
+        ],
+        "routeFamily": "international",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 0.98,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "ambiguous",
+            "confidence": 0.72,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 0.98,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.2,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "product_or_scope_missing",
+          "product_ambiguous",
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "reasons": []
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A U.S. non-electricity request uses the available International metadata.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "raw_exact_deterministic"
+        ],
+        "geographyEvidence": [
+          {
+            "name": "United States",
+            "code": "USA",
+            "type": "national",
+            "routeFamilies": [
+              "domestic",
+              "international",
+              "seds"
+            ],
+            "rawText": "united states",
+            "index": 23,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "contextual_state_country",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "United States",
+                "confidence": 0.98,
+                "candidateCodes": [
+                  "USA",
+                  "US"
+                ]
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "default",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "bounded_deterministic_grammar"
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "requestEvidence": {
+        "version": 1,
+        "query": "gas consumption in the United States",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 36,
+            "text": "gas consumption in the United States",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_source_scope",
+          "uncovered_source_text",
+          "split_or_uncovered_metadata_mention"
+        ],
+        "unresolved": 0
+      }
+    },
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A U.S. non-electricity request uses the available International metadata.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "approved",
+          "confidence": 0.98,
+          "fallbackUsed": false
+        },
+        "product": {
+          "validation": "ambiguous",
+          "confidence": 0.72,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": 0.98,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 0.2,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "product_or_scope_missing",
+        "product_ambiguous",
+        "request_scope_unresolved"
+      ]
+    },
+    "evidenceQuery": "gas consumption in the United States",
+    "requestEvidence": {
+      "version": 1,
+      "query": "gas consumption in the United States",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "gas consumption in the United States",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    }
+  },
+  "serialized": "q=gas+consumption+in+the+United+States&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22gas+consumption+in+the+United+States%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A36%2C%22text%22%3A%22gas+consumption+in+the+United+States%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%2C%22invalid%22%3Atrue%7D%2C%22originalQuery%22%3A%22gas+consumption+in+the+United+States%22%2C%22cleanedQuery%22%3A%22gas+consumption+in+the+United+States%22%2C%22correctedQuery%22%3A%22natural+gas+consumption+in+the+United+States%22%2C%22correctedQuerySource%22%3A%22ai%22%2C%22interpreter%22%3A%22openai%22%2C%22confidence%22%3A0.95%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3A%22United+States%22%2C%22aiValue%22%3A%22United+States%22%2C%22normalizedValue%22%3A%22USA%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.98%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22USA%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22product%22%3A%7B%22rawValue%22%3A%22gas%22%2C%22aiValue%22%3A%22natural+gas%22%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22ambiguous%22%2C%22confidence%22%3A0.72%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22The+product+term+may+refer+to+more+than+one+approved+energy-product+family.%22%2C%22alternatives%22%3A%5B%22natural+gas%22%2C%22petroleum%22%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22unsupported_ai_claim%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22breadth%22%3A%22ambiguous%22%7D%2C%22activity%22%3A%7B%22rawValue%22%3A%22consumption%22%2C%22aiValue%22%3A%22consumption%22%2C%22normalizedValue%22%3A%22consumption%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.98%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22consumption%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A0.2%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22frequency%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3A%22annual%22%2C%22normalizedValue%22%3A%22annual%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22frequency_ai_ambiguous%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22No+frequency+stated%3B+defaulted+to+annual+with+frequency.explicit%3Dfalse.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22annual%22%2C%22conflictStatus%22%3A%22unsupported_ai_claim%22%2C%22resolutionSource%22%3A%22deterministic_fallback%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22explicit%22%3Afalse%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22United+States%22%2C%22code%22%3A%22USA%22%2C%22type%22%3A%22national%22%2C%22routeFamilies%22%3A%5B%22domestic%22%2C%22international%22%2C%22seds%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22United+States%22%2C%22code%22%3A%22USA%22%2C%22type%22%3A%22national%22%2C%22routeFamilies%22%3A%5B%22domestic%22%2C%22international%22%2C%22seds%22%5D%2C%22rawText%22%3A%22united+states%22%2C%22index%22%3A23%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22contextual_state_country%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22United+States%22%2C%22confidence%22%3A0.98%2C%22candidateCodes%22%3A%5B%22USA%22%2C%22US%22%5D%7D%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%7B%22order%22%3A0%2C%22product%22%3Anull%2C%22activity%22%3A%22consumption%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A0.72%7D%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Afalse%2C%22requestedFrequency%22%3Anull%2C%22multiCountryComparison%22%3A%7B%22active%22%3Afalse%2C%22status%22%3A%22not_applicable%22%2C%22geographyCodes%22%3A%5B%22USA%22%5D%2C%22routeFamily%22%3A%22international%22%2C%22reason%22%3A%22fewer_than_two_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22product_or_scope_missing%22%2C%22product_ambiguous%22%2C%22request_scope_unresolved%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Atrue%2C%22method%22%3A%22field_level_deterministic_fallback%22%2C%22reasons%22%3A%5B%22frequency_ai_ambiguous%22%5D%7D%7D&intentCorrectedQuery=natural+gas+consumption+in+the+United+States&intentCorrectedQuerySource=ai&intentInterpreter=openai&intentCountryCode=USA&intentProduct=&intentActivity=consumption&intentFrequency=annual&intentConfidence=0.95",
+  "normalized": {
+    "interpreter": "openai",
+    "geographies": [
+      "USA"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A U.S. non-electricity request uses the available International metadata.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "gas consumption in the United States",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "gas consumption in the United States",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "international",
+    "retrievals": [],
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "rankingApplied": false,
+      "semanticRerankingApplied": false,
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "product_or_scope_missing",
+        "product_ambiguous",
+        "request_scope_unresolved"
+      ],
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "international",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    }
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": false,
+    "query": "gas consumption in the United States",
+    "intent": {
+      "originalQuery": "gas consumption in the United States",
+      "cleanedQuery": "gas consumption in the United States",
+      "correctedQuery": "natural gas consumption in the United States",
+      "correctedQuerySource": "ai",
+      "normalizedQuery": "gas consumption in the united states",
+      "interpreter": "openai",
+      "interpretationMethod": "ai_primary",
+      "country": {
+        "name": "United States",
+        "code": "USA",
+        "type": "national",
+        "routeFamilies": [
+          "domestic",
+          "international",
+          "seds"
+        ]
+      },
+      "countryCode": "USA",
+      "validatedGeographies": [
+        {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ],
+          "rawText": "united states",
+          "index": 23,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "contextual_state_country",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "USA",
+              "confidence": null,
+              "candidateCodes": [
+                "USA"
+              ]
+            }
+          ]
+        }
+      ],
+      "geographyConflicts": [],
+      "validatedCorrections": [],
+      "product": null,
+      "activity": "consumption",
+      "sector": null,
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validatedConceptPairs": [
+        {
+          "order": 0,
+          "product": null,
+          "activity": "consumption",
+          "originalActivity": null,
+          "activityNormalization": null,
+          "confidence": 0.72,
+          "source": "validated_interpreter"
+        }
+      ],
+      "conceptPairStatus": "partial",
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.95,
+      "fields": {
+        "country": {
+          "rawValue": "United States",
+          "aiValue": "USA",
+          "normalizedValue": "USA",
+          "validation": "approved",
+          "confidence": 0.98,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "USA",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "product": {
+          "rawValue": "gas",
+          "aiValue": "natural gas",
+          "normalizedValue": null,
+          "validation": "ambiguous",
+          "confidence": 0.72,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "The product term may refer to more than one approved energy-product family.",
+          "alternatives": [
+            "natural gas",
+            "petroleum"
+          ],
+          "deterministicValue": null,
+          "conflictStatus": "ai_only",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "breadth": "ambiguous"
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "aiValue": "consumption",
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "confidence": 0.98,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "consumption",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 0.2,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved sector was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "frequency": {
+          "rawValue": null,
+          "aiValue": "annual",
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "confidence": 0.65,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "annual",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "explicit": false
+        }
+      },
+      "aiAmbiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "product_or_scope_missing",
+          "product_ambiguous",
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "method": "field_level_deterministic_fallback",
+        "reasons": []
+      },
+      "cleanedKeywords": "",
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "ambiguousFields": [
+        "product"
+      ],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": null,
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.72
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "USA"
+        ],
+        "routeFamily": "international",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "gas consumption in the United States",
+        "normalizedQuery": "gas consumption in the united states",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 23,
+              "text": "united states",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "United States",
+                "code": "USA",
+                "type": "national",
+                "routeFamilies": [
+                  "domestic",
+                  "international",
+                  "seds"
+                ],
+                "rawText": "united states",
+                "index": 23,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "contextual_state_country",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "USA",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "USA"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "United States",
+                "code": "USA",
+                "type": "national",
+                "routeFamilies": [
+                  "domestic",
+                  "international",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "United States",
+            "code": "USA",
+            "type": "national",
+            "routeFamilies": [
+              "domestic",
+              "international",
+              "seds"
+            ]
+          }
+        ],
+        "product": null,
+        "productBreadth": "ambiguous",
+        "productAlternatives": [
+          "natural gas",
+          "petroleum"
+        ],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 0.72
+          }
+        ],
+        "conceptPairStatus": "partial",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [
+            "USA"
+          ],
+          "routeFamily": "international",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": 0.98,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "ambiguous",
+              "confidence": 0.72,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": 0.98,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 0.2,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": 0.65,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "product_or_scope_missing",
+            "product_ambiguous",
+            "request_scope_unresolved"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A U.S. non-electricity request uses the available International metadata.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "raw_exact_deterministic"
+          ],
+          "geographyEvidence": [
+            {
+              "name": "United States",
+              "code": "USA",
+              "type": "national",
+              "routeFamilies": [
+                "domestic",
+                "international",
+                "seds"
+              ],
+              "rawText": "united states",
+              "index": 23,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "contextual_state_country",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "USA",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "USA"
+                  ]
+                }
+              ]
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "bounded_deterministic_grammar"
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [],
+        "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+        "requestEvidence": {
+          "version": 1,
+          "query": "gas consumption in the United States",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 36,
+              "text": "gas consumption in the United States",
+              "status": "requested",
+              "target": "data"
+            }
+          ],
+          "invalid": true
+        },
+        "scopeValidation": {
+          "source": "rules",
+          "issues": [
+            "invalid_evidence_envelope"
+          ],
+          "unresolved": 0
+        }
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A U.S. non-electricity request uses the available International metadata.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 0.98,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "ambiguous",
+            "confidence": 0.72,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 0.98,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.2,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 0.65,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "product_or_scope_missing",
+          "product_ambiguous",
+          "request_scope_unresolved"
+        ]
+      },
+      "evidenceQuery": "gas consumption in the United States",
+      "requestEvidence": {
+        "version": 1,
+        "query": "gas consumption in the United States",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 36,
+            "text": "gas consumption in the United States",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope"
+        ],
+        "unresolved": 0
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [],
+    "userWarnings": [],
+    "needsClarification": true,
+    "userMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "product_or_scope_missing",
+        "product_ambiguous",
+        "request_scope_unresolved"
+      ],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 0,
+      "rankingUnit": "country_series"
+    },
+    "note": "No observations were fetched."
+  },
+  "final": {
+    "interpreter": "openai",
+    "geographies": [
+      "USA"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A U.S. non-electricity request uses the available International metadata.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "gas consumption in the United States",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "gas consumption in the United States",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

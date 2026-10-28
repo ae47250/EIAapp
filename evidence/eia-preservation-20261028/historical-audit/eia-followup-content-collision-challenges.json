@@ -1,0 +1,73 @@
+{
+  "reviewBase": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "frozenBefore": "Targeted content-word collision assessment requested by implementation agent after modifier fix",
+  "metadata": {
+    "routingMetadata": "data/eia/routing-metadata.json",
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "geographies": {
+      "GMB": "Gambia, The",
+      "ZMB": "Zambia",
+      "BHS": "The Bahamas",
+      "CAN": "Canada",
+      "USA": "United States",
+      "PNG": "Papua New Guinea",
+      "GNB": "Guinea-Bissau",
+      "GIN": "Guinea",
+      "GEO": "Georgia"
+    }
+  },
+  "defaults": {
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "products": [
+      "total energy"
+    ],
+    "activities": [
+      "consumption"
+    ],
+    "excludedGeographies": [],
+    "excludedProducts": [],
+    "excludedActivities": []
+  },
+  "cases": [
+    {
+      "id": "italy-actual-exclusion-confirmation",
+      "query": "Canada energy consumption, not Italy, sure?",
+      "geographies": [
+        "CAN"
+      ],
+      "excludedGeographies": [
+        "ITA"
+      ]
+    },
+    {
+      "id": "italy-actual-exclusion-certainty",
+      "query": "Canada energy consumption, not Italy, certainly not USA",
+      "geographies": [
+        "CAN"
+      ],
+      "excludedGeographies": [
+        "ITA",
+        "USA"
+      ]
+    },
+    {
+      "id": "italy-punctuation-control",
+      "query": "Canada energy consumption, not Italy. Sure?",
+      "geographies": [
+        "CAN"
+      ],
+      "excludedGeographies": [
+        "ITA"
+      ]
+    },
+    {
+      "id": "genuine-certainty-ordinary",
+      "query": "I'm not entirely sure about Canada energy consumption",
+      "geographies": [
+        "CAN"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-27 ET",
+  "sources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.4-nano",
+    "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "https://developers.openai.com/api/docs/deprecations",
+    "https://developers.openai.com/api/docs/guides/fast-mode",
+    "https://developers.openai.com/api/docs/guides/prompt-caching"
+  ],
+  "models": {
+    "gpt-5.4-nano-2026-03-17": {
+      "officialListed": true, "responses": true, "noneReasoning": true,
+      "maxOutputTokens": 128000, "deprecationAnnounced": "2026-10-01", "shutdown": "2027-04-01",
+      "standardUSDPerMillion": { "input": 0.20, "cachedInput": 0.02, "output": 1.25, "cacheWrite": 0.20 }
+    },
+    "gpt-6-luna": {
+      "officialListed": true, "responses": true, "noneReasoning": true,
+      "maxOutputTokens": 128000, "deprecationAnnounced": null, "shutdown": null,
+      "deprecationNote": "No Luna deprecation found on the current official page; absence is not an account-access guarantee.",
+      "standardUSDPerMillion": { "input": 0.10, "cachedInput": 0.01, "output": 0.50, "cacheWrite": 0.125 }
+    }
+  },
+  "cacheAccounting": "input_tokens_details.cached_tokens is charged at cached input rate; cache_write_tokens at the total write rate, not an additional surcharge. Remaining input is ordinary uncached input. Default30m write applies to GPT5.6+; no additional write charge for earlier models. No cache settings are overridden.",
+  "fairSettingSupport": "Both use Responses, reasoning.effort none,4096 max output,30s timeout,service_tier default,store false,stream false; no tools or JSON repair. Standard/default response tier will be verified in responses.",
+  "accountAccess": "Pending authenticated model metadata check and scheduled calls. Documentation and model catalog do not prove account access.",
+  "costCeilingUSD": 0.50,
+  "worstCaseAssumptions": { "scheduledCalls": 40, "maxAttemptsEach": 2, "maxTotalAttempts": 80, "attemptsPerModel": 40, "maxInputTokensEach": 10000, "maxOutputTokensEach": 4096, "noCacheHitDiscountAssumed": true },
+  "conservativeArithmetic": "40*(10000*0.25+4096*1.25)/1e6 +40*(10000*0.125+4096*0.50)/1e6 =0.43672 USD. Nano input reservation is additionally padded above its documented0.20 rate. Actual prompts are at most4149 UTF-8 bytes plus a1000-token framing allowance, below the10000 bound. No generation outside the40 scheduled calls or their eligible single retries."
+}

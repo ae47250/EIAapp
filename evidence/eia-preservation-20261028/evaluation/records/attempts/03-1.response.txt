@@ -1,0 +1,110 @@
+{
+  "id": "<REDACTED_PROVIDER_ID>",
+  "object": "response",
+  "created_at": 1793185601,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1793185607,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 4096,
+  "max_tool_calls": null,
+  "model": "gpt-6-luna",
+  "moderation": null,
+  "output": [
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"correctedQuery\":\"Brazil and Japan electricity consumption\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"brazil and japan\",\"value\":null,\"confidence\":0.99,\"ambiguityReason\":\"Two geographies are requested; see geographies.\"},\"product\":{\"rawValue\":\"electrciity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":0.99,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":1.0,\"ambiguityReason\":\"No sector is explicitly stated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":1.0,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"Brazil\",\"confidence\":1.0},{\"value\":\"Japan\",\"confidence\":1.0}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"brazil and japan electrciity consumption\",\"scopes\":[{\"start\":0,\"end\":6,\"text\":\"brazil\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":6,\"end\":11,\"text\":\" and \",\"status\":\"context\",\"target\":\"unknown\"},{\"start\":11,\"end\":16,\"text\":\"japan\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":16,\"end\":27,\"text\":\" electrciity\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\" consumption\",\"status\":\"requested\",\"target\":\"data\"}]}} \ud8f9\udfe2\nburugburu\n \u767d\u5c0f\u59d0"
+        }
+      ],
+      "phase": "commentary",
+      "role": "assistant"
+    },
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"correctedQuery\":\"Brazil and Japan electricity consumption\",\"confidence\":0.99,\"ambiguity\":null,\"fields\":{\"country\":{\"rawValue\":\"Brazil and Japan\",\"value\":null,\"confidence\":1.0,\"ambiguityReason\":\"Two geographies are requested; see geographies.\"},\"product\":{\"rawValue\":\"electrciity\",\"value\":\"electricity\",\"confidence\":0.99,\"ambiguityReason\":null},\"activity\":{\"rawValue\":\"consumption\",\"value\":\"consumption\",\"confidence\":1.0,\"ambiguityReason\":null},\"sector\":{\"rawValue\":null,\"value\":null,\"confidence\":1.0,\"ambiguityReason\":\"No sector is explicitly stated.\"},\"frequency\":{\"rawValue\":null,\"value\":\"annual\",\"confidence\":1.0,\"ambiguityReason\":null,\"explicit\":false}},\"geographies\":[{\"value\":\"Brazil\",\"confidence\":1.0},{\"value\":\"Japan\",\"confidence\":1.0}],\"conceptPairs\":[{\"product\":\"electricity\",\"activity\":\"consumption\",\"order\":1,\"confidence\":0.99}],\"exclusions\":[],\"unknownQualifiers\":[],\"requestEvidence\":{\"version\":1,\"query\":\"brazil and japan electrciity consumption\",\"scopes\":[{\"start\":0,\"end\":6,\"text\":\"brazil\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":6,\"end\":11,\"text\":\" and \",\"status\":\"context\",\"target\":\"unknown\"},{\"start\":11,\"end\":16,\"text\":\"japan\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":16,\"end\":27,\"text\":\" electrciity\",\"status\":\"requested\",\"target\":\"data\"},{\"start\":27,\"end\":38,\"text\":\" consumption\",\"status\":\"requested\",\"target\":\"data\"}]}}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 798,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 726,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1524
+  },
+  "user": null,
+  "metadata": {}
+}

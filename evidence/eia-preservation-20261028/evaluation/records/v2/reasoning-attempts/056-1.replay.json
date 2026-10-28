@@ -1,0 +1,1425 @@
+{
+  "queryId": 4,
+  "directValidation": {
+    "interpreter": "openai",
+    "geographies": [
+      "ISL"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 1
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "energy consumption iceland",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "energy",
+          "status": "unresolved",
+          "target": "data"
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": " consumption",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": " iceland",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "initial": {
+    "interpreter": "openai",
+    "geographies": [
+      "ISL"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 1
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "energy consumption iceland",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "energy",
+          "status": "unresolved",
+          "target": "data"
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": " consumption",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": " iceland",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "initialFull": {
+    "originalQuery": "energy consumption iceland",
+    "cleanedQuery": "energy consumption iceland",
+    "correctedQuery": "Energy consumption Iceland",
+    "correctedQuerySource": "ai",
+    "normalizedQuery": "energy consumption iceland",
+    "interpreter": "openai",
+    "interpretationMethod": "ai_primary",
+    "country": {
+      "name": "Iceland",
+      "code": "ISL",
+      "type": "country",
+      "routeFamilies": [
+        "international"
+      ]
+    },
+    "countryCode": "ISL",
+    "validatedGeographies": [
+      {
+        "name": "Iceland",
+        "code": "ISL",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "Iceland",
+        "code": "ISL",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "iceland",
+        "index": 12,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "Iceland",
+            "confidence": 1,
+            "candidateCodes": [
+              "ISL"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographyConflicts": [],
+    "validatedCorrections": [],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "requestedFrequency": null,
+    "frequencyExplicit": false,
+    "validatedConceptPairs": [
+      {
+        "order": 0,
+        "product": null,
+        "activity": "consumption",
+        "confidence": 0.98,
+        "source": "validated_interpreter"
+      }
+    ],
+    "conceptPairStatus": "partial",
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.98,
+    "fields": {
+      "country": {
+        "rawValue": "iceland",
+        "aiValue": "Iceland",
+        "normalizedValue": "ISL",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "ISL",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "product": {
+        "rawValue": "energy",
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "ambiguous",
+        "confidence": 0.98,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "The broad term \"energy\" does not identify a specific allowed product.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "breadth": "unknown"
+      },
+      "activity": {
+        "rawValue": "consumption",
+        "aiValue": "consumption",
+        "normalizedValue": "consumption",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "consumption",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "No approved sector was found.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "frequency": {
+        "rawValue": null,
+        "aiValue": "annual",
+        "normalizedValue": "annual",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "annual",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "explicit": false
+      }
+    },
+    "aiAmbiguity": [
+      "The broad term \"energy\" does not identify a specific product."
+    ],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "cleanedKeywords": "",
+    "needsClarification": true,
+    "blockingClarification": true,
+    "missingFields": [
+      "product"
+    ],
+    "ambiguousFields": [
+      "product"
+    ],
+    "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": null,
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 0.98
+      }
+    ],
+    "multiCountryComparison": {
+      "active": false,
+      "status": "not_applicable",
+      "geographyCodes": [
+        "ISL"
+      ],
+      "routeFamily": "international",
+      "reason": "fewer_than_two_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "energy consumption iceland",
+      "normalizedQuery": "consumption iceland",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 12,
+            "text": "iceland",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "Iceland",
+              "code": "ISL",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "iceland",
+              "index": 12,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "Iceland",
+                  "confidence": 1,
+                  "candidateCodes": [
+                    "ISL"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "Iceland",
+              "code": "ISL",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": []
+      },
+      "geography": {
+        "name": "Iceland",
+        "code": "ISL",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "Iceland",
+          "code": "ISL",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "product": null,
+      "productBreadth": "unknown",
+      "productAlternatives": [],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": null,
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.98
+        }
+      ],
+      "conceptPairStatus": "partial",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "ISL"
+        ],
+        "routeFamily": "international",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "ambiguous",
+            "confidence": 0.98,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "product_or_scope_missing",
+          "product_ambiguous",
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "reasons": []
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "raw_exact_deterministic"
+        ],
+        "geographyEvidence": [
+          {
+            "name": "Iceland",
+            "code": "ISL",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ],
+            "rawText": "iceland",
+            "index": 12,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "exact_name_alias_or_code",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "Iceland",
+                "confidence": 1,
+                "candidateCodes": [
+                  "ISL"
+                ]
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "default",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "model_proposed_locally_validated"
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [
+        "product"
+      ],
+      "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+      "requestEvidence": {
+        "version": 1,
+        "query": "energy consumption iceland",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 6,
+            "text": "energy",
+            "status": "unresolved",
+            "target": "data"
+          },
+          {
+            "start": 6,
+            "end": 18,
+            "text": " consumption",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 18,
+            "end": 26,
+            "text": " iceland",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      },
+      "scopeValidation": {
+        "source": "model",
+        "issues": [],
+        "unresolved": 1
+      }
+    },
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "product": {
+          "validation": "ambiguous",
+          "confidence": 0.98,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "product_or_scope_missing",
+        "product_ambiguous",
+        "request_scope_unresolved"
+      ]
+    },
+    "evidenceQuery": "       consumption iceland",
+    "requestEvidence": {
+      "version": 1,
+      "query": "energy consumption iceland",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "energy",
+          "status": "unresolved",
+          "target": "data"
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": " consumption",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": " iceland",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 1
+    }
+  },
+  "serialized": "q=energy+consumption+iceland&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22energy+consumption+iceland%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A6%2C%22text%22%3A%22energy%22%2C%22status%22%3A%22unresolved%22%2C%22target%22%3A%22data%22%7D%2C%7B%22start%22%3A6%2C%22end%22%3A18%2C%22text%22%3A%22+consumption%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%2C%7B%22start%22%3A18%2C%22end%22%3A26%2C%22text%22%3A%22+iceland%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%7D%2C%22originalQuery%22%3A%22energy+consumption+iceland%22%2C%22cleanedQuery%22%3A%22energy+consumption+iceland%22%2C%22correctedQuery%22%3A%22Energy+consumption+Iceland%22%2C%22correctedQuerySource%22%3A%22ai%22%2C%22interpreter%22%3A%22openai%22%2C%22confidence%22%3A0.98%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3A%22iceland%22%2C%22aiValue%22%3A%22Iceland%22%2C%22normalizedValue%22%3A%22ISL%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22ISL%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22product%22%3A%7B%22rawValue%22%3A%22energy%22%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22ambiguous%22%2C%22confidence%22%3A0.98%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22The+broad+term+%5C%22energy%5C%22+does+not+identify+a+specific+allowed+product.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22breadth%22%3A%22unknown%22%7D%2C%22activity%22%3A%7B%22rawValue%22%3A%22consumption%22%2C%22aiValue%22%3A%22consumption%22%2C%22normalizedValue%22%3A%22consumption%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22consumption%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22frequency%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3A%22annual%22%2C%22normalizedValue%22%3A%22annual%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22annual%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22explicit%22%3Afalse%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22Iceland%22%2C%22code%22%3A%22ISL%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22Iceland%22%2C%22code%22%3A%22ISL%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22iceland%22%2C%22index%22%3A12%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22Iceland%22%2C%22confidence%22%3A1%2C%22candidateCodes%22%3A%5B%22ISL%22%5D%7D%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%7B%22order%22%3A0%2C%22product%22%3Anull%2C%22activity%22%3A%22consumption%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A0.98%7D%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Afalse%2C%22requestedFrequency%22%3Anull%2C%22multiCountryComparison%22%3A%7B%22active%22%3Afalse%2C%22status%22%3A%22not_applicable%22%2C%22geographyCodes%22%3A%5B%22ISL%22%5D%2C%22routeFamily%22%3A%22international%22%2C%22reason%22%3A%22fewer_than_two_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22product_or_scope_missing%22%2C%22product_ambiguous%22%2C%22request_scope_unresolved%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Afalse%2C%22method%22%3A%22field_level_deterministic_fallback%22%2C%22reasons%22%3A%5B%5D%7D%7D&intentCorrectedQuery=Energy+consumption+Iceland&intentCorrectedQuerySource=ai&intentInterpreter=openai&intentCountryCode=ISL&intentProduct=&intentActivity=consumption&intentFrequency=annual&intentConfidence=0.98",
+  "normalized": {
+    "interpreter": "openai",
+    "geographies": [
+      "ISL"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 1
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "energy consumption iceland",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "energy",
+          "status": "unresolved",
+          "target": "data"
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": " consumption",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": " iceland",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "international",
+    "retrievals": [],
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "rankingApplied": false,
+      "semanticRerankingApplied": false,
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "missing_product",
+        "product_or_scope_missing",
+        "request_scope_unresolved"
+      ],
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "international",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    }
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": false,
+    "query": "energy consumption iceland",
+    "intent": {
+      "originalQuery": "energy consumption iceland",
+      "cleanedQuery": "energy consumption iceland",
+      "correctedQuery": "Energy consumption Iceland",
+      "correctedQuerySource": "ai",
+      "normalizedQuery": "energy consumption iceland",
+      "interpreter": "openai",
+      "interpretationMethod": "ai_primary",
+      "country": {
+        "name": "Iceland",
+        "code": "ISL",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "countryCode": "ISL",
+      "validatedGeographies": [
+        {
+          "name": "Iceland",
+          "code": "ISL",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "Iceland",
+          "code": "ISL",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "iceland",
+          "index": 12,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "ISL",
+              "confidence": null,
+              "candidateCodes": [
+                "ISL"
+              ]
+            }
+          ]
+        }
+      ],
+      "geographyConflicts": [],
+      "validatedCorrections": [],
+      "product": null,
+      "activity": "consumption",
+      "sector": null,
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validatedConceptPairs": [
+        {
+          "order": 0,
+          "product": null,
+          "activity": "consumption",
+          "confidence": 0.98,
+          "source": "validated_interpreter"
+        }
+      ],
+      "conceptPairStatus": "partial",
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.98,
+      "fields": {
+        "country": {
+          "rawValue": "iceland",
+          "aiValue": "ISL",
+          "normalizedValue": "ISL",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "ISL",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "product": {
+          "rawValue": "energy",
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 0.98,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved product was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "breadth": "unknown"
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "aiValue": "consumption",
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "consumption",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved sector was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "frequency": {
+          "rawValue": null,
+          "aiValue": "annual",
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "annual",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "explicit": false
+        }
+      },
+      "aiAmbiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "product_or_scope_missing",
+          "product_ambiguous",
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "method": "field_level_deterministic_fallback",
+        "reasons": []
+      },
+      "cleanedKeywords": "",
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [
+        "product"
+      ],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": null,
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.98
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "ISL"
+        ],
+        "routeFamily": "international",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "energy consumption iceland",
+        "normalizedQuery": "consumption iceland",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 12,
+              "text": "iceland",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "Iceland",
+                "code": "ISL",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ],
+                "rawText": "iceland",
+                "index": 12,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "exact_name_alias_or_code",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "ISL",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "ISL"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "Iceland",
+                "code": "ISL",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Iceland",
+          "code": "ISL",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Iceland",
+            "code": "ISL",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          }
+        ],
+        "product": null,
+        "productBreadth": "unknown",
+        "productAlternatives": [],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 0.98
+          }
+        ],
+        "conceptPairStatus": "partial",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [
+            "ISL"
+          ],
+          "routeFamily": "international",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "missing",
+              "confidence": 0.98,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "product_or_scope_missing",
+            "request_scope_unresolved"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "raw_exact_deterministic"
+          ],
+          "geographyEvidence": [
+            {
+              "name": "Iceland",
+              "code": "ISL",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "iceland",
+              "index": 12,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "ISL",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "ISL"
+                  ]
+                }
+              ]
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "model_proposed_locally_validated"
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [
+          "product"
+        ],
+        "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+        "requestEvidence": {
+          "version": 1,
+          "query": "energy consumption iceland",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 6,
+              "text": "energy",
+              "status": "unresolved",
+              "target": "data"
+            },
+            {
+              "start": 6,
+              "end": 18,
+              "text": " consumption",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 18,
+              "end": 26,
+              "text": " iceland",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        },
+        "scopeValidation": {
+          "source": "model",
+          "issues": [],
+          "unresolved": 1
+        }
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "missing",
+            "confidence": 0.98,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "product_or_scope_missing",
+          "request_scope_unresolved"
+        ]
+      },
+      "evidenceQuery": "       consumption iceland",
+      "requestEvidence": {
+        "version": 1,
+        "query": "energy consumption iceland",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 6,
+            "text": "energy",
+            "status": "unresolved",
+            "target": "data"
+          },
+          {
+            "start": 6,
+            "end": 18,
+            "text": " consumption",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 18,
+            "end": 26,
+            "text": " iceland",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      },
+      "scopeValidation": {
+        "source": "model",
+        "issues": [],
+        "unresolved": 1
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [],
+    "userWarnings": [],
+    "needsClarification": true,
+    "userMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "missing_product",
+        "product_or_scope_missing",
+        "request_scope_unresolved"
+      ],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 0,
+      "rankingUnit": "country_series"
+    },
+    "note": "No observations were fetched."
+  },
+  "final": {
+    "interpreter": "openai",
+    "geographies": [
+      "ISL"
+    ],
+    "pairs": [
+      [
+        null,
+        "consumption"
+      ]
+    ],
+    "product": null,
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 1
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "energy consumption iceland",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "energy",
+          "status": "unresolved",
+          "target": "data"
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": " consumption",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": " iceland",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

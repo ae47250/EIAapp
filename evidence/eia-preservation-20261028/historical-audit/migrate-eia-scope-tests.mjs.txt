@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+for(const [name,key] of [['eia-followup-regressions.test.js','followup'],['eia-negation-target.test.js','primary']]){
+ let s=fs.readFileSync(root+'/tests/'+name,'utf8');
+ s=s.replace('const source = readFileSync', `// Original semantic fixtures stay unchanged. This companion records the approved\n// model contract and the explicitly authorized conservative rules-only behavior.\nconst scopeCases = JSON.parse(readFileSync(new URL('./fixtures/eia/scope-evidence-legacy.json', import.meta.url))).${key};\nconst source = readFileSync`);
+ s=s.replace('  const { available, ...expected } = item.expected;', '  const scopeCase = scopeCases[item.id];\n  assert.equal(scopeCase.q, item.q);\n  const available = item.expected.available;\n  const expected = scopeCase.expected;');
+ s=s.replace('  const check = (phase, intent) => {', '  const check = (phase, intent, expectedMeaning = expected) => {');
+ s=s.replace('assert.deepEqual(meaning(intent), expected);', 'assert.deepEqual(meaning(intent), expectedMeaning);');
+ s=s.replace('if (item.unresolvedPairing) {', 'if (item.unresolvedPairing && phase !== "rules") {');
+ s=s.replace('errors.push({ phase, expected, actual: meaning(intent) })', 'errors.push({ phase, expected: expectedMeaning, actual: meaning(intent) })');
+ s=s.replace('  injected = model(expected);\n  check(\'rules\', interpretQueryWithRules(item.q));', '  injected = { ...model(expected), requestEvidence: scopeCase.requestEvidence };\n  check(\'rules\', interpretQueryWithRules(item.q), scopeCase.rulesExpected);');
+ s=s.replace('  if (available) {', '  if (available && !expected.clarify) {');
+ fs.writeFileSync('/private/tmp/eia-scope-'+name,s);
+}
+let s=fs.readFileSync(root+'/tests/eia-negation-independent.test.js','utf8');
+s=s.replace('const cases = JSON.parse(bytes).cases;', "const cases = JSON.parse(bytes).cases;\nconst scopeCases = JSON.parse(readFileSync(new URL('./fixtures/eia/scope-evidence-legacy.json', import.meta.url))).independent;");
+s=s.replace('for (const c of cases) test(`independent negation ${c.id}: ${c.query}`, async () => {\n  currentModel = modelFor(c);', 'for (const original of cases) test(`independent negation ${original.id}: ${original.query}`, async () => {\n  const scopeCase = scopeCases[original.id];\n  assert.equal(scopeCase.q, original.query);\n  const c = scopeCase.expected;\n  currentModel = { ...modelFor(c), requestEvidence: scopeCase.requestEvidence };');
+fs.writeFileSync('/private/tmp/eia-scope-eia-negation-independent.test.js',s);
+s=fs.readFileSync(root+'/tests/eia-independent-challenges.test.js','utf8');
+s=s.replace("const adjudications = fixture('challenge-route-adjudication').claims;", "const adjudications = fixture('challenge-route-adjudication').claims;\nconst scopeCases = fixture('scope-evidence-legacy').review;");
+s=s.replace("['injected', validateAiInterpretation(injected(expected), q)]", "['injected', validateAiInterpretation({ ...injected(expected), ...(scopeCases[id] ? { requestEvidence: scopeCases[id].requestEvidence } : {}) }, q)]");
+s=s.replace('      const actual = signature(intent);', '      const actual = signature(intent);\n      const modeExpected = mode === "rules" && scopeCases[id] ? scopeCases[id].rulesExpected : expected;');
+s=s.replace('Object.hasOwn(expected, key)', 'Object.hasOwn(modeExpected, key)');
+s=s.replace("key === 'pairs' ? expected.pairs.map(p => ({ product: p.product, activity: p.activity })) : expected[key]", "key === 'pairs' ? modeExpected.pairs.map(p => ({ product: p.product, activity: p.activity })) : modeExpected[key]");
+fs.writeFileSync('/private/tmp/eia-scope-eia-independent-challenges.test.js',s);

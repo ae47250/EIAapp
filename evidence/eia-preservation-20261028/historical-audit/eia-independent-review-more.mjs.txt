@@ -1,0 +1,14 @@
+import {interpretQueryWithRules,validateAiInterpretation} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+// Frozen meanings: neither comparison wording nor an excluded activity clause adds a positive geography;
+// '&' preserves the explicit uppercase US code; all duplicate mentions refer to the same state by default.
+const cases=[
+ {q:'Energy consumption in France, not energy consumption in Canada',codes:['FRA']},
+ {q:'Energy consumption in France & Canada; show US production',codes:['FRA','CAN','USA']},
+ {q:'Energy consumption in France and Canada; show US production',codes:['FRA','CAN','USA']},
+ {q:'Georgia energy consumption, not Georgia production',codes:['GA']},
+ {q:'Please present energy consumption for Peru',codes:['PER']},
+ {q:'Show energy consumption for Peru in a simple chart',codes:['PER']},
+ {q:'Please compare annual energy consumption in Peru over time',codes:['PER']},
+ {q:'Energy consumption in Oman compared with Peru',codes:['OMN','PER']}
+];
+for(const {q,codes} of cases){const model={confidence:.99,geographies:codes.map(value=>({value,confidence:.99})),fields:{country:{value:codes[0],confidence:.99},product:{value:'total energy',confidence:.99},activity:{value:'consumption',confidence:.99}}};const pick=i=>({codes:i.structuredIntent.geographies.map(g=>g.code),pairs:i.structuredIntent.conceptPairs.map(p=>[p.product,p.activity]),exclusions:i.exclusions});console.log(JSON.stringify({q,expected:codes,rules:pick(interpretQueryWithRules(q)),ai:pick(validateAiInterpretation(model,q))}));}

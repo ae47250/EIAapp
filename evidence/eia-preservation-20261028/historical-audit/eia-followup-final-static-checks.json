@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "lib/sources/eia/intent-routing.js"
+      ],
+      "status": 0
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "lib/sources/eia/interpret-query.js"
+      ],
+      "status": 0
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "tests/eia-followup-regressions.test.js"
+      ],
+      "status": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "status": 0
+    }
+  ],
+  "productionDiffSha256": "47f033d852c9dd9edb60465870342db7808b8a6fa37e844007b8b79c3c7eadee",
+  "productionFiles": [
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "sha256": "ceb9bdbc057816de390efed53b88f031468506f4cb7b63500e69439f4d9a4518"
+    },
+    {
+      "path": "lib/sources/eia/interpret-query.js",
+      "sha256": "045dbc849d44095c5c0ac88916bb074e7832b795338f601d9478fca631c6967f"
+    }
+  ]
+}

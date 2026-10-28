@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {gradeV2} from './scorer-v2.mjs';
+const bytes=fs.readFileSync(new URL('../records/v2/labelled-scorer-fixtures.json',import.meta.url));
+assert.equal(createHash('sha256').update(bytes).digest('hex'),fs.readFileSync(new URL('../records/v2/labelled-scorer-fixtures.sha256',import.meta.url),'utf8').trim());
+for(const fixture of JSON.parse(bytes).cases)test(fixture.name,()=>{
+ const before=JSON.stringify(fixture.response),g=gradeV2(fixture.response,fixture.case),e=fixture.expected;
+ assert.equal(g.semantic.pass,e.semantic,JSON.stringify(g.semantic));assert.equal(g.semantic.status,e.status);assert.equal(g.strictJSON,e.json);
+ if(e.spans!==undefined)assert.equal(g.sourceSpans,e.spans,JSON.stringify(g.contract));
+ if(e.contract!==undefined)assert.equal(g.contract.pass,e.contract,JSON.stringify(g.contract));
+ assert.equal(JSON.stringify(fixture.response),before,'Original response must not be mutated');
+});

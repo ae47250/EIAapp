@@ -1,0 +1,70 @@
+{
+  "scheduledId": 30,
+  "queryId": 8,
+  "repeat": 2,
+  "model": "gpt-6-luna",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:09:19.262Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "702e7e34fd16b8e9ea39903ebcc450545cc85d72845877c59e05b37656c1e8dd",
+  "promptSHA256": "ab9c546c0301ea65d7f6d0fef8684c72167ac47ba4ccd533018e367e11258b25",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.003298,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:09:11 GMT",
+    "openai-processing-ms": "8467",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999224",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "4ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 795,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 919,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1714
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:09:27.873Z",
+  "elapsedMs": 8611.129125000007,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "We need produce scopes cover every source word, exact offsets. Query length. \"monthly electricity consumption in California\"\nindices monthly 0-7, space7, electricity8-18? electricity length 11 => 8..19. space19, consumption20..31 (11), space31, in32..34, space34, California35..45 (10). Length45.\n\nScopes group roles: monthly requested data frequency; electricity consumption pair requested perhaps one contiguous scope \"electricity consumption\" target data. \"in \" context? cover spaces. Scopes exact coverage all chars. Can scope \"monthly\" requested data, \" \" context, \"electricity consumption\" requested data, \" in \" context, California requested data geography. No overlaps cover all. But group contiguous text same role, metadata. Could combine spaces into adjacent scopes? Roles perhaps scope requested can include separator? Exact parse. Use scopes contiguous covering every source word, not necessarily spaces? cover every source word means likely all chars? says positions... scopes ordered non-overlapping, and cover every source word. Spaces may omitted. easiest omit whitespace. Scopes each words, but multiword products metadata. California. \"in\" context. Request evidence scopes only words, ordered. Could include in context. Need frequency explicit true monthly. annual false no. fields country California? country singular field, geography state not country, likely country null and geographies California. Product electricity, activity consumption. sector null. conceptpair. ambiguity null? format ambiguity perhaps array? construct common strict JSON. correctedQuery same. confidence maybe overall numeric. ambiguity likely null. rawValue exact phrase. country rawValue perhaps null. fields each rawValue etc. Country maybe rawValue \"California\" value null? Since country field means country, state geography, don't put country. rawValue null. Geography confidence high. Unknown qualifiers []. scopes geography target data requested. \"in\" context. spaces omitted acceptable cover words.\n\n\n{\n  \"correctedQuery\": \"monthly electricity consumption in California\",\n  \"confidence\": 0.99,\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"electricity\",\n      \"value\": \"electricity\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": \"monthly\",\n      \"value\": \"monthly\",\n      \"confidence\": 1.0,\n      \"explicit\": true,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"California\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"electricity\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 1.0\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"monthly electricity consumption in California\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 7,\n        \"text\": \"monthly\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 8,\n        \"end\": 31,\n        \"text\": \"electricity consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 32,\n        \"end\": 34,\n        \"text\": \"in\",\n        \"status\": \"context\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 35,\n        \"end\": 45,\n        \"text\": \"California\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+    "parsed": null,
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "no_original_JSON_interpretation"
+      ],
+      "signature": null
+    },
+    "contract": {
+      "pass": false,
+      "json": false,
+      "shape": false,
+      "spans": false,
+      "errors": [
+        "original_output_not_strict_JSON_object"
+      ]
+    }
+  },
+  "replayFile": "attempts/30-1.replay.json"
+}

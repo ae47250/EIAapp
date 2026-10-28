@@ -1,0 +1,255 @@
+{
+  "scheduledId": 70,
+  "queryId": 8,
+  "repeat": 1,
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "positionInBlock": 1,
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:58:24.290Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "95eab00248fa8d6f5d57218378ad19e7376a1cb12ef037b608658a587c518498",
+  "promptSHA256": "ab9c546c0301ea65d7f6d0fef8684c72167ac47ba4ccd533018e367e11258b25",
+  "timeoutMs": 300000,
+  "reservedAttemptUSD": 0.017634,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:58:17 GMT",
+    "openai-processing-ms": "9572",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999288",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "4ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "completedAt": "2026-10-28T11:58:34.034Z",
+  "elapsedMs": 9743.212916999997,
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "incompleteDetails": null,
+  "usage": {
+    "input_tokens": 795,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 855,
+    "output_tokens_details": {
+      "reasoning_tokens": 234
+    },
+    "total_tokens": 1650
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "truncated": false,
+  "reasoningTokens": 234,
+  "tokenCostUSD": 0.000507,
+  "grade": {
+    "version": 2,
+    "semantic": {
+      "pass": true,
+      "gradable": true,
+      "status": "correct",
+      "errors": [],
+      "signature": {
+        "geographies": [
+          "CA"
+        ],
+        "pairs": [
+          [
+            "electricity",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "monthly",
+        "frequencyExplicit": true,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": [],
+        "scopeDispositions": [
+          {
+            "identity": "activity:consumption",
+            "status": "requested"
+          },
+          {
+            "identity": "frequency:monthly",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:CA",
+            "status": "requested"
+          },
+          {
+            "identity": "product:electricity",
+            "status": "requested"
+          }
+        ]
+      }
+    },
+    "strictJSON": true,
+    "shape": true,
+    "sourceSpans": true,
+    "contract": {
+      "pass": true,
+      "json": true,
+      "shape": true,
+      "spans": true,
+      "errors": []
+    },
+    "usable": true,
+    "truncated": false,
+    "original": {
+      "text": "{\n  \"correctedQuery\": \"monthly electricity consumption in California\",\n  \"confidence\": 1,\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"electricity\",\n      \"value\": \"electricity\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": \"monthly\",\n      \"value\": \"monthly\",\n      \"confidence\": 1,\n      \"explicit\": true,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"California\",\n      \"confidence\": 1\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"electricity\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 1\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"monthly electricity consumption in California\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 7,\n        \"text\": \"monthly\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 7,\n        \"end\": 8,\n        \"text\": \" \",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 8,\n        \"end\": 19,\n        \"text\": \"electricity\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 19,\n        \"end\": 20,\n        \"text\": \" \",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 20,\n        \"end\": 31,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 31,\n        \"end\": 35,\n        \"text\": \" in \",\n        \"status\": \"context\",\n        \"target\": \"unknown\"\n      },\n      {\n        \"start\": 35,\n        \"end\": 45,\n        \"text\": \"California\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "correctedQuery": "monthly electricity consumption in California",
+        "confidence": 1,
+        "ambiguity": null,
+        "fields": {
+          "country": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "electricity",
+            "value": "electricity",
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 1,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "monthly",
+            "value": "monthly",
+            "confidence": 1,
+            "explicit": true,
+            "ambiguityReason": null
+          }
+        },
+        "geographies": [
+          {
+            "value": "California",
+            "confidence": 1
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "electricity",
+            "activity": "consumption",
+            "order": 1,
+            "confidence": 1
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "requestEvidence": {
+          "version": 1,
+          "query": "monthly electricity consumption in California",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 7,
+              "text": "monthly",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 7,
+              "end": 8,
+              "text": " ",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 8,
+              "end": 19,
+              "text": "electricity",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 19,
+              "end": 20,
+              "text": " ",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 20,
+              "end": 31,
+              "text": "consumption",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 31,
+              "end": 35,
+              "text": " in ",
+              "status": "context",
+              "target": "unknown"
+            },
+            {
+              "start": 35,
+              "end": 45,
+              "text": "California",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        }
+      },
+      "semantic": {
+        "pass": false,
+        "errors": [
+          "country_summary_contradiction"
+        ],
+        "signature": {
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "monthly",
+          "frequencyExplicit": true,
+          "excludedGeographies": [],
+          "clarification": false,
+          "unknownQualifiers": []
+        }
+      },
+      "contract": {
+        "pass": true,
+        "json": true,
+        "shape": true,
+        "spans": true,
+        "errors": []
+      }
+    }
+  },
+  "replayFile": "reasoning-attempts/070-1.replay.json",
+  "unknownCostUpperBoundUSD": 0,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null
+}

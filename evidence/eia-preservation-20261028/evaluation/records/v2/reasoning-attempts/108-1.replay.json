@@ -1,0 +1,3976 @@
+{
+  "queryId": 3,
+  "directValidation": {
+    "interpreter": "openai",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": false,
+    "blockingClarification": false,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": null,
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 17,
+          "text": "brazil and japan ",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "text": "electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "initial": {
+    "interpreter": "openai",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": false,
+    "blockingClarification": false,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": null,
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 17,
+          "text": "brazil and japan ",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "text": "electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "initialFull": {
+    "originalQuery": "brazil and japan electrciity consumption",
+    "cleanedQuery": "brazil and japan electrciity consumption",
+    "correctedQuery": "Brazil and Japan electricity consumption",
+    "correctedQuerySource": "ai",
+    "normalizedQuery": "brazil and japan electricity consumption",
+    "interpreter": "openai",
+    "interpretationMethod": "ai_primary",
+    "country": {
+      "name": "Brazil",
+      "code": "BRA",
+      "type": "country",
+      "routeFamilies": [
+        "international"
+      ]
+    },
+    "countryCode": "BRA",
+    "validatedGeographies": [
+      {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      {
+        "name": "Japan",
+        "code": "JPN",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "brazil",
+        "index": 0,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "Brazil",
+            "confidence": 1,
+            "candidateCodes": [
+              "BRA"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Japan",
+        "code": "JPN",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "japan",
+        "index": 11,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "Japan",
+            "confidence": 1,
+            "candidateCodes": [
+              "JPN"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographyConflicts": [],
+    "validatedCorrections": [
+      {
+        "type": "product",
+        "value": "electricity",
+        "source": "ai_proposed_deterministically_verified",
+        "confidence": 0.99,
+        "from": "electrciity",
+        "to": "electricity",
+        "editDistance": 2
+      }
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "requestedFrequency": null,
+    "frequencyExplicit": false,
+    "validatedConceptPairs": [
+      {
+        "order": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "originalActivity": null,
+        "activityNormalization": null,
+        "confidence": 0.99,
+        "source": "validated_interpreter"
+      }
+    ],
+    "conceptPairStatus": "validated",
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.99,
+    "fields": {
+      "country": {
+        "rawValue": "brazil and japan",
+        "aiValue": null,
+        "normalizedValue": "BRA",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "country_ai_ambiguous",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "Multiple countries were requested; see geographies.",
+        "alternatives": [],
+        "deterministicValue": "BRA",
+        "conflictStatus": "deterministic_only",
+        "resolutionSource": "deterministic_fallback",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "product": {
+        "rawValue": "electrciity",
+        "aiValue": "electricity",
+        "normalizedValue": "electricity",
+        "validation": "approved",
+        "confidence": 0.99,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "electricity",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "ai_proposed_deterministically_verified",
+        "correction": {
+          "from": "electrciity",
+          "to": "electricity",
+          "editDistance": 2
+        },
+        "breadth": "specific"
+      },
+      "activity": {
+        "rawValue": "consumption",
+        "aiValue": "consumption",
+        "normalizedValue": "consumption",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "consumption",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "No approved sector was found.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "frequency": {
+        "rawValue": null,
+        "aiValue": "annual",
+        "normalizedValue": "annual",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "annual",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "explicit": false
+      }
+    },
+    "aiAmbiguity": [
+      "Two countries are requested, so the singular country field cannot represent both."
+    ],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "cleanedKeywords": "japan",
+    "needsClarification": false,
+    "blockingClarification": false,
+    "missingFields": [],
+    "ambiguousFields": [],
+    "clarificationMessage": null,
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 0.99
+      }
+    ],
+    "multiCountryComparison": {
+      "active": true,
+      "status": "active",
+      "geographyCodes": [
+        "BRA",
+        "JPN"
+      ],
+      "routeFamily": "international",
+      "reason": "two_or_more_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "brazil and japan electrciity consumption",
+      "normalizedQuery": "brazil and japan electrciity consumption",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 0,
+            "text": "brazil",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "brazil",
+              "index": 0,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "Brazil",
+                  "confidence": 1,
+                  "candidateCodes": [
+                    "BRA"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          },
+          {
+            "index": 11,
+            "text": "japan",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "japan",
+              "index": 11,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "Japan",
+                  "confidence": 1,
+                  "candidateCodes": [
+                    "JPN"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "product",
+            "value": "electricity",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": []
+      },
+      "geography": {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "product": "electricity",
+      "productBreadth": "specific",
+      "productAlternatives": [],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.99
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "BRA",
+          "JPN"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "reasons": []
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "raw_exact_deterministic",
+          "raw_exact_deterministic"
+        ],
+        "geographyEvidence": [
+          {
+            "name": "Brazil",
+            "code": "BRA",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ],
+            "rawText": "brazil",
+            "index": 0,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "exact_name_alias_or_code",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "Brazil",
+                "confidence": 1,
+                "candidateCodes": [
+                  "BRA"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Japan",
+            "code": "JPN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ],
+            "rawText": "japan",
+            "index": 11,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "exact_name_alias_or_code",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "Japan",
+                "confidence": 1,
+                "candidateCodes": [
+                  "JPN"
+                ]
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "default",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "model_proposed_locally_validated"
+      },
+      "needsClarification": false,
+      "blockingClarification": false,
+      "missingFields": [],
+      "clarificationMessage": null,
+      "requestEvidence": {
+        "version": 1,
+        "query": "brazil and japan electrciity consumption",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 17,
+            "text": "brazil and japan ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 17,
+            "end": 40,
+            "text": "electrciity consumption",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      },
+      "scopeValidation": {
+        "source": "model",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        },
+        "product": {
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "multiple_geographies"
+      ]
+    },
+    "evidenceQuery": "brazil and japan electrciity consumption",
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 17,
+          "text": "brazil and japan ",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "text": "electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    }
+  },
+  "serialized": "q=brazil+and+japan+electrciity+consumption&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A17%2C%22text%22%3A%22brazil+and+japan+%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%2C%7B%22start%22%3A17%2C%22end%22%3A40%2C%22text%22%3A%22electrciity+consumption%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%7D%2C%22originalQuery%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22cleanedQuery%22%3A%22brazil+and+japan+electrciity+consumption%22%2C%22correctedQuery%22%3A%22Brazil+and+Japan+electricity+consumption%22%2C%22correctedQuerySource%22%3A%22ai%22%2C%22interpreter%22%3A%22openai%22%2C%22confidence%22%3A0.99%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3A%22brazil+and+japan%22%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22BRA%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22country_ai_ambiguous%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22Multiple+countries+were+requested%3B+see+geographies.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22BRA%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22resolutionSource%22%3A%22deterministic_fallback%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22product%22%3A%7B%22rawValue%22%3A%22electrciity%22%2C%22aiValue%22%3A%22electricity%22%2C%22normalizedValue%22%3A%22electricity%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.99%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22electricity%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22ai_proposed_deterministically_verified%22%2C%22correction%22%3A%7B%22from%22%3A%22electrciity%22%2C%22to%22%3A%22electricity%22%2C%22editDistance%22%3A2%7D%2C%22breadth%22%3A%22specific%22%7D%2C%22activity%22%3A%7B%22rawValue%22%3A%22consumption%22%2C%22aiValue%22%3A%22consumption%22%2C%22normalizedValue%22%3A%22consumption%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22consumption%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22frequency%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3A%22annual%22%2C%22normalizedValue%22%3A%22annual%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22annual%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22explicit%22%3Afalse%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22Brazil%22%2C%22code%22%3A%22BRA%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%2C%7B%22name%22%3A%22Japan%22%2C%22code%22%3A%22JPN%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22Brazil%22%2C%22code%22%3A%22BRA%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22brazil%22%2C%22index%22%3A0%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22Brazil%22%2C%22confidence%22%3A1%2C%22candidateCodes%22%3A%5B%22BRA%22%5D%7D%5D%7D%2C%7B%22name%22%3A%22Japan%22%2C%22code%22%3A%22JPN%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22japan%22%2C%22index%22%3A11%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22Japan%22%2C%22confidence%22%3A1%2C%22candidateCodes%22%3A%5B%22JPN%22%5D%7D%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%7B%22order%22%3A0%2C%22product%22%3A%22electricity%22%2C%22activity%22%3A%22consumption%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A0.99%7D%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Afalse%2C%22requestedFrequency%22%3Anull%2C%22multiCountryComparison%22%3A%7B%22active%22%3Atrue%2C%22status%22%3A%22active%22%2C%22geographyCodes%22%3A%5B%22BRA%22%2C%22JPN%22%5D%2C%22routeFamily%22%3A%22international%22%2C%22reason%22%3A%22two_or_more_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22multiple_geographies%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Atrue%2C%22method%22%3A%22field_level_deterministic_fallback%22%2C%22reasons%22%3A%5B%22country_ai_ambiguous%22%5D%7D%7D&intentCorrectedQuery=Brazil+and+Japan+electricity+consumption&intentCorrectedQuerySource=ai&intentInterpreter=openai&intentCountryCode=BRA&intentProduct=electricity&intentActivity=consumption&intentFrequency=annual&intentConfidence=0.99",
+  "normalized": {
+    "interpreter": "openai",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": false,
+    "blockingClarification": false,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": null,
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 17,
+          "text": "brazil and japan ",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "text": "electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "international",
+    "targetCandidates": 20,
+    "maximumCandidates": 50,
+    "retrievals": [
+      {
+        "geography": {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "concept": {
+          "order": 0,
+          "product": "electricity",
+          "productBreadth": "specific",
+          "productAlternatives": [],
+          "ambiguitySource": null,
+          "activity": "consumption",
+          "activitySource": "explicit_or_validated",
+          "activityInference": null,
+          "sector": null
+        },
+        "frequency": {
+          "explicit": false,
+          "requested": null,
+          "value": "annual",
+          "mode": "not_explicit"
+        },
+        "primaryCandidates": [
+          {
+            "schema_version": "1.0.0",
+            "candidate_id": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+            "series_id": "INTL.2-2-BRA-BKWH.A",
+            "source": "EIA",
+            "route_family": "international",
+            "selector": {
+              "route": "/international",
+              "measure": "value",
+              "frequency": "annual",
+              "facets": {
+                "activityId": "2",
+                "countryRegionId": "BRA",
+                "productId": "2",
+                "unit": "BKWH"
+              }
+            },
+            "selector_source": "official_series_metadata",
+            "title": "Electricity net consumption, Brazil, Annual",
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "other"
+            },
+            "concept_type": "other",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "date_start": "1980",
+            "date_end": "2024",
+            "is_active": true,
+            "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-BRA-BKWH.A",
+            "metadata_hash": "88b7e77285f0e9042cc065118d55512577cbaf2210187297e62f2475f518180a",
+            "retrieval": {
+              "pool": "primary",
+              "tier": "exact_phrase",
+              "reasonCodes": [
+                "route_family_international",
+                "geography_exact",
+                "frequency_not_explicit",
+                "activity_explicit_or_validated",
+                "product_direct_or_alias",
+                "sector_not_requested",
+                "exclusions_not_requested",
+                "match_exact_phrase"
+              ]
+            },
+            "ranking": {
+              "score": 76.7,
+              "tier": "A",
+              "tierLabel": "Exact requested concept and frequency",
+              "reasonCodes": [
+                "tier_A",
+                "source_pool_primary",
+                "route_family_validated",
+                "geography_validated",
+                "selector_geography_validated",
+                "product_or_scope_hard_gate_passed",
+                "activity_hard_gate_passed",
+                "frequency_validated",
+                "product_exact_electricity",
+                "activity_exact_consumption",
+                "aggregation_relation_unknown_no_verified_hierarchy",
+                "lexical_title_consumption",
+                "frequency_exact",
+                "current_active",
+                "availability_present"
+              ],
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ],
+              "components": {
+                "productOrScope": {
+                  "active": true,
+                  "points": 22,
+                  "maximum": 22,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "product_exact_electricity"
+                  ]
+                },
+                "activity": {
+                  "active": true,
+                  "points": 18,
+                  "maximum": 18,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "activity_exact_consumption"
+                  ]
+                },
+                "measureOrAggregation": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": [
+                    "aggregation_relation_unknown_no_verified_hierarchy"
+                  ]
+                },
+                "fieldedLexical": {
+                  "active": true,
+                  "points": 4.6,
+                  "maximum": 20,
+                  "compatibility": 0.2,
+                  "reasonCodes": [
+                    "lexical_title_consumption"
+                  ]
+                },
+                "sector": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "frequency": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "frequency_exact"
+                  ]
+                },
+                "unit": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "requestedDateCoverage": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "currentness": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "current_active"
+                  ]
+                },
+                "availability": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "availability_present"
+                  ]
+                }
+              },
+              "signals": {
+                "sourcePool": "primary",
+                "familyId": "international electricity consumption other electricity net consumption",
+                "productCompatibility": 1,
+                "activityCompatibility": 1,
+                "detectedProducts": [
+                  "electricity"
+                ],
+                "detectedActivities": [
+                  "consumption"
+                ],
+                "lexicalQualifiers": {
+                  "requestedQualifiers": [],
+                  "candidateQualifiers": [],
+                  "exactRequestedQualifierMatches": 0,
+                  "titlePhraseEvidence": 1,
+                  "coverageFit": 0,
+                  "reasonCodes": []
+                },
+                "semanticFloorPassed": true,
+                "semanticFloorFailures": [],
+                "approvedFallback": null,
+                "matchedCoverage": null
+              }
+            }
+          }
+        ],
+        "fallbackCandidates": [],
+        "diagnostics": {
+          "routeEligibleCount": 104407,
+          "geographyEligibleCount": 399,
+          "frequencyEligibleCount": 399,
+          "primaryCount": 2,
+          "fallbackCount": 0,
+          "totalCount": 2,
+          "tiersApplied": [
+            "exact_phrase",
+            "approved_alias",
+            "all_tokens",
+            "partial_tokens",
+            "trigram"
+          ],
+          "stoppedAfterTarget": false,
+          "blockedByUnresolvedQualifiers": [],
+          "explicitFrequencyMismatchesExcluded": 0,
+          "rankingApplied": true,
+          "semanticRerankingApplied": false,
+          "rankingStrategy": "deterministic_tiers_fielded_idf",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingWarnings": [
+            "eia:1:e6fe1bdaa1140cf118e42b2f3eef79d9bb9515b6279930777576121ba0bfbea7:primary:product_or_scope_hard_gate_failed",
+            "aggregation_relationship_not_verified"
+          ],
+          "scoreScale": {
+            "minimum": 0,
+            "maximum": 100,
+            "displayThreshold": 55,
+            "displayLimit": 5
+          },
+          "topScore": 76.7,
+          "topReasonCodes": [
+            "tier_A",
+            "source_pool_primary",
+            "route_family_validated",
+            "geography_validated",
+            "selector_geography_validated",
+            "product_or_scope_hard_gate_passed",
+            "activity_hard_gate_passed",
+            "frequency_validated",
+            "product_exact_electricity",
+            "activity_exact_consumption",
+            "aggregation_relation_unknown_no_verified_hierarchy",
+            "lexical_title_consumption",
+            "frequency_exact",
+            "current_active",
+            "availability_present"
+          ],
+          "displayCount": 1,
+          "familyCount": 1,
+          "excludedBeforeScoring": 1,
+          "excludedBySemanticFloor": 0,
+          "belowDisplayThreshold": 0,
+          "interpretationGroupCount": 1,
+          "hiddenTechnicalGroupCount": 0
+        },
+        "routeFamily": "international",
+        "rankedCandidates": [
+          {
+            "schema_version": "1.0.0",
+            "candidate_id": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+            "series_id": "INTL.2-2-BRA-BKWH.A",
+            "source": "EIA",
+            "route_family": "international",
+            "selector": {
+              "route": "/international",
+              "measure": "value",
+              "frequency": "annual",
+              "facets": {
+                "activityId": "2",
+                "countryRegionId": "BRA",
+                "productId": "2",
+                "unit": "BKWH"
+              }
+            },
+            "selector_source": "official_series_metadata",
+            "title": "Electricity net consumption, Brazil, Annual",
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "other"
+            },
+            "concept_type": "other",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "date_start": "1980",
+            "date_end": "2024",
+            "is_active": true,
+            "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-BRA-BKWH.A",
+            "metadata_hash": "88b7e77285f0e9042cc065118d55512577cbaf2210187297e62f2475f518180a",
+            "retrieval": {
+              "pool": "primary",
+              "tier": "exact_phrase",
+              "reasonCodes": [
+                "route_family_international",
+                "geography_exact",
+                "frequency_not_explicit",
+                "activity_explicit_or_validated",
+                "product_direct_or_alias",
+                "sector_not_requested",
+                "exclusions_not_requested",
+                "match_exact_phrase"
+              ]
+            },
+            "ranking": {
+              "score": 76.7,
+              "tier": "A",
+              "tierLabel": "Exact requested concept and frequency",
+              "reasonCodes": [
+                "tier_A",
+                "source_pool_primary",
+                "route_family_validated",
+                "geography_validated",
+                "selector_geography_validated",
+                "product_or_scope_hard_gate_passed",
+                "activity_hard_gate_passed",
+                "frequency_validated",
+                "product_exact_electricity",
+                "activity_exact_consumption",
+                "aggregation_relation_unknown_no_verified_hierarchy",
+                "lexical_title_consumption",
+                "frequency_exact",
+                "current_active",
+                "availability_present"
+              ],
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ],
+              "components": {
+                "productOrScope": {
+                  "active": true,
+                  "points": 22,
+                  "maximum": 22,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "product_exact_electricity"
+                  ]
+                },
+                "activity": {
+                  "active": true,
+                  "points": 18,
+                  "maximum": 18,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "activity_exact_consumption"
+                  ]
+                },
+                "measureOrAggregation": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": [
+                    "aggregation_relation_unknown_no_verified_hierarchy"
+                  ]
+                },
+                "fieldedLexical": {
+                  "active": true,
+                  "points": 4.6,
+                  "maximum": 20,
+                  "compatibility": 0.2,
+                  "reasonCodes": [
+                    "lexical_title_consumption"
+                  ]
+                },
+                "sector": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "frequency": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "frequency_exact"
+                  ]
+                },
+                "unit": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "requestedDateCoverage": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "currentness": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "current_active"
+                  ]
+                },
+                "availability": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "availability_present"
+                  ]
+                }
+              },
+              "signals": {
+                "sourcePool": "primary",
+                "familyId": "international electricity consumption other electricity net consumption",
+                "productCompatibility": 1,
+                "activityCompatibility": 1,
+                "detectedProducts": [
+                  "electricity"
+                ],
+                "detectedActivities": [
+                  "consumption"
+                ],
+                "lexicalQualifiers": {
+                  "requestedQualifiers": [],
+                  "candidateQualifiers": [],
+                  "exactRequestedQualifierMatches": 0,
+                  "titlePhraseEvidence": 1,
+                  "coverageFit": 0,
+                  "reasonCodes": []
+                },
+                "semanticFloorPassed": true,
+                "semanticFloorFailures": [],
+                "approvedFallback": null,
+                "matchedCoverage": null
+              }
+            }
+          }
+        ],
+        "displayCandidates": [
+          {
+            "schema_version": "1.0.0",
+            "candidate_id": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+            "series_id": "INTL.2-2-BRA-BKWH.A",
+            "source": "EIA",
+            "route_family": "international",
+            "selector": {
+              "route": "/international",
+              "measure": "value",
+              "frequency": "annual",
+              "facets": {
+                "activityId": "2",
+                "countryRegionId": "BRA",
+                "productId": "2",
+                "unit": "BKWH"
+              }
+            },
+            "selector_source": "official_series_metadata",
+            "title": "Electricity net consumption, Brazil, Annual",
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "other"
+            },
+            "concept_type": "other",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "date_start": "1980",
+            "date_end": "2024",
+            "is_active": true,
+            "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-BRA-BKWH.A",
+            "metadata_hash": "88b7e77285f0e9042cc065118d55512577cbaf2210187297e62f2475f518180a",
+            "retrieval": {
+              "pool": "primary",
+              "tier": "exact_phrase",
+              "reasonCodes": [
+                "route_family_international",
+                "geography_exact",
+                "frequency_not_explicit",
+                "activity_explicit_or_validated",
+                "product_direct_or_alias",
+                "sector_not_requested",
+                "exclusions_not_requested",
+                "match_exact_phrase"
+              ]
+            },
+            "ranking": {
+              "score": 76.7,
+              "tier": "A",
+              "tierLabel": "Exact requested concept and frequency",
+              "reasonCodes": [
+                "tier_A",
+                "source_pool_primary",
+                "route_family_validated",
+                "geography_validated",
+                "selector_geography_validated",
+                "product_or_scope_hard_gate_passed",
+                "activity_hard_gate_passed",
+                "frequency_validated",
+                "product_exact_electricity",
+                "activity_exact_consumption",
+                "aggregation_relation_unknown_no_verified_hierarchy",
+                "lexical_title_consumption",
+                "frequency_exact",
+                "current_active",
+                "availability_present"
+              ],
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ],
+              "components": {
+                "productOrScope": {
+                  "active": true,
+                  "points": 22,
+                  "maximum": 22,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "product_exact_electricity"
+                  ]
+                },
+                "activity": {
+                  "active": true,
+                  "points": 18,
+                  "maximum": 18,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "activity_exact_consumption"
+                  ]
+                },
+                "measureOrAggregation": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": [
+                    "aggregation_relation_unknown_no_verified_hierarchy"
+                  ]
+                },
+                "fieldedLexical": {
+                  "active": true,
+                  "points": 4.6,
+                  "maximum": 20,
+                  "compatibility": 0.2,
+                  "reasonCodes": [
+                    "lexical_title_consumption"
+                  ]
+                },
+                "sector": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "frequency": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "frequency_exact"
+                  ]
+                },
+                "unit": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "requestedDateCoverage": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "currentness": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "current_active"
+                  ]
+                },
+                "availability": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "availability_present"
+                  ]
+                }
+              },
+              "signals": {
+                "sourcePool": "primary",
+                "familyId": "international electricity consumption other electricity net consumption",
+                "productCompatibility": 1,
+                "activityCompatibility": 1,
+                "detectedProducts": [
+                  "electricity"
+                ],
+                "detectedActivities": [
+                  "consumption"
+                ],
+                "lexicalQualifiers": {
+                  "requestedQualifiers": [],
+                  "candidateQualifiers": [],
+                  "exactRequestedQualifierMatches": 0,
+                  "titlePhraseEvidence": 1,
+                  "coverageFit": 0,
+                  "reasonCodes": []
+                },
+                "semanticFloorPassed": true,
+                "semanticFloorFailures": [],
+                "approvedFallback": null,
+                "matchedCoverage": null
+              }
+            }
+          }
+        ],
+        "candidateFamilies": [
+          {
+            "familyId": "international electricity consumption other electricity net consumption",
+            "representativeCandidateId": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+            "candidateIds": [
+              "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21"
+            ],
+            "variantCount": 1
+          }
+        ],
+        "excludedCandidates": [
+          {
+            "candidateId": "eia:1:e6fe1bdaa1140cf118e42b2f3eef79d9bb9515b6279930777576121ba0bfbea7",
+            "reasonCodes": [
+              "product_or_scope_hard_gate_failed"
+            ]
+          }
+        ],
+        "interpretationGroups": [
+          {
+            "id": "consumption:quantity",
+            "label": "Consumption: Energy or physical quantity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "technical": false,
+            "defaultVisible": true,
+            "unitFamilies": [
+              "kwh"
+            ],
+            "candidates": [
+              {
+                "schema_version": "1.0.0",
+                "candidate_id": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+                "series_id": "INTL.2-2-BRA-BKWH.A",
+                "source": "EIA",
+                "route_family": "international",
+                "selector": {
+                  "route": "/international",
+                  "measure": "value",
+                  "frequency": "annual",
+                  "facets": {
+                    "activityId": "2",
+                    "countryRegionId": "BRA",
+                    "productId": "2",
+                    "unit": "BKWH"
+                  }
+                },
+                "selector_source": "official_series_metadata",
+                "title": "Electricity net consumption, Brazil, Annual",
+                "geography": {
+                  "name": "Brazil",
+                  "code": "BRA",
+                  "type": "other"
+                },
+                "concept_type": "other",
+                "frequency": "annual",
+                "unit": "billion kilowatthours",
+                "date_start": "1980",
+                "date_end": "2024",
+                "is_active": true,
+                "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-BRA-BKWH.A",
+                "metadata_hash": "88b7e77285f0e9042cc065118d55512577cbaf2210187297e62f2475f518180a",
+                "retrieval": {
+                  "pool": "primary",
+                  "tier": "exact_phrase",
+                  "reasonCodes": [
+                    "route_family_international",
+                    "geography_exact",
+                    "frequency_not_explicit",
+                    "activity_explicit_or_validated",
+                    "product_direct_or_alias",
+                    "sector_not_requested",
+                    "exclusions_not_requested",
+                    "match_exact_phrase"
+                  ]
+                },
+                "ranking": {
+                  "score": 76.7,
+                  "tier": "A",
+                  "tierLabel": "Exact requested concept and frequency",
+                  "reasonCodes": [
+                    "tier_A",
+                    "source_pool_primary",
+                    "route_family_validated",
+                    "geography_validated",
+                    "selector_geography_validated",
+                    "product_or_scope_hard_gate_passed",
+                    "activity_hard_gate_passed",
+                    "frequency_validated",
+                    "product_exact_electricity",
+                    "activity_exact_consumption",
+                    "aggregation_relation_unknown_no_verified_hierarchy",
+                    "lexical_title_consumption",
+                    "frequency_exact",
+                    "current_active",
+                    "availability_present"
+                  ],
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ],
+                  "components": {
+                    "productOrScope": {
+                      "active": true,
+                      "points": 22,
+                      "maximum": 22,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "product_exact_electricity"
+                      ]
+                    },
+                    "activity": {
+                      "active": true,
+                      "points": 18,
+                      "maximum": 18,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "activity_exact_consumption"
+                      ]
+                    },
+                    "measureOrAggregation": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": [
+                        "aggregation_relation_unknown_no_verified_hierarchy"
+                      ]
+                    },
+                    "fieldedLexical": {
+                      "active": true,
+                      "points": 4.6,
+                      "maximum": 20,
+                      "compatibility": 0.2,
+                      "reasonCodes": [
+                        "lexical_title_consumption"
+                      ]
+                    },
+                    "sector": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": []
+                    },
+                    "frequency": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "frequency_exact"
+                      ]
+                    },
+                    "unit": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": []
+                    },
+                    "requestedDateCoverage": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": []
+                    },
+                    "currentness": {
+                      "active": true,
+                      "points": 3,
+                      "maximum": 3,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "current_active"
+                      ]
+                    },
+                    "availability": {
+                      "active": true,
+                      "points": 3,
+                      "maximum": 3,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "availability_present"
+                      ]
+                    }
+                  },
+                  "signals": {
+                    "sourcePool": "primary",
+                    "familyId": "international electricity consumption other electricity net consumption",
+                    "productCompatibility": 1,
+                    "activityCompatibility": 1,
+                    "detectedProducts": [
+                      "electricity"
+                    ],
+                    "detectedActivities": [
+                      "consumption"
+                    ],
+                    "lexicalQualifiers": {
+                      "requestedQualifiers": [],
+                      "candidateQualifiers": [],
+                      "exactRequestedQualifierMatches": 0,
+                      "titlePhraseEvidence": 1,
+                      "coverageFit": 0,
+                      "reasonCodes": []
+                    },
+                    "semanticFloorPassed": true,
+                    "semanticFloorFailures": [],
+                    "approvedFallback": null,
+                    "matchedCoverage": null
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "selectionPolicy": {
+          "requiresExplicitSelection": true,
+          "autoSelectionAllowed": false,
+          "reasonCodes": [
+            "verified_selector_click_required"
+          ]
+        },
+        "userWarnings": [],
+        "emptyResult": false
+      },
+      {
+        "geography": {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "concept": {
+          "order": 0,
+          "product": "electricity",
+          "productBreadth": "specific",
+          "productAlternatives": [],
+          "ambiguitySource": null,
+          "activity": "consumption",
+          "activitySource": "explicit_or_validated",
+          "activityInference": null,
+          "sector": null
+        },
+        "frequency": {
+          "explicit": false,
+          "requested": null,
+          "value": "annual",
+          "mode": "not_explicit"
+        },
+        "primaryCandidates": [
+          {
+            "schema_version": "1.0.0",
+            "candidate_id": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+            "series_id": "INTL.2-2-JPN-BKWH.A",
+            "source": "EIA",
+            "route_family": "international",
+            "selector": {
+              "route": "/international",
+              "measure": "value",
+              "frequency": "annual",
+              "facets": {
+                "activityId": "2",
+                "countryRegionId": "JPN",
+                "productId": "2",
+                "unit": "BKWH"
+              }
+            },
+            "selector_source": "official_series_metadata",
+            "title": "Electricity net consumption, Japan, Annual",
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "other"
+            },
+            "concept_type": "other",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "date_start": "1980",
+            "date_end": "2024",
+            "is_active": true,
+            "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-JPN-BKWH.A",
+            "metadata_hash": "93111709ed67a56f9c876bc22a8ac6302b5738f77c5e03df7feb4705912a0079",
+            "retrieval": {
+              "pool": "primary",
+              "tier": "exact_phrase",
+              "reasonCodes": [
+                "route_family_international",
+                "geography_exact",
+                "frequency_not_explicit",
+                "activity_explicit_or_validated",
+                "product_direct_or_alias",
+                "sector_not_requested",
+                "exclusions_not_requested",
+                "match_exact_phrase"
+              ]
+            },
+            "ranking": {
+              "score": 76.7,
+              "tier": "A",
+              "tierLabel": "Exact requested concept and frequency",
+              "reasonCodes": [
+                "tier_A",
+                "source_pool_primary",
+                "route_family_validated",
+                "geography_validated",
+                "selector_geography_validated",
+                "product_or_scope_hard_gate_passed",
+                "activity_hard_gate_passed",
+                "frequency_validated",
+                "product_exact_electricity",
+                "activity_exact_consumption",
+                "aggregation_relation_unknown_no_verified_hierarchy",
+                "lexical_title_consumption",
+                "frequency_exact",
+                "current_active",
+                "availability_present"
+              ],
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ],
+              "components": {
+                "productOrScope": {
+                  "active": true,
+                  "points": 22,
+                  "maximum": 22,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "product_exact_electricity"
+                  ]
+                },
+                "activity": {
+                  "active": true,
+                  "points": 18,
+                  "maximum": 18,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "activity_exact_consumption"
+                  ]
+                },
+                "measureOrAggregation": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": [
+                    "aggregation_relation_unknown_no_verified_hierarchy"
+                  ]
+                },
+                "fieldedLexical": {
+                  "active": true,
+                  "points": 4.6,
+                  "maximum": 20,
+                  "compatibility": 0.2,
+                  "reasonCodes": [
+                    "lexical_title_consumption"
+                  ]
+                },
+                "sector": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "frequency": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "frequency_exact"
+                  ]
+                },
+                "unit": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "requestedDateCoverage": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "currentness": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "current_active"
+                  ]
+                },
+                "availability": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "availability_present"
+                  ]
+                }
+              },
+              "signals": {
+                "sourcePool": "primary",
+                "familyId": "international electricity consumption other electricity net consumption",
+                "productCompatibility": 1,
+                "activityCompatibility": 1,
+                "detectedProducts": [
+                  "electricity"
+                ],
+                "detectedActivities": [
+                  "consumption"
+                ],
+                "lexicalQualifiers": {
+                  "requestedQualifiers": [],
+                  "candidateQualifiers": [],
+                  "exactRequestedQualifierMatches": 0,
+                  "titlePhraseEvidence": 1,
+                  "coverageFit": 0,
+                  "reasonCodes": []
+                },
+                "semanticFloorPassed": true,
+                "semanticFloorFailures": [],
+                "approvedFallback": null,
+                "matchedCoverage": null
+              }
+            }
+          }
+        ],
+        "fallbackCandidates": [],
+        "diagnostics": {
+          "routeEligibleCount": 104407,
+          "geographyEligibleCount": 404,
+          "frequencyEligibleCount": 404,
+          "primaryCount": 2,
+          "fallbackCount": 0,
+          "totalCount": 2,
+          "tiersApplied": [
+            "exact_phrase",
+            "approved_alias",
+            "all_tokens",
+            "partial_tokens",
+            "trigram"
+          ],
+          "stoppedAfterTarget": false,
+          "blockedByUnresolvedQualifiers": [],
+          "explicitFrequencyMismatchesExcluded": 0,
+          "rankingApplied": true,
+          "semanticRerankingApplied": false,
+          "rankingStrategy": "deterministic_tiers_fielded_idf",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingWarnings": [
+            "eia:1:91fd3dda1b11f7ed77caf96ea474135fb328eae7ae42dc37269239728852f667:primary:product_or_scope_hard_gate_failed",
+            "aggregation_relationship_not_verified"
+          ],
+          "scoreScale": {
+            "minimum": 0,
+            "maximum": 100,
+            "displayThreshold": 55,
+            "displayLimit": 5
+          },
+          "topScore": 76.7,
+          "topReasonCodes": [
+            "tier_A",
+            "source_pool_primary",
+            "route_family_validated",
+            "geography_validated",
+            "selector_geography_validated",
+            "product_or_scope_hard_gate_passed",
+            "activity_hard_gate_passed",
+            "frequency_validated",
+            "product_exact_electricity",
+            "activity_exact_consumption",
+            "aggregation_relation_unknown_no_verified_hierarchy",
+            "lexical_title_consumption",
+            "frequency_exact",
+            "current_active",
+            "availability_present"
+          ],
+          "displayCount": 1,
+          "familyCount": 1,
+          "excludedBeforeScoring": 1,
+          "excludedBySemanticFloor": 0,
+          "belowDisplayThreshold": 0,
+          "interpretationGroupCount": 1,
+          "hiddenTechnicalGroupCount": 0
+        },
+        "routeFamily": "international",
+        "rankedCandidates": [
+          {
+            "schema_version": "1.0.0",
+            "candidate_id": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+            "series_id": "INTL.2-2-JPN-BKWH.A",
+            "source": "EIA",
+            "route_family": "international",
+            "selector": {
+              "route": "/international",
+              "measure": "value",
+              "frequency": "annual",
+              "facets": {
+                "activityId": "2",
+                "countryRegionId": "JPN",
+                "productId": "2",
+                "unit": "BKWH"
+              }
+            },
+            "selector_source": "official_series_metadata",
+            "title": "Electricity net consumption, Japan, Annual",
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "other"
+            },
+            "concept_type": "other",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "date_start": "1980",
+            "date_end": "2024",
+            "is_active": true,
+            "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-JPN-BKWH.A",
+            "metadata_hash": "93111709ed67a56f9c876bc22a8ac6302b5738f77c5e03df7feb4705912a0079",
+            "retrieval": {
+              "pool": "primary",
+              "tier": "exact_phrase",
+              "reasonCodes": [
+                "route_family_international",
+                "geography_exact",
+                "frequency_not_explicit",
+                "activity_explicit_or_validated",
+                "product_direct_or_alias",
+                "sector_not_requested",
+                "exclusions_not_requested",
+                "match_exact_phrase"
+              ]
+            },
+            "ranking": {
+              "score": 76.7,
+              "tier": "A",
+              "tierLabel": "Exact requested concept and frequency",
+              "reasonCodes": [
+                "tier_A",
+                "source_pool_primary",
+                "route_family_validated",
+                "geography_validated",
+                "selector_geography_validated",
+                "product_or_scope_hard_gate_passed",
+                "activity_hard_gate_passed",
+                "frequency_validated",
+                "product_exact_electricity",
+                "activity_exact_consumption",
+                "aggregation_relation_unknown_no_verified_hierarchy",
+                "lexical_title_consumption",
+                "frequency_exact",
+                "current_active",
+                "availability_present"
+              ],
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ],
+              "components": {
+                "productOrScope": {
+                  "active": true,
+                  "points": 22,
+                  "maximum": 22,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "product_exact_electricity"
+                  ]
+                },
+                "activity": {
+                  "active": true,
+                  "points": 18,
+                  "maximum": 18,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "activity_exact_consumption"
+                  ]
+                },
+                "measureOrAggregation": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": [
+                    "aggregation_relation_unknown_no_verified_hierarchy"
+                  ]
+                },
+                "fieldedLexical": {
+                  "active": true,
+                  "points": 4.6,
+                  "maximum": 20,
+                  "compatibility": 0.2,
+                  "reasonCodes": [
+                    "lexical_title_consumption"
+                  ]
+                },
+                "sector": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "frequency": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "frequency_exact"
+                  ]
+                },
+                "unit": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "requestedDateCoverage": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "currentness": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "current_active"
+                  ]
+                },
+                "availability": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "availability_present"
+                  ]
+                }
+              },
+              "signals": {
+                "sourcePool": "primary",
+                "familyId": "international electricity consumption other electricity net consumption",
+                "productCompatibility": 1,
+                "activityCompatibility": 1,
+                "detectedProducts": [
+                  "electricity"
+                ],
+                "detectedActivities": [
+                  "consumption"
+                ],
+                "lexicalQualifiers": {
+                  "requestedQualifiers": [],
+                  "candidateQualifiers": [],
+                  "exactRequestedQualifierMatches": 0,
+                  "titlePhraseEvidence": 1,
+                  "coverageFit": 0,
+                  "reasonCodes": []
+                },
+                "semanticFloorPassed": true,
+                "semanticFloorFailures": [],
+                "approvedFallback": null,
+                "matchedCoverage": null
+              }
+            }
+          }
+        ],
+        "displayCandidates": [
+          {
+            "schema_version": "1.0.0",
+            "candidate_id": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+            "series_id": "INTL.2-2-JPN-BKWH.A",
+            "source": "EIA",
+            "route_family": "international",
+            "selector": {
+              "route": "/international",
+              "measure": "value",
+              "frequency": "annual",
+              "facets": {
+                "activityId": "2",
+                "countryRegionId": "JPN",
+                "productId": "2",
+                "unit": "BKWH"
+              }
+            },
+            "selector_source": "official_series_metadata",
+            "title": "Electricity net consumption, Japan, Annual",
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "other"
+            },
+            "concept_type": "other",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "date_start": "1980",
+            "date_end": "2024",
+            "is_active": true,
+            "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-JPN-BKWH.A",
+            "metadata_hash": "93111709ed67a56f9c876bc22a8ac6302b5738f77c5e03df7feb4705912a0079",
+            "retrieval": {
+              "pool": "primary",
+              "tier": "exact_phrase",
+              "reasonCodes": [
+                "route_family_international",
+                "geography_exact",
+                "frequency_not_explicit",
+                "activity_explicit_or_validated",
+                "product_direct_or_alias",
+                "sector_not_requested",
+                "exclusions_not_requested",
+                "match_exact_phrase"
+              ]
+            },
+            "ranking": {
+              "score": 76.7,
+              "tier": "A",
+              "tierLabel": "Exact requested concept and frequency",
+              "reasonCodes": [
+                "tier_A",
+                "source_pool_primary",
+                "route_family_validated",
+                "geography_validated",
+                "selector_geography_validated",
+                "product_or_scope_hard_gate_passed",
+                "activity_hard_gate_passed",
+                "frequency_validated",
+                "product_exact_electricity",
+                "activity_exact_consumption",
+                "aggregation_relation_unknown_no_verified_hierarchy",
+                "lexical_title_consumption",
+                "frequency_exact",
+                "current_active",
+                "availability_present"
+              ],
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ],
+              "components": {
+                "productOrScope": {
+                  "active": true,
+                  "points": 22,
+                  "maximum": 22,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "product_exact_electricity"
+                  ]
+                },
+                "activity": {
+                  "active": true,
+                  "points": 18,
+                  "maximum": 18,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "activity_exact_consumption"
+                  ]
+                },
+                "measureOrAggregation": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": [
+                    "aggregation_relation_unknown_no_verified_hierarchy"
+                  ]
+                },
+                "fieldedLexical": {
+                  "active": true,
+                  "points": 4.6,
+                  "maximum": 20,
+                  "compatibility": 0.2,
+                  "reasonCodes": [
+                    "lexical_title_consumption"
+                  ]
+                },
+                "sector": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "frequency": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "frequency_exact"
+                  ]
+                },
+                "unit": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "requestedDateCoverage": {
+                  "active": false,
+                  "points": 0,
+                  "maximum": 0,
+                  "compatibility": 0,
+                  "reasonCodes": []
+                },
+                "currentness": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "current_active"
+                  ]
+                },
+                "availability": {
+                  "active": true,
+                  "points": 3,
+                  "maximum": 3,
+                  "compatibility": 1,
+                  "reasonCodes": [
+                    "availability_present"
+                  ]
+                }
+              },
+              "signals": {
+                "sourcePool": "primary",
+                "familyId": "international electricity consumption other electricity net consumption",
+                "productCompatibility": 1,
+                "activityCompatibility": 1,
+                "detectedProducts": [
+                  "electricity"
+                ],
+                "detectedActivities": [
+                  "consumption"
+                ],
+                "lexicalQualifiers": {
+                  "requestedQualifiers": [],
+                  "candidateQualifiers": [],
+                  "exactRequestedQualifierMatches": 0,
+                  "titlePhraseEvidence": 1,
+                  "coverageFit": 0,
+                  "reasonCodes": []
+                },
+                "semanticFloorPassed": true,
+                "semanticFloorFailures": [],
+                "approvedFallback": null,
+                "matchedCoverage": null
+              }
+            }
+          }
+        ],
+        "candidateFamilies": [
+          {
+            "familyId": "international electricity consumption other electricity net consumption",
+            "representativeCandidateId": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+            "candidateIds": [
+              "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a"
+            ],
+            "variantCount": 1
+          }
+        ],
+        "excludedCandidates": [
+          {
+            "candidateId": "eia:1:91fd3dda1b11f7ed77caf96ea474135fb328eae7ae42dc37269239728852f667",
+            "reasonCodes": [
+              "product_or_scope_hard_gate_failed"
+            ]
+          }
+        ],
+        "interpretationGroups": [
+          {
+            "id": "consumption:quantity",
+            "label": "Consumption: Energy or physical quantity",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "technical": false,
+            "defaultVisible": true,
+            "unitFamilies": [
+              "kwh"
+            ],
+            "candidates": [
+              {
+                "schema_version": "1.0.0",
+                "candidate_id": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+                "series_id": "INTL.2-2-JPN-BKWH.A",
+                "source": "EIA",
+                "route_family": "international",
+                "selector": {
+                  "route": "/international",
+                  "measure": "value",
+                  "frequency": "annual",
+                  "facets": {
+                    "activityId": "2",
+                    "countryRegionId": "JPN",
+                    "productId": "2",
+                    "unit": "BKWH"
+                  }
+                },
+                "selector_source": "official_series_metadata",
+                "title": "Electricity net consumption, Japan, Annual",
+                "geography": {
+                  "name": "Japan",
+                  "code": "JPN",
+                  "type": "other"
+                },
+                "concept_type": "other",
+                "frequency": "annual",
+                "unit": "billion kilowatthours",
+                "date_start": "1980",
+                "date_end": "2024",
+                "is_active": true,
+                "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-JPN-BKWH.A",
+                "metadata_hash": "93111709ed67a56f9c876bc22a8ac6302b5738f77c5e03df7feb4705912a0079",
+                "retrieval": {
+                  "pool": "primary",
+                  "tier": "exact_phrase",
+                  "reasonCodes": [
+                    "route_family_international",
+                    "geography_exact",
+                    "frequency_not_explicit",
+                    "activity_explicit_or_validated",
+                    "product_direct_or_alias",
+                    "sector_not_requested",
+                    "exclusions_not_requested",
+                    "match_exact_phrase"
+                  ]
+                },
+                "ranking": {
+                  "score": 76.7,
+                  "tier": "A",
+                  "tierLabel": "Exact requested concept and frequency",
+                  "reasonCodes": [
+                    "tier_A",
+                    "source_pool_primary",
+                    "route_family_validated",
+                    "geography_validated",
+                    "selector_geography_validated",
+                    "product_or_scope_hard_gate_passed",
+                    "activity_hard_gate_passed",
+                    "frequency_validated",
+                    "product_exact_electricity",
+                    "activity_exact_consumption",
+                    "aggregation_relation_unknown_no_verified_hierarchy",
+                    "lexical_title_consumption",
+                    "frequency_exact",
+                    "current_active",
+                    "availability_present"
+                  ],
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ],
+                  "components": {
+                    "productOrScope": {
+                      "active": true,
+                      "points": 22,
+                      "maximum": 22,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "product_exact_electricity"
+                      ]
+                    },
+                    "activity": {
+                      "active": true,
+                      "points": 18,
+                      "maximum": 18,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "activity_exact_consumption"
+                      ]
+                    },
+                    "measureOrAggregation": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": [
+                        "aggregation_relation_unknown_no_verified_hierarchy"
+                      ]
+                    },
+                    "fieldedLexical": {
+                      "active": true,
+                      "points": 4.6,
+                      "maximum": 20,
+                      "compatibility": 0.2,
+                      "reasonCodes": [
+                        "lexical_title_consumption"
+                      ]
+                    },
+                    "sector": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": []
+                    },
+                    "frequency": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "frequency_exact"
+                      ]
+                    },
+                    "unit": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": []
+                    },
+                    "requestedDateCoverage": {
+                      "active": false,
+                      "points": 0,
+                      "maximum": 0,
+                      "compatibility": 0,
+                      "reasonCodes": []
+                    },
+                    "currentness": {
+                      "active": true,
+                      "points": 3,
+                      "maximum": 3,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "current_active"
+                      ]
+                    },
+                    "availability": {
+                      "active": true,
+                      "points": 3,
+                      "maximum": 3,
+                      "compatibility": 1,
+                      "reasonCodes": [
+                        "availability_present"
+                      ]
+                    }
+                  },
+                  "signals": {
+                    "sourcePool": "primary",
+                    "familyId": "international electricity consumption other electricity net consumption",
+                    "productCompatibility": 1,
+                    "activityCompatibility": 1,
+                    "detectedProducts": [
+                      "electricity"
+                    ],
+                    "detectedActivities": [
+                      "consumption"
+                    ],
+                    "lexicalQualifiers": {
+                      "requestedQualifiers": [],
+                      "candidateQualifiers": [],
+                      "exactRequestedQualifierMatches": 0,
+                      "titlePhraseEvidence": 1,
+                      "coverageFit": 0,
+                      "reasonCodes": []
+                    },
+                    "semanticFloorPassed": true,
+                    "semanticFloorFailures": [],
+                    "approvedFallback": null,
+                    "matchedCoverage": null
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "selectionPolicy": {
+          "requiresExplicitSelection": true,
+          "autoSelectionAllowed": false,
+          "reasonCodes": [
+            "verified_selector_click_required"
+          ]
+        },
+        "userWarnings": [],
+        "emptyResult": false
+      }
+    ],
+    "diagnostics": {
+      "index": {
+        "buildVersion": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "artifactContentHash": "a7cd0a3997bfe1f333b105498ab75c9b0262b21b6a277ec53ca762d05b03b2a7",
+        "artifacts": [
+          {
+            "output": "international.jsonl.gz",
+            "records": 104407,
+            "contentHash": "ced61a2f074a720b72d6a0d06604efbca2f8710614381438a5970bd6a15abb95"
+          }
+        ],
+        "routeFamily": "international",
+        "recordCount": 104407,
+        "refreshStatus": "partial",
+        "versionStatus": "match",
+        "warnings": [
+          "Phase 1B staging cache only; it is not active production metadata.",
+          "Domestic coverage includes Electricity and Natural Gas; other Domestic product families remain outside this partial cache.",
+          "Full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
+          "International dataFlagId is treated as an observation annotation, not candidate identity.",
+          "Artifacts are gzip-compressed because uncompressed normalized files are not GitHub-safe."
+        ]
+      },
+      "elapsedMs": 31.826,
+      "rankingApplied": true,
+      "semanticRerankingApplied": false,
+      "rankingStrategy": "deterministic_tiers_fielded_idf",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingWarnings": [
+        "eia:1:e6fe1bdaa1140cf118e42b2f3eef79d9bb9515b6279930777576121ba0bfbea7:primary:product_or_scope_hard_gate_failed",
+        "aggregation_relationship_not_verified",
+        "eia:1:91fd3dda1b11f7ed77caf96ea474135fb328eae7ae42dc37269239728852f667:primary:product_or_scope_hard_gate_failed"
+      ],
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "multiCountryComparison": {
+        "active": true,
+        "requestedGeographyCodes": [
+          "BRA",
+          "JPN"
+        ],
+        "retrievedGeographyCodes": [
+          "BRA",
+          "JPN"
+        ],
+        "missingRetrievalGeographyCodes": [],
+        "rankedDefinitionCount": 1,
+        "rankingUnit": "variable_definition"
+      },
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "international",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    },
+    "comparisonMode": true,
+    "comparisonDefinitions": [
+      {
+        "definitionId": "eia-definition:1:1e87790b86aff85ac1bac85b856d690740f0bf8d4082c7f694c6a4e9007a5691",
+        "signature": {
+          "version": 1,
+          "routeFamily": "international",
+          "route": "/international",
+          "measure": "value",
+          "frequency": "annual",
+          "unit": {
+            "family": "electricity_energy",
+            "baseUnit": "kilowatthours"
+          },
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": "",
+          "scope": "",
+          "grossNetTreatment": "net",
+          "source": "eia",
+          "methodology": "",
+          "selectorFacets": {
+            "activityId": "2",
+            "productId": "2",
+            "unit": "bkwh"
+          }
+        },
+        "title": "Electricity net consumption",
+        "semanticScore": 44.6,
+        "rankingTier": "A",
+        "rankingReasonCodes": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_electricity",
+          "activity_exact_consumption",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_consumption",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "representativeCandidateId": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+        "availableCountryCount": 2,
+        "requestedCountryCount": 2,
+        "countries": [
+          {
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "candidateId": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+            "seriesId": "INTL.2-2-BRA-BKWH.A",
+            "candidate": {
+              "schema_version": "1.0.0",
+              "candidate_id": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+              "series_id": "INTL.2-2-BRA-BKWH.A",
+              "source": "EIA",
+              "route_family": "international",
+              "selector": {
+                "route": "/international",
+                "measure": "value",
+                "frequency": "annual",
+                "facets": {
+                  "activityId": "2",
+                  "countryRegionId": "BRA",
+                  "productId": "2",
+                  "unit": "BKWH"
+                }
+              },
+              "selector_source": "official_series_metadata",
+              "title": "Electricity net consumption, Brazil, Annual",
+              "geography": {
+                "name": "Brazil",
+                "code": "BRA",
+                "type": "other"
+              },
+              "concept_type": "other",
+              "frequency": "annual",
+              "unit": "billion kilowatthours",
+              "date_start": "1980",
+              "date_end": "2024",
+              "is_active": true,
+              "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-BRA-BKWH.A",
+              "metadata_hash": "88b7e77285f0e9042cc065118d55512577cbaf2210187297e62f2475f518180a",
+              "retrieval": {
+                "pool": "primary",
+                "tier": "exact_phrase",
+                "reasonCodes": [
+                  "route_family_international",
+                  "geography_exact",
+                  "frequency_not_explicit",
+                  "activity_explicit_or_validated",
+                  "product_direct_or_alias",
+                  "sector_not_requested",
+                  "exclusions_not_requested",
+                  "match_exact_phrase"
+                ]
+              },
+              "ranking": {
+                "score": 76.7,
+                "tier": "A",
+                "tierLabel": "Exact requested concept and frequency",
+                "reasonCodes": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_electricity",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_consumption",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "components": {
+                  "productOrScope": {
+                    "active": true,
+                    "points": 22,
+                    "maximum": 22,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "product_exact_electricity"
+                    ]
+                  },
+                  "activity": {
+                    "active": true,
+                    "points": 18,
+                    "maximum": 18,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "activity_exact_consumption"
+                    ]
+                  },
+                  "measureOrAggregation": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": [
+                      "aggregation_relation_unknown_no_verified_hierarchy"
+                    ]
+                  },
+                  "fieldedLexical": {
+                    "active": true,
+                    "points": 4.6,
+                    "maximum": 20,
+                    "compatibility": 0.2,
+                    "reasonCodes": [
+                      "lexical_title_consumption"
+                    ]
+                  },
+                  "sector": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": []
+                  },
+                  "frequency": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "frequency_exact"
+                    ]
+                  },
+                  "unit": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": []
+                  },
+                  "requestedDateCoverage": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": []
+                  },
+                  "currentness": {
+                    "active": true,
+                    "points": 3,
+                    "maximum": 3,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "current_active"
+                    ]
+                  },
+                  "availability": {
+                    "active": true,
+                    "points": 3,
+                    "maximum": 3,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "availability_present"
+                    ]
+                  }
+                },
+                "signals": {
+                  "sourcePool": "primary",
+                  "familyId": "international electricity consumption other electricity net consumption",
+                  "productCompatibility": 1,
+                  "activityCompatibility": 1,
+                  "detectedProducts": [
+                    "electricity"
+                  ],
+                  "detectedActivities": [
+                    "consumption"
+                  ],
+                  "lexicalQualifiers": {
+                    "requestedQualifiers": [],
+                    "candidateQualifiers": [],
+                    "exactRequestedQualifierMatches": 0,
+                    "titlePhraseEvidence": 1,
+                    "coverageFit": 0,
+                    "reasonCodes": []
+                  },
+                  "semanticFloorPassed": true,
+                  "semanticFloorFailures": [],
+                  "approvedFallback": null,
+                  "matchedCoverage": null
+                }
+              }
+            },
+            "status": "comparable",
+            "warning": null,
+            "unitConversion": {
+              "required": false,
+              "originalUnit": "billion kilowatthours",
+              "comparisonUnit": "billion kilowatthours",
+              "factor": 1
+            },
+            "coverage": {
+              "start": "1980",
+              "end": "2024"
+            }
+          },
+          {
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "candidateId": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+            "seriesId": "INTL.2-2-JPN-BKWH.A",
+            "candidate": {
+              "schema_version": "1.0.0",
+              "candidate_id": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+              "series_id": "INTL.2-2-JPN-BKWH.A",
+              "source": "EIA",
+              "route_family": "international",
+              "selector": {
+                "route": "/international",
+                "measure": "value",
+                "frequency": "annual",
+                "facets": {
+                  "activityId": "2",
+                  "countryRegionId": "JPN",
+                  "productId": "2",
+                  "unit": "BKWH"
+                }
+              },
+              "selector_source": "official_series_metadata",
+              "title": "Electricity net consumption, Japan, Annual",
+              "geography": {
+                "name": "Japan",
+                "code": "JPN",
+                "type": "other"
+              },
+              "concept_type": "other",
+              "frequency": "annual",
+              "unit": "billion kilowatthours",
+              "date_start": "1980",
+              "date_end": "2024",
+              "is_active": true,
+              "raw_metadata_reference": "https://api.eia.gov/v2/seriesid/INTL.2-2-JPN-BKWH.A",
+              "metadata_hash": "93111709ed67a56f9c876bc22a8ac6302b5738f77c5e03df7feb4705912a0079",
+              "retrieval": {
+                "pool": "primary",
+                "tier": "exact_phrase",
+                "reasonCodes": [
+                  "route_family_international",
+                  "geography_exact",
+                  "frequency_not_explicit",
+                  "activity_explicit_or_validated",
+                  "product_direct_or_alias",
+                  "sector_not_requested",
+                  "exclusions_not_requested",
+                  "match_exact_phrase"
+                ]
+              },
+              "ranking": {
+                "score": 76.7,
+                "tier": "A",
+                "tierLabel": "Exact requested concept and frequency",
+                "reasonCodes": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_electricity",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_consumption",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "components": {
+                  "productOrScope": {
+                    "active": true,
+                    "points": 22,
+                    "maximum": 22,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "product_exact_electricity"
+                    ]
+                  },
+                  "activity": {
+                    "active": true,
+                    "points": 18,
+                    "maximum": 18,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "activity_exact_consumption"
+                    ]
+                  },
+                  "measureOrAggregation": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": [
+                      "aggregation_relation_unknown_no_verified_hierarchy"
+                    ]
+                  },
+                  "fieldedLexical": {
+                    "active": true,
+                    "points": 4.6,
+                    "maximum": 20,
+                    "compatibility": 0.2,
+                    "reasonCodes": [
+                      "lexical_title_consumption"
+                    ]
+                  },
+                  "sector": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": []
+                  },
+                  "frequency": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "frequency_exact"
+                    ]
+                  },
+                  "unit": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": []
+                  },
+                  "requestedDateCoverage": {
+                    "active": false,
+                    "points": 0,
+                    "maximum": 0,
+                    "compatibility": 0,
+                    "reasonCodes": []
+                  },
+                  "currentness": {
+                    "active": true,
+                    "points": 3,
+                    "maximum": 3,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "current_active"
+                    ]
+                  },
+                  "availability": {
+                    "active": true,
+                    "points": 3,
+                    "maximum": 3,
+                    "compatibility": 1,
+                    "reasonCodes": [
+                      "availability_present"
+                    ]
+                  }
+                },
+                "signals": {
+                  "sourcePool": "primary",
+                  "familyId": "international electricity consumption other electricity net consumption",
+                  "productCompatibility": 1,
+                  "activityCompatibility": 1,
+                  "detectedProducts": [
+                    "electricity"
+                  ],
+                  "detectedActivities": [
+                    "consumption"
+                  ],
+                  "lexicalQualifiers": {
+                    "requestedQualifiers": [],
+                    "candidateQualifiers": [],
+                    "exactRequestedQualifierMatches": 0,
+                    "titlePhraseEvidence": 1,
+                    "coverageFit": 0,
+                    "reasonCodes": []
+                  },
+                  "semanticFloorPassed": true,
+                  "semanticFloorFailures": [],
+                  "approvedFallback": null,
+                  "matchedCoverage": null
+                }
+              }
+            },
+            "status": "comparable",
+            "warning": null,
+            "unitConversion": {
+              "required": false,
+              "originalUnit": "billion kilowatthours",
+              "comparisonUnit": "billion kilowatthours",
+              "factor": 1
+            },
+            "coverage": {
+              "start": "1980",
+              "end": "2024"
+            }
+          }
+        ],
+        "warnings": [],
+        "rank": 1
+      }
+    ]
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": true,
+    "query": "brazil and japan electrciity consumption",
+    "intent": {
+      "originalQuery": "brazil and japan electrciity consumption",
+      "cleanedQuery": "brazil and japan electrciity consumption",
+      "correctedQuery": "Brazil and Japan electricity consumption",
+      "correctedQuerySource": "ai",
+      "normalizedQuery": "brazil and japan electricity consumption",
+      "interpreter": "openai",
+      "interpretationMethod": "ai_primary",
+      "country": {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "countryCode": "BRA",
+      "validatedGeographies": [
+        {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "brazil",
+          "index": 0,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "BRA",
+              "confidence": null,
+              "candidateCodes": [
+                "BRA"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Japan",
+          "code": "JPN",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "japan",
+          "index": 11,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "JPN",
+              "confidence": null,
+              "candidateCodes": [
+                "JPN"
+              ]
+            }
+          ]
+        }
+      ],
+      "geographyConflicts": [],
+      "validatedCorrections": [
+        {
+          "type": "product",
+          "value": "electricity",
+          "source": "ai_proposed_deterministically_verified",
+          "confidence": 0.99,
+          "from": "electrciity",
+          "to": "electricity",
+          "editDistance": 2
+        }
+      ],
+      "product": "electricity",
+      "activity": "consumption",
+      "sector": null,
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validatedConceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "originalActivity": null,
+          "activityNormalization": null,
+          "confidence": 0.99,
+          "source": "validated_interpreter"
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.99,
+      "fields": {
+        "country": {
+          "rawValue": "brazil and japan",
+          "aiValue": "BRA",
+          "normalizedValue": "BRA",
+          "validation": "approved",
+          "confidence": 0.65,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "BRA",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "product": {
+          "rawValue": "electrciity",
+          "aiValue": "electricity",
+          "normalizedValue": "electricity",
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "electricity",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "ai_proposed_deterministically_verified",
+          "correction": {
+            "from": "electrciity",
+            "to": "electricity",
+            "editDistance": 2
+          },
+          "breadth": "specific"
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "aiValue": "consumption",
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "consumption",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved sector was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "frequency": {
+          "rawValue": null,
+          "aiValue": "annual",
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "annual",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "explicit": false
+        }
+      },
+      "aiAmbiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "method": "field_level_deterministic_fallback",
+        "reasons": []
+      },
+      "cleanedKeywords": "japan",
+      "needsClarification": false,
+      "blockingClarification": false,
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.99
+        }
+      ],
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "BRA",
+          "JPN"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "brazil and japan electrciity consumption",
+        "normalizedQuery": "brazil and japan electrciity consumption",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": "brazil",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "Brazil",
+                "code": "BRA",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ],
+                "rawText": "brazil",
+                "index": 0,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "exact_name_alias_or_code",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "BRA",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "BRA"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "Brazil",
+                "code": "BRA",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            },
+            {
+              "index": 11,
+              "text": "japan",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "Japan",
+                "code": "JPN",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ],
+                "rawText": "japan",
+                "index": 11,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "exact_name_alias_or_code",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "JPN",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "JPN"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "Japan",
+                "code": "JPN",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "electricity",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Brazil",
+          "code": "BRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Brazil",
+            "code": "BRA",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          {
+            "name": "Japan",
+            "code": "JPN",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          }
+        ],
+        "product": "electricity",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": true,
+          "status": "active",
+          "geographyCodes": [
+            "BRA",
+            "JPN"
+          ],
+          "routeFamily": "international",
+          "reason": "two_or_more_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": 0.65,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": 0.99,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "multiple_geographies"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "raw_exact_deterministic",
+            "raw_exact_deterministic"
+          ],
+          "geographyEvidence": [
+            {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "brazil",
+              "index": 0,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "BRA",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "BRA"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "japan",
+              "index": 11,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "JPN",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "JPN"
+                  ]
+                }
+              ]
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "model_proposed_locally_validated"
+        },
+        "needsClarification": false,
+        "blockingClarification": false,
+        "missingFields": [],
+        "clarificationMessage": null,
+        "requestEvidence": {
+          "version": 1,
+          "query": "brazil and japan electrciity consumption",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 17,
+              "text": "brazil and japan ",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 17,
+              "end": 40,
+              "text": "electrciity consumption",
+              "status": "requested",
+              "target": "data"
+            }
+          ]
+        },
+        "scopeValidation": {
+          "source": "model",
+          "issues": [],
+          "unresolved": 0
+        }
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 0.65,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies"
+        ]
+      },
+      "evidenceQuery": "brazil and japan electrciity consumption",
+      "requestEvidence": {
+        "version": 1,
+        "query": "brazil and japan electrciity consumption",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 17,
+            "text": "brazil and japan ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 17,
+            "end": 40,
+            "text": "electrciity consumption",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      },
+      "scopeValidation": {
+        "source": "model",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [
+      {
+        "definitionId": "eia-definition:1:1e87790b86aff85ac1bac85b856d690740f0bf8d4082c7f694c6a4e9007a5691",
+        "rank": 1,
+        "title": "Electricity net consumption",
+        "semanticScore": 44.6,
+        "rankingTier": "A",
+        "rankingReasonCodes": [
+          "tier_A",
+          "source_pool_primary",
+          "route_family_validated",
+          "geography_validated",
+          "selector_geography_validated",
+          "product_or_scope_hard_gate_passed",
+          "activity_hard_gate_passed",
+          "frequency_validated",
+          "product_exact_electricity",
+          "activity_exact_consumption",
+          "aggregation_relation_unknown_no_verified_hierarchy",
+          "lexical_title_consumption",
+          "frequency_exact",
+          "current_active",
+          "availability_present"
+        ],
+        "availableCountryCount": 2,
+        "requestedCountryCount": 2,
+        "definition": {
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "scope": null,
+          "frequency": "annual",
+          "unit": {
+            "family": "electricity_energy",
+            "baseUnit": "kilowatthours"
+          },
+          "grossNetTreatment": "net",
+          "source": "eia",
+          "methodology": null
+        },
+        "countries": [
+          {
+            "geography": {
+              "name": "Brazil",
+              "code": "BRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "candidateId": "eia:1:17de25eab289c30fe277f91d034e9b494cf6d0c9dc818fa8aa37b1566bc63d21",
+            "seriesId": "INTL.2-2-BRA-BKWH.A",
+            "title": "Electricity net consumption, Brazil, Annual",
+            "product": "electricity",
+            "activity": "consumption",
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "coverage": "1980 to 2024",
+            "status": "comparable",
+            "warning": null,
+            "unitConversion": {
+              "required": false,
+              "originalUnit": "billion kilowatthours",
+              "comparisonUnit": "billion kilowatthours",
+              "factor": 1
+            },
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            }
+          },
+          {
+            "geography": {
+              "name": "Japan",
+              "code": "JPN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "candidateId": "eia:1:e64ab1cd072a9a00791f0456ce4692cb3c6271988c0c08333c3ef59459dca04a",
+            "seriesId": "INTL.2-2-JPN-BKWH.A",
+            "title": "Electricity net consumption, Japan, Annual",
+            "product": "electricity",
+            "activity": "consumption",
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "billion kilowatthours",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "coverage": "1980 to 2024",
+            "status": "comparable",
+            "warning": null,
+            "unitConversion": {
+              "required": false,
+              "originalUnit": "billion kilowatthours",
+              "comparisonUnit": "billion kilowatthours",
+              "factor": 1
+            },
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            }
+          }
+        ],
+        "warnings": []
+      }
+    ],
+    "userWarnings": [],
+    "needsClarification": false,
+    "userMessage": null,
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": true,
+      "clarificationBlocked": false,
+      "clarificationReasons": [],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 1,
+      "rankingUnit": "variable_definition"
+    },
+    "note": "Choose Graph or Excel for one of the 1 ranked variable definitions. Each choice keeps every requested country."
+  },
+  "final": {
+    "interpreter": "openai",
+    "geographies": [
+      "BRA",
+      "JPN"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": false,
+    "blockingClarification": false,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": null,
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "brazil and japan electrciity consumption",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 17,
+          "text": "brazil and japan ",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "text": "electrciity consumption",
+          "status": "requested",
+          "target": "data"
+        }
+      ]
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

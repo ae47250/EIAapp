@@ -1,0 +1,58 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+import {gradeV2} from './scorer-v2.mjs';
+import {frozen} from './replay.mjs';
+import {tokenCost,buildRequest,transient} from './run-reasoning-v2.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)),records=path.join(root,'records'),v2=path.join(records,'v2'),read=p=>JSON.parse(fs.readFileSync(p)),sha=x=>createHash('sha256').update(x).digest('hex');
+const plan=read(path.join(v2,'reasoning-schedule.json')),approval=read(path.join(v2,'budget-authorization.json')),report=read(path.join(v2,'comparison-all-settings.json')),snapshot=read(path.join(records,'snapshot.json'));
+const originalManifest=read(path.join(v2,'preserved-originals.json')),preexecution=read(path.join(v2,'preexecution-manifest.json'));
+for(const[p,h]of Object.entries(originalManifest.files))assert.equal(sha(fs.readFileSync(path.join(root,p))),h,p);
+for(const[p,h]of Object.entries(preexecution.hashes))assert.equal(sha(fs.readFileSync(path.join(root,p))),h,p);
+for(const[p,h]of Object.entries(snapshot.snapshotFiles)){assert.equal(sha(fs.readFileSync(path.join(root,'snapshot',p))),h,p);assert.equal(sha(fs.readFileSync(path.join(snapshot.sourceWorktree,p))),h,'Source worktree changed: '+p);}
+const git=args=>execFileSync('git',args,{cwd:snapshot.sourceWorktree,encoding:'utf8'});
+assert.equal(git(['status','--porcelain=v1']),snapshot.status);assert.equal(git(['rev-parse','HEAD']).trim(),snapshot.HEAD);assert.equal(git(['branch','--show-current']).trim(),snapshot.branch);
+assert.equal(sha(execFileSync('git',['diff','--binary','--full-index',snapshot.base],{cwd:snapshot.sourceWorktree})),snapshot.trackedDiffSHA256);
+assert.equal(sha(fs.readFileSync(snapshot.bundle)),snapshot.bundleSHA256);
+const validation=fs.readFileSync(path.join(v2,'validated-tests.tap'),'utf8');assert.ok(validation.includes('# tests 69')&&validation.includes('# pass 69')&&validation.includes('# fail 0'));
+assert.equal(report.completedScheduled,120,'All scheduled comparisons must be completed before final audit');
+const budget=read(path.join(v2,'execution-cost-bound.json'));assert.equal(budget.maximumTotalUSD,2.84696465);assert.equal(budget.approvedTotalUSD,approval.totalCeilingUSD);assert.ok(budget.maximumTotalUSD<=approval.totalCeilingUSD);
+const prompts=read(path.join(records,'prompts.json')).prompts;const attempts=report.newAttemptRows;let replayCount=0,meaningChanges=[],scopePreserved=0,unavailableResponses=0;
+const files=fs.readdirSync(path.join(v2,'reasoning-attempts'));assert.equal(files.filter(p=>p.endsWith('.started.json')).length,attempts.length,'No unresolved paid attempts');
+const contractCategories={},scopeFailures=[];
+for(const a of attempts){
+ const s=plan.schedule.find(s=>s.scheduledId===a.scheduledId),c=frozen.cases.find(c=>c.id===s.queryId),p=prompts.find(p=>p.queryId===s.queryId),base=String(s.scheduledId).padStart(3,'0')+'-'+a.attempt;
+ assert.ok(s);assert.ok(a.attempt>=1&&a.attempt<=2);assert.equal(a.effort,s.effort);assert.equal(a.queryId,s.queryId);assert.equal(a.repeat,s.repeat);
+ const request=read(path.join(v2,'reasoning-attempts',base+'.request.json'));
+ assert.deepEqual(request.body,buildRequest(plan,s,p));assert.equal(request.url,plan.endpoint);assert.equal(sha(JSON.stringify(request.body)),a.requestSHA256);assert.equal(sha(request.body.input),p.inputSHA256);assert.ok(!Object.keys(request.headers).some(k=>k.toLowerCase()==='authorization'));
+ assert.ok(Date.parse(a.startedAt)>=Date.parse(budget.recordedBeforeGenerationAt));
+ if(a.attempt===2){const previous=attempts.find(x=>x.scheduledId===a.scheduledId&&x.attempt===1);assert.ok(previous?.willRetry&&previous.retryEligible);assert.ok(previous.transportError||transient(previous.httpStatus,{error:previous.responseError}));}
+ if(a.usage){assert.ok(a.usage.input_tokens<=10000&&a.usage.output_tokens<=32768);assert.ok((a.usage.output_tokens_details?.reasoning_tokens||0)<=a.usage.output_tokens);assert.equal(a.tokenCostUSD,tokenCost(a.usage,plan.ratesUSDPerMillion));}
+ assert.ok(!a.evaluationFailure,'All received responses must be gradable/replayable by the harness');
+ if(a.httpStatus===200){assert.equal(a.returnedModel,'gpt-6-luna');assert.equal(a.serviceTier,'default');}
+ const rawPath=path.join(v2,'reasoning-attempts',base+'.response.txt');
+ if(fs.existsSync(rawPath)){
+  const raw=fs.readFileSync(rawPath,'utf8');let data;try{data=JSON.parse(raw)}catch{}
+  if(a.httpStatus===200){assert.equal(data.reasoning?.effort,a.effort);assert.equal(data.max_output_tokens,32768);}
+  assert.deepEqual(JSON.parse(JSON.stringify(gradeV2(data,c))),a.grade,'Recorded v2 grade must reproduce without edits');
+  const replay=read(path.join(v2,a.replayFile));assert.equal(replay.interceptedModelCalls,1);assert.equal(replay.actualExternalCalls,0);replayCount++;
+  assert.equal(replay.publicStatus,200);if(replay.evidencePreserved)scopePreserved++;
+  for(const field of ['geographies','pairs','frequency','frequencyExplicit','needsClarification'])if(JSON.stringify(replay.initial?.[field])!==JSON.stringify(replay.normalized?.[field])||JSON.stringify(replay.normalized?.[field])!==JSON.stringify(replay.final?.[field]))meaningChanges.push({scheduledId:a.scheduledId,attempt:a.attempt,field});
+ }else{assert.ok(a.transportError);unavailableResponses++;}
+ const errs=a.grade?.contract?.errors||[];for(const error of errs)contractCategories[error]=(contractCategories[error]||0)+1;
+ if(errs.length)scopeFailures.push({id:a.scheduledId,effort:a.effort,semantic:a.grade.semantic.status,errors:errs});
+}
+for(const s of plan.schedule){const completed=attempts.filter(a=>a.scheduledId===s.scheduledId&&!a.willRetry);assert.equal(completed.length,1,'Exactly one terminal result per scheduled request');}
+const keyMatches=fs.readFileSync(plan.credential.path,'utf8').match(/(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{40,}(?![A-Za-z0-9_-])/g)||[];assert.equal(keyMatches.length,1);const key=Buffer.from(keyMatches[0]);
+function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):e.isFile()?[path.join(dir,e.name)]:[]);}
+let secretScan=0;for(const file of [...walk(records),...walk(path.join(root,'harness'))]){assert.ok(!fs.readFileSync(file).includes(key),'Credential appeared in evaluation artifacts');secretScan++;}
+assert.ok(!fs.existsSync(path.join(root,'.env.local')));assert.ok(report.knownTotalCostUSD+report.unknownCostUpperBoundUSD<=approval.totalCeilingUSD);
+const baseline=read(path.join(v2,'rescored-baselines.json'));assert.equal(baseline.changedVerdicts.length,18);assert.ok(baseline.changedVerdicts.every(v=>v.changeReasons.length));
+const start=new Date(Math.min(...attempts.map(a=>Date.parse(a.startedAt)))),end=new Date(Math.max(...attempts.map(a=>Date.parse(a.completedAt))));
+const et=d=>new Intl.DateTimeFormat('en-US',{timeZone:'America/Indianapolis',dateStyle:'full',timeStyle:'long'}).format(d);
+const audit={completedAt:new Date().toISOString(),requirements:{labelledBeforeImplementation:63,scorerCasesPassed:63,runnerChecksPassed:6,allTestsPassed:69,originalArtifactsPreserved:Object.keys(originalManifest.files).length,v2FrozenArtifactsUnchanged:Object.keys(preexecution.hashes).length,originalResponsesRescored:40,newScheduled:80,overallScheduled:120,overallActualAttempts:report.actualAttempts,newActualAttempts:attempts.length,retries:attempts.filter(a=>a.attempt>1).length,newReceivedResponsesReplayed:replayCount,noResponseTransportFailures:unavailableResponses,baselineResponsesAlreadyReplayed:40,actualExternalCallsDuringReplay:0,sourceEvidencePreserved:scopePreserved,meaningChangesDuringResubmission:meaningChanges,hiddenGenerationProbes:0,allNewRequestBodiesAndReturnedModelsVerified:true,scorerVerdictsReproduced:true,sourceSnapshotFilesVerified:Object.keys(snapshot.snapshotFiles).length,sourceGitStateUnchanged:true,secretScanArtifactCount:secretScan,secretOccurrences:0,credentialCopied:false},versionIdentity:plan.versionIdentity,budget:{approvedTotalUSD:approval.totalCeilingUSD,maximumTotalBeforeExecutionUSD:budget.maximumTotalUSD,priorSpendingUSD:plan.budget.alreadySpentUSD,knownTotalTokenCostUSD:report.knownTotalCostUSD,unknownBilledCostUpperBoundUSD:report.unknownCostUpperBoundUSD},times:{reasoningStartedET:et(start),reasoningEndedET:et(end),reasoningWallSeconds:(end-start)/1000},newContractFailureCounts:contractCategories,newContractFailures:scopeFailures,scorerChanges:baseline.changedVerdicts,departures:plan.departuresFromNoneBaseline,limitations:report.limitations,productionChanges:0};
+fs.writeFileSync(path.join(v2,'completion-audit.json'),JSON.stringify(audit,null,2)+'\n');
+console.log(JSON.stringify({requirements:audit.requirements,budget:audit.budget,times:audit.times,newContractFailureCounts:contractCategories},null,2));

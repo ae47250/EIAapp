@@ -1,0 +1,787 @@
+{
+  "completedAt": "2026-10-28T12:16:37.388Z",
+  "requirements": {
+    "labelledBeforeImplementation": 63,
+    "scorerCasesPassed": 63,
+    "runnerChecksPassed": 6,
+    "allTestsPassed": 69,
+    "originalArtifactsPreserved": 228,
+    "v2FrozenArtifactsUnchanged": 11,
+    "originalResponsesRescored": 40,
+    "newScheduled": 80,
+    "overallScheduled": 120,
+    "overallActualAttempts": 120,
+    "newActualAttempts": 80,
+    "retries": 0,
+    "newReceivedResponsesReplayed": 80,
+    "noResponseTransportFailures": 0,
+    "baselineResponsesAlreadyReplayed": 40,
+    "actualExternalCallsDuringReplay": 0,
+    "sourceEvidencePreserved": 80,
+    "meaningChangesDuringResubmission": [],
+    "hiddenGenerationProbes": 0,
+    "allNewRequestBodiesAndReturnedModelsVerified": true,
+    "scorerVerdictsReproduced": true,
+    "sourceSnapshotFilesVerified": 221,
+    "sourceGitStateUnchanged": true,
+    "secretScanArtifactCount": 653,
+    "secretOccurrences": 0,
+    "credentialCopied": false
+  },
+  "versionIdentity": {
+    "branch": "codex/eia-interpretation-audit",
+    "HEAD": "5b60a094ecd10e1ca80492bc8558652768d93366",
+    "base": "5b60a094ecd10e1ca80492bc8558652768d93366",
+    "bundleSHA256": "d73f0caf30793b0274d247207136f951c4cf558209bdaf7032c2834ee727b6bf",
+    "snapshotContentManifestSHA256": "1944633ae032dc07fc967e4c7bf0e5cbc97bcafe02aebad4164b52681f0eb34c",
+    "trackedDiffSHA256": "f536b003086728374331a087cc86907570d3925ca4af18fd900af76dc42ab062",
+    "completePatchSHA256": "9b31ff106ab38c0fa8c5d8e18e351153d07f79c20574419e4a8ab5a204fc7509",
+    "promptTemplateSHA256": "a7e460e5240fff0d43d0f5975c68b7b86d94256697fbf93f97c77f164d41dbc5",
+    "promptsSHA256": "dc88ae5e20837af0581176cd416ee4b753d2fe8f3c70711bedba415d7bead3d8",
+    "expectationsSHA256": "c3ac869810552f656e25555a9f83e60ca66c6d67518bdda3bc1d145d1bcc457b",
+    "scorerSHA256": "5ed19344f49fd41065d782af287fecf2f852f35de1f75eedf4408e15c39887d1"
+  },
+  "budget": {
+    "approvedTotalUSD": 3,
+    "maximumTotalBeforeExecutionUSD": 2.84696465,
+    "priorSpendingUSD": 0.025524650000000003,
+    "knownTotalTokenCostUSD": 0.08924735,
+    "unknownBilledCostUpperBoundUSD": 0
+  },
+  "times": {
+    "reasoningStartedET": "Wednesday, October 28, 2026 at 7:51:34 AM EDT",
+    "reasoningEndedET": "Wednesday, October 28, 2026 at 8:11:22 AM EDT",
+    "reasoningWallSeconds": 1188.215
+  },
+  "newContractFailureCounts": {
+    "data_cannot_be_context": 13,
+    "invalid_source_scope": 13,
+    "uncovered_source_text": 13,
+    "split_or_uncovered_metadata_mention": 13,
+    "invalid_summary_shape": 6,
+    "invalid_field_country": 6,
+    "invalid_field_product": 6,
+    "invalid_field_activity": 6,
+    "invalid_field_sector": 6,
+    "invalid_field_frequency": 6,
+    "invalid_geography_item": 6,
+    "invalid_pair_item": 6
+  },
+  "newContractFailures": [
+    {
+      "id": 42,
+      "effort": "medium",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 44,
+      "effort": "xhigh",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 45,
+      "effort": "medium",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 49,
+      "effort": "high",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 50,
+      "effort": "xhigh",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 51,
+      "effort": "low",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 55,
+      "effort": "medium",
+      "semantic": "incorrect",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 57,
+      "effort": "low",
+      "semantic": "correct",
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item",
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 68,
+      "effort": "medium",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 71,
+      "effort": "medium",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 72,
+      "effort": "high",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 73,
+      "effort": "low",
+      "semantic": "incorrect",
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item"
+      ]
+    },
+    {
+      "id": 77,
+      "effort": "medium",
+      "semantic": "incorrect",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 79,
+      "effort": "xhigh",
+      "semantic": "incorrect",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 86,
+      "effort": "low",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 88,
+      "effort": "high",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 90,
+      "effort": "medium",
+      "semantic": "incorrect",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 97,
+      "effort": "high",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 98,
+      "effort": "xhigh",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 99,
+      "effort": "low",
+      "semantic": "correct",
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item"
+      ]
+    },
+    {
+      "id": 102,
+      "effort": "low",
+      "semantic": "incorrect",
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item",
+        "data_cannot_be_context",
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 103,
+      "effort": "medium",
+      "semantic": "correct",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 106,
+      "effort": "medium",
+      "semantic": "correct",
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item"
+      ]
+    },
+    {
+      "id": 107,
+      "effort": "high",
+      "semantic": "correct",
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item"
+      ]
+    },
+    {
+      "id": 110,
+      "effort": "high",
+      "semantic": "incorrect",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 115,
+      "effort": "low",
+      "semantic": "correct",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 117,
+      "effort": "xhigh",
+      "semantic": "incorrect",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    },
+    {
+      "id": 118,
+      "effort": "low",
+      "semantic": "incorrect",
+      "errors": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    },
+    {
+      "id": 120,
+      "effort": "high",
+      "semantic": "incorrect",
+      "errors": [
+        "data_cannot_be_context"
+      ]
+    }
+  ],
+  "scorerChanges": [
+    {
+      "scheduledId": 1,
+      "queryId": 9,
+      "query": "electricity consumption in Georgia and France",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 2,
+      "queryId": 9,
+      "query": "electricity consumption in Georgia and France",
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 4,
+      "queryId": 3,
+      "query": "brazil and japan electrciity consumption",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct.",
+        "Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract."
+      ]
+    },
+    {
+      "scheduledId": 5,
+      "queryId": 7,
+      "query": "natural gas production and consumption in Texas annually",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct.",
+        "Null or requested-member compatibility summaries do not replace or contradict preserved ordered pairs."
+      ]
+    },
+    {
+      "scheduledId": 8,
+      "queryId": 4,
+      "query": "energy consumption iceland",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract.",
+        "Existing nested value fields express the correct pair; wrong pair shape remains a contract failure, with no response rewriting."
+      ]
+    },
+    {
+      "scheduledId": 9,
+      "queryId": 2,
+      "query": "total energyy consumption usa",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 10,
+      "queryId": 2,
+      "query": "total energyy consumption usa",
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 13,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 14,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 16,
+      "queryId": 8,
+      "query": "monthly electricity consumption in California",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 23,
+      "queryId": 9,
+      "query": "electricity consumption in Georgia and France",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 26,
+      "queryId": 6,
+      "query": "energy consumption iceland not ireland",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "The flat Ireland exclusion duplicates the requested geography exclusion; it does not introduce a product/activity exclusion."
+      ]
+    },
+    {
+      "scheduledId": 27,
+      "queryId": 2,
+      "query": "total energyy consumption usa",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 29,
+      "queryId": 8,
+      "query": "monthly electricity consumption in California",
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": true,
+      "changed": {
+        "semantic": true,
+        "usable": true,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 33,
+      "queryId": 3,
+      "query": "brazil and japan electrciity consumption",
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct.",
+        "Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract."
+      ]
+    },
+    {
+      "scheduledId": 34,
+      "queryId": 3,
+      "query": "brazil and japan electrciity consumption",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 37,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 38,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    }
+  ],
+  "departures": {
+    "max_output_tokens": {
+      "old": 4096,
+      "new": 32768
+    },
+    "timeoutMs": {
+      "old": 30000,
+      "new": 300000
+    },
+    "reasoningEffort": "low/medium/high/xhigh; other API settings and the exact app prompt remain unchanged",
+    "scorer": "Version 2, validated on pre-labelled examples and applied to all baseline/new outputs. Original scores preserved."
+  },
+  "limitations": [
+    "All accuracy fractions use 20 scheduled responses per setting. Ungradable/truncated/failed responses are separate from observed semantic mistakes.",
+    "Strict original JSON only. App parser repairs and rules fallbacks do not upgrade model success.",
+    "Different 32768-token/300-second limits apply to reasoning runs vs original4096/30 none baselines; within four reasoning settings limits are identical.",
+    "Candidate display is not proof of appropriate variables, units or coverage. Inspect cached-retrieval warnings and known app issues independently.",
+    "Ten fixed queries cannot establish general accuracy or statistical equivalence."
+  ],
+  "productionChanges": 0
+}

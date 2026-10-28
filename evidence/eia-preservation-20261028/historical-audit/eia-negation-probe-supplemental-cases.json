@@ -1,0 +1,187 @@
+{
+  "purpose": "Supplemental semantic counterexamples selected from static prototype review before execution; frozen32 remains unchanged",
+  "cases": [
+    {
+      "id": "object_extent_all",
+      "query": "USA total energy consumption; do not include all coal production.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "coal",
+        "production"
+      ],
+      "clarification": true,
+      "reason": "Negating complete inclusion is not a full data exclusion; the permitted subset is unspecified."
+    },
+    {
+      "id": "object_exclusivity_only",
+      "query": "USA total energy consumption; do not include only coal production.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "coal",
+        "production"
+      ],
+      "clarification": true,
+      "reason": "Negates exclusive inclusion; does not entail coal omission."
+    },
+    {
+      "id": "choice_without_action_head",
+      "query": "USA total energy consumption; I'm not sure whether coal production belongs here.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "coal",
+        "production"
+      ],
+      "clarification": true,
+      "reason": "Coal production is an undecided addition, whether or not a whitelisted request action is used."
+    },
+    {
+      "id": "choice_country_predicate",
+      "query": "USA total energy consumption; I'm not certain that Canada coal production is wanted.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "CAN",
+        "coal",
+        "production"
+      ],
+      "clarification": true,
+      "reason": "Uncertainty about wanting a second request must not promote its country and pair."
+    },
+    {
+      "id": "certainty_then_fresh_command",
+      "query": "I'm not sure of the label, please show USA total energy consumption.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "USA",
+        "total energy",
+        "consumption"
+      ],
+      "reason": "The command is independently affirmative, not an undecided whether-to-include clause."
+    },
+    {
+      "id": "certainty_then_dash_command",
+      "query": "I'm not sure of the label \u2014 show USA total energy consumption.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "USA",
+        "total energy",
+        "consumption"
+      ],
+      "reason": "Em dash separates an affirmative command from a certainty comment."
+    },
+    {
+      "id": "fresh_unlisted_request_action",
+      "query": "USA energy consumption, not coal production, and give Canada natural gas consumption.",
+      "positive": {
+        "geographies": [
+          "USA",
+          "CAN"
+        ],
+        "pairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption"
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "required_exclusions": [
+        "coal",
+        "production"
+      ],
+      "forbid_exclusions": [
+        "USA",
+        "CAN",
+        "total energy",
+        "natural gas",
+        "consumption"
+      ],
+      "reason": "A fresh affirmative request must terminate the earlier exclusion regardless of the exact request verb."
+    },
+    {
+      "id": "conditional_negative_command",
+      "query": "USA total energy consumption; do not include coal production unless natural gas consumption is unavailable.",
+      "positive": {
+        "geographies": [
+          "USA"
+        ],
+        "products": [
+          "total energy"
+        ],
+        "activities": [
+          "consumption"
+        ]
+      },
+      "forbid_exclusions": [
+        "coal",
+        "production",
+        "natural gas",
+        "consumption"
+      ],
+      "clarification": true,
+      "reason": "Conditional inclusion policy is not an unconditional exclusion or positive request; clarify unsupported condition."
+    }
+  ]
+}

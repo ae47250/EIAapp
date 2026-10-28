@@ -1,0 +1,89 @@
+// Evaluation only. Original scorer and production snapshot are imported read-only.
+import fs from 'node:fs';
+import {gradeOriginal} from './replay.mjs';
+import {listRequestEvidenceMentions} from '../snapshot/lib/sources/eia/intent-routing.js';
+const metadata=JSON.parse(fs.readFileSync(new URL('../snapshot/data/eia/routing-metadata.json',import.meta.url))).geographies;
+const vocabulary=JSON.parse(fs.readFileSync(new URL('../snapshot/data/eia/phase4-routing-config.json',import.meta.url))).vocabulary;
+const norm=x=>String(x??'').trim().toLowerCase().replace(/[_-]/g,' ').replace(/\s+/g,' ');
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const array=x=>Array.isArray(x)?x:[];
+const valueOf=x=>x&&typeof x==='object'&&!Array.isArray(x)&&Object.hasOwn(x,'value')?x.value:x;
+const literalMatch=(text,term)=>(' '+norm(text).replace(/[^\p{L}\p{N}]+/gu,' ')+' ').includes(' '+norm(term).replace(/[^\p{L}\p{N}]+/gu,' ')+' ');
+function representative(g){
+ const equivalents=metadata.filter(x=>norm(x.name)===norm(g.name)&&x.type===g.type);
+ return equivalents.find(x=>x.routeFamilies?.includes('international'))?.code||g.code;
+}
+export function canonicalGeography(value,query){
+ value=valueOf(value);if(value==null)return null;
+ const n=norm(value),code=metadata.filter(g=>norm(g.code)===n);
+ if(code.length){const g=code.find(g=>g.type==='national')||code.find(g=>g.type==='country')||code[0];return representative(g);}
+ const qualifier=/\s*\((country|state|national)\)$/.exec(n),name=qualifier?n.slice(0,qualifier.index).trim():n;
+ let names=metadata.filter(g=>norm(g.name)===name||array(g.aliases).some(a=>norm(a)===name));
+ if(qualifier)names=names.filter(g=>g.type===qualifier[1]);
+ if(!names.length)return '?'+String(value);
+ const national=names.find(g=>g.type==='national');if(national)return representative(national);
+ const country=names.find(g=>g.type==='country'),state=names.find(g=>g.type==='state');
+ if(country&&state){
+  const foreign=metadata.some(g=>g.type==='country'&&norm(g.name)!==name&&literalMatch(query,g.name));
+  const international=/\b(international|global|worldwide|abroad|country|countries)\b/i.test(query);
+  return representative(foreign||international?country:state);
+ }
+ return representative(names[0]);
+}
+function canonical(category,value){value=valueOf(value);if(value==null)return null;const n=norm(value);return Object.keys(vocabulary[category]).find(k=>norm(k)===n)||Object.entries(vocabulary[category]).find(([,v])=>array(v.terms).some(t=>norm(t)===n))?.[0]||'?'+String(value);}
+export function gradeV2(data,c){
+ const original=gradeOriginal(data,c),p=original.parsed;
+ const truncated=data?.status==='incomplete'&&data?.incomplete_details?.reason==='max_output_tokens';
+ const unavailable=Boolean(data?.error)||data?.status==='failed'||data?.status==='cancelled';
+ const ungradable=truncated?'truncated':unavailable?'api_failure':!p?'malformed_or_nonobject_JSON':null;
+ if(ungradable)return {version:2,semantic:{pass:false,gradable:false,status:'ungradable',reason:ungradable,errors:[],signature:null},strictJSON:original.contract.json,shape:original.contract.shape,sourceSpans:original.contract.spans,contract:original.contract,usable:false,truncated,original};
+ const f=p.fields||{},e=c.expected,errors=[];
+ const geographies=array(p.geographies).map(g=>canonicalGeography(g?.value,c.query));
+ const pairs=array(p.conceptPairs).map(x=>[canonical('products',x?.product),canonical('activities',x?.activity)]);
+ const expectedGeos=e.geographies.map(g=>canonicalGeography(g,c.query)),expectedExcluded=e.excludedGeographies.map(g=>canonicalGeography(g,c.query));
+ const sector=canonical('sectors',f.sector?.value),frequency=canonical('frequencies',f.frequency?.value)??'annual',frequencyExplicit=f.frequency?.explicit??false;
+ if(!same(geographies,expectedGeos))errors.push('geographies_or_order');
+ const summaryCountry=canonicalGeography(f.country?.value,c.query),summaryProduct=canonical('products',f.product?.value),summaryActivity=canonical('activities',f.activity?.value);
+ if(summaryCountry!==null&&!expectedGeos.includes(summaryCountry))errors.push('country_summary_contradiction');
+ let clarification=false;
+ if(e.clarification){
+  const reasons=JSON.stringify({ambiguity:p.ambiguity,product:f.product,unknownQualifiers:p.unknownQualifiers,scopes:p.requestEvidence?.scopes});
+  clarification=summaryProduct===null&&/natural[ -]gas/i.test(reasons)&&/gasoline|petrol(?!eum)/i.test(reasons);
+  if(!clarification)errors.push('gas_choice_not_clearly_clarified');
+  if(pairs.some(([product,activity])=>product!==null||activity!=='consumption')||summaryProduct!==null)errors.push('unsupported_product_guess_or_pair');
+  if(summaryActivity!=='consumption'&&!pairs.some(([product,activity])=>product===null&&activity==='consumption'))errors.push('consumption_lost');
+  if(summaryActivity!==null&&summaryActivity!=='consumption')errors.push('activity_summary_contradiction');
+ }else{
+  if(!same(pairs,e.pairs))errors.push('product_activity_pairs_or_order');
+  if(summaryProduct!==null&&!e.pairs.some(([product])=>product===summaryProduct))errors.push('product_summary_contradiction');
+  if(summaryActivity!==null&&!e.pairs.some(([,activity])=>activity===summaryActivity))errors.push('activity_summary_contradiction');
+ }
+ if(sector!==e.sector)errors.push('unstated_or_wrong_sector');
+ if(frequency!==e.frequency||frequencyExplicit!==e.frequencyExplicit)errors.push('frequency_or_explicit_flag');
+ const excluded=new Set(),scopeDispositions=[];
+ for(const exclusion of array(p.exclusions)){
+  const geo=canonicalGeography(exclusion?.value,c.query);
+  if(geo&&!geo.startsWith('?'))excluded.add(geo);else errors.push('unsupported_product_activity_or_other_exclusion');
+ }
+ for(const scope of array(p.requestEvidence?.scopes)){
+  if(typeof scope?.text!=='string')continue;
+  // Only metadata vocabulary lookup. Never use offsets or app interpretation as semantic truth.
+  const mentions=listRequestEvidenceMentions(scope.text).filter(m=>m.type!=='negation');
+  const identities=[...new Set(mentions.map(m=>m.type==='geography'?'geography:'+canonicalGeography(m.text,c.query):m.type+':'+m.value))];
+  scopeDispositions.push(...identities.map(identity=>({identity,status:scope.status})));
+  if(scope.status==='excluded'){
+   for(const m of mentions){if(m.type==='geography')excluded.add(canonicalGeography(m.text,c.query));else errors.push('unsupported_excluded_data');}
+  }
+  if(scope.status==='requested')for(const m of mentions)if(m.type==='geography'&&expectedExcluded.includes(canonicalGeography(m.text,c.query)))errors.push('excluded_entity_requested_by_scope');
+  if(scope.status==='context'&&mentions.length)errors.push('requested_data_hidden_in_context');
+  if(scope.status==='unresolved'){
+   if(!e.clarification||mentions.length)errors.push('unnecessary_or_overbroad_unresolved_scope');
+  }
+ }
+ if(!same([...excluded].sort(),[...new Set(expectedExcluded)].sort()))errors.push('missing_or_extra_geography_exclusion');
+ const qualifiers=array(p.unknownQualifiers);
+ if(qualifiers.some(q=>!e.clarification||!/^gas$/i.test(String(q).trim())))errors.push('invented_unresolved_qualifier');
+ const signature={geographies,pairs,sector,frequency,frequencyExplicit,excludedGeographies:[...excluded].sort(),clarification,unknownQualifiers:qualifiers,scopeDispositions:[...new Map(scopeDispositions.map(d=>[JSON.stringify(d),d])).values()].sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)))};
+ const unique=[...new Set(errors)],pass=unique.length===0;
+ return {version:2,semantic:{pass,gradable:true,status:pass?'correct':'incorrect',errors:unique,signature},strictJSON:original.contract.json,shape:original.contract.shape,sourceSpans:original.contract.spans,contract:original.contract,usable:pass&&original.contract.pass,truncated:false,original};
+}

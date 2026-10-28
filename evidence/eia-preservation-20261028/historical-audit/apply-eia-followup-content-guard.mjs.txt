@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const wd='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const fp=wd+'/tests/fixtures/eia/followup-review-regressions.json';const f=JSON.parse(fs.readFileSync(fp));
+for(const name of ['eia-followup-content-collision-challenges.json','eia-followup-content-collision-extra.json','eia-followup-final-guards.json']) {
+ const bytes=fs.readFileSync('/private/tmp/'+name); const fixture=JSON.parse(bytes);
+ f.sources.push({file:name,sha256:createHash('sha256').update(bytes).digest('hex')});
+ for(const item of fixture.cases) {
+  const c={...fixture.defaults,...item};
+  f.cases.push({id:'independent-'+c.id,q:c.query,expected:{codes:c.geographies,pairs:c.products.flatMap(p=>c.activities.map(a=>[p,a])),frequency:c.frequency,explicit:c.frequencyExplicit,sector:null,clarify:false,exclusions:[...c.excludedProducts.map(p=>['product',p]),...c.excludedActivities.map(a=>['activity',a])]}});
+ }
+}
+fs.writeFileSync(fp,JSON.stringify(f,null,2)+'\n');
+const p=wd+'/lib/sources/eia/intent-routing.js';let s=fs.readFileSync(p,'utf8');
+s=s.replace('    return /^(?:(?:[a-z]+ly|very|so|too|quite|rather|yet|that|as|more|less|at all) )*(?:sure|certain|aware|know|knowing|understand|understanding)\\b/.test(predicate);',`    const match = predicate.match(/^((?:(?:[a-z]+ly|very|so|too|quite|rather|yet|that|as|more|less|at all) )*)(?:sure|certain|aware|know|knowing|understand|understanding)\\b/);
+    if (!match) return false;
+    const modifiers = match[1].trim();
+    // Known data entities take precedence over an adverb-shaped spelling.
+    if (findConceptMentions(modifiers).length || firstRuleValue(modifiers, FREQUENCY_RULES)
+      || firstRuleValue(modifiers, SECTOR_RULES)) return false;
+    const geographyTerms = [...ROUTING_METADATA.geographies.flatMap(item => geographyNameForms(item.name)), ...GEOGRAPHY_ALIASES.keys()];
+    return !geographyTerms.some(term => hasPhrase(modifiers, normalizeText(term)));`);
+fs.writeFileSync(p,s);
+console.log(JSON.stringify({reviewCases:f.cases.length,sha256:createHash('sha256').update(fs.readFileSync(fp)).digest('hex')}));

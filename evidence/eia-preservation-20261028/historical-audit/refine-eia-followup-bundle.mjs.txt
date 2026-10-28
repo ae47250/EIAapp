@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+const p='/private/tmp/build-eia-followup-bundle.mjs';let s=fs.readFileSync(p,'utf8');
+s=s.replace("  ['eia-followup-before-final.log', 'followup'],",`  ['eia-followup-before-final.log', 'followup'],
+  ['eia-followup-final-focused-tests.log', 'followup'],
+  ['eia-followup-final-tests.log', 'followup'],
+  ['eia-followup-final-build.log', 'followup'],
+  ['eia-followup-final-static-checks.json', 'followup'],
+  ['eia-followup-expectations.json', 'followup'],`);
+s=s.replace("for (const [name, category] of records) copy",`for (const name of fs.readdirSync('/private/tmp').filter(name => /^eia-followup-(?:independent|supplemental|content-collision|geography|final-guards|reviewed-(?:initial|final)-production|final-incremental|final-git-state).*\\.(?:json|md|mjs|log|patch|diff)$/.test(name))) {
+  if (!records.some(([existing]) => existing === name)) records.push([name, 'followup']);
+}
+for (const [name, category] of records) copy`);
+s=s.replace('const found = [...text.matchAll(pattern)];',`// Reviewed, deliberately fake transport sentinel used only by the archived offline probe.
+    const found = [...text.matchAll(pattern)].filter(match => !(kind === 'credential-literal' && /^OPENAI_API_KEY = 'injected-offline-fixture-not-a-key'$/.test(match[0])));`);
+s=s.replace('The current full suite has 422 tests / 421 passed', 'The final follow-up suite has 79 tests / 79 passed, including 42 retained independent/review cases. The current full suite has 464 tests / 463 passed');
+s=s.replace('No credential-like secret was found in those files.', 'No credential-like secret was found in those files. The deliberately fake API-key sentinel in the independent offline probe was reviewed and retained as test data; it cannot call the provider because fetch is intercepted.');
+s=s.replace('The full suite and the retained independent-challenges test cover its committed regression cases.', 'That is the historical focused run. Current follow-up commands are recorded in the current independent review, and tests/eia-followup-regressions.test.js runs the 79 retained follow-up cases.');
+fs.writeFileSync(p,s);

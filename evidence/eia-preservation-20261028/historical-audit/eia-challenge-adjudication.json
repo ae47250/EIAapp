@@ -1,0 +1,984 @@
+{
+  "schemaVersion": "route-adjudication-v1",
+  "status": "Post-execution route-oracle adjudication; implementation and observed outputs remain uninspected by this author.",
+  "createdUtc": "2026-10-27T15:09:38.842335+00:00",
+  "originalArtifact": {
+    "path": "/tmp/eia-blind-challenges.json",
+    "sha256": "1caf5edccda8e4e9a81fb3f79f5cb5df584ff04ac7dcc8f9942db91d189d8a30",
+    "modified": false
+  },
+  "summary": {
+    "exclusiveDomesticAssertionsRelaxed": 9,
+    "completeCoverageConditionRetained": 1,
+    "emptyUnavailableRouteAssertionRelaxed": 1,
+    "conclusion": "Annual state natural-gas requests do not require Domestic exclusively. Accept Domestic or SEDS when the requested specificity, quantities, geography, frequency, units, and disclosed coverage are preserved. An empty explicit daily Wyoming coal request does not establish a route correctness failure."
+  },
+  "scope": "Only the disputed route claims in cases 01, 09, 10, 19, 22, 25, 26, 30, 35, 38, and 41 are adjudicated. Other frozen expectations are unchanged. The original cases are exposed regressions, not untouched holdouts.",
+  "sources": [
+    {
+      "path": "data/eia/routing-metadata.json",
+      "sha256": "8cee62e497af1701405a86561a9a9dd9ba39f607ac092820ccd1a09aa8306558"
+    },
+    {
+      "path": "data/eia/phase4-routing-config.json",
+      "sha256": "c20f43fb9738a95e229d460e0d8b49913a6526420bfa0bab58dd5b14240c123e"
+    },
+    {
+      "path": "data/eia/builds/phase1b/seds.jsonl.gz",
+      "sha256": "6cd7b72b17e14cfe5402dcca4f9898671fb0e15d082d9c061569298202f4fb1d"
+    },
+    {
+      "path": "data/eia/builds/phase1b/natural-gas.jsonl.gz",
+      "sha256": "7ccb8112a7b34208fad94aabcf064a6da5115aa0a0279dbf611c127f7e3b1ce5"
+    },
+    {
+      "path": "data/eia/builds/phase1b/domestic.jsonl.gz",
+      "sha256": "6597620233b05eec92668b096159225ee7fc5593ab2cc3aa198be220e5b32b11"
+    }
+  ],
+  "requirementsBasis": [
+    "Scope and product coverage determine routing; requested specificity and units cannot be silently substituted.",
+    "Unstated frequency means annual with explicit=false and no invented sector.",
+    "Explicit unavailable frequency requests may correctly yield no result; alternatives must be visibly labeled.",
+    "Approved route profiles include annual Domestic metadata and stateAnnualConceptHints consumption/production for SEDS; stateNonAnnualPrimary Domestic is a routing preference, not proof of product availability."
+  ],
+  "claims": [
+    {
+      "caseId": "blind-01",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "Both families contain annual Texas marketed-natural-gas production in million cubic feet. The explicit marketed qualifier is preserved by SEDS NGMPP and NGMPB; the Domestic-only oracle is unsupported.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness.",
+        "The marketed qualifier is mandatory. Do not substitute dry gas, natural gas plant liquids, or the NGMPK conversion factor."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGMPP.TX.A",
+        "SEDS.NGMPB.TX.A",
+        "NG.N9050TX2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS.NGMPP.TX.A and SEDS.NGMPP.NM.A cover 1960-2024; corresponding Domestic marketed-production records cover 1967-2025. SEDS offers earlier history but omits the cached 2025 endpoint. With no requested time range this is a disclosed coverage tradeoff, not by itself a route failure."
+      ]
+    },
+    {
+      "caseId": "blind-09",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "Both families contain annual West Virginia and Virginia total-consumption records. SEDS annual state consumption is expressly within the route profile.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGTCP.WV.A",
+        "SEDS.NGTCP.VA.A",
+        "NG.NA1490_SWV_2.A",
+        "NG.NA1490_SVA_2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "Inspected SEDS physical totals include supplemental gaseous fuels and cover 1960-2024. Domestic total-consumption titles do not specify this supplemental-fuel definition and cover 1997-2024. Preserve those distinctions; metadata alone does not establish identical values."
+      ]
+    },
+    {
+      "caseId": "blind-10",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "New Mexico natural-gas production is broad enough to admit a clearly labeled marketed-production candidate from either annual family. The query does not require the dry-production variant.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGMPP.NM.A",
+        "NG.N9050NM2.A",
+        "NG.NA1160_SNM_2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS.NGMPP.TX.A and SEDS.NGMPP.NM.A cover 1960-2024; corresponding Domestic marketed-production records cover 1967-2025. SEDS offers earlier history but omits the cached 2025 endpoint. With no requested time range this is a disclosed coverage tradeoff, not by itself a route failure.",
+        "Domestic also has explicitly dry production; the inspected SEDS natural-gas production titles are marketed-production quantities and a conversion factor. A future explicit dry request could not be satisfied by silently choosing SEDS marketed production."
+      ]
+    },
+    {
+      "caseId": "blind-19",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "After applying the exclusions, Texas annual natural-gas production has applicable marketed-production quantities in both families. Exclusion correctness is independent of this family choice.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGMPP.TX.A",
+        "NG.N9050TX2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS.NGMPP.TX.A and SEDS.NGMPP.NM.A cover 1960-2024; corresponding Domestic marketed-production records cover 1967-2025. SEDS offers earlier history but omits the cached 2025 endpoint. With no requested time range this is a disclosed coverage tradeoff, not by itself a route failure."
+      ]
+    },
+    {
+      "caseId": "blind-22",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "Georgia is the state under the required rule, and both families contain applicable annual state-consumption series.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGTCP.GA.A",
+        "SEDS.NNTCB.GA.A",
+        "NG.NA1490_SGA_2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS distinguishes total consumption including supplemental gaseous fuels from the heat-unit series explicitly excluding them. Neither definition may be silently relabeled as the other."
+      ]
+    },
+    {
+      "caseId": "blind-25",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "Georgia remains the state alongside positive USA. Despite the SEDS profile describing state geography, the preserved SEDS cache contains a United States aggregate with stateId US and normalized geography USA, so SEDS can cover both requested entities.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGTCP.GA.A",
+        "SEDS.NGTCP.US.A",
+        "NG.NA1490_SGA_2.A",
+        "NG.N9140US2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "The SEDS US aggregate ends in 2024; the Domestic US total-consumption record ends in 2025. A SEDS result must show that shorter endpoint, and must not describe it as the latest observation available across all cached sources."
+      ]
+    },
+    {
+      "caseId": "blind-26",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "Excluding Armenia leaves Georgia the state. Both annual families offer the relevant consumption quantity; the excluded foreign mention must not affect routing as a positive foreign geography.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGTCP.GA.A",
+        "NG.NA1490_SGA_2.A"
+      ],
+      "availabilityOrSpecificityConsequences": []
+    },
+    {
+      "caseId": "blind-30",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "After harmless wording is ignored, this is broad Texas annual natural-gas production with applicable marketed-production candidates in both families.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGMPP.TX.A",
+        "NG.N9050TX2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS.NGMPP.TX.A and SEDS.NGMPP.NM.A cover 1960-2024; corresponding Domestic marketed-production records cover 1967-2025. SEDS offers earlier history but omits the cached 2025 endpoint. With no requested time range this is a disclosed coverage tradeoff, not by itself a route failure."
+      ]
+    },
+    {
+      "caseId": "blind-35",
+      "originalRouteExpectation": "domestic",
+      "decision": "retain-complete-coverage-condition",
+      "acceptedRouteFamilies": [
+        "domestic"
+      ],
+      "reasoning": "This case also requests electricity generation. Domestic has an all-fuels, all-sectors Texas net-generation series as well as natural-gas production/consumption. The inspected SEDS Texas generation titles cover particular renewable/nuclear fuels and sector subsets, and provide no all-fuels total-generation series. An exclusive SEDS search would therefore restrict the electricity-generation choice. A composite route using SEDS for gas and Domestic for electricity is also acceptable.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness.",
+        "Preserve all three pairs: natural gas production, natural gas consumption, and electricity generation.",
+        "A composite route is allowed if it includes Domestic all-fuels generation and preserves all requested pairs.",
+        "Fuel consumed for generation is an input quantity, not generated electricity, and cannot replace the generation pair."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGMPP.TX.A",
+        "SEDS.NGTCP.TX.A",
+        "NG.N9050TX2.A",
+        "NG.NA1490_STX_2.A",
+        "ELEC.GEN.ALL-TX-99.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS-only candidate coverage lacks the inspected all-fuels, all-sectors electricity-generation alternative available as ELEC.GEN.ALL-TX-99.A. Selecting only a renewable/nuclear subset would silently narrow the broad electricity request unless presented as a limited alternative."
+      ]
+    },
+    {
+      "caseId": "blind-38",
+      "originalRouteExpectation": "seds",
+      "decision": "route-not-dispositive-for-empty-request",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "The query requests daily Wyoming coal production. SEDS is annual only; Domestic is configured as stateNonAnnualPrimary but its cached products are electricity/natural gas. Neither inspected family contains the requested daily coal series. An explicit empty result is semantically correct from either routing policy. The original SEDS-only assertion conflated the available annual coal family with the requested unavailable daily series.",
+      "acceptedSemanticCriteria": [
+        "Keep Wyoming WY, coal production, frequency=daily, explicit=true, and no requested sector.",
+        "An empty result must explain that the requested daily series is unavailable in the supported metadata; do not claim coal production does not exist.",
+        "Do not silently return or relabel annual SEDS data as daily, and do not replace coal production with coal used for electricity generation.",
+        "If an annual alternative is offered, its annual frequency and SEDS source must be explicit and the original daily request must remain unchanged.",
+        "This route adjudication does not extend any application policy that permits automatic annual fallback only for monthly/quarterly requests; daily fallback need not be offered and is not needed to pass this case."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.CLPRP.WY.A",
+        "SEDS.CLPRB.WY.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS contains annual Wyoming coal production in thousand short tons and Billion Btu through 2024. An empty daily result does not lose an available daily series."
+      ]
+    },
+    {
+      "caseId": "blind-41",
+      "originalRouteExpectation": "domestic",
+      "decision": "relax-exclusive-route",
+      "acceptedRouteFamilies": [
+        "domestic",
+        "seds"
+      ],
+      "reasoning": "The approved vocabulary uses pipeline as context to resolve ambiguous gas to natural gas. It does not define pipeline as a mandatory production subtype or sector. Both annual families can supply clearly identified Texas natural-gas production. Neither inspected family has a Texas production title containing pipeline, so requiring that title would create a false unavailability condition.",
+      "acceptedSemanticCriteria": [
+        "Keep every positive geography and its order; keep exclusions negative and the stipulated Georgia interpretation unchanged.",
+        "Keep frequency annual with explicit=false for these unstated-frequency cases, and sector unset.",
+        "Preserve the requested product/activity and any explicit qualifier. A conversion-factor, per-capita, pipeline-fuel-consumption, or natural-gas-liquids record cannot silently stand in for a production or aggregate-consumption quantity.",
+        "Display the actual source series title, unit, source family, and time coverage. Do not claim numerical equivalence of Domestic and SEDS series without validation.",
+        "If a broader request is resolved to marketed production or consumption including supplemental gaseous fuels, identify that definition visibly. Do not overwrite the interpreted request with an unrequested named sector.",
+        "A source choice must return an applicable available candidate or explain a genuine restriction; a route-only label match is not sufficient evidence of correctness.",
+        "Use pipeline to resolve gas to natural gas; do not turn production into pipeline-fuel consumption or invent a transportation sector.",
+        "If the user intended a technical pipeline-quality gas standard, these metadata do not settle that meaning; clarify rather than asserting a grade equivalence."
+      ],
+      "evidenceSeriesIds": [
+        "SEDS.NGMPP.TX.A",
+        "NG.N9050TX2.A",
+        "NG.NA1160_STX_2.A"
+      ],
+      "availabilityOrSpecificityConsequences": [
+        "SEDS.NGMPP.TX.A and SEDS.NGMPP.NM.A cover 1960-2024; corresponding Domestic marketed-production records cover 1967-2025. SEDS offers earlier history but omits the cached 2025 endpoint. With no requested time range this is a disclosed coverage tradeoff, not by itself a route failure."
+      ]
+    }
+  ],
+  "metadataEvidence": [
+    {
+      "series_id": "SEDS.NGMPP.TX.A",
+      "title": "Natural gas marketed production, Texas",
+      "geography": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGMPP",
+          "stateId": "TX"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGMPP.NM.A",
+      "title": "Natural gas marketed production, New Mexico",
+      "geography": {
+        "name": "New Mexico",
+        "code": "NM",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGMPP",
+          "stateId": "NM"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGMPB.TX.A",
+      "title": "Natural gas marketed production, Texas",
+      "geography": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Billion Btu",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGMPB",
+          "stateId": "TX"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.CLPRP.WY.A",
+      "title": "Coal production, Wyoming",
+      "geography": {
+        "name": "Wyoming",
+        "code": "WY",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Thousand short tons",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "CLPRP",
+          "stateId": "WY"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.CLPRB.WY.A",
+      "title": "Coal production, Wyoming",
+      "geography": {
+        "name": "Wyoming",
+        "code": "WY",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Billion Btu",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "CLPRB",
+          "stateId": "WY"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NNTCB.GA.A",
+      "title": "Natural gas total consumption (excluding supplemental gaseous fuels), Georgia",
+      "geography": {
+        "name": "Georgia",
+        "code": "GA",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Billion Btu",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NNTCB",
+          "stateId": "GA"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGTCP.GA.A",
+      "title": "Natural gas total consumption (including supplemental gaseous fuels), Georgia",
+      "geography": {
+        "name": "Georgia",
+        "code": "GA",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGTCP",
+          "stateId": "GA"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGTCP.TX.A",
+      "title": "Natural gas total consumption (including supplemental gaseous fuels), Texas",
+      "geography": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGTCP",
+          "stateId": "TX"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGTCP.US.A",
+      "title": "Natural gas total consumption (including supplemental gaseous fuels), United States",
+      "geography": {
+        "name": "United States",
+        "code": "USA",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGTCP",
+          "stateId": "US"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGTCP.VA.A",
+      "title": "Natural gas total consumption (including supplemental gaseous fuels), Virginia",
+      "geography": {
+        "name": "Virginia",
+        "code": "VA",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGTCP",
+          "stateId": "VA"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "SEDS.NGTCP.WV.A",
+      "title": "Natural gas total consumption (including supplemental gaseous fuels), West Virginia",
+      "geography": {
+        "name": "West Virginia",
+        "code": "WV",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million cubic feet",
+      "date_start": "1960",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seds",
+        "measure": "value",
+        "frequency": "annual",
+        "facets": {
+          "seriesId": "NGTCP",
+          "stateId": "WV"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/seds.jsonl.gz"
+    },
+    {
+      "series_id": "NG.N9050TX2.A",
+      "title": "Texas Natural Gas Marketed Production, Annual",
+      "geography": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1967",
+      "date_end": "2025",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "n9050tx2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.N9050TX2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.N9140US2.A",
+      "title": "U.S. Natural Gas Total Consumption, Annual",
+      "geography": {
+        "name": "United States",
+        "code": "USA",
+        "type": "national"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1949",
+      "date_end": "2025",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "n9140us2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.N9140US2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.N9050NM2.A",
+      "title": "New Mexico Natural Gas Marketed Production, Annual",
+      "geography": {
+        "name": "New Mexico",
+        "code": "NM",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1967",
+      "date_end": "2025",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "n9050nm2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.N9050NM2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.NA1160_SNM_2.A",
+      "title": "New Mexico Dry Natural Gas Production, Annual",
+      "geography": {
+        "name": "New Mexico Dry",
+        "code": "NM",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1982",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "na1160_snm_2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.NA1160_SNM_2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.NA1160_STX_2.A",
+      "title": "Texas Dry Natural Gas Production, Annual",
+      "geography": {
+        "name": "Texas Dry",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1982",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "na1160_stx_2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.NA1160_STX_2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.NA1490_STX_2.A",
+      "title": "Texas Natural Gas Total Consumption, Annual",
+      "geography": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1997",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "na1490_stx_2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.NA1490_STX_2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.NA1490_SVA_2.A",
+      "title": "Virginia Natural Gas Total Consumption, Annual",
+      "geography": {
+        "name": "Virginia",
+        "code": "VA",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1997",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "na1490_sva_2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.NA1490_SVA_2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.NA1490_SWV_2.A",
+      "title": "West Virginia Natural Gas Total Consumption, Annual",
+      "geography": {
+        "name": "West Virginia",
+        "code": "WV",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1997",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "na1490_swv_2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.NA1490_SWV_2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "NG.NA1490_SGA_2.A",
+      "title": "Georgia Natural Gas Total Consumption, Annual",
+      "geography": {
+        "name": "Georgia",
+        "code": "GA",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "Million Cubic Feet",
+      "date_start": "1997",
+      "date_end": "2024",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "na1490_sga_2",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "NG.NA1490_SGA_2.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/natural-gas.jsonl.gz"
+    },
+    {
+      "series_id": "ELEC.GEN.ALL-TX-99.A",
+      "title": "Net generation : Texas : all sectors : all fuels : annual",
+      "geography": {
+        "name": "all fuels",
+        "code": "TX",
+        "type": "state"
+      },
+      "frequency": "annual",
+      "unit": "thousand megawatthours",
+      "date_start": "2001",
+      "date_end": "2026",
+      "selector": {
+        "route": "/seriesid",
+        "measure": "gen",
+        "frequency": "annual",
+        "facets": {
+          "series_id": "ELEC.GEN.ALL-TX-99.A"
+        }
+      },
+      "sourceFile": "data/eia/builds/phase1b/domestic.jsonl.gz"
+    }
+  ],
+  "metadataInventory": {
+    "seds.jsonl.gz": {
+      "frequencyCounts": {
+        "annual": 48046
+      }
+    },
+    "natural-gas.jsonl.gz": {
+      "frequencyCounts": {
+        "weekly": 13,
+        "daily": 5,
+        "monthly": 3100,
+        "annual": 12903
+      }
+    },
+    "domestic.jsonl.gz": {
+      "frequencyCounts": {
+        "annual": 28935,
+        "quarterly": 28290,
+        "monthly": 28800
+      }
+    }
+  },
+  "additionalAvailabilityEvidence": {
+    "texasSedsGenerationTitles": [
+      {
+        "series_id": "SEDS.WYTXP.TX.A",
+        "title": "Wind energy total end-use net generation, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.WYEGP.TX.A",
+        "title": "Wind electricity net generation in the electric power sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.WYEGB.TX.A",
+        "title": "Wind energy consumed for electricity generation by the electric power sector, Texas",
+        "unit": "Billion Btu"
+      },
+      {
+        "series_id": "SEDS.WYICP.TX.A",
+        "title": "Wind electricity net generation in the industrial sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.WYCCP.TX.A",
+        "title": "Wind electricity net generation in the commercial sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.WYTCP.TX.A",
+        "title": "Wind electricity total net generation, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.SOTGP.TX.A",
+        "title": "Solar thermal and photovoltaic electricity total net generation, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.SOICP.TX.A",
+        "title": "Solar thermal and photovoltaic electricity net generation in the industrial sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.SOEGP.TX.A",
+        "title": "Solar thermal and photovoltaic electricity net generation in the electric power sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.SOCCP.TX.A",
+        "title": "Solar thermal and photovoltaic electricity net generation in the commercial sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.SOEGB.TX.A",
+        "title": "Solar energy consumed for electricity generation by the electric power sector, Texas",
+        "unit": "Billion Btu"
+      },
+      {
+        "series_id": "SEDS.HYTCP.TX.A",
+        "title": "Hydroelectricity total net generation, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.SOR7P.TX.A",
+        "title": "Solar photovoltaic electricity generation by small-scale applications in the residential sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.HYTXP.TX.A",
+        "title": "Hydroelectricity, total end-use net generation, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.HYEGB.TX.A",
+        "title": "Hydropower consumed for electricity generation by the electric power sector, Texas",
+        "unit": "Billion Btu"
+      },
+      {
+        "series_id": "SEDS.HYICP.TX.A",
+        "title": "Hydroelectricity net generation in the industrial sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.HYEGP.TX.A",
+        "title": "Hydroelectricity net generation in the electric power sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.HYCCP.TX.A",
+        "title": "Hydroelectricity net generation in the commercial sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.GEEGB.TX.A",
+        "title": "Geothermal energy consumed for electricity generation by the electric power sector, Texas",
+        "unit": "Billion Btu"
+      },
+      {
+        "series_id": "SEDS.GEEGP.TX.A",
+        "title": "Geothermal electricity net generation in the electric power sector, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.NUETP.TX.A",
+        "title": "Nuclear electricity total net generation, Texas",
+        "unit": "Million kilowatthours"
+      },
+      {
+        "series_id": "SEDS.NUETB.TX.A",
+        "title": "Nuclear energy consumed for electricity generation, total, Texas",
+        "unit": "Billion Btu"
+      },
+      {
+        "series_id": "SEDS.NUEGB.TX.A",
+        "title": "Nuclear energy consumed for electricity generation by the electric power sector, Texas",
+        "unit": "Billion Btu"
+      },
+      {
+        "series_id": "SEDS.NUEGP.TX.A",
+        "title": "Nuclear electricity net generation in the electric power sector, Texas",
+        "unit": "Million kilowatthours"
+      }
+    ],
+    "dailyNaturalGasTitles": [
+      {
+        "series_id": "NG.RNGWHHD.D",
+        "title": "Henry Hub Natural Gas Spot Price, Daily"
+      },
+      {
+        "series_id": "NG.RNGC4.D",
+        "title": "Natural Gas Futures Contract 4, Daily"
+      },
+      {
+        "series_id": "NG.RNGC1.D",
+        "title": "Natural Gas Futures Contract 1, Daily"
+      },
+      {
+        "series_id": "NG.RNGC2.D",
+        "title": "Natural Gas Futures Contract 2, Daily"
+      },
+      {
+        "series_id": "NG.RNGC3.D",
+        "title": "Natural Gas Futures Contract 3, Daily"
+      }
+    ]
+  },
+  "limitations": [
+    "No observations were fetched, so cross-family numerical equality was not checked.",
+    "No production code, diffs, tests, challenge results, or output logs were read.",
+    "Only local metadata inspection and this JSON artifact were performed; no query execution, external calls, credentials, git writes, or production edits."
+  ]
+}

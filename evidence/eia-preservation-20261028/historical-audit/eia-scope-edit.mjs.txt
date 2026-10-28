@@ -1,0 +1,72 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+function edit(p,f){writeFileSync(p,f(readFileSync(p,'utf8')))}function rep(s,a,b){if(!s.includes(a))throw Error('missing '+a);return s.replace(a,b)}
+edit('lib/sources/eia/intent-routing.js',s=>{
+s=rep(s,'const scannedConcepts = findConceptMentions(normalizedQuery);','const scannedConcepts = findConceptMentions(normalizedQuery).filter(mention => getNegationScope(normalizedQuery, mention.index, originalQuery) === null);');
+s=rep(s,'const excludedCodes = new Set(complete.filter(match => isNegatedMention(normalizedQuery, match.index, originalQuery)).map(match => match.code));\n  const positive = complete.filter(match => !excludedCodes.has(match.code)',`const conceptScopes = new Set(findConceptMentions(normalizedQuery).map(mention => getNegationScope(normalizedQuery, mention.index, originalQuery)).filter(scope => scope !== null));
+  // A bare excluded entity removes that entity; a negated request can still share
+  // an entity with a distinct positive request (consumption, not production).
+  const excludedCodes = new Set(complete.filter(match => {
+    const scope = getNegationScope(normalizedQuery, match.index, originalQuery);
+    return scope !== null && !conceptScopes.has(scope);
+  }).map(match => match.code));
+  const positive = complete.filter(match => !excludedCodes.has(match.code)
+    && getNegationScope(normalizedQuery, match.index, originalQuery) === null`);
+const begin=s.indexOf('function isNegatedMention(');const end=s.indexOf('\nfunction disambiguateStateCountryMatches',begin);if(begin<0||end<0)throw Error('scope anchors');
+s=s.slice(0,begin)+`export function getNegationScope(query, index, originalQuery = query) {
+  // Token positions are shared with normalized matching, but sentence punctuation
+  // and affirmative/negative commands retain their scope in the original text.
+  const target = query.slice(0, index).trim().split(/\\s+/).filter(Boolean).length;
+  const original = String(originalQuery || query).normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/&/g, " and ").toLowerCase();
+  const tokens = [...original.matchAll(/[a-z0-9]+|[;.!?]/g)].map(match => match[0]);
+  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
+  let scope = null;
+  let wordIndex = 0;
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (/^[;.!?]$/.test(token)) {
+      if (token !== "." || (tokens[i - 1] || "").length > 1) scope = null;
+      continue;
+    }
+    if (wordIndex >= target) break;
+    if (markers.has(token)) scope = token === "not" && tokens[i + 1] === "only" ? null : wordIndex;
+    else if (["but", "instead", "rather"].includes(token)) scope = null;
+    else if (["show", "include"].includes(token) && scope !== null && wordIndex > scope + 1) scope = null;
+    wordIndex++;
+  }
+  return scope;
+}
+`+s.slice(end);
+// A pronoun that directly modifies an energy concept is a geographic alias, not a recipient.
+s=rep(s,'const requestVerb = /\\b(show|give|tell|help|let|allow|enable|ask|send|provide|compare|make)\\b/.test(query.slice(0, match.index));','const requestVerb = /\\b(show|give|tell|help|let|allow|enable|ask|send|provide|compare|make)\\b/.test(query.slice(0, match.index));\n  const followingConcept = findConceptMentions(tokens.slice(tokenIndex + 1).join(" ")).some(mention => mention.index === 0);\n  if (followingConcept && /^(to|for|in|versus|vs)$/.test(before || "")) return false;');
+return s;});
+edit('lib/sources/eia/interpret-query.js',s=>{
+s=rep(s,'findGeographyMentions, listApprovedGeographies','findGeographyMentions, getNegationScope, listApprovedGeographies');
+s=rep(s,'findRuleExclusions(normalizedQuery, correctionEvidence);','findRuleExclusions(normalizedQuery, correctionEvidence, forms.originalQuery);');
+s=rep(s,'findRuleExclusions(deterministicEvidenceQuery));','findRuleExclusions(deterministicEvidenceQuery, [], correctedEvidenceInput));');
+s=rep(s,'function findRuleExclusions(normalizedQuery, correctionEvidence = []) {','function findRuleExclusions(normalizedQuery, correctionEvidence = [], originalQuery = normalizedQuery) {');
+s=rep(s,'  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);\n  const exclusions = [];\n  for (const mention of findConceptMentions(normalizedQuery)) {',`  const mentions = findConceptMentions(normalizedQuery);
+  const positive = mentions.filter(mention => getNegationScope(normalizedQuery, mention.index, originalQuery) === null);
+  const exclusions = [];
+  for (const mention of mentions) {`);
+s=rep(s,'    const prefix = prefixTokens.slice(-3);\n    if (!prefix.some(token => markers.has(token))) continue;',`    if (getNegationScope(normalizedQuery, mention.index, originalQuery) === null) continue;
+    if (positive.some(item => item.type === mention.type && item.value === mention.value)) continue;`);
+const begin=s.indexOf('function applyVerifiedTokenCorrections(');const end=s.indexOf('\nfunction describeAiGeographyAgreement',begin);
+s=s.slice(0,begin)+`function applyVerifiedTokenCorrections(originalQuery, corrections) {
+  // Retain clause boundaries; normalization here used to turn a later positive
+  // request into part of an earlier exclusion after a spelling correction.
+  const original = String(originalQuery).normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/&/g, " and ");
+  const tokens = [...original.matchAll(/[a-z0-9]+/gi)];
+  let corrected = original;
+  let nextStart = tokens.length;
+  for (const correction of [...corrections].sort((left, right) => right.tokenStart - left.tokenStart)) {
+    const first = tokens[correction.tokenStart];
+    const last = tokens[correction.tokenStart + correction.tokenCount - 1];
+    if (!first || !last || correction.tokenStart + correction.tokenCount > nextStart) continue;
+    corrected = corrected.slice(0, first.index) + (correction.proposedTerm || correction.proposedName)
+      + corrected.slice(last.index + last[0].length);
+    nextStart = correction.tokenStart;
+  }
+  return corrected;
+}
+`+s.slice(end);
+return s;});

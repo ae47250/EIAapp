@@ -1,0 +1,464 @@
+{
+  "models": [
+    {
+      "label": "Nano-none",
+      "model": "gpt-5.4-nano-2026-03-17",
+      "scheduled": 20,
+      "actualAttempts": 20,
+      "retries": 0,
+      "originalSemantic": 1,
+      "correctedSemantic": 11,
+      "observedSemanticMistakes": 8,
+      "ungradable": 1,
+      "strictJSON": 19,
+      "shape": 8,
+      "sourceSpans": 5,
+      "contract": 2,
+      "originalUsable": 1,
+      "correctedUsable": 2,
+      "repeatConsistency": 6,
+      "latencyMs": {
+        "median": 4904.311124500004,
+        "min": 3879.337333000003,
+        "max": 6425.176084
+      },
+      "tokens": {
+        "input": 15918,
+        "cached": 0,
+        "cacheWrite": 0,
+        "output": 12385,
+        "reasoning": 0
+      },
+      "costUSD": 0.018664850000000004,
+      "costPerUsable": 0.009332425000000002,
+      "downstreamDisplayingResults": 4,
+      "downstreamClarifications": 16
+    },
+    {
+      "label": "Luna-none",
+      "model": "gpt-6-luna",
+      "scheduled": 20,
+      "actualAttempts": 20,
+      "retries": 0,
+      "originalSemantic": 3,
+      "correctedSemantic": 11,
+      "observedSemanticMistakes": 5,
+      "ungradable": 4,
+      "strictJSON": 16,
+      "shape": 16,
+      "sourceSpans": 0,
+      "contract": 0,
+      "originalUsable": 0,
+      "correctedUsable": 0,
+      "repeatConsistency": 5,
+      "latencyMs": {
+        "median": 5128.121999999999,
+        "min": 2634.603958000007,
+        "max": 9101.860209000006
+      },
+      "tokens": {
+        "input": 15918,
+        "cached": 0,
+        "cacheWrite": 0,
+        "output": 10536,
+        "reasoning": 0
+      },
+      "costUSD": 0.0068598,
+      "costPerUsable": null,
+      "downstreamDisplayingResults": 1,
+      "downstreamClarifications": 19
+    }
+  ],
+  "changedVerdicts": [
+    {
+      "scheduledId": 1,
+      "queryId": 9,
+      "query": "electricity consumption in Georgia and France",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 2,
+      "queryId": 9,
+      "query": "electricity consumption in Georgia and France",
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 4,
+      "queryId": 3,
+      "query": "brazil and japan electrciity consumption",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct.",
+        "Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract."
+      ]
+    },
+    {
+      "scheduledId": 5,
+      "queryId": 7,
+      "query": "natural gas production and consumption in Texas annually",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct.",
+        "Null or requested-member compatibility summaries do not replace or contradict preserved ordered pairs."
+      ]
+    },
+    {
+      "scheduledId": 8,
+      "queryId": 4,
+      "query": "energy consumption iceland",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract.",
+        "Existing nested value fields express the correct pair; wrong pair shape remains a contract failure, with no response rewriting."
+      ]
+    },
+    {
+      "scheduledId": 9,
+      "queryId": 2,
+      "query": "total energyy consumption usa",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 10,
+      "queryId": 2,
+      "query": "total energyy consumption usa",
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 13,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 14,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 16,
+      "queryId": 8,
+      "query": "monthly electricity consumption in California",
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 23,
+      "queryId": 9,
+      "query": "electricity consumption in Georgia and France",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 26,
+      "queryId": 6,
+      "query": "energy consumption iceland not ireland",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "The flat Ireland exclusion duplicates the requested geography exclusion; it does not introduce a product/activity exclusion."
+      ]
+    },
+    {
+      "scheduledId": 27,
+      "queryId": 2,
+      "query": "total energyy consumption usa",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 29,
+      "queryId": 8,
+      "query": "monthly electricity consumption in California",
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": true,
+      "changed": {
+        "semantic": true,
+        "usable": true,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 33,
+      "queryId": 3,
+      "query": "brazil and japan electrciity consumption",
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct.",
+        "Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract."
+      ]
+    },
+    {
+      "scheduledId": 34,
+      "queryId": 3,
+      "query": "brazil and japan electrciity consumption",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Null compatibility country summary is not a contradiction when the ordered geography array is correct."
+      ]
+    },
+    {
+      "scheduledId": 37,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    },
+    {
+      "scheduledId": 38,
+      "queryId": 1,
+      "query": "total energy consumption united states",
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "originalSemantic": false,
+      "correctedSemantic": true,
+      "originalUsable": false,
+      "correctedUsable": false,
+      "changed": {
+        "semantic": true,
+        "usable": false,
+        "json": false,
+        "spans": false,
+        "contract": false
+      },
+      "changeReasons": [
+        "Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.",
+        "US/USA national metadata equivalence also applies to the country summary."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const {interpretQuery,interpretQueryWithRules,normalizeSubmittedIntent}=await import(root+'/lib/sources/eia/interpret-query.js');
+const {GET}=await import(root+'/app/api/search-eia/route.js');
+const source=readFileSync(root+'/components/search/SearchWorkspace.js','utf8');
+const serialize=runInNewContext('('+source.slice(source.indexOf('function appendIntentParams('),source.indexOf('\nfunction formatInterpreter('))+')');
+process.env.LOGIN_REQUIRED='off';process.env.OPENAI_API_KEY='injected-offline-fixture-not-a-key';delete process.env.EIA_API_KEY;
+let model;
+globalThis.fetch=async url=>{assert.equal(url,'https://api.openai.com/v1/responses');return Response.json({output_text:JSON.stringify(model)});};
+const cases=[
+ {query:"I'm not sure what's available for Canada and The Gambia: coal consumption and natural gas production",codes:['CAN','GMB'],pairs:[['coal','consumption'],['natural gas','production']]},
+ {query:"I'm not sure what's available for Canada and The Gambia: energy consumption and production",codes:['CAN','GMB'],pairs:[['total energy','consumption'],['total energy','production']]}
+];
+const field=value=>({value,confidence:.99});
+const results=[];
+for(const c of cases){
+ model={confidence:.99,geographies:c.codes.map(field),conceptPairs:c.pairs.map(([product,activity],order)=>({product,activity,order,confidence:.99})),fields:{country:field(c.codes[0]),product:field(c.pairs[0][0]),activity:field(c.pairs[0][1]),sector:field(null),frequency:{...field('annual'),explicit:false}}};
+ const rules=interpretQueryWithRules(c.query);const intent=await interpretQuery(c.query);const params=serialize(new URLSearchParams({q:c.query}),intent);const serialized=normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')),c.query);const response=await GET(new Request('http://offline.invalid/api/search-eia?'+params));assert.equal(response.status,200);const body=await response.json();
+ const stages={rules,interpretQuery:intent,serialized,publicGET:body.intent};
+ for(const [phase,i] of Object.entries(stages)){assert.deepEqual(i.structuredIntent.conceptPairs.map(p=>[p.product,p.activity]),c.pairs);assert.deepEqual(i.structuredIntent.geographies.map(g=>g.code),c.codes);assert.equal(i.needsClarification,false);}
+ results.push({query:c.query,expectedCodes:c.codes,expectedPairs:c.pairs,phases:Object.keys(stages),pass:true});
+}
+writeFileSync('/private/tmp/eia-followup-exact-pairs-results.json',JSON.stringify(results,null,2));
+console.log(JSON.stringify({cases:results.length,passed:results.length,boundariesPerCase:4,externalFetches:0}));

@@ -1,0 +1,93 @@
+--- prior/lib/sources/eia/intent-routing.js
++++ current/lib/sources/eia/intent-routing.js
+@@ -456,10 +456,29 @@
+   return null;
+ }
+ 
++// Derive input forms from complete official labels; never drop a geographic
++// qualifier. Only the grammatical article is optional. Canonical output stays unchanged.
++export function geographyNameForms(name) {
++  const text = String(name || "").trim();
++  const forms = [text];
++  const parts = text.split(",").map(part => part.trim());
++  if (parts.length === 2 && parts.every(Boolean)) {
++    forms.push(parts[1] + " " + parts[0]);
++    if (/^the$/i.test(parts[1])) forms.push(parts[0]);
++  }
++  if (/^the /i.test(text)) {
++    const noun = text.replace(/^the\s+/i, "");
++    forms.push(noun, noun + ", The");
++  }
++  return [...new Set(forms.filter(Boolean))];
++}
++
+ export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {
+   const matches = [];
+   for (const geography of [...ROUTING_METADATA.geographies, ...additionalGeographies.filter(item => !geographyByCode.has(item.code))]) {
+-    addPhraseMatch(matches, normalizedQuery, geography.name, { ...geography, matchPriority: 0 });
++    for (const name of geographyNameForms(geography.name)) {
++      addPhraseMatch(matches, normalizedQuery, name, { ...geography, matchPriority: 0 });
++    }
+     if (hasUppercaseCode(originalQuery, geography.code)) {
+       addPhraseMatch(matches, normalizedQuery, geography.code, { ...geography, matchPriority: 5 });
+     }
+@@ -521,7 +540,12 @@
+       continue;
+     }
+     if (wordIndex >= target) break;
+-    if (markers.has(token)) scope = token === "not" && tokens[i + 1] === "only" ? null : wordIndex;
++    if (markers.has(token)) {
++      // Negating knowledge/certainty does not negate the data being asked about.
++      // Continue scanning so a later explicit exclusion still opens its own scope.
++      if (token === "not" && tokens[i + 1] === "only") scope = null;
++      else if (!isUncertaintyPredicate(tokens, i)) scope = wordIndex;
++    }
+     else if (["but", "instead", "rather"].includes(token)) scope = null;
+     else if (["show", "include"].includes(token) && scope !== null) {
+       // A new command follows a completed excluded subject, not merely an adverb.
+@@ -533,6 +557,16 @@
+     wordIndex++;
+   }
+   return scope;
++}
++
++function isUncertaintyPredicate(tokens, index) {
++  const predicate = tokens.slice(index + 1).join(" ");
++  if (tokens[index] === "not") {
++    return /^(?:(?:really|quite|entirely|completely|yet|fully) )*(?:sure|certain|aware|know|knowing|understand|understanding)\b/.test(predicate);
++  }
++  if (tokens[index] === "no") return /^(?:idea|certainty|knowledge)\b/.test(predicate);
++  if (tokens[index] === "without") return /^(?:knowing|understanding)\b/.test(predicate);
++  return false;
+ }
+ 
+ function disambiguateStateCountryMatches(matches, normalizedQuery) {
+@@ -579,7 +613,7 @@
+   const byCode = geographyByCode.get(text.toUpperCase());
+   if (byCode) return cleanGeography(byCode);
+   const normalized = normalizeText(text);
+-  const byName = ROUTING_METADATA.geographies.find(geography => normalizeText(geography.name) === normalized);
++  const byName = ROUTING_METADATA.geographies.find(geography => geographyNameForms(geography.name).some(name => normalizeText(name) === normalized));
+   return byName ? cleanGeography(byName) : null;
+ }
+ 
+--- prior/lib/sources/eia/interpret-query.js
++++ current/lib/sources/eia/interpret-query.js
+@@ -1,7 +1,7 @@
+ import { readFileSync } from "node:fs";
+ 
+ import { requireAuthentication } from "../../auth.js";
+-import { buildStructuredIntent, findConceptMentions, findGeographyMentions, getNegationScope, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
++import { buildStructuredIntent, findConceptMentions, findGeographyMentions, geographyNameForms, getNegationScope, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
+ 
+ const ROUTING_CONFIG = JSON.parse(readFileSync(new URL("../../../data/eia/phase4-routing-config.json", import.meta.url), "utf8"));
+ const PRODUCT_RULES = buildRules(ROUTING_CONFIG.vocabulary?.products);
+@@ -1232,7 +1232,7 @@
+     .filter(Boolean))];
+   const queryTokens = normalizeText(originalQuery).split(" ").filter(Boolean);
+   const protectedTokens = new Set();
+-  const exactTerms = [...names, ...COUNTRY_ALIASES.keys(), ...listApprovedGeographies().map(item => item.code)];
++  const exactTerms = [...names.flatMap(geographyNameForms), ...COUNTRY_ALIASES.keys(), ...listApprovedGeographies().map(item => item.code)];
+   for (const term of exactTerms) {
+     const tokens = normalizeText(term).split(" ").filter(Boolean);
+     for (let start = 0; start <= queryTokens.length - tokens.length; start++) {

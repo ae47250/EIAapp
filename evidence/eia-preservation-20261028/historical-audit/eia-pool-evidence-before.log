@@ -1,0 +1,110 @@
+✔ frozen D01: energy consumption Iceland (27.201458ms)
+✔ frozen D02: energy consumption Ireland (9.902959ms)
+✔ frozen D03: energy consumption Finland (9.071042ms)
+✔ frozen D04: energy consumption Poland (8.896584ms)
+✔ frozen D05: energy consumption Austria (9.08975ms)
+✔ frozen D06: energy consumption Australia (8.837ms)
+✔ frozen D07: energy consumption Niger (8.144459ms)
+✔ frozen D08: energy consumption Nigeria (8.994625ms)
+✔ frozen D09: energy consumption Guinea (8.460209ms)
+✔ frozen D10: energy consumption Equatorial Guinea (10.060542ms)
+✔ frozen D11: energy consumption Guinea-Bissau (9.849917ms)
+✔ frozen D12: energy consumption New Zealand (9.686208ms)
+✔ frozen D13: energy consumption United Kingdom (9.585834ms)
+✔ frozen D14: energy consumption Gambia, The (8.945ms)
+✔ frozen D15: energy consumption Germany, East (9.501ms)
+✔ frozen D16: energy consumption Germany, West (9.539167ms)
+✔ frozen D17: energy consumption uk (7.7925ms)
+✔ frozen D18: energy consumption u.s. (8.344917ms)
+✔ frozen D19: energy consumption uae (8.659458ms)
+✔ frozen D20: energy consumption Czechia (9.241917ms)
+✔ frozen D21: energy consumption south korea (9.699959ms)
+✔ frozen D22: energy consumption icealnd (9.042583ms)
+✔ frozen D23: energy consumption Irelxnd (8.959958ms)
+﹣ frozen D24: energy consumption Iland (0.066833ms) # Ambiguous spelling; no unique geography expectation. Do not force a country.
+✔ frozen D25: energy consumption Iceland not Ireland (10.59775ms)
+✔ frozen D26: energy consumption Iceland excluding Ireland (11.120542ms)
+✔ frozen D27: energy consumption Iceland without Ireland (12.561916ms)
+✔ frozen D28: energy consumption Iceland except Ireland (10.915292ms)
+✔ frozen D29: energy consumption France not Canada or Mexico (12.133125ms)
+✔ frozen D30: energy consumption not Ireland but Iceland (10.807541ms)
+✔ frozen D31: energy consumption excluding Ireland (10.723459ms)
+✔ frozen D32: please show the energy consumption for Iceland (11.206ms)
+✔ frozen D33: show the energy consumption in the United States (17.109209ms)
+✔ frozen D34: energy consumption east of France (9.432042ms)
+✔ frozen D35: energy consumption west of Canada (9.5995ms)
+✔ frozen D36: Georgia energy consumption (8.827167ms)
+✔ frozen D37: Georgia and France energy consumption (10.753958ms)
+✔ frozen D38: Georgia and Alabama energy consumption (10.811042ms)
+✔ frozen D39: Georgia and United States energy consumption (11.9445ms)
+✔ frozen D40: international Georgia energy consumption (10.17725ms)
+✔ frozen D41: international Georgia and United States energy consumption (12.885292ms)
+✔ frozen D42: France then Iceland then Ireland energy consumption (13.798208ms)
+✔ frozen D43: Canada natural gas imports and exports (11.236209ms)
+✔ frozen D44: Brazil petroleum and natural gas consumption (11.297042ms)
+✔ frozen D45: Texas coal production and natural gas consumption (12.621ms)
+✔ frozen D46: Texas coal and natural gas production and consumption (11.586125ms)
+✔ frozen D47: gas consumption in the United States (9.265208ms)
+✔ frozen D48: United States natural gas consumption (9.500416ms)
+✔ frozen D49: United States gasoline consumption (9.001541ms)
+✔ frozen D50: United States total energy consumption (562.126833ms)
+✔ frozen D51: France weekly solar electricity generation (22.903542ms)
+✔ frozen D52: Texas monthly residential natural gas consumption (12.169083ms)
+✔ frozen D53: France quarterly petroleum consumption (10.465791ms)
+✔ frozen D54: France annual energy consumption (9.5465ms)
+✔ frozen D55: France energy consumption (8.124291ms)
+✔ frozen D56: France energy consumption (8.026166ms)
+✔ every approved complete geography name survives exact and fuzzy competition (4911.172916ms)
+✔ supported aliases remain ordered and wording adds no countries (94.805167ms)
+✔ seed 47250: exact, excluded and filler invariants (860.053792ms)
+✔ builder preserves comma-bearing official geography labels and product punctuation (0.956708ms)
+✔ seed 47250: spelling ties may remain unresolved and exact names win (636.8065ms)
+✔ complete candidate labels retain raw artifact hashes and narrower coverage (62.097833ms)
+✖ bounded retrieval leaves room for every valid activity in a multiple-request search (846.846167ms)
+✖ official description product evidence prevents an inexact scope from scoring as exact (237.919917ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 61
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 8855.234084
+
+✖ failing tests:
+
+test at tests/eia-interpretation-audit.test.js:102:1
+✖ bounded retrieval leaves room for every valid activity in a multiple-request search (846.846167ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.retrievals[1].displayCandidates.some(c=>c.series_id==='NG.NA1490_STX_2.A'))
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-interpretation-audit.test.js:107:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:110:1
+✖ official description product evidence prevents an inexact scope from scoring as exact (237.919917ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(electricity.length>0)
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-interpretation-audit.test.js:115:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

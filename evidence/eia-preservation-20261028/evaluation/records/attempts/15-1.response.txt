@@ -1,0 +1,110 @@
+{
+  "id": "<REDACTED_PROVIDER_ID>",
+  "object": "response",
+  "created_at": 1793185660,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1793185669,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 4096,
+  "max_tool_calls": null,
+  "model": "gpt-6-luna",
+  "moderation": null,
+  "output": [
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "We need output strict JSON and scopes cover every word exact positions. Query chars: monthly 0-7, space7, electricity 8-19? electricity length11, space19, consumption 20-31 (11), space31, in 32-34, space34, California 35-45 (10). Scope grouping metadata role. monthly requested data frequency; electricity product; consumption activity; in context? geography preposition perhaps context target data? Scopes statuses requested data for terms. California requested data. Need scopes cover whitespace too. Group contiguous same role; could scope \"monthly\" then \" electricity\" etc but source words and spaces included exact. Scope text exact substring. Gaps prohibited cover every source word, perhaps whitespace can be included adjoining scopes. scopes positions 0-7 monthly, 7-19 \" electricity\", 19-31 \" consumption\", 31-35 \" in \", 35-45 California. in context likely data? geography relation context, target data? status context target data? context status target data odd. Could group in with California as requested scope since geographic phrase \"in California\" and target data. Recognized geography requested. Scope start 31 end45 text \" in California\". Fine. Fields rawValue values. country null due U.S. state geography; ambiguity reason country not explicitly requested? country summary perhaps null reason geography is state, not country. product electricity, activity consumption, freq monthly explicit. sector null. Pair. correctedQuery same. ambiguity maybe [] or reason? use array likely. strict schema unspecified types. confidence numeric. exclusions []. unknown []. geographies item canonical California. Request evidence all covered 0-45."
+        }
+      ],
+      "phase": "commentary",
+      "role": "assistant"
+    },
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\n  \"correctedQuery\": \"monthly electricity consumption in California\",\n  \"confidence\": 1,\n  \"ambiguity\": [],\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1,\n      \"ambiguityReason\": \"No country is specified; California is a U.S. state.\"\n    },\n    \"product\": {\n      \"rawValue\": \"electricity\",\n      \"value\": \"electricity\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1,\n      \"ambiguityReason\": \"No sector is explicitly stated.\"\n    },\n    \"frequency\": {\n      \"rawValue\": \"monthly\",\n      \"value\": \"monthly\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null,\n      \"explicit\": true\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"California\",\n      \"confidence\": 1\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"electricity\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 1\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"monthly electricity consumption in California\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 7,\n        \"text\": \"monthly\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 7,\n        \"end\": 19,\n        \"text\": \" electricity\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 19,\n        \"end\": 31,\n        \"text\": \" consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 31,\n        \"end\": 45,\n        \"text\": \" in California\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 795,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 865,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1660
+  },
+  "user": null,
+  "metadata": {}
+}

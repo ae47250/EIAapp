@@ -1,0 +1,43 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const wd='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const cases=[];
+function add(id,q,codes,extra={}) {cases.push({id,q,expected:{codes,pairs:[['total energy','consumption']],frequency:'annual',explicit:false,sector:null,clarify:false,...extra}});}
+for(const [code,names] of [['GMB',['Gambia, The','The Gambia','Gambia','THE GAMBIA']],['BHS',['The Bahamas','Bahamas','Bahamas, The']],['DDR',['Germany, East','East Germany']],['DEUW',['Germany, West','West Germany']]]) {
+ for(const name of names) add('name-'+cases.length,`energy consumption in ${name}`,[code],{available:!['DDR','DEUW'].includes(code)});
+}
+add('external-uncertainty',"I'm not sure what's available for USA energy consumption",['USA'],{available:true});
+for(const [prefix,code,name] of [
+ ['I am not certain whether data exists for','FRA','France'],
+ ["I don't know what's available for",'CAN','Canada'],
+ ["I'm not really sure what's available for",'USA','USA'],
+ ["We aren't sure about",'USA','USA'],
+ ['I have no idea what is available for','USA','USA'],
+ ["I'm unsure about",'FRA','France'],
+ ['Without knowing what data is available for','USA','USA'],
+ ['I do not know whether there is data for','CAN','Canada'],
+ ['I am not yet certain about','USA','USA'],
+ ['I am not aware of data for','USA','USA']
+]) add('uncertainty-'+cases.length,`${prefix} ${name} energy consumption`,[code],{available:true});
+add('variant-ordered','energy consumption in The Gambia and Zambia',['GMB','ZMB']);
+add('variant-exclusion','energy consumption in The Gambia not Zambia',['GMB'],{available:true});
+add('reverse-exclusion','energy consumption in Zambia not The Gambia',['ZMB'],{available:true});
+add('bahamas-exclusion','energy consumption Bahamas not The Gambia',['BHS'],{available:true});
+add('uncertainty-exclusion',"I'm not sure what's available for USA energy consumption, not Canada",['USA'],{available:true});
+add('uncertainty-product-exclusion',"I'm not sure what's available for USA energy consumption, not coal",['USA'],{available:true,exclusions:[['product','coal']]});
+add('actual-activity-exclusion','USA energy consumption, not production',['USA'],{available:true,exclusions:[['activity','production']]});
+add('actual-command-exclusion','USA energy consumption; do not include coal production',['USA'],{available:true,exclusions:[['product','coal'],['activity','production']]});
+add('actual-no-exclusion','USA energy consumption, no coal',['USA'],{available:true,exclusions:[['product','coal']]});
+add('actual-without-exclusion','USA energy consumption without coal',['USA'],{available:true,exclusions:[['product','coal']]});
+add('not-only','not only USA but also Canada energy consumption',['USA','CAN']);
+add('uncertainty-country-variant',"I'm not sure what's available for The Gambia energy consumption",['GMB'],{available:true});
+add('explicit-frequency','I am not certain about monthly USA natural gas consumption',['USA'],{pairs:[['natural gas','consumption']],frequency:'monthly',explicit:true,available:true});
+add('sector','I am not sure about USA residential natural gas consumption',['USA'],{pairs:[['natural gas','consumption']],sector:'residential',available:true});
+add('ambiguous-product',"I'm not sure what's available for USA gas consumption",['USA'],{pairs:[],clarify:true});
+const matrix={scope:'Two externally reported classes: approved country-name forms and epistemic negation versus exclusion. Expected values frozen before follow-up production edits, from query meaning and approved metadata; no output-derived expectations.',seed:47250,cases};
+fs.writeFileSync('/private/tmp/eia-followup-expectations.json',JSON.stringify(matrix,null,2)+'\n');
+const patch=execFileSync('git',['diff','--binary','5b60a094ecd10e1ca80492bc8558652768d93366'],{cwd:wd,maxBuffer:32*1024*1024});
+fs.writeFileSync('/private/tmp/eia-pre-followup-tracked.patch',patch);
+fs.writeFileSync('/private/tmp/eia-followup-freeze.json',JSON.stringify({cases:cases.length,fixtureSha256:createHash('sha256').update(fs.readFileSync('/private/tmp/eia-followup-expectations.json')).digest('hex'),trackedDiffSha256:createHash('sha256').update(patch).digest('hex')},null,2));
+console.log(fs.readFileSync('/private/tmp/eia-followup-freeze.json','utf8'));

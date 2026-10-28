@@ -1,0 +1,37 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const wd='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const sources=['/private/tmp/eia-followup-independent-challenges.json','/private/tmp/eia-followup-supplemental-challenges.json'];
+const sourcesInfo=sources.map(path=>({file:path.split('/').at(-1),sha256:createHash('sha256').update(fs.readFileSync(path)).digest('hex')}));
+const cases=sources.flatMap(path=>{
+ const fixture=JSON.parse(fs.readFileSync(path));
+ return fixture.cases.map(item=>{
+  const c={...fixture.defaults,...item};
+  const ambiguous=c.id==='positive-order-preserved';
+  const pairs=ambiguous?[]:c.id==='ordered-explicit-pairs'?[['coal','consumption'],['natural gas','production']]:c.products.flatMap(p=>c.activities.map(a=>[p,a]));
+  return {id:'independent-'+c.id,q:c.query,expected:{codes:c.geographies,pairs,frequency:c.frequency,explicit:c.frequencyExplicit,sector:null,clarify:ambiguous,exclusions:[...c.excludedProducts.map(p=>['product',p]),...c.excludedActivities.map(a=>['activity',a])]},...(ambiguous?{unresolvedPairing:{products:c.products,activities:c.activities}}:{})};
+ });
+});
+const fixture={sources:sourcesInfo,adjudication:{id:'independent-positive-order-preserved',reason:'Multiple products and activities without explicit pairing have unresolved pairing under the preserved existing contract; clarify instead of assuming a Cartesian product. Keep geography and all concept mentions. Original frozen expectation and observed failure remain in independent evidence.'},cases};
+fs.writeFileSync(wd+'/tests/fixtures/eia/followup-review-regressions.json',JSON.stringify(fixture,null,2)+'\n');
+const test=wd+'/tests/eia-followup-regressions.test.js';
+let t=fs.readFileSync(test,'utf8');
+t=t.replace('const source = readFileSync',"matrix.cases.push(...JSON.parse(readFileSync(new URL('./fixtures/eia/followup-review-regressions.json', import.meta.url))).cases);\nconst source = readFileSync");
+t=t.replace('try { assert.deepEqual(meaning(intent), expected); }',`try {
+      assert.deepEqual(meaning(intent), expected);
+      if (item.unresolvedPairing) {
+        assert.equal(intent.structuredIntent.conceptPairStatus, 'unresolved');
+        for (const [key, type] of [['products', 'product'], ['activities', 'activity']]) {
+          assert.deepEqual([...new Set(intent.structuredIntent.mentions.concepts.filter(m => m.type === type).map(m => m.value))], item.unresolvedPairing[key]);
+        }
+      }
+    }`);
+fs.writeFileSync(test,t);
+const routing=wd+'/lib/sources/eia/intent-routing.js';
+let s=fs.readFileSync(routing,'utf8');
+s=s.replace('    return /^(?:(?:really|quite|entirely|completely|yet|fully) )*(?:sure|certain|aware|know|knowing|understand|understanding)\\b/.test(predicate);',`    // Predicate modifiers may be degree words, productive -ly adverbs, or "at all".
+    // Stop at other content words: an exclusion command must not reach a later
+    // certainty word and be reclassified as uncertainty.
+    return /^(?:(?:[a-z]+ly|very|so|too|quite|rather|yet|that|as|more|less|at all) )*(?:sure|certain|aware|know|knowing|understand|understanding)\\b/.test(predicate);`);
+fs.writeFileSync(routing,s);
+console.log(JSON.stringify({retainedCases:cases.length,fixtureSha256:createHash('sha256').update(fs.readFileSync(wd+'/tests/fixtures/eia/followup-review-regressions.json')).digest('hex')}));

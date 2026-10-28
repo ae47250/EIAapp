@@ -1,0 +1,76 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {gradeV2} from './scorer-v2.mjs';
+import {frozen,replayOriginal} from './replay.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)),records=path.join(root,'records'),v2=path.join(records,'v2');
+const read=p=>JSON.parse(fs.readFileSync(p)),hash=b=>createHash('sha256').update(b).digest('hex');
+export function tokenCost(usage,rates){if(!usage)return null;const cached=usage.input_tokens_details?.cached_tokens||0,written=usage.input_tokens_details?.cache_write_tokens||0;assert.ok(cached+written<=usage.input_tokens);return ((usage.input_tokens-cached-written)*rates.input+cached*rates.cachedInput+written*rates.cacheWrite+usage.output_tokens*rates.output)/1e6;}
+export function transient(status,body){return [408,409,429,500,502,503,504].includes(status)&&!['insufficient_quota','billing_hard_limit_reached','billing_not_active'].includes(body?.error?.code);}
+export function budgetFits(plan,approved){return Number.isFinite(approved)&&approved>=plan.budget.requiredTotalUSD;}
+export function buildRequest(plan,s,prompt){return {model:s.model,input:prompt.input,reasoning:{effort:s.effort},max_output_tokens:plan.settings.max_output_tokens,service_tier:plan.settings.service_tier,store:plan.settings.store,stream:plan.settings.stream};}
+async function main(){
+ const plan=read(path.join(v2,'reasoning-schedule.json')),approval=read(path.join(v2,'budget-authorization.json'));
+ const approved=approval.totalCeilingUSD;
+ assert.equal(plan.budget.requiredTotalUSD,plan.budget.alreadySpentUSD+plan.maxAttemptsNew*plan.budget.perAttemptCeilingUSD);
+ const summary={scheduled:plan.scheduledNew,maxAttempts:plan.maxAttemptsNew,settings:plan.settings,approvedTotalUSD:approved,maximumTotalUSD:plan.budget.requiredTotalUSD,budgetFits:budgetFits(plan,approved)};
+ const preserved=read(path.join(v2,'preserved-originals.json'));for(const[p,h]of Object.entries(preserved.files))assert.equal(hash(fs.readFileSync(path.join(root,p))),h,'Original artifact changed: '+p);
+ const freeze=read(path.join(v2,'preexecution-manifest.json'));for(const[p,h]of Object.entries(freeze.hashes))assert.equal(hash(fs.readFileSync(path.join(root,p))),h,'Prepared v2 artifact changed: '+p);
+ const snapshot=read(path.join(records,'snapshot.json'));for(const[p,h]of Object.entries(snapshot.snapshotFiles))assert.equal(hash(fs.readFileSync(path.join(root,'snapshot',p))),h,'Snapshot changed: '+p);
+ if(!process.argv.includes('--execute-approved-80')){console.log(JSON.stringify({...summary,dryRun:true,networkCalls:0}));return;}
+ assert.ok(budgetFits(plan,approved),'Whole schedule plus all permitted retries exceeds authorized total');
+ const attemptDir=path.join(v2,'reasoning-attempts');assert.ok(!fs.existsSync(attemptDir),'Attempt directory exists: inspect live process/ledger; never restart blindly');
+ const keyPath=plan.credential.path;assert.ok(fs.existsSync(keyPath)&&!fs.lstatSync(keyPath).isSymbolicLink(),'Existing credential file unavailable');
+ const keyMatches=fs.readFileSync(keyPath,'utf8').match(/(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{40,}(?![A-Za-z0-9_-])/g)||[];assert.equal(keyMatches.length,1,'Expected one existing credential');const key=keyMatches[0];
+ const sanitize=x=>String(x).split(key).join('[REDACTED_CREDENTIAL]');
+ const save=(p,data)=>fs.writeFileSync(path.join(v2,p),typeof data==='string'?data:JSON.stringify(data,null,2)+'\n',{flag:'wx',mode:0o600});
+ const headers=r=>Object.fromEntries([...r.headers].filter(([k])=>['date','content-type','x-request-id','openai-processing-ms','retry-after'].includes(k)||k.startsWith('x-ratelimit-')));
+ const networkFetch=globalThis.fetch;
+ const accessStart=new Date().toISOString();let access;
+ try{access=await networkFetch('https://api.openai.com/v1/models/'+encodeURIComponent(plan.model),{headers:{Authorization:'Bearer '+key},signal:AbortSignal.timeout(30000)});}catch(e){save('reasoning-access-failure.json',{startedAt:accessStart,errorName:e.name,code:e.cause?.code||null});throw Error('Read-only model access check failed; no generation calls made');}
+ const accessRaw=sanitize(await access.text());let accessBody;try{accessBody=JSON.parse(accessRaw)}catch{}
+ save('reasoning-model-access.json',{startedAt:accessStart,completedAt:new Date().toISOString(),status:access.status,headers:headers(access),body:accessBody||accessRaw});
+ assert.ok(access.ok&&accessBody?.id===plan.model,'Exact requested model unavailable; no generation calls made');
+ fs.mkdirSync(attemptDir);save('execution-cost-bound.json',{recordedBeforeGenerationAt:new Date().toISOString(),...summary,budget:plan.budget,credentialHandling:'Existing file read in place; never copied. Authorization headers never recorded.'});
+ const prompts=read(path.join(records,'prompts.json')).prompts,ledger=[];let reserved=plan.budget.alreadySpentUSD,fatal=null;
+ for(const scheduled of plan.schedule){
+  if(fatal)break;const c=frozen.cases.find(c=>c.id===scheduled.queryId),prompt=prompts.find(p=>p.queryId===c.id),request=buildRequest(plan,scheduled,prompt);
+  assert.equal(hash(request.input),prompt.inputSHA256);assert.ok(Buffer.byteLength(request.input)+1000<=plan.settings.inputTokenUpperBound);
+  for(let attempt=1;attempt<=plan.maxAttemptsPerScheduledCall;attempt++){
+   assert.ok(reserved+plan.budget.perAttemptCeilingUSD<=approved+1e-10,'Authorized ceiling would be exceeded');reserved+=plan.budget.perAttemptCeilingUSD;
+   const id=String(scheduled.scheduledId).padStart(3,'0')+'-'+attempt,base='reasoning-attempts/'+id,startedAt=new Date().toISOString();
+   const record={...scheduled,attempt,startedAt,requestedModel:request.model,requestSHA256:hash(JSON.stringify(request)),promptSHA256:prompt.inputSHA256,timeoutMs:plan.settings.timeoutMs,reservedAttemptUSD:plan.budget.perAttemptCeilingUSD};
+   save(base+'.request.json',{url:plan.endpoint,method:'POST',headers:{'Content-Type':'application/json'},body:request});save(base+'.started.json',record);
+   let raw=null,body=null,status=null,shouldRetry=false;const start=performance.now();
+   try{
+    const response=await networkFetch(plan.endpoint,{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify(request),signal:AbortSignal.timeout(plan.settings.timeoutMs)});
+    status=response.status;record.headers=headers(response);raw=sanitize(await response.text());
+   }catch(e){record.transportError={name:e.name,code:e.cause?.code||null};shouldRetry=true;}
+   record.completedAt=new Date().toISOString();record.elapsedMs=performance.now()-start;record.httpStatus=status;
+   // File, parser and replay failures are never misclassified as retryable transport errors.
+   if(raw!==null){
+    save(base+'.response.txt',raw);try{body=JSON.parse(raw)}catch{record.responseJSONError=true;}
+    record.returnedModel=body?.model||null;record.responseId=body?.id||null;record.responseStatus=body?.status||null;record.incompleteDetails=body?.incomplete_details||null;record.usage=body?.usage||null;record.serviceTier=body?.service_tier||null;record.responseError=body?.error||null;record.credentialRedactions=raw.includes('[REDACTED_CREDENTIAL]');
+    record.truncated=body?.status==='incomplete'&&body?.incomplete_details?.reason==='max_output_tokens';record.reasoningTokens=body?.usage?.output_tokens_details?.reasoning_tokens||0;record.tokenCostUSD=tokenCost(body?.usage,plan.ratesUSDPerMillion);
+    shouldRetry=transient(status,body);
+    if([400,401,403,404].includes(status)||['insufficient_quota','billing_hard_limit_reached','billing_not_active','model_not_found'].includes(body?.error?.code))fatal='permanent_account_model_or_request_failure';
+    if(status>=200&&status<300&&body?.model!==plan.model)fatal='returned_model_mismatch';
+    if(status>=200&&status<300&&body?.service_tier!=='default')fatal='unexpected_service_tier';
+    if(body?.usage?.input_tokens>plan.settings.inputTokenUpperBound||body?.usage?.output_tokens>plan.settings.max_output_tokens)fatal='token_bounds_exceeded';
+    try{record.grade=gradeV2(body,c);save(base+'.replay.json',await replayOriginal(raw,c,{status}));record.replayFile=base+'.replay.json';}catch(e){record.evaluationFailure={name:e.name,message:sanitize(e.message)};fatal='local_evaluation_failure';}
+   }else{record.tokenCostUSD=null;record.grade={semantic:{pass:false,gradable:false,status:'ungradable',reason:'transport_failure',errors:[],signature:null},strictJSON:false,sourceSpans:false,usable:false};}
+   record.unknownCostUpperBoundUSD=record.usage?0:plan.budget.perAttemptCeilingUSD;
+   record.retryEligible=shouldRetry;record.willRetry=shouldRetry&&attempt===1&&!fatal;record.fatal=fatal;
+   save(base+'.result.json',record);ledger.push(record);
+   fs.writeFileSync(path.join(v2,'reasoning-progress.json'),JSON.stringify({updatedAt:new Date().toISOString(),actualAttempts:ledger.length,completedScheduled:ledger.filter(a=>!a.willRetry).map(a=>a.scheduledId),lastScheduled:scheduled.scheduledId,reservedTotalUSD:reserved,knownTotalUSD:plan.budget.alreadySpentUSD+ledger.reduce((s,a)=>s+(a.tokenCostUSD||0),0),unknownAdditionalUpperBoundUSD:ledger.reduce((s,a)=>s+a.unknownCostUpperBoundUSD,0),fatal},null,2)+'\n');
+   console.log(JSON.stringify({scheduledId:scheduled.scheduledId,queryId:c.id,effort:scheduled.effort,attempt,status,elapsedMs:Math.round(record.elapsedMs),reasoningTokens:record.reasoningTokens,semantic:record.grade?.semantic?.status,contract:record.grade?.contract?.pass,truncated:record.truncated,retry:record.willRetry,fatal}));
+   if(!record.willRetry)break;
+   const retrySeconds=Number(record.headers?.['retry-after']);await new Promise(resolve=>setTimeout(resolve,Number.isFinite(retrySeconds)?Math.max(1000,Math.min(30000,retrySeconds*1000)):2000));
+  }
+ }
+ save('reasoning-execution-summary.json',{completedAt:new Date().toISOString(),scheduled:80,actualAttempts:ledger.length,completedScheduled:new Set(ledger.filter(a=>!a.willRetry).map(a=>a.scheduledId)).size,retries:ledger.filter(a=>a.attempt>1).length,knownAdditionalCostUSD:ledger.reduce((s,a)=>s+(a.tokenCostUSD||0),0),unknownAdditionalCostUpperBoundUSD:ledger.reduce((s,a)=>s+a.unknownCostUpperBoundUSD,0),reservedTotalUSD:reserved,fatal});
+ console.log(JSON.stringify({finished:true,attempts:ledger.length,completedScheduled:new Set(ledger.map(a=>a.scheduledId)).size,fatal}));
+}
+if(process.argv[1]&&fileURLToPath(import.meta.url)===path.resolve(process.argv[1]))main().catch(e=>{console.error(JSON.stringify({error:e.name,message:e.message}));process.exitCode=1;});

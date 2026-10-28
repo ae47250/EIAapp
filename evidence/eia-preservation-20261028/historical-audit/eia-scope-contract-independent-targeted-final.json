@@ -1,0 +1,150 @@
+{
+  "results": [
+    {
+      "id": "approved-internal-no-1",
+      "query": "Show annual electricity generation in Texas with no direct fuel costs.",
+      "blocked": false,
+      "actualBlocked": false,
+      "passed": true,
+      "publicStatus": 200,
+      "publicBlocked": false,
+      "scopes": 1,
+      "geographies": [
+        "TX"
+      ],
+      "exclusions": [],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    {
+      "id": "approved-internal-no-2",
+      "query": "Show annual electricity generation in Texas with no direct cost.",
+      "blocked": false,
+      "actualBlocked": false,
+      "passed": true,
+      "publicStatus": 200,
+      "publicBlocked": false,
+      "scopes": 1,
+      "geographies": [
+        "TX"
+      ],
+      "exclusions": [],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    {
+      "id": "internal-scope-overflow",
+      "query": "Show natural gas production for Canada. not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; not coal; ",
+      "blocked": true,
+      "actualBlocked": true,
+      "passed": true,
+      "publicStatus": 200,
+      "publicBlocked": true,
+      "scopes": 31,
+      "geographies": [
+        "CAN"
+      ],
+      "exclusions": [
+        {
+          "type": "product",
+          "value": "coal",
+          "order": 0,
+          "confidence": 1,
+          "source": "validated_source_scope"
+        }
+      ],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 1
+      }
+    },
+    {
+      "id": "rules-independent-requests",
+      "query": "Show coal production for Canada. Also show monthly electricity consumption for Texas.",
+      "blocked": true,
+      "actualBlocked": true,
+      "passed": true,
+      "publicStatus": 200,
+      "publicBlocked": true,
+      "scopes": 1,
+      "geographies": [
+        "CAN",
+        "TX"
+      ],
+      "exclusions": [],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "interleaved_country_requests_not_representable"
+        ],
+        "unresolved": 0
+      }
+    },
+    {
+      "id": "scope-only-process-fuel",
+      "query": "Show electricity generation in Texas, not process fuel.",
+      "blocked": false,
+      "actualBlocked": false,
+      "passed": true,
+      "publicStatus": 200,
+      "publicBlocked": false,
+      "scopes": 3,
+      "geographies": [
+        "TX"
+      ],
+      "exclusions": [
+        {
+          "type": "conceptType",
+          "value": "process fuel",
+          "order": 0,
+          "confidence": 1,
+          "source": "validated_source_scope"
+        }
+      ],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 0
+      }
+    },
+    {
+      "id": "scope-only-plant",
+      "query": "Show electricity generation in Texas, excluding plant.",
+      "blocked": false,
+      "actualBlocked": false,
+      "passed": true,
+      "publicStatus": 200,
+      "publicBlocked": false,
+      "scopes": 3,
+      "geographies": [
+        "TX"
+      ],
+      "exclusions": [
+        {
+          "type": "conceptType",
+          "value": "plant",
+          "order": 0,
+          "confidence": 1,
+          "source": "validated_source_scope"
+        }
+      ],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [],
+        "unresolved": 0
+      }
+    }
+  ],
+  "externalCalls": 0,
+  "sourceHashes": {
+    "request-evidence.js": "d5e370c70355a8438c6a44a720943a4f3724af0c8419b13fa0fc74f2feb0b9e6",
+    "interpret-query.js": "a55399e13c702c9ac8d7856758dbd9883cdbcd8620a2c4e7cd6b8ed5f9ac4a14"
+  }
+}

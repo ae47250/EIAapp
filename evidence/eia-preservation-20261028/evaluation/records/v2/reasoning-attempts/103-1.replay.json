@@ -1,0 +1,1449 @@
+{
+  "queryId": 7,
+  "directValidation": {
+    "interpreter": "openai",
+    "geographies": [
+      "TX"
+    ],
+    "pairs": [
+      [
+        "natural gas",
+        "production"
+      ],
+      [
+        "natural gas",
+        "consumption"
+      ]
+    ],
+    "product": "natural gas",
+    "activity": "production",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "seds",
+      "label": "SEDS",
+      "reason": "A state-level energy request uses SEDS.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "data_cannot_be_context"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "natural gas production and consumption in Texas annually",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 56,
+          "text": "natural gas production and consumption in Texas annually",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initial": {
+    "interpreter": "openai",
+    "geographies": [
+      "TX"
+    ],
+    "pairs": [
+      [
+        "natural gas",
+        "production"
+      ],
+      [
+        "natural gas",
+        "consumption"
+      ]
+    ],
+    "product": "natural gas",
+    "activity": "production",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "seds",
+      "label": "SEDS",
+      "reason": "A state-level energy request uses SEDS.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "data_cannot_be_context"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "natural gas production and consumption in Texas annually",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 56,
+          "text": "natural gas production and consumption in Texas annually",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initialFull": {
+    "originalQuery": "natural gas production and consumption in Texas annually",
+    "cleanedQuery": "natural gas production and consumption in Texas annually",
+    "correctedQuery": "natural gas production and consumption in Texas annually",
+    "correctedQuerySource": "ai",
+    "normalizedQuery": "natural gas production and consumption in texas annually",
+    "interpreter": "openai",
+    "interpretationMethod": "ai_primary",
+    "country": {
+      "name": "Texas",
+      "code": "TX",
+      "type": "state",
+      "routeFamilies": [
+        "domestic",
+        "seds"
+      ]
+    },
+    "countryCode": "TX",
+    "validatedGeographies": [
+      {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ],
+        "rawText": "texas",
+        "index": 42,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "Texas",
+            "confidence": 1,
+            "candidateCodes": [
+              "TX"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographyConflicts": [],
+    "validatedCorrections": [],
+    "product": "natural gas",
+    "activity": "production",
+    "sector": null,
+    "frequency": "annual",
+    "requestedFrequency": "annual",
+    "frequencyExplicit": true,
+    "validatedConceptPairs": [
+      {
+        "order": 0,
+        "product": "natural gas",
+        "activity": "production",
+        "originalActivity": null,
+        "activityNormalization": null,
+        "confidence": 1,
+        "source": "validated_interpreter"
+      },
+      {
+        "order": 1,
+        "product": "natural gas",
+        "activity": "consumption",
+        "originalActivity": null,
+        "activityNormalization": null,
+        "confidence": 1,
+        "source": "validated_interpreter"
+      }
+    ],
+    "conceptPairStatus": "validated",
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.99,
+    "fields": {
+      "country": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": "TX",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "country_ai_ambiguous",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "No country is stated.",
+        "alternatives": [],
+        "deterministicValue": "TX",
+        "conflictStatus": "deterministic_only",
+        "resolutionSource": "deterministic_fallback",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "product": {
+        "rawValue": "natural gas",
+        "aiValue": "natural gas",
+        "normalizedValue": "natural gas",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "natural gas",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "breadth": "specific"
+      },
+      "activity": {
+        "rawValue": "production and consumption",
+        "aiValue": "production",
+        "normalizedValue": "production",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "consumption",
+        "conflictStatus": "conflict",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "No approved sector was found.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "frequency": {
+        "rawValue": "annually",
+        "aiValue": "annual",
+        "normalizedValue": "annual",
+        "validation": "approved",
+        "confidence": 1,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "annual",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "explicit": true
+      }
+    },
+    "aiAmbiguity": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "cleanedKeywords": "",
+    "needsClarification": true,
+    "blockingClarification": true,
+    "missingFields": [],
+    "ambiguousFields": [],
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": "natural gas",
+        "activity": "production",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 1
+      },
+      {
+        "order": 1,
+        "product": "natural gas",
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 1
+      }
+    ],
+    "multiCountryComparison": {
+      "active": false,
+      "status": "not_applicable",
+      "geographyCodes": [],
+      "routeFamily": "seds",
+      "reason": "fewer_than_two_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "natural gas production and consumption in Texas annually",
+      "normalizedQuery": "natural gas production and consumption in texas annually",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 42,
+            "text": "texas",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ],
+              "rawText": "texas",
+              "index": 42,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "Texas",
+                  "confidence": 1,
+                  "candidateCodes": [
+                    "TX"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "product",
+            "value": "natural gas",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "production",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 2,
+            "text": null,
+            "type": "product",
+            "value": "natural gas",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 3,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "frequency",
+            "value": "annual",
+            "source": "validated_interpreter"
+          }
+        ]
+      },
+      "geography": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "Texas",
+          "code": "TX",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "product": "natural gas",
+      "productBreadth": "specific",
+      "productAlternatives": [],
+      "activity": "production",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "natural gas",
+          "activity": "production",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 1
+        },
+        {
+          "order": 1,
+          "product": "natural gas",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 1
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "seds",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": true,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "reasons": []
+      },
+      "route": {
+        "family": "seds",
+        "label": "SEDS",
+        "reason": "A state-level energy request uses SEDS.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "raw_exact_deterministic"
+        ],
+        "geographyEvidence": [
+          {
+            "name": "Texas",
+            "code": "TX",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ],
+            "rawText": "texas",
+            "index": 42,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "exact_name_alias_or_code",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "Texas",
+                "confidence": 1,
+                "candidateCodes": [
+                  "TX"
+                ]
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          "validated_interpreter",
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "validated_interpreter",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "bounded_deterministic_grammar"
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "requestEvidence": {
+        "version": 1,
+        "query": "natural gas production and consumption in Texas annually",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 56,
+            "text": "natural gas production and consumption in Texas annually",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "data_cannot_be_context"
+        ],
+        "unresolved": 0
+      }
+    },
+    "route": {
+      "family": "seds",
+      "label": "SEDS",
+      "reason": "A state-level energy request uses SEDS.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        },
+        "product": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 1,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "request_scope_unresolved"
+      ]
+    },
+    "evidenceQuery": "natural gas production and consumption in Texas annually",
+    "requestEvidence": {
+      "version": 1,
+      "query": "natural gas production and consumption in Texas annually",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 56,
+          "text": "natural gas production and consumption in Texas annually",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "data_cannot_be_context"
+      ],
+      "unresolved": 0
+    }
+  },
+  "serialized": "q=natural+gas+production+and+consumption+in+Texas+annually&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22natural+gas+production+and+consumption+in+Texas+annually%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A56%2C%22text%22%3A%22natural+gas+production+and+consumption+in+Texas+annually%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%2C%22invalid%22%3Atrue%7D%2C%22originalQuery%22%3A%22natural+gas+production+and+consumption+in+Texas+annually%22%2C%22cleanedQuery%22%3A%22natural+gas+production+and+consumption+in+Texas+annually%22%2C%22correctedQuery%22%3A%22natural+gas+production+and+consumption+in+Texas+annually%22%2C%22correctedQuerySource%22%3A%22ai%22%2C%22interpreter%22%3A%22openai%22%2C%22confidence%22%3A0.99%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22TX%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22country_ai_ambiguous%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22No+country+is+stated.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22TX%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22resolutionSource%22%3A%22deterministic_fallback%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22product%22%3A%7B%22rawValue%22%3A%22natural+gas%22%2C%22aiValue%22%3A%22natural+gas%22%2C%22normalizedValue%22%3A%22natural+gas%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22natural+gas%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22breadth%22%3A%22specific%22%7D%2C%22activity%22%3A%7B%22rawValue%22%3A%22production+and+consumption%22%2C%22aiValue%22%3A%22production%22%2C%22normalizedValue%22%3A%22production%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22consumption%22%2C%22conflictStatus%22%3A%22conflict%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22frequency%22%3A%7B%22rawValue%22%3A%22annually%22%2C%22aiValue%22%3A%22annual%22%2C%22normalizedValue%22%3A%22annual%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A1%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22annual%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22explicit%22%3Atrue%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22Texas%22%2C%22code%22%3A%22TX%22%2C%22type%22%3A%22state%22%2C%22routeFamilies%22%3A%5B%22domestic%22%2C%22seds%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22Texas%22%2C%22code%22%3A%22TX%22%2C%22type%22%3A%22state%22%2C%22routeFamilies%22%3A%5B%22domestic%22%2C%22seds%22%5D%2C%22rawText%22%3A%22texas%22%2C%22index%22%3A42%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22Texas%22%2C%22confidence%22%3A1%2C%22candidateCodes%22%3A%5B%22TX%22%5D%7D%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%7B%22order%22%3A0%2C%22product%22%3A%22natural+gas%22%2C%22activity%22%3A%22production%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A1%7D%2C%7B%22order%22%3A1%2C%22product%22%3A%22natural+gas%22%2C%22activity%22%3A%22consumption%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A1%7D%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Atrue%2C%22requestedFrequency%22%3A%22annual%22%2C%22multiCountryComparison%22%3A%7B%22active%22%3Afalse%2C%22status%22%3A%22not_applicable%22%2C%22geographyCodes%22%3A%5B%5D%2C%22routeFamily%22%3A%22seds%22%2C%22reason%22%3A%22fewer_than_two_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22request_scope_unresolved%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Atrue%2C%22method%22%3A%22field_level_deterministic_fallback%22%2C%22reasons%22%3A%5B%22country_ai_ambiguous%22%5D%7D%7D&intentCorrectedQuery=natural+gas+production+and+consumption+in+Texas+annually&intentCorrectedQuerySource=ai&intentInterpreter=openai&intentCountryCode=TX&intentProduct=natural+gas&intentActivity=production&intentFrequency=annual&intentConfidence=0.99",
+  "normalized": {
+    "interpreter": "openai",
+    "geographies": [
+      "TX"
+    ],
+    "pairs": [
+      [
+        "natural gas",
+        "production"
+      ],
+      [
+        "natural gas",
+        "consumption"
+      ]
+    ],
+    "product": "natural gas",
+    "activity": "production",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "seds",
+      "label": "SEDS",
+      "reason": "A state-level energy request uses SEDS.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "natural gas production and consumption in Texas annually",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 56,
+          "text": "natural gas production and consumption in Texas annually",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "seds",
+    "retrievals": [],
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "rankingApplied": false,
+      "semanticRerankingApplied": false,
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "request_scope_unresolved"
+      ],
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "seds",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    }
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": false,
+    "query": "natural gas production and consumption in Texas annually",
+    "intent": {
+      "originalQuery": "natural gas production and consumption in Texas annually",
+      "cleanedQuery": "natural gas production and consumption in Texas annually",
+      "correctedQuery": "natural gas production and consumption in Texas annually",
+      "correctedQuerySource": "ai",
+      "normalizedQuery": "natural gas production and consumption in texas annually",
+      "interpreter": "openai",
+      "interpretationMethod": "ai_primary",
+      "country": {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      },
+      "countryCode": "TX",
+      "validatedGeographies": [
+        {
+          "name": "Texas",
+          "code": "TX",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "Texas",
+          "code": "TX",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ],
+          "rawText": "texas",
+          "index": 42,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "TX",
+              "confidence": null,
+              "candidateCodes": [
+                "TX"
+              ]
+            }
+          ]
+        }
+      ],
+      "geographyConflicts": [],
+      "validatedCorrections": [],
+      "product": "natural gas",
+      "activity": "production",
+      "sector": null,
+      "frequency": "annual",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": true,
+      "validatedConceptPairs": [
+        {
+          "order": 0,
+          "product": "natural gas",
+          "activity": "production",
+          "originalActivity": null,
+          "activityNormalization": null,
+          "confidence": 1,
+          "source": "validated_interpreter"
+        },
+        {
+          "order": 1,
+          "product": "natural gas",
+          "activity": "consumption",
+          "originalActivity": null,
+          "activityNormalization": null,
+          "confidence": 1,
+          "source": "validated_interpreter"
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.99,
+      "fields": {
+        "country": {
+          "rawValue": null,
+          "aiValue": "TX",
+          "normalizedValue": "TX",
+          "validation": "approved",
+          "confidence": 0.65,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "TX",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "product": {
+          "rawValue": "natural gas",
+          "aiValue": "natural gas",
+          "normalizedValue": "natural gas",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "natural gas",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "breadth": "specific"
+        },
+        "activity": {
+          "rawValue": "production and consumption",
+          "aiValue": "production",
+          "normalizedValue": "production",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "consumption",
+          "conflictStatus": "conflict",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved sector was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "frequency": {
+          "rawValue": "annually",
+          "aiValue": "annual",
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "confidence": 1,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "annual",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "explicit": true
+        }
+      },
+      "aiAmbiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "method": "field_level_deterministic_fallback",
+        "reasons": []
+      },
+      "cleanedKeywords": "",
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "natural gas",
+          "activity": "production",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 1
+        },
+        {
+          "order": 1,
+          "product": "natural gas",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 1
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "seds",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "natural gas production and consumption in Texas annually",
+        "normalizedQuery": "natural gas production and consumption in texas annually",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 42,
+              "text": "texas",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "Texas",
+                "code": "TX",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ],
+                "rawText": "texas",
+                "index": 42,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "exact_name_alias_or_code",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "TX",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "TX"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "Texas",
+                "code": "TX",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "natural gas",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "production",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 2,
+              "text": null,
+              "type": "product",
+              "value": "natural gas",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 3,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "frequency",
+              "value": "annual",
+              "source": "validated_interpreter"
+            }
+          ]
+        },
+        "geography": {
+          "name": "Texas",
+          "code": "TX",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Texas",
+            "code": "TX",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          }
+        ],
+        "product": "natural gas",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "production",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "natural gas",
+            "activity": "production",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 1
+          },
+          {
+            "order": 1,
+            "product": "natural gas",
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 1
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [],
+          "routeFamily": "seds",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": "annual",
+        "frequencyExplicit": true,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": 0.65,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 1,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": 1,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "request_scope_unresolved"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "seds",
+          "label": "SEDS",
+          "reason": "A state-level energy request uses SEDS.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "raw_exact_deterministic"
+          ],
+          "geographyEvidence": [
+            {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ],
+              "rawText": "texas",
+              "index": 42,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "TX",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "TX"
+                  ]
+                }
+              ]
+            }
+          ],
+          "concepts": [
+            "validated_interpreter",
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "validated_interpreter",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "bounded_deterministic_grammar"
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [],
+        "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+        "requestEvidence": {
+          "version": 1,
+          "query": "natural gas production and consumption in Texas annually",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 56,
+              "text": "natural gas production and consumption in Texas annually",
+              "status": "requested",
+              "target": "data"
+            }
+          ],
+          "invalid": true
+        },
+        "scopeValidation": {
+          "source": "rules",
+          "issues": [
+            "invalid_evidence_envelope"
+          ],
+          "unresolved": 0
+        }
+      },
+      "route": {
+        "family": "seds",
+        "label": "SEDS",
+        "reason": "A state-level energy request uses SEDS.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 0.65,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 1,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 1,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "request_scope_unresolved"
+        ]
+      },
+      "evidenceQuery": "natural gas production and consumption in Texas annually",
+      "requestEvidence": {
+        "version": 1,
+        "query": "natural gas production and consumption in Texas annually",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 56,
+            "text": "natural gas production and consumption in Texas annually",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope"
+        ],
+        "unresolved": 0
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [],
+    "userWarnings": [],
+    "needsClarification": true,
+    "userMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "request_scope_unresolved"
+      ],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 0,
+      "rankingUnit": "country_series"
+    },
+    "note": "No observations were fetched."
+  },
+  "final": {
+    "interpreter": "openai",
+    "geographies": [
+      "TX"
+    ],
+    "pairs": [
+      [
+        "natural gas",
+        "production"
+      ],
+      [
+        "natural gas",
+        "consumption"
+      ]
+    ],
+    "product": "natural gas",
+    "activity": "production",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "seds",
+      "label": "SEDS",
+      "reason": "A state-level energy request uses SEDS.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "natural gas production and consumption in Texas annually",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 56,
+          "text": "natural gas production and consumption in Texas annually",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

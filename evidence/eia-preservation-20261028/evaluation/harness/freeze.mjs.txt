@@ -1,0 +1,60 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const root = new URL('../', import.meta.url);
+const queries = [
+ ['total energy consumption united states',['USA'],[['total energy','consumption']]],
+ ['total energyy consumption usa',['USA'],[['total energy','consumption']]],
+ ['brazil and japan electrciity consumption',['BRA','JPN'],[['electricity','consumption']]],
+ ['energy consumption iceland',['ISL'],[['total energy','consumption']]],
+ ['energy consumption icealnd',['ISL'],[['total energy','consumption']]],
+ ['energy consumption iceland not ireland',['ISL'],[['total energy','consumption']]],
+ ['natural gas production and consumption in Texas annually',['TX'],[['natural gas','production'],['natural gas','consumption']]],
+ ['monthly electricity consumption in California',['CA'],[['electricity','consumption']]],
+ ['electricity consumption in Georgia and France',['GEO','FRA'],[['electricity','consumption']]],
+ ['gas consumption in the United States',['USA'],[]]
+];
+const cases = queries.map(([query,geographies,pairs],i)=>({
+ id:i+1,query,expected:{geographies,pairs,sector:null,frequency:i===7?'monthly':'annual',frequencyExplicit:i===6||i===7,
+ excludedGeographies:i===5?['IRL']:[],exclusions:[],clarification:i===9,
+ ...(i===9?{product:null,activity:'consumption',ambiguity:'natural gas versus gasoline; no unsupported choice'}:{})},
+ meaning:[
+ 'United States national total energy consumption; no sector or frequency stated.',
+ 'Same meaning as #1; obvious energy spelling error.',
+ 'Electricity consumption for Brazil then Japan; preserve both countries despite the electricity typo.',
+ 'Iceland total energy consumption; Ireland is not requested.',
+ 'Iceland total energy consumption with an unambiguous transposition spelling error; Ireland is not requested.',
+ 'Iceland total energy consumption, explicitly excluding Ireland.',
+ 'Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive.',
+ 'California state electricity consumption, monthly explicitly requested; no sector stated.',
+ 'Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule.',
+ 'United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product.'
+ ][i]
+}));
+const settings={endpoint:'https://api.openai.com/v1/responses',models:['gpt-5.4-nano-2026-03-17','gpt-6-luna'],reasoning:{effort:'none'},max_output_tokens:4096,service_tier:'default',store:false,stream:false,timeoutMs:30000,scheduledCalls:40,maxAttemptsPerScheduledCall:2,maxTotalAttempts:80,inputTokenUpperBound:10000,schedulingSeed:47250,retryHttpStatuses:[408,409,429,500,502,503,504],retryPolicy:'At most one retry only for transient transport/service errors; no retry for permanent HTTP, model refusal, malformed output, incomplete output or wrong interpretation. HTTP429 insufficient_quota is permanent. An uncertain transport failure consumes an attempt and full conservative cost reservation.',settingsDepartures:'Production sends only model and the exact input prompt, with30s timeout. Evaluation explicitly chooses the requested two models, none reasoning,4096 output limit, Standard/default service tier,store=false,stream=false. Temperature/top_p/text-format/seed/cache overrides are omitted identically. No JSON repair or model-specific tuning.'};
+// Fixed xorshift32 Fisher-Yates schedule: shuffle ten queries per repetition,
+// then alternate model order for successive paired query blocks. No API seed.
+let rngState=settings.schedulingSeed;const rand=()=>{rngState^=rngState<<13;rngState^=rngState>>>17;rngState^=rngState<<5;return(rngState>>>0)/4294967296;};
+const schedule=[];let block=0;
+for(let repeat=1;repeat<=2;repeat++){
+ const order=cases.map(c=>c.id);for(let i=order.length-1;i>0;i--){const j=Math.floor(rand()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+ for(const queryId of order){const models=block++%2?[...settings.models].reverse():settings.models;for(const model of models)schedule.push({scheduledId:schedule.length+1,queryId,repeat,model});}
+}
+const scoring={
+ semanticAccuracy:'All-or-nothing per original response, with field-level reasons also reported. Check ordered canonical geographies, every product/activity pair, no invented sector, annual/explicit=false default, explicit annual/monthly where stated, Ireland exclusion in #6, and gas clarification in #10. Confidence does not award correctness. Canonical names/metadata aliases with the same meaning are accepted; equivalent valid span segmentations are accepted. Contradictory requested/excluded/unresolved dispositions fail semantics even when compatibility fields look correct.',
+ ambiguityPolicy:'Only #10 requires clarification;1–9 establish clear requests and unnecessary clarification fails exact semantic accuracy. #10 must preserve country/consumption, leave product unresolved, and clearly identify natural-gas/gasoline ambiguity rather than guessing; structured ambiguity with equivalent prose is accepted.',
+ pairsPolicy:'Compare canonical ordered pair arrays. Singular compatibility product/activity fields may summarize the first pair; they cannot replace or contradict ordered pairs. #7 must retain both production and consumption. #10 may use an empty pairs array or null-product/consumption pair while clarifying.',
+ contractCompliance:'Strict original JSON only (no fenced/substr JSON repair), prompt-required top-level keys and field/item types, finite0..1 confidences, allowed canonical category values, and exact source evidence validated against original raw text. Record syntactic JSON, shape, and span compliance separately. App built-in tolerant extraction is replayed unchanged and explicitly labelled if it recovers a non-strict answer.',
+ downstream:'Replay every received original response verbatim through interpretQuery with injected transport, validateAiInterpretation (where JSON parses), actual browser appendIntentParams, normalizeSubmittedIntent, public search GET, and cached candidate pipeline. No additional model/EIA calls. Record semantic changes, clarification, fallback, routes, units, frequencies, source coverage, eligible/ranked/displayed counts and candidate IDs. Correct labelled frequency fallback is not itself a model mistake. Empty metadata results and the known Texas routing/eligibility problem are reported separately; no fixes.',
+ usableInterpretation:'Original semantic pass AND JSON/source-evidence contract pass. A downstream rescue/fallback never upgrades model success. Report downstream-safe outcomes separately.',
+ consistency:'For each query/model, compare normalized original semantic signatures from both scheduled repeats; count missing/error repeats as not consistent. Also report strict pass agreement separately. Byte-identical wording/span splits are not required.',
+ latency:'Wall time for each actual attempt. Report median/min/max of successful scheduled generation latency; separately report end-to-end time including retry and failed attempts.',
+ cost:'Use returned input/output/cache-write/cache-hit token usage and official Standard rates. Include all retries with reported usage. For transport failures without usage disclose unknown billed cost and reserve full per-attempt ceiling. Cost per usable interpretation uses all actual known generation cost divided by usable original responses.',
+ decision:'Provisionally prefer Luna only if frozen semantic and contract scores are no worse and measured token cost is lower; if neither is adequate say so. Ten queries and two repeats do not establish statistical equivalence or general complex-negation validity.'
+};
+const frozen={frozenAt:new Date().toISOString(),basis:'User-specified meanings and approved metadata; no model generation received. No app output used to derive expected meanings.',cases,settings,schedule,scoring};
+const bytes=JSON.stringify(frozen,null,2)+'\n';
+fs.writeFileSync(new URL('records/frozen-evaluation.json',root),bytes,{flag:'wx'});
+fs.writeFileSync(new URL('records/frozen-evaluation.sha256',root),createHash('sha256').update(bytes).digest('hex')+'\n',{flag:'wx'});
+const rows=cases.map(c=>`|${c.id}|${c.query}|${c.expected.geographies.join(', ')}|${c.expected.pairs.map(p=>p.join(' / ')).join('; ')||'unresolved gas / consumption'}|${c.expected.frequency}; explicit=${c.expected.frequencyExplicit}|${c.expected.excludedGeographies.join(', ')||'none'}|${c.expected.clarification?'natural gas vs gasoline':'no'}|`);
+fs.writeFileSync(new URL('records/frozen-expectations.md',root),'# Frozen expectations\n\nAll sectors are unstated/null. No product/activity exclusions, except the explicit Ireland geography exclusion in #6.\n\n|#|Exact query|Geographies in order|Product/activity pairs|Frequency|Excluded geography|Clarification|\n|---|---|---|---|---|---|---|\n'+rows.join('\n')+'\n\n'+Object.entries(scoring).map(([k,v])=>`**${k}:** ${v}`).join('\n\n')+'\n',{flag:'wx'});
+console.log(JSON.stringify({cases:cases.length,schedule:schedule.length,seed:settings.schedulingSeed,sha256:createHash('sha256').update(bytes).digest('hex')}));

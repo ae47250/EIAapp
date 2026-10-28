@@ -1,0 +1,17 @@
+import {interpretQueryWithRules, validateAiInterpretation} from '/tmp/eia-base-review/lib/sources/eia/interpret-query.js';
+// Meaning frozen before execution. No route assertions: these check positive geography and requested pairs only.
+const cases = [
+ {q:'Georgia energy consumption and Georgia production', codes:['GA'],pairs:[['total energy','consumption'],['total energy','production']]},
+ {q:'Not Canada; France energy consumption',codes:['FRA'],pairs:[['total energy','consumption']]},
+ {q:'Show energy consumption in France; exclude Canada; include Germany',codes:['FRA','DEU'],pairs:[['total energy','consumption']]},
+ {q:'Show energy consumption in France to us.',codes:['FRA'],pairs:[['total energy','consumption']]},
+ {q:'Can you compare energy consumption for us in Iceland?',codes:['ISL'],pairs:[['total energy','consumption']]},
+ {q:'Natural gas production and consumption of natural gas in Canada',codes:['CAN'],pairs:[['natural gas','production'],['natural gas','consumption']]},
+ {q:'Electricity generation from wind and solar in California',codes:['CA'],pairs:[['wind','generation'],['solar','generation']]},
+ {q:'Natural gas and electricity consumption in the United States',codes:['USA'],pairs:[['natural gas','consumption'],['electricity','consumption']]}
+];
+function signature(i){return {codes:i.structuredIntent.geographies.map(g=>g.code),pairs:i.structuredIntent.conceptPairs.map(p=>[p.product,p.activity]),clarify:i.needsClarification,corrected:i.correctedQuery,exclusions:i.exclusions};}
+for(const c of cases){
+ const ai={confidence:.99,geographies:c.codes.map(value=>({value,confidence:.99})),conceptPairs:c.pairs.map(([product,activity],order)=>({product,activity,order,confidence:.99})),fields:{country:{value:c.codes[0],confidence:.99},product:{value:c.pairs[0][0],confidence:.99},activity:{value:c.pairs[0][1],confidence:.99},frequency:{value:'annual',confidence:.99}}};
+ console.log(JSON.stringify({q:c.q,expected:{codes:c.codes,pairs:c.pairs},rules:signature(interpretQueryWithRules(c.q)),injected:signature(validateAiInterpretation(ai,c.q))}));
+}

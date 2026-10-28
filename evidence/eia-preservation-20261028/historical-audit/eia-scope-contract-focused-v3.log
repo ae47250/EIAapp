@@ -1,0 +1,674 @@
+TAP version 13
+# Subtest: mechanical cleanup preserves raw input separately and performs no semantic correction
+not ok 1 - mechanical cleanup preserves raw input separately and performs no semantic correction
+  ---
+  duration_ms: 25.999
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:13:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'montly nat gas prodction usa'
+    - 'monthly nat gas production usa'
+           ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'monthly nat gas production usa'
+  actual: 'montly nat gas prodction usa'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:20:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: rules recover the requested country, product, activity, and annual default from messy input
+not ok 2 - rules recover the requested country, product, activity, and annual default from messy input
+  ---
+  duration_ms: 8.4065
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:24:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'looking for data on ergy consn for usa'
+    - 'looking for data on energy consumption for usa'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'looking for data on energy consumption for usa'
+  actual: 'looking for data on ergy consn for usa'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:27:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: rules normalize supported production and consumption typos without broad fuzzy guessing
+ok 3 - rules normalize supported production and consumption typos without broad fuzzy guessing
+  ---
+  duration_ms: 43.248375
+  type: 'test'
+  ...
+# Subtest: validated high-confidence AI output uses only supported categories
+not ok 4 - validated high-confidence AI output uses only supported categories
+  ---
+  duration_ms: 18.005166
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:43:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    'unchanged' !== 'ai'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'ai'
+  actual: 'unchanged'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:55:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: unsupported AI fields cannot replace an unstated annual frequency
+ok 5 - unsupported AI fields cannot replace an unstated annual frequency
+  ---
+  duration_ms: 15.7145
+  type: 'test'
+  ...
+# Subtest: validated AI arrays preserve order and prevent negated raw text from overriding intent
+ok 6 - validated AI arrays preserve order and prevent negated raw text from overriding intent
+  ---
+  duration_ms: 27.493875
+  type: 'test'
+  ...
+# Subtest: AI cannot reintroduce a false total-energy pair inside a specific source phrase
+ok 7 - AI cannot reintroduce a false total-energy pair inside a specific source phrase
+  ---
+  duration_ms: 21.635666
+  type: 'test'
+  ...
+# Subtest: low-confidence AI output is rejected in favor of deterministic rules
+ok 8 - low-confidence AI output is rejected in favor of deterministic rules
+  ---
+  duration_ms: 0.06725
+  type: 'test'
+  ...
+# Subtest: submitted intent cannot introduce an unknown country code
+ok 9 - submitted intent cannot introduce an unknown country code
+  ---
+  duration_ms: 10.931917
+  type: 'test'
+  ...
+# Subtest: AI-corrected product cannot override conflicting raw-derived evidence
+ok 10 - AI-corrected product cannot override conflicting raw-derived evidence
+  ---
+  duration_ms: 19.989292
+  type: 'test'
+  ...
+# Subtest: AI-corrected text cannot manufacture sector evidence absent from the raw query
+ok 11 - AI-corrected text cannot manufacture sector evidence absent from the raw query
+  ---
+  duration_ms: 16.992334
+  type: 'test'
+  ...
+# Subtest: cross-family ambiguous product retains alternatives and requires clarification
+ok 12 - cross-family ambiguous product retains alternatives and requires clarification
+  ---
+  duration_ms: 17.653084
+  type: 'test'
+  ...
+# Subtest: deterministic gas fallback is phrase-first and context-aware
+ok 13 - deterministic gas fallback is phrase-first and context-aware
+  ---
+  duration_ms: 28.885458
+  type: 'test'
+  ...
+# Subtest: broad approved product families retain narrower options without forced selection
+ok 14 - broad approved product families retain narrower options without forced selection
+  ---
+  duration_ms: 9.198208
+  type: 'test'
+  ...
+# Subtest: AI-provided ambiguity uses the same approved-alternatives model for any product term
+ok 15 - AI-provided ambiguity uses the same approved-alternatives model for any product term
+  ---
+  duration_ms: 24.205041
+  type: 'test'
+  ...
+# Subtest: AI timeout is configured for thirty seconds
+ok 16 - AI timeout is configured for thirty seconds
+  ---
+  duration_ms: 0.073833
+  type: 'test'
+  ...
+# Subtest: ordinary lowercase three-letter words are not accepted as country codes
+ok 17 - ordinary lowercase three-letter words are not accepted as country codes
+  ---
+  duration_ms: 5.053
+  type: 'test'
+  ...
+# Subtest: AI receives only the exact raw query while cleaned text remains available locally
+not ok 18 - AI receives only the exact raw query while cleaned text remains available locally
+  ---
+  duration_ms: 24.477958
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:280:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'montly nat gas prodction usa'
+    - 'monthly natural gas production USA'
+           ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'monthly natural gas production USA'
+  actual: 'montly nat gas prodction usa'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:311:12)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: raw-only interpretation preserves exact raw and cleaned forms through staged normalization
+ok 19 - raw-only interpretation preserves exact raw and cleaned forms through staged normalization
+  ---
+  duration_ms: 35.097875
+  type: 'test'
+  ...
+# Subtest: AI request failure uses deterministic fallback with provenance
+ok 20 - AI request failure uses deterministic fallback with provenance
+  ---
+  duration_ms: 9.3605
+  type: 'test'
+  ...
+# Subtest: unsupported AI category and invented series ID are rejected
+ok 21 - unsupported AI category and invented series ID are rejected
+  ---
+  duration_ms: 20.002583
+  type: 'test'
+  ...
+# Subtest: clean state request validates every AI field without fallback
+ok 22 - clean state request validates every AI field without fallback
+  ---
+  duration_ms: 18.671583
+  type: 'test'
+  ...
+# Subtest: AI-corrected concepts control routing instead of misspelled raw mentions
+ok 23 - AI-corrected concepts control routing instead of misspelled raw mentions
+  ---
+  duration_ms: 22.275959
+  type: 'test'
+  ...
+# Subtest: AI cannot replace an explicit local geography or infer an unmentioned sector
+ok 24 - AI cannot replace an explicit local geography or infer an unmentioned sector
+  ---
+  duration_ms: 16.664125
+  type: 'test'
+  ...
+# Subtest: an omitted optional sector does not trigger a clarification request
+ok 25 - an omitted optional sector does not trigger a clarification request
+  ---
+  duration_ms: 16.841667
+  type: 'test'
+  ...
+# Subtest: recognized broad products and ordered activities repair AI ambiguity without expansion
+ok 26 - recognized broad products and ordered activities repair AI ambiguity without expansion
+  ---
+  duration_ms: 22.402791
+  type: 'test'
+  ...
+# Subtest: an explicit query frequency cannot be weakened or changed by AI
+ok 27 - an explicit query frequency cannot be weakened or changed by AI
+  ---
+  duration_ms: 16.965042
+  type: 'test'
+  ...
+# Subtest: compound carrier wording produces one validated concept pair
+ok 28 - compound carrier wording produces one validated concept pair
+  ---
+  duration_ms: 22.22775
+  type: 'test'
+  ...
+# Subtest: AI U.S. aliases cannot create a second noncanonical national geography
+ok 29 - AI U.S. aliases cannot create a second noncanonical national geography
+  ---
+  duration_ms: 28.085917
+  type: 'test'
+  ...
+# Subtest: explicit deterministic geographies survive low AI confidence and omission
+ok 30 - explicit deterministic geographies survive low AI confidence and omission
+  ---
+  duration_ms: 23.359583
+  type: 'test'
+  ...
+# Subtest: context resolves Georgia as a state beside Texas
+ok 31 - context resolves Georgia as a state beside Texas
+  ---
+  duration_ms: 20.735875
+  type: 'test'
+  ...
+# Subtest: AI geography corrections require bounded spelling evidence and official metadata
+ok 32 - AI geography corrections require bounded spelling evidence and official metadata
+  ---
+  duration_ms: 19.917583
+  type: 'test'
+  ...
+# Subtest: bounded metadata matching recovers a country typo omitted by AI
+ok 33 - bounded metadata matching recovers a country typo omitted by AI
+  ---
+  duration_ms: 19.926333
+  type: 'test'
+  ...
+# Subtest: explicit deterministic geography wins and records an AI conflict
+ok 34 - explicit deterministic geography wins and records an AI conflict
+  ---
+  duration_ms: 22.655416
+  type: 'test'
+  ...
+# Subtest: an unsupported geography-like token is not rescued by an unrelated AI claim
+ok 35 - an unsupported geography-like token is not rescued by an unrelated AI claim
+  ---
+  duration_ms: 16.21925
+  type: 'test'
+  ...
+# Subtest: bounded AI product corrections validate against the approved product vocabulary
+ok 36 - bounded AI product corrections validate against the approved product vocabulary
+  ---
+  duration_ms: 60.653875
+  type: 'test'
+  ...
+# Subtest: bounded AI activity corrections validate against the approved activity vocabulary
+ok 37 - bounded AI activity corrections validate against the approved activity vocabulary
+  ---
+  duration_ms: 64.880375
+  type: 'test'
+  ...
+# Subtest: bounded AI sector corrections validate against the approved sector vocabulary
+ok 38 - bounded AI sector corrections validate against the approved sector vocabulary
+  ---
+  duration_ms: 143.271833
+  type: 'test'
+  ...
+# Subtest: bounded AI frequency corrections validate against the approved frequency vocabulary
+ok 39 - bounded AI frequency corrections validate against the approved frequency vocabulary
+  ---
+  duration_ms: 117.478
+  type: 'test'
+  ...
+# Subtest: multiple approved vocabulary corrections can be validated in one raw query
+ok 40 - multiple approved vocabulary corrections can be validated in one raw query
+  ---
+  duration_ms: 23.696875
+  type: 'test'
+  ...
+# Subtest: semantic typo validation rejects low-confidence, unsupported, and tied AI corrections
+ok 41 - semantic typo validation rejects low-confidence, unsupported, and tied AI corrections
+  ---
+  duration_ms: 43.566375
+  type: 'test'
+  ...
+# Subtest: verified corrections preserve exact negations and corrected excluded products
+ok 42 - verified corrections preserve exact negations and corrected excluded products
+  ---
+  duration_ms: 54.980542
+  type: 'test'
+  ...
+# Subtest: AI correction cannot remove a raw negation or make its excluded product positive
+ok 43 - AI correction cannot remove a raw negation or make its excluded product positive
+  ---
+  duration_ms: 15.785292
+  type: 'test'
+  ...
+# Subtest: broad energy and a corrected exclusion stay consistent before browser resubmission
+ok 44 - broad energy and a corrected exclusion stay consistent before browser resubmission
+  ---
+  duration_ms: 17.018625
+  type: 'test'
+  ...
+# Subtest: a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion
+ok 45 - a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion
+  ---
+  duration_ms: 40.536
+  type: 'test'
+  ...
+# Subtest: specific product context resolves AI ambiguity without broadening
+ok 46 - specific product context resolves AI ambiguity without broadening
+  ---
+  duration_ms: 24.507958
+  type: 'test'
+  ...
+# Subtest: recognized query phrases cannot become unknown qualifiers
+ok 47 - recognized query phrases cannot become unknown qualifiers
+  ---
+  duration_ms: 18.249584
+  type: 'test'
+  ...
+# Subtest: AI cannot collapse an unresolved broad product into one interpretation
+ok 48 - AI cannot collapse an unresolved broad product into one interpretation
+  ---
+  duration_ms: 5.377792
+  type: 'test'
+  ...
+# Subtest: AI cannot resolve unsupported product and activity pairing scope
+ok 49 - AI cannot resolve unsupported product and activity pairing scope
+  ---
+  duration_ms: 29.625792
+  type: 'test'
+  ...
+# Subtest: genuinely unknown source terms remain blocking qualifiers
+ok 50 - genuinely unknown source terms remain blocking qualifiers
+  ---
+  duration_ms: 13.946625
+  type: 'test'
+  ...
+# Subtest: filler words and negated concepts do not become blocking qualifiers
+ok 51 - filler words and negated concepts do not become blocking qualifiers
+  ---
+  duration_ms: 26.64175
+  type: 'test'
+  ...
+# Subtest: an explicitly excluded product cannot become an approved positive AI field
+ok 52 - an explicitly excluded product cannot become an approved positive AI field
+  ---
+  duration_ms: 20.722042
+  type: 'test'
+  ...
+# Subtest: long AI interpretation respects the selected activity and ignores invented selection fields
+ok 53 - long AI interpretation respects the selected activity and ignores invented selection fields
+  ---
+  duration_ms: 33.4605
+  type: 'test'
+  ...
+# Subtest: unrelated natural wording near gasoline does not become natural gas
+ok 54 - unrelated natural wording near gasoline does not become natural gas
+  ---
+  duration_ms: 10.050166
+  type: 'test'
+  ...
+# Subtest: invalid AI JSON and timeout both fall back with distinct reasons
+ok 55 - invalid AI JSON and timeout both fall back with distinct reasons
+  ---
+  duration_ms: 19.204625
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-0: I'm not sure what's available for USA energy consumption
+ok 56 - scope evidence knowledge-0: I'm not sure what's available for USA energy consumption
+  ---
+  duration_ms: 502.599459
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-1: I'm not even sure what's available for USA energy consumption
+ok 57 - scope evidence knowledge-1: I'm not even sure what's available for USA energy consumption
+  ---
+  duration_ms: 136.753875
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-2: I'm not 100% sure what's available for USA energy consumption
+ok 58 - scope evidence knowledge-2: I'm not 100% sure what's available for USA energy consumption
+  ---
+  duration_ms: 127.541792
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-3: I'm not 99.5% sure what's available for USA energy consumption
+ok 59 - scope evidence knowledge-3: I'm not 99.5% sure what's available for USA energy consumption
+  ---
+  duration_ms: 125.227542
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-4: I'm not remotely certain about USA energy consumption
+ok 60 - scope evidence knowledge-4: I'm not remotely certain about USA energy consumption
+  ---
+  duration_ms: 122.522834
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-5: I'm not—in any way—certain about USA energy consumption
+ok 61 - scope evidence knowledge-5: I'm not—in any way—certain about USA energy consumption
+  ---
+  duration_ms: 126.377208
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-6: Without really knowing what's available for USA energy consumption
+ok 62 - scope evidence knowledge-6: Without really knowing what's available for USA energy consumption
+  ---
+  duration_ms: 122.017333
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-7: I have no clear idea what's available for USA energy consumption
+ok 63 - scope evidence knowledge-7: I have no clear idea what's available for USA energy consumption
+  ---
+  duration_ms: 121.655917
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-before-gambia: I'm not 80% sure what is available for The Gambia energy consumption
+ok 64 - scope evidence knowledge-before-gambia: I'm not 80% sure what is available for The Gambia energy consumption
+  ---
+  duration_ms: 109.990417
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-before-state: I'm not even certain about monthly Texas natural gas production
+not ok 65 - scope evidence knowledge-before-state: I'm not even certain about monthly Texas natural gas production
+  ---
+  duration_ms: 405.262375
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-evidence.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"public-candidates","error":"Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Texas Dry'\n- 'Texas'\n        ^\n","series":["NG.N9050TX2.M","NG.NA1160_STX_2.M","NG.NA1150_STX_2.M"]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     error: 'Expected values to be strictly equal:\n' +
+    +       '+ actual - expected\n' +
+    +       '\n' +
+    +       "+ 'Texas Dry'\n" +
+    +       "- 'Texas'\n" +
+    +       '        ^\n',
+    +     phase: 'public-candidates',
+    +     series: [
+    +       'NG.N9050TX2.M',
+    +       'NG.NA1160_STX_2.M',
+    +       'NG.NA1150_STX_2.M'
+    +     ]
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'public-candidates'
+      error: |-
+        Expected values to be strictly equal:
+        + actual - expected
+        
+        + 'Texas Dry'
+        - 'Texas'
+                ^
+        
+      series:
+        0: 'NG.N9050TX2.M'
+        1: 'NG.NA1160_STX_2.M'
+        2: 'NG.NA1150_STX_2.M'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-evidence.test.js:105:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: scope evidence knowledge-sector: I'm not absolutely certain about annual USA residential natural gas consumption
+ok 66 - scope evidence knowledge-sector: I'm not absolutely certain about annual USA residential natural gas consumption
+  ---
+  duration_ms: 147.846125
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-ordered: I'm not even sure about Canada and France natural gas consumption and production
+ok 67 - scope evidence knowledge-ordered: I'm not even sure about Canada and France natural gas consumption and production
+  ---
+  duration_ms: 490.708125
+  type: 'test'
+  ...
+# Subtest: scope evidence bare-exclusion: USA energy consumption, not coal production
+ok 68 - scope evidence bare-exclusion: USA energy consumption, not coal production
+  ---
+  duration_ms: 148.280208
+  type: 'test'
+  ...
+# Subtest: scope evidence geography-exclusion: USA energy consumption, not Canada or Mexico
+ok 69 - scope evidence geography-exclusion: USA energy consumption, not Canada or Mexico
+  ---
+  duration_ms: 132.631708
+  type: 'test'
+  ...
+# Subtest: scope evidence ordinary-negative-action: USA energy consumption; do not show coal production
+ok 70 - scope evidence ordinary-negative-action: USA energy consumption; do not show coal production
+  ---
+  duration_ms: 139.621208
+  type: 'test'
+  ...
+# Subtest: scope evidence modified-negative-action: USA energy consumption; please do not ever include coal production
+ok 71 - scope evidence modified-negative-action: USA energy consumption; please do not ever include coal production
+  ---
+  duration_ms: 141.089791
+  type: 'test'
+  ...
+# Subtest: scope evidence punctuated-negative-action: USA energy consumption; do not, under any circumstances, show coal production
+ok 72 - scope evidence punctuated-negative-action: USA energy consumption; do not, under any circumstances, show coal production
+  ---
+  duration_ms: 143.250792
+  type: 'test'
+  ...
+# Subtest: scope evidence direct-exclude: USA energy consumption excluding coal production
+ok 73 - scope evidence direct-exclude: USA energy consumption excluding coal production
+  ---
+  duration_ms: 141.304
+  type: 'test'
+  ...
+# Subtest: scope evidence without-data: USA energy consumption without coal production
+ok 74 - scope evidence without-data: USA energy consumption without coal production
+  ---
+  duration_ms: 140.962167
+  type: 'test'
+  ...
+# Subtest: scope evidence same-concept-not-negative: Natural gas consumption in Canada, not natural gas production in Canada
+ok 75 - scope evidence same-concept-not-negative: Natural gas consumption in Canada, not natural gas production in Canada
+  ---
+  duration_ms: 88.567792
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-then-exclusion: I'm not even sure what's available for USA energy consumption, not coal production
+ok 76 - scope evidence knowledge-then-exclusion: I'm not even sure what's available for USA energy consumption, not coal production
+  ---
+  duration_ms: 138.1105
+  type: 'test'
+  ...
+# Subtest: scope evidence excluded-then-positive: France energy consumption, not Canada; Germany energy consumption
+ok 77 - scope evidence excluded-then-positive: France energy consumption, not Canada; Germany energy consumption
+  ---
+  duration_ms: 220.702125
+  type: 'test'
+  ...
+# Subtest: scope evidence excluded-then-knowledge: France energy consumption, not Canada; I am not 100% sure about Germany energy consumption
+ok 78 - scope evidence excluded-then-knowledge: France energy consumption, not Canada; I am not 100% sure about Germany energy consumption
+  ---
+  duration_ms: 218.970917
+  type: 'test'
+  ...
+# Subtest: scope evidence additive-not-only: Not only USA but also Canada energy consumption
+ok 79 - scope evidence additive-not-only: Not only USA but also Canada energy consumption
+  ---
+  duration_ms: 201.598875
+  type: 'test'
+  ...
+# Subtest: scope evidence action-composition: USA energy consumption; do not exclude coal production
+ok 80 - scope evidence action-composition: USA energy consumption; do not exclude coal production
+  ---
+  duration_ms: 73.247666
+  type: 'test'
+  ...
+# Subtest: scope evidence unknown-bridge: USA energy consumption; not related to coal production
+ok 81 - scope evidence unknown-bridge: USA energy consumption; not related to coal production
+  ---
+  duration_ms: 71.61525
+  type: 'test'
+  ...
+# Subtest: scope evidence undecided-second-request: USA energy consumption; I'm not sure whether to include coal production
+ok 82 - scope evidence undecided-second-request: USA energy consumption; I'm not sure whether to include coal production
+  ---
+  duration_ms: 72.950917
+  type: 'test'
+  ...
+# Subtest: scope evidence uncertain-exclusion: USA energy consumption, not necessarily coal production
+ok 83 - scope evidence uncertain-exclusion: USA energy consumption, not necessarily coal production
+  ---
+  duration_ms: 70.675708
+  type: 'test'
+  ...
+# Subtest: scope evidence unknown-predicate: USA energy consumption; I am not sold on coal production
+ok 84 - scope evidence unknown-predicate: USA energy consumption; I am not sold on coal production
+  ---
+  duration_ms: 69.539542
+  type: 'test'
+  ...
+# Subtest: scope evidence clear-parts-around-ambiguity: France energy consumption; not related to coal production; Germany energy consumption
+ok 85 - scope evidence clear-parts-around-ambiguity: France energy consumption; not related to coal production; Germany energy consumption
+  ---
+  duration_ms: 99.805458
+  type: 'test'
+  ...
+# Subtest: scope evidence unknown-country-scope: USA energy consumption; not necessarily Canada
+ok 86 - scope evidence unknown-country-scope: USA energy consumption; not necessarily Canada
+  ---
+  duration_ms: 63.036667
+  type: 'test'
+  ...
+# Subtest: scope evidence country-adverb-collision: Canada energy consumption, not Italy, sure?
+ok 87 - scope evidence country-adverb-collision: Canada energy consumption, not Italy, sure?
+  ---
+  duration_ms: 110.670292
+  type: 'test'
+  ...
+# Subtest: scope evidence activity-adverb-collision: USA energy consumption, not supply, sure?
+ok 88 - scope evidence activity-adverb-collision: USA energy consumption, not supply, sure?
+  ---
+  duration_ms: 131.885333
+  type: 'test'
+  ...
+# Subtest: scope evidence gas-still-ambiguous: I'm not even sure about USA gas consumption
+ok 89 - scope evidence gas-still-ambiguous: I'm not even sure about USA gas consumption
+  ---
+  duration_ms: 43.340958
+  type: 'test'
+  ...
+1..89
+# tests 89
+# suites 0
+# pass 84
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5946.907833

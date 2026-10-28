@@ -1,0 +1,110 @@
+✔ frozen D01: energy consumption Iceland (26.060625ms)
+✔ frozen D02: energy consumption Ireland (9.973291ms)
+✔ frozen D03: energy consumption Finland (8.598375ms)
+✔ frozen D04: energy consumption Poland (8.401083ms)
+✔ frozen D05: energy consumption Austria (8.565292ms)
+✔ frozen D06: energy consumption Australia (8.9065ms)
+✔ frozen D07: energy consumption Niger (7.972125ms)
+✔ frozen D08: energy consumption Nigeria (8.967083ms)
+✔ frozen D09: energy consumption Guinea (8.339167ms)
+✔ frozen D10: energy consumption Equatorial Guinea (10.27825ms)
+✔ frozen D11: energy consumption Guinea-Bissau (9.612875ms)
+✔ frozen D12: energy consumption New Zealand (9.071375ms)
+✔ frozen D13: energy consumption United Kingdom (9.292958ms)
+✔ frozen D14: energy consumption Gambia, The (8.92675ms)
+✔ frozen D15: energy consumption Germany, East (9.582542ms)
+✔ frozen D16: energy consumption Germany, West (8.841666ms)
+✔ frozen D17: energy consumption uk (7.499083ms)
+✔ frozen D18: energy consumption u.s. (7.914125ms)
+✔ frozen D19: energy consumption uae (8.065333ms)
+✔ frozen D20: energy consumption Czechia (8.617084ms)
+✔ frozen D21: energy consumption south korea (9.206166ms)
+✔ frozen D22: energy consumption icealnd (9.07ms)
+✔ frozen D23: energy consumption Irelxnd (8.787208ms)
+﹣ frozen D24: energy consumption Iland (0.072959ms) # Ambiguous spelling; no unique geography expectation. Do not force a country.
+✔ frozen D25: energy consumption Iceland not Ireland (11.318583ms)
+✔ frozen D26: energy consumption Iceland excluding Ireland (11.309417ms)
+✔ frozen D27: energy consumption Iceland without Ireland (11.657667ms)
+✔ frozen D28: energy consumption Iceland except Ireland (10.474209ms)
+✔ frozen D29: energy consumption France not Canada or Mexico (11.143959ms)
+✔ frozen D30: energy consumption not Ireland but Iceland (10.512792ms)
+✔ frozen D31: energy consumption excluding Ireland (10.571375ms)
+✔ frozen D32: please show the energy consumption for Iceland (10.729792ms)
+✔ frozen D33: show the energy consumption in the United States (16.677084ms)
+✔ frozen D34: energy consumption east of France (9.2065ms)
+✔ frozen D35: energy consumption west of Canada (9.030208ms)
+✔ frozen D36: Georgia energy consumption (8.277083ms)
+✔ frozen D37: Georgia and France energy consumption (10.769666ms)
+✔ frozen D38: Georgia and Alabama energy consumption (10.562834ms)
+✔ frozen D39: Georgia and United States energy consumption (12.035292ms)
+✔ frozen D40: international Georgia energy consumption (10.444666ms)
+✔ frozen D41: international Georgia and United States energy consumption (12.971125ms)
+✔ frozen D42: France then Iceland then Ireland energy consumption (13.972959ms)
+✔ frozen D43: Canada natural gas imports and exports (11.157084ms)
+✔ frozen D44: Brazil petroleum and natural gas consumption (10.922791ms)
+✔ frozen D45: Texas coal production and natural gas consumption (12.956375ms)
+✔ frozen D46: Texas coal and natural gas production and consumption (11.690833ms)
+✔ frozen D47: gas consumption in the United States (9.277375ms)
+✔ frozen D48: United States natural gas consumption (10.011667ms)
+✔ frozen D49: United States gasoline consumption (9.093ms)
+✔ frozen D50: United States total energy consumption (561.7575ms)
+✔ frozen D51: France weekly solar electricity generation (22.989833ms)
+✔ frozen D52: Texas monthly residential natural gas consumption (12.568375ms)
+✔ frozen D53: France quarterly petroleum consumption (10.668542ms)
+✔ frozen D54: France annual energy consumption (9.839042ms)
+✔ frozen D55: France energy consumption (7.89575ms)
+✔ frozen D56: France energy consumption (7.811708ms)
+✔ every approved complete geography name survives exact and fuzzy competition (5139.925917ms)
+✔ supported aliases remain ordered and wording adds no countries (94.745708ms)
+✔ seed 47250: exact, excluded and filler invariants (882.964166ms)
+✔ builder preserves comma-bearing official geography labels and product punctuation (0.97475ms)
+✔ seed 47250: spelling ties may remain unresolved and exact names win (636.411875ms)
+✔ complete candidate labels retain raw artifact hashes and narrower coverage (60.6795ms)
+✖ bounded retrieval leaves room for every valid activity in a multiple-request search (877.760542ms)
+✖ official source and description product evidence prevent inexact scopes from scoring as exact (237.199333ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 61
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 9115.976833
+
+✖ failing tests:
+
+test at tests/eia-interpretation-audit.test.js:103:1
+✖ bounded retrieval leaves room for every valid activity in a multiple-request search (877.760542ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.retrievals[1].displayCandidates.some(c=>c.series_id==='NG.NA1490_STX_2.A'))
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-interpretation-audit.test.js:108:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-interpretation-audit.test.js:111:1
+✖ official source and description product evidence prevent inexact scopes from scoring as exact (237.199333ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(electricity.every(c=>c.ranking.signals.detectedProducts.includes('electricity') && c.ranking.signals.productCompatibility<1))
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-interpretation-audit.test.js:121:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

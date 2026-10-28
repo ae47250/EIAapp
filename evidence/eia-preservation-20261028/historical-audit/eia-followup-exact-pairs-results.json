@@ -1,0 +1,50 @@
+[
+  {
+    "query": "I'm not sure what's available for Canada and The Gambia: coal consumption and natural gas production",
+    "expectedCodes": [
+      "CAN",
+      "GMB"
+    ],
+    "expectedPairs": [
+      [
+        "coal",
+        "consumption"
+      ],
+      [
+        "natural gas",
+        "production"
+      ]
+    ],
+    "phases": [
+      "rules",
+      "interpretQuery",
+      "serialized",
+      "publicGET"
+    ],
+    "pass": true
+  },
+  {
+    "query": "I'm not sure what's available for Canada and The Gambia: energy consumption and production",
+    "expectedCodes": [
+      "CAN",
+      "GMB"
+    ],
+    "expectedPairs": [
+      [
+        "total energy",
+        "consumption"
+      ],
+      [
+        "total energy",
+        "production"
+      ]
+    ],
+    "phases": [
+      "rules",
+      "interpretQuery",
+      "serialized",
+      "publicGET"
+    ],
+    "pass": true
+  }
+]

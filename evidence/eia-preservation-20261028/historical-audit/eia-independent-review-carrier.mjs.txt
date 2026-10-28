@@ -1,0 +1,5 @@
+import * as current from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+import * as baseline from '/tmp/eia-base-review/lib/sources/eia/interpret-query.js';
+// Frozen: 'electricity generation from wind' is one wind-generation request; electricity is the carrier.
+// 'electricity generation from coal' similarly means coal-generation and has no independent electricity total.
+for(const [q,product] of [['Electricity generation from wind in California','wind'],['Electricity generation from coal in Texas','coal']]){const sig=i=>({codes:i.structuredIntent.geographies.map(g=>g.code),pairs:i.structuredIntent.conceptPairs.map(p=>[p.product,p.activity]),clarify:i.needsClarification});console.log(JSON.stringify({q,expected:[[product,'generation']],baseline:sig(baseline.interpretQueryWithRules(q)),current:sig(current.interpretQueryWithRules(q))}));}

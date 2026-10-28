@@ -1,0 +1,105 @@
+{
+  "reviewBase": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "frozenBefore": "Supplemental mechanism review; generated after implementation inspection",
+  "metadata": {
+    "routingMetadata": "data/eia/routing-metadata.json",
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "geographies": {
+      "GMB": "Gambia, The",
+      "ZMB": "Zambia",
+      "BHS": "The Bahamas",
+      "CAN": "Canada",
+      "USA": "United States",
+      "PNG": "Papua New Guinea",
+      "GNB": "Guinea-Bissau",
+      "GIN": "Guinea",
+      "GEO": "Georgia"
+    }
+  },
+  "defaults": {
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "products": [
+      "total energy"
+    ],
+    "activities": [
+      "consumption"
+    ],
+    "excludedGeographies": [],
+    "excludedProducts": [],
+    "excludedActivities": []
+  },
+  "cases": [
+    {
+      "id": "uncertainty-modifier-0",
+      "query": "I'm not at all sure what's available for USA energy consumption",
+      "geographies": [
+        "USA"
+      ]
+    },
+    {
+      "id": "uncertainty-modifier-1",
+      "query": "I'm not very sure what's available for USA energy consumption",
+      "geographies": [
+        "USA"
+      ]
+    },
+    {
+      "id": "uncertainty-modifier-2",
+      "query": "I'm not so sure what's available for USA energy consumption",
+      "geographies": [
+        "USA"
+      ]
+    },
+    {
+      "id": "uncertainty-modifier-3",
+      "query": "I'm not particularly sure what's available for USA energy consumption",
+      "geographies": [
+        "USA"
+      ]
+    },
+    {
+      "id": "uncertainty-modifier-4",
+      "query": "I'm not exactly sure what's available for USA energy consumption",
+      "geographies": [
+        "USA"
+      ]
+    },
+    {
+      "id": "uncertainty-modifier-5",
+      "query": "I'm not actually sure what's available for USA energy consumption",
+      "geographies": [
+        "USA"
+      ]
+    },
+    {
+      "id": "ordered-explicit-pairs",
+      "query": "I'm not sure what's available for Canada and The Gambia: coal consumption and natural gas production",
+      "geographies": [
+        "CAN",
+        "GMB"
+      ],
+      "products": [
+        "coal",
+        "natural gas"
+      ],
+      "activities": [
+        "consumption",
+        "production"
+      ]
+    },
+    {
+      "id": "ordered-multiple-activities",
+      "query": "I'm not sure what's available for Canada and The Gambia: energy consumption and production",
+      "geographies": [
+        "CAN",
+        "GMB"
+      ],
+      "activities": [
+        "consumption",
+        "production"
+      ]
+    }
+  ]
+}

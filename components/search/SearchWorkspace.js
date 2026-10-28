@@ -348,6 +348,7 @@ function appendIntentParams(params, intent) {
   if (!intent) return params;
   params.set("intentReady", "1");
   params.set("intentPayload", JSON.stringify({
+    requestEvidence: intent.requestEvidence,
     originalQuery: intent.originalQuery,
     cleanedQuery: intent.cleanedQuery,
     correctedQuery: intent.correctedQuery,

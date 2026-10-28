@@ -1,0 +1,44 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const old=JSON.parse(fs.readFileSync(root+'/tests/fixtures/eia/negation-target.json'));
+const cases=[];
+for(const item of old.cases){
+ const q=item.q; const scopes=[];
+ const add=(start,end,status,target='data')=>{if(end<=start)return;const scope={start,end,text:q.slice(start,end),status,target};if(status==='excluded'){const op=[...scope.text.matchAll(/\b(?:not|without|excluding)\b/gi)][0];if(!op)throw Error(item.id);scope.operator={start:start+op.index,end:start+op.index+op[0].length,text:op[0]};}scopes.push(scope);};
+ const preface=(data)=>{const start=q.indexOf(data);if(start<0)throw Error(item.id);add(0,start,'context','knowledge');add(start,q.length,'requested');};
+ const tail=(marker,status='excluded',target='data')=>{const start=q.indexOf(marker);if(start<0)throw Error(item.id);add(0,start,'requested');add(start,q.length,status,target);};
+ if(/^knowledge-\d$/.test(item.id))preface('USA');
+ else switch(item.id){
+ case 'knowledge-before-gambia':preface('The Gambia');break;
+ case 'knowledge-before-state':preface('monthly');break;
+ case 'knowledge-sector':preface('annual');break;
+ case 'knowledge-ordered':preface('Canada');break;
+ case 'gas-still-ambiguous':preface('USA');break;
+ case 'ordinary-negative-action':tail('do not','excluded','action');break;
+ case 'modified-negative-action':tail('please do not','excluded','action');break;
+ case 'punctuated-negative-action':tail('do not','excluded','action');break;
+ case 'direct-exclude':tail('excluding');break;
+ case 'without-data':tail('without');break;
+ case 'bare-exclusion':case 'geography-exclusion':case 'same-concept-not-negative':tail('not');break;
+ case 'knowledge-then-exclusion':{const a=q.indexOf('USA'),b=q.lastIndexOf('not');add(0,a,'context','knowledge');add(a,b,'requested');add(b,q.length,'excluded');break;}
+ case 'excluded-then-positive':{const a=q.indexOf('not'),b=q.indexOf(';')+1;add(0,a,'requested');add(a,b,'excluded');add(b,q.length,'requested');break;}
+ case 'excluded-then-knowledge':{const a=q.indexOf('not'),b=q.indexOf(';')+1,c=q.indexOf('Germany');add(0,a,'requested');add(a,b,'excluded');add(b,c,'context','knowledge');add(c,q.length,'requested');break;}
+ case 'additive-not-only':{const a=q.indexOf('USA');add(0,a,'context','action');add(a,q.length,'requested');break;}
+ case 'action-composition':tail('do not','unresolved','action');break;
+ case 'unknown-bridge':case 'uncertain-exclusion':case 'unknown-country-scope':tail('not','unresolved','unknown');break;
+ case 'undecided-second-request':tail("I'm",'unresolved','knowledge');break;
+ case 'unknown-predicate':tail('I am','unresolved','unknown');break;
+ case 'clear-parts-around-ambiguity':{const a=q.indexOf('not'),b=q.lastIndexOf(';')+1;add(0,a,'requested');add(a,b,'unresolved','unknown');add(b,q.length,'requested');break;}
+ case 'country-adverb-collision':case 'activity-adverb-collision':{const a=q.indexOf('not'),b=q.lastIndexOf(',')+1;add(0,a,'requested');add(a,b,'excluded');add(b,q.length,'context','knowledge');break;}
+ default:throw Error(item.id);
+ }
+ const expected=structuredClone(item.expected);
+ let adjudication=null;
+ if(item.id==='action-composition'){expected.pairs=[['total energy','consumption']];expected.clarify=true;adjudication='The independent review identifies do-not-exclude as permission versus positive-request ambiguity. Preserve the established request and clarify; do not force inclusion or exclusion. Original expectation is retained separately.';}
+ cases.push({...item,originalExpected:item.expected,expected,adjudication,requestEvidence:{version:1,query:q,scopes}});
+}
+const result={contractVersion:1,sourceFixtureSha256:createHash('sha256').update(fs.readFileSync(root+'/tests/fixtures/eia/negation-target.json')).digest('hex'),policy:'Expected meanings frozen before implementation remain controlling. Only the independently disputed action-composition expectation is transparently adjudicated; conservative rules-only clarification is tested separately from model semantic success.',cases};
+const text=JSON.stringify(result,null,2)+'\n';
+fs.writeFileSync('/private/tmp/eia-scope-evidence-regressions.json',text);
+console.log(JSON.stringify({cases:cases.length,sha256:createHash('sha256').update(text).digest('hex')}));

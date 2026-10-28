@@ -1,0 +1,211 @@
+{
+  "base": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "head": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "branch": "codex/eia-interpretation-audit",
+  "tracked": [
+    "components/search/SearchWorkspace.js",
+    "data/eia/phase4-routing-config.json",
+    "data/eia/routing-metadata.json",
+    "lib/sources/eia/candidate-search.js",
+    "lib/sources/eia/intent-routing.js",
+    "lib/sources/eia/interpret-query.js",
+    "lib/sources/eia/local-ranking.js",
+    "lib/sources/eia/local-retrieval.js",
+    "lib/sources/eia/multi-country-comparison.js",
+    "scripts/eia-metadata/normalize.js",
+    "tests/eia-query-interpretation.test.js"
+  ],
+  "untracked": [
+    "docs/eia-interpretation-audit.md",
+    "lib/sources/eia/request-evidence.js",
+    "tests/eia-followup-regressions.test.js",
+    "tests/eia-independent-challenges.test.js",
+    "tests/eia-interpretation-audit.test.js",
+    "tests/eia-negation-independent.test.js",
+    "tests/eia-negation-target.test.js",
+    "tests/eia-scope-evidence.test.js",
+    "tests/eia-scope-independent.test.js",
+    "tests/eia-scope-metadata-labels.test.js",
+    "tests/fixtures/eia/challenge-route-adjudication.json",
+    "tests/fixtures/eia/followup-regressions.json",
+    "tests/fixtures/eia/followup-review-regressions.json",
+    "tests/fixtures/eia/independent-challenges.json",
+    "tests/fixtures/eia/interpretation-audit.json",
+    "tests/fixtures/eia/negation-independent.json",
+    "tests/fixtures/eia/negation-target.json",
+    "tests/fixtures/eia/review-regressions.json",
+    "tests/fixtures/eia/scope-evidence-legacy.json",
+    "tests/fixtures/eia/scope-evidence-regressions.json",
+    "tests/fixtures/eia/scope-independent-matrix.json",
+    "tests/fixtures/eia/scope-independent-payloads.json"
+  ],
+  "checks": [
+    {
+      "command": "node --check lib/sources/eia/candidate-search.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check lib/sources/eia/intent-routing.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check lib/sources/eia/interpret-query.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check lib/sources/eia/local-ranking.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check lib/sources/eia/local-retrieval.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check lib/sources/eia/multi-country-comparison.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check lib/sources/eia/request-evidence.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check scripts/eia-metadata/normalize.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-followup-regressions.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-independent-challenges.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-interpretation-audit.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-negation-independent.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-negation-target.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-query-interpretation.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-scope-evidence.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-scope-independent.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "node --check tests/eia-scope-metadata-labels.test.js",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "git diff --cached --check",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "command": "Next.js production build checks JSX imports/exports and compilation",
+      "exitCode": 0,
+      "evidence": "eia-scope-contract-final-build.log"
+    }
+  ],
+  "countryNameFormsByteIdenticalToAuthorizedPhaseStart": true,
+  "originalFrozenFixturesUnchanged": {
+    "tests/fixtures/eia/challenge-route-adjudication.json": true,
+    "tests/fixtures/eia/followup-regressions.json": true,
+    "tests/fixtures/eia/followup-review-regressions.json": true,
+    "tests/fixtures/eia/independent-challenges.json": true,
+    "tests/fixtures/eia/interpretation-audit.json": true,
+    "tests/fixtures/eia/negation-independent.json": true,
+    "tests/fixtures/eia/negation-target.json": true,
+    "tests/fixtures/eia/review-regressions.json": true
+  },
+  "protectedFilesIdenticalToBase": {
+    "package.json": true,
+    "package-lock.json": true,
+    "proxy.js": true,
+    "app/api/login/route.js": true,
+    "app/api/logout/route.js": true,
+    "lib/auth.js": true,
+    "data/eia/builds/phase1b/domestic.jsonl.gz": true,
+    "data/eia/builds/phase1b/aggregation-hierarchy.generated.json": true,
+    "data/eia/builds/phase1b/validation-report.json": true,
+    "data/eia/builds/phase1b/natural-gas.jsonl.gz": true,
+    "data/eia/builds/phase1b/manifest.json": true,
+    "data/eia/builds/phase1b/plants.jsonl.gz": true,
+    "data/eia/builds/phase1b/international.jsonl.gz": true,
+    "data/eia/builds/phase1b/routes.json": true,
+    "data/eia/builds/phase1b/seds.jsonl.gz": true
+  },
+  "changedFileHashes": {
+    "components/search/SearchWorkspace.js": "26ccb47d5f182a66414ba35b2fe6b449075163e22112864c29a01852215049f8",
+    "data/eia/phase4-routing-config.json": "c20f43fb9738a95e229d460e0d8b49913a6526420bfa0bab58dd5b14240c123e",
+    "data/eia/routing-metadata.json": "8cee62e497af1701405a86561a9a9dd9ba39f607ac092820ccd1a09aa8306558",
+    "docs/eia-interpretation-audit.md": "3206cdd659908acc6aedf359e8940585dd1d703459fd4b75c4294744f999f652",
+    "lib/sources/eia/candidate-search.js": "5e155ea1154c27a24af1b504f345331a71582365c67f32bc89054ffba2cca5ef",
+    "lib/sources/eia/intent-routing.js": "d95587c9a82ede0b59d35bd815a109ce5be156dd8d9b0c230762a5244d3abebf",
+    "lib/sources/eia/interpret-query.js": "a55399e13c702c9ac8d7856758dbd9883cdbcd8620a2c4e7cd6b8ed5f9ac4a14",
+    "lib/sources/eia/local-ranking.js": "1eadc7aa26240e2e1ebe73c2b7ef2306b0ef7a2de1b727e4248be97935e10252",
+    "lib/sources/eia/local-retrieval.js": "e3c5a7f5d3805e4cd9f3e777f4be58bb1b0ae85819a038c3e43b11bd0a079fb3",
+    "lib/sources/eia/multi-country-comparison.js": "d9f8e8c7ae35b0d6e2032623afb9925ce4bdf91ec3e83a1fc28c0a17fb83fcfb",
+    "lib/sources/eia/request-evidence.js": "d5e370c70355a8438c6a44a720943a4f3724af0c8419b13fa0fc74f2feb0b9e6",
+    "scripts/eia-metadata/normalize.js": "5847618f0816ef62c5507d56c018ee0d15c9bdb10895efe576e05ba2435dd3b7",
+    "tests/eia-followup-regressions.test.js": "52131e0f95fa752d52fef95322f72c3d7f2cf6e39524b06a3900e9989246d78c",
+    "tests/eia-independent-challenges.test.js": "9e8a8bf8f2b1a614bcbc7fbf563b6583b4e54f05996af95d96a5cbb1bc505f91",
+    "tests/eia-interpretation-audit.test.js": "fdcb537dab7033e6861e91bdc0463479be8a6b51004d29982d763803bf922ba0",
+    "tests/eia-negation-independent.test.js": "4091ffba05fd68b03e441daf0e5df47b33516fb7423bc2726f243f1a9673ed9c",
+    "tests/eia-negation-target.test.js": "4c47acaecc8f9d25e54b13ce0f02f81d380e44b1ad2ce835c3e4aad08a77e9b3",
+    "tests/eia-query-interpretation.test.js": "fbee4ab70107e1a04acd87fbd9a6758c701e4f8a6b922beb44d0c5fd6f8d8634",
+    "tests/eia-scope-evidence.test.js": "736a02e519dadb90b03f6f338adab374af12ea7d4e481fcc3433e17add9ecb5b",
+    "tests/eia-scope-independent.test.js": "037662f8580b152093726b338ac18f4732814bd4cf4cb3e9bbfb544fbcd71670",
+    "tests/eia-scope-metadata-labels.test.js": "c2bb97f818f01a81bc1e3865a9732ac982c89b456010782c3470d0932144e584",
+    "tests/fixtures/eia/challenge-route-adjudication.json": "da51d7ee620516520490c09c8521a0c644714e7da67f56522e7561569dd3756b",
+    "tests/fixtures/eia/followup-regressions.json": "0f803a903f73313fc21a5e1f54600bacc8baf19423672327698b52da87d2c643",
+    "tests/fixtures/eia/followup-review-regressions.json": "ec6e7863daa27e4887d0d9655d9bd228884af3d6b6a7824aba342c5efb4e04a5",
+    "tests/fixtures/eia/independent-challenges.json": "1caf5edccda8e4e9a81fb3f79f5cb5df584ff04ac7dcc8f9942db91d189d8a30",
+    "tests/fixtures/eia/interpretation-audit.json": "8d35ff3775ddbc89916035b512eb26f9a7ac19ed10255f49cf4dfd16404c115d",
+    "tests/fixtures/eia/negation-independent.json": "5c911f9c2b7b47748f510eed4031cf1b49423ac1e39519764b8a691215c003ff",
+    "tests/fixtures/eia/negation-target.json": "e36b72f26bde670855b9c246919726926c4849798bb21c1b1d3aae9617cf52ae",
+    "tests/fixtures/eia/review-regressions.json": "2994d714bc27b4b63901de6a115d9a951e08803517f7c64fdabfa1b01057b991",
+    "tests/fixtures/eia/scope-evidence-legacy.json": "f9fae8ff19a879153be6e60bb046d2b150af8d7e1c9d1b8d78cd6ab14ef217a7",
+    "tests/fixtures/eia/scope-evidence-regressions.json": "921e306ce08eb8ab1802ab4083a650da748052df4e410e7784de2d9fdae7fc03",
+    "tests/fixtures/eia/scope-independent-matrix.json": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0",
+    "tests/fixtures/eia/scope-independent-payloads.json": "0de352d4ee655f56aec878fc7c5e9e979c392a779753930e5c0ac9ff9dc85fe5"
+  },
+  "newCommitsBeyondBase": 0,
+  "stagedPaths": [],
+  "productionTrackedDiffSHA256": "4de33e749e6fd56cafb9d2a243212a519ac1d2fcb3707fd280170f1512b4ffb4",
+  "countryNameFormsSHA256": "c8ad8cb03b14e1c84176feffc04b4433509051b7aeb8b12bf18b44444d339b46"
+}

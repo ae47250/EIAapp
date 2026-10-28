@@ -1,0 +1,1373 @@
+{
+  "queryId": 8,
+  "directValidation": {
+    "interpreter": "openai",
+    "geographies": [
+      "CA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "monthly",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "domestic",
+      "label": "Domestic EIA",
+      "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "monthly electricity consumption in California",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "monthly electricity consumption in California",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initial": {
+    "interpreter": "openai",
+    "geographies": [
+      "CA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "monthly",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "domestic",
+      "label": "Domestic EIA",
+      "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "monthly electricity consumption in California",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "monthly electricity consumption in California",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initialFull": {
+    "originalQuery": "monthly electricity consumption in California",
+    "cleanedQuery": "monthly electricity consumption in California",
+    "correctedQuery": "monthly electricity consumption in California",
+    "correctedQuerySource": "ai",
+    "normalizedQuery": "monthly electricity consumption in california",
+    "interpreter": "openai",
+    "interpretationMethod": "ai_primary",
+    "country": {
+      "name": "California",
+      "code": "CA",
+      "type": "state",
+      "routeFamilies": [
+        "domestic",
+        "seds"
+      ]
+    },
+    "countryCode": "CA",
+    "validatedGeographies": [
+      {
+        "name": "California",
+        "code": "CA",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "California",
+        "code": "CA",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ],
+        "rawText": "california",
+        "index": 35,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "California",
+            "confidence": 0.98,
+            "candidateCodes": [
+              "CA"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographyConflicts": [],
+    "validatedCorrections": [],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "monthly",
+    "requestedFrequency": "monthly",
+    "frequencyExplicit": true,
+    "validatedConceptPairs": [
+      {
+        "order": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "originalActivity": null,
+        "activityNormalization": null,
+        "confidence": 0.99,
+        "source": "validated_interpreter"
+      }
+    ],
+    "conceptPairStatus": "validated",
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.98,
+    "fields": {
+      "country": {
+        "rawValue": "California",
+        "aiValue": null,
+        "normalizedValue": "CA",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "country_ai_ambiguous",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "California is a U.S. state geography; country is not explicitly requested.",
+        "alternatives": [],
+        "deterministicValue": "CA",
+        "conflictStatus": "deterministic_only",
+        "resolutionSource": "deterministic_fallback",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "product": {
+        "rawValue": "electricity",
+        "aiValue": "electricity",
+        "normalizedValue": "electricity",
+        "validation": "approved",
+        "confidence": 0.99,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "electricity",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "breadth": "specific"
+      },
+      "activity": {
+        "rawValue": "consumption",
+        "aiValue": "consumption",
+        "normalizedValue": "consumption",
+        "validation": "approved",
+        "confidence": 0.99,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "consumption",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 0.3,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "No approved sector was found.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "frequency": {
+        "rawValue": "monthly",
+        "aiValue": "monthly",
+        "normalizedValue": "monthly",
+        "validation": "approved",
+        "confidence": 0.99,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "monthly",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "explicit": true
+      }
+    },
+    "aiAmbiguity": null,
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous"
+      ]
+    },
+    "cleanedKeywords": "",
+    "needsClarification": true,
+    "blockingClarification": true,
+    "missingFields": [],
+    "ambiguousFields": [],
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 0.99
+      }
+    ],
+    "multiCountryComparison": {
+      "active": false,
+      "status": "not_applicable",
+      "geographyCodes": [],
+      "routeFamily": "domestic",
+      "reason": "fewer_than_two_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "monthly electricity consumption in California",
+      "normalizedQuery": "monthly electricity consumption in california",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 35,
+            "text": "california",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ],
+              "rawText": "california",
+              "index": 35,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "California",
+                  "confidence": 0.98,
+                  "candidateCodes": [
+                    "CA"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "product",
+            "value": "electricity",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "frequency",
+            "value": "monthly",
+            "source": "validated_interpreter"
+          }
+        ]
+      },
+      "geography": {
+        "name": "California",
+        "code": "CA",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "California",
+          "code": "CA",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "product": "electricity",
+      "productBreadth": "specific",
+      "productAlternatives": [],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.99
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "domestic",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "monthly",
+      "requestedFrequency": "monthly",
+      "frequencyExplicit": true,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly",
+          "weekly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.3,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "reasons": []
+      },
+      "route": {
+        "family": "domestic",
+        "label": "Domestic EIA",
+        "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "raw_exact_deterministic"
+        ],
+        "geographyEvidence": [
+          {
+            "name": "California",
+            "code": "CA",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ],
+            "rawText": "california",
+            "index": 35,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "exact_name_alias_or_code",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "California",
+                "confidence": 0.98,
+                "candidateCodes": [
+                  "CA"
+                ]
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "validated_interpreter",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "bounded_deterministic_grammar"
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "requestEvidence": {
+        "version": 1,
+        "query": "monthly electricity consumption in California",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 45,
+            "text": "monthly electricity consumption in California",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_source_scope",
+          "uncovered_source_text",
+          "split_or_uncovered_metadata_mention"
+        ],
+        "unresolved": 0
+      }
+    },
+    "route": {
+      "family": "domestic",
+      "label": "Domestic EIA",
+      "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly",
+        "weekly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        },
+        "product": {
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 0.3,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "request_scope_unresolved"
+      ]
+    },
+    "evidenceQuery": "monthly electricity consumption in California",
+    "requestEvidence": {
+      "version": 1,
+      "query": "monthly electricity consumption in California",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "monthly electricity consumption in California",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    }
+  },
+  "serialized": "q=monthly+electricity+consumption+in+California&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22monthly+electricity+consumption+in+California%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A45%2C%22text%22%3A%22monthly+electricity+consumption+in+California%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%2C%22invalid%22%3Atrue%7D%2C%22originalQuery%22%3A%22monthly+electricity+consumption+in+California%22%2C%22cleanedQuery%22%3A%22monthly+electricity+consumption+in+California%22%2C%22correctedQuery%22%3A%22monthly+electricity+consumption+in+California%22%2C%22correctedQuerySource%22%3A%22ai%22%2C%22interpreter%22%3A%22openai%22%2C%22confidence%22%3A0.98%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3A%22California%22%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22CA%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22country_ai_ambiguous%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22California+is+a+U.S.+state+geography%3B+country+is+not+explicitly+requested.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22CA%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22resolutionSource%22%3A%22deterministic_fallback%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22product%22%3A%7B%22rawValue%22%3A%22electricity%22%2C%22aiValue%22%3A%22electricity%22%2C%22normalizedValue%22%3A%22electricity%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.99%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22electricity%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22breadth%22%3A%22specific%22%7D%2C%22activity%22%3A%7B%22rawValue%22%3A%22consumption%22%2C%22aiValue%22%3A%22consumption%22%2C%22normalizedValue%22%3A%22consumption%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.99%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22consumption%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A0.3%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22frequency%22%3A%7B%22rawValue%22%3A%22monthly%22%2C%22aiValue%22%3A%22monthly%22%2C%22normalizedValue%22%3A%22monthly%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.99%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22monthly%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22explicit%22%3Atrue%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22California%22%2C%22code%22%3A%22CA%22%2C%22type%22%3A%22state%22%2C%22routeFamilies%22%3A%5B%22domestic%22%2C%22seds%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22California%22%2C%22code%22%3A%22CA%22%2C%22type%22%3A%22state%22%2C%22routeFamilies%22%3A%5B%22domestic%22%2C%22seds%22%5D%2C%22rawText%22%3A%22california%22%2C%22index%22%3A35%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22California%22%2C%22confidence%22%3A0.98%2C%22candidateCodes%22%3A%5B%22CA%22%5D%7D%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%7B%22order%22%3A0%2C%22product%22%3A%22electricity%22%2C%22activity%22%3A%22consumption%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A0.99%7D%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Atrue%2C%22requestedFrequency%22%3A%22monthly%22%2C%22multiCountryComparison%22%3A%7B%22active%22%3Afalse%2C%22status%22%3A%22not_applicable%22%2C%22geographyCodes%22%3A%5B%5D%2C%22routeFamily%22%3A%22domestic%22%2C%22reason%22%3A%22fewer_than_two_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22request_scope_unresolved%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Atrue%2C%22method%22%3A%22field_level_deterministic_fallback%22%2C%22reasons%22%3A%5B%22country_ai_ambiguous%22%5D%7D%7D&intentCorrectedQuery=monthly+electricity+consumption+in+California&intentCorrectedQuerySource=ai&intentInterpreter=openai&intentCountryCode=CA&intentProduct=electricity&intentActivity=consumption&intentFrequency=monthly&intentConfidence=0.98",
+  "normalized": {
+    "interpreter": "openai",
+    "geographies": [
+      "CA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "monthly",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "domestic",
+      "label": "Domestic EIA",
+      "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "monthly electricity consumption in California",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "monthly electricity consumption in California",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "domestic",
+    "retrievals": [],
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "rankingApplied": false,
+      "semanticRerankingApplied": false,
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "request_scope_unresolved"
+      ],
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "domestic",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    }
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": false,
+    "query": "monthly electricity consumption in California",
+    "intent": {
+      "originalQuery": "monthly electricity consumption in California",
+      "cleanedQuery": "monthly electricity consumption in California",
+      "correctedQuery": "monthly electricity consumption in California",
+      "correctedQuerySource": "ai",
+      "normalizedQuery": "monthly electricity consumption in california",
+      "interpreter": "openai",
+      "interpretationMethod": "ai_primary",
+      "country": {
+        "name": "California",
+        "code": "CA",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      },
+      "countryCode": "CA",
+      "validatedGeographies": [
+        {
+          "name": "California",
+          "code": "CA",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "California",
+          "code": "CA",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ],
+          "rawText": "california",
+          "index": 35,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "CA",
+              "confidence": null,
+              "candidateCodes": [
+                "CA"
+              ]
+            }
+          ]
+        }
+      ],
+      "geographyConflicts": [],
+      "validatedCorrections": [],
+      "product": "electricity",
+      "activity": "consumption",
+      "sector": null,
+      "frequency": "monthly",
+      "requestedFrequency": "monthly",
+      "frequencyExplicit": true,
+      "validatedConceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "originalActivity": null,
+          "activityNormalization": null,
+          "confidence": 0.99,
+          "source": "validated_interpreter"
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.98,
+      "fields": {
+        "country": {
+          "rawValue": "California",
+          "aiValue": "CA",
+          "normalizedValue": "CA",
+          "validation": "approved",
+          "confidence": 0.65,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "CA",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "product": {
+          "rawValue": "electricity",
+          "aiValue": "electricity",
+          "normalizedValue": "electricity",
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "electricity",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "breadth": "specific"
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "aiValue": "consumption",
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "consumption",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 0.3,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved sector was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "frequency": {
+          "rawValue": "monthly",
+          "aiValue": "monthly",
+          "normalizedValue": "monthly",
+          "validation": "approved",
+          "confidence": 0.99,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "monthly",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "explicit": true
+        }
+      },
+      "aiAmbiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "method": "field_level_deterministic_fallback",
+        "reasons": []
+      },
+      "cleanedKeywords": "",
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.99
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "domestic",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "monthly electricity consumption in California",
+        "normalizedQuery": "monthly electricity consumption in california",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 35,
+              "text": "california",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "California",
+                "code": "CA",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ],
+                "rawText": "california",
+                "index": 35,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "exact_name_alias_or_code",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "CA",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "CA"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "California",
+                "code": "CA",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "electricity",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "frequency",
+              "value": "monthly",
+              "source": "validated_interpreter"
+            }
+          ]
+        },
+        "geography": {
+          "name": "California",
+          "code": "CA",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "California",
+            "code": "CA",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          }
+        ],
+        "product": "electricity",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [],
+          "routeFamily": "domestic",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "monthly",
+        "requestedFrequency": "monthly",
+        "frequencyExplicit": true,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly",
+            "weekly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": 0.65,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": 0.99,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": 0.99,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 0.3,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": 0.99,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "request_scope_unresolved"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "domestic",
+          "label": "Domestic EIA",
+          "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "raw_exact_deterministic"
+          ],
+          "geographyEvidence": [
+            {
+              "name": "California",
+              "code": "CA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ],
+              "rawText": "california",
+              "index": 35,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "CA",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "CA"
+                  ]
+                }
+              ]
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "validated_interpreter",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "bounded_deterministic_grammar"
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [],
+        "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+        "requestEvidence": {
+          "version": 1,
+          "query": "monthly electricity consumption in California",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 45,
+              "text": "monthly electricity consumption in California",
+              "status": "requested",
+              "target": "data"
+            }
+          ],
+          "invalid": true
+        },
+        "scopeValidation": {
+          "source": "rules",
+          "issues": [
+            "invalid_evidence_envelope"
+          ],
+          "unresolved": 0
+        }
+      },
+      "route": {
+        "family": "domestic",
+        "label": "Domestic EIA",
+        "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly",
+          "weekly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 0.65,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.3,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 0.99,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "request_scope_unresolved"
+        ]
+      },
+      "evidenceQuery": "monthly electricity consumption in California",
+      "requestEvidence": {
+        "version": 1,
+        "query": "monthly electricity consumption in California",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 45,
+            "text": "monthly electricity consumption in California",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope"
+        ],
+        "unresolved": 0
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [],
+    "userWarnings": [],
+    "needsClarification": true,
+    "userMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "request_scope_unresolved"
+      ],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 0,
+      "rankingUnit": "country_series"
+    },
+    "note": "No observations were fetched."
+  },
+  "final": {
+    "interpreter": "openai",
+    "geographies": [
+      "CA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "monthly",
+    "frequencyExplicit": true,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "domestic",
+      "label": "Domestic EIA",
+      "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "monthly electricity consumption in California",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "monthly electricity consumption in California",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

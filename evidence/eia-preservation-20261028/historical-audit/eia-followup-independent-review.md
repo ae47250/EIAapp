@@ -1,0 +1,104 @@
+# Independent follow-up review
+
+No remaining actionable findings in the bounded offline review of the final production diff. Two additional defects found during review were reported before verdict, corrected through shared logic, promoted to repository regressions, and independently rerun.
+
+Final reviewed production diff SHA-256: **47f033d852c9dd9edb60465870342db7808b8a6fa37e844007b8b79c3c7eadee**.
+
+Computed with `git diff --binary 5b60a094ecd10e1ca80492bc8558652768d93366 -- lib scripts data | shasum -a 256`. The exact final patch is `/private/tmp/eia-followup-reviewed-final-production.patch`. The verdict applies to that immutable snapshot.
+
+## Scope and independence
+
+The reviewer read AGENTS.md first, then the approved routing metadata, concept taxonomy, and archived EIA metadata. A 20-case challenge set was frozen before seeing development tests or implementation diffs. The complete uncommitted diff against base `5b60a094ecd10e1ca80492bc8558652768d93366` was reviewed, with special attention to the two authorized mechanisms and their incremental differences from exact copies in the previous bundle.
+
+Prior bundle SHA-256: `8098735a20af1d33d961c22d96a8499b751eada790551b2f5c56fd1c4bb0b446`. Exact prior files remain in `/private/tmp/eia-followup-prior-bundle/files/`. Final incremental production comparison: `/private/tmp/eia-followup-final-incremental.diff`.
+
+The reviewer made no repository edits or Git writes. All reviewer outputs are in `/private/tmp`. No credentials were read, external fetches or paid model calls made, models switched, or commits/pushes/deployments performed.
+
+## Evidence and results
+
+Each public-boundary case was tested through:
+
+1. Deterministic interpretation.
+2. `interpretQuery` with an injected correct model response and a fetch stub that rejects other destinations.
+3. Extraction and execution of the actual `appendIntentParams` browser function, then `normalizeSubmittedIntent` using the serialized query parameters.
+4. The actual public search `GET`, invoked in-process through its route adapter with those parameters.
+
+The 42 independent boundary cases produce 41 literal passes and one transparently adjudicated ambiguity case. Breakdown:
+
+| Set | Final result |
+| --- | --- |
+| Frozen pre-diff challenge set | 19/20 literal passes; one deliberately unresolved pairing, explained below |
+| Supplemental modifier and ordering cases | 8/8 pass |
+| Negative-command, exclusion, state/country, pronoun guards | 7/7 pass |
+| Initial content-word collision set | 4/4 pass |
+| Additional Italy/supply collisions | 3/3 pass |
+
+Two existing ordering cases were additionally checked for exact product/activity pairs, not merely their individual values, at all four boundaries. Both pass. Thirteen country-name/form checks pass, including canonical model-name claims and qualifier-only rejection. Nineteen direct predicate checks pass: every approved -ly content word remains under exclusion scope, while eleven ordinary degree/adverb forms express uncertainty.
+
+Both originally reported failures are repaired: “energy consumption in The Gambia” retains GMB and its canonical approved label; “I'm not sure what's available for USA energy consumption” retains USA, total energy, consumption, annual with explicit=false, and returns cached candidates. Genuine geography/product/activity exclusions, ordered geographies and unambiguous concept pairs, explicit annual/monthly/quarterly frequencies, aliases/collisions, and candidate provenance survive the tested boundaries.
+
+Every returned candidate in the boundary probes was checked against the unchanged archived metadata for series ID, requested geography, canonical geography label, unit, and start/end coverage. No observations were fetched, and `selectedSeries` remained null.
+
+The main agent's final logs were inspected: 464 tests, 463 passed, zero failures, one existing disputed skip (`/private/tmp/eia-followup-final-tests.log`); build passed (`/private/tmp/eia-followup-final-build.log`). The final static-check record matches the reviewed production diff hash. Independent syntax checks and `git diff --check` also passed.
+
+## Resolved findings
+
+**P2: ordinary uncertainty modifiers were treated as data exclusions.** At initial production hash `87234103f9face7f8bb658bf1dd5325b65406a381575c188d9aa6023457d6179`, “I'm not at all sure what's available for USA energy consumption” dropped USA and excluded total energy/consumption despite a correct injected response. The same occurred with very, so, particularly, exactly, and actually. All six failed through public GET and returned no candidates. The final shared predicate grammar recognizes these forms; all six now pass. Initial patch and failing evidence remain preserved.
+
+**P2: the productive -ly modifier rule consumed approved content words.** At intermediate production hash `fe919571ef60c5afc3df67aea6c50299726caee351f6da28ac715191fe4ad2a5`, “Canada energy consumption, not Italy, sure?” incorrectly included Italy and actual Italian comparison candidates. “USA energy consumption, not supply, sure?” incorrectly included production and lost its exclusion. Both also failed with “understand?” instead of “sure?”. The final guard gives approved geography names/forms/aliases, concepts, frequencies, and sectors precedence over adverb-shaped spelling. All four exposed failures now pass. The direct control covers Italy, supply, daily, weekly, monthly, quarterly, annually, and yearly. All exposed counterexamples are retained as repository regressions.
+
+## Frozen expectations and adjudication
+
+Original frozen file: `/private/tmp/eia-followup-independent-challenges.json`; unchanged SHA-256 `c60cf4a533abb90b78bd5acb3700eb25d4d0fc4ce7d59994304b2b46ff0bec46`. Metadata build: phase1b; manifest content hash `1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028`.
+
+| ID | Exact query | Geography order | Products / activities | Frequency | Exclusions |
+| --- | --- | --- | --- | --- | --- |
+| gambia-reported | energy consumption in The Gambia | GMB | total energy / consumption | annual implicit | None |
+| gambia-canonical | energy consumption in Gambia, The | GMB | total energy / consumption | annual implicit | None |
+| gambia-bare | energy consumption in Gambia | GMB | total energy / consumption | annual implicit | None |
+| zambia-independent | energy consumption in Zambia | ZMB | total energy / consumption | annual implicit | None |
+| gambia-zambia-ordered | Compare energy consumption in The Gambia, Zambia and Canada | GMB, ZMB, CAN | total energy / consumption | annual implicit | None |
+| bahamas-article | energy consumption in The Bahamas | BHS | total energy / consumption | annual implicit | None |
+| bahamas-bare | energy consumption in Bahamas | BHS | total energy / consumption | annual implicit | None |
+| long-country-protection | energy consumption in Papua New Guinea and Guinea-Bissau | PNG, GNB | total energy / consumption | annual implicit | None |
+| usa-uncertainty-reported | I'm not sure what's available for USA energy consumption | USA | total energy / consumption | annual implicit | None |
+| gambia-uncertainty-generalized | I'm not certain whether energy consumption is available for The Gambia | GMB | total energy / consumption | annual implicit | None |
+| canada-uncertainty-monthly | I don't know whether monthly natural gas consumption is available for Canada | CAN | natural gas / consumption | monthly explicit | None |
+| usa-uncertainty-explicit-annual | I'm not sure what annual USA energy consumption data is available | USA | total energy / consumption | annual explicit | None |
+| genuine-geography-exclusion | energy consumption in Canada, not USA | CAN | total energy / consumption | annual implicit | geography: USA |
+| genuine-product-exclusion | USA natural gas consumption, not petroleum | USA | natural gas / consumption | annual implicit | product: petroleum |
+| genuine-activity-exclusion | USA energy consumption, not production | USA | total energy / consumption | annual implicit | activity: production |
+| uncertainty-with-exclusion | I'm not sure what's available for USA natural gas consumption, not petroleum production | USA | natural gas / consumption | annual implicit | product: petroleum; activity: production |
+| positive-order-preserved | I'm not sure what's available for Canada and The Gambia: coal and natural gas consumption and production | CAN, GMB | coal, natural gas / consumption, production | annual implicit | None |
+| uncertainty-no-country-substitution | I'm not sure whether quarterly energy consumption exists for The Gambia, not Zambia | GMB | total energy / consumption | quarterly explicit | geography: ZMB |
+| uncertainty-cannot-tell | I cannot tell what USA energy consumption data is available | USA | total energy / consumption | annual implicit | None |
+| uncertainty-no-idea | I have no idea what energy consumption data is available for Canada | CAN | total energy / consumption | annual implicit | None |
+
+The frozen `positive-order-preserved` case names two products and two activities without pairing them. Its original expectation remains unchanged and its raw mismatch remains visible. The app retains both countries but requests clarification rather than guessing one-to-one versus all-combinations pairing. The prior bundle already contains this deliberate ambiguity guard. This is adjudicated as expected safety behavior, not removed from the denominator or represented as an unqualified 20/20 pass. Exact-pair checks for “coal consumption and natural gas production” and “energy consumption and production” confirm order preservation when pairing is unambiguous. Separate adjudication: `/private/tmp/eia-followup-independent-adjudication.md`.
+
+## Scope and working-tree accounting
+
+Relative to the previous bundle, production changes remain confined to `lib/sources/eia/intent-routing.js` and `lib/sources/eia/interpret-query.js`: shared metadata-derived country forms used consistently for matching, name resolution, and spelling protection; shared uncertainty scope with content-word precedence. Canonical output labels remain unchanged by form derivation. No per-query/country branch, new dependency, API transport change, or archived metadata change was added by this follow-up.
+
+The full diff also includes the earlier audit's metadata-label, routing, interpretation, ranking, retrieval, comparison fairness, frequency, and ambiguity fixes. These were reviewed; no additional actionable issue was found in the bounded scope. The final snapshot retains HEAD at the review base on `codex/eia-interpretation-audit`, an empty index, no new commits beyond base, and the documented tracked/untracked implementation files. Full inventory: `/private/tmp/eia-followup-final-git-state.json`.
+
+## Reproduction and artifact locations
+
+The primary probe is `/private/tmp/eia-followup-independent-probe.mjs`. It uses an explicit repository root and replaces fetch with offline responses; its fake API-key marker exists only in the child process. The following reproduces the final boundary sets:
+
+```sh
+EIA_REVIEW_OUTPUT=/private/tmp/eia-followup-independent-final-results.json node /private/tmp/eia-followup-independent-probe.mjs
+EIA_CHALLENGES=/private/tmp/eia-followup-supplemental-challenges.json EIA_REVIEW_OUTPUT=/private/tmp/eia-followup-supplemental-final-results.json node /private/tmp/eia-followup-independent-probe.mjs
+EIA_CHALLENGES=/private/tmp/eia-followup-final-guards.json EIA_REVIEW_OUTPUT=/private/tmp/eia-followup-final-guards-results.json node /private/tmp/eia-followup-independent-probe.mjs
+EIA_CHALLENGES=/private/tmp/eia-followup-content-collision-challenges.json EIA_REVIEW_OUTPUT=/private/tmp/eia-followup-content-collision-final-results.json node /private/tmp/eia-followup-independent-probe.mjs
+EIA_CHALLENGES=/private/tmp/eia-followup-content-collision-extra.json EIA_REVIEW_OUTPUT=/private/tmp/eia-followup-content-collision-extra-final-results.json node /private/tmp/eia-followup-independent-probe.mjs
+node /private/tmp/eia-followup-geography-probe.mjs
+node /private/tmp/eia-followup-modifier-precedence-probe.mjs
+node /private/tmp/eia-followup-exact-pairs-probe.mjs
+```
+
+Matching logs and JSON results are retained under `/private/tmp/eia-followup-*`; initial failure logs/results are separate from final reruns. The initial production patch is `eia-followup-reviewed-initial-production.patch`; the intermediate modifier patch is `eia-followup-reviewed-modifier-production.patch`; the final patch is `eia-followup-reviewed-final-production.patch`.
+
+## Limits
+
+This is a bounded offline review, not a claim that arbitrary language is solved. Browser serialization uses the exact production function in a JavaScript VM with URLSearchParams; it is not a rendered-browser test. Live provider/model behavior, production authentication, browser console/network behavior, observation downloads, exports, and deployment were not tested. The final suite's existing disputed skip remains explicit. These limits do not invalidate the reproduced interpretation/serialization/public-candidate outcomes, but remain outside this task's authorized verification.

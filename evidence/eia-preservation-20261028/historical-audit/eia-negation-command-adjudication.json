@@ -1,0 +1,174 @@
+{
+  "source_file": "tests/fixtures/eia/followup-review-regressions.json",
+  "source_sha256": "ec6e7863daa27e4887d0d9655d9bd228884af3d6b6a7824aba342c5efb4e04a5",
+  "original_cases": [
+    {
+      "id": "independent-negative-command-0",
+      "q": "USA energy consumption; do not actually include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-1",
+      "q": "USA energy consumption; do not particularly include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-2",
+      "q": "USA energy consumption; do not really include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "independent-negative-command-3",
+      "q": "USA energy consumption; do not entirely include coal production",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": false,
+        "exclusions": [
+          [
+            "product",
+            "coal"
+          ],
+          [
+            "activity",
+            "production"
+          ]
+        ]
+      }
+    }
+  ],
+  "adjudications": [
+    {
+      "id": "independent-negative-command-0",
+      "classification": "dominant_hard_exclusion_reading",
+      "judgment": "Actually most naturally emphasizes that coal production should be omitted. A hard exclusion is a reasonable interpretation; conservative clarification remains acceptable for a parser that cannot establish this attachment without treating every modifier the same way.",
+      "hard_exclusion_entailed_for_all_readings": false
+    },
+    {
+      "id": "independent-negative-command-1",
+      "classification": "disputed_scope_clarify",
+      "judgment": "Particularly may negate emphasis or singling out rather than all inclusion. The phrasing is awkward enough that full exclusion must not be imposed as the only valid meaning.",
+      "hard_exclusion_entailed_for_all_readings": false
+    },
+    {
+      "id": "independent-negative-command-2",
+      "classification": "dominant_prohibition_but_materially_disputed",
+      "judgment": "Really usually softens or emphasizes the prohibition here, but can qualify degree or genuine inclusion. An unconditional never-clarify hard-exclusion assertion is too strong for a conservative bounded parser.",
+      "hard_exclusion_entailed_for_all_readings": false
+    },
+    {
+      "id": "independent-negative-command-3",
+      "classification": "hard_exclusion_unsound_clarify",
+      "judgment": "Not entirely negates complete inclusion and permits partial inclusion. In this data interface the intended partial operation is not specified. Preserve the USA consumption request and clarify whether to omit coal production or include some subset.",
+      "hard_exclusion_entailed_for_all_readings": false
+    }
+  ],
+  "unchanged_invariants": {
+    "positive_geographies": [
+      "USA"
+    ],
+    "positive_pairs": [
+      [
+        "total energy",
+        "consumption"
+      ]
+    ],
+    "frequency": "annual",
+    "frequency_explicit": false,
+    "sector": null
+  },
+  "bounded_design_decision": "Permit hard exclusion only with affirmative direct attachment evidence to an approved data mention or positive-polarity request action. An uninterpreted bridge between negator and action must be unresolved regardless of whether its spelling happens to end in -ly. Preserve the established first clause, keep the unknown second clause out of both positive concepts and global exclusions, and ask a focused clarification. This rule may conservatively clarify actually/really as well; no adverb whitelist is needed.",
+  "counterexamples_to_generic_first_action_head": [
+    {
+      "q": "USA energy consumption; do not necessarily include coal production",
+      "meaning": "Inclusion is not required, which does not entail exclusion."
+    },
+    {
+      "q": "USA energy consumption; do not always include coal production",
+      "meaning": "Negates inclusion on every occasion, which does not entail never including it."
+    }
+  ],
+  "scope_boundary": "The minimal safe change may increase clarification for modified commands. Automatically resolving all degrees, modality, and nested action polarity would require a broader representation/linguistic design. The existing four assertions cannot be an unquestioned all-green acceptance requirement."
+}

@@ -1,0 +1,115 @@
+{
+  "reviewBase": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "frozenBefore": "Supplemental regression guards after modifier fix",
+  "metadata": {
+    "routingMetadata": "data/eia/routing-metadata.json",
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "geographies": {
+      "GMB": "Gambia, The",
+      "ZMB": "Zambia",
+      "BHS": "The Bahamas",
+      "CAN": "Canada",
+      "USA": "United States",
+      "PNG": "Papua New Guinea",
+      "GNB": "Guinea-Bissau",
+      "GIN": "Guinea",
+      "GEO": "Georgia"
+    }
+  },
+  "defaults": {
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "products": [
+      "total energy"
+    ],
+    "activities": [
+      "consumption"
+    ],
+    "excludedGeographies": [],
+    "excludedProducts": [],
+    "excludedActivities": []
+  },
+  "cases": [
+    {
+      "id": "negative-command-0",
+      "query": "USA energy consumption; do not actually include coal production",
+      "geographies": [
+        "USA"
+      ],
+      "excludedProducts": [
+        "coal"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    },
+    {
+      "id": "negative-command-1",
+      "query": "USA energy consumption; do not particularly include coal production",
+      "geographies": [
+        "USA"
+      ],
+      "excludedProducts": [
+        "coal"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    },
+    {
+      "id": "negative-command-2",
+      "query": "USA energy consumption; do not really include coal production",
+      "geographies": [
+        "USA"
+      ],
+      "excludedProducts": [
+        "coal"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    },
+    {
+      "id": "negative-command-3",
+      "query": "USA energy consumption; do not entirely include coal production",
+      "geographies": [
+        "USA"
+      ],
+      "excludedProducts": [
+        "coal"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    },
+    {
+      "id": "modified-uncertainty-and-negative",
+      "query": "I'm not at all sure what's available for USA energy consumption, not actually coal production",
+      "geographies": [
+        "USA"
+      ],
+      "excludedProducts": [
+        "coal"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    },
+    {
+      "id": "state-country-alias-control",
+      "query": "I'm not particularly sure what's available for Georgia and Canada energy consumption",
+      "geographies": [
+        "GEO",
+        "CAN"
+      ]
+    },
+    {
+      "id": "request-pronoun-control",
+      "query": "Tell us about energy consumption in The Gambia",
+      "geographies": [
+        "GMB"
+      ]
+    }
+  ]
+}

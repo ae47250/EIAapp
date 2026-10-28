@@ -1,0 +1,109 @@
+{
+  "classification": "Known design limit: valid spans and metadata cannot prove arbitrary semantic scope. This deliberately wrong model proposal is not a request to expand predicate lists.",
+  "query": "Show coal production for Canada. I'm not convinced petroleum consumption for Mexico is higher; show both.",
+  "input": {
+    "confidence": 0.95,
+    "fields": {
+      "country": {
+        "value": "CAN",
+        "confidence": 0.95
+      },
+      "product": {
+        "value": "coal",
+        "confidence": 0.95
+      },
+      "activity": {
+        "value": "production",
+        "confidence": 0.95
+      },
+      "frequency": {
+        "value": "annual",
+        "confidence": 0.95,
+        "explicit": false
+      }
+    },
+    "geographies": [
+      {
+        "value": "CAN",
+        "confidence": 0.95
+      }
+    ],
+    "conceptPairs": [
+      {
+        "product": "coal",
+        "activity": "production",
+        "confidence": 0.95
+      }
+    ],
+    "requestEvidence": {
+      "version": 1,
+      "query": "Show coal production for Canada. I'm not convinced petroleum consumption for Mexico is higher; show both.",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "Show coal production for Canada. ",
+          "status": "requested",
+          "target": "data"
+        },
+        {
+          "start": 33,
+          "end": 93,
+          "text": "I'm not convinced petroleum consumption for Mexico is higher",
+          "status": "excluded",
+          "target": "data",
+          "operator": {
+            "start": 37,
+            "end": 40,
+            "text": "not"
+          }
+        },
+        {
+          "start": 93,
+          "end": 105,
+          "text": "; show both.",
+          "status": "context",
+          "target": "action"
+        }
+      ]
+    }
+  },
+  "output": {
+    "blocked": false,
+    "geographies": [
+      "CAN"
+    ],
+    "exclusions": [
+      {
+        "type": "product",
+        "value": "petroleum",
+        "order": 0,
+        "confidence": 1,
+        "source": "validated_source_scope"
+      },
+      {
+        "type": "activity",
+        "value": "consumption",
+        "order": 1,
+        "confidence": 1,
+        "source": "validated_source_scope"
+      }
+    ],
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    }
+  },
+  "resubmitted": {
+    "blocked": false,
+    "geographies": [
+      "CAN"
+    ],
+    "scopeValidation": {
+      "source": "model",
+      "issues": [],
+      "unresolved": 0
+    }
+  }
+}

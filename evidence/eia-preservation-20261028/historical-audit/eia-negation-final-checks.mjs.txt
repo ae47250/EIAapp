@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const git=args=>execFileSync('git',args,{cwd:root});
+const changed=git(['diff','--name-only','-z','5b60a094ecd10e1ca80492bc8558652768d93366']).toString().split('\0').filter(Boolean);
+const added=git(['ls-files','--others','--exclude-standard','-z']).toString().split('\0').filter(Boolean);
+const checks=[];
+for(const file of [...changed,...added].filter(f=>f.endsWith('.js'))) {
+ const r=spawnSync(process.execPath,['--check',file],{cwd:root});
+ checks.push({command:'node --check '+file,exitCode:r.status});
+ if(r.status!==0) throw new Error('Syntax failed: '+file);
+}
+for(const file of [...changed,...added].filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync(root+'/'+file));
+const check=spawnSync('git',['diff','--check'],{cwd:root});
+checks.push({command:'git diff --check',exitCode:check.status});
+if(check.status!==0) throw new Error('Diff check failed');
+const before=JSON.parse(fs.readFileSync('/private/tmp/eia-negation-target-starting-state.json'));
+const output={head:git(['rev-parse','HEAD']).toString().trim(),branch:git(['branch','--show-current']).toString().trim(),status:git(['status','--porcelain=v1']).toString(),newCommitsBeyondBase:Number(git(['rev-list','--count','5b60a094ecd10e1ca80492bc8558652768d93366..HEAD']).toString()),staged:git(['diff','--cached','--name-only']).toString().trim(),trackedModified:changed,newFiles:added,checks,jsonParse:'all changed/new JSON files passed',productionDiffSha256:sha(git(['diff','--binary','5b60a094ecd10e1ca80492bc8558652768d93366','--','lib','scripts','data'])),trackedPatchSha256:sha(git(['diff','--binary','5b60a094ecd10e1ca80492bc8558652768d93366'])),startingFileComparisons:[]};
+for(const file of [...changed,...added]) {
+ const original='/private/tmp/eia-negation-target-starting-files/'+file;
+ if(fs.existsSync(original)) output.startingFileComparisons.push({file,unchanged:sha(fs.readFileSync(original))===sha(fs.readFileSync(root+'/'+file))});
+}
+if(output.startingFileComparisons.some(x=>!x.unchanged&&x.file!=='docs/eia-interpretation-audit.md')) throw new Error('Unexpected starting-file modification');
+fs.writeFileSync('/private/tmp/eia-negation-target-final-static-state.json',JSON.stringify(output,null,2)+'\n');
+console.log(JSON.stringify({tracked:changed.length,new:added.length,syntaxChecks:checks.length-1,changedStartingFiles:output.startingFileComparisons.filter(x=>!x.unchanged).map(x=>x.file),productionDiffSha256:output.productionDiffSha256}));

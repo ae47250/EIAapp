@@ -1,0 +1,756 @@
+diff --git a/data/eia/phase4-routing-config.json b/data/eia/phase4-routing-config.json
+index 3541cd3..4b80bd5 100644
+--- a/data/eia/phase4-routing-config.json
++++ b/data/eia/phase4-routing-config.json
+@@ -151,6 +151,8 @@
+       }
+     },
+     "activities": {
++      "sales": { "terms": ["retail sales", "electricity sales", "sales"] },
++      "customers": { "terms": ["customer accounts", "customers", "customer"] },
+       "consumption": {
+         "terms": ["consumption", "consumed", "consume", "usage", "demand", "use"]
+       },
+diff --git a/data/eia/routing-metadata.json b/data/eia/routing-metadata.json
+index bd8ed3e..4c107f9 100644
+--- a/data/eia/routing-metadata.json
++++ b/data/eia/routing-metadata.json
+@@ -625,7 +625,7 @@
+       ]
+     },
+     {
+-      "name": "East",
++      "name": "Germany, East",
+       "code": "DDR",
+       "type": "country",
+       "routeFamilies": [
+@@ -2252,7 +2252,7 @@
+       ]
+     },
+     {
+-      "name": "The",
++      "name": "Gambia, The",
+       "code": "GMB",
+       "type": "country",
+       "routeFamilies": [
+@@ -2505,7 +2505,7 @@
+       ]
+     },
+     {
+-      "name": "West",
++      "name": "Germany, West",
+       "code": "DEUW",
+       "type": "country",
+       "routeFamilies": [
+diff --git a/lib/sources/eia/candidate-search.js b/lib/sources/eia/candidate-search.js
+index e4d3808..0ed29b3 100644
+--- a/lib/sources/eia/candidate-search.js
++++ b/lib/sources/eia/candidate-search.js
+@@ -97,7 +97,24 @@ export default async function candidateSearchHandler(req, res) {
+       });
+     }
+ 
+-    const userWarnings = dedupeWarnings((pipeline.retrievals || []).flatMap(retrieval => retrieval.userWarnings || []));
++    const displayedIds = new Set(variables.map(candidate => candidate.candidateId));
++    const undisplayedRequests = (pipeline.retrievals || []).filter(retrieval => {
++      if (comparisonMode) {
++        const available = retrieval.displayCandidates?.length || retrieval.rankedCandidates?.length;
++        return available && !comparisonDefinitions.some(definition => ["product", "activity", "sector"].every(field =>
++          (definition.definition[field] || "") === (retrieval.concept[field] || "")
++        ));
++      }
++      const visible = (retrieval.interpretationGroups || []).filter(group => group.defaultVisible).flatMap(group => group.candidates);
++      return visible.length > 0 && !visible.some(candidate => displayedIds.has(candidate.candidate_id));
++    });
++    const userWarnings = dedupeWarnings([
++      ...(pipeline.retrievals || []).flatMap(retrieval => retrieval.userWarnings || []),
++      ...(undisplayedRequests.length ? [{
++        code: "candidate_display_limit",
++        message: `The ${comparisonMode ? `${COMPARISON_DEFINITION_LIMIT}-definition` : `${PUBLIC_CANDIDATE_LIMIT}-candidate`} display limit leaves these requests undisplayed: ${undisplayedRequests.map(retrieval => [retrieval.geography.name, retrieval.concept.product, retrieval.concept.activity].filter(Boolean).join(" ")).join("; ")}. Narrow the search to view their candidates.`
++      }] : [])
++    ]);
+     const resultCount = comparisonMode ? comparisonDefinitions.length : variables.length;
+     const needsClarification = resultCount === 0 && Boolean(intent.needsClarification || userWarnings.some(warning => warning.code === "unresolved_qualifier_requires_clarification"));
+     return res.status(200).json({
+@@ -151,8 +168,23 @@ export default async function candidateSearchHandler(req, res) {
+ 
+ function buildPublicGroups(retrievals, intent) {
+   const groups = [];
+-  let remaining = PUBLIC_CANDIDATE_LIMIT;
+-  for (const retrieval of retrievals) {
++  const visible = retrievals.filter(retrieval => retrieval.interpretationGroups?.some(group => group.defaultVisible && group.candidates.length));
++  const capacities = visible.map(retrieval => retrieval.interpretationGroups.filter(group => group.defaultVisible).reduce((sum, group) => sum + group.candidates.length, 0));
++  const allowances = visible.map(() => 0);
++  let slots = PUBLIC_CANDIDATE_LIMIT;
++  // Share the existing cap across requests before filling additional choices.
++  while (slots > 0) {
++    let added = false;
++    for (let index = 0; index < visible.length && slots > 0; index++) {
++      if (allowances[index] >= capacities[index]) continue;
++      allowances[index]++;
++      slots--;
++      added = true;
++    }
++    if (!added) break;
++  }
++  for (const [index, retrieval] of visible.entries()) {
++    let remaining = allowances[index];
+     for (const group of retrieval.interpretationGroups || []) {
+       if (!group.defaultVisible || remaining <= 0) continue;
+       const candidates = group.candidates.slice(0, remaining).map(candidate => serializeCandidate(candidate, retrieval, group, intent));
+diff --git a/lib/sources/eia/intent-routing.js b/lib/sources/eia/intent-routing.js
+index ed624d3..f0aefd1 100644
+--- a/lib/sources/eia/intent-routing.js
++++ b/lib/sources/eia/intent-routing.js
+@@ -29,7 +29,7 @@ export function buildStructuredIntent(baseIntent, query) {
+     : baseIntent?.correctedQuery || baseIntent?.cleanedQuery || originalQuery;
+   const normalizedQuery = normalizeText(authoritativeQuery);
+   const scannedGeographies = findGeographyMentions(normalizedQuery, originalQuery);
+-  const scannedConcepts = findConceptMentions(normalizedQuery);
++  const scannedConcepts = findConceptMentions(normalizedQuery).filter(mention => getNegationScope(normalizedQuery, mention.index, originalQuery) === null);
+   const scannedFrequencies = findFrequencyMentions(normalizedQuery);
+   const exclusions = normalizeExclusions(baseIntent?.exclusions);
+   const unknownQualifiers = normalizeUnknownQualifiers(baseIntent?.unknownQualifiers);
+@@ -314,6 +314,8 @@ function buildOrderedConceptPairs(baseIntent, mentions, fallbackProduct, fallbac
+   let products = mentions.filter(mention => mention.type === "product");
+   const activities = mentions.filter(mention => mention.type === "activity");
+   products = collapseCompoundCarrierProducts(products, activities, normalizedQuery);
++  // Repeating the same product does not make an explicit list of its activities ambiguous.
++  if (new Set(products.map(mention => mention.value)).size === 1) products = products.slice(0, 1);
+   if (products.length === 0 && fallbackProduct) products = [{ index: 0, value: fallbackProduct, source: "validated_summary" }];
+   const effectiveActivities = activities.length > 0
+     ? activities
+@@ -327,7 +329,8 @@ function buildOrderedConceptPairs(baseIntent, mentions, fallbackProduct, fallbac
+     pairs = effectiveActivities.map(activity => ({ product: products[0], activity }));
+     rule = "shared_product_multiple_activities";
+   } else if (products.length > 1 && effectiveActivities.length === 1) {
+-    if (!isSharedTrailingActivity(products, effectiveActivities[0])) return unresolvedConceptPairs();
++    if (!isSharedTrailingActivity(products, effectiveActivities[0])
++      && !isSharedSourceActivity(products, effectiveActivities[0], normalizedQuery)) return unresolvedConceptPairs();
+     pairs = products.map(product => ({ product, activity: effectiveActivities[0] }));
+     rule = "shared_trailing_activity";
+   } else if (products.length > 1 && effectiveActivities.length > 1) {
+@@ -389,12 +392,17 @@ function isSharedTrailingActivity(products, activity) {
+   return Number.isFinite(activity?.index) && products.every(product => Number(product.index) < Number(activity.index));
+ }
+ 
++function isSharedSourceActivity(products, activity, query) {
++  if (!activity?.text || !products.length || !products.every(product => product.index >= activity.index + activity.text.length)) return false;
++  return /^(from|using)$/.test(normalizeText(query.slice(activity.index + activity.text.length, products[0].index)));
++}
++
+ function hasOrderedOneToOneScope(products, activities) {
+   if (products.length !== activities.length) return false;
+   return products.every((product, index) => {
+     const activity = activities[index];
+     const nextProduct = products[index + 1];
+-    return Number(product.index) < Number(activity.index)
++    return Number(product.index) <= Number(activity.index)
+       && (!nextProduct || Number(activity.index) < Number(nextProduct.index));
+   });
+ }
+@@ -417,6 +425,11 @@ function shouldCollapseCarrierProduct(product, products, activities, normalizedQ
+   if (rule.genericTerms?.length && !rule.genericTerms.map(normalizeText).includes(normalizeText(product.text))) return false;
+   const specificProducts = products.filter(other => other !== product && other.value !== rule.carrier);
+   if (specificProducts.length === 0) return false;
++  // Carrier collapse is local to a noun phrase; a separate electricity request must survive.
++  if (rule.activity) {
++    return specificProducts.some(other => mentionsAreAdjacent(other, product, normalizedQuery))
++      || (activities.length === 1 && isSharedSourceActivity(specificProducts, activities[0], normalizedQuery));
++  }
+   if (!rule.requireAdjacentSpecificProduct) return true;
+   return specificProducts.some(other => mentionsAreAdjacent(other, product, normalizedQuery));
+ }
+@@ -443,9 +456,9 @@ function firstRuleValue(text, rules) {
+   return null;
+ }
+ 
+-export function findGeographyMentions(normalizedQuery, originalQuery = "") {
++export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {
+   const matches = [];
+-  for (const geography of ROUTING_METADATA.geographies) {
++  for (const geography of [...ROUTING_METADATA.geographies, ...additionalGeographies.filter(item => !geographyByCode.has(item.code))]) {
+     addPhraseMatch(matches, normalizedQuery, geography.name, { ...geography, matchPriority: 0 });
+     if (hasUppercaseCode(originalQuery, geography.code)) {
+       addPhraseMatch(matches, normalizedQuery, geography.code, { ...geography, matchPriority: 5 });
+@@ -455,7 +468,71 @@ export function findGeographyMentions(normalizedQuery, originalQuery = "") {
+     const geography = geographyByCode.get(code);
+     if (geography) addPhraseMatch(matches, normalizedQuery, alias, { ...geography, matchPriority: 10 });
+   }
+-  return selectOrderedMentions(disambiguateStateCountryMatches(matches, normalizedQuery), "geography");
++  // Remove excluded spans before context resolution: a negated country is not evidence for country scope.
++  const complete = matches.filter(match => !matches.some(other => other.length > match.length
++    && other.index <= match.index && other.index + other.length >= match.index + match.length));
++  const conceptScopes = new Set(findConceptMentions(normalizedQuery).map(mention => getNegationScope(normalizedQuery, mention.index, originalQuery)).filter(scope => scope !== null));
++  // A bare excluded entity removes that entity; a negated request can still share
++  // an entity with a distinct positive request (consumption, not production).
++  const excludedCodes = new Set(complete.filter(match => {
++    const scope = getNegationScope(normalizedQuery, match.index, originalQuery);
++    return scope !== null && !conceptScopes.has(scope);
++  }).map(match => match.code));
++  const positive = complete.filter(match => !excludedCodes.has(match.code)
++    && getNegationScope(normalizedQuery, match.index, originalQuery) === null
++    && !isRequestPronoun(normalizedQuery, match, originalQuery, complete));
++  return selectOrderedMentions(disambiguateStateCountryMatches(positive, normalizedQuery), "geography");
++}
++
++function isRequestPronoun(query, match, originalQuery, matches) {
++  const tokens = query.split(" ");
++  const tokenIndex = query.slice(0, match.index).trim().split(/\s+/).filter(Boolean).length;
++  const rawToken = String(originalQuery).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ").replace(/[^a-zA-Z0-9]+/g, " ").trim().split(/\s+/)[tokenIndex];
++  if (/^[A-Z]{2,3}$/.test(rawToken || "")) return false;
++  const pronouns = new Set(["me", "us", "you", "them", "him", "her"]);
++  if (!pronouns.has(match.text)) return false;
++  const before = tokens[tokenIndex - 1];
++  const after = tokens[tokenIndex + 1];
++  const hasOtherGeography = matches.some(other => other.code !== match.code);
++  const requestVerb = /\b(show|give|tell|help|let|allow|enable|ask|send|provide|compare|make)\b/.test(query.slice(0, match.index));
++  const followingConcept = findConceptMentions(tokens.slice(tokenIndex + 1).join(" ")).some(mention => mention.index === 0);
++  if (followingConcept && /^(to|for|in|versus|vs)$/.test(before || "")) return false;
++  return /^(show|give|tell|help|let|allow|enable|ask|send|provide)$/.test(before || "")
++    || (/^(for|of|to|with|by)$/.test(before || "")
++      && (/^(to|a|an|the|my|our|your|their)$/.test(after || "")
++        || (hasOtherGeography && requestVerb && !/^(and|or|versus|vs)$/.test(after || ""))));
++}
++
++export function getNegationScope(query, index, originalQuery = query) {
++  // Token positions are shared with normalized matching, but sentence punctuation
++  // and affirmative/negative commands retain their scope in the original text.
++  const target = query.slice(0, index).trim().split(/\s+/).filter(Boolean).length;
++  const rawOriginal = String(originalQuery || query).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ");
++  const original = rawOriginal.toLowerCase();
++  const words = rawOriginal.match(/[a-z0-9]+/gi) || [];
++  const tokens = [...original.matchAll(/[a-z0-9]+|[;.!?]/g)].map(match => match[0]);
++  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
++  let scope = null;
++  let wordIndex = 0;
++  for (let i = 0; i < tokens.length; i++) {
++    const token = tokens[i];
++    if (/^[;.!?]$/.test(token)) {
++      if (token !== "." || (tokens[i - 1] || "").length > 1) scope = null;
++      continue;
++    }
++    if (wordIndex >= target) break;
++    if (markers.has(token)) scope = token === "not" && tokens[i + 1] === "only" ? null : wordIndex;
++    else if (["but", "instead", "rather"].includes(token)) scope = null;
++    else if (["show", "include"].includes(token) && scope !== null) {
++      // A new command follows a completed excluded subject, not merely an adverb.
++      // The span starts after the latest negation marker, so it has no nested negation.
++      const subject = words.slice(scope + 1, wordIndex).join(" ");
++      const normalizedSubject = normalizeText(subject);
++      if (findConceptMentions(normalizedSubject).length || findGeographyMentions(normalizedSubject, subject).length) scope = null;
++    }
++    wordIndex++;
++  }
++  return scope;
+ }
+ 
+ function disambiguateStateCountryMatches(matches, normalizedQuery) {
+@@ -475,7 +552,8 @@ function disambiguateStateCountryMatches(matches, normalizedQuery) {
+     const country = group.find(match => match.type === "country");
+     if (!state || !country) continue;
+     const hasOtherForeignGeography = matches.some(match =>
+-      match.type !== "state" && !isUnitedStatesMatch(match) && `${match.index}:${match.length}:${match.text}` !== key
++      match.type !== "state" && !isUnitedStatesMatch(match)
++      && normalizeText(match.name) !== normalizeText(country.name) && `${match.index}:${match.length}:${match.text}` !== key
+     );
+     const hasUnitedStates = matches.some(match =>
+       isUnitedStatesMatch(match) && `${match.index}:${match.length}:${match.text}` !== key
+@@ -547,7 +625,11 @@ function chooseRoute({ geographyMentions, primaryGeography, conceptMentions, pro
+   if (activity) concepts.add(activity);
+   const domesticProfile = ROUTING_CONFIG.routeProfiles?.domestic || {};
+   const sedsProfile = ROUTING_CONFIG.routeProfiles?.seds || {};
+-  const domesticSpecific = (domesticProfile.conceptHints || []).some(value => concepts.has(value));
++  // Generic activities occur in every family; only product/scope evidence selects domestic coverage.
++  const requestedProducts = [...new Set([product, ...conceptMentions.filter(mention => mention.type === "product").map(mention => mention.value)].filter(Boolean))];
++  const domesticSpecific = requestedProducts.length > 0
++    ? requestedProducts.every(value => (domesticProfile.conceptHints || []).includes(value))
++    : conceptMentions.some(mention => mention.type === "scope" && (domesticProfile.conceptHints || []).includes(mention.value));
+   const electricitySpecific = (domesticProfile.stateElectricityConceptHints || []).some(value => concepts.has(value));
+   const sedsAnnualSpecific = (sedsProfile.stateAnnualConceptHints || []).some(value => concepts.has(value));
+ 
+@@ -673,7 +755,7 @@ function selectOrderedMentions(matches, kind) {
+     const overlaps = occupied.some(range => range.group === overlapGroup && match.index < range.end && match.index + match.length > range.start);
+     if (overlaps) continue;
+     const identity = kind === "geography" ? match.code : `${match.type || kind}:${match.value}`;
+-    if (selected.some(item => item.identity === identity)) continue;
++    if (kind !== "concept" && selected.some(item => item.identity === identity)) continue;
+     occupied.push({ start: match.index, end: match.index + match.length, group: overlapGroup });
+     if (kind === "geography") {
+       selected.push({ identity, index: match.index, text: match.text, source: "query", geography: cleanGeography(match) });
+@@ -689,7 +771,7 @@ function cleanGeography(match) {
+     name: match.name,
+     code: match.code,
+     type: match.type,
+-    routeFamilies: [...match.routeFamilies]
++    routeFamilies: [...(match.routeFamilies || [])]
+   };
+ }
+ 
+diff --git a/lib/sources/eia/interpret-query.js b/lib/sources/eia/interpret-query.js
+index 50b7f21..08dd5ec 100644
+--- a/lib/sources/eia/interpret-query.js
++++ b/lib/sources/eia/interpret-query.js
+@@ -1,7 +1,7 @@
+ import { readFileSync } from "node:fs";
+ 
+ import { requireAuthentication } from "../../auth.js";
+-import { buildStructuredIntent, findConceptMentions, findGeographyMentions, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
++import { buildStructuredIntent, findConceptMentions, findGeographyMentions, getNegationScope, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
+ 
+ const ROUTING_CONFIG = JSON.parse(readFileSync(new URL("../../../data/eia/phase4-routing-config.json", import.meta.url), "utf8"));
+ const PRODUCT_RULES = buildRules(ROUTING_CONFIG.vocabulary?.products);
+@@ -85,7 +85,7 @@ const FALLBACK_COUNTRIES = [
+   ["United States", "USA"], ["Uruguay", "URY"], ["Venezuela", "VEN"], ["Vietnam", "VNM"], ["World", "WOR"]
+ ].map(([name, code]) => ({ name, code }));
+ 
+-const STOP_WORDS = new Set(["a", "an", "and", "are", "as", "at", "by", "can", "chart", "country", "data", "download", "eia", "for", "from", "graph", "i", "in", "of", "on", "or", "please", "plot", "search", "series", "show", "table", "the", "to", "with"]);
++const STOP_WORDS = new Set(["a", "an", "and", "are", "as", "at", "by", "can", "chart", "country", "data", "download", "eia", "for", "from", "graph", "i", "in", "of", "on", "or", "please", "plot", "search", "series", "show", "table", "the", "to", "with", "could", "would", "should", "will", "may", "might", "must", "shall", "do", "does", "did", "have", "has", "had", "was", "were", "be", "been", "being", "this", "that", "these", "those", "we", "you", "me", "my", "us", "our", "your", "they", "them", "their", "it", "its"]);
+ 
+ function buildRules(items = {}) {
+   return Object.entries(items).map(([value, config]) => ({
+@@ -159,7 +159,7 @@ export function interpretQueryWithRules(query, countries = [], fallbackReason =
+   const countryList = mergeCountries(countries, FALLBACK_COUNTRIES);
+   const geographyResolution = resolveDeterministicGeographyEvidence(forms.originalQuery, countryList, normalizedQuery);
+   const detectedCountries = geographyResolution.geographies;
+-  const exclusions = findRuleExclusions(normalizedQuery, correctionEvidence);
++  const exclusions = findRuleExclusions(normalizedQuery, correctionEvidence, forms.originalQuery);
+   const productResult = interpretProductWithRules(normalizedQuery, exclusions);
+   const product = productResult.value;
+   const activity = firstNonExcludedRuleMatch(normalizedQuery, ACTIVITY_RULES, exclusions, "activity");
+@@ -295,7 +295,7 @@ export function validateAiInterpretation(parsed, query, countries = [], fallback
+     ? "unchanged"
+     : parsed.correctedQuery ? "ai" : "unchanged";
+   const deterministicEvidenceQuery = ruleIntent.normalizedQuery || normalizeText(forms.cleanedQuery);
+-  const ruleExclusions = mergeExclusions(ruleIntent.exclusions, findRuleExclusions(deterministicEvidenceQuery));
++  const ruleExclusions = mergeExclusions(ruleIntent.exclusions, findRuleExclusions(deterministicEvidenceQuery, [], correctedEvidenceInput));
+   const validatePositiveField = (type, value, validator) => {
+     const normalizedValue = validator(value);
+     return ruleExclusions.some(item => item.type === type && item.value === normalizedValue) ? null : normalizedValue;
+@@ -350,7 +350,7 @@ export function validateAiInterpretation(parsed, query, countries = [], fallback
+   const frequencyField = {
+     ...validateAiField("frequency", rawFrequencyField, confidence, value => {
+       const frequency = normalizeCategory(value, FREQUENCY_RULES, FREQUENCY_ALIASES);
+-      if (ruleIntent.frequencyExplicit && frequency !== ruleIntent.requestedFrequency) return null;
++      if (frequency !== (ruleIntent.requestedFrequency || "annual")) return null;
+       return frequency;
+     }, ruleIntent.fields.frequency, {
+       claimNormalizer: value => normalizeCategory(value, FREQUENCY_RULES, FREQUENCY_ALIASES),
+@@ -472,7 +472,7 @@ function readAiField(parsed, fieldName, legacyKeys) {
+   if (field && typeof field === "object") {
+     return {
+       rawValue: field.rawValue ?? field.raw_value ?? null,
+-      value: field.value ?? field.aiValue ?? field.ai_value ?? null,
++      value: field.normalizedValue ?? field.value ?? field.aiValue ?? field.ai_value ?? null,
+       confidence: Number(field.confidence),
+       ambiguityReason: field.ambiguityReason ?? field.ambiguity_reason ?? null,
+       alternatives: Array.isArray(field.alternatives) ? field.alternatives : [],
+@@ -542,10 +542,7 @@ function isGeographySupportedByQuery(code, query, ruleIntent, countries) {
+   );
+   if (deterministicCodes.size > 0) return deterministicCodes.has(code);
+ 
+-  const geography = resolveApprovedGeography(code) || findCountryByCode(countries, code);
+-  if (!geography) return false;
+-  if (hasPhrase(normalizeText(query), geography.name)) return true;
+-  return new RegExp(`(^|[^A-Z0-9])${escapeRegExp(code)}(?=$|[^A-Z0-9])`).test(String(query || ""));
++  return findGeographyMentions(normalizeText(query), query, countries).some(mention => mention.geography.code === code);
+ }
+ 
+ function validateAiConceptPairs(values, overallConfidence, query, ruleIntent) {
+@@ -814,14 +811,15 @@ function correctQueryTerms(normalizedQuery) {
+     .join(" ");
+ }
+ 
+-function findRuleExclusions(normalizedQuery, correctionEvidence = []) {
+-  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
++function findRuleExclusions(normalizedQuery, correctionEvidence = [], originalQuery = normalizedQuery) {
++  const mentions = findConceptMentions(normalizedQuery);
++  const positive = mentions.filter(mention => getNegationScope(normalizedQuery, mention.index, originalQuery) === null);
+   const exclusions = [];
+-  for (const mention of findConceptMentions(normalizedQuery)) {
++  for (const mention of mentions) {
+     const prefixText = normalizedQuery.slice(0, mention.index).trim();
+     const prefixTokens = prefixText.split(" ").filter(Boolean);
+-    const prefix = prefixTokens.slice(-3);
+-    if (!prefix.some(token => markers.has(token))) continue;
++    if (getNegationScope(normalizedQuery, mention.index, originalQuery) === null) continue;
++    if (positive.some(item => item.type === mention.type && item.value === mention.value)) continue;
+     const type = mention.type === "scope" ? "conceptType" : mention.type;
+     const key = `${type}:${mention.value}`;
+     if (!exclusions.some(item => `${item.type}:${item.value}` === key)) {
+@@ -934,7 +932,8 @@ function addClarificationState(intent) {
+   const ambiguousFields = Object.entries(intent.fields || {})
+     .filter(([, field]) => field?.validation === "ambiguous")
+     .map(([name]) => name);
+-  const blockingAmbiguousFields = ambiguousFields.filter(name => !intent.fields?.[name]?.alternatives?.length);
++  const blockingAmbiguousFields = ambiguousFields.filter(name => !intent.fields?.[name]?.alternatives?.length
++    || (name === "product" && !intent.product && AMBIGUOUS_PRODUCT_RULES.some(rule => hasPhrase(intent.normalizedQuery, rule.term))));
+   const unresolvedQualifiers = (intent.unknownQualifiers || []).map(item => item.value).filter(Boolean);
+   const unresolvedConceptPairs = preliminaryStructuredIntent.conceptPairStatus === "unresolved";
+   const needsClarification = missingFields.length > 0 || blockingAmbiguousFields.length > 0 || unresolvedQualifiers.length > 0 || unresolvedConceptPairs;
+@@ -948,7 +947,9 @@ function addClarificationState(intent) {
+     missingFields,
+     ambiguousFields,
+     clarificationMessage: needsClarification
+-      ? buildClarificationMessage(missingFields, blockingAmbiguousFields, unresolvedQualifiers, unresolvedConceptPairs)
++      ? (blockingAmbiguousFields.includes("product") && intent.fields.product.alternatives?.length
++        ? `Please clarify the product: ${formatList(intent.fields.product.alternatives.map(value => value === "petroleum" ? "petroleum (including gasoline)" : value))}. No series will be selected until it is resolved.`
++        : buildClarificationMessage(missingFields, blockingAmbiguousFields, unresolvedQualifiers, unresolvedConceptPairs))
+       : null
+   };
+   const structuredIntent = {
+@@ -1027,7 +1028,7 @@ export function detectCountries(normalizedQuery, countries = [], originalQuery =
+ 
+ function resolveDeterministicGeographyEvidence(originalQuery, countries = [], normalizedOverride = null) {
+   const normalizedQuery = normalizedOverride || correctQueryTerms(normalizeText(cleanQueryMechanically(originalQuery)));
+-  const mentions = findGeographyMentions(normalizedQuery, originalQuery);
++  const mentions = findGeographyMentions(normalizedQuery, originalQuery, countries);
+   const selectedNameCodes = new Map();
+   for (const mention of mentions) {
+     const name = normalizeText(mention.geography?.name);
+@@ -1050,23 +1051,6 @@ function resolveDeterministicGeographyEvidence(originalQuery, countries = [], no
+     conflictStatus: "deterministic_only",
+     aiClaims: []
+   }));
+-  const selectedCodes = new Set(evidence.map(item => item.code));
+-  const detected = detectCountries(normalizedQuery, countries, originalQuery);
+-  for (const geography of detected) {
+-    if (!geography?.code || selectedCodes.has(geography.code)) continue;
+-    const selectedForName = selectedNameCodes.get(normalizeText(geography.name));
+-    if (selectedForName && !selectedForName.has(geography.code)) continue;
+-    evidence.push({
+-      ...geography,
+-      rawText: geography.code,
+-      index: Number.MAX_SAFE_INTEGER,
+-      source: "raw_exact_deterministic",
+-      resolutionRule: "exact_name_alias_or_code",
+-      conflictStatus: "deterministic_only",
+-      aiClaims: []
+-    });
+-    selectedCodes.add(geography.code);
+-  }
+   evidence.sort((left, right) => left.index - right.index || left.code.localeCompare(right.code));
+   return { evidence, geographies: evidence.map(geographyFromEvidence) };
+ }
+@@ -1246,9 +1230,21 @@ function collectBoundedMetadataGeographyCorrections(originalQuery, countries) {
+   const names = [...new Set(mergeCountries([...listApprovedGeographies(), ...(countries || [])], FALLBACK_COUNTRIES)
+     .map(geography => geography.name)
+     .filter(Boolean))];
++  const queryTokens = normalizeText(originalQuery).split(" ").filter(Boolean);
++  const protectedTokens = new Set();
++  const exactTerms = [...names, ...COUNTRY_ALIASES.keys(), ...listApprovedGeographies().map(item => item.code)];
++  for (const term of exactTerms) {
++    const tokens = normalizeText(term).split(" ").filter(Boolean);
++    for (let start = 0; start <= queryTokens.length - tokens.length; start++) {
++      if (tokens.every((token, offset) => queryTokens[start + offset] === token)) {
++        tokens.forEach((_, offset) => protectedTokens.add(start + offset));
++      }
++    }
++  }
+   const matches = names.map(name => findBoundedSpellingMatch(originalQuery, name)).filter(match =>
+     match
+     && match.editDistance > 0
++    && !Array.from({ length: match.tokenCount }, (_, offset) => match.tokenStart + offset).some(index => protectedTokens.has(index))
+     && isEligibleGeographyCorrectionSpan(match.rawText)
+   );
+   const groups = new Map();
+@@ -1273,6 +1269,7 @@ function collectBoundedMetadataGeographyCorrections(originalQuery, countries) {
+ function isEligibleGeographyCorrectionSpan(rawText) {
+   const normalized = normalizeText(rawText);
+   if (!normalized || /^\d/.test(normalized) || normalized.split(" ").some(token => STOP_WORDS.has(token))) return false;
++  if (NEGATION_RULES.some(rule => hasPhrase(normalized, rule.value))) return false;
+   if (findConceptMentions(normalized).length > 0) return false;
+   if (firstRuleMatch(normalized, SECTOR_RULES) || firstRuleMatch(normalized, FREQUENCY_RULES)) return false;
+   return true;
+@@ -1303,20 +1300,21 @@ function findBoundedSpellingMatch(originalQuery, proposedName) {
+ }
+ 
+ function applyVerifiedTokenCorrections(originalQuery, corrections) {
+-  const tokens = normalizeText(originalQuery).split(" ").filter(Boolean);
+-  const byStart = new Map(corrections.map(item => [item.tokenStart, item]));
+-  const corrected = [];
+-  for (let index = 0; index < tokens.length;) {
+-    const correction = byStart.get(index);
+-    if (!correction) {
+-      corrected.push(tokens[index]);
+-      index += 1;
+-      continue;
+-    }
+-    corrected.push(...normalizeText(correction.proposedTerm || correction.proposedName).split(" ").filter(Boolean));
+-    index += correction.tokenCount;
++  // Retain clause boundaries; normalization here used to turn a later positive
++  // request into part of an earlier exclusion after a spelling correction.
++  const original = String(originalQuery).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ");
++  const tokens = [...original.matchAll(/[a-z0-9]+/gi)];
++  let corrected = original;
++  let nextStart = tokens.length;
++  for (const correction of [...corrections].sort((left, right) => right.tokenStart - left.tokenStart)) {
++    const first = tokens[correction.tokenStart];
++    const last = tokens[correction.tokenStart + correction.tokenCount - 1];
++    if (!first || !last || correction.tokenStart + correction.tokenCount > nextStart) continue;
++    corrected = corrected.slice(0, first.index) + (correction.proposedTerm || correction.proposedName)
++      + corrected.slice(last.index + last[0].length);
++    nextStart = correction.tokenStart;
+   }
+-  return corrected.join(" ");
++  return corrected;
+ }
+ 
+ function describeAiGeographyAgreement(evidence, values, countries) {
+diff --git a/lib/sources/eia/local-ranking.js b/lib/sources/eia/local-ranking.js
+index 767251b..d3ebd2f 100644
+--- a/lib/sources/eia/local-ranking.js
++++ b/lib/sources/eia/local-ranking.js
+@@ -286,11 +286,9 @@ function buildScoringContext(intent, retrieval, preparedCandidates) {
+   return { queryTokens, idf };
+ }
+ 
+-function scoreCandidate(intent, retrieval, prepared, context) {
+-  const candidate = prepared.candidate;
+-  const areas = candidateAreas(candidate);
++function candidateSemanticMatches(intent, retrieval, areas) {
+   const detectedActivities = detectVocabulary(areas, ACTIVITY_VOCABULARY, ["title", "measure", "activity"]);
+-  const detectedProducts = detectVocabulary(areas, PRODUCT_VOCABULARY, ["title", "measure", "productOrScope", "facets"]);
++  const detectedProducts = detectVocabulary(areas, PRODUCT_VOCABULARY, ["title", "measure", "productOrScope", "facets", "description"]);
+   for (const activity of detectedActivities.keys()) {
+     for (const product of TAXONOMY.activityImpliedProducts?.[activity] || []) {
+       if (!detectedProducts.has(product)) detectedProducts.set(product, `implied_by_${activity}`);
+@@ -316,6 +314,20 @@ function scoreCandidate(intent, retrieval, prepared, context) {
+     dimension: "activity"
+   });
+ 
++  return { detectedProducts, detectedActivities, requestedProduct, requestedActivity, explicitActivity, weakActivity, productMatch, activityMatch };
++}
++
++export function isExactCandidateConcept(intent, concept, candidate) {
++  const match = candidateSemanticMatches(intent, { concept }, candidateAreas(candidate));
++  return (!match.requestedProduct || match.productMatch.compatibility >= 0.99)
++    && (!match.explicitActivity || match.activityMatch.compatibility >= 0.99);
++}
++
++function scoreCandidate(intent, retrieval, prepared, context) {
++  const candidate = prepared.candidate;
++  const areas = candidateAreas(candidate);
++  const { detectedProducts, detectedActivities, requestedProduct, requestedActivity, explicitActivity, weakActivity, productMatch, activityMatch } = candidateSemanticMatches(intent, retrieval, areas);
++
+   const components = {};
+   components.productOrScope = component(
+     requestedProduct ? WEIGHTS.productOrScope : 0,
+@@ -689,7 +701,8 @@ function candidateAreas(candidate) {
+     title: normalizeText(candidate?.title),
+     description: normalizeText(candidate?.description),
+     measure: normalizeText(`${candidate?.activity || ""} ${candidate?.selector?.measure || ""}`),
+-    productOrScope: normalizeText(candidate?.product_or_scope),
++    // The official namespace supplies the same product evidence used by retrieval.
++    productOrScope: normalizeText(`${candidate?.product_or_scope || ""} ${candidate?.route_family === "domestic" && String(candidate?.series_id || "").startsWith("ELEC.") ? "electricity" : ""}`),
+     activity: normalizeText(candidate?.activity),
+     facets: normalizeText(Object.values(candidate?.selector?.facets || {}).join(" ")),
+     conceptType: normalizeText(candidate?.concept_type),
+diff --git a/lib/sources/eia/local-retrieval.js b/lib/sources/eia/local-retrieval.js
+index a31ea07..f654ba0 100644
+--- a/lib/sources/eia/local-retrieval.js
++++ b/lib/sources/eia/local-retrieval.js
+@@ -4,6 +4,8 @@ import { readFile as readFileAsync } from "node:fs/promises";
+ import { promisify } from "node:util";
+ import { gunzip } from "node:zlib";
+ 
++import { isExactCandidateConcept } from "./local-ranking.js";
++
+ const unzip = promisify(gunzip);
+ const ROUTING_CONFIG = JSON.parse(readFileSync(new URL("../../../data/eia/phase4-routing-config.json", import.meta.url), "utf8"));
+ 
+@@ -94,7 +96,7 @@ function retrievePair(records, intent, geography, concept) {
+   const frequencyEligible = frequency.mode === "exact"
+     ? geographyEligible.filter(record => record.frequency === frequency.value)
+     : geographyEligible;
+-  const classified = classifyCandidates(unresolvedQualifiers.length > 0 ? [] : frequencyEligible, intent.route.family, concept, frequency, intent);
++  const classified = classifyCandidates(unresolvedQualifiers.length > 0 ? [] : frequencyEligible, intent.route.family, concept, frequency, intent, geography);
+   const selected = selectTiers(classified);
+ 
+   return {
+@@ -120,7 +122,7 @@ function retrievePair(records, intent, geography, concept) {
+   };
+ }
+ 
+-function classifyCandidates(records, family, concept, frequency, intent) {
++function classifyCandidates(records, family, concept, frequency, intent, geography) {
+   const buckets = new Map([
+     ["exact_phrase", []],
+     ["approved_alias", []],
+@@ -128,6 +130,7 @@ function classifyCandidates(records, family, concept, frequency, intent) {
+     ["partial_tokens", []],
+     ["trigram", []]
+   ]);
++  const semanticEligibility = new WeakMap();
+   const directProducts = unique([concept.product]);
+   const alternativeProducts = unique(concept.productAlternatives || []);
+   const productTerms = expandAliases([...directProducts, ...alternativeProducts]);
+@@ -174,10 +177,19 @@ function classifyCandidates(records, family, concept, frequency, intent) {
+       (intent.exclusions || []).length > 0 ? "exclusions_applied" : "exclusions_not_requested",
+       `match_${tier}`
+     ];
+-    buckets.get(tier).push(toRetrievedCandidate(record, pool, tier, reasonCodes));
++    const candidate = toRetrievedCandidate(record, pool, tier, reasonCodes, geography);
++    semanticEligibility.set(candidate, isExactCandidateConcept(intent, concept, candidate));
++    buckets.get(tier).push(candidate);
+   }
+ 
+-  for (const values of buckets.values()) values.sort(compareCandidates);
++  // Exact requested concepts must reach ranking before the pool cap. Preserve the
++  // existing ordering for related/fallback concepts; no eligibility threshold is relaxed.
++  for (const values of buckets.values()) values.sort((left, right) =>
++    Number(semanticEligibility.get(right)) - Number(semanticEligibility.get(left))
++    || (semanticEligibility.get(left) && semanticEligibility.get(right)
++      ? Number(right.frequency === frequency.value) - Number(left.frequency === frequency.value) : 0)
++    || compareCandidates(left, right)
++  );
+   return buckets;
+ }
+ 
+@@ -519,8 +531,11 @@ function trigrams(value) {
+   return output;
+ }
+ 
+-function toRetrievedCandidate(record, pool, tier, reasonCodes) {
+-  return { ...record, retrieval: { pool, tier, reasonCodes } };
++function toRetrievedCandidate(record, pool, tier, reasonCodes, geography) {
++  // Display the approved complete label; metadata_hash still identifies the unchanged archived source.
++  const title = String(record.title || "").replace(/,\s*(annual|quarterly|monthly|weekly|daily)\s*$/i, "").trim();
++  const name = title.toLowerCase().endsWith(", " + geography.name.toLowerCase()) ? geography.name : record.geography.name;
++  return { ...record, geography: { ...record.geography, name }, retrieval: { pool, tier, reasonCodes } };
+ }
+ 
+ function appendUnique(target, candidates, limit, existing = []) {
+diff --git a/lib/sources/eia/multi-country-comparison.js b/lib/sources/eia/multi-country-comparison.js
+index 8ed315a..984329a 100644
+--- a/lib/sources/eia/multi-country-comparison.js
++++ b/lib/sources/eia/multi-country-comparison.js
+@@ -37,6 +37,7 @@ export function buildComparisonDefinitions(intent, rankedResult, { limit = 5 } =
+   if (!isMultiCountryComparison(structured)) return [];
+   const geographies = structured.geographies || [];
+   const groups = new Map();
++  const requestKeys = new Set();
+ 
+   for (const retrieval of rankedResult?.retrievals || []) {
+     const context = {
+@@ -46,6 +47,7 @@ export function buildComparisonDefinitions(intent, rankedResult, { limit = 5 } =
+       sector: retrieval?.concept?.sector,
+       frequency: retrieval?.frequency?.value || retrieval?.frequency
+     };
++    requestKeys.add(requestKey(context));
+     const candidates = retrieval?.displayCandidates?.length
+       ? retrieval.displayCandidates
+       : retrieval?.rankedCandidates || [];
+@@ -68,11 +70,20 @@ export function buildComparisonDefinitions(intent, rankedResult, { limit = 5 } =
+     }
+   }
+ 
+-  return [...groups.values()]
+-    .map(group => finalizeDefinition(group, geographies))
+-    .sort(compareDefinitions)
+-    .slice(0, limit)
+-    .map((definition, index) => ({ ...definition, rank: index + 1 }));
++  const ranked = [...groups.values()].map(group => finalizeDefinition(group, geographies)).sort(compareDefinitions);
++  const requests = [...requestKeys].map(key => ranked.filter(definition => requestKey(definition.signature) === key));
++  const selected = [];
++  // Preserve each requested product/activity before taking more variants of one.
++  for (let depth = 0; selected.length < limit; depth++) {
++    const round = requests.map(definitions => definitions[depth]).filter(Boolean);
++    if (round.length === 0) break;
++    selected.push(...round.slice(0, limit - selected.length));
++  }
++  return selected.map((definition, index) => ({ ...definition, rank: index + 1 }));
++}
++
++function requestKey(concept) {
++  return JSON.stringify([concept.product, concept.activity, concept.sector].map(normalizeText));
+ }
+ 
+ export function validateComparisonCandidate(candidate, reference) {
+diff --git a/scripts/eia-metadata/normalize.js b/scripts/eia-metadata/normalize.js
+index dd3074f..ef717e0 100644
+--- a/scripts/eia-metadata/normalize.js
++++ b/scripts/eia-metadata/normalize.js
+@@ -1,10 +1,14 @@
+ import { createHash } from "node:crypto";
++import { readFileSync } from "node:fs";
+ import { resolve } from "node:path";
+ import { fileURLToPath } from "node:url";
+ 
+ import { loadPhase1aFixtures } from "./discover-routes.js";
+ 
+ const SCHEMA_VERSION = "1.0.0";
++// Approved complete names preserve embedded commas. Match by code and title suffix,
++// so product punctuation cannot be mistaken for part of the geography.
++const APPROVED_GEOGRAPHIES = JSON.parse(readFileSync(new URL("../../data/eia/routing-metadata.json", import.meta.url), "utf8")).geographies;
+ const TRUSTED_SELECTOR_SOURCES = new Set([
+   "official_series_metadata",
+   "official_combination_metadata",
+@@ -259,7 +263,7 @@ function buildBulkGeography(record, routeFamily) {
+   }
+ 
+   const code = routeFamily === "seds" ? sourceCode.replace(/^USA-/, "") : sourceCode;
+-  const name = extractTrailingGeographyName(record.name) || code;
++  const name = extractTrailingGeographyName(record.name, code) || code;
+   return {
+     name,
+     code,
+@@ -278,7 +282,12 @@ function extractDomesticGeographyName(name, fallback) {
+   return fallback;
+ }
+ 
+-function extractTrailingGeographyName(name) {
++export function extractTrailingGeographyName(name, code) {
++  const title = String(name || "").replace(/,\s*(annual|quarterly|monthly|weekly|daily)\s*$/i, "").trim();
++  const approved = APPROVED_GEOGRAPHIES.filter(geography => geography.code === code
++    && title.toLowerCase().endsWith(", " + geography.name.toLowerCase()))
++    .sort((left, right) => right.name.length - left.name.length)[0];
++  if (approved) return approved.name;
+   const parts = String(name || "").split(",").map(part => part.trim()).filter(Boolean);
+   if (parts.length < 2) return null;
+   return /^(annual|quarterly|monthly|weekly|daily)$/i.test(parts.at(-1))
+diff --git a/tests/eia-query-interpretation.test.js b/tests/eia-query-interpretation.test.js
+index 3556468..cd93483 100644
+--- a/tests/eia-query-interpretation.test.js
++++ b/tests/eia-query-interpretation.test.js
+@@ -60,7 +60,7 @@ test("validated high-confidence AI output uses only supported categories", () =>
+   assert.equal(intent.needsClarification, false);
+ });
+ 
+-test("unsupported AI product and country are discarded while frequency is preserved", () => {
++test("unsupported AI fields cannot replace an unstated annual frequency", () => {
+   const intent = validateAiInterpretation({
+     correctedQuery: "Zed energy consumption",
+     countryName: "Zedland",
+@@ -75,7 +75,9 @@ test("unsupported AI product and country are discarded while frequency is preser
+   assert.equal(intent.countryCode, null);
+   assert.equal(intent.product, "total energy");
+   assert.equal(intent.activity, "consumption");
+-  assert.equal(intent.frequency, "weekly");
++  assert.equal(intent.frequency, "annual");
++  assert.equal(intent.frequencyExplicit, false);
++  assert.equal(intent.requestedFrequency, null);
+   assert.equal(intent.needsClarification, true);
+   assert.deepEqual(intent.missingFields, ["country"]);
+ });
+@@ -191,7 +193,7 @@ test("AI-corrected text cannot manufacture sector evidence absent from the raw q
+   assert.equal(intent.fields.sector.resolutionSource, "unresolved");
+ });
+ 
+-test("cross-family ambiguity stays broad for later candidate retrieval", () => {
++test("cross-family ambiguous product retains alternatives and requires clarification", () => {
+   const intent = validateAiInterpretation({
+     correctedQuery: "gas prices in the United States",
+     confidence: 0.85,
+@@ -209,8 +211,9 @@ test("cross-family ambiguity stays broad for later candidate retrieval", () => {
+   assert.deepEqual(intent.fields.product.alternatives, ["natural gas", "petroleum"]);
+   assert.equal(intent.structuredIntent.productBreadth, "ambiguous");
+   assert.deepEqual(intent.structuredIntent.productAlternatives, ["natural gas", "petroleum"]);
+-  assert.equal(intent.needsClarification, false);
+-  assert.equal(intent.clarificationMessage, null);
++  assert.equal(intent.needsClarification, true);
++  assert.equal(intent.blockingClarification, true);
++  assert.match(intent.clarificationMessage, /natural gas.*gasoline/);
+ });
+ 
+ test("deterministic gas fallback is phrase-first and context-aware", () => {

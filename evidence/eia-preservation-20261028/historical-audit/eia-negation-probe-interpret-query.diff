@@ -1,0 +1,104 @@
+--- lib/sources/eia/interpret-query.js	2026-10-27 13:04:39
++++ /private/tmp/eia-negation-design-probe/lib/sources/eia/interpret-query.js	2026-10-27 17:24:43
+@@ -1,7 +1,7 @@
+ import { readFileSync } from "node:fs";
+ 
+ import { requireAuthentication } from "../../auth.js";
+-import { buildStructuredIntent, findConceptMentions, findGeographyMentions, geographyNameForms, getNegationScope, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
++import { buildStructuredIntent, findConceptMentions, findGeographyMentions, geographyNameForms, getNegationScope, resolveNegation, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
+ 
+ const ROUTING_CONFIG = JSON.parse(readFileSync(new URL("../../../data/eia/phase4-routing-config.json", import.meta.url), "utf8"));
+ const PRODUCT_RULES = buildRules(ROUTING_CONFIG.vocabulary?.products);
+@@ -160,12 +160,13 @@
+   const geographyResolution = resolveDeterministicGeographyEvidence(forms.originalQuery, countryList, normalizedQuery);
+   const detectedCountries = geographyResolution.geographies;
+   const exclusions = findRuleExclusions(normalizedQuery, correctionEvidence, forms.originalQuery);
+-  const productResult = interpretProductWithRules(normalizedQuery, exclusions);
++  const positiveQuery = resolveNegation(normalizedQuery, forms.originalQuery).positiveQuery;
++  const productResult = interpretProductWithRules(positiveQuery, exclusions);
+   const product = productResult.value;
+-  const activity = firstNonExcludedRuleMatch(normalizedQuery, ACTIVITY_RULES, exclusions, "activity");
+-  const requestedFrequency = firstRuleMatch(normalizedQuery, FREQUENCY_RULES);
++  const activity = firstNonExcludedRuleMatch(positiveQuery, ACTIVITY_RULES, exclusions, "activity");
++  const requestedFrequency = firstRuleMatch(positiveQuery, FREQUENCY_RULES);
+   const frequency = requestedFrequency || "annual";
+-  const sector = firstNonExcludedRuleMatch(normalizedQuery, SECTOR_RULES, exclusions, "sector");
++  const sector = firstNonExcludedRuleMatch(positiveQuery, SECTOR_RULES, exclusions, "sector");
+   const fields = {
+     country: buildFallbackField(detectedCountries[0]?.code || null, fallbackReason, detectedCountries[0] ? null : "No approved geography was found."),
+     product: buildFallbackField(product, fallbackReason, productResult.reason, productResult),
+@@ -295,6 +296,7 @@
+     ? "unchanged"
+     : parsed.correctedQuery ? "ai" : "unchanged";
+   const deterministicEvidenceQuery = ruleIntent.normalizedQuery || normalizeText(forms.cleanedQuery);
++  const positiveEvidenceQuery = resolveNegation(deterministicEvidenceQuery, correctedEvidenceInput).positiveQuery;
+   const ruleExclusions = mergeExclusions(ruleIntent.exclusions, findRuleExclusions(deterministicEvidenceQuery, [], correctedEvidenceInput));
+   const validatePositiveField = (type, value, validator) => {
+     const normalizedValue = validator(value);
+@@ -310,7 +312,7 @@
+     "product",
+     readAiField(parsed, "product", ["product"]),
+     confidence,
+-    value => validatePositiveField("product", value, candidate => validateExplicitCategory(candidate, PRODUCT_RULES, PRODUCT_ALIASES, deterministicEvidenceQuery)),
++    value => validatePositiveField("product", value, candidate => validateExplicitCategory(candidate, PRODUCT_RULES, PRODUCT_ALIASES, positiveEvidenceQuery)),
+     ruleIntent.fields.product,
+     {
+       preserveFallbackAmbiguity: true,
+@@ -327,7 +329,7 @@
+     "activity",
+     readAiField(parsed, "activity", ["activity"]),
+     confidence,
+-    value => validatePositiveField("activity", value, candidate => validateExplicitCategory(candidate, ACTIVITY_RULES, ACTIVITY_ALIASES, deterministicEvidenceQuery)),
++    value => validatePositiveField("activity", value, candidate => validateExplicitCategory(candidate, ACTIVITY_RULES, ACTIVITY_ALIASES, positiveEvidenceQuery)),
+     ruleIntent.fields.activity,
+     {
+       claimNormalizer: value => normalizeCategory(value, ACTIVITY_RULES, ACTIVITY_ALIASES),
+@@ -340,7 +342,7 @@
+     ambiguityReason: ruleIntent.fields.sector?.normalizedValue ? rawSectorField.ambiguityReason : null
+   }, confidence, value => {
+     const sector = normalizeCategory(value, SECTOR_RULES, SECTOR_ALIASES);
+-    const explicitSector = sector && isCategoryExplicit(sector, SECTOR_RULES, deterministicEvidenceQuery) ? sector : null;
++    const explicitSector = sector && isCategoryExplicit(sector, SECTOR_RULES, positiveEvidenceQuery) ? sector : null;
+     return ruleExclusions.some(item => item.type === "sector" && item.value === explicitSector) ? null : explicitSector;
+   }, ruleIntent.fields.sector, {
+     claimNormalizer: value => normalizeCategory(value, SECTOR_RULES, SECTOR_ALIASES),
+@@ -393,7 +395,7 @@
+   const sector = sectorField.normalizedValue;
+   const frequency = frequencyField.normalizedValue || "annual";
+   const conceptPairs = preserveAmbiguousPairProducts(
+-    validateAiConceptPairs(parsed.conceptPairs, confidence, deterministicEvidenceQuery, ruleIntent),
++    validateAiConceptPairs(parsed.conceptPairs, confidence, positiveEvidenceQuery, ruleIntent),
+     productField
+   );
+   const exclusions = mergeExclusions(
+@@ -813,7 +815,8 @@
+ 
+ function findRuleExclusions(normalizedQuery, correctionEvidence = [], originalQuery = normalizedQuery) {
+   const mentions = findConceptMentions(normalizedQuery);
+-  const positive = mentions.filter(mention => getNegationScope(normalizedQuery, mention.index, originalQuery) === null);
++  const negation = resolveNegation(normalizedQuery, originalQuery);
++  const positive = mentions.filter(mention => negation.at(mention.index).status === "positive");
+   const exclusions = [];
+   for (const mention of mentions) {
+     const prefixText = normalizedQuery.slice(0, mention.index).trim();
+@@ -936,7 +939,8 @@
+     || (name === "product" && !intent.product && AMBIGUOUS_PRODUCT_RULES.some(rule => hasPhrase(intent.normalizedQuery, rule.term))));
+   const unresolvedQualifiers = (intent.unknownQualifiers || []).map(item => item.value).filter(Boolean);
+   const unresolvedConceptPairs = preliminaryStructuredIntent.conceptPairStatus === "unresolved";
+-  const needsClarification = missingFields.length > 0 || blockingAmbiguousFields.length > 0 || unresolvedQualifiers.length > 0 || unresolvedConceptPairs;
++  const unresolvedNegation = preliminaryStructuredIntent.unresolvedNegation || [];
++  const needsClarification = missingFields.length > 0 || blockingAmbiguousFields.length > 0 || unresolvedQualifiers.length > 0 || unresolvedConceptPairs || unresolvedNegation.length > 0;
+   const blockingClarification = unresolvedQualifiers.length > 0 || missingFields.length > 0 || blockingAmbiguousFields.length > 0 || unresolvedConceptPairs;
+ 
+   const clarifiedIntent = {
+@@ -946,7 +950,9 @@
+     conceptPairStatus: preliminaryStructuredIntent.conceptPairStatus,
+     missingFields,
+     ambiguousFields,
+-    clarificationMessage: needsClarification
++    clarificationMessage: unresolvedNegation.length
++      ? `Please clarify what should be excluded or requested in: ${unresolvedNegation.map(item => JSON.stringify(item.text)).join("; ")}. Established request fields are preserved; no series will be selected until the scope is resolved.`
++      : needsClarification
+       ? (blockingAmbiguousFields.includes("product") && intent.fields.product.alternatives?.length
+         ? `Please clarify the product: ${formatList(intent.fields.product.alternatives.map(value => value === "petroleum" ? "petroleum (including gasoline)" : value))}. No series will be selected until it is resolved.`
+         : buildClarificationMessage(missingFields, blockingAmbiguousFields, unresolvedQualifiers, unresolvedConceptPairs))

@@ -1,0 +1,193 @@
+--- starting/lib/sources/eia/interpret-query.js
++++ final/lib/sources/eia/interpret-query.js
+@@ -1,7 +1,9 @@
+ import { readFileSync } from "node:fs";
+ 
+ import { requireAuthentication } from "../../auth.js";
+-import { buildStructuredIntent, findConceptMentions, findGeographyMentions, geographyNameForms, getNegationScope, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
++import { buildStructuredIntent, findConceptMentions, findGeographyMentions, geographyNameForms, getNegationScope, listRequestEvidenceMentions, listApprovedGeographies, resolveApprovedGeography } from "./intent-routing.js";
++
++import { ruleRequestEvidence, validateRequestEvidence } from "./request-evidence.js";
+ 
+ const ROUTING_CONFIG = JSON.parse(readFileSync(new URL("../../../data/eia/phase4-routing-config.json", import.meta.url), "utf8"));
+ const PRODUCT_RULES = buildRules(ROUTING_CONFIG.vocabulary?.products);
+@@ -133,6 +135,7 @@
+     return interpretQueryWithRules(query, countries, "submitted_rule_intent");
+   }
+   const parsed = {
++    requestEvidence: rawIntent.requestEvidence,
+     correctedQuery: rawIntent.correctedQuery,
+     correctedQuerySource: rawIntent.correctedQuerySource,
+     confidence: rawIntent.confidence ?? 0.75,
+@@ -152,7 +155,8 @@
+   return validateAiInterpretation(parsed, query, countries) || interpretQueryWithRules(query, countries, "submitted_ai_intent_invalid");
+ }
+ 
+-export function interpretQueryWithRules(query, countries = [], fallbackReason = "openai_not_used", correctionEvidence = []) {
++export function interpretQueryWithRules(query, countries = [], fallbackReason = "openai_not_used", correctionEvidence = [], scopeHandled = false) {
++  if (!scopeHandled) return interpretWithEvidence(null, String(query), countries, fallbackReason, correctionEvidence);
+   const forms = buildQueryForms(query);
+   const rawNormalizedQuery = normalizeText(forms.cleanedQuery);
+   const normalizedQuery = correctQueryTerms(rawNormalizedQuery);
+@@ -228,7 +232,13 @@
+     `Allowed sector values: ${formatAllowedValues(SECTOR_RULES)}, or null.`,
+     `Allowed frequency values: ${formatAllowedValues(FREQUENCY_RULES)}, or null. Use annual when no frequency is stated, and set frequency.explicit to false.`,
+     "Never return or invent an EIA series ID.",
+-    "Return only JSON with correctedQuery, confidence, ambiguity, fields, geographies, conceptPairs, exclusions, and unknownQualifiers.",
++    "Return only JSON with correctedQuery, confidence, ambiguity, fields, geographies, conceptPairs, exclusions, unknownQualifiers, and requestEvidence.",
++    "requestEvidence is {version:1, query:<exact raw query>, scopes:[{start,end,text,status,target,operator?}]}. Positions are zero-based UTF-16 character offsets; end is exclusive; text must be the exact raw substring.",
++    "Scopes must be ordered, non-overlapping, and cover every source word. Group contiguous text with the same role; use at most 32 scopes. Never split a word or complete metadata name such as natural gas or United States.",
++    "status is requested, excluded, unresolved, or context. target is data, action, knowledge, condition, or unknown. Keep data mentions in requested, excluded or unresolved scopes, never hidden inside context.",
++    "A knowledge/certainty comment is context, not a data exclusion. Separately mark an established data request as requested; an undecided choice or conditional request is unresolved. Non-exclusion alone does not establish a request.",
++    "Each excluded scope must contain its negative operator, recorded as operator:{start,end,text}, and must target data or an exclusion-request action. A requested scope must not contain a negation operator; put non-excluding grammatical context into its own context scope.",
++    "Preserve genuinely ambiguous extent, conditions, and nested request/exclusion actions as unresolved; never turn unknown intervening words into exclusions. Preserve all clearly established requests around an unresolved scope.",
+     "Each fields entry (country, product, activity, sector, frequency) must contain rawValue, value, confidence, and ambiguityReason; frequency must also contain explicit.",
+     "Each geography item contains value and confidence. Each conceptPairs item contains product, activity, order, and confidence.",
+     "Each exclusion contains type (product, activity, sector, or conceptType), value, and confidence. unknownQualifiers is an ordered array of literal unresolved source or scope terms.",
+@@ -267,7 +277,117 @@
+   }
+ }
+ 
+-export function validateAiInterpretation(parsed, query, countries = [], fallbackIntent = null) {
++function resolveRequestEvidence(query, proposed = null, parsed = null) {
++  const corrections = parsed ? collectVerifiedAiVocabularyCorrections(parsed, Number(parsed.confidence) || 0.75, query) : [];
++  const rawWords = [...String(query).matchAll(/[\p{L}\p{N}]+|&/gu)];
++  const correctedMentions = corrections.map(c => {
++    const first = rawWords[c.tokenStart], last = rawWords[c.tokenStart + c.tokenCount - 1];
++    return first && last ? { start: first.index, end: last.index + last[0].length, text: query.slice(first.index, last.index + last[0].length), type: c.type, value: c.canonicalValue, correction: c } : null;
++  }).filter(Boolean);
++  const mentions = [...listRequestEvidenceMentions(query), ...correctedMentions].sort((a, b) => a.start - b.start || b.end - a.end);
++  const ruleEvidence = ruleRequestEvidence(query, mentions);
++  let resolution = validateRequestEvidence(proposed || ruleEvidence, query, mentions, { source: proposed ? "model" : "rules" });
++  const invalidReasons = resolution.valid ? [] : resolution.errors;
++  if (!resolution.valid) resolution = validateRequestEvidence(ruleEvidence, query, mentions, { source: "rules" });
++  if (!resolution.valid) throw new Error("Internal request-evidence construction failed.");
++  // Projection may remove words, but must never invent a new complete metadata term.
++  const invented = listRequestEvidenceMentions(resolution.positiveQuery).filter(m =>
++    !mentions.some(raw => raw.start === m.start && raw.end === m.end && raw.type === m.type && raw.value === m.value));
++  if (invented.length) {
++    invalidReasons.push("projection_created_metadata_term");
++    const chars = resolution.positiveQuery.split("");
++    for (const mention of invented) for (let i = mention.start; i < mention.end; i++) chars[i] = " ";
++    resolution.positiveQuery = chars.join("");
++  }
++  if (invalidReasons.length) resolution.evidence.invalid = true;
++  return { ...resolution, invalidReasons, corrections };
++}
++
++function interpretWithEvidence(parsed, query, countries, fallbackReason = "scope_rules", correctionEvidence = []) {
++  const resolved = resolveRequestEvidence(query, parsed?.requestEvidence, parsed);
++  const requested = resolved.mentions.filter(m => m.status === "requested");
++  const excluded = resolved.mentions.filter(m => m.status === "excluded");
++  const same = (a, b) => a.type === b.type && a.value === b.value;
++  const exclusions = [];
++  for (const mention of excluded) {
++    if (!["product", "activity", "sector", "scope"].includes(mention.type) || requested.some(m => same(m, mention))) continue;
++    const type = mention.type === "scope" ? "conceptType" : mention.type;
++    if (!exclusions.some(item => item.type === type && item.value === mention.value)) {
++      exclusions.push({ type, value: mention.value, order: exclusions.length, confidence: 1, source: "validated_source_scope", ...(mention.correction ? { corrections: [serializeVocabularyCorrection(mention.correction)] } : {}) });
++    }
++  }
++  const positiveFallback = interpretQueryWithRules(resolved.positiveQuery, countries, fallbackReason, correctionEvidence, true);
++  const inner = (parsed && validateAiInterpretation({ ...parsed, requestEvidence: undefined }, resolved.positiveQuery, countries, { ...positiveFallback, exclusions }, true)) || positiveFallback;
++  const issues = [...resolved.invalidReasons];
++  for (const scope of resolved.evidence.scopes.filter(s => s.status === "excluded")) {
++    const members = excluded.filter(m => m.start >= scope.start && m.end <= scope.end);
++    const concepts = members.filter(m => ["product", "activity", "sector"].includes(m.type));
++    if (concepts.length && concepts.every(m => requested.some(p => same(p, m)))) issues.push("scoped_exclusion_not_representable");
++    if (!concepts.length && members.some(m => m.type === "geography" && requested.some(p => same(p, m)))) issues.push("conflicting_geography_scope");
++    if (members.some(m => m.type === "frequency" && m.value === inner.frequency)) issues.push("excluded_selected_frequency");
++  }
++  for (const type of ["frequency", "sector"]) {
++    if (new Set(requested.filter(m => m.type === type).map(m => m.value)).size > 1) issues.push(`multiple_requested_${type}_scopes`);
++  }
++  const requestedScopes = resolved.evidence.scopes.filter(scope => scope.status === "requested").map(scope => {
++    const members = requested.filter(m => m.start >= scope.start && m.end <= scope.end);
++    const geographies = members.filter(m => m.type === "geography" && inner.structuredIntent.geographies.some(g => g.code === m.value));
++    const qualifiers = [...new Set(members.filter(m => ["product", "activity", "frequency", "sector"].includes(m.type)).map(m => `${m.type}:${m.value}`))].sort();
++    return { members, geographies, signature: JSON.stringify(qualifiers) };
++  }).filter(scope => scope.geographies.length > 0);
++  if (requestedScopes.length > 1 && new Set(requestedScopes.map(s => s.signature)).size > 1) issues.push("country_scoped_requests_not_representable");
++  for (const scope of requestedScopes) {
++    const positions = [...new Set(scope.geographies.map(g => g.start))].sort((a, b) => a - b);
++    const concepts = scope.members.filter(m => ["product", "activity"].includes(m.type));
++    const multiplePairs = ["product", "activity"].some(type => new Set(concepts.filter(m => m.type === type).map(m => m.value)).size > 1);
++    if (new Set(scope.geographies.map(g => g.value)).size > 1 && positions.length > 1 && multiplePairs && concepts.some(m => m.start > positions[0] && m.start < positions.at(-1))) issues.push("interleaved_country_requests_not_representable");
++  }
++  for (const scope of resolved.evidence.scopes.filter(s => s.status === "context")) {
++    if (findUnknownQualifiers(normalizeText(scope.text)).length) issues.push("unsupported_qualifier_hidden_in_context");
++  }
++  const unresolved = resolved.unresolved;
++  const blocked = inner.needsClarification || unresolved.length > 0 || issues.length > 0;
++  const message = issues.length > 0
++    ? "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected."
++    : unresolved.length > 0
++      ? `Please clarify what is requested or excluded in ${unresolved.map(s => JSON.stringify(s.text.trim())).join("; ")}. Established request fields are preserved; no series will be selected until this is resolved.`
++      : inner.clarificationMessage;
++  const forms = buildQueryForms(query);
++  const structuredIntent = {
++    ...inner.structuredIntent,
++    originalQuery: forms.originalQuery,
++    exclusions,
++    needsClarification: blocked,
++    blockingClarification: blocked,
++    clarificationMessage: message,
++    requestEvidence: resolved.evidence,
++    scopeValidation: { source: resolved.source, issues: [...new Set(issues)], unresolved: unresolved.length },
++    ambiguity: {
++      ...inner.structuredIntent.ambiguity,
++      status: blocked ? "ambiguous" : inner.structuredIntent.ambiguity.status,
++      reasons: [...new Set([...inner.structuredIntent.ambiguity.reasons, ...(unresolved.length || issues.length ? ["request_scope_unresolved"] : [])])]
++    },
++    provenance: { ...inner.structuredIntent.provenance, query: "validated_source_scopes", scopeSemantics: resolved.source === "model" ? "model_proposed_locally_validated" : "bounded_deterministic_grammar" }
++  };
++  return {
++    ...inner, ...forms,
++    correctedQuery: parsed?.correctedQuery ? cleanQueryMechanically(parsed.correctedQuery) : correctQueryTerms(normalizeText(forms.cleanedQuery)) === normalizeText(forms.cleanedQuery) ? forms.cleanedQuery : correctQueryTerms(normalizeText(forms.cleanedQuery)),
++    correctedQuerySource: parsed?.correctedQuery ? (parsed.correctedQuerySource || "ai") : correctQueryTerms(normalizeText(forms.cleanedQuery)) === normalizeText(forms.cleanedQuery) ? "unchanged" : "deterministic_typo_rules",
++    normalizedQuery: correctQueryTerms(normalizeText(applyVerifiedTokenCorrections(query, resolved.corrections))),
++    validatedCorrections: [...(inner.validatedCorrections || []), ...resolved.corrections.map(serializeVocabularyCorrection)].filter((v, i, all) => all.findIndex(x => x.type === v.type && x.from === v.from && x.to === v.to) === i),
++    evidenceQuery: resolved.positiveQuery,
++    requestEvidence: resolved.evidence,
++    scopeValidation: structuredIntent.scopeValidation,
++    exclusions,
++    needsClarification: blocked,
++    blockingClarification: blocked,
++    clarificationMessage: message,
++    ambiguity: structuredIntent.ambiguity,
++    structuredIntent
++  };
++}
++
++export function validateAiInterpretation(parsed, query, countries = [], fallbackIntent = null, scopeHandled = false) {
+   if (!parsed || typeof parsed !== "object") return null;
+ 
+   const explicitConfidence = Number(parsed.confidence);
+@@ -279,6 +399,8 @@
+       : 0;
+   const confidence = Number.isFinite(confidenceValue) ? Math.max(0, Math.min(1, confidenceValue)) : 0;
+   if (confidence < MIN_AI_CONFIDENCE) return null;
++
++  if (!scopeHandled) return interpretWithEvidence(parsed, String(query), countries);
+ 
+   const forms = buildQueryForms(query);
+   const rawRuleIntent = fallbackIntent || interpretQueryWithRules(query, countries, "ai_field_unresolved");
+@@ -1087,6 +1209,18 @@
+     if (["product", "activity", "sector"].includes(type)) addClaim(type, exclusion?.value, exclusion?.confidence);
+   }
+ 
++  // A resubmitted raw operator is still only a spelling proposal. Recheck the
++  // same bounded vocabulary correction against its exact original source span.
++  const rawOperatorWords = [...String(originalQuery).matchAll(/[\p{L}\p{N}]+|&/gu)];
++  for (const scope of parsed?.requestEvidence?.scopes || []) {
++    const op = scope?.operator;
++    if (!op || !Number.isInteger(op.start) || !Number.isInteger(op.end) || op.start < 0
++      || op.end <= op.start || op.end > originalQuery.length || originalQuery.slice(op.start, op.end) !== op.text) continue;
++    for (const rule of NEGATION_RULES) {
++      const match = findUniqueApprovedVocabularyCorrection(originalQuery, "negation", rule.value);
++      if (match && rawOperatorWords[match.tokenStart]?.index === op.start && match.rawText === op.text) addClaim("negation", rule.value, overallConfidence);
++    }
++  }
+   const correctedQuery = normalizeText(parsed?.correctedQuery);
+   const correctedExclusions = findRuleExclusions(correctedQuery);
+   for (const exclusion of correctedExclusions) addClaim(exclusion.type, exclusion.value, overallConfidence);

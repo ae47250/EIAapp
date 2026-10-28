@@ -1,0 +1,402 @@
+TAP version 13
+# Subtest: mechanical cleanup preserves raw input separately and performs no semantic correction
+ok 1 - mechanical cleanup preserves raw input separately and performs no semantic correction
+  ---
+  duration_ms: 19.800541
+  type: 'test'
+  ...
+# Subtest: rules recover the requested country, product, activity, and annual default from messy input
+ok 2 - rules recover the requested country, product, activity, and annual default from messy input
+  ---
+  duration_ms: 6.601375
+  type: 'test'
+  ...
+# Subtest: rules normalize supported production and consumption typos without broad fuzzy guessing
+ok 3 - rules normalize supported production and consumption typos without broad fuzzy guessing
+  ---
+  duration_ms: 37.335
+  type: 'test'
+  ...
+# Subtest: validated high-confidence AI output uses only supported categories
+ok 4 - validated high-confidence AI output uses only supported categories
+  ---
+  duration_ms: 13.617125
+  type: 'test'
+  ...
+# Subtest: unsupported AI fields cannot replace an unstated annual frequency
+ok 5 - unsupported AI fields cannot replace an unstated annual frequency
+  ---
+  duration_ms: 14.446583
+  type: 'test'
+  ...
+# Subtest: validated AI arrays preserve order and prevent negated raw text from overriding intent
+ok 6 - validated AI arrays preserve order and prevent negated raw text from overriding intent
+  ---
+  duration_ms: 23.471375
+  type: 'test'
+  ...
+# Subtest: AI cannot reintroduce a false total-energy pair inside a specific source phrase
+ok 7 - AI cannot reintroduce a false total-energy pair inside a specific source phrase
+  ---
+  duration_ms: 16.582291
+  type: 'test'
+  ...
+# Subtest: low-confidence AI output is rejected in favor of deterministic rules
+ok 8 - low-confidence AI output is rejected in favor of deterministic rules
+  ---
+  duration_ms: 0.073625
+  type: 'test'
+  ...
+# Subtest: submitted intent cannot introduce an unknown country code
+ok 9 - submitted intent cannot introduce an unknown country code
+  ---
+  duration_ms: 10.002333
+  type: 'test'
+  ...
+# Subtest: AI-corrected product cannot override conflicting raw-derived evidence
+ok 10 - AI-corrected product cannot override conflicting raw-derived evidence
+  ---
+  duration_ms: 16.547542
+  type: 'test'
+  ...
+# Subtest: AI-corrected text cannot manufacture sector evidence absent from the raw query
+ok 11 - AI-corrected text cannot manufacture sector evidence absent from the raw query
+  ---
+  duration_ms: 14.13575
+  type: 'test'
+  ...
+# Subtest: cross-family ambiguous product retains alternatives and requires clarification
+ok 12 - cross-family ambiguous product retains alternatives and requires clarification
+  ---
+  duration_ms: 14.871583
+  type: 'test'
+  ...
+# Subtest: deterministic gas fallback is phrase-first and context-aware
+ok 13 - deterministic gas fallback is phrase-first and context-aware
+  ---
+  duration_ms: 23.330792
+  type: 'test'
+  ...
+# Subtest: broad approved product families retain narrower options without forced selection
+ok 14 - broad approved product families retain narrower options without forced selection
+  ---
+  duration_ms: 8.3225
+  type: 'test'
+  ...
+# Subtest: AI-provided ambiguity uses the same approved-alternatives model for any product term
+ok 15 - AI-provided ambiguity uses the same approved-alternatives model for any product term
+  ---
+  duration_ms: 19.296208
+  type: 'test'
+  ...
+# Subtest: AI timeout is configured for thirty seconds
+ok 16 - AI timeout is configured for thirty seconds
+  ---
+  duration_ms: 0.050458
+  type: 'test'
+  ...
+# Subtest: ordinary lowercase three-letter words are not accepted as country codes
+ok 17 - ordinary lowercase three-letter words are not accepted as country codes
+  ---
+  duration_ms: 4.228583
+  type: 'test'
+  ...
+# Subtest: AI receives only the exact raw query while cleaned text remains available locally
+ok 18 - AI receives only the exact raw query while cleaned text remains available locally
+  ---
+  duration_ms: 18.044375
+  type: 'test'
+  ...
+# Subtest: raw-only interpretation preserves exact raw and cleaned forms through staged normalization
+ok 19 - raw-only interpretation preserves exact raw and cleaned forms through staged normalization
+  ---
+  duration_ms: 26.657167
+  type: 'test'
+  ...
+# Subtest: AI request failure uses deterministic fallback with provenance
+ok 20 - AI request failure uses deterministic fallback with provenance
+  ---
+  duration_ms: 8.098334
+  type: 'test'
+  ...
+# Subtest: unsupported AI category and invented series ID are rejected
+ok 21 - unsupported AI category and invented series ID are rejected
+  ---
+  duration_ms: 15.402583
+  type: 'test'
+  ...
+# Subtest: clean state request validates every AI field without fallback
+ok 22 - clean state request validates every AI field without fallback
+  ---
+  duration_ms: 13.236458
+  type: 'test'
+  ...
+# Subtest: AI-corrected concepts control routing instead of misspelled raw mentions
+ok 23 - AI-corrected concepts control routing instead of misspelled raw mentions
+  ---
+  duration_ms: 17.189583
+  type: 'test'
+  ...
+# Subtest: AI cannot replace an explicit local geography or infer an unmentioned sector
+ok 24 - AI cannot replace an explicit local geography or infer an unmentioned sector
+  ---
+  duration_ms: 12.987541
+  type: 'test'
+  ...
+# Subtest: an omitted optional sector does not trigger a clarification request
+ok 25 - an omitted optional sector does not trigger a clarification request
+  ---
+  duration_ms: 12.633791
+  type: 'test'
+  ...
+# Subtest: recognized broad products and ordered activities repair AI ambiguity without expansion
+ok 26 - recognized broad products and ordered activities repair AI ambiguity without expansion
+  ---
+  duration_ms: 16.552375
+  type: 'test'
+  ...
+# Subtest: an explicit query frequency cannot be weakened or changed by AI
+ok 27 - an explicit query frequency cannot be weakened or changed by AI
+  ---
+  duration_ms: 12.115792
+  type: 'test'
+  ...
+# Subtest: compound carrier wording produces one validated concept pair
+ok 28 - compound carrier wording produces one validated concept pair
+  ---
+  duration_ms: 16.98975
+  type: 'test'
+  ...
+# Subtest: AI U.S. aliases cannot create a second noncanonical national geography
+ok 29 - AI U.S. aliases cannot create a second noncanonical national geography
+  ---
+  duration_ms: 23.361958
+  type: 'test'
+  ...
+# Subtest: explicit deterministic geographies survive low AI confidence and omission
+ok 30 - explicit deterministic geographies survive low AI confidence and omission
+  ---
+  duration_ms: 17.448333
+  type: 'test'
+  ...
+# Subtest: context resolves Georgia as a state beside Texas
+ok 31 - context resolves Georgia as a state beside Texas
+  ---
+  duration_ms: 17.170541
+  type: 'test'
+  ...
+# Subtest: AI geography corrections require bounded spelling evidence and official metadata
+ok 32 - AI geography corrections require bounded spelling evidence and official metadata
+  ---
+  duration_ms: 15.250375
+  type: 'test'
+  ...
+# Subtest: bounded metadata matching recovers a country typo omitted by AI
+ok 33 - bounded metadata matching recovers a country typo omitted by AI
+  ---
+  duration_ms: 15.665042
+  type: 'test'
+  ...
+# Subtest: explicit deterministic geography wins and records an AI conflict
+ok 34 - explicit deterministic geography wins and records an AI conflict
+  ---
+  duration_ms: 17.371458
+  type: 'test'
+  ...
+# Subtest: an unsupported geography-like token is not rescued by an unrelated AI claim
+ok 35 - an unsupported geography-like token is not rescued by an unrelated AI claim
+  ---
+  duration_ms: 11.862917
+  type: 'test'
+  ...
+# Subtest: bounded AI product corrections validate against the approved product vocabulary
+ok 36 - bounded AI product corrections validate against the approved product vocabulary
+  ---
+  duration_ms: 45.07825
+  type: 'test'
+  ...
+# Subtest: bounded AI activity corrections validate against the approved activity vocabulary
+ok 37 - bounded AI activity corrections validate against the approved activity vocabulary
+  ---
+  duration_ms: 48.665709
+  type: 'test'
+  ...
+# Subtest: bounded AI sector corrections validate against the approved sector vocabulary
+ok 38 - bounded AI sector corrections validate against the approved sector vocabulary
+  ---
+  duration_ms: 96.710625
+  type: 'test'
+  ...
+# Subtest: bounded AI frequency corrections validate against the approved frequency vocabulary
+ok 39 - bounded AI frequency corrections validate against the approved frequency vocabulary
+  ---
+  duration_ms: 90.013833
+  type: 'test'
+  ...
+# Subtest: multiple approved vocabulary corrections can be validated in one raw query
+ok 40 - multiple approved vocabulary corrections can be validated in one raw query
+  ---
+  duration_ms: 16.9015
+  type: 'test'
+  ...
+# Subtest: semantic typo validation rejects low-confidence, unsupported, and tied AI corrections
+ok 41 - semantic typo validation rejects low-confidence, unsupported, and tied AI corrections
+  ---
+  duration_ms: 31.8165
+  type: 'test'
+  ...
+# Subtest: verified corrections preserve exact negations and corrected excluded products
+not ok 42 - verified corrections preserve exact negations and corrected excluded products
+  ---
+  duration_ms: 15.888208
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:916:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(intent.normalizedQuery.includes(marker))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:934:12)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: AI correction cannot remove a raw negation or make its excluded product positive
+not ok 43 - AI correction cannot remove a raw negation or make its excluded product positive
+  ---
+  duration_ms: 13.264625
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:941:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(intent.normalizedQuery.includes("not petroleum"))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:956:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: broad energy and a corrected exclusion stay consistent before browser resubmission
+not ok 44 - broad energy and a corrected exclusion stay consistent before browser resubmission
+  ---
+  duration_ms: 13.547917
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:963:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + null
+    - 'total energy'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'total energy'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:983:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion
+ok 45 - a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion
+  ---
+  duration_ms: 42.042
+  type: 'test'
+  ...
+# Subtest: specific product context resolves AI ambiguity without broadening
+ok 46 - specific product context resolves AI ambiguity without broadening
+  ---
+  duration_ms: 19.665292
+  type: 'test'
+  ...
+# Subtest: recognized query phrases cannot become unknown qualifiers
+ok 47 - recognized query phrases cannot become unknown qualifiers
+  ---
+  duration_ms: 13.825334
+  type: 'test'
+  ...
+# Subtest: AI cannot collapse an unresolved broad product into one interpretation
+ok 48 - AI cannot collapse an unresolved broad product into one interpretation
+  ---
+  duration_ms: 4.563084
+  type: 'test'
+  ...
+# Subtest: AI cannot resolve unsupported product and activity pairing scope
+ok 49 - AI cannot resolve unsupported product and activity pairing scope
+  ---
+  duration_ms: 21.990375
+  type: 'test'
+  ...
+# Subtest: genuinely unknown source terms remain blocking qualifiers
+ok 50 - genuinely unknown source terms remain blocking qualifiers
+  ---
+  duration_ms: 11.15575
+  type: 'test'
+  ...
+# Subtest: filler words and negated concepts do not become blocking qualifiers
+ok 51 - filler words and negated concepts do not become blocking qualifiers
+  ---
+  duration_ms: 20.496875
+  type: 'test'
+  ...
+# Subtest: an explicitly excluded product cannot become an approved positive AI field
+ok 52 - an explicitly excluded product cannot become an approved positive AI field
+  ---
+  duration_ms: 15.062084
+  type: 'test'
+  ...
+# Subtest: long AI interpretation respects the selected activity and ignores invented selection fields
+ok 53 - long AI interpretation respects the selected activity and ignores invented selection fields
+  ---
+  duration_ms: 26.803292
+  type: 'test'
+  ...
+# Subtest: unrelated natural wording near gasoline does not become natural gas
+ok 54 - unrelated natural wording near gasoline does not become natural gas
+  ---
+  duration_ms: 9.860625
+  type: 'test'
+  ...
+# Subtest: invalid AI JSON and timeout both fall back with distinct reasons
+ok 55 - invalid AI JSON and timeout both fall back with distinct reasons
+  ---
+  duration_ms: 17.359625
+  type: 'test'
+  ...
+1..55
+# tests 55
+# suites 0
+# pass 52
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1152.222167

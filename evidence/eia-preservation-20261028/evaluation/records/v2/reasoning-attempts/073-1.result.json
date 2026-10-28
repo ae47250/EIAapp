@@ -1,0 +1,275 @@
+{
+  "scheduledId": 73,
+  "queryId": 6,
+  "repeat": 1,
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "positionInBlock": 0,
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:58:59.239Z",
+  "requestedModel": "gpt-6-luna",
+  "requestSHA256": "7cd7805fe15e0fb2d61f8b4a3c592a5f85973ee8f63b263f30d10a1d21d6c968",
+  "promptSHA256": "ced126ad529c301184040cb13574f71438ba82ee2c16f38360c2bff515c2838b",
+  "timeoutMs": 300000,
+  "reservedAttemptUSD": 0.017634,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:58:51 GMT",
+    "openai-processing-ms": "9301",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999110",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "5ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "completedAt": "2026-10-28T11:59:08.767Z",
+  "elapsedMs": 9527.766375000007,
+  "httpStatus": 200,
+  "returnedModel": "gpt-6-luna",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "incompleteDetails": null,
+  "usage": {
+    "input_tokens": 796,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1033,
+    "output_tokens_details": {
+      "reasoning_tokens": 424
+    },
+    "total_tokens": 1829
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "truncated": false,
+  "reasoningTokens": 424,
+  "tokenCostUSD": 0.0005961,
+  "grade": {
+    "version": 2,
+    "semantic": {
+      "pass": false,
+      "gradable": true,
+      "status": "incorrect",
+      "errors": [
+        "product_activity_pairs_or_order",
+        "unnecessary_or_overbroad_unresolved_scope"
+      ],
+      "signature": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            null,
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [
+          "IRL"
+        ],
+        "clarification": false,
+        "unknownQualifiers": [],
+        "scopeDispositions": [
+          {
+            "identity": "activity:consumption",
+            "status": "requested"
+          },
+          {
+            "identity": "geography:IRL",
+            "status": "excluded"
+          },
+          {
+            "identity": "geography:ISL",
+            "status": "requested"
+          },
+          {
+            "identity": "product:total energy",
+            "status": "unresolved"
+          }
+        ]
+      }
+    },
+    "strictJSON": true,
+    "shape": false,
+    "sourceSpans": true,
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": true,
+      "errors": [
+        "invalid_summary_shape",
+        "invalid_field_country",
+        "invalid_field_product",
+        "invalid_field_activity",
+        "invalid_field_sector",
+        "invalid_field_frequency",
+        "invalid_geography_item",
+        "invalid_pair_item"
+      ]
+    },
+    "usable": false,
+    "truncated": false,
+    "original": {
+      "text": "{\n  \"correctedQuery\": \"energy consumption Iceland, not Ireland\",\n  \"confidence\": \"high\",\n  \"ambiguity\": [\n    {\n      \"field\": \"product\",\n      \"reason\": \"“Energy” is broad and does not identify a specific product.\"\n    },\n    {\n      \"field\": \"exclusions\",\n      \"reason\": \"Ireland is explicitly negated, but the exclusion schema does not include geography.\"\n    }\n  ],\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"iceland\",\n      \"value\": \"Iceland\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"energy\",\n      \"value\": null,\n      \"confidence\": \"low\",\n      \"ambiguityReason\": \"Broad product term; no specific energy product is identified.\"\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": \"high\",\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": \"high\",\n      \"explicit\": false,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Iceland\",\n      \"confidence\": \"high\"\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": null,\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": \"medium\"\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"energy consumption iceland not ireland\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 6,\n        \"text\": \"energy\",\n        \"status\": \"unresolved\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 7,\n        \"end\": 18,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 19,\n        \"end\": 26,\n        \"text\": \"iceland\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 27,\n        \"end\": 38,\n        \"text\": \"not ireland\",\n        \"status\": \"excluded\",\n        \"target\": \"data\",\n        \"operator\": {\n          \"start\": 27,\n          \"end\": 30,\n          \"text\": \"not\"\n        }\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "correctedQuery": "energy consumption Iceland, not Ireland",
+        "confidence": "high",
+        "ambiguity": [
+          {
+            "field": "product",
+            "reason": "“Energy” is broad and does not identify a specific product."
+          },
+          {
+            "field": "exclusions",
+            "reason": "Ireland is explicitly negated, but the exclusion schema does not include geography."
+          }
+        ],
+        "fields": {
+          "country": {
+            "rawValue": "iceland",
+            "value": "Iceland",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "energy",
+            "value": null,
+            "confidence": "low",
+            "ambiguityReason": "Broad product term; no specific energy product is identified."
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": "high",
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": null,
+            "value": "annual",
+            "confidence": "high",
+            "explicit": false,
+            "ambiguityReason": null
+          }
+        },
+        "geographies": [
+          {
+            "value": "Iceland",
+            "confidence": "high"
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": null,
+            "activity": "consumption",
+            "order": 1,
+            "confidence": "medium"
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "requestEvidence": {
+          "version": 1,
+          "query": "energy consumption iceland not ireland",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 6,
+              "text": "energy",
+              "status": "unresolved",
+              "target": "data"
+            },
+            {
+              "start": 7,
+              "end": 18,
+              "text": "consumption",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 19,
+              "end": 26,
+              "text": "iceland",
+              "status": "requested",
+              "target": "data"
+            },
+            {
+              "start": 27,
+              "end": 38,
+              "text": "not ireland",
+              "status": "excluded",
+              "target": "data",
+              "operator": {
+                "start": 27,
+                "end": 30,
+                "text": "not"
+              }
+            }
+          ]
+        }
+      },
+      "semantic": {
+        "pass": false,
+        "errors": [
+          "product_activity_pairs_or_order",
+          "compatibility_summary_contradiction",
+          "unnecessary_clarification"
+        ],
+        "signature": {
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              null,
+              "consumption"
+            ]
+          ],
+          "sector": null,
+          "frequency": "annual",
+          "frequencyExplicit": false,
+          "excludedGeographies": [
+            "IRL"
+          ],
+          "clarification": true,
+          "unknownQualifiers": []
+        }
+      },
+      "contract": {
+        "pass": false,
+        "json": true,
+        "shape": false,
+        "spans": true,
+        "errors": [
+          "invalid_summary_shape",
+          "invalid_field_country",
+          "invalid_field_product",
+          "invalid_field_activity",
+          "invalid_field_sector",
+          "invalid_field_frequency",
+          "invalid_geography_item",
+          "invalid_pair_item"
+        ]
+      }
+    }
+  },
+  "replayFile": "reasoning-attempts/073-1.replay.json",
+  "unknownCostUpperBoundUSD": 0,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null
+}

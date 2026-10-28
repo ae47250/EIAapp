@@ -1,0 +1,78 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const read=name=>JSON.parse(fs.readFileSync(root+'/tests/fixtures/eia/'+name+'.json'));
+const hash=name=>createHash('sha256').update(fs.readFileSync(root+'/tests/fixtures/eia/'+name+'.json')).digest('hex');
+const empty={codes:[],pairs:[],frequency:'annual',explicit:false,sector:null,exclusions:[],clarify:true};
+const clean=e=>{const x=structuredClone(e);delete x.available;x.exclusions ||= [];return x;};
+const out={policy:'Literal model evidence and rules-mode expectations for the explicitly authorized contract. Original source fixtures remain unchanged. Expectations below are derived from the declared conservative grammar and independent semantic adjudications, not runtime outputs.',sources:{},followup:{},primary:{},independent:{},review:{}};
+for(const name of ['followup-regressions','followup-review-regressions','negation-target','negation-independent','review-regressions'])out.sources[name]=hash(name);
+function builder(q){const scopes=[];return {scopes,add(start,end,status,target='data'){if(end<=start)return;const s={start,end,text:q.slice(start,end),status,target};if(status==='excluded'){const op=[...s.text.matchAll(/\b(?:not|no|never|without|except|exclude|excluding)\b|\b[a-z]+n['’]t\b/gi)][0];if(!op)throw Error('Missing operator: '+s.text);s.operator={start:start+op.index,end:start+op.index+op[0].length,text:op[0]};}scopes.push(s);},done(){return {version:1,query:q,scopes};}};}
+const prefaces={
+ 'external-uncertainty':'USA','uncertainty-12':'France','uncertainty-13':'Canada','uncertainty-14':'USA','uncertainty-15':'USA','uncertainty-16':'USA','uncertainty-18':'USA','uncertainty-19':'Canada','uncertainty-20':'USA','uncertainty-21':'USA',
+ 'uncertainty-exclusion':'USA','uncertainty-product-exclusion':'USA','uncertainty-country-variant':'The Gambia','explicit-frequency':'monthly','sector':'USA','ambiguous-product':'USA',
+ 'independent-usa-uncertainty-reported':'USA','independent-gambia-uncertainty-generalized':'energy','independent-canada-uncertainty-monthly':'monthly','independent-usa-uncertainty-explicit-annual':'annual','independent-uncertainty-with-exclusion':'USA','independent-positive-order-preserved':'Canada','independent-uncertainty-no-country-substitution':'quarterly','independent-uncertainty-no-idea':'energy',
+ 'independent-ordered-explicit-pairs':'Canada','independent-ordered-multiple-activities':'Canada','independent-genuine-certainty-ordinary':'Canada','independent-modified-uncertainty-and-negative':'USA','independent-state-country-alias-control':'Georgia'
+};
+for(let i=0;i<6;i++)prefaces['independent-uncertainty-modifier-'+i]='USA';
+for(const item of [...read('followup-regressions').cases,...read('followup-review-regressions').cases]){
+ const {id,q}=item,b=builder(q);let expected=clean(item.expected),rulesExpected=clean(item.expected),adjudication=null;
+ if(prefaces[id]){
+  const a=q.indexOf(prefaces[id]); if(a<0)throw Error(id);const match=/\bnot\b/gi;let tail=[...q.matchAll(match)].find(m=>m.index>a)?.index ?? q.length;
+  b.add(0,a,'context','knowledge');b.add(a,tail,'requested');b.add(tail,q.length,'excluded');rulesExpected=structuredClone(empty);
+ }else if(id==='not-only'){
+  const a=q.indexOf('USA');b.add(0,a,'context','action');b.add(a,q.length,'requested');rulesExpected={...clean(item.expected),codes:['CAN'],clarify:true};
+ }else if(id.startsWith('independent-negative-command-')){
+  const a=q.indexOf('do not'), n=Number(id.at(-1));b.add(0,a,'requested');b.add(a,q.length,n===0?'excluded':'unresolved','action');rulesExpected={...clean(item.expected),exclusions:[],clarify:true};
+  if(n!==0){expected={...expected,exclusions:[],clarify:true};adjudication='Independent command adjudication: degree/emphasis/completeness may be negated. Preserve the request and clarify rather than require full exclusion.';}
+ }else if(['independent-italy-actual-exclusion-confirmation','independent-supply-actual-exclusion','independent-italy-exclusion-understand','independent-supply-exclusion-understand'].includes(id)){
+  const a=q.indexOf('not'),c=q.lastIndexOf(',')+1;b.add(0,a,'requested');b.add(a,c,'excluded');b.add(c,q.length,'context','knowledge');rulesExpected={...expected,exclusions:[],clarify:true};
+ }else if(id==='independent-italy-actual-exclusion-certainty'){
+  const a=q.indexOf('not'),c=q.lastIndexOf(',')+1;b.add(0,a,'requested');b.add(a,c,'excluded');b.add(c,q.length,'excluded');rulesExpected={...expected,exclusions:[],clarify:true};
+ }else if(id==='independent-italy-punctuation-control'){
+  const a=q.indexOf('not'),c=q.indexOf('.')+1;b.add(0,a,'requested');b.add(a,c,'excluded');b.add(c,q.length,'context','knowledge');
+ }else{
+  const op=[...q.matchAll(/\b(?:not|no|without|excluding)\b/gi)][0];
+  if(op){b.add(0,op.index,'requested');b.add(op.index,q.length,'excluded');}else b.add(0,q.length,'requested');
+ }
+ out.followup[id]={q,expected,rulesExpected,requestEvidence:b.done(),adjudication};
+}
+const primary=read('scope-evidence-regressions').cases;
+const supported=new Set(['bare-exclusion','geography-exclusion','ordinary-negative-action','direct-exclude','without-data','same-concept-not-negative','excluded-then-positive']);
+for(const c of primary){
+ let rulesExpected;
+ if(supported.has(c.id))rulesExpected=clean(c.expected);
+ else if(c.id.startsWith('knowledge-')||c.id==='gas-still-ambiguous')rulesExpected=structuredClone(empty);
+ else if(c.id==='excluded-then-knowledge')rulesExpected={...clean(c.expected),codes:['FRA'],exclusions:[],clarify:true};
+ else if(c.id==='additive-not-only')rulesExpected={...clean(c.expected),codes:['CAN'],clarify:true};
+ else rulesExpected={...clean(c.expected),exclusions:[],clarify:true};
+ out.primary[c.id]={q:c.q,expected:clean(c.expected),rulesExpected,requestEvidence:c.requestEvidence,adjudication:c.adjudication};
+}
+for(const c of read('negation-independent').cases){
+ const q=c.query,b=builder(q);let adjudication=null, expected=structuredClone(c);
+ const pre={certainty_decimal:'USA',certainty_unseen_modifier:'USA',certainty_multiple_modifiers:'USA',certainty_em_dash:'USA',certainty_country_order:'Trinidad',knowledge_country_repair:'natural gas',certainty_frequency_sector:'monthly',paired_positive_scope:'Canada'}[c.id];
+ if(pre){const a=q.indexOf(pre);b.add(0,a,'context','knowledge');b.add(a,q.length,'requested');}
+ else if(['certainty_even','certainty_100','certainty_parenthetical'].includes(c.id)){const a=q.toLowerCase().indexOf('show');b.add(0,a,'context','knowledge');b.add(a,q.length,'requested');}
+ else if(['direct_product_activity','direct_country','direct_frequency','direct_sector'].includes(c.id)){const a=q.indexOf('not');b.add(0,a,'requested');b.add(a,q.length,'excluded');}
+ else if(['negative_command_show','negative_command_include','negative_command_numeric_modifier','negative_command_no_need','semicolon_boundary','dash_request_boundary'].includes(c.id)){
+  let a=q.indexOf(';')+1;if(!a)a=q.indexOf('. ')+1;if(!a)a=q.indexOf('show',4);if(a<1)throw Error(c.id);
+  const disputed=c.id==='negative_command_no_need';b.add(0,a,disputed?'unresolved':'excluded',disputed?'unknown':'action');b.add(a,q.length,'requested');
+  if(disputed){expected.required_exclusions=[];expected.forbid_exclusions=[...(expected.forbid_exclusions||[]),'coal','production'];expected.clarification=true;adjudication='No need permits omission but does not unconditionally prohibit inclusion; independent review marks the meaning disputed.';}
+ }else if(c.id==='mixed_certainty_exclusion'){
+  const a=q.indexOf('USA'),d=q.lastIndexOf('not');b.add(0,a,'context','knowledge');b.add(a,d,'requested');b.add(d,q.length,'excluded');
+ }else if(['mixed_exclusion_certainty','interposed_uncertainty_scope'].includes(c.id)){
+  const a=q.indexOf('not'),d=c.id==='mixed_exclusion_certainty'?q.indexOf('. ')+1:q.indexOf(', though');b.add(0,a,'requested');b.add(a,d,'excluded');b.add(d,q.length,'context','knowledge');
+ }else if(c.id==='mixed_independent_commands'){
+  const a=q.indexOf('but');b.add(0,a,'excluded','action');b.add(a,q.length,'requested');
+ }else if(['unknown_bridge','unknown_relevance','unknown_scope_before_head','uncertain_choice','nested_negation'].includes(c.id)){
+  let a=q.indexOf(';')+1;if(!a)a=q.indexOf('. ')+1;if(!a)a=q.indexOf(', not')+1;if(a<1)throw Error(c.id);b.add(0,a,'requested');b.add(a,q.length,'unresolved',c.id==='uncertain_choice'?'knowledge':c.id==='nested_negation'?'action':'unknown');
+  if(c.id==='nested_negation'){expected.clarification=true;adjudication='Do not exclude does not unconditionally demand a new series; requested status is disputed and clarified.';}
+ }else if(['additive_not_only','additive_not_just'].includes(c.id)){
+  const a=q.indexOf('Canada');b.add(0,a,'context','action');b.add(a,q.length,'requested');
+ }else throw Error('Unannotated independent '+c.id);
+ out.independent[c.id]={q,expected,requestEvidence:b.done(),adjudication};
+}
+const q='Show not only coal production but also coal consumption in Canada';const b=builder(q);b.add(0,q.indexOf('coal'),'context','action');b.add(q.indexOf('coal'),q.length,'requested');
+out.review['review-21']={q,requestEvidence:b.done(),rulesExpected:{codes:['CAN'],pairs:[{product:'coal',activity:'consumption'}],clarify:true}};
+const text=JSON.stringify(out,null,2)+'\n';fs.writeFileSync('/private/tmp/eia-scope-evidence-legacy.json',text);
+console.log(JSON.stringify({followup:Object.keys(out.followup).length,primary:Object.keys(out.primary).length,independent:Object.keys(out.independent).length,sha256:createHash('sha256').update(text).digest('hex')}));

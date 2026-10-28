@@ -1,0 +1,713 @@
+✖ blind-01: Show marketed natural gas production in Texas. (625.297541ms)
+✖ blind-02: Annual electricity retail sales in Texas. (17.278875ms)
+✔ blind-03: Coal production in Wyoming. (125.561125ms)
+✔ blind-04: Annual crude oil production in the United States. (849.79375ms)
+✔ blind-05: Monthly industrial electricity prices in Texas. (849.732083ms)
+✔ blind-06: Coal production in Papua New Guinea, Equatorial Guinea, and Guinea, in that order. (25.303541ms)
+✔ blind-07: Compare natural gas production in Guinea-Bissau and Guinea. (15.355292ms)
+✔ blind-08: Coal consumption in Nigeria and Niger. (26.562167ms)
+✖ blind-09: Natural gas consumption in West Virginia and Virginia. (15.394709ms)
+✖ blind-10: Natural gas production in New Mexico. (11.796708ms)
+✔ blind-11: Natural gas production in the United Arab Emirates and Ukraine. (41.357917ms)
+✔ blind-12: Coal production in Gambia, The; then The Bahamas. (39.970833ms)
+✔ blind-13: Total energy production in Germany, West; then Germany, East. (46.964417ms)
+✔ blind-14: Coal consumption in Samoa and American Samoa. (20.358834ms)
+✔ blind-15: Coal production in the UK, Czech Republic, and United Kingdom. (15.698ms)
+✔ blind-16: Natural gas consumption in the U.S. Virgin Islands. (12.890583ms)
+✔ blind-17: Coal production in Peru, excluding Canada, Chile, and Brazil. (16.270875ms)
+✔ blind-18: Coal consumption: not Canada or Mexico, but Argentina. (14.520833ms)
+✖ blind-19: Natural gas production for Texas only, not California, Oklahoma, or Louisiana. (18.542042ms)
+✔ blind-20: Exclude Guinea and Guinea-Bissau; show coal production for Papua New Guinea. (22.323333ms)
+✔ blind-21: Natural gas production for the UK, without France or Germany. (17.937417ms)
+✖ blind-22: Natural gas consumption in Georgia. (19.589084ms)
+✔ blind-23: Natural gas consumption in Georgia and Armenia. (13.483417ms)
+✔ blind-24: Natural gas consumption in the country Georgia. (13.147417ms)
+✖ blind-25: Compare international natural gas consumption in Georgia and the United States. (19.546166ms)
+✖ blind-26: Natural gas consumption in Georgia, excluding Armenia. (23.776542ms)
+✔ blind-27: International natural gas consumption in Georgia, excluding the United States. (21.30675ms)
+✔ blind-28: Natural gas consumption in Georgia, the United States, and Armenia. (16.995417ms)
+✖ blind-29: Can you show us coal production in Peru for my report? (1143.140583ms)
+✖ blind-30: Please show me natural gas production in Texas, or put it in a simple table. (18.309958ms)
+✖ blind-31: I would like natural gas production in Oman; please make the result easy for us to read. (22.369125ms)
+✔ blind-32: For Mexico, then Canada, show crude oil production and natural gas consumption. (20.329334ms)
+✔ blind-33: For France and Germany, show both natural gas production and natural gas consumption. (19.331709ms)
+✖ blind-34: Wind electricity generation and solar electricity generation in California. (18.513084ms)
+✖ blind-35: In Texas, show natural gas production, natural gas consumption, and electricity generation. (21.326584ms)
+✔ blind-36: Coal and natural gas production and consumption for Canada and Mexico. (16.083667ms)
+✔ blind-37: Quarterly coal production in Canada. (10.569166ms)
+✖ blind-38: Daily coal production in Wyoming. (9.730667ms)
+✔ blind-39: Weekly natural gas underground storage in the United States. (14.451791ms)
+✔ blind-40: Gas prices in Texas. (8.458041ms)
+✖ blind-41: Pipeline gas production in Texas. (10.409542ms)
+✔ blind-42: Monthly residential electricity prices in Texas, in dollars per kilowatt hour. (18.108ms)
+✔ blind-43: Natural gas production in Canada, in megawatts. (11.494667ms)
+✔ blind-44: Natural gas production in Californa. (11.776209ms)
+✔ blind-45: Annual industrial total energy consumption in California. (391.972875ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 30
+ℹ fail 15
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4813.625958
+
+✖ failing tests:
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-01: Show marketed natural gas production in Texas. (625.297541ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-02: Annual electricity retail sales in Texas. (17.278875ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"clarify","expected":false,"actual":true},{"mode":"rules","key":"availability","expected":"nonempty","actual":"empty"},{"mode":"injected","key":"clarify","expected":false,"actual":true},{"mode":"injected","key":"availability","expected":"nonempty","actual":"empty"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: true,
+  +     expected: false,
+  +     key: 'clarify',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'empty',
+  +     expected: 'nonempty',
+  +     key: 'availability',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: true,
+  +     expected: false,
+  +     key: 'clarify',
+  +     mode: 'injected'
+  +   },
+  +   {
+  +     actual: 'empty',
+  +     expected: 'nonempty',
+  +     key: 'availability',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'clarify', expected: false, actual: true }, { mode: 'rules', key: 'availability', expected: 'nonempty', actual: 'empty' }, { mode: 'injected', key: 'clarify', expected: false, actual: true }, { mode: 'injected', key: 'availability', expected: 'nonempty', actual: 'empty' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-09: Natural gas consumption in West Virginia and Virginia. (15.394709ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-10: Natural gas production in New Mexico. (11.796708ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-19: Natural gas production for Texas only, not California, Oklahoma, or Louisiana. (18.542042ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-22: Natural gas consumption in Georgia. (19.589084ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-25: Compare international natural gas consumption in Georgia and the United States. (19.546166ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-26: Natural gas consumption in Georgia, excluding Armenia. (23.776542ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-29: Can you show us coal production in Peru for my report? (1143.140583ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"codes","expected":["PER"],"actual":["USA","PER"]},{"mode":"injected","key":"codes","expected":["PER"],"actual":["USA","PER"]}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: [
+  +       'USA',
+  +       'PER'
+  +     ],
+  +     expected: [
+  +       'PER'
+  +     ],
+  +     key: 'codes',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: [
+  +       'USA',
+  +       'PER'
+  +     ],
+  +     expected: [
+  +       'PER'
+  +     ],
+  +     key: 'codes',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'codes', expected: [Array], actual: [Array] }, { mode: 'injected', key: 'codes', expected: [Array], actual: [Array] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-30: Please show me natural gas production in Texas, or put it in a simple table. (18.309958ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-31: I would like natural gas production in Oman; please make the result easy for us to read. (22.369125ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"codes","expected":["OMN"],"actual":["OMN","USA"]},{"mode":"injected","key":"codes","expected":["OMN"],"actual":["WLD","OMN","USA"]}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: [
+  +       'OMN',
+  +       'USA'
+  +     ],
+  +     expected: [
+  +       'OMN'
+  +     ],
+  +     key: 'codes',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: [
+  +       'WLD',
+  +       'OMN',
+  +       'USA'
+  +     ],
+  +     expected: [
+  +       'OMN'
+  +     ],
+  +     key: 'codes',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'codes', expected: [Array], actual: [Array] }, { mode: 'injected', key: 'codes', expected: [Array], actual: [Array] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-34: Wind electricity generation and solar electricity generation in California. (18.513084ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"pairs","expected":[{"product":"wind","activity":"generation"},{"product":"solar","activity":"generation"}],"actual":[]},{"mode":"rules","key":"clarify","expected":false,"actual":true},{"mode":"injected","key":"pairs","expected":[{"product":"wind","activity":"generation"},{"product":"solar","activity":"generation"}],"actual":[]},{"mode":"injected","key":"clarify","expected":false,"actual":true}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: [],
+  +     expected: [
+  +       {
+  +         activity: 'generation',
+  +         product: 'wind'
+  +       },
+  +       {
+  +         activity: 'generation',
+  +         product: 'solar'
+  +       }
+  +     ],
+  +     key: 'pairs',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: true,
+  +     expected: false,
+  +     key: 'clarify',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: [],
+  +     expected: [
+  +       {
+  +         activity: 'generation',
+  +         product: 'wind'
+  +       },
+  +       {
+  +         activity: 'generation',
+  +         product: 'solar'
+  +       }
+  +     ],
+  +     key: 'pairs',
+  +     mode: 'injected'
+  +   },
+  +   {
+  +     actual: true,
+  +     expected: false,
+  +     key: 'clarify',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'pairs', expected: [Array], actual: [] }, { mode: 'rules', key: 'clarify', expected: false, actual: true }, { mode: 'injected', key: 'pairs', expected: [Array], actual: [] }, { mode: 'injected', key: 'clarify', expected: false, actual: true } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-35: In Texas, show natural gas production, natural gas consumption, and electricity generation. (21.326584ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"pairs","expected":[{"product":"natural gas","activity":"production"},{"product":"natural gas","activity":"consumption"},{"product":"electricity","activity":"generation"}],"actual":[{"product":"natural gas","activity":"production"},{"product":"natural gas","activity":"consumption"},{"product":"natural gas","activity":"generation"}]},{"mode":"injected","key":"pairs","expected":[{"product":"natural gas","activity":"production"},{"product":"natural gas","activity":"consumption"},{"product":"electricity","activity":"generation"}],"actual":[{"product":"natural gas","activity":"production"},{"product":"natural gas","activity":"consumption"},{"product":"natural gas","activity":"generation"}]}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: [
+  +       {
+  +         activity: 'production',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'consumption',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'generation',
+  +         product: 'natural gas'
+  +       }
+  +     ],
+  +     expected: [
+  +       {
+  +         activity: 'production',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'consumption',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'generation',
+  +         product: 'electricity'
+  +       }
+  +     ],
+  +     key: 'pairs',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: [
+  +       {
+  +         activity: 'production',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'consumption',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'generation',
+  +         product: 'natural gas'
+  +       }
+  +     ],
+  +     expected: [
+  +       {
+  +         activity: 'production',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'consumption',
+  +         product: 'natural gas'
+  +       },
+  +       {
+  +         activity: 'generation',
+  +         product: 'electricity'
+  +       }
+  +     ],
+  +     key: 'pairs',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'pairs', expected: [Array], actual: [Array] }, { mode: 'injected', key: 'pairs', expected: [Array], actual: [Array] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-38: Daily coal production in Wyoming. (9.730667ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"seds","actual":"domestic"},{"mode":"injected","key":"route","expected":"seds","actual":"domestic"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'domestic',
+  +     expected: 'seds',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'domestic',
+  +     expected: 'seds',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'seds', actual: 'domestic' }, { mode: 'injected', key: 'route', expected: 'seds', actual: 'domestic' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-independent-challenges.test.js:11:38
+✖ blind-41: Pipeline gas production in Texas. (10.409542ms)
+  AssertionError [ERR_ASSERTION]: [{"mode":"rules","key":"route","expected":"domestic","actual":"seds"},{"mode":"injected","key":"route","expected":"domestic","actual":"seds"}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'rules'
+  +   },
+  +   {
+  +     actual: 'seds',
+  +     expected: 'domestic',
+  +     key: 'route',
+  +     mode: 'injected'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-independent-challenges.test.js:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { mode: 'rules', key: 'route', expected: 'domestic', actual: 'seds' }, { mode: 'injected', key: 'route', expected: 'domestic', actual: 'seds' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
