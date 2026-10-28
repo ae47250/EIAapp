@@ -7,12 +7,14 @@ import { replayPublicSearch, scoreRightData } from './real-path.js';
 import { scoreMeaning, firstRunPass } from './score.js';
 const root = new URL('../../', import.meta.url);
 const read = path => JSON.parse(readFileSync(new URL(path,root)));
-const budget = read('evidence/eia-locked-form/budget.json');
+const tuned = process.argv.includes('--tuned');
+const budget = read(tuned ? 'evidence/eia-locked-form/budget-tuned.json' : 'evidence/eia-locked-form/budget.json');
 if (!budget.permitted || budget.maximumUSD > 2) throw new Error('Budget does not permit calls');
 for(const [path,hash] of Object.entries(read('evidence/eia-locked-form/freeze-manifest.json').sha256)) {
- if(createHash('sha256').update(readFileSync(new URL(path,root))).digest('hex')!==hash)throw new Error('Frozen artifact changed: '+path);
+ const expectedHash = tuned && path === 'lib/sources/eia/locked-form-instructions.txt' ? read('evidence/eia-locked-form/prompt-revision.json').revisedSHA256 : hash;
+ if(createHash('sha256').update(readFileSync(new URL(path,root))).digest('hex')!==expectedHash)throw new Error('Frozen artifact changed: '+path);
 }
-const directory = new URL('evidence/eia-locked-form/live-first/',root);
+const directory = new URL(tuned ? 'evidence/eia-locked-form/live-tuned/' : 'evidence/eia-locked-form/live-first/',root);
 if (existsSync(directory)) throw new Error('First-run directory already exists; never overwrite or repeat scored calls');
 mkdirSync(directory);
 const matches = readFileSync(`${homedir()}/Downloads/openai-api-key.txt`,'utf8').match(/sk-[A-Za-z0-9_-]+/g)||[];
@@ -54,5 +56,5 @@ for(let repeat=1;repeat<=2;repeat++) for(const k of keys){
  }
 }
 const first=rows.map(r=>r.attempts[0]);
-const summary={pass:firstRunPass(first),scheduledCalls:48,generationCalls:count,reasks:count-48,rows:first.map(({public:_,...r})=>r),costUSD:rows.flatMap(r=>r.attempts).reduce((n,r)=>n+r.costUSD,0),costUpperUSD:rows.flatMap(r=>r.attempts).reduce((n,r)=>n+r.costUpperUSD,0),costNote:'Standard input/output estimate; upper bound treats uncached input as cache-write pricing. Usage and raw responses retained.'};
+const summary={label:tuned?'tuned on the same queries, not independent':'frozen first run',pass:firstRunPass(first),scheduledCalls:48,generationCalls:count,reasks:count-48,rows:first.map(({public:_,...r})=>r),costUSD:rows.flatMap(r=>r.attempts).reduce((n,r)=>n+r.costUSD,0),costUpperUSD:rows.flatMap(r=>r.attempts).reduce((n,r)=>n+r.costUpperUSD,0),costNote:'Standard input/output estimate; upper bound treats uncached input as cache-write pricing. Usage and raw responses retained.'};
 writeFileSync(new URL('summary.json',directory),JSON.stringify(summary,null,2)+'\n');console.log(JSON.stringify({pass:summary.pass,calls:count,costUSD:summary.costUSD,costUpperUSD:summary.costUpperUSD}));
