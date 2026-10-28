@@ -1,0 +1,72 @@
+{
+  "retrievedAt": "2026-10-28T23:50:44.204622+00:00",
+  "url": "https://api.eia.gov/v2/natural-gas/enr/dry/data/",
+  "params": {
+    "frequency": "annual",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[product][]": "EPG0",
+    "facets[process][]": "R11",
+    "facets[duoarea][]": "R48"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "45",
+      "dateFormat": "YYYY",
+      "frequency": "annual",
+      "data": [
+        {
+          "period": "2021",
+          "duoarea": "R48",
+          "area-name": "NA",
+          "product": "EPG0",
+          "product-name": "Natural Gas",
+          "process": "R11",
+          "process-name": "Dry, Expected Future Production",
+          "series": "RNGR11R48_1",
+          "series-description": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+          "value": "490395",
+          "units": "BCF"
+        }
+      ]
+    },
+    "request": {
+      "command": "/v2/natural-gas/enr/dry/data/",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "product": [
+            "EPG0"
+          ],
+          "process": [
+            "R11"
+          ],
+          "duoarea": [
+            "R48"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

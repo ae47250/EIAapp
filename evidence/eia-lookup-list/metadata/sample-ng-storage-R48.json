@@ -1,0 +1,72 @@
+{
+  "retrievedAt": "2026-10-28T23:50:46.641819+00:00",
+  "url": "https://api.eia.gov/v2/natural-gas/stor/wkly/data/",
+  "params": {
+    "frequency": "weekly",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[product][]": "EPG0",
+    "facets[process][]": "SWO",
+    "facets[duoarea][]": "R48"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "877",
+      "dateFormat": "YYYY-MM-DD",
+      "frequency": "weekly",
+      "data": [
+        {
+          "period": "2026-10-16",
+          "duoarea": "R48",
+          "area-name": "NA",
+          "product": "EPG0",
+          "product-name": "Natural Gas",
+          "process": "SWO",
+          "process-name": "Underground Storage - Working Gas",
+          "series": "NW2_EPG0_SWO_R48_BCF",
+          "series-description": "Weekly Lower 48 States Natural Gas Working Underground Storage (Billion Cubic Feet)",
+          "value": "3644",
+          "units": "BCF"
+        }
+      ]
+    },
+    "request": {
+      "command": "/v2/natural-gas/stor/wkly/data/",
+      "params": {
+        "frequency": "weekly",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "product": [
+            "EPG0"
+          ],
+          "process": [
+            "SWO"
+          ],
+          "duoarea": [
+            "R48"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

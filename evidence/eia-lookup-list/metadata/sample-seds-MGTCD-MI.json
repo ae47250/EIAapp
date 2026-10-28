@@ -1,0 +1,65 @@
+{
+  "retrievedAt": "2026-10-28T23:51:01.704810+00:00",
+  "url": "https://api.eia.gov/v2/seds/data/",
+  "params": {
+    "frequency": "annual",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[seriesId][]": "MGTCD",
+    "facets[stateId][]": "MI"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "55",
+      "dateFormat": "YYYY",
+      "frequency": "annual",
+      "data": [
+        {
+          "period": "2024",
+          "seriesId": "MGTCD",
+          "seriesDescription": "Motor gasoline average price, all sectors",
+          "stateId": "MI",
+          "stateDescription": "Michigan",
+          "value": "25.8",
+          "unit": "Dollars per million Btu"
+        }
+      ],
+      "description": "Estimated production, consumption, price, and expenditure data for all energy sources by state and sector.  \r\n        Source:  https://www.eia.gov/state/seds/seds-technical-notes-complete.php  \r\n        Product:  SEDS (https://www.eia.gov/state/seds/)"
+    },
+    "request": {
+      "command": "/v2/seds/data/",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "seriesId": [
+            "MGTCD"
+          ],
+          "stateId": [
+            "MI"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

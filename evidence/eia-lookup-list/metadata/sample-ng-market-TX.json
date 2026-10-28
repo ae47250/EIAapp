@@ -1,0 +1,72 @@
+{
+  "retrievedAt": "2026-10-28T23:50:37.157775+00:00",
+  "url": "https://api.eia.gov/v2/natural-gas/prod/sum/data/",
+  "params": {
+    "frequency": "annual",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[product][]": "EPG0",
+    "facets[process][]": "VGM",
+    "facets[duoarea][]": "STX"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "59",
+      "dateFormat": "YYYY",
+      "frequency": "annual",
+      "data": [
+        {
+          "period": "2025",
+          "duoarea": "STX",
+          "area-name": "TEXAS",
+          "product": "EPG0",
+          "product-name": "Natural Gas",
+          "process": "VGM",
+          "process-name": "Marketed Production",
+          "series": "N9050TX2",
+          "series-description": "Texas Natural Gas Marketed Production (MMcf)",
+          "value": "12656556",
+          "units": "MMCF"
+        }
+      ]
+    },
+    "request": {
+      "command": "/v2/natural-gas/prod/sum/data/",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "product": [
+            "EPG0"
+          ],
+          "process": [
+            "VGM"
+          ],
+          "duoarea": [
+            "STX"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

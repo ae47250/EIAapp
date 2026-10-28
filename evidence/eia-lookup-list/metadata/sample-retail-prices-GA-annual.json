@@ -1,0 +1,57 @@
+{
+  "retrievedAt": "2026-10-28T23:55:31.820337+00:00",
+  "url": "https://api.eia.gov/v2/electricity/retail-sales/data/",
+  "params": {
+    "frequency": "annual",
+    "data[]": "price",
+    "facets[stateid][]": "GA",
+    "facets[sectorid][]": "ALL",
+    "length": 1
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "25",
+      "dateFormat": "YYYY",
+      "frequency": "annual",
+      "data": [
+        {
+          "period": "2025",
+          "stateid": "GA",
+          "stateDescription": "Georgia",
+          "sectorid": "ALL",
+          "sectorName": "all sectors",
+          "price": "12.06",
+          "price-units": "cents per kilowatt-hour"
+        }
+      ],
+      "description": "Electricity sales to ultimate customer by state and sector (number of customers, average price, revenue, and megawatthours of sales).  \n    Sources: Forms EIA-826, EIA-861, EIA-861M"
+    },
+    "request": {
+      "command": "/v2/electricity/retail-sales/data/",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "price"
+        ],
+        "facets": {
+          "stateid": [
+            "GA"
+          ],
+          "sectorid": [
+            "ALL"
+          ]
+        },
+        "length": "1"
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}
