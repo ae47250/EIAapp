@@ -1,0 +1,1721 @@
+TAP version 13
+# Subtest: successful login creates an HTTP-only 20-minute sliding session
+ok 1 - successful login creates an HTTP-only 20-minute sliding session
+  ---
+  duration_ms: 108.340625
+  type: 'test'
+  ...
+# Subtest: incorrect username and password return the same generic response
+ok 2 - incorrect username and password return the same generic response
+  ---
+  duration_ms: 89.63725
+  type: 'test'
+  ...
+# Subtest: unauthenticated protected-page requests redirect to login
+ok 3 - unauthenticated protected-page requests redirect to login
+  ---
+  duration_ms: 0.527167
+  type: 'test'
+  ...
+# Subtest: LOGIN_REQUIRED=off bypasses page and API authentication
+ok 4 - LOGIN_REQUIRED=off bypasses page and API authentication
+  ---
+  duration_ms: 0.620583
+  type: 'test'
+  ...
+# Subtest: every private API handler rejects requests without a session
+ok 5 - every private API handler rejects requests without a session
+  ---
+  duration_ms: 0.196833
+  type: 'test'
+  ...
+# Subtest: proxy passes API requests to handlers for direct authorization
+ok 6 - proxy passes API requests to handlers for direct authorization
+  ---
+  duration_ms: 0.291334
+  type: 'test'
+  ...
+# Subtest: proxy does not refresh sessions on public login and logout routes
+ok 7 - proxy does not refresh sessions on public login and logout routes
+  ---
+  duration_ms: 0.363083
+  type: 'test'
+  ...
+# Subtest: logout deletes the session cookie and redirects to login
+ok 8 - logout deletes the session cookie and redirects to login
+  ---
+  duration_ms: 0.129
+  type: 'test'
+  ...
+# Subtest: expired, malformed, and tampered session cookies are rejected
+ok 9 - expired, malformed, and tampered session cookies are rejected
+  ---
+  duration_ms: 0.185167
+  type: 'test'
+  ...
+# Subtest: missing required environment variables fail securely
+ok 10 - missing required environment variables fail securely
+  ---
+  duration_ms: 0.143875
+  type: 'test'
+  ...
+# Subtest: unsafe return URLs are replaced with the internal root
+ok 11 - unsafe return URLs are replaced with the internal root
+  ---
+  duration_ms: 45.552125
+  type: 'test'
+  ...
+# Subtest: production session cookies include Secure
+ok 12 - production session cookies include Secure
+  ---
+  duration_ms: 0.231792
+  type: 'test'
+  ...
+# Subtest: login attempts are throttled per function instance
+ok 13 - login attempts are throttled per function instance
+  ---
+  duration_ms: 252.42375
+  type: 'test'
+  ...
+# Subtest: an explicit aggregate-component relationship with official provenance is accepted
+ok 14 - an explicit aggregate-component relationship with official provenance is accepted
+  ---
+  duration_ms: 0.7855
+  type: 'test'
+  ...
+# Subtest: a relationship cannot be verified without the cache candidate-ID registry
+ok 15 - a relationship cannot be verified without the cache candidate-ID registry
+  ---
+  duration_ms: 0.096125
+  type: 'test'
+  ...
+# Subtest: aggregate wording in titles is not relationship evidence
+ok 16 - aggregate wording in titles is not relationship evidence
+  ---
+  duration_ms: 0.347667
+  type: 'test'
+  ...
+# Subtest: independent route facets are not accepted as a component hierarchy
+ok 17 - independent route facets are not accepted as a component hierarchy
+  ---
+  duration_ms: 0.066458
+  type: 'test'
+  ...
+# Subtest: unofficial, missing, self-referential, and duplicate relationships are rejected
+ok 18 - unofficial, missing, self-referential, and duplicate relationships are rejected
+  ---
+  duration_ms: 0.135708
+  type: 'test'
+  ...
+# Subtest: the complete Phase 1B cache has no verified aggregation hierarchy
+ok 19 - the complete Phase 1B cache has no verified aggregation hierarchy
+  ---
+  duration_ms: 2223.997459
+  type: 'test'
+  ...
+# Subtest: reviewed templates generate every eligible SEDS geography under the approved production gate
+ok 20 - reviewed templates generate every eligible SEDS geography under the approved production gate
+  ---
+  duration_ms: 760.280459
+  type: 'test'
+  ...
+# Subtest: Texas remains an exact regression canary rather than a manual registry entry
+ok 21 - Texas remains an exact regression canary rather than a manual registry entry
+  ---
+  duration_ms: 0.215542
+  type: 'test'
+  ...
+# Subtest: all 51 state and district relationships are unique and use the five-component formula
+ok 22 - all 51 state and district relationships are unique and use the five-component formula
+  ---
+  duration_ms: 0.103125
+  type: 'test'
+  ...
+# Subtest: the United States uses its separate four-component official formula
+ok 23 - the United States uses its separate four-component official formula
+  ---
+  duration_ms: 0.064333
+  type: 'test'
+  ...
+# Subtest: generation is deterministic for the same registry and metadata build
+ok 24 - generation is deterministic for the same registry and metadata build
+  ---
+  duration_ms: 1274.123375
+  type: 'test'
+  ...
+# Subtest: an incomplete geography is excluded instead of receiving a partial relationship
+ok 25 - an incomplete geography is excluded instead of receiving a partial relationship
+  ---
+  duration_ms: 0.339667
+  type: 'test'
+  ...
+# Subtest: production ranking cannot lose its explicit approval state
+ok 26 - production ranking cannot lose its explicit approval state
+  ---
+  duration_ms: 0.17525
+  type: 'test'
+  ...
+# Subtest: a stale or tampered generated artifact is rejected
+ok 27 - a stale or tampered generated artifact is rejected
+  ---
+  duration_ms: 1.7655
+  type: 'test'
+  ...
+# Subtest: unapproved route adapters cannot generate inferred hierarchy
+ok 28 - unapproved route adapters cannot generate inferred hierarchy
+  ---
+  duration_ms: 0.328833
+  type: 'test'
+  ...
+# Subtest: base scoring and retrieval remain unchanged by governed hierarchy post-ranking
+ok 29 - base scoring and retrieval remain unchanged by governed hierarchy post-ranking
+  ---
+  duration_ms: 1.228084
+  type: 'test'
+  ...
+# Subtest: common periods pass within a precision-derived rounding bound
+ok 30 - common periods pass within a precision-derived rounding bound
+  ---
+  duration_ms: 6.592625
+  type: 'test'
+  ...
+# Subtest: formula mismatches block the relationship
+ok 31 - formula mismatches block the relationship
+  ---
+  duration_ms: 0.224667
+  type: 'test'
+  ...
+# Subtest: missing series, incomplete periods, and duplicate observations are explicit
+ok 32 - missing series, incomplete periods, and duplicate observations are explicit
+  ---
+  duration_ms: 0.350875
+  type: 'test'
+  ...
+# Subtest: zero aggregates are recorded without dividing contributions
+ok 33 - zero aggregates are recorded without dividing contributions
+  ---
+  duration_ms: 0.162875
+  type: 'test'
+  ...
+# Subtest: bounded fetch sends one six-series request and stores no API key
+ok 34 - bounded fetch sends one six-series request and stores no API key
+  ---
+  duration_ms: 0.364084
+  type: 'test'
+  ...
+# Subtest: API failures block activation and are redacted in a reproducible report
+ok 35 - API failures block activation and are redacted in a reproducible report
+  ---
+  duration_ms: 0.472667
+  type: 'test'
+  ...
+# Subtest: candidate mode blocks missing activity before ranking or observation retrieval
+ok 36 - candidate mode blocks missing activity before ranking or observation retrieval
+  ---
+  duration_ms: 36.869875
+  type: 'test'
+  ...
+# Subtest: the retired feature flag cannot switch the route back to legacy search
+ok 37 - the retired feature flag cannot switch the route back to legacy search
+  ---
+  duration_ms: 6.681791
+  type: 'test'
+  ...
+# Subtest: preview hierarchy mode exposes only the observation-validated aggregate tie-break
+ok 38 - preview hierarchy mode exposes only the observation-validated aggregate tie-break
+  ---
+  duration_ms: 662.58975
+  type: 'test'
+  ...
+# Subtest: certainty labels an approved cross-route fallback without calling it exact
+ok 39 - certainty labels an approved cross-route fallback without calling it exact
+  ---
+  duration_ms: 1281.519791
+  type: 'test'
+  ...
+# Subtest: candidate IDs cannot bypass clarification
+ok 40 - candidate IDs cannot bypass clarification
+  ---
+  duration_ms: 18.531792
+  type: 'test'
+  ...
+# Subtest: explicit selection reruns validation and fetches only the verified series ID
+ok 41 - explicit selection reruns validation and fetches only the verified series ID
+  ---
+  duration_ms: 650.329708
+  type: 'test'
+  ...
+# Subtest: a candidate ID that was not displayed is rejected before any EIA request
+ok 42 - a candidate ID that was not displayed is rejected before any EIA request
+  ---
+  duration_ms: 59.393375
+  type: 'test'
+  ...
+# Subtest: multi-country responses rank definitions first without fetching observations
+ok 43 - multi-country responses rank definitions first without fetching observations
+  ---
+  duration_ms: 134.547958
+  type: 'test'
+  ...
+# Subtest: definition selection preserves missing and failed countries as warnings
+ok 44 - definition selection preserves missing and failed countries as warnings
+  ---
+  duration_ms: 260.580917
+  type: 'test'
+  ...
+# Subtest: combined definition selection fetches all countries with bounded concurrency
+ok 45 - combined definition selection fetches all countries with bounded concurrency
+  ---
+  duration_ms: 298.720333
+  type: 'test'
+  ...
+# Subtest: adds separately retrieved annual SEDS fallbacks when monthly Domestic results fail
+ok 46 - adds separately retrieved annual SEDS fallbacks when monthly Domestic results fail
+  ---
+  duration_ms: 1410.468334
+  type: 'test'
+  ...
+# Subtest: does not retrieve SEDS when a valid Domestic result already exists
+ok 47 - does not retrieve SEDS when a valid Domestic result already exists
+  ---
+  duration_ms: 648.822666
+  type: 'test'
+  ...
+# Subtest: labels narrower national coverage when metadata uses the same geography code
+ok 48 - labels narrower national coverage when metadata uses the same geography code
+  ---
+  duration_ms: 36.2075
+  type: 'test'
+  ...
+# Subtest: uses labeled annual International fallbacks for unavailable country frequencies
+ok 49 - uses labeled annual International fallbacks for unavailable country frequencies
+  ---
+  duration_ms: 485.515542
+  type: 'test'
+  ...
+# Subtest: blocks missing activity before local retrieval or ranking
+ok 50 - blocks missing activity before local retrieval or ranking
+  ---
+  duration_ms: 21.107834
+  type: 'test'
+  ...
+# Subtest: blocks ambiguous product alternatives when activity is also missing
+ok 51 - blocks ambiguous product alternatives when activity is also missing
+  ---
+  duration_ms: 4.637125
+  type: 'test'
+  ...
+# Subtest: blocks unresolved product and activity pairing before retrieval or ranking
+ok 52 - blocks unresolved product and activity pairing before retrieval or ranking
+  ---
+  duration_ms: 15.336833
+  type: 'test'
+  ...
+# Subtest: asks for clarification instead of showing candidates for unresolved qualifiers
+ok 53 - asks for clarification instead of showing candidates for unresolved qualifiers
+  ---
+  duration_ms: 6.139
+  type: 'test'
+  ...
+# Subtest: reports an empty result instead of silently selecting a substitute
+ok 54 - reports an empty result instead of silently selecting a substitute
+  ---
+  duration_ms: 10.096417
+  type: 'test'
+  ...
+# Subtest: candidate orchestration is repeatable for identical input and metadata
+ok 55 - candidate orchestration is repeatable for identical input and metadata
+  ---
+  duration_ms: 1746.981625
+  type: 'test'
+  ...
+# Subtest: retrieves every comparison country and ranks five shared definitions
+ok 56 - retrieves every comparison country and ranks five shared definitions
+  ---
+  duration_ms: 431.996291
+  type: 'test'
+  ...
+# Subtest: multi-country choices expose identified series and explicit actions
+ok 57 - multi-country choices expose identified series and explicit actions
+  ---
+  duration_ms: 0.358167
+  type: 'test'
+  ...
+# Subtest: candidate selection and browser-side XLSX export retain verified metadata
+ok 58 - candidate selection and browser-side XLSX export retain verified metadata
+  ---
+  duration_ms: 822.359333
+  type: 'test'
+  ...
+# Subtest: combined comparison XLSX includes all definitions, countries, statuses, and warning fields
+ok 59 - combined comparison XLSX includes all definitions, countries, statuses, and warning fields
+  ---
+  duration_ms: 355.3575
+  type: 'test'
+  ...
+# Subtest: validated observation, ranking, and Preview evidence open production
+ok 60 - validated observation, ranking, and Preview evidence open production
+  ---
+  duration_ms: 0.667334
+  type: 'test'
+  ...
+# Subtest: shadow mode promotes the verified Texas aggregate without changing visible order
+ok 61 - shadow mode promotes the verified Texas aggregate without changing visible order
+  ---
+  duration_ms: 2508.355209
+  type: 'test'
+  ...
+# Subtest: preview on mode applies only the verified aggregate tie-break
+ok 62 - preview on mode applies only the verified aggregate tie-break
+  ---
+  duration_ms: 254.416083
+  type: 'test'
+  ...
+# Subtest: production gate is approved after deployed Preview verification
+ok 63 - production gate is approved after deployed Preview verification
+  ---
+  duration_ms: 0.114709
+  type: 'test'
+  ...
+# Subtest: non-total intents are ineligible and retain deterministic top five
+ok 64 - non-total intents are ineligible and retain deterministic top five
+  ---
+  duration_ms: 252.823375
+  type: 'test'
+  ...
+# Subtest: specific source energy consumption cannot activate total-energy hierarchy
+ok 65 - specific source energy consumption cannot activate total-energy hierarchy
+  ---
+  duration_ms: 97.27825
+  type: 'test'
+  ...
+# Subtest: activated aggregate certainty is explicit and removes the unknown warning
+ok 66 - activated aggregate certainty is explicit and removes the unknown warning
+  ---
+  duration_ms: 0.189916
+  type: 'test'
+  ...
+# Subtest: public cap shares slots across requests and discloses overflow without dropping intent
+ok 67 - public cap shares slots across requests and discloses overflow without dropping intent
+  ---
+  duration_ms: 2637.713083
+  type: 'test'
+  ...
+# Subtest: comparison definition cap represents each requested pair and discloses excess requests
+ok 68 - comparison definition cap represents each requested pair and discloses excess requests
+  ---
+  duration_ms: 1066.5355
+  type: 'test'
+  ...
+# Subtest: routes a country request to International with validated monthly frequency
+ok 69 - routes a country request to International with validated monthly frequency
+  ---
+  duration_ms: 28.323709
+  type: 'test'
+  ...
+# Subtest: routes annual state total-energy requests to SEDS
+ok 70 - routes annual state total-energy requests to SEDS
+  ---
+  duration_ms: 9.171708
+  type: 'test'
+  ...
+# Subtest: routes state electricity requests to Domestic EIA
+ok 71 - routes state electricity requests to Domestic EIA
+  ---
+  duration_ms: 14.444625
+  type: 'test'
+  ...
+# Subtest: blocks an unresolved source qualifier instead of inferring an activity
+ok 72 - blocks an unresolved source qualifier instead of inferring an activity
+  ---
+  duration_ms: 8.87825
+  type: 'test'
+  ...
+# Subtest: routes explicit plant requests to Domestic EIA without retrieving plant candidates
+ok 73 - routes explicit plant requests to Domestic EIA without retrieving plant candidates
+  ---
+  duration_ms: 10.340792
+  type: 'test'
+  ...
+# Subtest: preserves geography and concept mention order
+ok 74 - preserves geography and concept mention order
+  ---
+  duration_ms: 5.5455
+  type: 'test'
+  ...
+# Subtest: preserves only governed product and activity pair scopes
+ok 75 - preserves only governed product and activity pair scopes
+  ---
+  duration_ms: 64.255042
+  type: 'test'
+  ...
+# Subtest: treats a specific source followed by energy as one product
+ok 76 - treats a specific source followed by energy as one product
+  ---
+  duration_ms: 170.281708
+  type: 'test'
+  ...
+# Subtest: uses context to distinguish the state and country named Georgia
+ok 77 - uses context to distinguish the state and country named Georgia
+  ---
+  duration_ms: 137.262917
+  type: 'test'
+  ...
+# Subtest: routes mixed U.S. and foreign-country requests through International
+ok 78 - routes mixed U.S. and foreign-country requests through International
+  ---
+  duration_ms: 21.70375
+  type: 'test'
+  ...
+# Subtest: canonicalizes U.S. aliases to the governed national geography
+ok 79 - canonicalizes U.S. aliases to the governed national geography
+  ---
+  duration_ms: 0.137166
+  type: 'test'
+  ...
+# Subtest: routes nonannual U.S. state requests to Domestic before SEDS fallback
+ok 80 - routes nonannual U.S. state requests to Domestic before SEDS fallback
+  ---
+  duration_ms: 30.34125
+  type: 'test'
+  ...
+# Subtest: represents missing geography and deterministic route fallback
+ok 81 - represents missing geography and deterministic route fallback
+  ---
+  duration_ms: 10.763375
+  type: 'test'
+  ...
+# Subtest: rejects unknown geography text because it is absent from local metadata
+ok 82 - rejects unknown geography text because it is absent from local metadata
+  ---
+  duration_ms: 3.112584
+  type: 'test'
+  ...
+# Subtest: does not mistake lowercase filler words for three-letter country codes
+ok 83 - does not mistake lowercase filler words for three-letter country codes
+  ---
+  duration_ms: 9.705
+  type: 'test'
+  ...
+# Subtest: accepts an explicitly uppercase local metadata country code
+ok 84 - accepts an explicitly uppercase local metadata country code
+  ---
+  duration_ms: 15.059375
+  type: 'test'
+  ...
+# Subtest: preserves sector, ordered repeated activities, explicit frequency, and negation
+ok 85 - preserves sector, ordered repeated activities, explicit frequency, and negation
+  ---
+  duration_ms: 55.5545
+  type: 'test'
+  ...
+# Subtest: does not reinterpret an explicit sector phrase as a second product
+ok 86 - does not reinterpret an explicit sector phrase as a second product
+  ---
+  duration_ms: 12.748334
+  type: 'test'
+  ...
+# Subtest: preserves a requested unsupported frequency instead of silently replacing it
+ok 87 - preserves a requested unsupported frequency instead of silently replacing it
+  ---
+  duration_ms: 3.6565
+  type: 'test'
+  ...
+# Subtest: marks two or more validated countries as a multi-country comparison
+ok 88 - marks two or more validated countries as a multi-country comparison
+  ---
+  duration_ms: 5.167333
+  type: 'test'
+  ...
+# Subtest: does not mark a state and country request as a multi-country comparison
+ok 89 - does not mark a state and country request as a multi-country comparison
+  ---
+  duration_ms: 3.775875
+  type: 'test'
+  ...
+# Subtest: canonicalizes electricity production to generation without changing the query
+ok 90 - canonicalizes electricity production to generation without changing the query
+  ---
+  duration_ms: 6.511209
+  type: 'test'
+  ...
+# Subtest: builder preserves comma-bearing official geography labels and product punctuation
+ok 91 - builder preserves comma-bearing official geography labels and product punctuation
+  ---
+  duration_ms: 1.269333
+  type: 'test'
+  ...
+# Subtest: complete candidate labels retain raw artifact hashes and narrower coverage
+ok 92 - complete candidate labels retain raw artifact hashes and narrower coverage
+  ---
+  duration_ms: 699.617917
+  type: 'test'
+  ...
+# Subtest: bounded retrieval leaves room for every valid activity in a multiple-request search
+ok 93 - bounded retrieval leaves room for every valid activity in a multiple-request search
+  ---
+  duration_ms: 1440.088042
+  type: 'test'
+  ...
+# Subtest: official source and description product evidence prevent inexact scopes from scoring as exact
+ok 94 - official source and description product evidence prevent inexact scopes from scoring as exact
+  ---
+  duration_ms: 299.355
+  type: 'test'
+  ...
+# Subtest: live comparison keeps the original cohort and expands to forty curated expected outcomes
+ok 95 - live comparison keeps the original cohort and expands to forty curated expected outcomes
+  ---
+  duration_ms: 1.555166
+  type: 'test'
+  ...
+# Subtest: curated benchmark grading reports exact agreement and field-level disagreement
+ok 96 - curated benchmark grading reports exact agreement and field-level disagreement
+  ---
+  duration_ms: 0.160542
+  type: 'test'
+  ...
+# Subtest: benchmark statistics retain failed query IDs and fields
+ok 97 - benchmark statistics retain failed query IDs and fields
+  ---
+  duration_ms: 0.119458
+  type: 'test'
+  ...
+# Subtest: intent summaries retain field-level provenance
+ok 98 - intent summaries retain field-level provenance
+  ---
+  duration_ms: 0.100583
+  type: 'test'
+  ...
+# Subtest: provenance statistics separate acceptance, rejection, repair, and visible failure
+ok 99 - provenance statistics separate acceptance, rejection, repair, and visible failure
+  ---
+  duration_ms: 0.181875
+  type: 'test'
+  ...
+# Subtest: raw AI disagreement can disappear after local validation
+ok 100 - raw AI disagreement can disappear after local validation
+  ---
+  duration_ms: 0.11525
+  type: 'test'
+  ...
+# Subtest: deterministic ranking meets the graded baseline metrics on representative cases
+ok 101 - deterministic ranking meets the graded baseline metrics on representative cases
+  ---
+  duration_ms: 60.724666
+  type: 'test'
+  ...
+# Subtest: wrong-frequency candidates stay in fallback and are still auditable
+ok 102 - wrong-frequency candidates stay in fallback and are still auditable
+  ---
+  duration_ms: 10.950375
+  type: 'test'
+  ...
+# Subtest: selector geography mismatches are excluded before scoring
+ok 103 - selector geography mismatches are excluded before scoring
+  ---
+  duration_ms: 9.302792
+  type: 'test'
+  ...
+# Subtest: broad renewable queries keep several options in the top ranks and stay deterministic
+ok 104 - broad renewable queries keep several options in the top ranks and stay deterministic
+  ---
+  duration_ms: 19.272209
+  type: 'test'
+  ...
+# Subtest: requested-date coverage and currentness outrank stale non-covering records
+ok 105 - requested-date coverage and currentness outrank stale non-covering records
+  ---
+  duration_ms: 12.404209
+  type: 'test'
+  ...
+# Subtest: hierarchy-like labels receive no aggregation points or verified relationship claims
+ok 106 - hierarchy-like labels receive no aggregation points or verified relationship claims
+  ---
+  duration_ms: 15.221917
+  type: 'test'
+  ...
+# Subtest: hierarchy labels and untrusted relationship-shaped fields cannot influence tie order
+ok 107 - hierarchy labels and untrusted relationship-shaped fields cannot influence tie order
+  ---
+  duration_ms: 14.817333
+  type: 'test'
+  ...
+# Subtest: unresolved intent cannot reach ranking directly
+ok 108 - unresolved intent cannot reach ranking directly
+  ---
+  duration_ms: 22.364542
+  type: 'test'
+  ...
+# Subtest: unrequested lexical qualifiers do not create a narrower-or-broader ranking preference
+ok 109 - unrequested lexical qualifiers do not create a narrower-or-broader ranking preference
+  ---
+  duration_ms: 12.039959
+  type: 'test'
+  ...
+# Subtest: the Phase 3 output shape remains compatible with the ranker
+ok 110 - the Phase 3 output shape remains compatible with the ranker
+  ---
+  duration_ms: 628.590791
+  type: 'test'
+  ...
+# Subtest: assigns exact, approved-fallback, and related candidates to tiers A, B, and C
+ok 111 - assigns exact, approved-fallback, and related candidates to tiers A, B, and C
+  ---
+  duration_ms: 23.019625
+  type: 'test'
+  ...
+# Subtest: semantic floors reject mixed or contradictory concepts before display
+ok 112 - semantic floors reject mixed or contradictory concepts before display
+  ---
+  duration_ms: 8.476834
+  type: 'test'
+  ...
+# Subtest: an activity contradiction fails the activity floor even when query words appear in the title
+ok 113 - an activity contradiction fails the activity floor even when query words appear in the title
+  ---
+  duration_ms: 8.222084
+  type: 'test'
+  ...
+# Subtest: allows only the configured annual SEDS fallback for a nonannual state request
+ok 114 - allows only the configured annual SEDS fallback for a nonannual state request
+  ---
+  duration_ms: 8.655042
+  type: 'test'
+  ...
+# Subtest: scores only requested constraints and exposes a reproducible 0-100 composition
+ok 115 - scores only requested constraints and exposes a reproducible 0-100 composition
+  ---
+  duration_ms: 8.224334
+  type: 'test'
+  ...
+# Subtest: fielded IDF gives title matches more credit than normalized-field-only matches
+ok 116 - fielded IDF gives title matches more credit than normalized-field-only matches
+  ---
+  duration_ms: 8.01575
+  type: 'test'
+  ...
+# Subtest: groups unit variants into one display family and can return fewer than five results
+ok 117 - groups unit variants into one display family and can return fewer than five results
+  ---
+  duration_ms: 16.023291
+  type: 'test'
+  ...
+# Subtest: parses compact EIA year-month coverage and removes duplicate selectors deterministically
+ok 118 - parses compact EIA year-month coverage and removes duplicate selectors deterministically
+  ---
+  duration_ms: 9.91925
+  type: 'test'
+  ...
+# Subtest: accepts official EIA coverage dates for every supported frequency
+ok 119 - accepts official EIA coverage dates for every supported frequency
+  ---
+  duration_ms: 69.896833
+  type: 'test'
+  ...
+# Subtest: retrieves relevant International candidates from the local Phase 1b index
+ok 120 - retrieves relevant International candidates from the local Phase 1b index
+  ---
+  duration_ms: 640.284875
+  type: 'test'
+  ...
+# Subtest: hard-gates route family, geography, and explicit frequency
+ok 121 - hard-gates route family, geography, and explicit frequency
+  ---
+  duration_ms: 651.41975
+  type: 'test'
+  ...
+# Subtest: retrieves SEDS total-energy candidates for the requested state
+ok 122 - retrieves SEDS total-energy candidates for the requested state
+  ---
+  duration_ms: 532.515209
+  type: 'test'
+  ...
+# Subtest: broad renewable intent retrieves several approved product options
+ok 123 - broad renewable intent retrieves several approved product options
+  ---
+  duration_ms: 506.238292
+  type: 'test'
+  ...
+# Subtest: nonannual state total-energy requests do not fall into SEDS annual candidates
+ok 124 - nonannual state total-energy requests do not fall into SEDS annual candidates
+  ---
+  duration_ms: 513.918333
+  type: 'test'
+  ...
+# Subtest: unresolved intent cannot reach retrieval directly
+ok 125 - unresolved intent cannot reach retrieval directly
+  ---
+  duration_ms: 32.003917
+  type: 'test'
+  ...
+# Subtest: deduplicates canonical selectors and excludes explicit activity mismatches
+ok 126 - deduplicates canonical selectors and excludes explicit activity mismatches
+  ---
+  duration_ms: 0.778458
+  type: 'test'
+  ...
+# Subtest: stops at the hard 50-candidate limit without padding or ranking
+ok 127 - stops at the hard 50-candidate limit without padding or ranking
+  ---
+  duration_ms: 13.415542
+  type: 'test'
+  ...
+# Subtest: preserves geography and concept request order
+ok 128 - preserves geography and concept request order
+  ---
+  duration_ms: 1.050792
+  type: 'test'
+  ...
+# Subtest: returns repeatable candidate identities and retrieval reasons
+ok 129 - returns repeatable candidate identities and retrieval reasons
+  ---
+  duration_ms: 400.380541
+  type: 'test'
+  ...
+# Subtest: reports the validated index version and rejects a mismatched intent version
+ok 130 - reports the validated index version and rejects a mismatched intent version
+  ---
+  duration_ms: 48.129333
+  type: 'test'
+  ...
+# Subtest: rejects missing geography and route-family mismatch
+ok 131 - rejects missing geography and route-family mismatch
+  ---
+  duration_ms: 0.147959
+  type: 'test'
+  ...
+# Subtest: cold local retrieval stays within the Phase 3 latency budget
+ok 132 - cold local retrieval stays within the Phase 3 latency budget
+  ---
+  duration_ms: 359.499333
+  type: 'test'
+  ...
+# Subtest: frozen original JSON answer key agrees with original expectation table and policies
+ok 133 - frozen original JSON answer key agrees with original expectation table and policies
+  ---
+  duration_ms: 1.150667
+  type: 'test'
+  ...
+# Subtest: fresh JSON answer key agrees with every cell of the user supplied table
+ok 134 - fresh JSON answer key agrees with every cell of the user supplied table
+  ---
+  duration_ms: 0.3715
+  type: 'test'
+  ...
+# Subtest: runtime schema meets every documented count limit and references each vocabulary once
+ok 135 - runtime schema meets every documented count limit and references each vocabulary once
+  ---
+  duration_ms: 0.948125
+  type: 'test'
+  ...
+# Subtest: schema counting includes named constants and follows references for nesting
+ok 136 - schema counting includes named constants and follows references for nesting
+  ---
+  duration_ms: 0.27525
+  type: 'test'
+  ...
+# Subtest: gold O1: correct meaning; independent wrong fields rejected
+ok 137 - gold O1: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.549375
+  type: 'test'
+  ...
+# Subtest: gold O2: correct meaning; independent wrong fields rejected
+ok 138 - gold O2: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.193833
+  type: 'test'
+  ...
+# Subtest: gold O3: correct meaning; independent wrong fields rejected
+ok 139 - gold O3: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.134042
+  type: 'test'
+  ...
+# Subtest: gold O4: correct meaning; independent wrong fields rejected
+ok 140 - gold O4: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.131417
+  type: 'test'
+  ...
+# Subtest: gold O5: correct meaning; independent wrong fields rejected
+ok 141 - gold O5: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.439292
+  type: 'test'
+  ...
+# Subtest: gold O6: correct meaning; independent wrong fields rejected
+ok 142 - gold O6: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.526375
+  type: 'test'
+  ...
+# Subtest: gold O7: correct meaning; independent wrong fields rejected
+ok 143 - gold O7: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 1.07525
+  type: 'test'
+  ...
+# Subtest: gold O8: correct meaning; independent wrong fields rejected
+ok 144 - gold O8: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.150875
+  type: 'test'
+  ...
+# Subtest: gold O9: correct meaning; independent wrong fields rejected
+ok 145 - gold O9: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.104625
+  type: 'test'
+  ...
+# Subtest: gold O10: correct meaning; independent wrong fields rejected
+ok 146 - gold O10: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.174083
+  type: 'test'
+  ...
+# Subtest: gold F1: correct meaning; independent wrong fields rejected
+ok 147 - gold F1: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.078917
+  type: 'test'
+  ...
+# Subtest: gold F2: correct meaning; independent wrong fields rejected
+ok 148 - gold F2: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.0805
+  type: 'test'
+  ...
+# Subtest: gold F3: correct meaning; independent wrong fields rejected
+ok 149 - gold F3: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.082791
+  type: 'test'
+  ...
+# Subtest: gold F4: correct meaning; independent wrong fields rejected
+ok 150 - gold F4: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.082625
+  type: 'test'
+  ...
+# Subtest: gold F5: correct meaning; independent wrong fields rejected
+ok 151 - gold F5: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.072708
+  type: 'test'
+  ...
+# Subtest: gold F6: correct meaning; independent wrong fields rejected
+ok 152 - gold F6: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.072834
+  type: 'test'
+  ...
+# Subtest: gold F7: correct meaning; independent wrong fields rejected
+ok 153 - gold F7: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.077041
+  type: 'test'
+  ...
+# Subtest: gold F8: correct meaning; independent wrong fields rejected
+ok 154 - gold F8: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.0835
+  type: 'test'
+  ...
+# Subtest: gold F9: correct meaning; independent wrong fields rejected
+ok 155 - gold F9: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.328167
+  type: 'test'
+  ...
+# Subtest: gold F10: correct meaning; independent wrong fields rejected
+ok 156 - gold F10: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.131333
+  type: 'test'
+  ...
+# Subtest: gold F11: correct meaning; independent wrong fields rejected
+ok 157 - gold F11: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.090542
+  type: 'test'
+  ...
+# Subtest: gold F12: correct meaning; independent wrong fields rejected
+ok 158 - gold F12: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.070292
+  type: 'test'
+  ...
+# Subtest: gold F13: correct meaning; independent wrong fields rejected
+ok 159 - gold F13: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.116708
+  type: 'test'
+  ...
+# Subtest: gold F14: correct meaning; independent wrong fields rejected
+ok 160 - gold F14: correct meaning; independent wrong fields rejected
+  ---
+  duration_ms: 0.154833
+  type: 'test'
+  ...
+# Subtest: scorer catches missing pairs, order, exclusions, gas guesses and wrong countries
+ok 161 - scorer catches missing pairs, order, exclusions, gas guesses and wrong countries
+  ---
+  duration_ms: 0.215708
+  type: 'test'
+  ...
+# Subtest: pass gate requires full schedule, 44 first-attempt successes and mandatory clarification gates
+ok 162 - pass gate requires full schedule, 44 first-attempt successes and mandatory clarification gates
+  ---
+  duration_ms: 0.450416
+  type: 'test'
+  ...
+# Subtest: locked form O1: frozen meaning survives conversion and browser resubmission
+ok 163 - locked form O1: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 53.920916
+  type: 'test'
+  ...
+# Subtest: locked form O2: frozen meaning survives conversion and browser resubmission
+ok 164 - locked form O2: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 5.113958
+  type: 'test'
+  ...
+# Subtest: locked form O3: frozen meaning survives conversion and browser resubmission
+ok 165 - locked form O3: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 9.107333
+  type: 'test'
+  ...
+# Subtest: locked form O4: frozen meaning survives conversion and browser resubmission
+ok 166 - locked form O4: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 9.125625
+  type: 'test'
+  ...
+# Subtest: locked form O5: frozen meaning survives conversion and browser resubmission
+ok 167 - locked form O5: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 5.121125
+  type: 'test'
+  ...
+# Subtest: locked form O6: frozen meaning survives conversion and browser resubmission
+ok 168 - locked form O6: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 10.081625
+  type: 'test'
+  ...
+# Subtest: locked form O7: frozen meaning survives conversion and browser resubmission
+ok 169 - locked form O7: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 19.212
+  type: 'test'
+  ...
+# Subtest: locked form O8: frozen meaning survives conversion and browser resubmission
+ok 170 - locked form O8: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 17.377583
+  type: 'test'
+  ...
+# Subtest: locked form O9: frozen meaning survives conversion and browser resubmission
+ok 171 - locked form O9: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 9.893667
+  type: 'test'
+  ...
+# Subtest: locked form O10: frozen meaning survives conversion and browser resubmission
+ok 172 - locked form O10: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 13.105792
+  type: 'test'
+  ...
+# Subtest: locked form F1: frozen meaning survives conversion and browser resubmission
+ok 173 - locked form F1: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 8.608708
+  type: 'test'
+  ...
+# Subtest: locked form F2: frozen meaning survives conversion and browser resubmission
+ok 174 - locked form F2: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 9.64225
+  type: 'test'
+  ...
+# Subtest: locked form F3: frozen meaning survives conversion and browser resubmission
+ok 175 - locked form F3: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 10.225417
+  type: 'test'
+  ...
+# Subtest: locked form F4: frozen meaning survives conversion and browser resubmission
+ok 176 - locked form F4: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 11.261292
+  type: 'test'
+  ...
+# Subtest: locked form F5: frozen meaning survives conversion and browser resubmission
+ok 177 - locked form F5: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 22.6165
+  type: 'test'
+  ...
+# Subtest: locked form F6: frozen meaning survives conversion and browser resubmission
+ok 178 - locked form F6: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 16.884042
+  type: 'test'
+  ...
+# Subtest: locked form F7: frozen meaning survives conversion and browser resubmission
+ok 179 - locked form F7: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 14.3595
+  type: 'test'
+  ...
+# Subtest: locked form F8: frozen meaning survives conversion and browser resubmission
+ok 180 - locked form F8: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 23.194333
+  type: 'test'
+  ...
+# Subtest: locked form F9: frozen meaning survives conversion and browser resubmission
+ok 181 - locked form F9: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 22.386417
+  type: 'test'
+  ...
+# Subtest: locked form F10: frozen meaning survives conversion and browser resubmission
+ok 182 - locked form F10: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 30.119417
+  type: 'test'
+  ...
+# Subtest: locked form F11: frozen meaning survives conversion and browser resubmission
+ok 183 - locked form F11: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 9.520875
+  type: 'test'
+  ...
+# Subtest: locked form F12: frozen meaning survives conversion and browser resubmission
+ok 184 - locked form F12: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 28.638042
+  type: 'test'
+  ...
+# Subtest: locked form F13: frozen meaning survives conversion and browser resubmission
+ok 185 - locked form F13: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 9.376208
+  type: 'test'
+  ...
+# Subtest: locked form F14: frozen meaning survives conversion and browser resubmission
+ok 186 - locked form F14: frozen meaning survives conversion and browser resubmission
+  ---
+  duration_ms: 8.467125
+  type: 'test'
+  ...
+# Subtest: locked-form geography is authoritative; USA does not introduce US or comparison mode
+ok 187 - locked-form geography is authoritative; USA does not introduce US or comparison mode
+  ---
+  duration_ms: 13.548333
+  type: 'test'
+  ...
+# Subtest: quote checks are case-insensitive, whitespace-collapsed and check every quote-bearing field
+ok 188 - quote checks are case-insensitive, whitespace-collapsed and check every quote-bearing field
+  ---
+  duration_ms: 1.173583
+  type: 'test'
+  ...
+# Subtest: facts reject overlapping geographies, missing required geography, and unsupported words without clarification
+ok 189 - facts reject overlapping geographies, missing required geography, and unsupported words without clarification
+  ---
+  duration_ms: 0.256167
+  type: 'test'
+  ...
+# Subtest: clarification product: options validation
+ok 190 - clarification product: options validation
+  ---
+  duration_ms: 0.175542
+  type: 'test'
+  ...
+# Subtest: clarification activity: options validation
+ok 191 - clarification activity: options validation
+  ---
+  duration_ms: 0.146208
+  type: 'test'
+  ...
+# Subtest: clarification frequency: options validation
+ok 192 - clarification frequency: options validation
+  ---
+  duration_ms: 0.158333
+  type: 'test'
+  ...
+# Subtest: clarification geography: options validation
+ok 193 - clarification geography: options validation
+  ---
+  duration_ms: 0.146584
+  type: 'test'
+  ...
+# Subtest: clarification other: options validation
+ok 194 - clarification other: options validation
+  ---
+  duration_ms: 0.186792
+  type: 'test'
+  ...
+# Subtest: plain fact checks do not reinterpret meaning or spell-check a valid model selection
+ok 195 - plain fact checks do not reinterpret meaning or spell-check a valid model selection
+  ---
+  duration_ms: 8.751291
+  type: 'test'
+  ...
+# Subtest: HTTP 400 outcome mapping
+ok 196 - HTTP 400 outcome mapping
+  ---
+  duration_ms: 0.729084
+  type: 'test'
+  ...
+# Subtest: HTTP 401 outcome mapping
+ok 197 - HTTP 401 outcome mapping
+  ---
+  duration_ms: 1.019792
+  type: 'test'
+  ...
+# Subtest: HTTP 403 outcome mapping
+ok 198 - HTTP 403 outcome mapping
+  ---
+  duration_ms: 0.398333
+  type: 'test'
+  ...
+# Subtest: HTTP 429 outcome mapping
+ok 199 - HTTP 429 outcome mapping
+  ---
+  duration_ms: 28.558209
+  type: 'test'
+  ...
+# Subtest: HTTP 500 outcome mapping
+ok 200 - HTTP 500 outcome mapping
+  ---
+  duration_ms: 12.415125
+  type: 'test'
+  ...
+# Subtest: HTTP 503 outcome mapping
+ok 201 - HTTP 503 outcome mapping
+  ---
+  duration_ms: 14.542834
+  type: 'test'
+  ...
+# Subtest: missing-key outcome mapping and bounded re-ask
+ok 202 - missing-key outcome mapping and bounded re-ask
+  ---
+  duration_ms: 36.052417
+  type: 'test'
+  ...
+# Subtest: network outcome mapping and bounded re-ask
+ok 203 - network outcome mapping and bounded re-ask
+  ---
+  duration_ms: 23.363292
+  type: 'test'
+  ...
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"missing_or_legacy_form"}
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"missing_or_legacy_form"}
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"missing_or_legacy_form"}
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"missing_or_legacy_form"}
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"missing_or_legacy_form"}
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"failed_check:quote_not_in_query"}
+# Subtest: timeout outcome mapping and bounded re-ask
+ok 204 - timeout outcome mapping and bounded re-ask
+  ---
+  duration_ms: 6.086542
+  type: 'test'
+  ...
+# Subtest: refusal outcome mapping and bounded re-ask
+ok 205 - refusal outcome mapping and bounded re-ask
+  ---
+  duration_ms: 0.378292
+  type: 'test'
+  ...
+# Subtest: cutoff outcome mapping and bounded re-ask
+ok 206 - cutoff outcome mapping and bounded re-ask
+  ---
+  duration_ms: 0.277666
+  type: 'test'
+  ...
+# Subtest: invalid-json outcome mapping and bounded re-ask
+ok 207 - invalid-json outcome mapping and bounded re-ask
+  ---
+  duration_ms: 0.438417
+  type: 'test'
+  ...
+# Subtest: failed-check outcome mapping and bounded re-ask
+ok 208 - failed-check outcome mapping and bounded re-ask
+  ---
+  duration_ms: 0.381583
+  type: 'test'
+  ...
+# Subtest: one re-ask can pass; first attempt and retry are independently recorded
+ok 209 - one re-ask can pass; first attempt and retry are independently recorded
+  ---
+  duration_ms: 13.406917
+  type: 'test'
+  ...
+# Subtest: request enforces schema and preserves production model settings unless explicitly injected for evaluation
+ok 210 - request enforces schema and preserves production model settings unless explicitly injected for evaluation
+  ---
+  duration_ms: 0.841792
+  type: 'test'
+  ...
+# Subtest: public search rejects missing, unreadable, oversized and legacy payloads without fetching
+ok 211 - public search rejects missing, unreadable, oversized and legacy payloads without fetching
+  ---
+  duration_ms: 4.778625
+  type: 'test'
+  ...
+# Subtest: all approved geography labels survive conversion and raw-form resubmission without competing raw mentions
+ok 212 - all approved geography labels survive conversion and raw-form resubmission without competing raw mentions
+  ---
+  duration_ms: 2201.998708
+  type: 'test'
+  ...
+# Subtest: bulk adapters produce deterministic valid records without observations
+ok 213 - bulk adapters produce deterministic valid records without observations
+  ---
+  duration_ms: 2.562792
+  type: 'test'
+  ...
+# Subtest: family adapters preserve the required retrieval selectors
+ok 214 - family adapters preserve the required retrieval selectors
+  ---
+  duration_ms: 0.514584
+  type: 'test'
+  ...
+# Subtest: facility-level Electricity records are explicitly excluded
+ok 215 - facility-level Electricity records are explicitly excluded
+  ---
+  duration_ms: 0.053833
+  type: 'test'
+  ...
+# Subtest: plant records normalize to a compact on-demand directory entry
+ok 216 - plant records normalize to a compact on-demand directory entry
+  ---
+  duration_ms: 0.313625
+  type: 'test'
+  ...
+# Subtest: invalid or cross-family series IDs are rejected
+ok 217 - invalid or cross-family series IDs are rejected
+  ---
+  duration_ms: 0.179
+  type: 'test'
+  ...
+# Subtest: staging activation atomically preserves the previous build
+ok 218 - staging activation atomically preserves the previous build
+  ---
+  duration_ms: 3.966292
+  type: 'test'
+  ...
+# Subtest: failed activation restores the previous build
+ok 219 - failed activation restores the previous build
+  ---
+  duration_ms: 1.382875
+  type: 'test'
+  ...
+# Subtest: generated Phase 1B artifacts remain valid staging metadata
+ok 220 - generated Phase 1B artifacts remain valid staging metadata
+  ---
+  duration_ms: 210.874667
+  type: 'test'
+  ...
+# Subtest: Phase 1A schemas use JSON Schema 2020-12 and reject unknown fields
+ok 221 - Phase 1A schemas use JSON Schema 2020-12 and reject unknown fields
+  ---
+  duration_ms: 8.302625
+  type: 'test'
+  ...
+# Subtest: recorded route fixtures cover all three families without exposing an API key
+ok 222 - recorded route fixtures cover all three families without exposing an API key
+  ---
+  duration_ms: 2.780459
+  type: 'test'
+  ...
+# Subtest: official route fixtures normalize and validate deterministically
+ok 223 - official route fixtures normalize and validate deterministically
+  ---
+  duration_ms: 7.398584
+  type: 'test'
+  ...
+# Subtest: Phase 4A natural-gas routes are official, key-free, and locally valid
+ok 224 - Phase 4A natural-gas routes are official, key-free, and locally valid
+  ---
+  duration_ms: 2.06275
+  type: 'test'
+  ...
+# Subtest: route normalization ignores object-property ordering
+ok 225 - route normalization ignores object-property ordering
+  ---
+  duration_ms: 2.188833
+  type: 'test'
+  ...
+# Subtest: route metadata reports capabilities but does not claim valid series combinations
+ok 226 - route metadata reports capabilities but does not claim valid series combinations
+  ---
+  duration_ms: 1.896791
+  type: 'test'
+  ...
+# Subtest: candidate identity is stable across facet ordering
+ok 227 - candidate identity is stable across facet ordering
+  ---
+  duration_ms: 0.51325
+  type: 'test'
+  ...
+# Subtest: an explicitly sourced selector produces a valid candidate record
+ok 228 - an explicitly sourced selector produces a valid candidate record
+  ---
+  duration_ms: 0.671625
+  type: 'test'
+  ...
+# Subtest: route facet definitions alone cannot create a series candidate
+ok 229 - route facet definitions alone cannot create a series candidate
+  ---
+  duration_ms: 0.4775
+  type: 'test'
+  ...
+# Subtest: manifest validation catches inconsistent totals and failed complete builds
+ok 230 - manifest validation catches inconsistent totals and failed complete builds
+  ---
+  duration_ms: 0.57775
+  type: 'test'
+  ...
+# Subtest: Phase 1A.2 fixtures are sanitized and cover the three route families
+ok 231 - Phase 1A.2 fixtures are sanitized and cover the three route families
+  ---
+  duration_ms: 2.894834
+  type: 'test'
+  ...
+# Subtest: conditional facet requests do not expose relationships
+ok 232 - conditional facet requests do not expose relationships
+  ---
+  duration_ms: 1.473667
+  type: 'test'
+  ...
+# Subtest: independent facet products overgenerate international and SEDS selectors
+ok 233 - independent facet products overgenerate international and SEDS selectors
+  ---
+  duration_ms: 0.618458
+  type: 'test'
+  ...
+# Subtest: representative bulk series IDs round-trip to the expected v2 routes
+ok 234 - representative bulk series IDs round-trip to the expected v2 routes
+  ---
+  duration_ms: 0.46
+  type: 'test'
+  ...
+# Subtest: complete no-value observation enumeration has a measured high cost
+ok 235 - complete no-value observation enumeration has a measured high cost
+  ---
+  duration_ms: 0.522584
+  type: 'test'
+  ...
+# Subtest: Phase 1A.2 stops at the review gate before Phase 1B
+ok 236 - Phase 1A.2 stops at the review gate before Phase 1B
+  ---
+  duration_ms: 0.618042
+  type: 'test'
+  ...
+# Subtest: canonical definition signatures omit geography and retain semantic selector facets
+ok 237 - canonical definition signatures omit geography and retain semantic selector facets
+  ---
+  duration_ms: 8.215541
+  type: 'test'
+  ...
+# Subtest: definition IDs are stable across country and object key order
+ok 238 - definition IDs are stable across country and object key order
+  ---
+  duration_ms: 0.747917
+  type: 'test'
+  ...
+# Subtest: meaningful definition differences produce different IDs
+ok 239 - meaningful definition differences produce different IDs
+  ---
+  duration_ms: 0.1355
+  type: 'test'
+  ...
+# Subtest: groups and ranks a definition once while retaining unavailable countries
+ok 240 - groups and ranks a definition once while retaining unavailable countries
+  ---
+  duration_ms: 1.375792
+  type: 'test'
+  ...
+# Subtest: definition ranking is independent of requested country order
+ok 241 - definition ranking is independent of requested country order
+  ---
+  duration_ms: 0.469208
+  type: 'test'
+  ...
+# Subtest: validates hard comparability mismatches and safe unit conversion
+ok 242 - validates hard comparability mismatches and safe unit conversion
+  ---
+  duration_ms: 0.110125
+  type: 'test'
+  ...
+# Subtest: Q03-Q14 deterministic remediation cohort
+ok 243 - Q03-Q14 deterministic remediation cohort
+  ---
+  duration_ms: 2042.45525
+  type: 'test'
+  ...
+# Subtest: local plant search returns compact matches without calling EIA
+ok 244 - local plant search returns compact matches without calling EIA
+  ---
+  duration_ms: 62.519792
+  type: 'test'
+  ...
+# Subtest: exact plant IDs resolve only from the local directory
+ok 245 - exact plant IDs resolve only from the local directory
+  ---
+  duration_ms: 57.388709
+  type: 'test'
+  ...
+# Subtest: live lookup uses the verified plant facet and returns only the latest period
+ok 246 - live lookup uses the verified plant facet and returns only the latest period
+  ---
+  duration_ms: 10.582584
+  type: 'test'
+  ...
+# Subtest: successful live metadata is cached by plant ID
+ok 247 - successful live metadata is cached by plant ID
+  ---
+  duration_ms: 0.735959
+  type: 'test'
+  ...
+# Subtest: API name search remains local and reports that no live lookup occurred
+ok 248 - API name search remains local and reports that no live lookup occurred
+  ---
+  duration_ms: 64.823417
+  type: 'test'
+  ...
+# [EIA interpretation] {"event":"locked_form_blocked","reason":"missing_or_legacy_form"}
+# Subtest: mechanical cleanup preserves raw input separately and performs no semantic correction
+ok 249 - mechanical cleanup preserves raw input separately and performs no semantic correction
+  ---
+  duration_ms: 31.9965
+  type: 'test'
+  ...
+# Subtest: rules recover the requested country, product, activity, and annual default from messy input
+ok 250 - rules recover the requested country, product, activity, and annual default from messy input
+  ---
+  duration_ms: 8.32725
+  type: 'test'
+  ...
+# Subtest: rules normalize supported production and consumption typos without broad fuzzy guessing
+ok 251 - rules normalize supported production and consumption typos without broad fuzzy guessing
+  ---
+  duration_ms: 86.56425
+  type: 'test'
+  ...
+# Subtest: submitted intent cannot introduce an unknown country code
+ok 252 - submitted intent cannot introduce an unknown country code
+  ---
+  duration_ms: 0.5355
+  type: 'test'
+  ...
+# Subtest: deterministic gas fallback is phrase-first and context-aware
+ok 253 - deterministic gas fallback is phrase-first and context-aware
+  ---
+  duration_ms: 50.4415
+  type: 'test'
+  ...
+# Subtest: broad approved product families retain narrower options without forced selection
+ok 254 - broad approved product families retain narrower options without forced selection
+  ---
+  duration_ms: 18.810458
+  type: 'test'
+  ...
+# Subtest: AI timeout is configured for thirty seconds
+ok 255 - AI timeout is configured for thirty seconds
+  ---
+  duration_ms: 0.071166
+  type: 'test'
+  ...
+# Subtest: ordinary lowercase three-letter words are not accepted as country codes
+ok 256 - ordinary lowercase three-letter words are not accepted as country codes
+  ---
+  duration_ms: 18.317791
+  type: 'test'
+  ...
+# Subtest: AI request failure uses deterministic fallback with provenance
+ok 257 - AI request failure uses deterministic fallback with provenance
+  ---
+  duration_ms: 19.1425
+  type: 'test'
+  ...
+# Subtest: unrelated natural wording near gasoline does not become natural gas
+ok 258 - unrelated natural wording near gasoline does not become natural gas
+  ---
+  duration_ms: 17.724292
+  type: 'test'
+  ...
+# Subtest: top-five benchmark retains the approved human-reviewed Q01-Q14 contract
+ok 259 - top-five benchmark retains the approved human-reviewed Q01-Q14 contract
+  ---
+  duration_ms: 0.596834
+  type: 'test'
+  ...
+# Subtest: candidate pipeline matches exact top-five, clarification, and zero-hierarchy expectations
+ok 260 - candidate pipeline matches exact top-five, clarification, and zero-hierarchy expectations
+  ---
+  duration_ms: 4337.735208
+  type: 'test'
+  ...
+# Subtest: ranked certainty reports every result dimension independently
+ok 261 - ranked certainty reports every result dimension independently
+  ---
+  duration_ms: 0.773458
+  type: 'test'
+  ...
+# Subtest: fallback certainty never turns unknown aggregation into exactness
+ok 262 - fallback certainty never turns unknown aggregation into exactness
+  ---
+  duration_ms: 0.095125
+  type: 'test'
+  ...
+# Subtest: route certainty does not call an unapproved route mismatch equivalent
+ok 263 - route certainty does not call an unapproved route mismatch equivalent
+  ---
+  duration_ms: 0.058292
+  type: 'test'
+  ...
+# Subtest: state-series metadata regeneration uses the verified code, not an energy qualifier as part of the place name
+ok 264 - state-series metadata regeneration uses the verified code, not an energy qualifier as part of the place name
+  ---
+  duration_ms: 57.419958
+  type: 'test'
+  ...
+# Subtest: display repair applies across affected states and preserves source identifiers, units, coverage and provenance
+ok 265 - display repair applies across affected states and preserves source identifiers, units, coverage and provenance
+  ---
+  duration_ms: 275.499292
+  type: 'test'
+  ...
+# Subtest: unverified regional and mismatched series identifiers do not receive a state-wide label
+ok 266 - unverified regional and mismatched series identifiers do not receive a state-wide label
+  ---
+  duration_ms: 0.573875
+  type: 'test'
+  ...
+# Subtest: candidate labels do not create a protected aggregate status
+ok 267 - candidate labels do not create a protected aggregate status
+  ---
+  duration_ms: 1.22325
+  type: 'test'
+  ...
+# Subtest: ambiguous close same-tier families receive a validated shadow order only
+ok 268 - ambiguous close same-tier families receive a validated shadow order only
+  ---
+  duration_ms: 1.157542
+  type: 'test'
+  ...
+# Subtest: unknown IDs and incomplete orders are rejected without changing deterministic output
+ok 269 - unknown IDs and incomplete orders are rejected without changing deterministic output
+  ---
+  duration_ms: 0.188833
+  type: 'test'
+  ...
+# Subtest: AI timeout, failure, invalid JSON, and low confidence preserve deterministic ranking
+ok 270 - AI timeout, failure, invalid JSON, and low confidence preserve deterministic ranking
+  ---
+  duration_ms: 0.543541
+  type: 'test'
+  ...
+# Subtest: off mode is an immediate rollback and never invokes AI
+ok 271 - off mode is an immediate rollback and never invokes AI
+  ---
+  duration_ms: 0.096292
+  type: 'test'
+  ...
+# Subtest: conditional and always-AI evaluation policies report different invocation behavior
+ok 272 - conditional and always-AI evaluation policies report different invocation behavior
+  ---
+  duration_ms: 0.167083
+  type: 'test'
+  ...
+# Subtest: trigger requires ambiguity, credible same-tier families, and a close score gap
+ok 273 - trigger requires ambiguity, credible same-tier families, and a close score gap
+  ---
+  duration_ms: 0.084167
+  type: 'test'
+  ...
+# Subtest: request contains raw text, structured intent, and only known eligible families
+ok 274 - request contains raw text, structured intent, and only known eligible families
+  ---
+  duration_ms: 0.107041
+  type: 'test'
+  ...
+# Subtest: validated shadow ordering can improve a graded offline case without changing live order
+ok 275 - validated shadow ordering can improve a graded offline case without changing live order
+  ---
+  duration_ms: 0.139458
+  type: 'test'
+  ...
+# Subtest: response validation accepts only a complete permutation of known family IDs
+ok 276 - response validation accepts only a complete permutation of known family IDs
+  ---
+  duration_ms: 0.092584
+  type: 'test'
+  ...
+# Subtest: response validation accepts a complete permutation inside a JSON code fence
+ok 277 - response validation accepts a complete permutation inside a JSON code fence
+  ---
+  duration_ms: 0.16325
+  type: 'test'
+  ...
+# Subtest: Vercel search function traces every runtime candidate-pipeline artifact
+ok 278 - Vercel search function traces every runtime candidate-pipeline artifact
+  ---
+  duration_ms: 1.821916
+  type: 'test'
+  ...
+# Subtest: HoHo7 freezes 50 development and 150 unique sealed holdout queries
+ok 279 - HoHo7 freezes 50 development and 150 unique sealed holdout queries
+  ---
+  duration_ms: 2.839708
+  type: 'test'
+  ...
+# Subtest: HoHo7 represents all 52 reviewed SEDS targets without inventing national route eligibility
+ok 280 - HoHo7 represents all 52 reviewed SEDS targets without inventing national route eligibility
+  ---
+  duration_ms: 0.697458
+  type: 'test'
+  ...
+# Subtest: HoHo7 hierarchy isolation preserves raw input and does not replace requested components
+ok 281 - HoHo7 hierarchy isolation preserves raw input and does not replace requested components
+  ---
+  duration_ms: 896.928625
+  type: 'test'
+  ...
+# Subtest: HoHo8 ignores certainty-only additions when selecting human review cases
+ok 282 - HoHo8 ignores certainty-only additions when selecting human review cases
+  ---
+  duration_ms: 1.445209
+  type: 'test'
+  ...
+# Subtest: HoHo8 detects semantic and visible-ranking differences independently
+ok 283 - HoHo8 detects semantic and visible-ranking differences independently
+  ---
+  duration_ms: 0.142083
+  type: 'test'
+  ...
+# Subtest: HoHo8 detects an objective geography failure even when both arms match
+ok 284 - HoHo8 detects an objective geography failure even when both arms match
+  ---
+  duration_ms: 7.354375
+  type: 'test'
+  ...
+1..284
+# tests 284
+# suites 0
+# pass 284
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5576.340875

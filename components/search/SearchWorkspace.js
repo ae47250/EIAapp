@@ -1,5 +1,7 @@
 "use client";
 
+import { appendIntentParams } from "../../lib/eia-intent-payload.js";
+
 import { useRef, useState } from "react";
 
 import { downloadComparisonWorkbook, downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
@@ -344,43 +346,8 @@ function buildComparisonUrl(definitions, existingData) {
   return `/api/search-eia?${params}`;
 }
 
-function appendIntentParams(params, intent) {
-  if (!intent) return params;
-  params.set("intentReady", "1");
-  params.set("intentPayload", JSON.stringify({
-    requestEvidence: intent.requestEvidence,
-    originalQuery: intent.originalQuery,
-    cleanedQuery: intent.cleanedQuery,
-    correctedQuery: intent.correctedQuery,
-    correctedQuerySource: intent.correctedQuerySource,
-    interpreter: intent.interpreter,
-    confidence: intent.confidence,
-    fields: intent.fields,
-    geographies: intent.validatedGeographies || intent.geographies,
-    geographyEvidence: intent.geographyEvidence,
-    geographyConflicts: intent.geographyConflicts,
-    conceptPairs: intent.conceptPairs,
-    exclusions: intent.exclusions,
-    unknownQualifiers: intent.unknownQualifiers,
-    frequencyExplicit: intent.frequencyExplicit,
-    requestedFrequency: intent.requestedFrequency,
-    multiCountryComparison: intent.multiCountryComparison,
-    ambiguity: intent.ambiguity,
-    fallback: intent.fallback
-  }));
-  params.set("intentCorrectedQuery", String(intent.correctedQuery || ""));
-  params.set("intentCorrectedQuerySource", String(intent.correctedQuerySource || "unchanged"));
-  params.set("intentInterpreter", String(intent.interpreter || "rules"));
-  params.set("intentCountryCode", String(intent.countryCode || intent.country?.code || ""));
-  params.set("intentProduct", String(intent.product || ""));
-  params.set("intentActivity", String(intent.activity || ""));
-  params.set("intentFrequency", String(intent.frequency || "annual"));
-  params.set("intentConfidence", String(intent.confidence ?? ""));
-  return params;
-}
-
 function formatInterpreter(intent, fallbackQuery) {
-  return `Interpreter: ${intent?.interpreter || "rules"}. Corrected query: ${intent?.correctedQuery || fallbackQuery}.`;
+  return `Interpreter: ${intent?.interpreter || "rules"}.${intent?.interpreter === "rules" ? " AI interpretation unavailable." : ""} Corrected query: ${intent?.correctedQuery || fallbackQuery}.`;
 }
 
 function seriesCacheKey(series) {

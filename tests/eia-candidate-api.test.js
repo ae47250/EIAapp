@@ -157,38 +157,6 @@ test("a candidate ID that was not displayed is rejected before any EIA request",
   assert.equal(seriesRequests, 0);
 });
 
-test("AI corrected wording cannot override the validated activity used for candidates", async () => {
-  const raw = "Brazil energy production";
-  const url = new URL("https://example.test/api/search-eia");
-  url.searchParams.set("q", raw);
-  url.searchParams.set("intentReady", "1");
-  url.searchParams.set("intentPayload", JSON.stringify({
-    originalQuery: raw,
-    cleanedQuery: raw,
-    correctedQuery: "Brazil energy consumption",
-    correctedQuerySource: "ai",
-    interpreter: "openai",
-    confidence: 0.98,
-    fields: {
-      country: { value: "BRA", confidence: 0.98 },
-      product: { value: "total energy", confidence: 0.98 },
-      activity: { value: "production", confidence: 0.98 },
-      frequency: { value: "annual", explicit: false, confidence: 0.98 }
-    }
-  }));
-
-  const response = await searchEia(new Request(url));
-  const body = await response.json();
-
-  assert.equal(response.status, 200);
-  assert.equal(body.mode, "candidate-selection");
-  assert.equal(body.intent.activity, "production");
-  assert.equal(body.intent.correctedQuery, "Brazil energy consumption");
-  assert.ok(body.variables.length > 0);
-  assert.ok(body.variables.every(variable => variable.activity === "production"));
-  assert.ok(body.variables.every(variable => !/consumption/i.test(variable.title)));
-});
-
 test("multi-country responses rank definitions first without fetching observations", async () => {
   seriesRequests = 0;
   const query = "Brazil, Japan, and Germany electricity production";

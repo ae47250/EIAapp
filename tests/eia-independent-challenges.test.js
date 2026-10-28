@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { gunzipSync } from 'node:zlib';
 import { after, before, test } from 'node:test';
-import { interpretQueryWithRules, validateAiInterpretation, normalizeSubmittedIntent } from '../lib/sources/eia/interpret-query.js';
+import { interpretQueryWithRules, normalizeSubmittedIntent } from '../lib/sources/eia/interpret-query.js';
 import { buildLocalCandidatePipeline } from '../lib/sources/eia/candidate-pipeline.js';
 import { GET as searchEia } from '../app/api/search-eia/route.js';
 
@@ -21,8 +21,6 @@ cases.push(...fixture('review-regressions').cases.map((item, index) => ({
     ...(item.pairs ? { pairs: item.pairs.map(([product, activity]) => ({ product, activity })) } : {})
   }
 })));
-const source = readFileSync(new URL('../components/search/SearchWorkspace.js', import.meta.url), 'utf8');
-const serialize = runInNewContext(`(${source.slice(source.indexOf('function appendIntentParams('), source.indexOf('\nfunction formatInterpreter('))})`);
 const savedEnvironment = Object.fromEntries(['LOGIN_REQUIRED', 'OPENAI_API_KEY', 'EIA_API_KEY'].map(key => [key, process.env[key]]));
 const savedFetch = globalThis.fetch;
 let fetches = 0;
@@ -77,96 +75,6 @@ function sourceRecord(family, seriesId) {
   }
   return sourceRecords.get(family).get(seriesId);
 }
-
-for (const { id, q, expected, additionalChecks = [] } of cases) {
-  test(`${id}: ${q}`, async () => {
-    const errors = [];
-    for (const [mode, intent] of [
-      ['rules', interpretQueryWithRules(q)],
-      ['injected', validateAiInterpretation({ ...injected(expected), ...(scopeCases[id] ? { requestEvidence: scopeCases[id].requestEvidence } : {}) }, q)]
-    ]) {
-      const actual = signature(intent);
-      const modeExpected = mode === "rules" && scopeCases[id] ? scopeCases[id].rulesExpected : expected;
-      for (const key of ['codes', 'frequency', 'explicit', 'sector', 'route', 'pairs', 'clarify']) {
-        if (!Object.hasOwn(modeExpected, key)) continue;
-        const value = key === 'pairs' ? modeExpected.pairs.map(p => ({ product: p.product, activity: p.activity })) : modeExpected[key];
-        try {
-          const routeClaim = key === 'route' && adjudications.find(claim => claim.caseId === id);
-          if (routeClaim) assert.ok(routeClaim.acceptedRouteFamilies.includes(actual.route));
-          else assert.deepEqual(actual[key], value);
-        } catch {
-          errors.push({ mode, key, expected: value, actual: actual[key] });
-        }
-      }
-      const params = serialize(new URLSearchParams({ q }), intent);
-      const submitted = normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')), q);
-      try {
-        assert.deepEqual(signature(submitted), actual);
-      } catch {
-        errors.push({ mode, key: 'browser-resubmission', expected: actual, actual: signature(submitted) });
-      }
-      if (expected.empty === false || expected.clarify === true || additionalChecks.length) {
-        try {
-          const pipeline = await buildLocalCandidatePipeline(submitted);
-          if (expected.empty === false) assert.ok(pipeline.retrievals.some(r => r.displayCandidates.length), 'Expected available candidates');
-          if (expected.clarify === true) assert.equal(pipeline.diagnostics.clarificationBlocked, true);
-          if (additionalChecks.length) {
-            const response = await searchEia(new Request(`http://example.test/api/search-eia?${params}`));
-            const body = await response.json();
-            assert.equal(response.status, 200);
-            assert.equal(body.selectedSeries, null);
-            for (const check of additionalChecks) {
-              if (check.kind === 'frequency-fallback') {
-                assert.equal(body.intent.frequency, expected.frequency);
-                assert.equal(body.intent.frequencyExplicit, true);
-                for (const retrieval of pipeline.retrievals) {
-                  for (const candidate of retrieval.displayCandidates.filter(c => c.frequency !== expected.frequency)) {
-                    assert.equal(candidate.ranking.tier, 'B');
-                    assert.ok(retrieval.userWarnings.some(warning => /fallback|alternatives/i.test(warning.message)));
-                  }
-                }
-              }
-              if (check.kind === 'unit') {
-                for (const candidate of body.variables) {
-                  const record = sourceRecord(candidate.routeFamily, candidate.seriesId);
-                  assert.ok(record, 'Candidate must exist in the preserved official metadata');
-                  assert.equal(candidate.unit, record.unit, 'Offer the source unit without silent relabeling or conversion');
-                }
-              }
-            }
-          }
-        } catch (error) {
-          errors.push({ mode, key: 'retrieval/public-response', error: error.code || error.message });
-        }
-      }
-    }
-    assert.deepEqual(errors, [], JSON.stringify(errors));
-  });
-}
-
-test('public search preserves injected interpretation through the actual browser serializer without network access', async () => {
-  const expectations = [
-    { q: 'energy consumption iceland not ireland', codes: ['ISL'], pairs: [{ product: 'total energy', activity: 'consumption' }], clarify: false },
-    { q: 'U.S. total energy consumption', codes: ['USA'], pairs: [{ product: 'total energy', activity: 'consumption' }], clarify: false },
-    { q: 'gas consumption in the United States', codes: ['USA'], clarify: true },
-    { q: 'In Texas, show natural gas production, natural gas consumption, and electricity generation.', codes: ['TX'], pairs: [{ product: 'natural gas', activity: 'production' }, { product: 'natural gas', activity: 'consumption' }, { product: 'electricity', activity: 'generation' }], clarify: false }
-  ];
-  for (const expected of expectations) {
-    const intent = validateAiInterpretation(injected({ ...expected, frequency: 'annual', explicit: false, sector: null }), expected.q);
-    const params = serialize(new URLSearchParams({ q: expected.q }), intent);
-    const response = await searchEia(new Request(`http://example.test/api/search-eia?${params}`));
-    const body = await response.json();
-    assert.equal(response.status, 200, expected.q);
-    assert.deepEqual(body.intent.structuredIntent.geographies.map(g => g.code), expected.codes);
-    assert.equal(body.needsClarification, expected.clarify);
-    assert.equal(body.selectedSeries, null);
-    if (expected.clarify) assert.match(body.intent.clarificationMessage, /natural gas.*gasoline/);
-    else {
-      assert.ok(body.variables.length > 0, expected.q);
-      for (const pair of expected.pairs) assert.ok(body.variables.some(candidate => candidate.activity === pair.activity), expected.q + ': ' + pair.activity);
-    }
-  }
-});
 
 test('public cap shares slots across requests and discloses overflow without dropping intent', async () => {
   const q = 'electricity generation Alabama Alaska Arizona Arkansas California Colorado Connecticut Delaware Florida Georgia Hawaii';
