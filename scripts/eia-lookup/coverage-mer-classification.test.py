@@ -1,6 +1,6 @@
 """Source-based MER regressions, not an independent or standard benchmark.
 Expectations follow full EIA definitions and owner whole-product/qualifier rules.
-Generation scope acceptance is deliberately deferred to the pending owner decision.
+Generation scope expectations were recorded in generation-scope-review.json before edits.
 """
 import importlib.util,json,unittest
 from pathlib import Path
@@ -54,8 +54,44 @@ class MERTests(unittest.TestCase):
     def test_sector_components_are_not_whole_sector(self):
         for code in ['CLKCPUS','NGPZPUS','NGINPUS']:
             self.assertEqual(self.item(code)['sectorCellClassification'],'subset')
-    def test_generation_scope_decision_is_pending(self):
-        self.assertIn('Pending owner decision',self.item('ELETPUS')['scopeReview'])
+    def test_combined_solar_total_has_preference(self):
+        r=self.item('SOTEPUS')
+        self.assertEqual((r['classification'],r['generationScope']),('whole product','all sizes'))
+        self.assertIn('Prefer',r['selectionPreference'])
+        self.assertNotIn('omittedSmallScaleEstimate',r)
+    def test_all_sectors_does_not_mean_all_facility_sizes(self):
+        for code in ['SOETPUS','SOT5PUS']:
+            r=self.item(code)
+            self.assertEqual((r['classification'],r['generationScope']),('whole product','utility-scale'))
+            self.assertIn('utility-scale (1 MW and larger)',r['basisLabel'])
+            self.assertIn('excludes small-scale (e.g. rooftop) generation',r['basisLabel'])
+            self.assertIn('Fallback only',r['selectionConstraint'])
+    def test_utility_scale_sector_totals_keep_sector_boundary(self):
+        for code in ['SOC5PUS','SOI5PUS','SOEGPUS']:
+            r=self.item(code)
+            self.assertEqual((r['classification'],r['sectorCellClassification']),('subset','whole product'))
+            self.assertEqual(r['generationScope'],'utility-scale')
+    def test_small_scale_only_is_still_subset(self):
+        for code in ['SOT7PUS','SOC7PUS','SOR7PUS','SOI7PUS']:
+            r=self.item(code)
+            self.assertEqual((r['classification'],r['generationScope']),('subset','small-scale only'))
+            self.assertNotIn('selectionPreference',r)
+            if 'sector' in r:self.assertEqual(r['sectorCellClassification'],'subset')
+    def test_solar_exclusion_notice_respects_product_and_sector(self):
+        for code in ['ELETPUS','ELC5PUS','ELI5PUS','SOC5PUS','SOI5PUS']:
+            self.assertEqual(self.item(code)['omittedSmallScaleEstimate'],'solar photovoltaic')
+        for code in ['ELEGPUS','SOEGPUS','NGETPUS','WYETPUS','NUETPUS']:
+            r=self.item(code)
+            self.assertEqual(r['generationScope'],'utility-scale')
+            self.assertNotIn('omittedSmallScaleEstimate',r)
+    def test_generation_policy_does_not_relax_other_measures(self):
+        for d in self.rows.values():
+            r=m.classify(d)
+            if r.get('activity')!='generation':
+                self.assertNotIn('generationScope',r)
+                self.assertNotIn('selectionConstraint',r)
+    def test_generation_scope_no_longer_awaits_owner(self):
+        for d in self.rows.values():self.assertNotIn('scopeReview',m.classify(d))
     def test_all_source_definitions_retained(self):
         source=m.i.inventory('total-energy')['msn']
         self.assertEqual(len(source),1103)

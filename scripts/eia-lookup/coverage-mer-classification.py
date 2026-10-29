@@ -90,7 +90,8 @@ def classify(definition):
     restrictions=[]
     for pattern,why in [
         (r'non-combustion|non-combusiton','Non-combustion use only'),
-        (r'small-scale|utility-scale','Facility-size restriction'),
+        (r'small-scale','Small-scale facilities only'),
+        (r'utility-scale','Utility-scale facilities only'),
         (r'photovoltaic|solar thermal','One solar technology'),
         (r'other industrial|sector, other|customers, other|coke plants|non-chp','Sub-sector restriction'),
         (r'pipeline|distribution in|lease and plant|vehicle fuel|vehicle use','One end-use component'),
@@ -103,6 +104,8 @@ def classify(definition):
         (r'refinery and blender|field production','Production/processing stage component'),
     ]:
         if re.search(pattern,text):
+            if activity=='generation' and why=='Utility-scale facilities only':
+                continue  # Owner accepts this labelled basis, subject to all-size preference.
             if product=='electricity' and activity=='sales' and why=='Selected consuming/holding sectors' and 'end-use' in text:
                 continue  # All retail end-use sectors are the whole sales market.
             restrictions.append(why)
@@ -120,7 +123,23 @@ def classify(definition):
             if field in result:result[field]='subset'
         result['reason']+=' '+'; '.join(restrictions)+'.'
     if activity=='generation':
-        result['scopeReview']='Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.'
+        # Explicit correspondence over EIA series definitions, not query exceptions.
+        # SOTEPUS is the combined total in MER Table 10.6; Section 7 totals
+        # (including SOETPUS, despite 'All Sectors') are utility-scale.
+        scope='all sizes' if code=='SOTEPUS' else ('small-scale only' if 'small-scale' in text else 'utility-scale')
+        result['generationScope']=scope
+        result['scopeEvidence']='generation-scope-review.json'
+        if scope=='utility-scale':
+            result['basisLabel']+='; utility-scale (1 MW and larger)'
+            result['selectionConstraint']='Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.'
+            # Domestic small-PV estimates are for end-use sectors, not the
+            # electric-power sector. This does not prove foreign-place scope.
+            if result.get('placeKind')=='US' and product in ['solar','electricity','renewable'] and result.get('sector')!='electric power':
+                result['omittedSmallScaleEstimate']='solar photovoltaic'
+                result['basisLabel']+='; excludes small-scale (e.g. rooftop) generation'
+        elif scope=='all sizes':
+            result['basisLabel']+='; utility-scale and small-scale generation'
+            result['selectionPreference']='Prefer over utility-scale-only totals with compatible dimensions.'
     return result
 
 def main():

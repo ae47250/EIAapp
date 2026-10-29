@@ -1,6 +1,6 @@
 {
   "route": "total-energy",
-  "complete": false,
+  "complete": true,
   "reviewStatus": "Draft: inspect whole/sector candidates and source notes before grid freeze.",
   "scope": "Concept correspondence, not availability or period verification.",
   "methodSources": [
@@ -786,7 +786,7 @@
         "name": "Electricity Net Generation Total (including from sources not shown), Commercial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation Total (including from sources not shown), Commercial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation Total (including from sources not shown), Commercial Sector in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "electricity",
       "activity": "generation",
@@ -795,7 +795,10 @@
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -1540,7 +1543,7 @@
         "name": "Electricity Net Generation From Natural Gas, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Natural Gas, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Natural Gas, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "natural gas",
       "activity": "generation",
@@ -1549,7 +1552,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -1565,14 +1570,16 @@
         "name": "Electricity Net Generation From Natural Gas, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Natural Gas, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Natural Gas, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "natural gas",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -1588,7 +1595,7 @@
         "name": "Electricity Net Generation From Natural Gas, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Natural Gas, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Natural Gas, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "natural gas",
       "activity": "generation",
@@ -1597,7 +1604,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -1972,7 +1981,7 @@
         "name": "Electricity Net Generation From Petroleum, Commercial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Petroleum, Commercial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Petroleum, Commercial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "petroleum",
       "activity": "generation",
@@ -1981,7 +1990,9 @@
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -2021,7 +2032,7 @@
         "name": "Electricity Net Generation From Petroleum, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Petroleum, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Petroleum, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "petroleum",
       "activity": "generation",
@@ -2030,7 +2041,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -2111,7 +2124,7 @@
         "name": "Electricity Net Generation From Petroleum, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Petroleum, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Petroleum, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "petroleum",
       "activity": "generation",
@@ -2120,7 +2133,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -2632,16 +2647,17 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction; One solar technology.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Small-scale facilities only; One solar technology.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction",
+        "Small-scale facilities only",
         "One solar technology"
       ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "small-scale only",
+      "scopeEvidence": "generation-scope-review.json",
       "frequencies": [
         "annual",
         "monthly"
@@ -2657,14 +2673,17 @@
         "name": "Electricity Net Generation From Solar, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Solar, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Solar, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -2809,7 +2828,7 @@
         "name": "Electricity Net Generation From Wood, All Sectors in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Wood, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Wood, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "biofuels",
       "activity": "generation",
@@ -2817,7 +2836,9 @@
       "basisRestriction": "Preserve named liquid-biofuel versus total-biomass basis; these are not interchangeable units.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -2879,7 +2900,7 @@
         "name": "Electricity Net Generation From Wind, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Wind, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Wind, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "wind",
       "activity": "generation",
@@ -2888,7 +2909,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -4124,14 +4147,17 @@
         "name": "Electricity Net Generation From Hydroelectric Pumped Storage, All Sectors in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Hydroelectric Pumped Storage, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Hydroelectric Pumped Storage, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "electricity",
       "activity": "generation",
       "reason": "Named component narrower than electricity.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -4709,14 +4735,16 @@
         "name": "Electricity Net Generation From Other Fossil Gases, All Sectors in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Other Fossil Gases, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Other Fossil Gases, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "fossil fuels",
       "activity": "generation",
       "reason": "Named component narrower than fossil fuels.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -5302,13 +5330,13 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Utility-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction"
+        "Utility-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -5417,7 +5445,7 @@
         "name": "Electricity Net Generation From Wood, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Wood, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Wood, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "biofuels",
       "activity": "generation",
@@ -5427,7 +5455,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -5493,7 +5523,7 @@
         "name": "Electricity Net Generation From Waste, Commercial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Waste, Commercial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Waste, Commercial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "total energy",
       "activity": "generation",
@@ -5502,7 +5532,9 @@
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -5578,14 +5610,16 @@
         "name": "Electricity Net Generation From Wind, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Wind, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Wind, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "wind",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -6225,7 +6259,7 @@
         "name": "Electricity Net Generation Total (including from sources not shown), Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation Total (including from sources not shown), Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation Total (including from sources not shown), Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "electricity",
       "activity": "generation",
@@ -6234,7 +6268,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -6738,7 +6774,7 @@
         "name": "Electricity Net Generation From Natural Gas, Commercial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Natural Gas, Commercial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Natural Gas, Commercial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "natural gas",
       "activity": "generation",
@@ -6747,7 +6783,9 @@
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -7746,11 +7784,11 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Facility-size restriction.",
+      "reason": "Named whole-product basis. Small-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "restrictions": [
-        "Facility-size restriction"
+        "Small-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -7771,13 +7809,13 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Utility-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction"
+        "Utility-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -7794,19 +7832,19 @@
         "name": "Utility-Scale Solar Electricity Net Generation: Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Utility-Scale Solar Electricity Net Generation: Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Utility-Scale Solar Electricity Net Generation: Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "industrial",
-      "sectorCellClassification": "subset",
-      "restrictions": [
-        "Facility-size restriction"
-      ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "sectorCellClassification": "whole product",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -7826,16 +7864,17 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction; One solar technology.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Small-scale facilities only; One solar technology.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction",
+        "Small-scale facilities only",
         "One solar technology"
       ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "small-scale only",
+      "scopeEvidence": "generation-scope-review.json",
       "frequencies": [
         "annual",
         "monthly"
@@ -7879,13 +7918,13 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Small-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "residential",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction"
+        "Small-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -8122,7 +8161,7 @@
         "name": "Electricity Net Generation From Wood, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Wood, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Wood, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "biofuels",
       "activity": "generation",
@@ -8132,7 +8171,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -8624,7 +8665,7 @@
         "name": "Electricity Net Generation From Coal, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Coal, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Coal, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "coal",
       "activity": "generation",
@@ -8633,7 +8674,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -9273,7 +9316,7 @@
         "name": "Electricity Net Generation From Geothermal, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Geothermal, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Geothermal, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "geothermal",
       "activity": "generation",
@@ -9282,7 +9325,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -10630,19 +10675,19 @@
         "name": "Utility-Scale Solar Electricity Net Generation: Commercial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Utility-Scale Solar Electricity Net Generation: Commercial Sector in Million Kilowatthours",
+      "basisLabel": "Utility-Scale Solar Electricity Net Generation: Commercial Sector in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "commercial",
-      "sectorCellClassification": "subset",
-      "restrictions": [
-        "Facility-size restriction"
-      ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "sectorCellClassification": "whole product",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -10686,11 +10731,11 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Facility-size restriction.",
+      "reason": "Named whole-product basis. Utility-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "restrictions": [
-        "Facility-size restriction"
+        "Utility-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -10706,18 +10751,18 @@
         "id": "SOT5PUS",
         "name": "Utility-Scale Solar Electricity Net Generation:  Total in Million Kilowatthours"
       },
-      "classification": "subset",
-      "basisLabel": "Utility-Scale Solar Electricity Net Generation:  Total in Million Kilowatthours",
+      "classification": "whole product",
+      "basisLabel": "Utility-Scale Solar Electricity Net Generation:  Total in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Facility-size restriction.",
+      "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "restrictions": [
-        "Facility-size restriction"
-      ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -10737,11 +10782,11 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Facility-size restriction.",
+      "reason": "Named whole-product basis. Small-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "restrictions": [
-        "Facility-size restriction"
+        "Small-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -10977,7 +11022,7 @@
         "name": "Electricity Net Generation From Waste, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Waste, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Waste, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "total energy",
       "activity": "generation",
@@ -10986,7 +11031,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -11029,7 +11076,7 @@
         "name": "Electricity Net Generation From Waste, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Waste, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Waste, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "total energy",
       "activity": "generation",
@@ -11038,7 +11085,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -11493,14 +11542,16 @@
         "name": "Electricity Net Generation From Coal, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Coal, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Coal, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "coal",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -12024,7 +12075,7 @@
         "name": "Electricity Net Generation From Hydroelectric Pumped Storage, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Hydroelectric Pumped Storage, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Hydroelectric Pumped Storage, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "electricity",
       "activity": "generation",
@@ -12033,7 +12084,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -12670,7 +12723,7 @@
         "name": "Electricity Net Generation From Nuclear Electric Power, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Nuclear Electric Power, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Nuclear Electric Power, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "nuclear",
       "activity": "generation",
@@ -12679,7 +12732,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -13685,14 +13740,15 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Facility-size restriction; One solar technology.",
+      "reason": "Named whole-product basis. Small-scale facilities only; One solar technology.",
       "placeKind": "US",
       "placeCode": "USA",
       "restrictions": [
-        "Facility-size restriction",
+        "Small-scale facilities only",
         "One solar technology"
       ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "small-scale only",
+      "scopeEvidence": "generation-scope-review.json",
       "frequencies": [
         "annual",
         "monthly"
@@ -14188,7 +14244,7 @@
         "name": "Electricity Net Generation From Coal, Commercial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Coal, Commercial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Coal, Commercial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "coal",
       "activity": "generation",
@@ -14197,7 +14253,9 @@
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -15234,7 +15292,7 @@
         "name": "Electricity Net Generation From Other Fossil Gases, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Other Fossil Gases, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Other Fossil Gases, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "fossil fuels",
       "activity": "generation",
@@ -15243,7 +15301,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -16119,16 +16179,17 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction; One solar technology.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Small-scale facilities only; One solar technology.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "residential",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction",
+        "Small-scale facilities only",
         "One solar technology"
       ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "small-scale only",
+      "scopeEvidence": "generation-scope-review.json",
       "frequencies": [
         "annual",
         "monthly"
@@ -16170,14 +16231,16 @@
         "name": "Solar Electricity Net Generation in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Solar Electricity Net Generation in Million Kilowatthours",
+      "basisLabel": "Solar Electricity Net Generation in Million Kilowatthours; utility-scale and small-scale generation",
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "all sizes",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionPreference": "Prefer over utility-scale-only totals with compatible dimensions.",
       "frequencies": [
         "annual",
         "monthly"
@@ -16336,14 +16399,16 @@
         "name": "Electricity Net Generation From Waste, All Sectors in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Waste, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Waste, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "total energy",
       "activity": "generation",
       "reason": "Named component narrower than total energy.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -16710,7 +16775,7 @@
         "name": "Electricity Net Generation From Coal, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Coal, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Coal, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "coal",
       "activity": "generation",
@@ -16719,7 +16784,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -17403,7 +17470,7 @@
         "name": "Electricity Net Generation From Conventional Hydroelectric Power, Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Conventional Hydroelectric Power, Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Conventional Hydroelectric Power, Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "hydro",
       "activity": "generation",
@@ -17412,7 +17479,9 @@
       "placeCode": "USA",
       "sector": "electric power",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -17979,14 +18048,16 @@
         "name": "Electricity Net Generation From Nuclear Electric Power, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Nuclear Electric Power, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Nuclear Electric Power, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "nuclear",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -18191,14 +18262,16 @@
         "name": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "petroleum",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -18834,13 +18907,13 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Small-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction"
+        "Small-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -18909,11 +18982,11 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Facility-size restriction.",
+      "reason": "Named whole-product basis. Small-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "restrictions": [
-        "Facility-size restriction"
+        "Small-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -19833,14 +19906,17 @@
         "name": "Electricity Net Generation Total (including from sources not shown), All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation Total (including from sources not shown), All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation Total (including from sources not shown), All Sectors in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "electricity",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -19856,7 +19932,7 @@
         "name": "Electricity Net Generation Total (including from sources not shown), Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation Total (including from sources not shown), Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation Total (including from sources not shown), Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger); excludes small-scale (e.g. rooftop) generation",
       "publicationStatus": "unverified",
       "product": "electricity",
       "activity": "generation",
@@ -19865,7 +19941,10 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+      "omittedSmallScaleEstimate": "solar photovoltaic",
       "frequencies": [
         "annual",
         "monthly"
@@ -20187,14 +20266,16 @@
         "name": "Electricity Net Generation From Geothermal, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Geothermal, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Geothermal, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "geothermal",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -20348,14 +20429,16 @@
         "name": "Electricity Net Generation From Conventional Hydroelectric Power, All Sectors in Million Kilowatthours"
       },
       "classification": "whole product",
-      "basisLabel": "Electricity Net Generation From Conventional Hydroelectric Power, All Sectors in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Conventional Hydroelectric Power, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "hydro",
       "activity": "generation",
       "reason": "Named whole-product basis.",
       "placeKind": "US",
       "placeCode": "USA",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -20371,7 +20454,7 @@
         "name": "Electricity Net Generation From Hydroelectric Power, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Hydroelectric Power, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Hydroelectric Power, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "hydro",
       "activity": "generation",
@@ -20380,7 +20463,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "whole product",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -21133,7 +21218,7 @@
         "name": "Electricity Net Generation From Other Fossil Gases, Industrial Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Electricity Net Generation From Other Fossil Gases, Industrial Sector in Million Kilowatthours",
+      "basisLabel": "Electricity Net Generation From Other Fossil Gases, Industrial Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "fossil fuels",
       "activity": "generation",
@@ -21142,7 +21227,9 @@
       "placeCode": "USA",
       "sector": "industrial",
       "sectorCellClassification": "subset",
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
@@ -21892,13 +21979,13 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Utility-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction"
+        "Utility-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -21919,13 +22006,13 @@
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "consumption",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Small-scale facilities only.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "commercial",
       "sectorCellClassification": "subset",
       "restrictions": [
-        "Facility-size restriction"
+        "Small-scale facilities only"
       ],
       "frequencies": [
         "annual",
@@ -21942,19 +22029,18 @@
         "name": "Utility-Scale Solar Electricity Net Generation:  Electric Power Sector in Million Kilowatthours"
       },
       "classification": "subset",
-      "basisLabel": "Utility-Scale Solar Electricity Net Generation:  Electric Power Sector in Million Kilowatthours",
+      "basisLabel": "Utility-Scale Solar Electricity Net Generation:  Electric Power Sector in Million Kilowatthours; utility-scale (1 MW and larger)",
       "publicationStatus": "unverified",
       "product": "solar",
       "activity": "generation",
-      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell. Facility-size restriction.",
+      "reason": "Named whole-product basis. Named sector is a subset of the all-sector cell.",
       "placeKind": "US",
       "placeCode": "USA",
       "sector": "electric power",
-      "sectorCellClassification": "subset",
-      "restrictions": [
-        "Facility-size restriction"
-      ],
-      "scopeReview": "Pending owner decision on utility-scale totals; do not accept as whole coverage before source scope is resolved.",
+      "sectorCellClassification": "whole product",
+      "generationScope": "utility-scale",
+      "scopeEvidence": "generation-scope-review.json",
+      "selectionConstraint": "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
       "frequencies": [
         "annual",
         "monthly"
