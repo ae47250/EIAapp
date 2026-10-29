@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "pythonASTFiles": 11,
+  "offlineTests": {
+    "seriesCorrespondence": 11,
+    "placeCrosswalk": 10,
+    "facetInventory": 6,
+    "failed": 0
+  },
+  "exclusionQuoteCheck": {
+    "checked": 61,
+    "mismatches": 0,
+    "seed": 20261029,
+    "seeded": 13,
+    "mandatoryNameMatches": 2
+  },
+  "rawResponseHashesVerified": 1417,
+  "actualKeyMatches": 0,
+  "credentialPatternMatches": 0,
+  "EIA_API_calls": 1417,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "No EIA-to-locked-form public reference alignment found; method/benchmark applicability recorded in DESIGN.md. Regression checks are not independent benchmark accuracy.",
+  "notRun": "Application offline suite/build/live model runs: application unchanged and implementation phase not authorized yet.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "python3 -B scripts/eia-lookup/coverage-exclusion-check.py",
+    "git diff --check"
+  ],
+  "executionNote": "Exclusion checker first reached a sandbox-denied report write; unchanged rerun with authorized write access passed. No product/test repair.",
+  "remaining": "Review all classifications, grid freeze, B1 estimate/full coverage, Set D/scorer freeze, owner checkpoint."
+}
