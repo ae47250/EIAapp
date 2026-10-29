@@ -1,0 +1,301 @@
+{
+  "status": "Definition review, not availability or B1 coverage.",
+  "method": "UNSD statistical correspondence table; SKOS whole/narrower distinction. See DESIGN.md for standard-benchmark search and limitations.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/coal/data/browser/data/index.php?method=getConfigJSON",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/coal-browser-config-8dbbc46774e4.json",
+      "sha256": "8dbbc46774e4257bdccae837052e887e1c43705265a5c227ef716190c2c1760f"
+    },
+    {
+      "url": "https://www.eia.gov/coal/data/browser/data/index.php?method=getImportExportConfigJSON",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/coal-trade-config-3d04eb80e365.json",
+      "sha256": "3d04eb80e365e82c14693954adbed3f705b68814f5b87857c9a8bb4ffae1f3ea"
+    },
+    {
+      "url": "https://www.eia.gov/coal/reserves/",
+      "finding": "Producing-mine recoverable reserves are working inventory, distinct from larger estimated recoverable reserves across the resource base."
+    },
+    {
+      "url": "https://www.eia.gov/coal/annual/",
+      "finding": "Tables 11 and 14 distinguish productive capacity and recoverable reserves at producing mines; table 31 is mine sales price by rank."
+    },
+    {
+      "url": "https://www.eia.gov/coal/production/quarterly/",
+      "finding": "U.S. coal import/export tables use origin/destination countries, not subject-country whole trade totals."
+    },
+    {
+      "url": "https://www.eia.gov/tools/glossary/?id=coal",
+      "finding": "Productive capacity is potential output with existing equipment, sufficient inputs and demand; not actual production or reserves."
+    },
+    {
+      "url": "https://www.eia.gov/electricity/annual/pdf/tech_notes.pdf",
+      "finding": "p.14: fuel receipt/cost reporting is limited to selected plants, including 50 MW coal-primary capacity and 200 MW specified gas/petroleum-primary capacity. Generation facility-size amendment does not extend to receipt prices."
+    }
+  ],
+  "nativeTopicDefinitions": [
+    {
+      "dataTopicId": 41,
+      "description": "Export quantity",
+      "dataType": "EXPORT_QTY",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 42,
+      "description": "Export price",
+      "dataType": "EXPORT_PRICE",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 39,
+      "description": "Import quantity",
+      "dataType": "IMPORT_QTY",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 40,
+      "description": "Import price",
+      "dataType": "IMPORT_PRICE",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 33,
+      "description": "Aggregate coal mine production",
+      "dataType": "PRODUCTION",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 35,
+      "description": "Aggregate coal mine labor hours",
+      "dataType": "LABOR_HOURS",
+      "units": "hours"
+    },
+    {
+      "dataTopicId": 36,
+      "description": "Aggregate coal mine average employees",
+      "dataType": "AVERAGE_EMPLOYEES",
+      "units": "number of employees"
+    },
+    {
+      "dataTopicId": 37,
+      "description": "Aggregate coal mine productivity",
+      "dataType": "PRODUCTIVITY",
+      "units": "short tons/labor hour"
+    },
+    {
+      "dataTopicId": 38,
+      "description": "Mine level data",
+      "dataType": "MINE",
+      "units": ""
+    },
+    {
+      "dataTopicId": 20,
+      "description": "Total consumption",
+      "dataType": "CONS_TOT",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 23,
+      "description": "Price",
+      "dataType": "COST",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 24,
+      "description": "Receipts",
+      "dataType": "RECEIPTS",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 25,
+      "description": "Stocks",
+      "dataType": "STOCKS",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 21,
+      "description": "Ash content",
+      "dataType": "ASH_CONTENT",
+      "units": "percent"
+    },
+    {
+      "dataTopicId": 26,
+      "description": "Sulfur content",
+      "dataType": "SULFUR_CONTENT",
+      "units": "percent"
+    },
+    {
+      "dataTopicId": 22,
+      "description": "Heat content",
+      "dataType": "HEAT_CONTENT",
+      "units": "Btu/lb"
+    },
+    {
+      "dataTopicId": 27,
+      "description": "Market sales",
+      "dataType": "MARKET_SALES",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 28,
+      "description": "Market average price",
+      "dataType": "MARKET_PRICE",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 29,
+      "description": "Average price by rank",
+      "dataType": "PRICE_BY_RANK",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 30,
+      "description": "Productive capacity",
+      "dataType": "PRODUCTIVE_CAP",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 31,
+      "description": "Recoverable reserves at producing mines",
+      "dataType": "RECOVER_RESERVE",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 32,
+      "description": "Coal mine ending stocks",
+      "dataType": "PROD_DIST_STOCKS",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 47,
+      "description": "Coal shipments to the electric power sector: quantity, by plant state",
+      "dataType": "SHIP_PLANT_QTY",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 45,
+      "description": "Coal shipments to the electric power sector: price, by plant state",
+      "dataType": "SHIP_PLANT_PRICE",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 49,
+      "description": "Coal shipments to the electric power sector: heat content, by plant state",
+      "dataType": "SHIP_PLANT_HEAT",
+      "units": "Btu/lb"
+    },
+    {
+      "dataTopicId": 51,
+      "description": "Coal shipments to the electric power sector: ash content, by plant state",
+      "dataType": "SHIP_PLANT_ASH",
+      "units": "percent"
+    },
+    {
+      "dataTopicId": 53,
+      "description": "Coal shipments to the electric power sector: sulfur content, by plant state",
+      "dataType": "SHIP_PLANT_SULFUR",
+      "units": "percent"
+    },
+    {
+      "dataTopicId": 44,
+      "description": "Coal shipments to the electric power sector: price, by mine state",
+      "dataType": "SHIP_MINE_PRICE",
+      "units": "$/short ton"
+    },
+    {
+      "dataTopicId": 46,
+      "description": "Coal shipments to the electric power sector: quantity, by mine state",
+      "dataType": "SHIP_MINE_QTY",
+      "units": "short tons"
+    },
+    {
+      "dataTopicId": 48,
+      "description": "Coal shipments to the electric power sector: heat content, by mine state",
+      "dataType": "SHIP_MINE_HEAT",
+      "units": "Btu/lb"
+    },
+    {
+      "dataTopicId": 50,
+      "description": "Coal shipments to the electric power sector: ash content, by mine state",
+      "dataType": "SHIP_MINE_ASH",
+      "units": "percent"
+    },
+    {
+      "dataTopicId": 52,
+      "description": "Coal shipments to the electric power sectors: sulfur content, by mine state",
+      "dataType": "SHIP_MINE_SULFUR",
+      "units": "percent"
+    },
+    {
+      "dataTopicId": 54,
+      "description": "Coal shipments to the electric power sector: by mine",
+      "dataType": "SHIP_MINE",
+      "units": ""
+    },
+    {
+      "dataTopicId": 55,
+      "description": "Coal shipments to the electric power sector: by plant",
+      "dataType": "SHIP_PLANT",
+      "units": ""
+    }
+  ],
+  "expectationsBeforeClassifierEdit": [
+    "Only all ranks and all mine types can yield whole coal production; individual ranks/types remain subsets.",
+    "Producing-mine reserves and producer/distributor stocks remain subsets even with total mine type.",
+    "Total productive mine capacity is a separate labelled whole-product capacity basis, not output.",
+    "Mine count, employees, hours, productivity and coal quality measures are outside locked activities.",
+    "Shipments/receipts are not consumption or production; shipments route is further restricted to electric-power deliveries and mine/destination place role.",
+    "Coal coke, steam and metallurgical trade are subsets of coal.",
+    "Whole U.S. trade requires both total foreign partners and total customs districts; never reinterpret partners as requested subject countries.",
+    "Import/export unit prices must carry trade-price basis, never domestic retail wording.",
+    "Other industrial and coke plants separately are not the whole industrial sector; utility/IPP breakdowns are not the whole electric-power sector.",
+    "No definition combination proves published observations."
+  ],
+  "routeScope": {
+    "coal/exports-imports-quantity-price": {
+      "placeKind": "US",
+      "placeCode": "USA",
+      "subject": "United States",
+      "placeFacetRoles": {
+        "countryId": "foreign trade partner",
+        "customsDistrictId": "port/customs district"
+      },
+      "wholeSubjectFilters": {
+        "countryId": "TOT",
+        "customsDistrictId": "TOT"
+      },
+      "source": "https://www.eia.gov/coal/production/quarterly/",
+      "quote": "detailed quarterly data on U.S. coal production, exports, imports, receipts, prices, consumption, quality, and stocks."
+    },
+    "coal/shipments/mine-state-aggregates": {
+      "placeRole": "origin mine state",
+      "population": "Coal shipments to electric-power sector"
+    },
+    "coal/shipments/plant-state-aggregates": {
+      "placeRole": "destination plant state",
+      "population": "Coal receipts at electric-power sector"
+    }
+  },
+  "metadataConflicts": [
+    {
+      "route": "coal/consumption-and-quality",
+      "field": "heat-content.units",
+      "apiValue": "average sulfur percent by weight",
+      "finding": "Heat content cannot be sulfur percentage. Outside locked activities, so retain raw definition but never use it as requested quantity or silently repair units."
+    },
+    {
+      "routes": [
+        "coal/exports-imports-quantity-price",
+        "coal/shipments/mine-state-aggregates",
+        "coal/shipments/plant-state-aggregates"
+      ],
+      "field": "description source attribution",
+      "finding": "API generic source text alone does not establish survey provenance. Published trade/receipt documentation and native browser population must control interpretation."
+    }
+  ],
+  "expectationAmendmentBeforeTests": {
+    "reason": "Official receipt-survey population source checked during classification review.",
+    "expectation": "Shipment prices remain subset in sector cells because of receipt-survey population restrictions; origin mine-state prices also cannot become destination-state consumer prices.",
+    "consistencyCheck": "The same power-sector receipt-price restriction applies in coal/consumption-and-quality. Add explicit sector-cell override; a whole sector facet does not remove a column population restriction."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "pythonASTFiles": 19,
+  "offlineTests": {
+    "coalCorrespondence": 15,
+    "electricityCorrespondence": 18,
+    "MERCorrespondence": 24,
+    "seriesCorrespondence": 11,
+    "placeCrosswalk": 10,
+    "facetInventory": 6,
+    "failed": 0
+  },
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1423,
+  "EIA_API_calls": 1423,
+  "newEIA_API_callsThisTurn": 0,
+  "additionalPublicSourceSnapshots": 3,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "coalDraft": {
+    "routes": 8,
+    "classificationCompleteRoutes": 8,
+    "dataColumns": 30,
+    "facetDefinitions": 50,
+    "acceptedForCoverage": false
+  },
+  "observedResearchCorrection": "Whole power-sector facet could have widened receipt-price survey population; explicit column restriction now prevents it. Source-based expectation retained.",
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not an independent reference alignment or standard benchmark score.",
+  "notRun": "App offline suite/build/browser: application unchanged and implementation gated.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "git diff --check"
+  ]
+}

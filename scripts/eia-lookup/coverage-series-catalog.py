@@ -23,12 +23,13 @@ def build_node(node):
             row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
         result['dataColumns'][0]['classification']='via '+facet
         result['classificationComplete']=review['complete'] and all(r['classification']!='pending' for r in result['facets'][facet])
-    if node['route'].startswith('electricity/'):
-        review=i.read(i.EVIDENCE/'electricity-classification.json')['routes'][node['route']]
+    if node['route'].split('/')[0] in ['electricity','coal']:
+        family=node['route'].split('/')[0]
+        review=i.read(i.EVIDENCE/(family+'-classification.json'))['routes'][node['route']]
         columns={r['id']:r for r in review['dataColumns']}
         for row in result['dataColumns']:
             decision=columns[row['id']]
-            if row['definition']!=decision['sourceDefinition']:raise ValueError('Electricity column definition changed')
+            if row['definition']!=decision['sourceDefinition']:raise ValueError('Reviewed column definition changed')
             row.update({k:v for k,v in decision.items() if k not in ['id','sourceDefinition']})
         for fid,rows in result['facets'].items():
             decisions={json.dumps(r['sourceDefinition'],sort_keys=True):r for r in review['facets'][fid]}
@@ -37,6 +38,7 @@ def build_node(node):
                 row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
         result['classificationComplete']=review['complete']
         result['classificationSources']=review['sources']
+        if review.get('scope'):result['scope']=review['scope']
     if node['route']=='international':
         review=i.read(i.EVIDENCE/'international-classification.json')
         for facet,key in [('productId','products'),('activityId','activities')]:

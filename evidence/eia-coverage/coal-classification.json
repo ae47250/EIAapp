@@ -1,0 +1,1379 @@
+{
+  "method": "Definition correspondence; combine every facet and source restriction before B1 acceptance.",
+  "routes": {
+    "coal/consumption-and-quality": {
+      "route": "coal/consumption-and-quality",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "receipts",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Receipts are not consumption, production, imports or sales.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "consumption",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "subset",
+          "reason": "Sector-specific coal measure; no all-sector facet total published in this inventory.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "consumption",
+          "sectorCellClassification": "via sector facet",
+          "basisLabel": "Coal consumption"
+        },
+        {
+          "id": "stocks",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "subset",
+          "reason": "Sector-specific coal measure; no all-sector facet total published in this inventory.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "storage",
+          "sectorCellClassification": "via sector facet",
+          "basisLabel": "Coal stocks held by consuming sector"
+        },
+        {
+          "id": "price",
+          "sourceDefinition": {
+            "units": "dollars per short ton"
+          },
+          "classification": "subset",
+          "reason": "Sector-specific coal measure; no all-sector facet total published in this inventory.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "prices",
+          "sectorCellClassification": "via sector facet",
+          "basisLabel": "Average delivered coal price by consuming sector",
+          "sectorCellOverrides": {
+            "electric power": "subset"
+          },
+          "populationRestriction": "Power-sector delivered prices use the restricted EIA-923 receipt population; an all-sector label cannot broaden that population."
+        },
+        {
+          "id": "heat-content",
+          "sourceDefinition": {
+            "units": "average sulfur percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "sulfur-content",
+          "sourceDefinition": {
+            "units": "average sulfur percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "ash-content",
+          "sourceDefinition": {
+            "units": "average ash percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        }
+      ],
+      "facets": {
+        "sector": [
+          {
+            "sourceDefinition": {
+              "id": "98",
+              "name": "Electric Power"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "electric power",
+            "sectorCellClassification": "whole product"
+          },
+          {
+            "sourceDefinition": {
+              "id": "8",
+              "name": "Commercial and Institutional"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "commercial",
+            "sectorCellClassification": "whole product"
+          },
+          {
+            "sourceDefinition": {
+              "id": "10",
+              "name": "Other Industrial"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "industrial",
+            "sectorCellClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "9",
+              "name": "Coke Plants"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "industrial",
+            "sectorCellClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "2",
+              "name": "IPP Non-CHP"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "electric power",
+            "sectorCellClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "1",
+              "name": "Electric Utility"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "electric power",
+            "sectorCellClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "94",
+              "name": "Independent Power Producers"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "electric power",
+            "sectorCellClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "3",
+              "name": "IPP CHP"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              255,
+              992
+            ],
+            "classification": "subset",
+            "reason": "One consuming sector or sector component, not all coal use.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "sector": "electric power",
+            "sectorCellClassification": "subset"
+          }
+        ]
+      },
+      "scope": {},
+      "complete": true
+    },
+    "coal/aggregate-production": {
+      "route": "coal/aggregate-production",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "production",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "whole product",
+          "reason": "Coal mine output, with all-rank/all-mine filters.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "production",
+          "basisLabel": "Coal mine production"
+        },
+        {
+          "id": "number-of-mines",
+          "sourceDefinition": {
+            "units": "number of mines"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Mine/labor count or productivity ratio; not coal output, capacity or customers.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "labor-hours",
+          "sourceDefinition": {
+            "units": "hours"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Mine/labor count or productivity ratio; not coal output, capacity or customers.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "average-employees",
+          "sourceDefinition": {
+            "units": "number of employees"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Mine/labor count or productivity ratio; not coal output, capacity or customers.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "productivity",
+          "sourceDefinition": {
+            "units": "short tons per labor hour"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Mine/labor count or productivity ratio; not coal output, capacity or customers.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        }
+      ],
+      "facets": {
+        "coalRankId": [
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "All"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              267
+            ],
+            "classification": "whole product",
+            "reason": "All coal ranks/types within route; other restrictions remain.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SUB",
+              "name": "Subbituminous"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              267
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "BIT",
+              "name": "Bituminous"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              267
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "LIG",
+              "name": "Lignite"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              267
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "ANT",
+              "name": "Anthracite"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              267
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ],
+        "mineTypeId": [
+          {
+            "sourceDefinition": {
+              "id": "ALL",
+              "name": "All"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              268
+            ],
+            "classification": "whole product",
+            "reason": "All mine types; does not remove producing-mine-only reserve restriction.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "UND",
+              "name": "Underground"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              268
+            ],
+            "classification": "subset",
+            "reason": "One mining method/type, not all coal.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SUR",
+              "name": "Surface"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              268
+            ],
+            "classification": "subset",
+            "reason": "One mining method/type, not all coal.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "REF",
+              "name": "Refuse"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              268
+            ],
+            "classification": "subset",
+            "reason": "One mining method/type, not all coal.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {},
+      "complete": true
+    },
+    "coal/exports-imports-quantity-price": {
+      "route": "coal/exports-imports-quantity-price",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "whole product",
+          "reason": "Gross U.S. coal trade; direction facet defines imports or exports.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activities": [
+            "imports",
+            "exports"
+          ],
+          "activityFacet": "exportImportType",
+          "subjectKind": "US",
+          "subjectCode": "USA",
+          "requiredTotalFacets": {
+            "countryId": "TOT",
+            "customsDistrictId": "TOT"
+          }
+        },
+        {
+          "id": "price",
+          "sourceDefinition": {
+            "units": "dollars per short ton"
+          },
+          "classification": "whole product",
+          "reason": "Unit value of U.S. coal imports or exports, not domestic retail price.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "prices",
+          "subjectKind": "US",
+          "subjectCode": "USA",
+          "requiredTotalFacets": {
+            "countryId": "TOT",
+            "customsDistrictId": "TOT"
+          },
+          "basisLabel": "Coal import/export unit value; preserve trade direction"
+        }
+      ],
+      "facets": {
+        "exportImportType": [
+          {
+            "sourceDefinition": {
+              "id": "Exports"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              269,
+              993
+            ],
+            "classification": "whole product",
+            "reason": "Gross U.S. trade direction; partner/district restrictions apply.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "activity": "exports"
+          },
+          {
+            "sourceDefinition": {
+              "id": "Imports"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              269,
+              993
+            ],
+            "classification": "whole product",
+            "reason": "Gross U.S. trade direction; partner/district restrictions apply.",
+            "product": "coal",
+            "publicationStatus": "unverified",
+            "activity": "imports"
+          }
+        ],
+        "coalRankId": [
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "All"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              270,
+              994
+            ],
+            "classification": "whole product",
+            "reason": "All coal ranks/types within route; other restrictions remain.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "MET",
+              "name": "Metallurgical"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              270,
+              994
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "COK",
+              "name": "Coke"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              270,
+              994
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "STM",
+              "name": "Steam Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              270,
+              994
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {
+        "placeKind": "US",
+        "placeCode": "USA",
+        "subject": "United States",
+        "placeFacetRoles": {
+          "countryId": "foreign trade partner",
+          "customsDistrictId": "port/customs district"
+        },
+        "wholeSubjectFilters": {
+          "countryId": "TOT",
+          "customsDistrictId": "TOT"
+        },
+        "source": "https://www.eia.gov/coal/production/quarterly/",
+        "quote": "detailed quarterly data on U.S. coal production, exports, imports, receipts, prices, consumption, quality, and stocks."
+      },
+      "complete": true
+    },
+    "coal/market-sales-price": {
+      "route": "coal/market-sales-price",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "sales",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "whole product",
+          "reason": "Whole mine sales market only with marketTypeId=TOT.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "sales",
+          "basisLabel": "Coal mine sales"
+        },
+        {
+          "id": "price",
+          "sourceDefinition": {
+            "units": "dollars per short ton"
+          },
+          "classification": "whole product",
+          "reason": "Whole mine sales market only with marketTypeId=TOT.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "prices",
+          "basisLabel": "Average coal mine sales price"
+        }
+      ],
+      "facets": {
+        "marketTypeId": [
+          {
+            "sourceDefinition": {
+              "id": "CAP",
+              "name": "Captive"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              274
+            ],
+            "classification": "subset",
+            "reason": "One sales market, not the total market.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "OM",
+              "name": "Open Market"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              274
+            ],
+            "classification": "subset",
+            "reason": "One sales market, not the total market.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "Total"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              274
+            ],
+            "classification": "whole product",
+            "reason": "Total captive and open-market sales.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {},
+      "complete": true
+    },
+    "coal/price-by-rank": {
+      "route": "coal/price-by-rank",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "price",
+          "sourceDefinition": {
+            "units": "dollars per short ton"
+          },
+          "classification": "whole product",
+          "reason": "Average mine sales price; all ranks required for whole coal.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "prices",
+          "basisLabel": "Average coal mine sales price"
+        }
+      ],
+      "facets": {
+        "coalRankId": [
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "All"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              276
+            ],
+            "classification": "whole product",
+            "reason": "All coal ranks/types within route; other restrictions remain.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SUB",
+              "name": "Subbituminous"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              276
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "BIT",
+              "name": "Bituminous"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              276
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "LIG",
+              "name": "Lignite"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              276
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "ANT",
+              "name": "Anthracite"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              276
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {},
+      "complete": true
+    },
+    "coal/reserves-capacity": {
+      "route": "coal/reserves-capacity",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "productive-capacity",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "whole product",
+          "reason": "EIA total productive mine capacity; all mine types required.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "capacity",
+          "basisLabel": "Coal mine productive capacity"
+        },
+        {
+          "id": "recoverable-reserves",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "subset",
+          "reason": "Recoverable reserves at producing mines exclude other recoverable coal reserves.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "reserves",
+          "basisLabel": "Recoverable coal reserves at producing mines"
+        },
+        {
+          "id": "producer-distributor-stocks",
+          "sourceDefinition": {
+            "units": "short tons"
+          },
+          "classification": "subset",
+          "reason": "Producer/distributor holdings exclude consumer stocks.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "storage",
+          "basisLabel": "Coal producer and distributor stocks"
+        }
+      ],
+      "facets": {
+        "mineTypeId": [
+          {
+            "sourceDefinition": {
+              "id": "UND",
+              "name": "Underground"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              278
+            ],
+            "classification": "subset",
+            "reason": "One mining method/type, not all coal.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SUR",
+              "name": "Surface"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              278
+            ],
+            "classification": "subset",
+            "reason": "One mining method/type, not all coal.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "Total"
+            },
+            "frequencies": [
+              "annual"
+            ],
+            "calls": [
+              278
+            ],
+            "classification": "whole product",
+            "reason": "All mine types; does not remove producing-mine-only reserve restriction.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {},
+      "complete": true
+    },
+    "coal/shipments/mine-state-aggregates": {
+      "route": "coal/shipments/mine-state-aggregates",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Shipments/receipts to electric-power facilities are neither total production nor consumption; no shipments activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "price",
+          "sourceDefinition": {
+            "units": "average dollars per ton"
+          },
+          "classification": "subset",
+          "reason": "Delivered price for coal shipped to reporting electric-power facilities, not all coal sales; receipt-survey size restrictions remain. Preserve origin versus destination geography.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "prices",
+          "sector": "electric power",
+          "sectorCellClassification": "subset",
+          "basisLabel": "Delivered coal price for electric-power shipments"
+        },
+        {
+          "id": "heat-content",
+          "sourceDefinition": {
+            "units": "Btu per pound"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "sulfur-content",
+          "sourceDefinition": {
+            "units": "percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "ash-content",
+          "sourceDefinition": {
+            "units": "percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        }
+      ],
+      "facets": {
+        "coalRankId": [
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "All"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "whole product",
+            "reason": "All coal ranks/types within route; other restrictions remain.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SUB",
+              "name": "Subbituminous"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "BIT",
+              "name": "Bituminous"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SYN",
+              "name": "Synfuel Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "LIG",
+              "name": "Lignite"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "WC",
+              "name": "Waste Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "REF",
+              "name": "Refined Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "ANT",
+              "name": "Anthracite"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              290,
+              1008
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {
+        "placeRole": "origin mine state",
+        "population": "Coal shipments to electric-power sector"
+      },
+      "complete": true
+    },
+    "coal/shipments/plant-state-aggregates": {
+      "route": "coal/shipments/plant-state-aggregates",
+      "sources": [
+        "coal-source-review.json"
+      ],
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Shipments/receipts to electric-power facilities are neither total production nor consumption; no shipments activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "price",
+          "sourceDefinition": {
+            "units": "average dollars per ton"
+          },
+          "classification": "subset",
+          "reason": "Delivered price for coal shipped to reporting electric-power facilities, not all coal sales; receipt-survey size restrictions remain. Preserve origin versus destination geography.",
+          "product": "coal",
+          "publicationStatus": "unverified",
+          "activity": "prices",
+          "sector": "electric power",
+          "sectorCellClassification": "subset",
+          "basisLabel": "Delivered coal price for electric-power shipments"
+        },
+        {
+          "id": "heat-content",
+          "sourceDefinition": {
+            "units": "Btu per pound"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "sulfur-content",
+          "sourceDefinition": {
+            "units": "percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "ash-content",
+          "sourceDefinition": {
+            "units": "percent by weight"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Fuel quality/conversion measure, not a locked product activity.",
+          "product": "coal",
+          "publicationStatus": "unverified"
+        }
+      ],
+      "facets": {
+        "coalRankId": [
+          {
+            "sourceDefinition": {
+              "id": "TOT",
+              "name": "All"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "whole product",
+            "reason": "All coal ranks/types within route; other restrictions remain.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SUB",
+              "name": "Subbituminous"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "BIT",
+              "name": "Bituminous"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "LIG",
+              "name": "Lignite"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "SYN",
+              "name": "Synfuel Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "WC",
+              "name": "Waste Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "REF",
+              "name": "Refined Coal"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "ANT",
+              "name": "Anthracite"
+            },
+            "frequencies": [
+              "quarterly",
+              "annual"
+            ],
+            "calls": [
+              292,
+              1010
+            ],
+            "classification": "subset",
+            "reason": "One coal rank, type or processed component; no new qualifier authorized.",
+            "product": "coal",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "scope": {
+        "placeRole": "destination plant state",
+        "population": "Coal receipts at electric-power sector"
+      },
+      "complete": true
+    }
+  }
+}
