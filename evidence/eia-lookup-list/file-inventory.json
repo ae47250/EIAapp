@@ -1,0 +1,1399 @@
+{
+  "base": "9e6dda37443383fb2abce06a60f281c1bcd135a4",
+  "codeCommit": "6d44adfffaa65a33df7934ade38f41172b1e7eae",
+  "branch": "codex/eia-lookup-list",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "b9f6ab84457155d745836c1abda4a8d6278db99d24d770411d8b40c7470f02ab",
+      "why": "Cherry-picked the owner-authorized execution/search guardrails."
+    },
+    {
+      "path": "LICENSES/cyanheads-eia-energy-mcp-server-Apache-2.0.txt",
+      "sha256": "30a07b9d314bdaf2c01a7bb7a905bb085ce669aec786d814183cdc6a2909d838",
+      "why": "Preserve Apache-2.0 attribution for adapted cyanheads period/error logic."
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "84e763ea0fe937688b2f9da796cefb35d09d8cf1423c59b6d7a29fed86f0ab7e",
+      "why": "Preserve Apache-2.0 attribution for adapted cyanheads period/error logic."
+    },
+    {
+      "path": "app/api/search-eia/route.js",
+      "sha256": "7a81f698a78d21589e10822d91c532ee8b35ec15a804795fd0d87cff9f718919",
+      "why": "Connect the main search route to checked lookup and automatic retrieval."
+    },
+    {
+      "path": "components/search/LookupChoices.js",
+      "sha256": "8a1a73a5f3cbeacac0f2f353e9a5f5a4dfe16bf2e18c917684f1f06328a03a0b",
+      "why": "Render automatic results and labels in existing components, with the sole new choice-button row."
+    },
+    {
+      "path": "components/search/SearchWorkspace.js",
+      "sha256": "b4f1a60ea6596315d7509a57fd14628f071cea2ccb3b90bb3802816cfde4c64f",
+      "why": "Render automatic results and labels in existing components, with the sole new choice-button row."
+    },
+    {
+      "path": "components/search/SelectedComparison.js",
+      "sha256": "b8967ebe1744950c1c484b5599ee5517eebad9f5b4dd9ab66dfacb8ea9eb57d7",
+      "why": "Render automatic results and labels in existing components, with the sole new choice-button row."
+    },
+    {
+      "path": "components/search/SelectedSeries.js",
+      "sha256": "71cc60527c9885d7361562308d77ba2e53e285eca3a7d4b33da060e366e7838e",
+      "why": "Render automatic results and labels in existing components, with the sole new choice-button row."
+    },
+    {
+      "path": "data/eia/lookup-list.json",
+      "sha256": "ff36c0b8573de69339f7c880ffa0764cb5afefcbb85f8edf2e29158b753f542f",
+      "why": "Store 27 checked concepts, route geography mappings and two evidence-supported unavailable concepts."
+    },
+    {
+      "path": "evidence/eia-lookup-list/LABELS.md",
+      "sha256": "61e2645a58facc1fb1aad4c9d64a0d4ae47959e34c757c512cb6ae3c7eac057d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/MODEL-RESULTS.md",
+      "sha256": "94da0f5d01ab04ec7eed9b78b2ebcddbeae8cde39dfa460679ac2ce0210c29dc",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/ORIGINAL-RESULTS.md",
+      "sha256": "1a592390cda30620d1acb0c100100ba4d7a7b6c80ebce15e3fc901d572aba999",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/REPORT.md",
+      "sha256": "b0b0f834d5a318d3e93c3e74e4886dd2f14010abe3ff0498ec2b63f150774334",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/REPRODUCE.md",
+      "sha256": "fec69685dcb75dc4705c96e69021c86c95dc8b1b724c87eb7723ab65bdf546c0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/baseline-tests.tap",
+      "sha256": "332ecdeffea4948c582f8df8bcd4b2b83022bdef2fb4e4f206c93c25a37f00a6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/F1-0-raw.json",
+      "sha256": "4af822614397d70ea7092392561ebc805d4b64ebde4c701d988d0fc9fb80b33e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/I4-0-raw.json",
+      "sha256": "12711d8c2d6f54af8dde4e1117ec01c2d1cb019fd7a348a95a10b9aef8caaa6b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/I6-0-raw.json",
+      "sha256": "b7eb54776e5e942f317fa429a930f9f40f7003c2dc87c9ef21119d53e6332177",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/Michigan_Petroleum_Prices.xlsx",
+      "sha256": "71627b8d2612f809442a3c3864722ac93b08c7ddde2ede40aa61ff14fca479ca",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/O1-0-raw.json",
+      "sha256": "c239dc72aeab5b4400401ca72fbb510c5d3ebd4f608ec6b6c0cbbfe04686e884",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/console.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-F1-result.png",
+      "sha256": "931839035eb8554d972bab0c201899b700d107de2a9f41f1ee037d12c09a3eb2",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-F1-result.txt",
+      "sha256": "fd41690ffa684892a18b969c228856b07bde66264fe091fee17031970097977e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I4-clarification.png",
+      "sha256": "081d33a1fa60e38b7d3168e343bd08a75467387e7c7bec14e954b93e7d9e1c78",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I4-clarification.txt",
+      "sha256": "fd41690ffa684892a18b969c228856b07bde66264fe091fee17031970097977e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I4-result.png",
+      "sha256": "2f59f42d64625f58bbe43b317adea4f89b0b3e36a95310fa1086a9e5ffb25843",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I4-result.txt",
+      "sha256": "fd41690ffa684892a18b969c228856b07bde66264fe091fee17031970097977e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I6-alternative.png",
+      "sha256": "4373cae5b2b3a34a1e5d2b7e0d38b16d9c97edf3bc5a011077953afda949b963",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I6-alternative.txt",
+      "sha256": "fd41690ffa684892a18b969c228856b07bde66264fe091fee17031970097977e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I6-unavailable.png",
+      "sha256": "56e4bfcb751eca42d6b95110c4ec8b0bb108f875f7bcaf8d7968d8becc57e99f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-I6-unavailable.txt",
+      "sha256": "95205b77285d5607d974d045d20bfaba788520a42151660a88824177afcc90d3",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-O1-result.png",
+      "sha256": "7e37544c2f2eb722236971ddff27efe8a0d4c4e03b37f496190299450470b2b1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/eia-lookup-O1-result.txt",
+      "sha256": "fd41690ffa684892a18b969c228856b07bde66264fe091fee17031970097977e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/http-replay.json",
+      "sha256": "324c9751ae8ff406757a392fc3e18e071c26ce7ecf94a4bd8eaa3b5744b1ed41",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/server.log",
+      "sha256": "ed8d6ad40acc4e4ab6db9aaa5ec1384fe848d8694a742080b897eb4f4a6f41b9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/browser/verification.json",
+      "sha256": "54942c2c996d79332bf9f724f668a78cf3edfe08c29b9b5391b47ae322561ad8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/budget.json",
+      "sha256": "f74604615baec2897f4de42ecc8bc55474ea7d3a9f7626e62ca38c3b4e7da05b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/build-1.log",
+      "sha256": "3715faf09f1f95c620ae4bc0db8d61d10b65c60a3c5969a630462e04685f8d20",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/build-2.log",
+      "sha256": "2957616647f406d4634801ec9d8aa90ac072def4cdde403e5dfc969963c86e91",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/build-final.log",
+      "sha256": "fa1c6efc33f3984ca3cceefbce4a106c0fb8cf4d4bf199cd0b2cbef11f2b2dae",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/closure.json",
+      "sha256": "6822940be44436a095902ab7f234cbc2d068c39a6be9ebb115e0d709fe29592c",
+      "why": "Retain final verification, failure history or closure evidence."
+    },
+    {
+      "path": "evidence/eia-lookup-list/cost-reconciliation.json",
+      "sha256": "386d1f7273b96b26652149e5bcadd8c727a933fc2f6120d1b41d7c3b023858b0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/expected-data.json",
+      "sha256": "fb5d162008b493b3b6fa2f5333ac105e6d0c7126fce797b0f756109ee655025e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/failures.json",
+      "sha256": "faa6128ec4a340a5e92e0dd3fbb0b7c478b4cd266cca1b70b0ec17ca57b93975",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/freeze-manifest.json",
+      "sha256": "0acd78b527e869111e18baa4f31aebe9ba1f7bfed3416f9ca66ef2496a13ad2f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/freeze-verification-final.json",
+      "sha256": "2933e7ab2ecb954adab59c84c7367580dbb9caca0edecbec4b05ec2611b79b2d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F1.json",
+      "sha256": "e575491b17c1749091e0d4478e8ca3e7d3e13f09f0a8a656a9f49e33434cad64",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F10.json",
+      "sha256": "aa830baec7d6b2a86cd862899f41b162e1230c629775a119a787563942a13b3b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F11.json",
+      "sha256": "95391f2d6347e9047981df8dfb7ce729d5ed4ca30953242d26afa1db5bf5212f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F12.json",
+      "sha256": "cfec28bf1a080ce52a9aadd1a3187d810765504d0abc310086cd5399910f9bc6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F13.json",
+      "sha256": "fe1f238e0dab38baf0633e6f6254ee59e22f99d92fc1ce6f9b36eadb8b2e625c",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F14.json",
+      "sha256": "c116ab60258282e8a653c09b2773b51aa82d6a47b76b624a26690fdad76336a9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F2.json",
+      "sha256": "dd4207e80354bd5eb0025e2324924600ce0c9a45bda92f69e952db3b940b6ac8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F3.json",
+      "sha256": "796c4a0b9525f51be86f74755b9ea91a922fecb542171676c8253e01b424bcc1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F4.json",
+      "sha256": "d2de9180bef726165658162ea04dcc922fcadfbd953cd86dcd3d65220c316131",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F5.json",
+      "sha256": "4b31107b40d3e898a134bb44e0b1e961fcbdd0dd55bf5d5cea53d9e612d6d59b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F6.json",
+      "sha256": "34e7eec1c114a77705fc88f6ee8d4549a253de3f7f628096193addcfb10737f3",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F7.json",
+      "sha256": "c388dc08061c914bd4beae7251f2805d3c69196f6c99f489ab1d04337f41327d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F8.json",
+      "sha256": "d772c1816c3ef592889e222623d6065a7a17970d7646326ab137effaa106b678",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/F9.json",
+      "sha256": "9940943851696d77ead0d4fcd6525c12e8d863ef8c48e0182769baca348a4a86",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O1.json",
+      "sha256": "c43b356d084d0718e130633fa5c1f2a033a6a38b9f96e77876e82521a35fb603",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O10.json",
+      "sha256": "c094be883b17b9376e33dcb1bc5ece06b212c80669995f5160a9a707d8c1e2c1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O2.json",
+      "sha256": "fea2fcfc134a4efdc08473ec0d7965e6f495816bbc0a3d774bdb53cece16e863",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O3.json",
+      "sha256": "15df6dd49873a3e7cddc74446bff5879cea2f131e5debdf0ad50386c5718cfe1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O4.json",
+      "sha256": "0d8e15eb8dff9cb20352a7981a6da50a24b034060a63364ce0651c4d3f024f29",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O5.json",
+      "sha256": "e9a04c825df02bb04990c5b1ec228eab7a17a94c494b0bd70d9f08180cc75255",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O6.json",
+      "sha256": "3b74897447f6ff5146038b877a63eca24adf18aecae0de2768826d34a1e24ce7",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O7.json",
+      "sha256": "f37fb85044f0ad57b52fdbec7df74cbf7696f82623354c8273433c1663cc5f15",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O8.json",
+      "sha256": "71186a7fc45c8c4ce48796b5dfa64a02f30f1784f4dd33db749ed3817570a1d9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/O9.json",
+      "sha256": "16409e4442b41f4e27a0a871667332cc43cbde3c4fb383ea44511545a57fa6b5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/gold-live/summary.json",
+      "sha256": "254684a104d6321ff8f0b37d969b149cc08cbd8ec68aab7b89b4d0b668ade95a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/implementation-checkpoint.json",
+      "sha256": "957761d4c5d76c6b9a6d33041435805e24e305e22ae647192f7d37f5e2dfde16",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I1-1-raw.json",
+      "sha256": "400fc0a4b85e9da5c96401394633da36dcc9689b070b20584ebed9c4af333eb7",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I1-1-scored.json",
+      "sha256": "e881cdbd43e9adafd7b105a89b4310b603687f30d0e1d9102d40a713cc73e467",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I1-2-raw.json",
+      "sha256": "5789de78708b235e8b16040d52a01e44409de1155c9170940105d5b111a9cee2",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I1-2-scored.json",
+      "sha256": "366d615d98124c337089215998d55b30ca9973446b73477ee92ec2f4cd776b17",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I10-1-raw.json",
+      "sha256": "390d6cbb6e0dd73ee8767468e4b8a69b4c940a841e8e75c6ad9e12999c1cee90",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I10-1-scored.json",
+      "sha256": "fffa287e603b5e4e94bc12b77a5eda549332e053d8712ff3cd1d7e0c2e9ecde5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I10-2-raw.json",
+      "sha256": "ff86ac9ef8568f74f6d1d96fe348bfe6a016d609bc1c8f74fa1e22d5bd0d5147",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I10-2-scored.json",
+      "sha256": "16e453ac73ce395a7e8d534f167bbdf81ea1d3b527dd4faafe36cd8b6d1a71e0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I11-1-raw.json",
+      "sha256": "b63fcfe4457df009153bfcd31a5676da27734fc5ff72bfa06b849695c241e2b0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I11-1-scored.json",
+      "sha256": "55947d5e2c9b5c801ed032457701eac920c74d9ac756b2d78fc3efec4d3ee3fd",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I11-2-raw.json",
+      "sha256": "840fa09ab010da3ad1f97f3ef745ebeb9718617bc5e0f70c71ee365ee6e63583",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I11-2-scored.json",
+      "sha256": "eb72844ee4597d5c559221dc57d1de2d9d4d75436e1391bec76e342e60a01a41",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I12-1-raw.json",
+      "sha256": "0f13a2111f3eac082c913a4ac156afe4722e27182c33f91f92828336dcfe51e0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I12-1-scored.json",
+      "sha256": "f987bcde2eda79725a8cf70da4726db43e4d75f72f5282d9b89cebf6bc662a56",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I12-2-raw.json",
+      "sha256": "23dd0ed0613f74272b8f945d57ec4698ff367cc463e58abe612a17bebd5ef3d8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I12-2-scored.json",
+      "sha256": "95b7f71a7cc831b7732538100e1d79b28948b8bdf71c2b2f18455dfab8ebfddf",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I2-1-raw.json",
+      "sha256": "6b24400c0eff1576f54c6128851a907274f5556ae4da688a8482658c5269e435",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I2-1-scored.json",
+      "sha256": "8c05c4a7647cb61522362b762d2125d36362a0c295f0069203f3ff0276ef20cd",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I2-2-raw.json",
+      "sha256": "fcd355794ad3dfd4c3f536431abd2a3772a735ad7ae941780fa6ccc5d40fb71d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I2-2-scored.json",
+      "sha256": "5507ab99538fd045870a414359c2b5c85043dc503ad1aacca9c37fd22490ce77",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I3-1-raw.json",
+      "sha256": "55616a8806b6b75bc91cf1dde01a2ecc2a373fff5728e42a49805d5146450c14",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I3-1-scored.json",
+      "sha256": "a9c8042e3f6b5e121e52b0a2854da18a405239db8116e7bf33da32c4fe552965",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I3-2-raw.json",
+      "sha256": "bb5f5f5566118a6880a0081e9cb46495673f9858c95ec708f9d74d95d3ea566b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I3-2-scored.json",
+      "sha256": "19847fe45cb0152d5c5c5b7f3f7d47419421045d27faf3d6c06cfefd986a390a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I4-1-raw.json",
+      "sha256": "65089498f888d90f5a362390f0ff755efedea0f2979df045fa5595d0aab160a0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I4-1-scored.json",
+      "sha256": "5468ca6a03a42193ad18cfe7ac2b0d121bee5818855983b6eab3519376c3705f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I4-2-raw.json",
+      "sha256": "1125b2acd5838e65abc02ada2e5f1ad08190e7a988a1a9acd8f656bf1363e305",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I4-2-scored.json",
+      "sha256": "f7b16b56df82246366070925c707ce5481d4c37b35ff1dedaf3b4c51d95947ba",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I5-1-raw.json",
+      "sha256": "70a9c8b4e613237c58443ffa1202b6b5265e253c30d8ec55eb184571d9d6a893",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I5-1-scored.json",
+      "sha256": "a043de37e0bbe01b81c2e6df8d8868ab2d09a6218ace770adc2703835fca4d18",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I5-2-raw.json",
+      "sha256": "4ebda998e7a5fedfba0ef43fc2030110f919a5058d546291a27de0bef160a58b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I5-2-scored.json",
+      "sha256": "981c7dcafd2a5196a68d9c8e8d3cf274c0e95d29d4d8690cbe8f742b16eb69e2",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I6-1-raw.json",
+      "sha256": "9ccccd513e0c1ce7ab96da6f92ce563ace56a484699b0bf5adc45ac1be466ddd",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I6-1-scored.json",
+      "sha256": "a3bc46c118bc0e5d513d84636ff11f7a788801394140a8c0483765cbd9101e80",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I6-2-raw.json",
+      "sha256": "315a032688873a10c665e1ba9c55fd39f4e8cfadfebb9011c15411bb5cb8f840",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I6-2-scored.json",
+      "sha256": "05c7df667c2b894b62f156fea115b0da149b54547a06c1cea1afc4f93af38759",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I7-1-raw.json",
+      "sha256": "f7083ff652bedc541a44ce5ccc88d9b15b260dbfe7845d31f91588424b305203",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I7-1-scored.json",
+      "sha256": "746c2aa6526010a2b59be03577eeddb605f46fc483a2f05771ac939b20e7ea2b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I7-2-raw.json",
+      "sha256": "43c9b66042cac7cb51ae31b6dc025afcf8b734eb6bcea95a3f8de050da113386",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I7-2-scored.json",
+      "sha256": "4c99b4f6fef4b0b258efa79b228ec2726e955227516a6fc0d0b2759df1fd86c8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I8-1-raw.json",
+      "sha256": "7fe2ec33b12ae66958e5b2084310b9ac8375745606fab1179ddfcecb1e71ac22",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I8-1-scored.json",
+      "sha256": "371b4ee2f73fd365f9f1da65949a908d73d5fa8542fb14fc36b1a967aa30997e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I8-2-raw.json",
+      "sha256": "c720d1c7bfc1a1d74c3f5ef181e9adbd2fd066745396df99ceecd18bf8aabff4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I8-2-scored.json",
+      "sha256": "2ee454757f388ccf55f0cd4f0f5e098b9e0a52b8f72c370a71dd208e57412e32",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I9-1-raw.json",
+      "sha256": "013b64878d701ee90d3e24517bb5837b3f6f38d77f4f1297e2c028b82042983d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I9-1-scored.json",
+      "sha256": "6089ff3dbb6915a3de9a69194a9e7c8620f39c338e29357ace135596a6a197bf",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I9-2-raw.json",
+      "sha256": "5607df7667529419517c8d1ff6d8423810d6c633f867efda8138a615dc2e9cb3",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/I9-2-scored.json",
+      "sha256": "e704697dda2b38315a840c62d3a030062c6d6ee0364a37c100940297d907359b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/live-model/summary.json",
+      "sha256": "7cc821e4e77c6dd9d3584c3994a0a28d71e8217f38c81a858f6436ef76ae89cb",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/cached-selected-definitions.json",
+      "sha256": "92be1457b0b261aff92dfe62850047061914a843aa9908111cbc07c571cbdc2f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-disposition-route.json",
+      "sha256": "e65011a66dbfb2b885d015ef846e2f1ef31ce66e12aade44293e1023814aeba9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-fuels-A.json",
+      "sha256": "fb42bd2bac2a429d32841391808dc617a43b00fc46c845655a4e7720897cfc27",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-fuels-default.json",
+      "sha256": "e63eb140f93d02a85fa16eaae0ea2c9e9d2619ad077bf8f1b5e0479a343809d6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-fuels.json",
+      "sha256": "58df9a00aea6d7e18f37c3e8b033aa473bd853c99bd04b979ec47486645eab2f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-route.json",
+      "sha256": "28871e8e8463bf45a0e5919867a772888283e0fa1abc8420ccae9bf3b122a892",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-sectors-A.json",
+      "sha256": "363c57da8a74f5e68a80f09a0222529b3d9024a7c51bd62f4db541ef71b93c9b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-sectors-default.json",
+      "sha256": "af36d11768d978a09542f98dc54c0953f95ef4397f6a8a7280fac4992669f7b5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-generation-sectors.json",
+      "sha256": "485b332a545ec65a4e2ec5ffc17cde5490973bd87326613b67e4878ef1e91eb4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-retail-route.json",
+      "sha256": "2b48e8f6c89d4b9a7fb612cb4638a05ef4ad918b1391a22df2cbec35376a3f04",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/electricity-state-route.json",
+      "sha256": "d91a98274e6222bdd214af5cfdb027e30f1732f139837d474ab5d4a6defa5674",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/generation-TX-fuels-2024.json",
+      "sha256": "584b3526d79e992e76729cef081b4af39681f513ad99c62cbb1563a123eff629",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/generation-states.json",
+      "sha256": "5c6cd847c3a291ee8a3842931987580b28cc217fa264852d12e945415a000b5a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-activities-A.json",
+      "sha256": "e94e56edfc0634759f1c9f5f4e78749a59e2887048de524511c13c5256224919",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-activities-annual.json",
+      "sha256": "8a9bd0f79a50b6be7c5e1b81e6d12ef6756dd7d246a24eda3a20942c04b58f4d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-activities.json",
+      "sha256": "c17d3ddc930ef28eeb5007fed61dad3e91a2229d026a6972334b62a9f9f0341f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-countries-A.json",
+      "sha256": "173e04d703929b840b367e439d808201df8deae9275e3f024461b916ccd8b3bd",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-countries-annual.json",
+      "sha256": "40976b9179eafc67700c2a2558774f022ae03ae055747ba184bb753d6e225c85",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-countries-default.json",
+      "sha256": "97a22c3b90360d42d87f5c930f8aea335aeb0f0c42767d38b57bb3fcf957a119",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-products-A.json",
+      "sha256": "657def8faf9e28c4441671967484cb44e1a90443aecbcd484e141e0f333ddbd1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-products-DEU-annual.json",
+      "sha256": "46bb62a12b7cce4e4bbd863cd4d61a884b36bd667758282b2ce8d61c3308cf81",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-products-annual.json",
+      "sha256": "112b4f5dcd601e45fb269bb4d6c7e147f00652acbac9fe6b43cd74836e1791a0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-products-plain.json",
+      "sha256": "e85dbea1f3a0a5c7277394d2817a74e4af3012bfb5ba71e08fbd68d2b8d034d8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-products.json",
+      "sha256": "0addaf10a7b4757ad82cb4a2304a3753a5cd416b10ffea74f74c5fb42cdff39b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-route-annual.json",
+      "sha256": "d7cf9baaaf77e0c6203397cffb52023c2520d9d5ef5969b3eb81990ea3a70998",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-route.json",
+      "sha256": "0e417ea43462793aea821fa106db2aef21a69498326f729d8c27357ecb9a5f5a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-units-A.json",
+      "sha256": "57f30834e33970a62c27ee466f7108fc7a8d2bf826297db8c97d7c8c8809bf56",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-units-annual.json",
+      "sha256": "30b2966d71f5fb5463a55782ca638616dc3fc207dd173c7b24f15fcf7c6f0e43",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/international-units.json",
+      "sha256": "5497d4d6ce69ba1a521e20b0314f839f064db167e014562b3ba30dd8c5a09a8f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/intl-export-products-CAN.json",
+      "sha256": "685ad3b295af6b3a55d11350b7a38c0c89db17bb81ad7f925dda6412a07ef3cd",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/intl-export-products-MEX.json",
+      "sha256": "d7796b53c7e591eeac062033619f75dc9abab2d6c0511d3a02e8df3e50e17319",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/natural-gas-route.json",
+      "sha256": "5d78be8e817d71c0171e42347ea467a23c72260360e54115b6bad2d92e829813",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-consumption-geos.json",
+      "sha256": "e188f0639986686104f06a2d71dde12cccbcb853df8f8941e96729d4d2747d4a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-consumption-processes.json",
+      "sha256": "7f641175b528b873f6ddb95cb0ec5779e559c9ab64469cfbc76c627770dcbda9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-consumption-products.json",
+      "sha256": "deb416359d26d2b4e75aded97c88a0a672773157fc37977afffb70deca1536a6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-consumption-route.json",
+      "sha256": "663bf01e981c220a4197ef26f966ecd58a5ff30112c1d8e675a35324a3039288",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-enr-route.json",
+      "sha256": "e91d3edfa6b8e37345143c20fae433e711479dfd0eaf18439d5f6dcd7c031375",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-imports-JPN-quarterly.json",
+      "sha256": "9f55876eef890d56ed6b9988e7f56757e461aaef37ac031b6d4ce6a3a34cde55",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-price-processes.json",
+      "sha256": "6d711aacd441fadf32c2d9fe0da598e7f6f5474d0dd00b77373ee7aeecfb5357",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-price-products.json",
+      "sha256": "02fdb7038a59e14d5b1eeba371cd0ea1fbce856edb477247425aae0c73864ca4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-price-route.json",
+      "sha256": "f7e32263b1eafd48f3ad38b48a008979d949a30d5315b1ded7c161cf222c7360",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-production-geos.json",
+      "sha256": "b08fe544c5990a1347fcd0bbb9492f4204f6878bcf9688b1a58954187fe8b6b0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-production-processes.json",
+      "sha256": "0808b855cf77d857af540e695fc605c92563f8e0354721437861d12c0aa6af42",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-production-products.json",
+      "sha256": "826494b87f843fa23aa9862592cc7ea579ea1ff42ca5fd5dd9d7fa38d4da9d9f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-production-route.json",
+      "sha256": "50fcfaba4079a87a9564ac616e66bc384424698ddb8851c0fd9a215bd1e5d140",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-reserves-geos.json",
+      "sha256": "167a3312b0d72ed36bc81ef92079c4c9d0f306a7e47c91ea3f6b17c2e7d8a808",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-reserves-processes.json",
+      "sha256": "b4ddddb24e80114062ab6840b06f95546ebb6f7cbe36f6a361edc6b8a93b1e9f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-reserves-products.json",
+      "sha256": "bc75f1e6d9a53e80ba1ed0e7dc6e4038d692447c57a2dc763cd176b0c9c55ef6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-reserves-route.json",
+      "sha256": "2605ce155f4a00ebc042d81545004cd887e293733dec4257112685eced3aa486",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-reserves-series-r48.json",
+      "sha256": "71220487fc0a78b2cb78912708f14763a227a730fa4bae9570d9c6b9248d6cd4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-storage-geos.json",
+      "sha256": "e35d80c15ccd848dd10076f43738ec0b028b64d0276f7d2c8c987df73692906a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-storage-processes.json",
+      "sha256": "2587d853f384b751f3cca4982c7055e43ecd3519b6e45409f9defcc277c62f1c",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-storage-products.json",
+      "sha256": "b9bf3b22c6d6a48b7a46ffbe6f5eb85098614709eb030422f5c45a6b20f22c92",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/ng-storage-route.json",
+      "sha256": "09e16961c385628b2c55784782c83abdd8fd5f54a0ddf088f9a37b0d43eb7f18",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/petroleum-production-geos.json",
+      "sha256": "4e4ea6499befae8cc271db7044d64c5dc4058c18618aa6b90af385686e890bb8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/petroleum-production-processes.json",
+      "sha256": "71c51bf7e2cf6e4d59cd1c424137017ab8b06f161c63ade13631136e3a1f0560",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/petroleum-production-products.json",
+      "sha256": "d74327904e5b565804893c4ac2387b46ee66d1d1d014adbbec9ad55c08444a56",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/petroleum-production-route.json",
+      "sha256": "932e484e369c8ea7537c0604573a13ac97259c312e30d64ddfd13e872c098bf6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/retail-sectors-default.json",
+      "sha256": "59f3bb6145090840d45a7f99ec476946fa5770921fe7e1666853e8f93ff6c022",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/retail-states.json",
+      "sha256": "ae0b908b29e1d11e101ac80b30724cb4c9cb060a7600da96429243dd9086c35a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-crude-production-ND.json",
+      "sha256": "cb091dce12f5b9c3cff1b400ccc1f13773f184432c807020424d585498310267",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-generation-AOR-TX.json",
+      "sha256": "a6e607e112c772afe8b1c6b4c42b6a922307b23b46c0af9f3174e0695af8b845",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-generation-ORW-TX.json",
+      "sha256": "b609ee5c275e4ebbac9bf8f303151b26f8b27aa2ee192383e6a008d08e4e0a56",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-generation-REN-TX.json",
+      "sha256": "cdd27b7c9bbe1ab75d20f4a2a94c649af46563d2b0e2b939c2cc73d8e495deb0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-116-12-GMB.json",
+      "sha256": "fbab0be2fbb4c8d5fac8bfbbc37e4ccb48a54fc105b204deb769947d2ad86c5e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-2-2-BRA.json",
+      "sha256": "f08640b065f1eb93b2de6835cf0f01ae0b265e0fe741320d9c635a0cd5b97c35",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-2-2-FRA.json",
+      "sha256": "392b17c0b4745f1bdf240cc3b9ba469ffeef79af5e4a3a59bac29b0d930bd69b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-2-2-GEO.json",
+      "sha256": "ba88781164f58552f149a51eeb534ea836c71be297c2090d2d738f2576d6c766",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-2-2-JPN.json",
+      "sha256": "e5c0b0dce25086d324b2af145e2fa5d03ff5161ddac3c2eb6595fd946291c7cc",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-26-3-ARM.json",
+      "sha256": "7e22ac99fbac71f8449f9b9d5da4c3ccdaa794e004b9ac73c4b7683f1f7c49f8",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-26-3-GEO.json",
+      "sha256": "b5783c9cd807e2ad510950cdf8c38c37dd576d40669efd7477f4452762ebf243",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-26-3-JPN.json",
+      "sha256": "926d02b93fb50e450a393b37d5422d47111a669a8b13b7cdb76bbef20a4bdc7c",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-27-12-DEU.json",
+      "sha256": "a9e48f58e934593a36fe81452b7d63a4ee05491d18845407191ccec75f48500a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-27-12-FRA.json",
+      "sha256": "55e0d644df9bf6999ab613d1a31510406a8aa8f02f3ee30df220146d93c2599a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-33-7-NOR.json",
+      "sha256": "8618c97259ad008dbb61f197fecd78c24812c7d49e39b67a170ea669236542b5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-33-7-SWE.json",
+      "sha256": "005ff8ffb7166983f6ab6f4086cca063e74f9eb074b28aa2e7fdb8c05219dee5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-37-7-DNK.json",
+      "sha256": "de331e53d2b909bf2b019ee1e31ffe00d508a46f72421476c0cca2a82cd86ee5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-44-2-ISL.json",
+      "sha256": "74cede0fd41782c239300d3f5c5905c32947b72a875629449754ed3a4dd3678e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-5-4-CAN.json",
+      "sha256": "c9c3e68301b6fa4fc0054df737b40dcc17910094103745496de414bc3bb7b16a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-5-4-MEX.json",
+      "sha256": "56cdfdd9abfb51399a207389835765034c55dfeb6e13e8a39df903ec6a0a0471",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-53-4-CAN.json",
+      "sha256": "9a2d1db38e0aee076542689c6010a010ca8410afc68b0489223b64d2ce101632",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-53-4-MEX.json",
+      "sha256": "ec9b31c5b8ef015b2c8d43bb051f2d8fcccd9d3fb94d20e7fe110a8dbb97da6b",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-57-4-CAN.json",
+      "sha256": "17827d0da6fd9476b51e7fe9101cf98c0a1b37a67326d523f72fc6ac35ac5837",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-57-4-MEX.json",
+      "sha256": "8dee88c70a72430ee849a0b5ce5b596fd1058ec8ed321fe51cc2bdf1c9be1a96",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-57-4-SAU.json",
+      "sha256": "cdc6cd1108754078d71b75ceba765942e49202ef34d6d48babb4249ecb9d8066",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-1-AUS.json",
+      "sha256": "682700907eef714ad065cae213e1fe9894b8e4d794152816b36753cbce563963",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-1-DEU.json",
+      "sha256": "179830824cbc4da4fec49178971e0c44d0b1ee5d21d327bb5f17c24a5bd4a052",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-1-IDN.json",
+      "sha256": "88cea92d556b93651f184af316cd8b353bd8ff877ddfbf733e7c849ab40b9393",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-2-CHN.json",
+      "sha256": "7c65f24a342b99c3ebc37c9282e420be6d15ce985e33e2d233d44a0e73f118f4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-2-IND.json",
+      "sha256": "42f0bc08c49de8f5aaedcddd0dbea10005f9cbcc4e66b83468a12148d24d4261",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-4-AUS.json",
+      "sha256": "56b8e715f5a4e10ef354b2052b8715b6e2cde3ef5b994bef406124849938fa92",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-intl-7-4-IDN.json",
+      "sha256": "21519c9a983ad68c172508012bbec6d0921086517b4238e702a6b416ef13ccb1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-ng-consume-TX.json",
+      "sha256": "c0c03bdf660b49a50b517fda361dc4b86870146a1b92f91761328330a829f4dd",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-ng-market-TX.json",
+      "sha256": "a98352b1e551e595b809c5ba79f68a93330f0c1f9469245e194a5985b439821e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-ng-reserves-R48.json",
+      "sha256": "2e196394ef90473540c224c065839ab9a92e877be6e6db19da8d25ca01ef2486",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-ng-storage-R48.json",
+      "sha256": "3d217a190e9e524cb87af7a8ff8b7c69db295113c131ed017d06ff4daa44354e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-customers-AZ-annual.json",
+      "sha256": "dfe6e6896a9379aad0a339f135b8431c3355c9b5ef2c46b5f7dda1bf3bb16de5",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-customers-NV-annual.json",
+      "sha256": "65186d8dc6dfac626ff5de788e05cf60d7082429639fbf187415b5d76f9718b6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-prices-GA-annual.json",
+      "sha256": "8ff8f572d211418494673a078fe6596f5168d7fc47849fe7c7e5f37b1520eafc",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-prices-PA-monthly.json",
+      "sha256": "5c90fbeef229aaa5f06fccc1064b84138e87b8c69d4bb57a8a3586933e695543",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-sales-CA-monthly.json",
+      "sha256": "ed209fffb0ded4eee9d20f26b17d7ac81fd5cacd5c25e0a84a2493c89d54e243",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-sales-FL-annual.json",
+      "sha256": "147ae69ad2ed007cbdc0f496076276927797a01aee339ee936d267fbd3c3c3a4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-sales-GA-annual.json",
+      "sha256": "3de129ad688721aa172c2258e493acf0886c3859be1ce5971e6541ff7da743f3",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-retail-sales-TX-annual.json",
+      "sha256": "9a8379ce4bb77b6f8d18f52a2cc1f641623111214b726e047b21080c2938fa1e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-seds-BFPRP-IA.json",
+      "sha256": "e1da84d8d48b2a5cfdbcac1e21f4d576090a98554451d0e14a27a936ac2b9a3d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-seds-BFPRP-NE.json",
+      "sha256": "cc5b73fd75aec1ff99b1a3aa79ba8d5dc00667fbaf8cabce064c6617d73545ba",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-seds-MGTCD-MI.json",
+      "sha256": "b3b3aceb3e93c79c70ce3b4eeea27dca53701e09ca2f22025544e4509ed69f2d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-seds-NGTCD-MI.json",
+      "sha256": "11990efcfc938086d09fd7475bb85bc650e00faec7ee1d99bb803a7cf9207ace",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/sample-seds-TETCB-US.json",
+      "sha256": "f8219d23634b3eb465837762dd64a65944bb78bde7194ae88c44dda20a8ee904",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/seds-route.json",
+      "sha256": "0e46c7a20043e34ac5c210e010b6987c171c3da5bc4c9c536b4f7004a6ae926a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/seds-series.json",
+      "sha256": "5d751ba2cafeb7d3e8246bd940eb1d1337179dd3590add03db87e16b7b8959d1",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/metadata/seds-state-geos.json",
+      "sha256": "5609466fbafa3f05a5ecf7b7b4b26924ac6033f1750e4cfa932e203193796d0a",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/offline-search-initial-failures.tap",
+      "sha256": "da2b06e191bf3353bb1981ef6ad4a3409643184d871c37b0bf8f0afeb9fb679f",
+      "why": "Retain final verification, failure history or closure evidence."
+    },
+    {
+      "path": "evidence/eia-lookup-list/offline-tests-1.tap",
+      "sha256": "d3050e5f2cf8b6ad36bc4233d7df129c3281e2532b332ab29f3cbdafe9556a18",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/offline-tests-closure.tap",
+      "sha256": "6cd3927feff906c2184a3de676e891ba448b1338216fcee2e9cb42e96c0a00d3",
+      "why": "Retain final verification, failure history or closure evidence."
+    },
+    {
+      "path": "evidence/eia-lookup-list/offline-tests-final.tap",
+      "sha256": "7f88fdc1752ff1fb298f673381fe4ca2e53bf055bb2c030e1bf2f30c873add1e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/owner-decisions.json",
+      "sha256": "448ab58b52b17f983b889a73ed846b310cbae3ddaf8b1fdf65ad9e40e2ff24c0",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-check-changes.json",
+      "sha256": "0c72fcd1a164e959d5ae3d3c9da7ce73ab098283bfe52563767c7bd429885303",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-checks-1.json",
+      "sha256": "276b42d9a47753cecae5a550a228855151e1204b306a108555ec7bd75ff0e45d",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-checks-2.json",
+      "sha256": "bde1bd6d531af84d7a7d4b8eed63541e74a35ae54e837d5fea5befc3fd3521c9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-support/ng-consumption-series.json",
+      "sha256": "5b7db733487e043981db7548b6dbde0095dbdf7ebac2e4ef91c213ccf9b36054",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-support/ng-production-series.json",
+      "sha256": "53c4fe98394e1a4c0919341ffeabda1c2aad881baba50778cb0e5b6137db3c65",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-support/petroleum-production-series.json",
+      "sha256": "0c43e59bb13111c1ee52a3d0c2b9fbc5acd7217ece13c47975370ee9dd91fc9c",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-support/seds-gasoline-consumption-USA.json",
+      "sha256": "2250638bb4e94d0d9092988725d546b9d190c2608ef4de6e8e43794be6f951f9",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/row-support/seds-total-energy-NY.json",
+      "sha256": "e0e545a4706f3497beaa1d6209cb4d71cf1dd86fc9c2be853284b4eade1352d4",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/serialization-replay.json",
+      "sha256": "35a9398ed0e4769763b98e5b4b186dfb5cc53bb8f533d0bfe91905b9706d552c",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/source-notes.md",
+      "sha256": "d2912d2897adec7cee0395d4d2d2897c69a719b7be4a32e92202464aac9b616f",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/test-boundary-changes.json",
+      "sha256": "ae13404e7cd7d82379f03f7b30b7af071f92cc6089ff3bd2234c3f80edaa1df6",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "evidence/eia-lookup-list/work-order.txt",
+      "sha256": "5ead258ec579682ea553838bfc0b37c3703c1a2c56d864ec638d0fd4b0d1a83e",
+      "why": "Preserve frozen expectations, official metadata, test/build records, live outputs, browser evidence or review documentation."
+    },
+    {
+      "path": "lib/client/xlsx.js",
+      "sha256": "f6953f3a0cfe16a1333aeea852d58bd1a58012ec285c5a4dd876db5ad6eac17c",
+      "why": "Keep measurement basis, region, fallback, completeness and no-conversion provenance in exported workbooks."
+    },
+    {
+      "path": "lib/eia-intent-payload.js",
+      "sha256": "ab74bc191d351adace9679b656675d7a466835f13adb970bac0038075d36cf42",
+      "why": "Keep source form and explicit choices separate and identical across browser/direct/evaluation paths."
+    },
+    {
+      "path": "lib/sources/eia/eia-fetch.js",
+      "sha256": "e6ab2eb33efbb26635bc7f4505a6d8f3e2d634fbb79fd7b1cfd720a60ec5c244",
+      "why": "Select compatible checked measures, validate bounds, page/pacing source requests and return safe visible results."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "sha256": "ceb7d98d7a3cf2f7a897c1357d739f6ae3effb08cf90e9fbb397d59dae09a9cf",
+      "why": "Select compatible checked measures, validate bounds, page/pacing source requests and return safe visible results."
+    },
+    {
+      "path": "lib/sources/eia/locked-form.js",
+      "sha256": "2d0682fb2c25c29a5663de54c1dbcf40ab9c3fd67283faed67b1acd332a9a7ca",
+      "why": "Set only the authorized Luna/low default; frozen prompt/schema/checks remain unchanged."
+    },
+    {
+      "path": "lib/sources/eia/lookup-list.js",
+      "sha256": "e6957f498de26f737c057e4ffda10bb43054b23eb92be7938f1c39fed4d0dd3c",
+      "why": "Select compatible checked measures, validate bounds, page/pacing source requests and return safe visible results."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "sha256": "d13b01e765ada8eeeacb7ab2b4abbbe90122c617df16cc46ea7653b09267f887",
+      "why": "Select compatible checked measures, validate bounds, page/pacing source requests and return safe visible results."
+    },
+    {
+      "path": "scripts/eia-lookup/browser-replay.js",
+      "sha256": "379921974ca1871f7b253c03fd7060e957350ae18bae7e8b0ce5a04433f90969",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/browser-server.js",
+      "sha256": "1132980af318daaf2a866c60bbc5cb7fe04266c3b9242c40cab310f4d1835b37",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/browser-transport.js",
+      "sha256": "320529080f187ddfb5a5650eaf8d685023010744c8d50d5db2e2994015178f42",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/budget.js",
+      "sha256": "265fa5944d23ee62f8484a2ff0ae01c9b9f83178f4ece4a30fa4c8c3164ed269",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/check-rows.js",
+      "sha256": "7c510e054e6884480b99d9d17435c04a10aa8a3c4852fb53d962ac2da6c2b651",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/evaluate.js",
+      "sha256": "14124e81ae420ebe8e293bcb0f7beea7b9af5e302b3ac1a0d3b2fe2a864bf8d3",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/freeze.js",
+      "sha256": "e361ce636b523c0a0b1a9d5d848caae039d9c1a5debb3e25db0cd045151e94ba",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/gold-live.js",
+      "sha256": "f4e6fc4edbdc8661e327695f792b9ff6cdbf8cf1d8f2dc0b4d1346f02426a552",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/reconcile-cost.js",
+      "sha256": "b6d776fa4caca3969601e11a5dce0e7e761e60b0a80e8b06bfdb8849626eaa31",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/replay-serialization.js",
+      "sha256": "1b347cb4832dda666a569639d307e3bb150e815611bcd70dadddb6ddf9b83e68",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "scripts/eia-lookup/score-data.js",
+      "sha256": "d524b08409527b6344d654639f4252201cab64b80361210da02a23537fc073dd",
+      "why": "Reproduce bounded row/evaluation checks, preserve evidence, verify frozen inputs or reconcile recorded usage."
+    },
+    {
+      "path": "tests/eia-candidate-api.test.js",
+      "sha256": "43b23f69a71a88efc6f484799a37ef67f84c6a1f1b68cb460a5b6d5a401700dd",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/eia-contract.test.js",
+      "sha256": "74645edcbc56efb197a0b69bd40cde3eed171395e95b47297a2dddb8ec70eda4",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/eia-independent-challenges.test.js",
+      "sha256": "0afac14da62ab7c5d5e49dd12f6fb0eb3e949c25c26e969a971ccb8012eaf583",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/eia-locked-form.test.js",
+      "sha256": "7630e63c346a0bd97ecaf9fdfcec797fe12a3bef4f9913219b283b25793e1842",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/eia-lookup-core.test.js",
+      "sha256": "27ac14bb9454487a60936a207a1ce428678174f6908b409e20dcf025c6ac90e5",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/eia-lookup-search.test.js",
+      "sha256": "840bac23e9b0f33ee7427de33dda3d0181ad0e6eccdfd0664dfaafb1c279541c",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/fixtures/eia/lookup-list/fetch-pages.json",
+      "sha256": "646f046059b970c66247b0921f9424beb89e5673219cca4259d45f201cc7a4f1",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    },
+    {
+      "path": "tests/fixtures/eia/lookup-list/independent-key.json",
+      "sha256": "f11bb9728620e8e538a831ab220948b7dcdc0eb69c48ec854f71d44b377c8f40",
+      "why": "Retain old-module tests, add full-path/recorded-response regressions, and freeze the supplied independent key."
+    }
+  ],
+  "selfExcluded": "file-inventory.json is listed by Git and its enclosing final copy manifest.",
+  "unrelatedUntouched": [
+    "docs/eia-interpretation-audit.md"
+  ],
+  "excluded": [
+    "Designated credential files in Downloads",
+    "Any .env/authentication files",
+    "node_modules",
+    ".next",
+    "caches"
+  ],
+  "noMissingRequiredRecords": true
+}
