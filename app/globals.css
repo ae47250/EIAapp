@@ -20,9 +20,11 @@ body {
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--ink);
   line-height: 1.5;
-  background: var(--page-red);
   background-attachment: fixed;
 }
+
+body[data-env="production"] { background-color: var(--page-red); }
+body[data-env="preview"] { background-color: #cfe8ff; }
 
 body::before {
   content: "";
