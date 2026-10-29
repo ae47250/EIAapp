@@ -23,9 +23,10 @@ def build_node(node):
             row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
         result['dataColumns'][0]['classification']='via '+facet
         result['classificationComplete']=review['complete'] and all(r['classification']!='pending' for r in result['facets'][facet])
-    if node['route'].split('/')[0] in ['electricity','coal']:
+    if node['route'].split('/')[0] in ['electricity','coal'] or node['route'].startswith('natural-gas/enr/'):
         family=node['route'].split('/')[0]
-        review=i.read(i.EVIDENCE/(family+'-classification.json'))['routes'][node['route']]
+        filename='natural-gas-reserves-classification.json.gz' if family=='natural-gas' else family+'-classification.json'
+        review=i.read(i.EVIDENCE/filename)['routes'][node['route']]
         columns={r['id']:r for r in review['dataColumns']}
         for row in result['dataColumns']:
             decision=columns[row['id']]
