@@ -1,3 +1,4 @@
+import {sourceIntentPayload} from '../../lib/eia-intent-payload.js';
 import {writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import {interpretQuery} from '../../lib/sources/eia/interpret-query.js';
 import {searchLookup} from '../../lib/sources/eia/lookup-search.js';
@@ -19,9 +20,9 @@ for(let repeat=1;repeat<=2;repeat++)for(const k of keys){
    if(url!=='https://api.openai.com/v1/responses'||++generationCalls>48||sha256(JSON.stringify(body))!==expected.bodySHA256)throw new Error('Frozen request or call-count boundary violated');
    return nativeFetch(url,init);
   },onAttempt:attempt=>{attempts.push(attempt);writeFileSync(new URL(`${k.id}-${repeat}-raw.json`,directory),JSON.stringify({id:k.id,repeat,query:k.query,attempts,events},null,2)+'\n');},log:event=>events.push(event)});
- const result=await searchLookup(k.query,intent);
+ const result=await searchLookup(k.query,sourceIntentPayload(intent));
  const finalAttempt=attempts.at(-1),usage=attempts.map(a=>a.response?.usage||{});
- const costUSD=usage.reduce((n,u)=>n+((u.input_tokens||0)-(u.input_tokens_details?.cached_tokens||0))*.10/1e6+(u.input_tokens_details?.cached_tokens||0)*.01/1e6+(u.output_tokens||0)*.50/1e6,0);
+ const costUSD=usage.reduce((n,u)=>{const cached=u.input_tokens_details?.cached_tokens||0,written=u.input_tokens_details?.cache_write_tokens||0;return n+((u.input_tokens||0)-cached-written)*.10/1e6+written*.125/1e6+cached*.01/1e6+(u.output_tokens||0)*.50/1e6;},0);
  const costUpperUSD=usage.reduce((n,u)=>n+(u.input_tokens||0)*.25/1e6+(u.output_tokens||0)*.50/1e6,0);
  const row={id:k.id,repeat,query:k.query,meaning:scoreMeaning(finalAttempt?.form,k,finalAttempt?.reason||'answer'),checksPassed:finalAttempt?.checks?.valid===true,
   firstAttempt:{meaning:scoreMeaning(attempts[0]?.form,k,attempts[0]?.reason||'answer'),checksPassed:attempts[0]?.checks?.valid===true},

@@ -1,0 +1,2790 @@
+{
+  "id": "I12",
+  "repeat": 1,
+  "query": "biofuel production in iowa and nebraksa",
+  "attempts": [
+    {
+      "attempt": 0,
+      "body": {
+        "model": "gpt-6-luna",
+        "input": "Read the raw EIA data request and fill the supplied form. Use the allowed values in its schema. Copy quoted_words exactly from the raw request, including typos; do not produce character positions.\nBare energy means total energy.\nGas without a qualifier is ambiguous: clarify product with natural gas and petroleum (gasoline) options, leave product null, and preserve everything else.\nGeorgia is the country only alongside another non-US country or international context; otherwise it is the US state.\nIf no frequency is stated, use annual and explicit=false.\nNever invent a sector.\nKeep mention order.\nPut only explicit exclusions (not X, except X, excluding X, but not X) in excluded lists. Doubt or comparison wording (not sure, not convinced) is not an exclusion.\nA place that cannot be matched to the allowed list needs geography clarification.\nAsk for clarification only when a required field cannot be determined.\nResolve unambiguous spelling errors to allowed values; preserve the original spelling in quoted_words.\nEvery quote must be a contiguous excerpt of the raw request. It may cover the whole coordinated request; never synthesize an expanded product/activity phrase.\nIn excluded_topics, fill only fields explicitly excluded. Do not inherit a requested activity or sector into an exclusion that names only a product.\n\nRaw query: \"biofuel production in iowa and nebraksa\"",
+        "text": {
+          "format": {
+            "type": "json_schema",
+            "name": "eia_search",
+            "strict": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "sector": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/sector"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "sector",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sector": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/sector"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "frequency": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "$ref": "#/$defs/frequency"
+                    },
+                    "explicit": {
+                      "type": "boolean"
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "explicit",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "unsupported_words": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "clarification": {
+                  "type": "object",
+                  "properties": {
+                    "needed": {
+                      "type": "boolean"
+                    },
+                    "about": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        "product",
+                        "geography",
+                        "activity",
+                        "frequency",
+                        "other",
+                        null
+                      ]
+                    },
+                    "options": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "value"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "needed",
+                    "about",
+                    "options"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "geographies",
+                "excluded_geographies",
+                "topics",
+                "excluded_topics",
+                "sector",
+                "frequency",
+                "unsupported_words",
+                "clarification"
+              ],
+              "additionalProperties": false,
+              "$defs": {
+                "geography": {
+                  "type": "string",
+                  "enum": [
+                    "AFG | Afghanistan | country",
+                    "AGO+BDI+BEN+BFA+BWA+CAF+CIV+CMR+COD+COG+COM+CPV+DJI+DZA+EGY+ERI+ESH+ETH+GAB+GHA+GIN+GMB+GNB+GNQ+KEN+LBR+LBY+LSO+MAR+MDG+MLI+MOZ+MRT+MUS+MWI+NAM+NER+NGA+REU+RWA+SDN+SEN+SHN+SLE+SOM+SSD+STP+SWZ+SYC+TCD+TGO+TUN+TZA+UGA+ZAF+ZMB+ZWE | Africa | country",
+                    "AL | Alabama | US state",
+                    "AK | Alaska | US state",
+                    "ALB | Albania | country",
+                    "DZA | Algeria | country",
+                    "ASM | American Samoa | country",
+                    "AGO | Angola | country",
+                    "ATA | Antarctica | country",
+                    "ATG | Antigua and Barbuda | country",
+                    "ARG | Argentina | country",
+                    "AZ | Arizona | US state",
+                    "AR | Arkansas | US state",
+                    "ARM | Armenia | country",
+                    "ABW | Aruba | country",
+                    "AFG+ASM+AUS+BGD+BRN+BTN+CHN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+IND+JPN+KHM+KIR+KOR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+NZL+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Asia & Oceania | country",
+                    "AUS | Australia | country",
+                    "AUS+NZL | Australia and New Zealand | country",
+                    "AUT | Austria | country",
+                    "AZE | Azerbaijan | country",
+                    "BHR | Bahrain | country",
+                    "BGD | Bangladesh | country",
+                    "BRB | Barbados | country",
+                    "BLR | Belarus | country",
+                    "BEL | Belgium | country",
+                    "BLZ | Belize | country",
+                    "BEN | Benin | country",
+                    "BMU | Bermuda | country",
+                    "BTN | Bhutan | country",
+                    "BOL | Bolivia | country",
+                    "BIH | Bosnia and Herzegovina | country",
+                    "BWA | Botswana | country",
+                    "BRA | Brazil | country",
+                    "VGB | British Virgin Islands | country",
+                    "BRN | Brunei | country",
+                    "BGR | Bulgaria | country",
+                    "BFA | Burkina Faso | country",
+                    "MMR | Burma | country",
+                    "BDI | Burundi | country",
+                    "CPV | Cabo Verde | country",
+                    "CA | California | US state",
+                    "KHM | Cambodia | country",
+                    "CMR | Cameroon | country",
+                    "CAN | Canada | country",
+                    "CYM | Cayman Islands | country",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BOL+BRA+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Central & South America | country",
+                    "CAF | Central African Republic | country",
+                    "TCD | Chad | country",
+                    "CHL | Chile | country",
+                    "CHN | China | country",
+                    "COL | Colombia | country",
+                    "CO | Colorado | US state",
+                    "COM | Comoros | country",
+                    "COG | Congo-Brazzaville | country",
+                    "COD | Congo-Kinshasa | country",
+                    "CT | Connecticut | US state",
+                    "COK | Cook Islands | country",
+                    "CRI | Costa Rica | country",
+                    "HRV | Croatia | country",
+                    "CUB | Cuba | country",
+                    "CYP | Cyprus | country",
+                    "CZE | Czechia | country",
+                    "DE | Delaware | US state",
+                    "DNK | Denmark | country",
+                    "DC | District of Columbia | US state",
+                    "DJI | Djibouti | country",
+                    "DMA | Dominica | country",
+                    "DOM | Dominican Republic | country",
+                    "DDR | Germany, East | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+SCG+SUN+TJK+TKM+UKR+UZB+YUG | Eastern Europe and Eurasia | country",
+                    "ECU | Ecuador | country",
+                    "EGY | Egypt | country",
+                    "SLV | El Salvador | country",
+                    "GNQ | Equatorial Guinea | country",
+                    "ERI | Eritrea | country",
+                    "EST | Estonia | country",
+                    "SWZ | Eswatini | country",
+                    "ETH | Ethiopia | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+RUS+SUN+TJK+TKM+UKR+UZB | Eurasia | country",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SCG+SRB+SVK+SVN+SWE+TUR+XKS+YUG | Europe | country",
+                    "AUT+BEL+BGR+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GRC+HRV+HUN+IRL+ITA+LTU+LUX+LVA+MLT+NLD+POL+PRT+ROU+SVK+SVN+SWE | European Union | country",
+                    "FLK | Falkland Islands | country",
+                    "FRO | Faroe Islands | country",
+                    "X3 | Federal Offshore - Gulf of America | US state",
+                    "X5 | Federal Offshore - Pacific | US state",
+                    "FJI | Fiji | country",
+                    "FIN | Finland | country",
+                    "FL | Florida | US state",
+                    "CSK | Former Czechoslovakia | country",
+                    "SCG | Former Serbia and Montenegro | country",
+                    "SUN | Former U.S.S.R. | country",
+                    "YUG | Former Yugoslavia | country",
+                    "FRA | France | country",
+                    "GUF | French Guiana | country",
+                    "PYF | French Polynesia | country",
+                    "GAB | Gabon | country",
+                    "GA | Georgia | US state",
+                    "GEO | Georgia | country",
+                    "DEU | Germany | country",
+                    "GHA | Ghana | country",
+                    "GIB | Gibraltar | country",
+                    "GRC | Greece | country",
+                    "GRL | Greenland | country",
+                    "GRD | Grenada | country",
+                    "GLP | Guadeloupe | country",
+                    "GUM | Guam | country",
+                    "GTM | Guatemala | country",
+                    "GIN | Guinea | country",
+                    "GNB | Guinea-Bissau | country",
+                    "GUY | Guyana | country",
+                    "HTI | Haiti | country",
+                    "HI | Hawaii | US state",
+                    "HITZ | Hawaiian Trade Zone | country",
+                    "HND | Honduras | country",
+                    "HKG | Hong Kong | country",
+                    "HUN | Hungary | country",
+                    "ISL | Iceland | country",
+                    "ID | Idaho | US state",
+                    "IL | Illinois | US state",
+                    "IND | India | country",
+                    "IN | Indiana | US state",
+                    "IDN | Indonesia | country",
+                    "IA | Iowa | US state",
+                    "IRN | Iran | country",
+                    "IRQ | Iraq | country",
+                    "IRL | Ireland | country",
+                    "ISR | Israel | country",
+                    "ITA | Italy | country",
+                    "CIV | Ivory Coast | country",
+                    "JAM | Jamaica | country",
+                    "JPN | Japan | country",
+                    "JOR | Jordan | country",
+                    "KS | Kansas | US state",
+                    "KAZ | Kazakhstan | country",
+                    "KY | Kentucky | US state",
+                    "KEN | Kenya | country",
+                    "KIR | Kiribati | country",
+                    "XKS | Kosovo | country",
+                    "KWT | Kuwait | country",
+                    "KGZ | Kyrgyzstan | country",
+                    "LAO | Laos | country",
+                    "LVA | Latvia | country",
+                    "LBN | Lebanon | country",
+                    "LSO | Lesotho | country",
+                    "LBR | Liberia | country",
+                    "LBY | Libya | country",
+                    "LTU | Lithuania | country",
+                    "LA | Louisiana | US state",
+                    "LUX | Luxembourg | country",
+                    "MAC | Macau | country",
+                    "MDG | Madagascar | country",
+                    "ME | Maine | US state",
+                    "MWI | Malawi | country",
+                    "MYS | Malaysia | country",
+                    "MDV | Maldives | country",
+                    "MLI | Mali | country",
+                    "MLT | Malta | country",
+                    "MTQ | Martinique | country",
+                    "MD | Maryland | US state",
+                    "MA | Massachusetts | US state",
+                    "MRT | Mauritania | country",
+                    "MUS | Mauritius | country",
+                    "MEX | Mexico | country",
+                    "MI | Michigan | US state",
+                    "FSM | Micronesia | country",
+                    "ARE+BHR+IRN+IRQ+ISR+JOR+KWT+LBN+OMN+PSE+QAT+SAU+SYR+YEM | Middle East | country",
+                    "MN | Minnesota | US state",
+                    "MS | Mississippi | US state",
+                    "MO | Missouri | US state",
+                    "MDA | Moldova | country",
+                    "MNG | Mongolia | country",
+                    "MT | Montana | US state",
+                    "MNE | Montenegro | country",
+                    "MSR | Montserrat | country",
+                    "MAR | Morocco | country",
+                    "MOZ | Mozambique | country",
+                    "NAM | Namibia | country",
+                    "NRU | Nauru | country",
+                    "NE | Nebraska | US state",
+                    "NPL | Nepal | country",
+                    "NLD | Netherlands | country",
+                    "NLDA | Netherlands Antilles | country",
+                    "NV | Nevada | US state",
+                    "NCL | New Caledonia | country",
+                    "NH | New Hampshire | US state",
+                    "NJ | New Jersey | US state",
+                    "NM | New Mexico | US state",
+                    "NY | New York | US state",
+                    "NZL | New Zealand | country",
+                    "NIC | Nicaragua | country",
+                    "NER | Niger | country",
+                    "NGA | Nigeria | country",
+                    "NIU | Niue | country",
+                    "ABW+AFG+AGO+ALB+ARE+ARG+ARM+ATA+ATG+AZE+BDI+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CHN+CIV+CMR+COD+COG+COK+COM+CPV+CUB+CYM+CYP+DJI+DMA+DOM+DZA+ECU+EGY+ERI+ESH+ETH+FJI+FLK+FRO+FSM+GAB+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GNQ+GRD+GRL+GTM+GUF+GUY+HKG+HND+HRV+HTI+IDN+IND+IRN+IRQ+JAM+JOR+KAZ+KEN+KGZ+KHM+KIR+KNA+KWT+LAO+LBN+LBR+LBY+LCA+LKA+LSO+MAC+MAR+MDA+MDG+MDV+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NGA+NIC+NIU+NLDA+NPL+NRU+OMN+PAK+PAN+PER+PHL+PNG+PRK+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SAU+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUV+TWN+TZA+UGA+UKR+URY+USIQ+UZB+VCT+VEN+VGB+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OECD | country",
+                    "ABW+AFG+AGO+ALB+ARG+ARM+ASM+ATA+ATG+AUS+AUT+AZE+BDI+BEL+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CAN+CHE+CHL+CHN+CIV+CMR+COD+COK+COL+COM+CPV+CRI+CSK+CUB+CYM+CYP+CZE+DDR+DEU+DEUW+DJI+DMA+DNK+DOM+ECU+EGY+ERI+ESH+ESP+EST+ETH+FIN+FJI+FLK+FRA+FRO+FSM+GBR+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GRC+GRD+GRL+GTM+GUF+GUM+GUY+HITZ+HKG+HND+HRV+HTI+HUN+IDN+IND+IRL+ISL+ISR+ITA+JAM+JOR+JPN+KAZ+KEN+KGZ+KHM+KIR+KNA+KOR+LAO+LBN+LBR+LCA+LKA+LSO+LTU+LUX+LVA+MAC+MAR+MDA+MDG+MDV+MEX+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NIC+NIU+NLD+NLDA+NOR+NPL+NRU+NZL+OMN+PAK+PAN+PER+PHL+PNG+POL+PRI+PRK+PRT+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SVK+SVN+SWE+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUR+TUV+TWN+TZA+UGA+UKR+URY+USA+USIQ+UZB+VCT+VGB+VIR+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OPEC | country",
+                    "BMU+CAN+GRL+MEX+SPM+USA | North America | country",
+                    "NC | North Carolina | US state",
+                    "ND | North Dakota | US state",
+                    "PRK | North Korea | country",
+                    "MKD | North Macedonia | country",
+                    "MNP | Northern Mariana Islands | country",
+                    "NOR | Norway | country",
+                    "ASM+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+GUM+HITZ+HUN+IRL+ISL+ISR+ITA+JPN+KOR+LTU+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRI+PRT+SVK+SVN+SWE+TUR+USA+USOH+VIR | OECD | country",
+                    "ASM+AUS+GUM+JPN+KOR+NZL | OECD - Asia And Oceania | country",
+                    "AUT+BEL+CHE+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+HUN+IRL+ISL+ITA+LTU+LUX+LVA+NLD+NOR+POL+PRT+SVK+SVN+SWE+TUR | OECD - Europe | country",
+                    "CAN+MEX+USA | OECD - North America | country",
+                    "OH | Ohio | US state",
+                    "OK | Oklahoma | US state",
+                    "OMN | Oman | country",
+                    "ARE+COG+DZA+GAB+GNQ+IRN+IRQ+KWT+LBY+NGA+SAU+VEN | OPEC | country",
+                    "COG+DZA+GAB+GNQ+LBY+NGA | OPEC - Africa | country",
+                    "OR | Oregon | US state",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BMU+BOL+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GRL+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SPM+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Other Americas | country",
+                    "AFG+ASM+BGD+BRN+BTN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+KHM+KIR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Other Asia-Pacific | country",
+                    "PAK | Pakistan | country",
+                    "PSE | Palestinian Territories | country",
+                    "PAN | Panama | country",
+                    "PNG | Papua New Guinea | country",
+                    "PRY | Paraguay | country",
+                    "PA | Pennsylvania | US state",
+                    "ARE+BHR+IRN+IRQ+KWT+QAT+SAU | Persian Gulf | country",
+                    "PER | Peru | country",
+                    "PHL | Philippines | country",
+                    "POL | Poland | country",
+                    "PRT | Portugal | country",
+                    "PRI | Puerto Rico | country",
+                    "QAT | Qatar | country",
+                    "REU | Reunion | country",
+                    "RI | Rhode Island | US state",
+                    "ROU | Romania | country",
+                    "RUS | Russia | country",
+                    "RWA | Rwanda | country",
+                    "SHN | Saint Helena | country",
+                    "KNA | Saint Kitts and Nevis | country",
+                    "LCA | Saint Lucia | country",
+                    "SPM | Saint Pierre and Miquelon | country",
+                    "VCT | Saint Vincent/Grenadines | country",
+                    "WSM | Samoa | country",
+                    "STP | Sao Tome and Principe | country",
+                    "SAU | Saudi Arabia | country",
+                    "SEN | Senegal | country",
+                    "SRB | Serbia | country",
+                    "SYC | Seychelles | country",
+                    "SLE | Sierra Leone | country",
+                    "SGP | Singapore | country",
+                    "SVK | Slovakia | country",
+                    "SVN | Slovenia | country",
+                    "SLB | Solomon Islands | country",
+                    "SOM | Somalia | country",
+                    "ZAF | South Africa | country",
+                    "SC | South Carolina | US state",
+                    "SD | South Dakota | US state",
+                    "KOR | South Korea | country",
+                    "SSD | South Sudan | country",
+                    "ESP | Spain | country",
+                    "LKA | Sri Lanka | country",
+                    "SDN | Sudan | country",
+                    "SUR | Suriname | country",
+                    "SWE | Sweden | country",
+                    "CHE | Switzerland | country",
+                    "SYR | Syria | country",
+                    "TWN | Taiwan | country",
+                    "TJK | Tajikistan | country",
+                    "TZA | Tanzania | country",
+                    "TN | Tennessee | US state",
+                    "TX | Texas | US state",
+                    "THA | Thailand | country",
+                    "GMB | Gambia, The | country",
+                    "BHS | The Bahamas | country",
+                    "TLS | Timor-Leste | country",
+                    "TGO | Togo | country",
+                    "TON | Tonga | country",
+                    "TTO | Trinidad and Tobago | country",
+                    "TUN | Tunisia | country",
+                    "TUR | Turkiye | country",
+                    "TKM | Turkmenistan | country",
+                    "TCA | Turks and Caicos Islands | country",
+                    "TUV | Tuvalu | country",
+                    "USIQ | U.S. Pacific Islands | country",
+                    "USOH | U.S. Territories | country",
+                    "VIR | U.S. Virgin Islands | country",
+                    "UGA | Uganda | country",
+                    "UKR | Ukraine | country",
+                    "ARE | United Arab Emirates | country",
+                    "GBR | United Kingdom | country",
+                    "USA | United States | national",
+                    "URY | Uruguay | country",
+                    "UT | Utah | US state",
+                    "UZB | Uzbekistan | country",
+                    "VUT | Vanuatu | country",
+                    "VEN | Venezuela | country",
+                    "VT | Vermont | US state",
+                    "VNM | Vietnam | country",
+                    "VA | Virginia | US state",
+                    "WAK | Wake Island | country",
+                    "WA | Washington | US state",
+                    "DEUW | Germany, West | country",
+                    "WV | West Virginia | US state",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SRB+SVK+SVN+SWE+TUR+XKS | Western Europe | country",
+                    "ESH | Western Sahara | country",
+                    "WI | Wisconsin | US state",
+                    "WLD | World | country",
+                    "WY | Wyoming | US state",
+                    "YEM | Yemen | country",
+                    "ZMB | Zambia | country",
+                    "ZWE | Zimbabwe | country"
+                  ]
+                },
+                "product": {
+                  "type": "string",
+                  "enum": [
+                    "natural gas",
+                    "petroleum",
+                    "electricity",
+                    "coal",
+                    "nuclear",
+                    "renewable",
+                    "fossil fuels",
+                    "hydro",
+                    "solar",
+                    "wind",
+                    "geothermal",
+                    "biofuels",
+                    "marine",
+                    "total energy"
+                  ]
+                },
+                "activity": {
+                  "type": "string",
+                  "enum": [
+                    "sales",
+                    "customers",
+                    "consumption",
+                    "production",
+                    "generation",
+                    "imports",
+                    "exports",
+                    "reserves",
+                    "capacity",
+                    "storage",
+                    "prices",
+                    "expenditures"
+                  ]
+                },
+                "sector": {
+                  "type": "string",
+                  "enum": [
+                    "residential",
+                    "commercial",
+                    "industrial",
+                    "transportation",
+                    "electric power",
+                    "utility"
+                  ]
+                },
+                "frequency": {
+                  "type": "string",
+                  "enum": [
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "quarterly",
+                    "annual"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "reasoning": {
+          "effort": "low"
+        },
+        "max_output_tokens": 16000
+      },
+      "response": {
+        "id": "resp_0ec146f47f867698006ae2959a5c0087d2819ff24c85a0504e",
+        "object": "response",
+        "created_at": 1793234330,
+        "status": "completed",
+        "access_programs": null,
+        "background": false,
+        "billing": {
+          "payer": "developer"
+        },
+        "completed_at": 1793234333,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 16000,
+        "max_tool_calls": null,
+        "model": "gpt-6-luna",
+        "moderation": null,
+        "output": [
+          {
+            "id": "rs_0ec146f47f867698006ae2959b6e8087d29004cbce0597b633",
+            "type": "reasoning",
+            "content": [],
+            "encrypted_content": "gAAAAABq4pWdsiqnpLBpb0kPPgnClfsXRkG1a8LEzHuLrxdh1ec3PspqoFEzkgvmiESWbJk_1GKHnvXg4Do80E0c-C0cR8oLFXPSHyBPlJXKymRtdvlmElnkRYZwuHl7H2blpyDckvtJO79kqThwF0jZnVxQj7b6ylJQssJ4nLiM_0D1b0ELKUxeGFzHlD7i1qQpQgJgxNeyxVKDvIYWw5xbV7afjLZEHUv_oSv1hK-CK0XHelVTWlhbTWFacnt0W_A00wgKDfuh-T8IP-mMP0gXiPJzCXBnUmacaqOn0Kd5z3oHWHvuQNR2tDEQ2HWCAl1lOp0_VY2PAlElSroxF0SdXHRv5vjsFhTH0phWMSQGz5miZPsd6MCvGCrAN86gWmIXjy6kK462VabgYQgpYt3Y2w5zQ59eC6CpmjEv1x_tpGSruhTEMtYRHGxb6eckV24BoDmICGgbDzxlWrL0Fl2TBLFcuT_Q18SehCWX0pdqIx5fcmT4KqYuAjNhW9gSSfS3kFKW45BQqDysLmTsJ-YVHga5hCvGkVTDs25j204CfA6iIlgDdY0LN0N5OjSozr59JXHUGv8qZteTXsFW49xESnyJffPy1KkBFhAiDwSwRCCBkf7vD3ZT29O9EBM76PIsn4EANtOhw1vm3dfP3FXUMfcz3YS_TmsXb6zKQ7LbpVGrru86zT6pl3AEAQjlBxVs66s74wcXVl6e27LPFU2yS3DN-Hcd-OMRrn2_0DxGrdOzy8t3NGLn65cG0ARpfoka43GBs58YuJ1zTYZ0b93EtExVBBP_lWk1qiXy-56hE50oGGEW5DddSkO7jdG7j5VFvKKKC9qCJGStfp7PY9X8VDuX3Hd0S_Uerc8NX3y8Vwg4jkrDjtFII3sgvWAPwaXySno4b5cpBiiz8IWZUjF_4tw6iYbQ8HZj_yT4vxitGSDYsmWrGq3hJF7wYx09poCsyOfdZkjVTt2XsKuKXux9UbT7RSSl2byqPsqSkoS9Mkmn6-Egj5bAtRNKvxi2eqYPylqpkvlJ7eADdbxXl5jqd4UCDy1ObW6h_XG_7-V4L2EcTqoVcr4jWOb8UjIyUoQG5FU7WHhgfHuJ9UIOJwDbAyfEFiyn-vQ5tL4c86fZCGs2N4Jbdf5_fl9R6jfAcfL65oy5_ZDITYMkouaVhPOCpp8Tlg9JjXWFVHWXReJz6hVuyM51rM6bJ8Wz6XSovvKJYAPnh5Twmy6lYfjW8YIZ0wMTVzclKSDakDsxjdUTRUS46gh5HzHvV_ockj6CnRaHKUubNBHTOW4YOdkyeIHbZByKgwKJnlYNgKwv2IcJd2XLpar6Idtp-cSRXyA35SDwcHhr2g0pIuL242r0bQVuwA6XYQBuWZQKXwKwvzSjTzQIz-uhmlrDHtnZJ0qnu1KEzUDbYZvZLZ-oN5kyxncxhV3WoJ25QWI8yYV8tO4OTFsqv2v6VDAiabaJG-6XzH5D8Z2p33EEH8pdkegNhhXl09bNgEq25j9wMeJk0fo3FmFvE8mwDASU9vLO-mzpJB4rcBKKUD-ySfTLQMY-YjQapnHfeGkFbYnjI4RBToP7V1EOQWQORH6lkcYGvxelh10ndLAWLz-MjjdFdWiI5lksnQ95L2vRTD9aH87njvW2cwgnukFDMaGcKfvxv2hRTii3eNTgSm8yFBzQFrXF_Ey8uhnpm_mR-N0xWjXADDKNhz5xB4Fk3sSe9HJeMJ6vcxTAJiswjBHFGCFxpOqaiIL1baR9tdDIQrdCHDzoQmYyyjD2c45-KiCVLHqsJfXa96vxE2YcMeOrC3MgMmCgOuUSWNFbOUKV8Qzj7AL1ehbHEod941RRZBTdBuZ0qIcARCn8T_o96MC1EujM0rcdI1tL7DPDaYGolL2yZkKw0yNglGtJ-55UgUTLXhUrD8q8wcW21rbOXfG5J2AX3mWtw--n1TZYvqMzyidhCXrWrbiUIIrOJyMl0Bp51KX6yNn2SYPKddZZ81mg0xMuRpPNRPkY5C4_JjVX4uY87h2sC3XFUuMVXvMwi3eu88XILjvysqoT30z-L9RA8ySmvVO0Ss-qDHt5XH6c4KYH5lZIc7GYwg6p7TwgrhdfPgxmTN6ur16lgZA_Zbybt4OIhG3oJiE5tzLgK3LHNfoXwKc9VqhyR8wLPezWwpR-QSl-TqWk0YQMHS3xw6XPa8fUrAher2xLy13APVuwQy8qiRt_A0F4CQ1C-t-ToEoXM9ES9Cdknv85d7KUbfOcKVBTBBQAF_bIWkwqgHnBm5QVKAOg0Hgy955qrKiQDVjmkwGLHPgh4HfA4gwl28iCJYbi0KUqDM90ZSGuI3-gSvDvifmv1ViqA0th9X5Sgs5DE_87cxXsOkJvLbRwdg7QbZ_yL-4Z3BAqV3Ugq5wJL3B26oI3zbm4SoPD-SmOBbtSL6mHx9xwFE_bMzfMPSyCtTmbPVYuitz3Kqz6vOKXvk-LLEKyKWEuMsIQimCkwAPCMLze1IoGh9ik3mBc5ioke_WK3XFI0WQp17R9qXa2g-uYv4fIr7VznYyFoRKzpQOhrYUYRq57zzsS4PUU4W2Y6eoQ0jF78FJ3DLcgHyZ0nOxENZeFZKp4BJZj4i1oyzE=",
+            "summary": []
+          },
+          {
+            "id": "msg_0ec146f47f867698006ae2959c62b087d2a69f708e6122988c",
+            "type": "message",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"geographies\":[{\"geography\":\"NE | Nebraska | US state\",\"quoted_words\":\"nebraksa\"}],\"excluded_geographies\":[],\"topics\":[{\"product\":\"biofuels\",\"activity\":\"production\",\"quoted_words\":\"biofuel production\"}],\"excluded_topics\":[],\"sector\":{\"value\":null,\"quoted_words\":null},\"frequency\":{\"value\":\"annual\",\"explicit\":false,\"quoted_words\":null},\"unsupported_words\":[\"iowa\"],\"clarification\":{\"needed\":true,\"about\":\"geography\",\"options\":[{\"label\":\"Iowa\",\"value\":\"Iowa is not available in the allowed geography list.\"}]}}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": "24h",
+        "reasoning": {
+          "context": "all_turns",
+          "effort": "low",
+          "mode": "standard",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": true,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_schema",
+            "description": null,
+            "name": "eia_search",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "sector": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/sector"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "sector",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sector": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/sector"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "frequency": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "$ref": "#/$defs/frequency"
+                    },
+                    "explicit": {
+                      "type": "boolean"
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "explicit",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "unsupported_words": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "clarification": {
+                  "type": "object",
+                  "properties": {
+                    "needed": {
+                      "type": "boolean"
+                    },
+                    "about": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        "product",
+                        "geography",
+                        "activity",
+                        "frequency",
+                        "other",
+                        null
+                      ]
+                    },
+                    "options": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "value"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "needed",
+                    "about",
+                    "options"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "geographies",
+                "excluded_geographies",
+                "topics",
+                "excluded_topics",
+                "sector",
+                "frequency",
+                "unsupported_words",
+                "clarification"
+              ],
+              "additionalProperties": false,
+              "$defs": {
+                "geography": {
+                  "type": "string",
+                  "enum": [
+                    "AFG | Afghanistan | country",
+                    "AGO+BDI+BEN+BFA+BWA+CAF+CIV+CMR+COD+COG+COM+CPV+DJI+DZA+EGY+ERI+ESH+ETH+GAB+GHA+GIN+GMB+GNB+GNQ+KEN+LBR+LBY+LSO+MAR+MDG+MLI+MOZ+MRT+MUS+MWI+NAM+NER+NGA+REU+RWA+SDN+SEN+SHN+SLE+SOM+SSD+STP+SWZ+SYC+TCD+TGO+TUN+TZA+UGA+ZAF+ZMB+ZWE | Africa | country",
+                    "AL | Alabama | US state",
+                    "AK | Alaska | US state",
+                    "ALB | Albania | country",
+                    "DZA | Algeria | country",
+                    "ASM | American Samoa | country",
+                    "AGO | Angola | country",
+                    "ATA | Antarctica | country",
+                    "ATG | Antigua and Barbuda | country",
+                    "ARG | Argentina | country",
+                    "AZ | Arizona | US state",
+                    "AR | Arkansas | US state",
+                    "ARM | Armenia | country",
+                    "ABW | Aruba | country",
+                    "AFG+ASM+AUS+BGD+BRN+BTN+CHN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+IND+JPN+KHM+KIR+KOR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+NZL+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Asia & Oceania | country",
+                    "AUS | Australia | country",
+                    "AUS+NZL | Australia and New Zealand | country",
+                    "AUT | Austria | country",
+                    "AZE | Azerbaijan | country",
+                    "BHR | Bahrain | country",
+                    "BGD | Bangladesh | country",
+                    "BRB | Barbados | country",
+                    "BLR | Belarus | country",
+                    "BEL | Belgium | country",
+                    "BLZ | Belize | country",
+                    "BEN | Benin | country",
+                    "BMU | Bermuda | country",
+                    "BTN | Bhutan | country",
+                    "BOL | Bolivia | country",
+                    "BIH | Bosnia and Herzegovina | country",
+                    "BWA | Botswana | country",
+                    "BRA | Brazil | country",
+                    "VGB | British Virgin Islands | country",
+                    "BRN | Brunei | country",
+                    "BGR | Bulgaria | country",
+                    "BFA | Burkina Faso | country",
+                    "MMR | Burma | country",
+                    "BDI | Burundi | country",
+                    "CPV | Cabo Verde | country",
+                    "CA | California | US state",
+                    "KHM | Cambodia | country",
+                    "CMR | Cameroon | country",
+                    "CAN | Canada | country",
+                    "CYM | Cayman Islands | country",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BOL+BRA+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Central & South America | country",
+                    "CAF | Central African Republic | country",
+                    "TCD | Chad | country",
+                    "CHL | Chile | country",
+                    "CHN | China | country",
+                    "COL | Colombia | country",
+                    "CO | Colorado | US state",
+                    "COM | Comoros | country",
+                    "COG | Congo-Brazzaville | country",
+                    "COD | Congo-Kinshasa | country",
+                    "CT | Connecticut | US state",
+                    "COK | Cook Islands | country",
+                    "CRI | Costa Rica | country",
+                    "HRV | Croatia | country",
+                    "CUB | Cuba | country",
+                    "CYP | Cyprus | country",
+                    "CZE | Czechia | country",
+                    "DE | Delaware | US state",
+                    "DNK | Denmark | country",
+                    "DC | District of Columbia | US state",
+                    "DJI | Djibouti | country",
+                    "DMA | Dominica | country",
+                    "DOM | Dominican Republic | country",
+                    "DDR | Germany, East | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+SCG+SUN+TJK+TKM+UKR+UZB+YUG | Eastern Europe and Eurasia | country",
+                    "ECU | Ecuador | country",
+                    "EGY | Egypt | country",
+                    "SLV | El Salvador | country",
+                    "GNQ | Equatorial Guinea | country",
+                    "ERI | Eritrea | country",
+                    "EST | Estonia | country",
+                    "SWZ | Eswatini | country",
+                    "ETH | Ethiopia | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+RUS+SUN+TJK+TKM+UKR+UZB | Eurasia | country",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SCG+SRB+SVK+SVN+SWE+TUR+XKS+YUG | Europe | country",
+                    "AUT+BEL+BGR+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GRC+HRV+HUN+IRL+ITA+LTU+LUX+LVA+MLT+NLD+POL+PRT+ROU+SVK+SVN+SWE | European Union | country",
+                    "FLK | Falkland Islands | country",
+                    "FRO | Faroe Islands | country",
+                    "X3 | Federal Offshore - Gulf of America | US state",
+                    "X5 | Federal Offshore - Pacific | US state",
+                    "FJI | Fiji | country",
+                    "FIN | Finland | country",
+                    "FL | Florida | US state",
+                    "CSK | Former Czechoslovakia | country",
+                    "SCG | Former Serbia and Montenegro | country",
+                    "SUN | Former U.S.S.R. | country",
+                    "YUG | Former Yugoslavia | country",
+                    "FRA | France | country",
+                    "GUF | French Guiana | country",
+                    "PYF | French Polynesia | country",
+                    "GAB | Gabon | country",
+                    "GA | Georgia | US state",
+                    "GEO | Georgia | country",
+                    "DEU | Germany | country",
+                    "GHA | Ghana | country",
+                    "GIB | Gibraltar | country",
+                    "GRC | Greece | country",
+                    "GRL | Greenland | country",
+                    "GRD | Grenada | country",
+                    "GLP | Guadeloupe | country",
+                    "GUM | Guam | country",
+                    "GTM | Guatemala | country",
+                    "GIN | Guinea | country",
+                    "GNB | Guinea-Bissau | country",
+                    "GUY | Guyana | country",
+                    "HTI | Haiti | country",
+                    "HI | Hawaii | US state",
+                    "HITZ | Hawaiian Trade Zone | country",
+                    "HND | Honduras | country",
+                    "HKG | Hong Kong | country",
+                    "HUN | Hungary | country",
+                    "ISL | Iceland | country",
+                    "ID | Idaho | US state",
+                    "IL | Illinois | US state",
+                    "IND | India | country",
+                    "IN | Indiana | US state",
+                    "IDN | Indonesia | country",
+                    "IA | Iowa | US state",
+                    "IRN | Iran | country",
+                    "IRQ | Iraq | country",
+                    "IRL | Ireland | country",
+                    "ISR | Israel | country",
+                    "ITA | Italy | country",
+                    "CIV | Ivory Coast | country",
+                    "JAM | Jamaica | country",
+                    "JPN | Japan | country",
+                    "JOR | Jordan | country",
+                    "KS | Kansas | US state",
+                    "KAZ | Kazakhstan | country",
+                    "KY | Kentucky | US state",
+                    "KEN | Kenya | country",
+                    "KIR | Kiribati | country",
+                    "XKS | Kosovo | country",
+                    "KWT | Kuwait | country",
+                    "KGZ | Kyrgyzstan | country",
+                    "LAO | Laos | country",
+                    "LVA | Latvia | country",
+                    "LBN | Lebanon | country",
+                    "LSO | Lesotho | country",
+                    "LBR | Liberia | country",
+                    "LBY | Libya | country",
+                    "LTU | Lithuania | country",
+                    "LA | Louisiana | US state",
+                    "LUX | Luxembourg | country",
+                    "MAC | Macau | country",
+                    "MDG | Madagascar | country",
+                    "ME | Maine | US state",
+                    "MWI | Malawi | country",
+                    "MYS | Malaysia | country",
+                    "MDV | Maldives | country",
+                    "MLI | Mali | country",
+                    "MLT | Malta | country",
+                    "MTQ | Martinique | country",
+                    "MD | Maryland | US state",
+                    "MA | Massachusetts | US state",
+                    "MRT | Mauritania | country",
+                    "MUS | Mauritius | country",
+                    "MEX | Mexico | country",
+                    "MI | Michigan | US state",
+                    "FSM | Micronesia | country",
+                    "ARE+BHR+IRN+IRQ+ISR+JOR+KWT+LBN+OMN+PSE+QAT+SAU+SYR+YEM | Middle East | country",
+                    "MN | Minnesota | US state",
+                    "MS | Mississippi | US state",
+                    "MO | Missouri | US state",
+                    "MDA | Moldova | country",
+                    "MNG | Mongolia | country",
+                    "MT | Montana | US state",
+                    "MNE | Montenegro | country",
+                    "MSR | Montserrat | country",
+                    "MAR | Morocco | country",
+                    "MOZ | Mozambique | country",
+                    "NAM | Namibia | country",
+                    "NRU | Nauru | country",
+                    "NE | Nebraska | US state",
+                    "NPL | Nepal | country",
+                    "NLD | Netherlands | country",
+                    "NLDA | Netherlands Antilles | country",
+                    "NV | Nevada | US state",
+                    "NCL | New Caledonia | country",
+                    "NH | New Hampshire | US state",
+                    "NJ | New Jersey | US state",
+                    "NM | New Mexico | US state",
+                    "NY | New York | US state",
+                    "NZL | New Zealand | country",
+                    "NIC | Nicaragua | country",
+                    "NER | Niger | country",
+                    "NGA | Nigeria | country",
+                    "NIU | Niue | country",
+                    "ABW+AFG+AGO+ALB+ARE+ARG+ARM+ATA+ATG+AZE+BDI+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CHN+CIV+CMR+COD+COG+COK+COM+CPV+CUB+CYM+CYP+DJI+DMA+DOM+DZA+ECU+EGY+ERI+ESH+ETH+FJI+FLK+FRO+FSM+GAB+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GNQ+GRD+GRL+GTM+GUF+GUY+HKG+HND+HRV+HTI+IDN+IND+IRN+IRQ+JAM+JOR+KAZ+KEN+KGZ+KHM+KIR+KNA+KWT+LAO+LBN+LBR+LBY+LCA+LKA+LSO+MAC+MAR+MDA+MDG+MDV+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NGA+NIC+NIU+NLDA+NPL+NRU+OMN+PAK+PAN+PER+PHL+PNG+PRK+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SAU+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUV+TWN+TZA+UGA+UKR+URY+USIQ+UZB+VCT+VEN+VGB+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OECD | country",
+                    "ABW+AFG+AGO+ALB+ARG+ARM+ASM+ATA+ATG+AUS+AUT+AZE+BDI+BEL+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CAN+CHE+CHL+CHN+CIV+CMR+COD+COK+COL+COM+CPV+CRI+CSK+CUB+CYM+CYP+CZE+DDR+DEU+DEUW+DJI+DMA+DNK+DOM+ECU+EGY+ERI+ESH+ESP+EST+ETH+FIN+FJI+FLK+FRA+FRO+FSM+GBR+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GRC+GRD+GRL+GTM+GUF+GUM+GUY+HITZ+HKG+HND+HRV+HTI+HUN+IDN+IND+IRL+ISL+ISR+ITA+JAM+JOR+JPN+KAZ+KEN+KGZ+KHM+KIR+KNA+KOR+LAO+LBN+LBR+LCA+LKA+LSO+LTU+LUX+LVA+MAC+MAR+MDA+MDG+MDV+MEX+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NIC+NIU+NLD+NLDA+NOR+NPL+NRU+NZL+OMN+PAK+PAN+PER+PHL+PNG+POL+PRI+PRK+PRT+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SVK+SVN+SWE+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUR+TUV+TWN+TZA+UGA+UKR+URY+USA+USIQ+UZB+VCT+VGB+VIR+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OPEC | country",
+                    "BMU+CAN+GRL+MEX+SPM+USA | North America | country",
+                    "NC | North Carolina | US state",
+                    "ND | North Dakota | US state",
+                    "PRK | North Korea | country",
+                    "MKD | North Macedonia | country",
+                    "MNP | Northern Mariana Islands | country",
+                    "NOR | Norway | country",
+                    "ASM+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+GUM+HITZ+HUN+IRL+ISL+ISR+ITA+JPN+KOR+LTU+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRI+PRT+SVK+SVN+SWE+TUR+USA+USOH+VIR | OECD | country",
+                    "ASM+AUS+GUM+JPN+KOR+NZL | OECD - Asia And Oceania | country",
+                    "AUT+BEL+CHE+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+HUN+IRL+ISL+ITA+LTU+LUX+LVA+NLD+NOR+POL+PRT+SVK+SVN+SWE+TUR | OECD - Europe | country",
+                    "CAN+MEX+USA | OECD - North America | country",
+                    "OH | Ohio | US state",
+                    "OK | Oklahoma | US state",
+                    "OMN | Oman | country",
+                    "ARE+COG+DZA+GAB+GNQ+IRN+IRQ+KWT+LBY+NGA+SAU+VEN | OPEC | country",
+                    "COG+DZA+GAB+GNQ+LBY+NGA | OPEC - Africa | country",
+                    "OR | Oregon | US state",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BMU+BOL+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GRL+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SPM+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Other Americas | country",
+                    "AFG+ASM+BGD+BRN+BTN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+KHM+KIR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Other Asia-Pacific | country",
+                    "PAK | Pakistan | country",
+                    "PSE | Palestinian Territories | country",
+                    "PAN | Panama | country",
+                    "PNG | Papua New Guinea | country",
+                    "PRY | Paraguay | country",
+                    "PA | Pennsylvania | US state",
+                    "ARE+BHR+IRN+IRQ+KWT+QAT+SAU | Persian Gulf | country",
+                    "PER | Peru | country",
+                    "PHL | Philippines | country",
+                    "POL | Poland | country",
+                    "PRT | Portugal | country",
+                    "PRI | Puerto Rico | country",
+                    "QAT | Qatar | country",
+                    "REU | Reunion | country",
+                    "RI | Rhode Island | US state",
+                    "ROU | Romania | country",
+                    "RUS | Russia | country",
+                    "RWA | Rwanda | country",
+                    "SHN | Saint Helena | country",
+                    "KNA | Saint Kitts and Nevis | country",
+                    "LCA | Saint Lucia | country",
+                    "SPM | Saint Pierre and Miquelon | country",
+                    "VCT | Saint Vincent/Grenadines | country",
+                    "WSM | Samoa | country",
+                    "STP | Sao Tome and Principe | country",
+                    "SAU | Saudi Arabia | country",
+                    "SEN | Senegal | country",
+                    "SRB | Serbia | country",
+                    "SYC | Seychelles | country",
+                    "SLE | Sierra Leone | country",
+                    "SGP | Singapore | country",
+                    "SVK | Slovakia | country",
+                    "SVN | Slovenia | country",
+                    "SLB | Solomon Islands | country",
+                    "SOM | Somalia | country",
+                    "ZAF | South Africa | country",
+                    "SC | South Carolina | US state",
+                    "SD | South Dakota | US state",
+                    "KOR | South Korea | country",
+                    "SSD | South Sudan | country",
+                    "ESP | Spain | country",
+                    "LKA | Sri Lanka | country",
+                    "SDN | Sudan | country",
+                    "SUR | Suriname | country",
+                    "SWE | Sweden | country",
+                    "CHE | Switzerland | country",
+                    "SYR | Syria | country",
+                    "TWN | Taiwan | country",
+                    "TJK | Tajikistan | country",
+                    "TZA | Tanzania | country",
+                    "TN | Tennessee | US state",
+                    "TX | Texas | US state",
+                    "THA | Thailand | country",
+                    "GMB | Gambia, The | country",
+                    "BHS | The Bahamas | country",
+                    "TLS | Timor-Leste | country",
+                    "TGO | Togo | country",
+                    "TON | Tonga | country",
+                    "TTO | Trinidad and Tobago | country",
+                    "TUN | Tunisia | country",
+                    "TUR | Turkiye | country",
+                    "TKM | Turkmenistan | country",
+                    "TCA | Turks and Caicos Islands | country",
+                    "TUV | Tuvalu | country",
+                    "USIQ | U.S. Pacific Islands | country",
+                    "USOH | U.S. Territories | country",
+                    "VIR | U.S. Virgin Islands | country",
+                    "UGA | Uganda | country",
+                    "UKR | Ukraine | country",
+                    "ARE | United Arab Emirates | country",
+                    "GBR | United Kingdom | country",
+                    "USA | United States | national",
+                    "URY | Uruguay | country",
+                    "UT | Utah | US state",
+                    "UZB | Uzbekistan | country",
+                    "VUT | Vanuatu | country",
+                    "VEN | Venezuela | country",
+                    "VT | Vermont | US state",
+                    "VNM | Vietnam | country",
+                    "VA | Virginia | US state",
+                    "WAK | Wake Island | country",
+                    "WA | Washington | US state",
+                    "DEUW | Germany, West | country",
+                    "WV | West Virginia | US state",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SRB+SVK+SVN+SWE+TUR+XKS | Western Europe | country",
+                    "ESH | Western Sahara | country",
+                    "WI | Wisconsin | US state",
+                    "WLD | World | country",
+                    "WY | Wyoming | US state",
+                    "YEM | Yemen | country",
+                    "ZMB | Zambia | country",
+                    "ZWE | Zimbabwe | country"
+                  ]
+                },
+                "product": {
+                  "type": "string",
+                  "enum": [
+                    "natural gas",
+                    "petroleum",
+                    "electricity",
+                    "coal",
+                    "nuclear",
+                    "renewable",
+                    "fossil fuels",
+                    "hydro",
+                    "solar",
+                    "wind",
+                    "geothermal",
+                    "biofuels",
+                    "marine",
+                    "total energy"
+                  ]
+                },
+                "activity": {
+                  "type": "string",
+                  "enum": [
+                    "sales",
+                    "customers",
+                    "consumption",
+                    "production",
+                    "generation",
+                    "imports",
+                    "exports",
+                    "reserves",
+                    "capacity",
+                    "storage",
+                    "prices",
+                    "expenditures"
+                  ]
+                },
+                "sector": {
+                  "type": "string",
+                  "enum": [
+                    "residential",
+                    "commercial",
+                    "industrial",
+                    "transportation",
+                    "electric power",
+                    "utility"
+                  ]
+                },
+                "frequency": {
+                  "type": "string",
+                  "enum": [
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "quarterly",
+                    "annual"
+                  ]
+                }
+              }
+            },
+            "strict": true
+          },
+          "verbosity": "medium"
+        },
+        "tool_choice": "auto",
+        "tool_usage": {
+          "image_gen": {
+            "input_tokens": 0,
+            "input_tokens_details": {
+              "image_tokens": 0,
+              "text_tokens": 0
+            },
+            "output_tokens": 0,
+            "output_tokens_details": {
+              "image_tokens": 0,
+              "text_tokens": 0
+            },
+            "total_tokens": 0
+          },
+          "web_search": {
+            "num_requests": 0
+          }
+        },
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 0.98,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 5574,
+          "input_tokens_details": {
+            "cache_write_tokens": 276,
+            "cached_tokens": 5295
+          },
+          "output_tokens": 217,
+          "output_tokens_details": {
+            "reasoning_tokens": 84
+          },
+          "total_tokens": 5791
+        },
+        "user": null,
+        "metadata": {}
+      },
+      "status": 200,
+      "elapsedMs": 3462,
+      "form": {
+        "geographies": [
+          {
+            "geography": "NE | Nebraska | US state",
+            "quoted_words": "nebraksa"
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "biofuels",
+            "activity": "production",
+            "quoted_words": "biofuel production"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [
+          "iowa"
+        ],
+        "clarification": {
+          "needed": true,
+          "about": "geography",
+          "options": [
+            {
+              "label": "Iowa",
+              "value": "Iowa is not available in the allowed geography list."
+            }
+          ]
+        }
+      },
+      "checks": {
+        "valid": false,
+        "errors": [
+          "invalid_clarification_option"
+        ]
+      }
+    },
+    {
+      "attempt": 1,
+      "body": {
+        "model": "gpt-6-luna",
+        "input": "Read the raw EIA data request and fill the supplied form. Use the allowed values in its schema. Copy quoted_words exactly from the raw request, including typos; do not produce character positions.\nBare energy means total energy.\nGas without a qualifier is ambiguous: clarify product with natural gas and petroleum (gasoline) options, leave product null, and preserve everything else.\nGeorgia is the country only alongside another non-US country or international context; otherwise it is the US state.\nIf no frequency is stated, use annual and explicit=false.\nNever invent a sector.\nKeep mention order.\nPut only explicit exclusions (not X, except X, excluding X, but not X) in excluded lists. Doubt or comparison wording (not sure, not convinced) is not an exclusion.\nA place that cannot be matched to the allowed list needs geography clarification.\nAsk for clarification only when a required field cannot be determined.\nResolve unambiguous spelling errors to allowed values; preserve the original spelling in quoted_words.\nEvery quote must be a contiguous excerpt of the raw request. It may cover the whole coordinated request; never synthesize an expanded product/activity phrase.\nIn excluded_topics, fill only fields explicitly excluded. Do not inherit a requested activity or sector into an exclusion that names only a product.\n\nRaw query: \"biofuel production in iowa and nebraksa\"\nThe previous response failed local form checks. Return a complete form satisfying the schema and quoted-word checks.",
+        "text": {
+          "format": {
+            "type": "json_schema",
+            "name": "eia_search",
+            "strict": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "sector": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/sector"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "sector",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sector": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/sector"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "frequency": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "$ref": "#/$defs/frequency"
+                    },
+                    "explicit": {
+                      "type": "boolean"
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "explicit",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "unsupported_words": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "clarification": {
+                  "type": "object",
+                  "properties": {
+                    "needed": {
+                      "type": "boolean"
+                    },
+                    "about": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        "product",
+                        "geography",
+                        "activity",
+                        "frequency",
+                        "other",
+                        null
+                      ]
+                    },
+                    "options": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "value"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "needed",
+                    "about",
+                    "options"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "geographies",
+                "excluded_geographies",
+                "topics",
+                "excluded_topics",
+                "sector",
+                "frequency",
+                "unsupported_words",
+                "clarification"
+              ],
+              "additionalProperties": false,
+              "$defs": {
+                "geography": {
+                  "type": "string",
+                  "enum": [
+                    "AFG | Afghanistan | country",
+                    "AGO+BDI+BEN+BFA+BWA+CAF+CIV+CMR+COD+COG+COM+CPV+DJI+DZA+EGY+ERI+ESH+ETH+GAB+GHA+GIN+GMB+GNB+GNQ+KEN+LBR+LBY+LSO+MAR+MDG+MLI+MOZ+MRT+MUS+MWI+NAM+NER+NGA+REU+RWA+SDN+SEN+SHN+SLE+SOM+SSD+STP+SWZ+SYC+TCD+TGO+TUN+TZA+UGA+ZAF+ZMB+ZWE | Africa | country",
+                    "AL | Alabama | US state",
+                    "AK | Alaska | US state",
+                    "ALB | Albania | country",
+                    "DZA | Algeria | country",
+                    "ASM | American Samoa | country",
+                    "AGO | Angola | country",
+                    "ATA | Antarctica | country",
+                    "ATG | Antigua and Barbuda | country",
+                    "ARG | Argentina | country",
+                    "AZ | Arizona | US state",
+                    "AR | Arkansas | US state",
+                    "ARM | Armenia | country",
+                    "ABW | Aruba | country",
+                    "AFG+ASM+AUS+BGD+BRN+BTN+CHN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+IND+JPN+KHM+KIR+KOR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+NZL+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Asia & Oceania | country",
+                    "AUS | Australia | country",
+                    "AUS+NZL | Australia and New Zealand | country",
+                    "AUT | Austria | country",
+                    "AZE | Azerbaijan | country",
+                    "BHR | Bahrain | country",
+                    "BGD | Bangladesh | country",
+                    "BRB | Barbados | country",
+                    "BLR | Belarus | country",
+                    "BEL | Belgium | country",
+                    "BLZ | Belize | country",
+                    "BEN | Benin | country",
+                    "BMU | Bermuda | country",
+                    "BTN | Bhutan | country",
+                    "BOL | Bolivia | country",
+                    "BIH | Bosnia and Herzegovina | country",
+                    "BWA | Botswana | country",
+                    "BRA | Brazil | country",
+                    "VGB | British Virgin Islands | country",
+                    "BRN | Brunei | country",
+                    "BGR | Bulgaria | country",
+                    "BFA | Burkina Faso | country",
+                    "MMR | Burma | country",
+                    "BDI | Burundi | country",
+                    "CPV | Cabo Verde | country",
+                    "CA | California | US state",
+                    "KHM | Cambodia | country",
+                    "CMR | Cameroon | country",
+                    "CAN | Canada | country",
+                    "CYM | Cayman Islands | country",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BOL+BRA+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Central & South America | country",
+                    "CAF | Central African Republic | country",
+                    "TCD | Chad | country",
+                    "CHL | Chile | country",
+                    "CHN | China | country",
+                    "COL | Colombia | country",
+                    "CO | Colorado | US state",
+                    "COM | Comoros | country",
+                    "COG | Congo-Brazzaville | country",
+                    "COD | Congo-Kinshasa | country",
+                    "CT | Connecticut | US state",
+                    "COK | Cook Islands | country",
+                    "CRI | Costa Rica | country",
+                    "HRV | Croatia | country",
+                    "CUB | Cuba | country",
+                    "CYP | Cyprus | country",
+                    "CZE | Czechia | country",
+                    "DE | Delaware | US state",
+                    "DNK | Denmark | country",
+                    "DC | District of Columbia | US state",
+                    "DJI | Djibouti | country",
+                    "DMA | Dominica | country",
+                    "DOM | Dominican Republic | country",
+                    "DDR | Germany, East | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+SCG+SUN+TJK+TKM+UKR+UZB+YUG | Eastern Europe and Eurasia | country",
+                    "ECU | Ecuador | country",
+                    "EGY | Egypt | country",
+                    "SLV | El Salvador | country",
+                    "GNQ | Equatorial Guinea | country",
+                    "ERI | Eritrea | country",
+                    "EST | Estonia | country",
+                    "SWZ | Eswatini | country",
+                    "ETH | Ethiopia | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+RUS+SUN+TJK+TKM+UKR+UZB | Eurasia | country",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SCG+SRB+SVK+SVN+SWE+TUR+XKS+YUG | Europe | country",
+                    "AUT+BEL+BGR+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GRC+HRV+HUN+IRL+ITA+LTU+LUX+LVA+MLT+NLD+POL+PRT+ROU+SVK+SVN+SWE | European Union | country",
+                    "FLK | Falkland Islands | country",
+                    "FRO | Faroe Islands | country",
+                    "X3 | Federal Offshore - Gulf of America | US state",
+                    "X5 | Federal Offshore - Pacific | US state",
+                    "FJI | Fiji | country",
+                    "FIN | Finland | country",
+                    "FL | Florida | US state",
+                    "CSK | Former Czechoslovakia | country",
+                    "SCG | Former Serbia and Montenegro | country",
+                    "SUN | Former U.S.S.R. | country",
+                    "YUG | Former Yugoslavia | country",
+                    "FRA | France | country",
+                    "GUF | French Guiana | country",
+                    "PYF | French Polynesia | country",
+                    "GAB | Gabon | country",
+                    "GA | Georgia | US state",
+                    "GEO | Georgia | country",
+                    "DEU | Germany | country",
+                    "GHA | Ghana | country",
+                    "GIB | Gibraltar | country",
+                    "GRC | Greece | country",
+                    "GRL | Greenland | country",
+                    "GRD | Grenada | country",
+                    "GLP | Guadeloupe | country",
+                    "GUM | Guam | country",
+                    "GTM | Guatemala | country",
+                    "GIN | Guinea | country",
+                    "GNB | Guinea-Bissau | country",
+                    "GUY | Guyana | country",
+                    "HTI | Haiti | country",
+                    "HI | Hawaii | US state",
+                    "HITZ | Hawaiian Trade Zone | country",
+                    "HND | Honduras | country",
+                    "HKG | Hong Kong | country",
+                    "HUN | Hungary | country",
+                    "ISL | Iceland | country",
+                    "ID | Idaho | US state",
+                    "IL | Illinois | US state",
+                    "IND | India | country",
+                    "IN | Indiana | US state",
+                    "IDN | Indonesia | country",
+                    "IA | Iowa | US state",
+                    "IRN | Iran | country",
+                    "IRQ | Iraq | country",
+                    "IRL | Ireland | country",
+                    "ISR | Israel | country",
+                    "ITA | Italy | country",
+                    "CIV | Ivory Coast | country",
+                    "JAM | Jamaica | country",
+                    "JPN | Japan | country",
+                    "JOR | Jordan | country",
+                    "KS | Kansas | US state",
+                    "KAZ | Kazakhstan | country",
+                    "KY | Kentucky | US state",
+                    "KEN | Kenya | country",
+                    "KIR | Kiribati | country",
+                    "XKS | Kosovo | country",
+                    "KWT | Kuwait | country",
+                    "KGZ | Kyrgyzstan | country",
+                    "LAO | Laos | country",
+                    "LVA | Latvia | country",
+                    "LBN | Lebanon | country",
+                    "LSO | Lesotho | country",
+                    "LBR | Liberia | country",
+                    "LBY | Libya | country",
+                    "LTU | Lithuania | country",
+                    "LA | Louisiana | US state",
+                    "LUX | Luxembourg | country",
+                    "MAC | Macau | country",
+                    "MDG | Madagascar | country",
+                    "ME | Maine | US state",
+                    "MWI | Malawi | country",
+                    "MYS | Malaysia | country",
+                    "MDV | Maldives | country",
+                    "MLI | Mali | country",
+                    "MLT | Malta | country",
+                    "MTQ | Martinique | country",
+                    "MD | Maryland | US state",
+                    "MA | Massachusetts | US state",
+                    "MRT | Mauritania | country",
+                    "MUS | Mauritius | country",
+                    "MEX | Mexico | country",
+                    "MI | Michigan | US state",
+                    "FSM | Micronesia | country",
+                    "ARE+BHR+IRN+IRQ+ISR+JOR+KWT+LBN+OMN+PSE+QAT+SAU+SYR+YEM | Middle East | country",
+                    "MN | Minnesota | US state",
+                    "MS | Mississippi | US state",
+                    "MO | Missouri | US state",
+                    "MDA | Moldova | country",
+                    "MNG | Mongolia | country",
+                    "MT | Montana | US state",
+                    "MNE | Montenegro | country",
+                    "MSR | Montserrat | country",
+                    "MAR | Morocco | country",
+                    "MOZ | Mozambique | country",
+                    "NAM | Namibia | country",
+                    "NRU | Nauru | country",
+                    "NE | Nebraska | US state",
+                    "NPL | Nepal | country",
+                    "NLD | Netherlands | country",
+                    "NLDA | Netherlands Antilles | country",
+                    "NV | Nevada | US state",
+                    "NCL | New Caledonia | country",
+                    "NH | New Hampshire | US state",
+                    "NJ | New Jersey | US state",
+                    "NM | New Mexico | US state",
+                    "NY | New York | US state",
+                    "NZL | New Zealand | country",
+                    "NIC | Nicaragua | country",
+                    "NER | Niger | country",
+                    "NGA | Nigeria | country",
+                    "NIU | Niue | country",
+                    "ABW+AFG+AGO+ALB+ARE+ARG+ARM+ATA+ATG+AZE+BDI+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CHN+CIV+CMR+COD+COG+COK+COM+CPV+CUB+CYM+CYP+DJI+DMA+DOM+DZA+ECU+EGY+ERI+ESH+ETH+FJI+FLK+FRO+FSM+GAB+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GNQ+GRD+GRL+GTM+GUF+GUY+HKG+HND+HRV+HTI+IDN+IND+IRN+IRQ+JAM+JOR+KAZ+KEN+KGZ+KHM+KIR+KNA+KWT+LAO+LBN+LBR+LBY+LCA+LKA+LSO+MAC+MAR+MDA+MDG+MDV+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NGA+NIC+NIU+NLDA+NPL+NRU+OMN+PAK+PAN+PER+PHL+PNG+PRK+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SAU+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUV+TWN+TZA+UGA+UKR+URY+USIQ+UZB+VCT+VEN+VGB+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OECD | country",
+                    "ABW+AFG+AGO+ALB+ARG+ARM+ASM+ATA+ATG+AUS+AUT+AZE+BDI+BEL+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CAN+CHE+CHL+CHN+CIV+CMR+COD+COK+COL+COM+CPV+CRI+CSK+CUB+CYM+CYP+CZE+DDR+DEU+DEUW+DJI+DMA+DNK+DOM+ECU+EGY+ERI+ESH+ESP+EST+ETH+FIN+FJI+FLK+FRA+FRO+FSM+GBR+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GRC+GRD+GRL+GTM+GUF+GUM+GUY+HITZ+HKG+HND+HRV+HTI+HUN+IDN+IND+IRL+ISL+ISR+ITA+JAM+JOR+JPN+KAZ+KEN+KGZ+KHM+KIR+KNA+KOR+LAO+LBN+LBR+LCA+LKA+LSO+LTU+LUX+LVA+MAC+MAR+MDA+MDG+MDV+MEX+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NIC+NIU+NLD+NLDA+NOR+NPL+NRU+NZL+OMN+PAK+PAN+PER+PHL+PNG+POL+PRI+PRK+PRT+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SVK+SVN+SWE+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUR+TUV+TWN+TZA+UGA+UKR+URY+USA+USIQ+UZB+VCT+VGB+VIR+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OPEC | country",
+                    "BMU+CAN+GRL+MEX+SPM+USA | North America | country",
+                    "NC | North Carolina | US state",
+                    "ND | North Dakota | US state",
+                    "PRK | North Korea | country",
+                    "MKD | North Macedonia | country",
+                    "MNP | Northern Mariana Islands | country",
+                    "NOR | Norway | country",
+                    "ASM+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+GUM+HITZ+HUN+IRL+ISL+ISR+ITA+JPN+KOR+LTU+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRI+PRT+SVK+SVN+SWE+TUR+USA+USOH+VIR | OECD | country",
+                    "ASM+AUS+GUM+JPN+KOR+NZL | OECD - Asia And Oceania | country",
+                    "AUT+BEL+CHE+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+HUN+IRL+ISL+ITA+LTU+LUX+LVA+NLD+NOR+POL+PRT+SVK+SVN+SWE+TUR | OECD - Europe | country",
+                    "CAN+MEX+USA | OECD - North America | country",
+                    "OH | Ohio | US state",
+                    "OK | Oklahoma | US state",
+                    "OMN | Oman | country",
+                    "ARE+COG+DZA+GAB+GNQ+IRN+IRQ+KWT+LBY+NGA+SAU+VEN | OPEC | country",
+                    "COG+DZA+GAB+GNQ+LBY+NGA | OPEC - Africa | country",
+                    "OR | Oregon | US state",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BMU+BOL+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GRL+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SPM+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Other Americas | country",
+                    "AFG+ASM+BGD+BRN+BTN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+KHM+KIR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Other Asia-Pacific | country",
+                    "PAK | Pakistan | country",
+                    "PSE | Palestinian Territories | country",
+                    "PAN | Panama | country",
+                    "PNG | Papua New Guinea | country",
+                    "PRY | Paraguay | country",
+                    "PA | Pennsylvania | US state",
+                    "ARE+BHR+IRN+IRQ+KWT+QAT+SAU | Persian Gulf | country",
+                    "PER | Peru | country",
+                    "PHL | Philippines | country",
+                    "POL | Poland | country",
+                    "PRT | Portugal | country",
+                    "PRI | Puerto Rico | country",
+                    "QAT | Qatar | country",
+                    "REU | Reunion | country",
+                    "RI | Rhode Island | US state",
+                    "ROU | Romania | country",
+                    "RUS | Russia | country",
+                    "RWA | Rwanda | country",
+                    "SHN | Saint Helena | country",
+                    "KNA | Saint Kitts and Nevis | country",
+                    "LCA | Saint Lucia | country",
+                    "SPM | Saint Pierre and Miquelon | country",
+                    "VCT | Saint Vincent/Grenadines | country",
+                    "WSM | Samoa | country",
+                    "STP | Sao Tome and Principe | country",
+                    "SAU | Saudi Arabia | country",
+                    "SEN | Senegal | country",
+                    "SRB | Serbia | country",
+                    "SYC | Seychelles | country",
+                    "SLE | Sierra Leone | country",
+                    "SGP | Singapore | country",
+                    "SVK | Slovakia | country",
+                    "SVN | Slovenia | country",
+                    "SLB | Solomon Islands | country",
+                    "SOM | Somalia | country",
+                    "ZAF | South Africa | country",
+                    "SC | South Carolina | US state",
+                    "SD | South Dakota | US state",
+                    "KOR | South Korea | country",
+                    "SSD | South Sudan | country",
+                    "ESP | Spain | country",
+                    "LKA | Sri Lanka | country",
+                    "SDN | Sudan | country",
+                    "SUR | Suriname | country",
+                    "SWE | Sweden | country",
+                    "CHE | Switzerland | country",
+                    "SYR | Syria | country",
+                    "TWN | Taiwan | country",
+                    "TJK | Tajikistan | country",
+                    "TZA | Tanzania | country",
+                    "TN | Tennessee | US state",
+                    "TX | Texas | US state",
+                    "THA | Thailand | country",
+                    "GMB | Gambia, The | country",
+                    "BHS | The Bahamas | country",
+                    "TLS | Timor-Leste | country",
+                    "TGO | Togo | country",
+                    "TON | Tonga | country",
+                    "TTO | Trinidad and Tobago | country",
+                    "TUN | Tunisia | country",
+                    "TUR | Turkiye | country",
+                    "TKM | Turkmenistan | country",
+                    "TCA | Turks and Caicos Islands | country",
+                    "TUV | Tuvalu | country",
+                    "USIQ | U.S. Pacific Islands | country",
+                    "USOH | U.S. Territories | country",
+                    "VIR | U.S. Virgin Islands | country",
+                    "UGA | Uganda | country",
+                    "UKR | Ukraine | country",
+                    "ARE | United Arab Emirates | country",
+                    "GBR | United Kingdom | country",
+                    "USA | United States | national",
+                    "URY | Uruguay | country",
+                    "UT | Utah | US state",
+                    "UZB | Uzbekistan | country",
+                    "VUT | Vanuatu | country",
+                    "VEN | Venezuela | country",
+                    "VT | Vermont | US state",
+                    "VNM | Vietnam | country",
+                    "VA | Virginia | US state",
+                    "WAK | Wake Island | country",
+                    "WA | Washington | US state",
+                    "DEUW | Germany, West | country",
+                    "WV | West Virginia | US state",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SRB+SVK+SVN+SWE+TUR+XKS | Western Europe | country",
+                    "ESH | Western Sahara | country",
+                    "WI | Wisconsin | US state",
+                    "WLD | World | country",
+                    "WY | Wyoming | US state",
+                    "YEM | Yemen | country",
+                    "ZMB | Zambia | country",
+                    "ZWE | Zimbabwe | country"
+                  ]
+                },
+                "product": {
+                  "type": "string",
+                  "enum": [
+                    "natural gas",
+                    "petroleum",
+                    "electricity",
+                    "coal",
+                    "nuclear",
+                    "renewable",
+                    "fossil fuels",
+                    "hydro",
+                    "solar",
+                    "wind",
+                    "geothermal",
+                    "biofuels",
+                    "marine",
+                    "total energy"
+                  ]
+                },
+                "activity": {
+                  "type": "string",
+                  "enum": [
+                    "sales",
+                    "customers",
+                    "consumption",
+                    "production",
+                    "generation",
+                    "imports",
+                    "exports",
+                    "reserves",
+                    "capacity",
+                    "storage",
+                    "prices",
+                    "expenditures"
+                  ]
+                },
+                "sector": {
+                  "type": "string",
+                  "enum": [
+                    "residential",
+                    "commercial",
+                    "industrial",
+                    "transportation",
+                    "electric power",
+                    "utility"
+                  ]
+                },
+                "frequency": {
+                  "type": "string",
+                  "enum": [
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "quarterly",
+                    "annual"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "reasoning": {
+          "effort": "low"
+        },
+        "max_output_tokens": 16000
+      },
+      "response": {
+        "id": "resp_07a51a73dd4dc48b006ae295a2c60487d2b9313ae4ffc4b074",
+        "object": "response",
+        "created_at": 1793234338,
+        "status": "completed",
+        "access_programs": null,
+        "background": false,
+        "billing": {
+          "payer": "developer"
+        },
+        "completed_at": 1793234342,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 16000,
+        "max_tool_calls": null,
+        "model": "gpt-6-luna",
+        "moderation": null,
+        "output": [
+          {
+            "id": "rs_07a51a73dd4dc48b006ae295a36c9c87d2801dace69bafce36",
+            "type": "reasoning",
+            "content": [],
+            "encrypted_content": "gAAAAABq4pWmFm-p_lElkKBBx4vj0LFh752KKAyeWHNUm25z_JoO9nBMq89LWhzgB98k2TJ6Df3ZDvoCXr15k11M8MwZ1KnPtMikpqvSTd2BZyAlWA0znBAoK7xypEL0CSSasLpt_syH0NvRjhRF8TkPGhgdi76ZeNzpOqplO_2vuTasU9cbDpNnuriBamuKragnnOGkfv7wDLrsCYEFeiBUEg86c2eR57Z0C-8fZfz9Afvlm8vqcY1vQfVADwItMeU4gTzLTq8m7ftVDKw9i5sLCTyE7F9s0Pke4ORkpD9wqL3T_545LP7T7eQf0WufknrTLPsFBLAeVHYhohRN486TCW5ANilQMO9VJESvtX0YUXua-yRB8m0-p2gqIU_iQwj7qmF4pG3CVQaKvqMLlXdMZIur6JhSB0kxrQ6iQjyd7fMiPQ8E2wvV1Mw06DMj4RMceX3JDWJmPXPCLhKjl70PZE1DlWxDkqWPcOwW5cJZPY_MeInmUnkwRvCmCBM5jO9iJi9_LIwB1uq8MWrepB38LPxXJF3z7f7HF6UE2LanQL22s7IUKqNgAfYnTaEALWzGiVarTmi18uCF0wkjL6WJgFZF0KwRsrF-SCpkFCQaAixtmxYSx9X-bvko5m_usfe-l895tL_gMTGmPDIY4nv__YQl4cFxNI2FaU6sCOa33KRd_GFfKTDM-LumYYXUqbaHjoY1Yjf8jokh73DOWYZ16Ou2BIOz9LKkNRiC1cEYQ9HPOhKYylGQqa23NnOlnpbX20avnVvhugTSRyYTzeFyp_6EFyCpwIkHZTPb8wLQSHsmH0VBIK7yk-3sreIVbBjYK5usSs2BsbArA9Ff0rOQ6y6p9Uo3OLgxaEGnwe-hWYrtyFoLe3KRDwAsKOkVbpwwWS6Pfe1cCkeq9JAjIVZs0E50uiD0pl9te-R3vIK7Wrrw3XVtHRosWpg41XS-ThFZTNGgilVnrVCQbNDhB9AXL_Dk09rOm7OJ07fzAu2gRu78SvinYQamtiKag3sy2-KcljpCrFpHXMI7mHB8XZj100u5T4-yoq74xGAdpwITKrO6xhF3ZWDUp5cYSir-jo7RiV_lOs0Y4XoCcOjFnljvnO_bAgf7qjBre7jtTxGRdqxD75AJfQU5BPHChX7tYWc1w8GOT0BZDdZIF3NqXu3KyWd2xg95aLaWQmRx9HIEDQTWfSwWUgxXQDLuasuIhN8fVZe-T49Huiv9ZJEBtMSN64CHzfkCV6nhWjz3cVlObXF_FDJXMfouWSqF6sUGx8GS6qUGPKqE7kNb5wbd7PtNsMc3pYt1ZmSv-a0a1UmaKFG01Ve6z3B83774ffpVHpZxI0PLwO8Rcm1N6eydEp8W3aqD8JuWr_3j3q4YVjX8QauaLGUWAVRBeAYthPy_2Ix7mbY9Tp6LvZtNftsaZzZoUlXOEYjncZ8CxbgEEnSGKMWZx9-iEK8yaiQFynIaeWZ2wJ8LnVF4Yb2CPSw1-Doo6m01ngFzAzLTeXNGWLp_jEt7lSL2LkBeY7RFXX1ShCWlpevzoJea3htm4OKj3o1bDnEXPPckbJFHFEv3460qyLAoLtQXe6m8Kv9THnoIJ6GG0BP0wB16qSm_5AevX3IBZ9lM0-pHWN6moHX6NApf8-aTyFQ8QaguM4v1rRmyhOnrjAynFEzP-UfFzl4x5D_J8E5T3LEgmUnUtppKlGNHygHKnMHXY9pT4D8uf8ewzNwEhKEPIHEpL7vVuq3iIyZB94zVtlJq1IvWxrXp9e4f0U058nJbCIwCFZfuOBTCxlCESrIIw-jnUpzGzBDuZ_jVYdpLaAWO9mgiLpPyi6ztcWqMPCsZfg8IujWquByTtkA8ALoiFJk_Y5NDrtIbFueBKq5ZA1efIgjtarf4FthqdhvT0h4rkexDKPTQen2f2YvGC8gfMhFWPdxNW7i-IbeYnYxfYkgMXcBxAw9JexC5LD7B0lUmqm7p4BkaGnUba5sVDrfsleoImlTuI3wDC3YuMRMnpC44sATu9feBkijtLhEtXwTH4FkOLLIq4m0NezcJYSMSf5jxwCkMyg1Lk53lWf9v8-FTKwhbJQie3LSIsXFrNyWGmODd-YtEAvqQ6C0KskVpT1FbA-kxd7Y4JwFv34vnTdsq-jQ8Dboj9r48cgjSbZtJAoNHvCi124ycOtBljIvn3s43NGznXrdl7LTDMOv7ef7-1ai_hwV1JB9lLR-53FX2ZaHGH1Ndv4--iT38WZBp6C0_RO_rPxM3tlzz4F_wf0iA0qwDbmo-Y_s-glrJKP0ICoWFO5p9xzOBDFZUNvAd9ohJj_9dJWNbnc1Q4giJJeVwYP2DBQWflJuRvV02jLWgFtbo59QofOepv3h1apf8jqwJl-vcuV83NVXgetk2T4dWhQdSn7wAnvOq_BoQ9dXzLFWsmJtj0xF1mzbR0OqnpUKrd68tPykyKklb9uX653SMod5gavTUuPQrZ2hTl5X29a166pr15djoYIiJJrGAn-WQjdra0XRbEYyLFcPp9wv78DKZ2o0Nhs3X18PzrdMB1XPBkBOLw0VLELAOMImxGrHISZP09UsQdBE8HRftk9GytVgFJp0Uejc99yrCA2N9K-KOB3OV1TNzUbgfjA9lWZJ4Z7Yap48lLc053Dt_Qf_ehJ4kNXxmFLp5GKgXDkAyaM_YpYJdeo6bU8vTryQd7AdLNhnFp102nbr6aayEVo52CBDKo7KEkxTOHeT0oh6MIfx6u_CrBN05jXjNI9Na4mg5DY2r3zNy-8wE9We8TwD3fAIoZ5pBkMkvy3TsUw85FyUixAYtho659s-wfUq1EvCUXYPU9hOM5vGhNoPpk78C3TBgFB1Ve0sqLotQqOUumIbS-r3tf1n7XgTcc0W8B7EBoL7klDSWX5bQWA09F5IVjMSuz-0R3V8x-KW7SMUnX2RavYEIR3qcWCBirUMLaoRYkC2Pw4WrctmXqgKGna9IhmbLNnv-uQvrlfPRwAEix5gxQY44HW0BrzxMvfvulxREWHl0A8dImRLbDzEMbn2olFvdmaUnF8_TSX4n4hTKj1Ihu-lMjyF_fwOL8YbAq_WfArFYld8RSkuuL1cQ6K9MiljSaJmN3dd5uR0DIYCWYeK98AqJxhc-O9rtcfxz4i5v5W2oCGHabNvx1AZqStQWnB9NXeLf6cLErf9EWPpsShXsgwz4C7ELzsbSumlAeCZPR2CvfeKqeTM656K0I5pwanUV5tZWtP7WIMuTghxfUtC-cZcN6yab343tN-srnOrnk9fw9NKZb1C_5D2y9m6mQbGFlUnD_E-1mZ4aJJxOY-UVqCE1X3CFDrA_xgO6ap1cdLLGTlXD0tlSHsBnoF4vQIwKrRxARwvv9KF2UbHUDnnP54EYnsaVIKTVlW5NSTccivwiHOqYyloHOIDf0WIDRZzxWnJl5wPlRQ0pDsggBLb5jJcz2gu6dxcduOnLVRg7DTnvc-kxcbc9j7SJaVetUw95wCVyvzYOB4gDZBI7Z6iKap38T-q71h5UAkmnqVxDCTSBM66CrWPoH2RJgfoaMQNw3d9T3da3BuwKATQS-HgpCTkg1X7cQD7m4ECx7y5gCoI5XSQ2-ot4_0KaBhxjKtplgxyCj9KJG1H71gjkmv3LvCVlcOkFGy4ACCRFc0vVek26MkQ720I-hHKtioBTz1xenkZSvF5keRzRKwY3T7ttmViu0znb8WPnMtoR7tim",
+            "summary": []
+          },
+          {
+            "id": "msg_07a51a73dd4dc48b006ae295a53cf487d2a89b47a6e9aa35ae",
+            "type": "message",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"geographies\":[{\"geography\":\"NE | Nebraska | US state\",\"quoted_words\":\"nebraksa\"}],\"excluded_geographies\":[],\"topics\":[{\"product\":\"biofuels\",\"activity\":\"production\",\"quoted_words\":\"biofuel production\"}],\"excluded_topics\":[],\"sector\":{\"value\":null,\"quoted_words\":null},\"frequency\":{\"value\":\"annual\",\"explicit\":false,\"quoted_words\":null},\"unsupported_words\":[],\"clarification\":{\"needed\":true,\"about\":\"geography\",\"options\":[]}}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": "24h",
+        "reasoning": {
+          "context": "all_turns",
+          "effort": "low",
+          "mode": "standard",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": true,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_schema",
+            "description": null,
+            "name": "eia_search",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_geographies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "$ref": "#/$defs/geography"
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded_topics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/product"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "activity": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/activity"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "sector": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/sector"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "quoted_words": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product",
+                      "activity",
+                      "sector",
+                      "quoted_words"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sector": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/sector"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "frequency": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "$ref": "#/$defs/frequency"
+                    },
+                    "explicit": {
+                      "type": "boolean"
+                    },
+                    "quoted_words": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "explicit",
+                    "quoted_words"
+                  ],
+                  "additionalProperties": false
+                },
+                "unsupported_words": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "clarification": {
+                  "type": "object",
+                  "properties": {
+                    "needed": {
+                      "type": "boolean"
+                    },
+                    "about": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        "product",
+                        "geography",
+                        "activity",
+                        "frequency",
+                        "other",
+                        null
+                      ]
+                    },
+                    "options": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "value"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "needed",
+                    "about",
+                    "options"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "geographies",
+                "excluded_geographies",
+                "topics",
+                "excluded_topics",
+                "sector",
+                "frequency",
+                "unsupported_words",
+                "clarification"
+              ],
+              "additionalProperties": false,
+              "$defs": {
+                "geography": {
+                  "type": "string",
+                  "enum": [
+                    "AFG | Afghanistan | country",
+                    "AGO+BDI+BEN+BFA+BWA+CAF+CIV+CMR+COD+COG+COM+CPV+DJI+DZA+EGY+ERI+ESH+ETH+GAB+GHA+GIN+GMB+GNB+GNQ+KEN+LBR+LBY+LSO+MAR+MDG+MLI+MOZ+MRT+MUS+MWI+NAM+NER+NGA+REU+RWA+SDN+SEN+SHN+SLE+SOM+SSD+STP+SWZ+SYC+TCD+TGO+TUN+TZA+UGA+ZAF+ZMB+ZWE | Africa | country",
+                    "AL | Alabama | US state",
+                    "AK | Alaska | US state",
+                    "ALB | Albania | country",
+                    "DZA | Algeria | country",
+                    "ASM | American Samoa | country",
+                    "AGO | Angola | country",
+                    "ATA | Antarctica | country",
+                    "ATG | Antigua and Barbuda | country",
+                    "ARG | Argentina | country",
+                    "AZ | Arizona | US state",
+                    "AR | Arkansas | US state",
+                    "ARM | Armenia | country",
+                    "ABW | Aruba | country",
+                    "AFG+ASM+AUS+BGD+BRN+BTN+CHN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+IND+JPN+KHM+KIR+KOR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+NZL+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Asia & Oceania | country",
+                    "AUS | Australia | country",
+                    "AUS+NZL | Australia and New Zealand | country",
+                    "AUT | Austria | country",
+                    "AZE | Azerbaijan | country",
+                    "BHR | Bahrain | country",
+                    "BGD | Bangladesh | country",
+                    "BRB | Barbados | country",
+                    "BLR | Belarus | country",
+                    "BEL | Belgium | country",
+                    "BLZ | Belize | country",
+                    "BEN | Benin | country",
+                    "BMU | Bermuda | country",
+                    "BTN | Bhutan | country",
+                    "BOL | Bolivia | country",
+                    "BIH | Bosnia and Herzegovina | country",
+                    "BWA | Botswana | country",
+                    "BRA | Brazil | country",
+                    "VGB | British Virgin Islands | country",
+                    "BRN | Brunei | country",
+                    "BGR | Bulgaria | country",
+                    "BFA | Burkina Faso | country",
+                    "MMR | Burma | country",
+                    "BDI | Burundi | country",
+                    "CPV | Cabo Verde | country",
+                    "CA | California | US state",
+                    "KHM | Cambodia | country",
+                    "CMR | Cameroon | country",
+                    "CAN | Canada | country",
+                    "CYM | Cayman Islands | country",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BOL+BRA+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Central & South America | country",
+                    "CAF | Central African Republic | country",
+                    "TCD | Chad | country",
+                    "CHL | Chile | country",
+                    "CHN | China | country",
+                    "COL | Colombia | country",
+                    "CO | Colorado | US state",
+                    "COM | Comoros | country",
+                    "COG | Congo-Brazzaville | country",
+                    "COD | Congo-Kinshasa | country",
+                    "CT | Connecticut | US state",
+                    "COK | Cook Islands | country",
+                    "CRI | Costa Rica | country",
+                    "HRV | Croatia | country",
+                    "CUB | Cuba | country",
+                    "CYP | Cyprus | country",
+                    "CZE | Czechia | country",
+                    "DE | Delaware | US state",
+                    "DNK | Denmark | country",
+                    "DC | District of Columbia | US state",
+                    "DJI | Djibouti | country",
+                    "DMA | Dominica | country",
+                    "DOM | Dominican Republic | country",
+                    "DDR | Germany, East | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+SCG+SUN+TJK+TKM+UKR+UZB+YUG | Eastern Europe and Eurasia | country",
+                    "ECU | Ecuador | country",
+                    "EGY | Egypt | country",
+                    "SLV | El Salvador | country",
+                    "GNQ | Equatorial Guinea | country",
+                    "ERI | Eritrea | country",
+                    "EST | Estonia | country",
+                    "SWZ | Eswatini | country",
+                    "ETH | Ethiopia | country",
+                    "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+RUS+SUN+TJK+TKM+UKR+UZB | Eurasia | country",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SCG+SRB+SVK+SVN+SWE+TUR+XKS+YUG | Europe | country",
+                    "AUT+BEL+BGR+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GRC+HRV+HUN+IRL+ITA+LTU+LUX+LVA+MLT+NLD+POL+PRT+ROU+SVK+SVN+SWE | European Union | country",
+                    "FLK | Falkland Islands | country",
+                    "FRO | Faroe Islands | country",
+                    "X3 | Federal Offshore - Gulf of America | US state",
+                    "X5 | Federal Offshore - Pacific | US state",
+                    "FJI | Fiji | country",
+                    "FIN | Finland | country",
+                    "FL | Florida | US state",
+                    "CSK | Former Czechoslovakia | country",
+                    "SCG | Former Serbia and Montenegro | country",
+                    "SUN | Former U.S.S.R. | country",
+                    "YUG | Former Yugoslavia | country",
+                    "FRA | France | country",
+                    "GUF | French Guiana | country",
+                    "PYF | French Polynesia | country",
+                    "GAB | Gabon | country",
+                    "GA | Georgia | US state",
+                    "GEO | Georgia | country",
+                    "DEU | Germany | country",
+                    "GHA | Ghana | country",
+                    "GIB | Gibraltar | country",
+                    "GRC | Greece | country",
+                    "GRL | Greenland | country",
+                    "GRD | Grenada | country",
+                    "GLP | Guadeloupe | country",
+                    "GUM | Guam | country",
+                    "GTM | Guatemala | country",
+                    "GIN | Guinea | country",
+                    "GNB | Guinea-Bissau | country",
+                    "GUY | Guyana | country",
+                    "HTI | Haiti | country",
+                    "HI | Hawaii | US state",
+                    "HITZ | Hawaiian Trade Zone | country",
+                    "HND | Honduras | country",
+                    "HKG | Hong Kong | country",
+                    "HUN | Hungary | country",
+                    "ISL | Iceland | country",
+                    "ID | Idaho | US state",
+                    "IL | Illinois | US state",
+                    "IND | India | country",
+                    "IN | Indiana | US state",
+                    "IDN | Indonesia | country",
+                    "IA | Iowa | US state",
+                    "IRN | Iran | country",
+                    "IRQ | Iraq | country",
+                    "IRL | Ireland | country",
+                    "ISR | Israel | country",
+                    "ITA | Italy | country",
+                    "CIV | Ivory Coast | country",
+                    "JAM | Jamaica | country",
+                    "JPN | Japan | country",
+                    "JOR | Jordan | country",
+                    "KS | Kansas | US state",
+                    "KAZ | Kazakhstan | country",
+                    "KY | Kentucky | US state",
+                    "KEN | Kenya | country",
+                    "KIR | Kiribati | country",
+                    "XKS | Kosovo | country",
+                    "KWT | Kuwait | country",
+                    "KGZ | Kyrgyzstan | country",
+                    "LAO | Laos | country",
+                    "LVA | Latvia | country",
+                    "LBN | Lebanon | country",
+                    "LSO | Lesotho | country",
+                    "LBR | Liberia | country",
+                    "LBY | Libya | country",
+                    "LTU | Lithuania | country",
+                    "LA | Louisiana | US state",
+                    "LUX | Luxembourg | country",
+                    "MAC | Macau | country",
+                    "MDG | Madagascar | country",
+                    "ME | Maine | US state",
+                    "MWI | Malawi | country",
+                    "MYS | Malaysia | country",
+                    "MDV | Maldives | country",
+                    "MLI | Mali | country",
+                    "MLT | Malta | country",
+                    "MTQ | Martinique | country",
+                    "MD | Maryland | US state",
+                    "MA | Massachusetts | US state",
+                    "MRT | Mauritania | country",
+                    "MUS | Mauritius | country",
+                    "MEX | Mexico | country",
+                    "MI | Michigan | US state",
+                    "FSM | Micronesia | country",
+                    "ARE+BHR+IRN+IRQ+ISR+JOR+KWT+LBN+OMN+PSE+QAT+SAU+SYR+YEM | Middle East | country",
+                    "MN | Minnesota | US state",
+                    "MS | Mississippi | US state",
+                    "MO | Missouri | US state",
+                    "MDA | Moldova | country",
+                    "MNG | Mongolia | country",
+                    "MT | Montana | US state",
+                    "MNE | Montenegro | country",
+                    "MSR | Montserrat | country",
+                    "MAR | Morocco | country",
+                    "MOZ | Mozambique | country",
+                    "NAM | Namibia | country",
+                    "NRU | Nauru | country",
+                    "NE | Nebraska | US state",
+                    "NPL | Nepal | country",
+                    "NLD | Netherlands | country",
+                    "NLDA | Netherlands Antilles | country",
+                    "NV | Nevada | US state",
+                    "NCL | New Caledonia | country",
+                    "NH | New Hampshire | US state",
+                    "NJ | New Jersey | US state",
+                    "NM | New Mexico | US state",
+                    "NY | New York | US state",
+                    "NZL | New Zealand | country",
+                    "NIC | Nicaragua | country",
+                    "NER | Niger | country",
+                    "NGA | Nigeria | country",
+                    "NIU | Niue | country",
+                    "ABW+AFG+AGO+ALB+ARE+ARG+ARM+ATA+ATG+AZE+BDI+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CHN+CIV+CMR+COD+COG+COK+COM+CPV+CUB+CYM+CYP+DJI+DMA+DOM+DZA+ECU+EGY+ERI+ESH+ETH+FJI+FLK+FRO+FSM+GAB+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GNQ+GRD+GRL+GTM+GUF+GUY+HKG+HND+HRV+HTI+IDN+IND+IRN+IRQ+JAM+JOR+KAZ+KEN+KGZ+KHM+KIR+KNA+KWT+LAO+LBN+LBR+LBY+LCA+LKA+LSO+MAC+MAR+MDA+MDG+MDV+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NGA+NIC+NIU+NLDA+NPL+NRU+OMN+PAK+PAN+PER+PHL+PNG+PRK+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SAU+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUV+TWN+TZA+UGA+UKR+URY+USIQ+UZB+VCT+VEN+VGB+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OECD | country",
+                    "ABW+AFG+AGO+ALB+ARG+ARM+ASM+ATA+ATG+AUS+AUT+AZE+BDI+BEL+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CAN+CHE+CHL+CHN+CIV+CMR+COD+COK+COL+COM+CPV+CRI+CSK+CUB+CYM+CYP+CZE+DDR+DEU+DEUW+DJI+DMA+DNK+DOM+ECU+EGY+ERI+ESH+ESP+EST+ETH+FIN+FJI+FLK+FRA+FRO+FSM+GBR+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GRC+GRD+GRL+GTM+GUF+GUM+GUY+HITZ+HKG+HND+HRV+HTI+HUN+IDN+IND+IRL+ISL+ISR+ITA+JAM+JOR+JPN+KAZ+KEN+KGZ+KHM+KIR+KNA+KOR+LAO+LBN+LBR+LCA+LKA+LSO+LTU+LUX+LVA+MAC+MAR+MDA+MDG+MDV+MEX+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NIC+NIU+NLD+NLDA+NOR+NPL+NRU+NZL+OMN+PAK+PAN+PER+PHL+PNG+POL+PRI+PRK+PRT+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SVK+SVN+SWE+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUR+TUV+TWN+TZA+UGA+UKR+URY+USA+USIQ+UZB+VCT+VGB+VIR+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE | Non-OPEC | country",
+                    "BMU+CAN+GRL+MEX+SPM+USA | North America | country",
+                    "NC | North Carolina | US state",
+                    "ND | North Dakota | US state",
+                    "PRK | North Korea | country",
+                    "MKD | North Macedonia | country",
+                    "MNP | Northern Mariana Islands | country",
+                    "NOR | Norway | country",
+                    "ASM+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+GUM+HITZ+HUN+IRL+ISL+ISR+ITA+JPN+KOR+LTU+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRI+PRT+SVK+SVN+SWE+TUR+USA+USOH+VIR | OECD | country",
+                    "ASM+AUS+GUM+JPN+KOR+NZL | OECD - Asia And Oceania | country",
+                    "AUT+BEL+CHE+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+HUN+IRL+ISL+ITA+LTU+LUX+LVA+NLD+NOR+POL+PRT+SVK+SVN+SWE+TUR | OECD - Europe | country",
+                    "CAN+MEX+USA | OECD - North America | country",
+                    "OH | Ohio | US state",
+                    "OK | Oklahoma | US state",
+                    "OMN | Oman | country",
+                    "ARE+COG+DZA+GAB+GNQ+IRN+IRQ+KWT+LBY+NGA+SAU+VEN | OPEC | country",
+                    "COG+DZA+GAB+GNQ+LBY+NGA | OPEC - Africa | country",
+                    "OR | Oregon | US state",
+                    "ABW+ARG+ATA+ATG+BHS+BLZ+BMU+BOL+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GRL+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SPM+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR | Other Americas | country",
+                    "AFG+ASM+BGD+BRN+BTN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+KHM+KIR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM | Other Asia-Pacific | country",
+                    "PAK | Pakistan | country",
+                    "PSE | Palestinian Territories | country",
+                    "PAN | Panama | country",
+                    "PNG | Papua New Guinea | country",
+                    "PRY | Paraguay | country",
+                    "PA | Pennsylvania | US state",
+                    "ARE+BHR+IRN+IRQ+KWT+QAT+SAU | Persian Gulf | country",
+                    "PER | Peru | country",
+                    "PHL | Philippines | country",
+                    "POL | Poland | country",
+                    "PRT | Portugal | country",
+                    "PRI | Puerto Rico | country",
+                    "QAT | Qatar | country",
+                    "REU | Reunion | country",
+                    "RI | Rhode Island | US state",
+                    "ROU | Romania | country",
+                    "RUS | Russia | country",
+                    "RWA | Rwanda | country",
+                    "SHN | Saint Helena | country",
+                    "KNA | Saint Kitts and Nevis | country",
+                    "LCA | Saint Lucia | country",
+                    "SPM | Saint Pierre and Miquelon | country",
+                    "VCT | Saint Vincent/Grenadines | country",
+                    "WSM | Samoa | country",
+                    "STP | Sao Tome and Principe | country",
+                    "SAU | Saudi Arabia | country",
+                    "SEN | Senegal | country",
+                    "SRB | Serbia | country",
+                    "SYC | Seychelles | country",
+                    "SLE | Sierra Leone | country",
+                    "SGP | Singapore | country",
+                    "SVK | Slovakia | country",
+                    "SVN | Slovenia | country",
+                    "SLB | Solomon Islands | country",
+                    "SOM | Somalia | country",
+                    "ZAF | South Africa | country",
+                    "SC | South Carolina | US state",
+                    "SD | South Dakota | US state",
+                    "KOR | South Korea | country",
+                    "SSD | South Sudan | country",
+                    "ESP | Spain | country",
+                    "LKA | Sri Lanka | country",
+                    "SDN | Sudan | country",
+                    "SUR | Suriname | country",
+                    "SWE | Sweden | country",
+                    "CHE | Switzerland | country",
+                    "SYR | Syria | country",
+                    "TWN | Taiwan | country",
+                    "TJK | Tajikistan | country",
+                    "TZA | Tanzania | country",
+                    "TN | Tennessee | US state",
+                    "TX | Texas | US state",
+                    "THA | Thailand | country",
+                    "GMB | Gambia, The | country",
+                    "BHS | The Bahamas | country",
+                    "TLS | Timor-Leste | country",
+                    "TGO | Togo | country",
+                    "TON | Tonga | country",
+                    "TTO | Trinidad and Tobago | country",
+                    "TUN | Tunisia | country",
+                    "TUR | Turkiye | country",
+                    "TKM | Turkmenistan | country",
+                    "TCA | Turks and Caicos Islands | country",
+                    "TUV | Tuvalu | country",
+                    "USIQ | U.S. Pacific Islands | country",
+                    "USOH | U.S. Territories | country",
+                    "VIR | U.S. Virgin Islands | country",
+                    "UGA | Uganda | country",
+                    "UKR | Ukraine | country",
+                    "ARE | United Arab Emirates | country",
+                    "GBR | United Kingdom | country",
+                    "USA | United States | national",
+                    "URY | Uruguay | country",
+                    "UT | Utah | US state",
+                    "UZB | Uzbekistan | country",
+                    "VUT | Vanuatu | country",
+                    "VEN | Venezuela | country",
+                    "VT | Vermont | US state",
+                    "VNM | Vietnam | country",
+                    "VA | Virginia | US state",
+                    "WAK | Wake Island | country",
+                    "WA | Washington | US state",
+                    "DEUW | Germany, West | country",
+                    "WV | West Virginia | US state",
+                    "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SRB+SVK+SVN+SWE+TUR+XKS | Western Europe | country",
+                    "ESH | Western Sahara | country",
+                    "WI | Wisconsin | US state",
+                    "WLD | World | country",
+                    "WY | Wyoming | US state",
+                    "YEM | Yemen | country",
+                    "ZMB | Zambia | country",
+                    "ZWE | Zimbabwe | country"
+                  ]
+                },
+                "product": {
+                  "type": "string",
+                  "enum": [
+                    "natural gas",
+                    "petroleum",
+                    "electricity",
+                    "coal",
+                    "nuclear",
+                    "renewable",
+                    "fossil fuels",
+                    "hydro",
+                    "solar",
+                    "wind",
+                    "geothermal",
+                    "biofuels",
+                    "marine",
+                    "total energy"
+                  ]
+                },
+                "activity": {
+                  "type": "string",
+                  "enum": [
+                    "sales",
+                    "customers",
+                    "consumption",
+                    "production",
+                    "generation",
+                    "imports",
+                    "exports",
+                    "reserves",
+                    "capacity",
+                    "storage",
+                    "prices",
+                    "expenditures"
+                  ]
+                },
+                "sector": {
+                  "type": "string",
+                  "enum": [
+                    "residential",
+                    "commercial",
+                    "industrial",
+                    "transportation",
+                    "electric power",
+                    "utility"
+                  ]
+                },
+                "frequency": {
+                  "type": "string",
+                  "enum": [
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "quarterly",
+                    "annual"
+                  ]
+                }
+              }
+            },
+            "strict": true
+          },
+          "verbosity": "medium"
+        },
+        "tool_choice": "auto",
+        "tool_usage": {
+          "image_gen": {
+            "input_tokens": 0,
+            "input_tokens_details": {
+              "image_tokens": 0,
+              "text_tokens": 0
+            },
+            "output_tokens": 0,
+            "output_tokens_details": {
+              "image_tokens": 0,
+              "text_tokens": 0
+            },
+            "total_tokens": 0
+          },
+          "web_search": {
+            "num_requests": 0
+          }
+        },
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 0.98,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 5594,
+          "input_tokens_details": {
+            "cache_write_tokens": 296,
+            "cached_tokens": 5295
+          },
+          "output_tokens": 271,
+          "output_tokens_details": {
+            "reasoning_tokens": 161
+          },
+          "total_tokens": 5865
+        },
+        "user": null,
+        "metadata": {}
+      },
+      "status": 200,
+      "elapsedMs": 8829,
+      "form": {
+        "geographies": [
+          {
+            "geography": "NE | Nebraska | US state",
+            "quoted_words": "nebraksa"
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "biofuels",
+            "activity": "production",
+            "quoted_words": "biofuel production"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "geography",
+          "options": []
+        }
+      },
+      "checks": {
+        "valid": true,
+        "errors": []
+      }
+    }
+  ],
+  "events": [
+    {
+      "event": "locked_form_reask",
+      "errors": [
+        "invalid_clarification_option"
+      ]
+    }
+  ]
+}

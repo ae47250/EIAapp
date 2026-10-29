@@ -1,0 +1,521 @@
+{
+  "id": "I6",
+  "repeat": 1,
+  "query": "energy consumption in new york excluding the transportation sector",
+  "meaning": {
+    "correct": true,
+    "errors": [],
+    "returnedGeographies": [
+      "NY"
+    ],
+    "rawGeographies": [
+      "NY | New York | US state"
+    ]
+  },
+  "checksPassed": true,
+  "firstAttempt": {
+    "meaning": {
+      "correct": true,
+      "errors": [],
+      "returnedGeographies": [
+        "NY"
+      ],
+      "rawGeographies": [
+        "NY | New York | US state"
+      ]
+    },
+    "checksPassed": true
+  },
+  "data": {
+    "correct": true,
+    "errors": [],
+    "unlabelledWrongData": false,
+    "entries": [
+      {
+        "geographyCode": "NY",
+        "product": "total energy",
+        "activity": "consumption",
+        "correct": true,
+        "errors": [],
+        "status": "not_available",
+        "message": "EIA does not publish total energy consumption excluding transportation for New York.",
+        "labels": [
+          "Total energy consumption — all sectors, including transportation (Billion Btu; Total energy consumption across all sectors)"
+        ]
+      }
+    ]
+  },
+  "clarificationNeeded": false,
+  "attemptCount": 1,
+  "usage": [
+    {
+      "input_tokens": 5572,
+      "input_tokens_details": {
+        "cache_write_tokens": 274,
+        "cached_tokens": 5295
+      },
+      "output_tokens": 177,
+      "output_tokens_details": {
+        "reasoning_tokens": 49
+      },
+      "total_tokens": 5749
+    }
+  ],
+  "costUSD": 0.00016915000000000002,
+  "costUpperUSD": 0.0014815,
+  "result": {
+    "mode": "lookup",
+    "query": "energy consumption in new york excluding the transportation sector",
+    "intent": {
+      "originalQuery": "energy consumption in new york excluding the transportation sector",
+      "cleanedQuery": "energy consumption in new york excluding the transportation sector",
+      "normalizedQuery": "energy consumption in new york excluding the transportation sector",
+      "correctedQuery": "energy consumption in new york excluding the transportation sector",
+      "correctedQuerySource": "unchanged",
+      "interpreter": "openai_locked_form",
+      "interpretationMethod": "enforced_form",
+      "lockedForm": {
+        "geographies": [
+          {
+            "geography": "NY | New York | US state",
+            "quoted_words": "new york"
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "quoted_words": "energy consumption"
+          }
+        ],
+        "excluded_topics": [
+          {
+            "product": null,
+            "activity": null,
+            "sector": "transportation",
+            "quoted_words": "the transportation sector"
+          }
+        ],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": false,
+          "about": null,
+          "options": []
+        }
+      },
+      "country": {
+        "name": "New York",
+        "code": "NY",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      },
+      "countryCode": "NY",
+      "validatedGeographies": [
+        {
+          "name": "New York",
+          "code": "NY",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "excludedGeographies": [],
+      "product": "total energy",
+      "activity": "consumption",
+      "sector": "transportation",
+      "validatedConceptPairs": [
+        {
+          "product": "total energy",
+          "activity": "consumption",
+          "order": 0,
+          "source": "validated_interpreter"
+        }
+      ],
+      "exclusions": [
+        {
+          "type": "sector",
+          "value": "transportation",
+          "order": 0,
+          "confidence": null,
+          "source": "locked_form"
+        }
+      ],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "fields": {
+        "country": {
+          "normalizedValue": "NY",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "product": {
+          "normalizedValue": "total energy",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "activity": {
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "sector": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "fallbackUsed": false,
+          "explicit": false
+        }
+      },
+      "unknownQualifiers": [],
+      "fallback": {
+        "used": false,
+        "method": null,
+        "reasons": []
+      },
+      "needsClarification": false,
+      "blockingClarification": false,
+      "conceptPairStatus": "validated",
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "seds",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "energy consumption in new york excluding the transportation sector",
+        "normalizedQuery": "energy consumption in new york excluding the transportation sector",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": null,
+              "source": "validated_interpreter",
+              "evidence": null,
+              "geography": {
+                "name": "New York",
+                "code": "NY",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "total energy",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "New York",
+          "code": "NY",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "New York",
+            "code": "NY",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          }
+        ],
+        "product": "total energy",
+        "productBreadth": "broad",
+        "productAlternatives": [
+          "natural gas",
+          "petroleum",
+          "electricity",
+          "coal",
+          "nuclear",
+          "renewable"
+        ],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": "transportation",
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": null
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [],
+          "routeFamily": "seds",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [
+          {
+            "type": "sector",
+            "value": "transportation",
+            "order": 0,
+            "confidence": null,
+            "source": "locked_form"
+          }
+        ],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "none",
+          "reasons": []
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "seds",
+          "label": "SEDS",
+          "reason": "A state-level energy request uses SEDS.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "mechanically_cleaned_raw_query",
+          "geographies": [
+            "validated_interpreter"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "NY",
+              "rawText": null,
+              "source": "validated_interpreter",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [
+            "locked_form"
+          ],
+          "unknownQualifiers": []
+        },
+        "needsClarification": false,
+        "blockingClarification": false,
+        "missingFields": [],
+        "clarificationMessage": null
+      },
+      "route": {
+        "family": "seds",
+        "label": "SEDS",
+        "reason": "A state-level energy request uses SEDS.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "none",
+        "reasons": []
+      }
+    },
+    "source": "U.S. Energy Information Administration",
+    "selectedSeries": null,
+    "selectedComparison": null,
+    "selectedComparisons": [],
+    "results": [
+      {
+        "topicIndex": 0,
+        "product": "total energy",
+        "activity": "consumption",
+        "title": "Total energy consumption",
+        "countries": [
+          {
+            "geography": {
+              "name": "New York",
+              "code": "NY",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "product": "total energy",
+            "activity": "consumption",
+            "status": "not_available",
+            "series": null,
+            "message": "EIA does not publish total energy consumption excluding transportation for New York.",
+            "alternatives": [
+              {
+                "label": "Total energy consumption — all sectors, including transportation (Billion Btu; Total energy consumption across all sectors)",
+                "lookupRowKey": "state-total-energy-consumption",
+                "topicIndex": 0
+              }
+            ]
+          }
+        ],
+        "selectedComparison": null,
+        "selectedSeries": null
+      }
+    ],
+    "choices": [],
+    "choice": null,
+    "needsClarification": false,
+    "note": "Data fetched from checked EIA routes. Measurement definitions and availability are shown with each result."
+  }
+}

@@ -120,3 +120,18 @@ test('main route import graph excludes the old candidate/ranking pipeline and me
   for(const match of source.matchAll(/(?:from\s+|import\s*)['"](\.[^'"]+\.js)['"]/g))walk(resolve(dirname(path),match[1]));
  }walk('app/api/search-eia/route.js');assert.ok(visited.has(resolve('lib/sources/eia/lookup-search.js')));
 });
+test('direct search and browser resubmission apply the size boundary to the same source form',async()=>{
+ const {listApprovedGeographies}=await import('../lib/sources/eia/intent-routing.js');
+ const {geographyLabel}=await import('../lib/sources/eia/locked-form-schema.js');
+ const p=payload('O1'),q='natural gas reserves for all US states';
+ p.lockedForm.geographies=listApprovedGeographies().filter(g=>g.type==='state').map(g=>({geography:geographyLabel(g),quoted_words:'all US states'}));
+ p.lockedForm.topics=[{product:'natural gas',activity:'reserves',quoted_words:'natural gas reserves'}];
+ assert.ok(JSON.stringify(normalizeSubmittedIntent(p,q)).length>12000);assert.ok(JSON.stringify(p).length<12000);
+ const saved={login:process.env.LOGIN_REQUIRED,key:process.env.OPENAI_API_KEY,fetch:globalThis.fetch};let count=0;
+ process.env.LOGIN_REQUIRED='off';process.env.OPENAI_API_KEY='offline-test-only';globalThis.fetch=async(url)=>{assert.equal(String(url),'https://api.openai.com/v1/responses');count++;return Response.json({output_text:JSON.stringify(p.lockedForm)});};
+ try{
+  const direct=await (await GET(new Request('http://localhost/api/search-eia?'+new URLSearchParams({q})))).json();
+  const params=appendIntentParams(new URLSearchParams({q}),p),browser=await (await GET(new Request('http://localhost/api/search-eia?'+params))).json();
+  assert.equal(direct.needsClarification,false);assert.equal(direct.results[0].countries.length,p.lockedForm.geographies.length);assert.deepEqual(direct.results,browser.results);assert.equal(count,1);
+ }finally{globalThis.fetch=saved.fetch;for(const [name,value] of [['LOGIN_REQUIRED',saved.login],['OPENAI_API_KEY',saved.key]])if(value===undefined)delete process.env[name];else process.env[name]=value;}
+});
