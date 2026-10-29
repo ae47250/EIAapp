@@ -123,7 +123,7 @@ test("LOGIN_REQUIRED=off bypasses page and API authentication", async () => {
   const handlers = [searchEiaHandler, interpretQueryHandler, plantMetadataHandler, openaiDiagnosticHandler];
   for (const handler of handlers) {
     const res = createMockResponse();
-    await handler(createRequest({ method: "POST" }), res);
+    await handler(createRequest({ method: "DELETE" }), res);
     assert.equal(res.statusCode, 405);
   }
 

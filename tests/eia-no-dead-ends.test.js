@@ -89,7 +89,7 @@ test('what comes before where, and the next click carries the repaired form',asy
 test('browser guard keeps blocked/missing forms away from search and displays clarification',()=>{
  for(const intent of [null,{}, {interpreter:'openai_locked_form'},{interpreter:'openai_locked_form',interpretationFailure:'bad',lockedForm:{}},convertLockedFormV2(get('C1').form,get('C1').query)]) assert.equal(canSearchIntent(intent),false);
  assert.equal(canSearchIntent(convertLockedFormV2(get('C2').form,get('C2').query)),true);
- const source=readFileSync(new URL('../components/search/SearchWorkspace.js',import.meta.url),'utf8');assert.ok(source.indexOf('if (!canSearchIntent(intent))')<source.indexOf('fetchJson(`/api/search-eia?${params}`)'));assert.ok(source.includes('`${data.query} ${text}`'));
+ const source=readFileSync(new URL('../components/search/SearchWorkspace.js',import.meta.url),'utf8');assert.ok(source.indexOf('if (!canSearchIntent(intent))')<source.indexOf('fetchJson(`/api/search-eia?${params}`)'));assert.ok(!source.includes('`${data.query} ${text}`'));assert.ok(source.includes('clarificationReplyPayload(data.query, data.intent, text)'));
 });
 for(const id of ['C1','C4','C5','C6'])test('frozen question '+id,async()=>{
  const c=get(id),result=await searchLookup(c.query,payload(c.form),{},{fetchData:noFetch});assert.equal(scoreC(result,c).correct,true);

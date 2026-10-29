@@ -1,6 +1,6 @@
 "use client";
 
-import { appendIntentParams, appendLookupChoice, canSearchIntent, clarificationResult } from "../../lib/eia-intent-payload.js";
+import { appendIntentParams, appendLookupChoice, canSearchIntent, clarificationResult, clarificationReplyPayload } from "../../lib/eia-intent-payload.js";
 
 import { useRef, useState } from "react";
 
@@ -24,7 +24,7 @@ export default function SearchWorkspace({ showLogout }) {
   const [loading, setLoading] = useState(false);
   const seriesCache = useRef(new Map());
 
-  async function searchEia(nextQuery = query) {
+  async function searchEia(nextQuery = query, replyPayload = null) {
     const originalQuery = typeof nextQuery === 'string' ? nextQuery : query;
     const cleanQuery = originalQuery.trim().replace(/\s+/g, " ");
     if (!cleanQuery) {
@@ -39,7 +39,9 @@ export default function SearchWorkspace({ showLogout }) {
     setData(null);
     setStatus({ message: "Interpreting query..." });
     try {
-      const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
+      const interpretation = replyPayload
+        ? await fetchJson('/api/interpret-query', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(replyPayload)})
+        : await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
       const intent = interpretation.intent;
       if (!canSearchIntent(intent)) { applySearchResult(clarificationResult(intent,originalQuery)); return; }
       setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
@@ -286,7 +288,10 @@ export default function SearchWorkspace({ showLogout }) {
       {lookupMode ? <p className="card compact-card" aria-label="Understood request"><strong>Here's what I understood:</strong> {data.understood || data.intent?.understood || "Request needs clarification"}</p> : null}
       <SearchStatus status={status} />
       {lookupMode ? <LookupChoices choices={data.choices} onChoose={chooseLookup} disabled={loading} freeText={data.freeText}
-        onFreeText={text => { const next = `${data.query} ${text}`; setQuery(next); searchEia(next); }} /> : null}
+        onFreeText={text => {
+          if (data.intent?.lockedForm?.clarification.needed) searchEia(data.query, clarificationReplyPayload(data.query, data.intent, text));
+          else { setQuery(text); searchEia(text); }
+        }} /> : null}
       {lookupMode ? (data.results || []).map(result => (
         <section className="results-pair single-result" key={result.topicIndex} aria-label={result.title}>
           {result.selectedComparison ? <SelectedComparison comparison={result.selectedComparison} source={data.source} />
@@ -341,8 +346,8 @@ export default function SearchWorkspace({ showLogout }) {
   );
 }
 
-async function fetchJson(url) {
-  const response = await fetch(url);
+async function fetchJson(url, options) {
+  const response = await fetch(url, options);
   let data;
   try {
     data = await response.json();

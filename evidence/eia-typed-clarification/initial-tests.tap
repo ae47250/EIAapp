@@ -1,0 +1,65 @@
+✔ typed reply end-to-end offline: place-exact (53.058375ms)
+✔ typed reply end-to-end offline: place-typos (21.284917ms)
+✖ typed reply end-to-end offline: product (31.998333ms)
+✔ typed reply end-to-end offline: activity-rich-answer (11.96625ms)
+✔ field schemas stay strict and never permit unrelated model edits (0.719417ms)
+✔ new quotes must be in reply, not borrowed from the original request; old fields cannot borrow reply text (0.24025ms)
+✔ an invalid answer gets one reask, then preserves the current form and useful question (5.677792ms)
+✔ genuine ambiguity remains unresolved; a valid country does not erase unknown countries (0.144042ms)
+✔ geography reply preserves earlier countries, ordered additions and explicit exclusions (0.29275ms)
+✔ product reply updates missing topics only and retains other activities, topics and quotes (0.230083ms)
+✔ typed frequency answer preserves all other fields and retains its separate quote (0.220167ms)
+✔ typed answer, next-question button and serialization preserve both evidence sources (14.745125ms)
+✔ unrelated fields in submitted merged form cannot override replayed history (15.309583ms)
+✖ HTTP POST and client payload perform field-only interpretation without concatenation (0.1795ms)
+✖ search and diagnostic use the same Luna default and honor OPENAI_MODEL (0.080375ms)
+✔ typed-reply expected meanings remain frozen (0.287458ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 13
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 207.114583
+
+✖ failing tests:
+
+test at tests/eia-typed-clarification.test.js:30:22
+✖ typed reply end-to-end offline: product (31.998333ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.results[0].countries.every(country=>country.series?.points.length))
+  
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-clarification.test.js:47:40)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-typed-clarification.test.js:103:1
+✖ HTTP POST and client payload perform field-only interpretation without concatenation (0.1795ms)
+  TypeError: t.mock.env is not a function
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-clarification.test.js:104:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at tests/eia-typed-clarification.test.js:110:1
+✖ search and diagnostic use the same Luna default and honor OPENAI_MODEL (0.080375ms)
+  TypeError: t.mock.env is not a function
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-clarification.test.js:111:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
