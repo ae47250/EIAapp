@@ -1,6 +1,6 @@
 "use client";
 
-import { appendIntentParams, appendLookupChoice } from "../../lib/eia-intent-payload.js";
+import { appendIntentParams, appendLookupChoice, canSearchIntent, clarificationResult } from "../../lib/eia-intent-payload.js";
 
 import { useRef, useState } from "react";
 
@@ -24,9 +24,9 @@ export default function SearchWorkspace({ showLogout }) {
   const [loading, setLoading] = useState(false);
   const seriesCache = useRef(new Map());
 
-  async function searchEia() {
-    const originalQuery = query;
-    const cleanQuery = query.trim().replace(/\s+/g, " ");
+  async function searchEia(nextQuery = query) {
+    const originalQuery = typeof nextQuery === 'string' ? nextQuery : query;
+    const cleanQuery = originalQuery.trim().replace(/\s+/g, " ");
     if (!cleanQuery) {
       setStatus({
         error: true,
@@ -41,6 +41,7 @@ export default function SearchWorkspace({ showLogout }) {
     try {
       const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
       const intent = interpretation.intent;
+      if (!canSearchIntent(intent)) { applySearchResult(clarificationResult(intent,originalQuery)); return; }
       setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
       const params = appendIntentParams(new URLSearchParams({ q: originalQuery }), intent);
       const nextData = await fetchJson(`/api/search-eia?${params}`);
@@ -54,11 +55,12 @@ export default function SearchWorkspace({ showLogout }) {
 
   async function chooseLookup(action) {
     if (!data?.intent) return;
+    if (action.editSearch) { document.querySelector(".search-form input")?.focus(); return; }
     setLoading(true);
     setStatus({ message: "Loading your choice from EIA..." });
     try {
       const params = appendLookupChoice(new URLSearchParams({ q: data.query }), data.intent,
-        { ...action, choice: action.choice || data.choice });
+        action);
       applySearchResult(await fetchJson(`/api/search-eia?${params}`));
     } catch (error) {
       setStatus({ error: true, message: error.message });
@@ -281,8 +283,10 @@ export default function SearchWorkspace({ showLogout }) {
         />
       </section>
 
+      {lookupMode ? <p className="card compact-card" aria-label="Understood request"><strong>Here's what I understood:</strong> {data.understood || data.intent?.understood || "Request needs clarification"}</p> : null}
       <SearchStatus status={status} />
-      {lookupMode ? <LookupChoices choices={data.choices} onChoose={chooseLookup} disabled={loading} /> : null}
+      {lookupMode ? <LookupChoices choices={data.choices} onChoose={chooseLookup} disabled={loading} freeText={data.freeText}
+        onFreeText={text => { const next = `${data.query} ${text}`; setQuery(next); searchEia(next); }} /> : null}
       {lookupMode ? (data.results || []).map(result => (
         <section className="results-pair single-result" key={result.topicIndex} aria-label={result.title}>
           {result.selectedComparison ? <SelectedComparison comparison={result.selectedComparison} source={data.source} />

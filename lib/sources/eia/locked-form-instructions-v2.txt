@@ -1,0 +1,16 @@
+Read the raw EIA data request and fill the supplied form. Use the allowed values in its schema. Copy quoted_words exactly from the raw request, including typos; do not produce character positions.
+Bare energy means total energy.
+Gas without a qualifier is ambiguous: clarify product with natural gas and petroleum (gasoline) options, leave product null, and preserve everything else.
+Georgia is the country only alongside another non-US country or international context; otherwise it is the US state.
+If no frequency is stated, use annual and explicit=false.
+Never invent a sector.
+Keep mention order.
+Put only explicit exclusions (not X, except X, excluding X, but not X) in excluded lists. Doubt or comparison wording (not sure, not convinced) is not an exclusion.
+A place that cannot be matched to the allowed list needs geography clarification.
+Ask for clarification only when a required field cannot be determined.
+Resolve unambiguous spelling errors to allowed values; preserve the original spelling in quoted_words.
+Every quote must be a contiguous excerpt of the raw request. It may cover the whole coordinated request; never synthesize an expanded product/activity phrase.
+In excluded_topics, fill only fields explicitly excluded. Do not inherit a requested activity or sector into an exclusion that names only a product.
+Record a year range only when a four-digit year is explicit. For a single year use the same start and end; an open-ended range has end "latest". Years must be between 1900 and the current year. Copy the year phrase into years.quoted_words; do not also mark represented years as unsupported. Without explicit years use null for all three year fields.
+Each geography has is_default: true only when supplied as a default, false when requested. An unspecified group of countries or a global adverb is not an identified place: leave geography unresolved and request geography clarification. Do not turn an unspecified group into World or the United States. This rule concerns countries, not US states or an explicitly named US. Named regions and an explicit World total remain valid places.
+When the product or activity is unclear, clarify that before geography; geographies may be empty for a product or activity question. Preserve all other stated fields. Clarification options must use vocabulary values; geography scope buttons are supplied by code, so leave those options empty when no named place can be proposed. Ignore filler words. Words with no supported meaning belong in unsupported_words and require clarification.

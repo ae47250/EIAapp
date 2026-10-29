@@ -1,0 +1,41 @@
+{
+  "recordedAt": "2026-10-29T03:26:48.930Z",
+  "permitted": true,
+  "ceilingUSD": 1,
+  "maximumUSD": 0.955248,
+  "model": "gpt-6-luna",
+  "reasoning": {
+    "effort": "low"
+  },
+  "maxOutputTokens": 16000,
+  "maxInputTokens": 8000,
+  "maxGenerationCalls": 80,
+  "maxBrowserGenerationCalls": 6,
+  "transientRetries": 0,
+  "counts": [
+    {
+      "reask": true,
+      "status": 200,
+      "inputTokens": 5886,
+      "countBytes": 20558,
+      "maxQueryBytes": 135,
+      "bound": 6277
+    }
+  ],
+  "inputBoundJustification": "Native count of the complete schema/instructions with an empty raw query, plus the largest frozen UTF-8 encoded query length and 256 tokens covering boundary changes and removing the short re-ask sentence for initial calls. One byte per added query token is a conservative upper bound; no truncation.",
+  "priorRejectedCount": "evidence/eia-no-dead-ends/request-freeze-v2/count-initial.json",
+  "totalCountingCalls": 4,
+  "initialBudget": "evidence/eia-no-dead-ends/step0/budget-before-calls.json",
+  "requestFileSHA256": "4b88e30684e633b8d4f84b1a6951ffd31699c526a735c2f74039054ac369b0ba",
+  "codeSHA256": {
+    "lib/sources/eia/locked-form-schema-v2.js": "8700efc9ef6f979c976a41c7451c6097fb7c37d33305e1332ccef7ac9978c00e",
+    "lib/sources/eia/locked-form-instructions-v2.txt": "dafeed88cf3806055b4d5c7f189c6ad7a69bc02faa4250fc2e5f89d660e170ae",
+    "lib/sources/eia/locked-form-v2.js": "191ee1ca93ea1a61692dcbb2be7935ebfa0b4bcc3c9c392963ded4d6667e96dd",
+    "lib/sources/eia/lookup-context.js": "51336e33e0838d48a73ed3740d487cbc51e0c9b723c2a4b612a4fe49769aa437",
+    "lib/sources/eia/lookup-list.js": "e0abaa891de8278527e4a1f1b1c7829c42e5290e84a98d184dc3f09840f46020",
+    "lib/sources/eia/lookup-search.js": "3c2817f6ccc61918bad1d667b5a5db00a634b2c619e29085bf63afca1aeae19b",
+    "lib/sources/eia/interpret-query.js": "84d5c9e9f7e76d8542b76dde6b21abea682bef7a80da2d0677099a908c365aec",
+    "lib/eia-intent-payload.js": "f63ca6db9f084818346271de51172ad8b3554ba701cbae0148a5d64cd7cff2c4",
+    "data/eia/lookup-list.json": "33c68eb35da1b1e8a3cc72fc35c0c34f475b6320cbf3035706a9eaeed1de90b0"
+  }
+}

@@ -1,3 +1,4 @@
+import { upgradeV1Form } from '../lib/sources/eia/locked-form-schema-v2.js';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
@@ -17,10 +18,10 @@ const quiet = () => {};
 const answer = form => Response.json({ status: 'completed', output: [{ type: 'message', content: [{ type: 'output_text', text: JSON.stringify(form) }] }] });
 
 for (const k of keys) test(`locked form ${k.id}: frozen meaning survives conversion and browser resubmission`, async () => {
-  const form = gold(k.id);
+  const form = upgradeV1Form(gold(k.id));
   const intent = await interpretQuery(k.query, [], { apiKey: 'offline-placeholder', fetch: async () => answer(form), rules: noRules, log: quiet });
   assert.equal(intent.interpreter, 'openai_locked_form');
-  assert.deepEqual(checkLockedForm(form, k.query), { valid: true, errors: [] });
+  assert.deepEqual(checkLockedForm(gold(k.id), k.query), { valid: true, errors: [] });
   const params = appendIntentParams(new URLSearchParams({ q: k.query }), intent);
   const payload = JSON.parse(params.get('intentPayload'));
   assert.deepEqual(Object.keys(payload), ['interpreter', 'lockedForm']);
@@ -147,7 +148,7 @@ test('public search rejects missing, unreadable, oversized and legacy payloads w
       const p = new URLSearchParams({ q: key('O1').query, intentReady: '1' }); if (payload !== undefined) p.set('intentPayload', payload);
       const response = await searchEia(new Request(`http://localhost/api/search-eia?${p}`)); const result = await response.json();
       assert.equal(response.status, 200); assert.equal(result.needsClarification, true); assert.deepEqual(result.results, []);
-      assert.deepEqual(result.choices, []);
+      assert.ok(result.choices.length > 0); assert.equal(result.freeText, true);
     }
     const f = gold('O1'); f.geographies[0].quoted_words = 'invented';
     assert.equal(recheckSubmittedForm({ interpreter: 'openai_locked_form', lockedForm: f }, key('O1').query, noRules).needsClarification, true);

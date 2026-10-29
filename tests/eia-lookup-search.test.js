@@ -1,3 +1,4 @@
+import { upgradeV1Form } from '../lib/sources/eia/locked-form-schema-v2.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -16,7 +17,7 @@ const gold=read('tests/fixtures/eia/locked-form/gold-forms.json');
 const oracle=read('evidence/eia-lookup-list/expected-data.json');
 const checks=[...read('evidence/eia-lookup-list/row-checks-1.json').records,...read('evidence/eia-lookup-list/row-checks-2.json').records];
 const key=id=>keys.find(k=>k.id===id);
-const payload=id=>({interpreter:'openai_locked_form',lockedForm:structuredClone(gold.find(g=>g.id===id).form)});
+const payload=id=>({interpreter:'openai_locked_form',lockedForm:upgradeV1Form(gold.find(g=>g.id===id).form)});
 const calls=[];
 async function recorded(selector){
  calls.push(selector);
@@ -77,10 +78,10 @@ test('comparison and series shapes are accepted by chart helpers and Excel, with
  }
 });
 test('different units, definitions or frequencies never share a comparison chart',async()=>{
- const submitted=payload('O3');submitted.lockedForm.geographies=[{geography:'USA | United States | national',quoted_words:'USA'},{geography:'TX | Texas | US state',quoted_words:'Texas'}];
+ const submitted=payload('O3');submitted.lockedForm.geographies=[{geography:'USA | United States | national',quoted_words:'USA',is_default:false},{geography:'TX | Texas | US state',quoted_words:'Texas',is_default:false}];
  submitted.lockedForm.topics[0].quoted_words='electricity consumption';
  const result=await searchLookup('USA and Texas electricity consumption',submitted,{},{fetchData:recorded});assert.equal(result.selectedComparison.chartCompatible,false);assert.equal(result.selectedComparison.countries.length,2);assert.ok(result.selectedComparison.warnings.some(w=>w.code==='different_measures'));
- const total=payload('O1');total.lockedForm.geographies.push({geography:'ISL | Iceland | country',quoted_words:'Iceland'});
+ const total=payload('O1');total.lockedForm.geographies.push({geography:'ISL | Iceland | country',quoted_words:'Iceland',is_default:false});
  const common=await searchLookup('united states and Iceland energy consumption',total,{},{fetchData:recorded});assert.equal(common.selectedComparison.chartCompatible,true);assert.ok(common.selectedComparison.countries.every(c=>c.series.unit==='quadrillion Btu'));
 });
 test('no result for an unchecked concept is not called EIA nonpublication',async()=>{
@@ -124,7 +125,7 @@ test('direct search and browser resubmission apply the size boundary to the same
  const {listApprovedGeographies}=await import('../lib/sources/eia/intent-routing.js');
  const {geographyLabel}=await import('../lib/sources/eia/locked-form-schema.js');
  const p=payload('O1'),q='natural gas reserves for all US states';
- p.lockedForm.geographies=listApprovedGeographies().filter(g=>g.type==='state').map(g=>({geography:geographyLabel(g),quoted_words:'all US states'}));
+ p.lockedForm.geographies=listApprovedGeographies().filter(g=>g.type==='state').map(g=>({geography:geographyLabel(g),quoted_words:'all US states',is_default:false}));
  p.lockedForm.topics=[{product:'natural gas',activity:'reserves',quoted_words:'natural gas reserves'}];
  assert.ok(JSON.stringify(normalizeSubmittedIntent(p,q)).length>12000);assert.ok(JSON.stringify(p).length<12000);
  const saved={login:process.env.LOGIN_REQUIRED,key:process.env.OPENAI_API_KEY,fetch:globalThis.fetch};let count=0;
