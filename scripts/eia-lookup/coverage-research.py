@@ -1,15 +1,19 @@
 """Job 5 research collector. No app behavior; no OpenAI requests. Resume by safe URL."""
 from pathlib import Path
-import json,hashlib,urllib.request,urllib.parse,urllib.error,time,datetime,sys
+import gzip,json,hashlib,urllib.request,urllib.parse,urllib.error,time,datetime,sys
 ROOT=Path(__file__).resolve().parents[2]
 EVIDENCE=ROOT/'evidence/eia-coverage'
 RAW=Path.home()/'Documents/EIAapp-Evidence/20261029/coverage/raw'
 KEYFILE=Path.home()/'Downloads/eia-api-key.txt'
 LOG=EVIDENCE/'calls.jsonl'
 def digest(b):return hashlib.sha256(b).hexdigest()
+def read(path):
+    return json.loads(gzip.decompress(path.read_bytes()) if path.suffix=='.gz' else path.read_bytes())
 def write(path,data):
     path.parent.mkdir(parents=True,exist_ok=True)
-    temp=path.with_suffix(path.suffix+'.tmp');temp.write_text(json.dumps(data,indent=2)+'\n');temp.replace(path)
+    temp=path.with_suffix(path.suffix+'.tmp')
+    body=(json.dumps(data,separators=(',',':'))+'\n').encode() if path.suffix=='.gz' else (json.dumps(data,indent=2)+'\n').encode()
+    temp.write_bytes(gzip.compress(body,mtime=0) if path.suffix=='.gz' else body);temp.replace(path)
 class Collector:
     def __init__(self):
         self.key=KEYFILE.read_text().strip()
@@ -45,6 +49,7 @@ class Collector:
             try:data=json.loads(clean)
             except Exception:data={};error=error or 'NonJSONResponse'
             if not isinstance(data,dict):data={};error=error or 'NonObjectJSONResponse'
+            if 'error' in data:error=error or 'APIErrorResponse'
             response=data.get('response',{})
             if not isinstance(response,dict):response={};error=error or 'InvalidResponseWrapper'
             record={'id':len(self.records)+1,'timestamp':stamp,'time':datetime.datetime.fromtimestamp(stamp,datetime.timezone.utc).isoformat(),'kind':kind,'url':url,'status':status,'total':response.get('total',response.get('totalFacets')),'file':file,'sha256':digest(clean),'redactedKeyEcho':clean!=body}

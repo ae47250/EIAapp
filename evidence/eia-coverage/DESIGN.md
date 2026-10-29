@@ -13,3 +13,11 @@ The new branch was created from verified `bbff3bf4edf76935b5700b6ca702fa93071d62
 - Finish route-specific notation research and the design source review; then perform the full route census, facet inventory, place crosswalk, committed cell-grid freeze, call estimate and complete coverage checks in the work order's sequence.
 - Freeze Set D and its scorer, then stop for the separate owner “go” before implementation.
 - D12 specifies 2005–2019 for “only from 2005”, whereas the previous job used whole-interval replacement for “from 2005”. Record/reconcile this changed expectation before freezing, without modifying earlier frozen expectations or silently adding a query-specific rule.
+
+## Documented U.S. scope amendment
+
+The owner approved routes without a place filter only for documented U.S. series. EIA's [Monthly Energy Review](https://www.eia.gov/totalenergy/data/monthly/) states: “A publication of recent and historical U.S. energy statistics.” This establishes `total-energy` as a U.S.-scope candidate; individual series still require whole-product and activity validation. Country/state mappings and treating bilateral trade partners as the requested place are prohibited. The citation and restriction are recorded in the route census.
+
+## Additional discovery reference
+
+- **Route-specific identifiers and data safeguards** — cyanheads/eia-energy-mcp-server [design](https://github.com/cyanheads/eia-energy-mcp-server/blob/36e5ac081e6f44c525eda7a578806ad454f0f3b9/docs/design.md) and [EIA guide](https://github.com/cyanheads/eia-energy-mcp-server/blob/36e5ac081e6f44c525eda7a578806ad454f0f3b9/skills/eia-energy-guide/SKILL.md), Apache-2.0, checked 2026-10-29. Useful discovery guidance for route-specific place codes, totals alongside components, and missing values versus zeros. EIA facet calls independently confirm the electricity/natural-gas/SEDS code differences and coexisting totals. EIA observation call 243 confirms numeric-zero strings; EIA's own notation legend controls symbol meanings. Observation-unit and process/series-label examples remain candidates until verified. Source hashes and EIA checks are in cyanheads-reference-review.json. No implementation code copied and no MCP server used.

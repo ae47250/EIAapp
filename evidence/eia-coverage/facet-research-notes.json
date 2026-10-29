@@ -1,0 +1,28 @@
+{
+  "facetFrequency": {
+    "defaultCompleteness": "Default facet endpoints may be frequency limited; row-count completeness alone does not prove all frequencies.",
+    "failedCalls": [
+      244,
+      258,
+      259,
+      260
+    ],
+    "source": "https://www.eia.gov/opendata/browser/main-QSMAUV7W.js",
+    "finding": "EIA browser uses a frequency array. frequency[]=annual verified successfully; scalar frequency is not used for facet requests.",
+    "verifiedArrayCall": 973,
+    "annualProducts": 68,
+    "defaultMonthlyProducts": 18
+  },
+  "duplicateFacetIds": {
+    "call": 300,
+    "route": "electricity/rto/daily-fuel-type-data",
+    "facet": "fueltype",
+    "reportedRows": 20,
+    "finding": "Duplicate IDs have different labels (PS, BAT, SNB, UES); preserve all returned definitions. This is not missing rows."
+  },
+  "biomassNotation": {
+    "url": "https://www.eia.gov/biofuels/biomass/",
+    "quote": "N/A = No production",
+    "handling": "Owner has already required every symbol to stay nonnumeric, retain original symbol and show its meaning; this symbol is not numeric zero. Actual API occurrence remains to be checked."
+  }
+}

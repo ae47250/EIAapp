@@ -1,0 +1,200 @@
+{
+  "referenceRevision": "36e5ac081e6f44c525eda7a578806ad454f0f3b9",
+  "license": "Apache-2.0 (guide front matter; owner supplied)",
+  "sources": [
+    {
+      "path": "docs/design.md",
+      "sha256": "6f50a02cccf1bbf0b24a3e5e4a90116f403828e33291fed52c07e564a2731432"
+    },
+    {
+      "path": "skills/eia-energy-guide/SKILL.md",
+      "sha256": "f4597044c2c1f64c3d75c8870dbda2ba9b8de7748766e788d57ccfada68cd9b0"
+    }
+  ],
+  "use": "Discovery hints only. No copied implementation code; no server installed or called. EIA evidence decides every mapping.",
+  "verifiedAgainstEIA": [
+    {
+      "route": "electricity/retail-sales",
+      "facet": "stateid",
+      "calls": [
+        256
+      ],
+      "confirmedDefinitions": [
+        {
+          "id": "MAT",
+          "name": "Middle Atlantic",
+          "alias": "Region: (MAT) Middle Atlantic"
+        },
+        {
+          "id": "NEW",
+          "name": "New England",
+          "alias": "Region: (NEW) New England"
+        },
+        {
+          "id": "US",
+          "name": "U.S. Total",
+          "alias": "Total: (US) United States (not including territory data)"
+        },
+        {
+          "id": "SAT",
+          "name": "South Atlantic",
+          "alias": "Region: (SAT) South Atlantic"
+        },
+        {
+          "id": "WSC",
+          "name": "West South Central",
+          "alias": "Region: (WSC) West South Central"
+        },
+        {
+          "id": "TX",
+          "name": "Texas",
+          "alias": "(TX) Texas"
+        }
+      ]
+    },
+    {
+      "route": "electricity/retail-sales",
+      "facet": "sectorid",
+      "calls": [
+        257
+      ],
+      "confirmedDefinitions": [
+        {
+          "id": "OTH",
+          "name": "other",
+          "alias": "(OTH) other"
+        },
+        {
+          "id": "COM",
+          "name": "commercial",
+          "alias": "(COM) commercial"
+        },
+        {
+          "id": "RES",
+          "name": "residential",
+          "alias": "(RES) residential"
+        },
+        {
+          "id": "TRA",
+          "name": "transportation",
+          "alias": "(TRA) transportation"
+        },
+        {
+          "id": "IND",
+          "name": "industrial",
+          "alias": "(IND) industrial"
+        },
+        {
+          "id": "ALL",
+          "name": "all sectors",
+          "alias": "(ALL) all sectors"
+        }
+      ]
+    },
+    {
+      "route": "natural-gas/cons/sum",
+      "facet": "duoarea",
+      "calls": [
+        505
+      ],
+      "confirmedDefinitions": [
+        {
+          "id": "NUS",
+          "name": "U.S."
+        },
+        {
+          "id": "STX",
+          "name": "TEXAS"
+        }
+      ]
+    },
+    {
+      "route": "natural-gas/cons/sum",
+      "facet": "process",
+      "calls": [
+        507
+      ],
+      "confirmedDefinitions": [
+        {
+          "id": "VCS",
+          "name": "Commercial Consumption"
+        },
+        {
+          "id": "VRS",
+          "name": "Residential Consumption"
+        },
+        {
+          "id": "VGT",
+          "name": "Delivered to Consumers"
+        },
+        {
+          "id": "VC0",
+          "name": "Total Consumption"
+        },
+        {
+          "id": "VIN",
+          "name": "Industrial Consumption"
+        }
+      ]
+    },
+    {
+      "route": "seds",
+      "facet": "stateId",
+      "calls": [
+        253
+      ],
+      "confirmedDefinitions": [
+        {
+          "id": "TX",
+          "name": "Texas"
+        },
+        {
+          "id": "US",
+          "name": "United States"
+        }
+      ]
+    },
+    {
+      "route": "seds",
+      "facet": "seriesId",
+      "calls": [
+        252
+      ],
+      "confirmedDefinitions": [
+        {
+          "id": "PACCB",
+          "name": "All petroleum products consumed by the commercial sector"
+        },
+        {
+          "id": "PACCP",
+          "name": "All petroleum products consumed by the commercial sector"
+        }
+      ]
+    }
+  ],
+  "zeroEvidence": {
+    "record": "coal-zero-check.json",
+    "call": 243,
+    "finding": "135 observations for the three owner-named places are numeric-zero strings, not nulls or symbols."
+  },
+  "symbolEvidence": {
+    "url": "https://www.eia.gov/dnav/ng/ng_cons_sum_dcu_nus_a.htm",
+    "meaning": "EIA distinguishes no data, not applicable, not available, and withheld; owner decision keeps all symbols nonnumeric."
+  },
+  "notYetReliedOn": [
+    "Specific Texas wellhead-price null example",
+    "Specific Alaska transportation-price zero example",
+    "Actual unit difference between PACCB and PACCP",
+    "Process-versus-series label disagreement for VFC/N3020TX4"
+  ],
+  "candidateCheckQueue": [
+    "Check observation units and series descriptions rather than trusting generic route/process aliases.",
+    "Do not add totals to their own component rows.",
+    "Use route-specific place-facet values, preserving national totals and regions as different scopes."
+  ],
+  "limitations": [
+    "A name-matching state code alone cannot prove a balancing-authority area is a state total.",
+    "Default facet definitions can be frequency-limited; all-frequency audit remains required.",
+    "Cyanheads strict unique-ID completeness rule is not adopted: EIA call 300 returns repeated IDs with different labels; inventory preserves those variants."
+  ]
+}
