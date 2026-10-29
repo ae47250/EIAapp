@@ -130,10 +130,10 @@ test('one re-ask can pass; first attempt and retry are independently recorded', 
   assert.equal(attempts[0].checks.valid, false); assert.equal(attempts[1].checks.valid, true);
 });
 
-test('request enforces schema and preserves production model settings unless explicitly injected for evaluation', () => {
+test('request enforces schema and uses the owner-authorized low reasoning default with explicit evaluation overrides', () => {
   const body = lockedFormRequest('raw words', { model: 'production-placeholder' });
   assert.equal(body.model, 'production-placeholder'); assert.equal(body.text.format.strict, true);
-  assert.equal(body.text.format.type, 'json_schema'); assert.equal(body.reasoning, undefined); assert.equal(body.max_output_tokens, undefined);
+  assert.equal(body.text.format.type, 'json_schema'); assert.deepEqual(body.reasoning, { effort: 'low' }); assert.equal(body.max_output_tokens, undefined);
   assert.equal(body.input.includes('requestEvidence'), false);
   const evaluation = lockedFormRequest('raw words', { model: 'gpt-6-luna', reasoning: { effort: 'low' }, maxOutputTokens: 16000 });
   assert.deepEqual(evaluation.reasoning, { effort: 'low' }); assert.equal(evaluation.max_output_tokens, 16000);
@@ -146,8 +146,8 @@ test('public search rejects missing, unreadable, oversized and legacy payloads w
     for (const payload of [undefined, '{', 'x'.repeat(12001), JSON.stringify({ interpreter: 'openai', countryCode: 'USA' }), JSON.stringify({ interpreter: 'openai_locked_form', countryCode: 'USA' })]) {
       const p = new URLSearchParams({ q: key('O1').query, intentReady: '1' }); if (payload !== undefined) p.set('intentPayload', payload);
       const response = await searchEia(new Request(`http://localhost/api/search-eia?${p}`)); const result = await response.json();
-      assert.equal(response.status, 200); assert.equal(result.needsClarification, true); assert.deepEqual(result.variables, []);
-      assert.equal(result.diagnostics.clarificationBlocked, true);
+      assert.equal(response.status, 200); assert.equal(result.needsClarification, true); assert.deepEqual(result.results, []);
+      assert.deepEqual(result.choices, []);
     }
     const f = gold('O1'); f.geographies[0].quoted_words = 'invented';
     assert.equal(recheckSubmittedForm({ interpreter: 'openai_locked_form', lockedForm: f }, key('O1').query, noRules).needsClarification, true);

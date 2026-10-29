@@ -1,3 +1,4 @@
+import { downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
 import { formatCoverageParts, formatLatestValue } from "../../lib/client/formatting.js";
 import SeriesChart from "./SeriesChart.js";
 
@@ -12,6 +13,18 @@ export default function SelectedSeries({ series, source }) {
         <h2>{series.title || ""}</h2>
       </div>
       <div className="selected-source">Source: {source || "EIA"}</div>
+      {series.lookup ? (
+        <div className="muted">
+          <p>{series.description}</p>
+          <p>Measurement basis: {series.basisLabel}. {series.sectorLabel}. Units: {series.unit}. Frequency: {series.frequency}.</p>
+          {series.otherMeasuresExist ? <p>Other measures exist</p> : null}
+          {series.regionLabel ? <p>{series.regionLabel}</p> : null}
+          {series.fallbackLabel ? <p>{series.fallbackLabel}</p> : null}
+          {series.alternative ? <p>Alternative selected: {series.basisLabel}. This differs from the original request.</p> : null}
+          {series.completenessNote ? <p role="status">{series.completenessNote}</p> : null}
+          <button className="ghost-button" type="button" onClick={() => downloadSeriesWorkbook(series)}>Excel</button>
+        </div>
+      ) : null}
       <div className="stats">
         <div className="stat series-stat-card">
           <div className="stats-row">

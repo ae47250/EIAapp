@@ -1,0 +1,90 @@
+{
+  "startedAt": "2026-10-29T00:25:04.641Z",
+  "finishedAt": "2026-10-29T00:25:07.879Z",
+  "inputSha256": "035de010526b69749c811c0d3a33a882aecbab19addc2c1bd76e59e2eea2da61",
+  "complete": true,
+  "records": [
+    {
+      "key": "state-natural-gas-consumption",
+      "required": true,
+      "route": "natural-gas/cons/sum",
+      "dataColumn": "value",
+      "selectorDefinitionHash": "1ba3ec26636244dbbe42707b4c51a5d70d03ac44f82203c861d2569e4614d97c",
+      "checks": [
+        {
+          "geography": "TX",
+          "sector": null,
+          "selector": {
+            "route": "natural-gas/cons/sum",
+            "dataColumn": "value",
+            "frequency": "annual",
+            "facets": {
+              "product": "EPG0",
+              "process": "VC0",
+              "duoarea": "STX"
+            }
+          },
+          "rows": 28,
+          "total": 28,
+          "complete": true,
+          "numericRows": 28,
+          "units": [
+            "MMCF"
+          ],
+          "displayedUnit": "Million cubic feet",
+          "frequency": "annual",
+          "coverage": {
+            "start": "1997",
+            "end": "2024"
+          },
+          "facetChecks": [
+            {
+              "id": "product",
+              "values": [
+                "EPG0"
+              ],
+              "source": "facet_metadata",
+              "names": [
+                "Natural Gas"
+              ]
+            },
+            {
+              "id": "process",
+              "values": [
+                "VC0"
+              ],
+              "source": "facet_metadata",
+              "names": [
+                "Total Consumption"
+              ]
+            },
+            {
+              "id": "duoarea",
+              "values": [
+                "STX"
+              ],
+              "source": "facet_metadata",
+              "names": [
+                "TEXAS"
+              ]
+            }
+          ],
+          "sample": {
+            "period": "2024",
+            "duoarea": "STX",
+            "area-name": "TEXAS",
+            "product": "EPG0",
+            "product-name": "Natural Gas",
+            "process": "VC0",
+            "process-name": "Total Consumption",
+            "series": "NA1490_STX_2",
+            "series-description": "Texas Natural Gas Total Consumption (MMcf)",
+            "value": "5348651",
+            "units": "MMCF"
+          }
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

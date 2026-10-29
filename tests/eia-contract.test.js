@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
 
-import { GET as searchEia } from "../app/api/search-eia/route.js";
+import retainedCandidateHandler from '../lib/sources/eia/candidate-search.js';
+import {runRouteHandler} from '../lib/next-route-adapter.js';
+const searchEia = request => runRouteHandler(retainedCandidateHandler,request);
 import { GET as interpretQuery } from "../app/api/interpret-query/route.js";
 import {
   buildComparisonXlsx,

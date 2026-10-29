@@ -5,7 +5,9 @@ import { gunzipSync } from 'node:zlib';
 import { after, before, test } from 'node:test';
 import { interpretQueryWithRules, normalizeSubmittedIntent } from '../lib/sources/eia/interpret-query.js';
 import { buildLocalCandidatePipeline } from '../lib/sources/eia/candidate-pipeline.js';
-import { GET as searchEia } from '../app/api/search-eia/route.js';
+import retainedCandidateHandler from '../lib/sources/eia/candidate-search.js';
+import {runRouteHandler} from '../lib/next-route-adapter.js';
+const searchEia = request => runRouteHandler(retainedCandidateHandler,request);
 
 function fixture(name) {
   return JSON.parse(readFileSync(new URL(`./fixtures/eia/${name}.json`, import.meta.url)));

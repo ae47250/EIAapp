@@ -1,10 +1,11 @@
 "use client";
 
-import { appendIntentParams } from "../../lib/eia-intent-payload.js";
+import { appendIntentParams, appendLookupChoice } from "../../lib/eia-intent-payload.js";
 
 import { useRef, useState } from "react";
 
 import { downloadComparisonWorkbook, downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
+import LookupChoices from "./LookupChoices.js";
 import CandidateGroups from "./CandidateGroups.js";
 import ComparisonGroups from "./ComparisonGroups.js";
 import MatchingVariables from "./MatchingVariables.js";
@@ -49,6 +50,19 @@ export default function SearchWorkspace({ showLogout }) {
     } finally {
       setLoading(false);
     }
+  }
+
+  async function chooseLookup(action) {
+    if (!data?.intent) return;
+    setLoading(true);
+    setStatus({ message: "Loading your choice from EIA..." });
+    try {
+      const params = appendLookupChoice(new URLSearchParams({ q: data.query }), data.intent,
+        { ...action, choice: action.choice || data.choice });
+      applySearchResult(await fetchJson(`/api/search-eia?${params}`));
+    } catch (error) {
+      setStatus({ error: true, message: error.message });
+    } finally { setLoading(false); }
   }
 
   async function selectSeries(variable) {
@@ -183,6 +197,11 @@ export default function SearchWorkspace({ showLogout }) {
   }
 
   function applySearchResult(nextData) {
+    if (nextData.mode === "lookup") {
+      setData(nextData);
+      setStatus({ message: nextData.userMessage || nextData.note || "Search complete." });
+      return;
+    }
     if (nextData.needsCountry || nextData.needsClarification) {
       setData(null);
       setStatus({ error: true, message: nextData.userMessage || "Please include a country name." });
@@ -219,6 +238,7 @@ export default function SearchWorkspace({ showLogout }) {
     setStatus({ message: `${interpreter} ${nextData.note || ""}`.trim() });
   }
 
+  const lookupMode = data?.mode === "lookup";
   const series = data?.selectedSeries;
   const variables = data?.variables || [];
   const candidateGroups = data?.candidateGroups || [];
@@ -262,8 +282,23 @@ export default function SearchWorkspace({ showLogout }) {
       </section>
 
       <SearchStatus status={status} />
-      {series ? <RecentObservations series={series} /> : null}
-      {candidateMode && comparisonMode && comparisonDefinitions.length ? (
+      {lookupMode ? <LookupChoices choices={data.choices} onChoose={chooseLookup} disabled={loading} /> : null}
+      {lookupMode ? (data.results || []).map(result => (
+        <section className="results-pair single-result" key={result.topicIndex} aria-label={result.title}>
+          {result.selectedComparison ? <SelectedComparison comparison={result.selectedComparison} source={data.source} />
+            : result.selectedSeries ? <SelectedSeries series={result.selectedSeries} source={data.source} />
+            : <article className="card"><h2>{result.title}</h2></article>}
+          {result.countries.filter(country => !country.series).map(country => (
+            <div className="card compact-card" key={country.geography.code}>
+              <p role="status">{country.message}</p>
+              <LookupChoices choices={country.alternatives} onChoose={chooseLookup} disabled={loading} />
+            </div>
+          ))}
+          {result.selectedSeries ? <RecentObservations series={result.selectedSeries} /> : null}
+        </section>
+      )) : null}
+      {!lookupMode && series ? <RecentObservations series={series} /> : null}
+      {!lookupMode && (candidateMode && comparisonMode && comparisonDefinitions.length ? (
         <section className={`results-pair${selectedComparison ? "" : " single-result"}`}>
           <ComparisonGroups
             definitions={comparisonDefinitions}
@@ -288,7 +323,7 @@ export default function SearchWorkspace({ showLogout }) {
           <MatchingVariables variables={variables} onSelect={selectSeries} onDownload={downloadSeries} />
           <SelectedSeries series={series} source={data.source} />
         </section>
-      ) : null}
+      ) : null)}
 
       <section className="card about">
         <h2>About</h2>
