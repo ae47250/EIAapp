@@ -12,7 +12,7 @@ The new branch was created from verified `bbff3bf4edf76935b5700b6ca702fa93071d62
 - The notation stop is resolved in owner-clarifications.json. SDMX CL_OBS_STATUS (https://sdmx.org/sdmx_cdcl/) supports distinguishing unusual/missing observation statuses; EIA route-specific meanings remain authoritative.
 - Finish route-specific notation research and the design source review; then perform the full route census, facet inventory, place crosswalk, committed cell-grid freeze, call estimate and complete coverage checks in the work order's sequence.
 - Freeze Set D and its scorer, then stop for the separate owner “go” before implementation.
-- D12 specifies 2005–2019 for “only from 2005”, whereas the previous job used whole-interval replacement for “from 2005”. Record/reconcile this changed expectation before freezing, without modifying earlier frozen expectations or silently adding a query-specific rule.
+- D12 year-boundary conflict resolved by owner: treat start and end as separate dialogue-state slots. Update only stated boundaries; a stated single year sets both. D12 remains 2005–2019; an initially open-ended form plus “from 2005” becomes 2005–latest. This supersedes the prior whole-interval rule. Preserve earlier frozen records and record this owner change in the new freeze.
 
 ## Documented U.S. scope amendment
 
@@ -21,3 +21,7 @@ The owner approved routes without a place filter only for documented U.S. series
 ## Additional discovery reference
 
 - **Route-specific identifiers and data safeguards** — cyanheads/eia-energy-mcp-server [design](https://github.com/cyanheads/eia-energy-mcp-server/blob/36e5ac081e6f44c525eda7a578806ad454f0f3b9/docs/design.md) and [EIA guide](https://github.com/cyanheads/eia-energy-mcp-server/blob/36e5ac081e6f44c525eda7a578806ad454f0f3b9/skills/eia-energy-guide/SKILL.md), Apache-2.0, checked 2026-10-29. Useful discovery guidance for route-specific place codes, totals alongside components, and missing values versus zeros. EIA facet calls independently confirm the electricity/natural-gas/SEDS code differences and coexisting totals. EIA observation call 243 confirms numeric-zero strings; EIA's own notation legend controls symbol meanings. Observation-unit and process/series-label examples remain candidates until verified. Source hashes and EIA checks are in cyanheads-reference-review.json. No implementation code copied and no MCP server used.
+
+## Explicit product qualifiers amendment
+
+The owner permits separate coverage cells only for the existing qualifiers **crude oil** and **gasoline**. Count these separately from the unchanged 672 whole-product cells. Use them only when the user explicitly names that part, label it as a part of petroleum, and never offer it in place of the whole product. No new qualifiers or form vocabulary are authorized. See owner-clarifications.json.

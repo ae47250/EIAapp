@@ -1,0 +1,12 @@
+{
+  "call": 1403,
+  "route": "petroleum/pri/imc1/facet/series",
+  "request": {
+    "frequency[]": "annual",
+    "facets[duoarea][]": "NUS-Z00"
+  },
+  "expectedIfFiltered": "Only the all-partner national series, not individual foreign partners",
+  "actualTotal": 11,
+  "finding": "Response contains all 11 annual series, including individual partners. This request does not establish a series-to-place join. Do not treat a successful HTTP response as filter enforcement.",
+  "impact": "Retain unresolved geography mapping until supported by other route-specific evidence or subsequent fully scoped observations."
+}

@@ -1,0 +1,172 @@
+[
+  {
+    "route": "petroleum/pri/imc1",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "EIA observation explicitly joins this duoarea to a U.S.-labelled series. Geography probe only; coverage remains unverified.",
+    "evidenceCall": 1404,
+    "series": "I000000004",
+    "quote": "U.S. FOB Costs of Crude Oil (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/move/imc1",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "Complete all-frequency series/product/process/duoarea definitions are identical to the price route with the verified observation join. Coverage on this alias still requires its own request.",
+    "equivalentDefinitionsTo": "petroleum/pri/imc1",
+    "evidenceCall": 1404,
+    "series": "I000000004",
+    "quote": "U.S. FOB Costs of Crude Oil (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/pri/imc3",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "EIA observation explicitly joins this duoarea to a U.S.-labelled series. Geography probe only; coverage remains unverified.",
+    "evidenceCall": 1405,
+    "series": "I000000204",
+    "quote": "U.S. FOB Costs of Crude with API Gravity 20.0 degrees or less (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/move/imc3",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "Complete all-frequency series/product/process/duoarea definitions are identical to the price route with the verified observation join. Coverage on this alias still requires its own request.",
+    "equivalentDefinitionsTo": "petroleum/pri/imc3",
+    "evidenceCall": 1405,
+    "series": "I000000204",
+    "quote": "U.S. FOB Costs of Crude with API Gravity 20.0 degrees or less (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/pri/land1",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "EIA observation explicitly joins this duoarea to a U.S.-labelled series. Geography probe only; coverage remains unverified.",
+    "evidenceCall": 1406,
+    "series": "I000000008",
+    "quote": "U.S. Landed Costs of Crude Oil (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/move/land1",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "Complete all-frequency series/product/process/duoarea definitions are identical to the price route with the verified observation join. Coverage on this alias still requires its own request.",
+    "equivalentDefinitionsTo": "petroleum/pri/land1",
+    "evidenceCall": 1406,
+    "series": "I000000008",
+    "quote": "U.S. Landed Costs of Crude Oil (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/pri/land3",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "EIA observation explicitly joins this duoarea to a U.S.-labelled series. Geography probe only; coverage remains unverified.",
+    "evidenceCall": 1407,
+    "series": "I000000208",
+    "quote": "U.S. Landed Costs of Crude with API Gravity 20.0 degrees or less (Dollars per Barrel)"
+  },
+  {
+    "route": "petroleum/move/land3",
+    "facet": "duoarea",
+    "definition": {
+      "id": "NUS-Z00",
+      "name": "NA"
+    },
+    "geographyCode": "USA",
+    "basis": "Complete all-frequency series/product/process/duoarea definitions are identical to the price route with the verified observation join. Coverage on this alias still requires its own request.",
+    "equivalentDefinitionsTo": "petroleum/pri/land3",
+    "evidenceCall": 1407,
+    "series": "I000000208",
+    "quote": "U.S. Landed Costs of Crude with API Gravity 20.0 degrees or less (Dollars per Barrel)"
+  },
+  {
+    "route": "crude-oil-imports",
+    "facet": "destinationId",
+    "definition": {
+      "id": "PS_VI",
+      "name": "Virgin Islands"
+    },
+    "geographyCode": "VIR",
+    "basis": "Domestic port/refinery-state context identifies the U.S. territory. EIA refinery scope explicitly includes U.S. Virgin Islands, and the same catalogue labels its territory series U.S. Virgin Islands (VIR/NVQ). Not British Virgin Islands.",
+    "requiredFilters": {
+      "destinationType": [
+        "PS"
+      ]
+    },
+    "sources": [
+      {
+        "url": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php",
+        "quote": "PORT_STATE | State Abbreviation; PCOMP_STAT | Processing Company State Code"
+      },
+      {
+        "url": "https://www.eia.gov/petroleum/refinerycapacity/index.php",
+        "quote": "Puerto Rico, the U.S. Virgin Islands, Guam, and other U.S. possessions."
+      }
+    ],
+    "supportingSeries": {
+      "route": "petroleum/pnp/cap1",
+      "id": "8_NA_8CDDG_NVQ_5",
+      "name": "U.S. Virgin Islands Refinery Desulfurization, Gasoline Downstream Charge Capacity as of January 1 (Barrels per Stream Day)",
+      "call": 756
+    }
+  },
+  {
+    "route": "crude-oil-imports",
+    "facet": "destinationId",
+    "definition": {
+      "id": "RS_VI",
+      "name": "Virgin Islands"
+    },
+    "geographyCode": "VIR",
+    "basis": "Domestic port/refinery-state context identifies the U.S. territory. EIA refinery scope explicitly includes U.S. Virgin Islands, and the same catalogue labels its territory series U.S. Virgin Islands (VIR/NVQ). Not British Virgin Islands.",
+    "requiredFilters": {
+      "destinationType": [
+        "RS"
+      ]
+    },
+    "sources": [
+      {
+        "url": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php",
+        "quote": "PORT_STATE | State Abbreviation; PCOMP_STAT | Processing Company State Code"
+      },
+      {
+        "url": "https://www.eia.gov/petroleum/refinerycapacity/index.php",
+        "quote": "Puerto Rico, the U.S. Virgin Islands, Guam, and other U.S. possessions."
+      }
+    ],
+    "supportingSeries": {
+      "route": "petroleum/pnp/cap1",
+      "id": "8_NA_8CDDG_NVQ_5",
+      "name": "U.S. Virgin Islands Refinery Desulfurization, Gasoline Downstream Charge Capacity as of January 1 (Barrels per Stream Day)",
+      "call": 756
+    }
+  }
+]

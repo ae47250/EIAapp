@@ -9,5 +9,18 @@
     "date": "2026-10-29",
     "decision": "A route with no place filter counts for the US place kind only, when EIA documentation states the series covers the United States. Record the URL and quote in the route census. This amends the no place facet at country, US or state level reason for US scope only. Never use such a series for a state or a country.",
     "source": "Owner direct reply during Job 5"
+  },
+  "explicitQualifiers": {
+    "date": "2026-10-29",
+    "decision": "Only existing lookup-list.json qualifiers crude oil and gasoline may have separate coverage cells. No new qualifiers. Count and report qualifier cells separately from the unchanged 672 whole-product cells. Use only when user words explicitly name that part. Label on screen, for example Gasoline (part of petroleum). Never use or offer a qualifier in place of the whole product.",
+    "source": "Owner direct reply during Job 5"
+  },
+  "yearBoundarySlots": {
+    "date": "2026-10-29",
+    "decision": "Start and end years are separate dialogue-state slots. A reply updates only stated year slots, preserving unstated slots. From X or since X states start only; use latest for end only when no end was already set. Stating both years, or a single year, replaces both. This supersedes the earlier whole-interval replacement rule.",
+    "D12": "2000-2019 then Japan and Korea, only from 2005 => 2005-2019",
+    "requiredOfflineRegression": "No end set, then from 2005 => 2005-latest",
+    "historicalEvidence": "Keep earlier frozen files intact; record this as an owner-approved expectation change in the new freeze and explain affected earlier checks.",
+    "source": "Owner direct reply during Job 5"
   }
 }
