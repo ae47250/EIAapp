@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "pythonASTFiles": 17,
+  "offlineTests": {
+    "electricityCorrespondence": 18,
+    "MERCorrespondence": 24,
+    "seriesCorrespondence": 11,
+    "placeCrosswalk": 10,
+    "facetInventory": 6,
+    "failed": 0
+  },
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1423,
+  "EIA_API_calls": 1423,
+  "newEIA_API_callsThisTurn": 4,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "electricityDraft": {
+    "routes": 6,
+    "classificationCompleteRoutes": 5,
+    "dataColumns": 78,
+    "facetDefinitions": 104,
+    "pending": [
+      {
+        "route": "electricity/electric-power-operational-data",
+        "facet": "fueltypeid",
+        "codes": [
+          "OB2",
+          "OBW"
+        ]
+      },
+      {
+        "route": "electricity/electric-power-operational-data",
+        "facet": "sectorid",
+        "codes": [
+          "95"
+        ]
+      }
+    ],
+    "acceptedForCoverage": false
+  },
+  "findings": [
+    "Published Table 1 and probe 1422 confirm utility-only subset behind electric-power-sector API aliases.",
+    "Technical Notes p.22 resolve sector 2/3 browser wording; both are ownership/CHP components.",
+    "Biomass codes OB2/OBW agree with narrower published components for 10 annual periods, but exact code definitions remain pending.",
+    "Sector 95 label Coal Consumption contradicts returned fuel and activity dimensions; remains pending."
+  ],
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not independently annotated reference alignment. No applicable public EIA mapping benchmark identified in documented bounded research.",
+  "notRun": "Application suite/build/browser: application untouched and implementation checkpoint not reached.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-electricity-source-review.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "git diff --check"
+  ]
+}

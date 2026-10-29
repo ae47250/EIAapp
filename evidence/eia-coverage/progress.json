@@ -1,18 +1,18 @@
 {
-  "recordedAt": "2026-10-29T23:17:22.830670+00:00",
+  "recordedAt": "2026-10-29T23:28:41.980873+00:00",
   "branch": "codex/eia-coverage",
   "startSHA": "bbff3bf4edf76935b5700b6ca702fa93071d624e",
   "workOrderSHA256": "c878980d594337a14ac089181b75862824165d34f1b70c63ca441dfd7c9fac0c",
   "phase": "2: all FITS measure definitions inventoried; draft international and SEDS correspondence; remaining classifications/grid/coverage pending",
-  "state": "active: owner generation policy recorded and MER scope annotated; remaining route definitions and coverage still in progress",
+  "state": "active: electricity definitions classified except three unresolved operational metadata labels; remaining families/grid/B1 pending",
   "trigger": "Owner accepts conditional labelled utility-scale generation, with preference for published all-size totals.",
-  "EIA_API_calls": 1419,
+  "EIA_API_calls": 1423,
   "OpenAI_calls": 0,
   "codeChanges": false,
   "pushed": false,
   "implementationAuthorizedAfterCheckpointGo": false,
   "unrelatedUntrackedPreserved": "docs/eia-interpretation-audit.md",
-  "previousGoalTurnClassification": "Progress: owner decision resolved; verified small-scale PV geography/source scope and updated 47 MER generation annotations.",
+  "previousGoalTurnClassification": "Progress: generation rule committed; current continuation adds six electricity-route classifications and resolves utility-versus-sector alias mismatch.",
   "defaultFacetRoutes": 193,
   "allFrequencyRoutes": 170,
   "leafClassifications": {
@@ -51,11 +51,37 @@
     {
       "route": "electricity/state-electricity-profiles/summary",
       "issue": "API aliases generation-elect-utils and capacity-elec-utilities say Electric Power Sector, but official state profile Table 1 calls them Electric utilities and separately reports IPP & CHP. Do not accept as whole electric-power sector without resolving underlying definition.",
-      "source": "https://www.eia.gov/electricity/state/unitedstates/index.php"
+      "source": "https://www.eia.gov/electricity/state/unitedstates/index.php",
+      "status": "Resolved as utility-only component by published Table 1 and call 1422; classified subset. Original metadata retained."
     },
     {
       "route": "electricity/electric-power-operational-data",
-      "issue": "AOR excludes hydro despite API label all renewables; BIO/OB2/OBW labels collide; classify from full official definitions. generation-scope-review.json records the evidence."
+      "issue": "AOR excludes hydro despite API label all renewables; BIO/OB2/OBW labels collide; classify from full official definitions. generation-scope-review.json records the evidence.",
+      "status": "AOR subset resolved; BIO total documented; OB2/OBW component correspondence corroborated over ten years but exact API code definitions remain pending."
     }
-  ]
+  ],
+  "electricityDraft": {
+    "routes": 6,
+    "classificationCompleteRoutes": 5,
+    "dataColumns": 78,
+    "facetDefinitions": 104,
+    "pending": [
+      {
+        "route": "electricity/electric-power-operational-data",
+        "facet": "fueltypeid",
+        "codes": [
+          "OB2",
+          "OBW"
+        ]
+      },
+      {
+        "route": "electricity/electric-power-operational-data",
+        "facet": "sectorid",
+        "codes": [
+          "95"
+        ]
+      }
+    ],
+    "acceptedForCoverage": false
+  }
 }

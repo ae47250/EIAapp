@@ -23,6 +23,20 @@ def build_node(node):
             row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
         result['dataColumns'][0]['classification']='via '+facet
         result['classificationComplete']=review['complete'] and all(r['classification']!='pending' for r in result['facets'][facet])
+    if node['route'].startswith('electricity/'):
+        review=i.read(i.EVIDENCE/'electricity-classification.json')['routes'][node['route']]
+        columns={r['id']:r for r in review['dataColumns']}
+        for row in result['dataColumns']:
+            decision=columns[row['id']]
+            if row['definition']!=decision['sourceDefinition']:raise ValueError('Electricity column definition changed')
+            row.update({k:v for k,v in decision.items() if k not in ['id','sourceDefinition']})
+        for fid,rows in result['facets'].items():
+            decisions={json.dumps(r['sourceDefinition'],sort_keys=True):r for r in review['facets'][fid]}
+            for row in rows:
+                decision=decisions[json.dumps(row['definition'],sort_keys=True)]
+                row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
+        result['classificationComplete']=review['complete']
+        result['classificationSources']=review['sources']
     if node['route']=='international':
         review=i.read(i.EVIDENCE/'international-classification.json')
         for facet,key in [('productId','products'),('activityId','activities')]:
