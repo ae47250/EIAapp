@@ -1,0 +1,103 @@
+EIAapp Job 5: coverage. Map EIA's WHOLE API catalogue (every dataset, not just the routes the app uses today), fill the checked lookup list from it, make the front page's three examples work, show ambiguous place picks, add a one-sentence answer, and fix the result-display problems the owner found. Goal mode.
+
+AUTHORIZED: create local branch codex/eia-coverage from codex/eia-no-dead-ends at bbff3bf (confirm the SHA; stop if different). Edit code, data and tests. Commit locally. Free EIA calls. Paid OpenAI calls within the ceiling in F.2. When every pass mark is met, push this branch to origin without force (a Vercel preview will appear; report its URL).
+NOT AUTHORIZED: main or any other branch, merge, deploy/promote, Vercel or environment settings, CSV, deep search or any MCP server, the Explore/browse mode, rankings, percent change, per capita, editable tags, follow-up questions, a second (escalation) model, saved history, deleting old modules or the cache, spot/trading-hub prices (WTI, Brent, Henry Hub), changing the locked-form schema or its vocabulary (14 products, 12 activities, sectors, frequencies in data/eia/phase4-routing-config.json), changing owner-decisions.json.
+Follow AGENTS.md (including its EIAapp guardrails).
+
+WHY: The checked lookup list (data/eia/lookup-list.json) has 28 rows, added one question at a time. The app reads questions well but often has nothing to fetch. The owner's exploratory test on the bbff3bf preview (2026-10-29) found:
+- "Brazil erngy production": read correctly as Brazil / total energy / production, then "We don't have total energy production for Brazil yet". This is the first example on the app's own front page. The same screen showed the two alternative buttons twice (under the status line and inside the result card) and an empty "Total energy production" card.
+- "electricity prices in georgia": picked the US state (correct by the existing rule in locked-form-instructions-v2.txt line 4), but the screen only says "Georgia", so the pick is invisible and cannot be switched.
+- "coal production for some countries" -> All countries in a region -> North America: Bermuda, Greenland and Saint Pierre and Miquelon show 0 for every year with status "Available". The zeros come from EIA (lookup-search.js ~157 turns non-numeric values into null, shown as "Unavailable"), so the data is right, but "Available" beside all zeros reads as an error. The comparison table also shows raw EIA codes in the Series column ("international | productId=7; activityId=1; ...") and unrounded numbers (52317.55723326).
+The front page (components/search/SearchWorkspace.js ~271 and ~341) promises typos are fixed and data is retrieved "from major data providers"; its examples are "Brazil erngy production", "how much oil does Japan us", "Looking for data USA prdouction and consumption of nuclear energy". Only EIA is connected.
+Job 3 leftovers (evidence/eia-no-dead-ends/remaining-misses.json): I7 "natural gas reserves for all the US states except alaska" got a country place question; I11 "compare georgia and armenia natural gas imports" was read with activity null and got all 12 activities as buttons; C6 run 2 "energy stuff" had no activity buttons.
+
+ORDER OF WORK (each step finishes before the next starts):
+1. DESIGN.md (short). 2. Route census, crosswalk, frozen cell grid and coverage table (Part B.0-B.2; EIA calls only, no app code). 3. Write and freeze Set D and score-d.js (Part A). 4. CHECKPOINT: stop and report (see below). 5. After the owner replies "go": implementation (B.3 onward, C, D, E). 6. Scored live runs (F). 7. Push and final report.
+
+DESIGN BASIS (process rule: name the established design before writing behaviour rules). Write evidence/eia-coverage/DESIGN.md with one line per item: the source checked (original source, not a summary) and whether it supports the behaviour.
+1. Coverage as a correspondence table (as statistical agencies link two classifications, e.g. UN Statistics Division correspondence tables): our vocabulary on one side, EIA series on the other, every cell mapped or given a reason. Coverage is a measured number.
+2. Zero versus missing are different observation statuses (statistical convention, e.g. SDMX observation status). Find EIA's own definition of each non-numeric value its API returns ("--", "NA", "W", others) on EIA's pages for the routes used; record URL and quote. If any symbol means zero or not applicable, stop and ask before changing how lookup-search.js treats it.
+3. Ambiguous names: DataTone (Gao et al., UIST 2015): show the system's choice where the ambiguity is, with a one-click switch.
+4. Constrained clarification options: Setlur, Tory & Djalali (IUI 2019): offer only sensible options; here, only what EIA publishes for the places already known.
+
+PART A. Freeze (one commit with SHA-256 of every frozen file, before any implementation)
+1. All earlier answer keys, gold forms, expected-data files, freeze manifests, score-data.js and score-c.js: unchanged.
+2. Write and freeze scripts/eia-lookup/score-d.js with offline tests, in the score-c.js style (form fields; question buttons and free text; data route/facets/unit/frequency/basis label/first and last period; missing entries). It also checks: status labels (Part D.1); the understood line contains the place display name, product and activity, and "(US state)" or "(country)" when the place name is ambiguous (no exact-wording match); the headline sentence (D.5) contains the latest value, unit and year from the fetched data. score-d.js may not change after the freeze.
+3. Set D. Freeze for each the expected v2 form and expected data (or expected question with exact buttons). Determine series and periods from the coverage table and live EIA calls; record the calls.
+   D1 Brazil erngy production -> BRA total energy production (EIA's whole-product total).
+   D2 how much oil does Japan us -> JPN petroleum consumption (EIA's total petroleum and other liquids consumption, labelled).
+   D3 Looking for data USA prdouction and consumption of nuclear energy -> two results: US nuclear generation (nuclear production means generation) and US nuclear consumption (EIA's own total for nuclear energy consumed; state which EIA dataset and basis; if it is numerically the same as generation in Btu, say so on screen).
+   D4 electricity prices in georgia -> GA electricity prices; shown as "Georgia (US state)", with a button "Did you mean Georgia the country?".
+   D4a (D4, then click that button) -> GEO electricity prices if the coverage table maps it, otherwise the "not available" message with choices; shown as "Georgia (country)".
+   D4b (D4, then type "no, I meant the country") -> same outcome as D4a, through the existing typed-reply path (dialogue state tracking); no phrase rule.
+   D5 coal production for some countries -> All countries in a region -> North America -> all members; Bermuda, Greenland, Saint Pierre and Miquelon labelled "Reported as zero every year", left out of the chart, kept in table and Excel.
+   D6 natural gas reserves for all the US states except alaska -> state natural gas reserves for every state EIA publishes, Alaska excluded; states EIA does not publish listed as missing. (I7)
+   D7 compare georgia and armenia natural gas imports -> GEO and ARM natural gas imports; if the activity is read as null, a question whose buttons are only the activities the coverage table maps for natural gas in GEO and ARM. (I11)
+   D8 energy stuff -> a question about what, with product buttons; after a product click, activity buttons the coverage table maps for that product. (C6)
+   D9 coal consumption in Japan and Ohio since 2010 -> JPN and OH coal consumption, 2010-latest, each from its own row, units labelled.
+   D10 natural gas consumption in Georgia and Armenia -> GEO and ARM (existing rule: Georgia with another non-US country is the country).
+   D11 Texas, residential electricity consumption, 2015 to 2020 -> TX residential, 2015-2020.
+   D12 Looking for data on energy consumption for many countries from 2000-2019, then type "Japan and Korea, only from 2005" -> JPN and KOR total energy consumption 2005-2019 (over-answering and a correction in one reply).
+   D13 monthly natural gas prices in Pennsylvania -> PA monthly natural gas price (the monthly route, not SEDS annual).
+   D14 gasoline prices this year -> US weekly or monthly retail gasoline price, current year to latest.
+   D15-D22: eight sampled cases. With a seed recorded in the freeze commit, sample eight mapped cells from the coverage table and write each as "<product> <activity> in <place>" with one typo chosen by the seed.
+4. Pass marks (fixed now):
+   - Route census: every leaf in EIA API v2 is listed and classified; every DOES NOT FIT has a reason code and quote; the re-check of DOES NOT FIT leaves finds no mismatch.
+   - Coverage: every cell in scope (B.1) has a status; "not checked" is zero. Every non-mapped cell cites the EIA call (URL without key, row total) that showed no data. A seeded random 5% of "EIA does not publish" and "subset only" cells is re-checked live; any mismatch fails this mark.
+   - Every mapped cell passes check-rows.js with real observations (live).
+   - Set D (live model; every case x 2 runs; click/typed steps scored as separate outcomes): at least 90% right on form AND data/question; D1, D2, D3 right on both runs.
+   - Set C: the same 20 scored outcomes as Job 3, at least 18/20. Second set (I1-I12 x 2): at least 21/24. Originals (24 gold forms, offline): 24/24.
+   - Zero dead ends. Zero unlabelled wrong data (a scored result whose series, unit or period differs from the frozen expectation without an on-screen basis label). Zero places shown as "Available" whose shown values are all zero or all missing.
+
+CHECKPOINT (after step 3): stop and report, plain language: the route census counts and the DOES NOT FIT list; the coverage number per place kind; the Set D table (question, expected understood line, expected series with route and facets, or expected question and buttons); the DESIGN.md findings; anything surprising. Do not start implementation until the owner replies "go". If the owner changes an expectation, record it as an owner change in the freeze, re-freeze, and report.
+
+PART B. Coverage table and rows
+0. Route census: walk EIA API v2's route tree from https://api.eia.gov/v2/ and list every leaf in evidence/eia-coverage/route-census.json. A leaf is a node whose metadata has no "routes" array. AEO and IEO: list their release subtrees and count them as one excluded family with N releases, without walking each release. Classify each leaf FITS or DOES NOT FIT. DOES NOT FIT takes exactly one reason code from this fixed list, with the quoted metadata field that proves it (facet id, frequency list or route description): plant/facility-level; forecast (STEO/AEO/IEO); sub-daily/hourly; outages; trading-hub/spot (excluded by owner); no place facet at country, US or state level; no measure in our 14 products. No other reasons. A seeded random 20% of DOES NOT FIT leaves, plus every DOES NOT FIT leaf whose name contains consumption, production, imports, exports, sales, price or reserves, is re-checked against its quote. Report: branch nodes, leaves, FITS, DOES NOT FIT per reason, metadata calls, facet calls.
+0b. Inside every FITS leaf, fetch each facet's values (/v2/<route>/facet/<id>) and list every series value (productId x activityId, seriesId, msn, series, product/process codes). Classify each as whole product (which product x activity), subset (of what), or out of vocabulary (why). Cells are filled only from this list.
+0c. Place crosswalk: evidence/eia-coverage/place-crosswalk.json maps every place facet value of every FITS leaf to our geography-list code, or flags it "not a place we use" (PADD, region, field, hub). Report unmapped codes per leaf.
+0d. Freeze the cell grid before filling it: 4 place kinds x 14 products x 12 activities (from phase4-routing-config.json) = 672 base cells, plus sector cells for every product x activity where any FITS leaf has a sector facet. Commit it before B.1.
+0e. Estimate the total EIA calls for B.1 and report the estimate before starting. Stop and report if the estimate is over 20,000 calls or 6 hours, or if B.0-B.1 actually pass 25,000 calls. For data checks, use one call per candidate cell with every place code at once, length=5000, only value and period columns, paging to response.total.
+1. Build evidence/eia-coverage/coverage-table.json from EIA metadata by live calls (the cache in data/eia/builds/phase1b may help find candidates but is not proof). Cells = place kind (country, World, US, state) x product x activity, plus sector where EIA publishes sector series. Routes in scope: every FITS route from B.0 (this includes international, SEDS and every route an existing row uses). When several routes publish the same cell, choose one default by: whole product, requested frequency available, longest history; record the others as alternative bases for that cell. Split the table into one file per top-level route if a file would exceed 5 MB. Each cell: status (mapped / EIA does not publish / subset only), route and facets, unit, frequencies, basis label, first/last period (evidence only), the place codes that have at least one non-missing value, and the cited call for non-mapped cells. A "subset only" cell names the whole-product series it was compared against, or says none exists in any FITS leaf. "EIA does not publish" is allowed only after checking every place code the crosswalk maps to that place.
+2. Basis rules (owner decisions in evidence/eia-lookup-list/owner-decisions.json): map only the whole product. A different measurement basis of the whole product counts and is labelled; subsets (one coal type, one sector of a total, crude-only for petroleum, a conversion factor) are "subset only". EIA's own definition of a product total counts as the whole product; label it. Default unit: follow the existing rows (physical units where EIA publishes them; Btu for total energy); the screen says other bases exist when they do. When a cell has several frequencies, the row lists all; the requested frequency is used when available.
+3. Generate lookup rows from mapped cells only, with one tested generator script, never hand-typed. Rows store route, facets, unit and basis, not periods (periods are fetched live). Keep every existing row and its behaviour; a generated row that duplicates an existing one is dropped.
+4. Where EIA publishes a World aggregate for a country measure, add its World row the same way Job 3 did (country rows never match WLD; keep that test).
+5. Replace the test "at most 40 non-required rows" with: every row is one of the original 28 or generated from a mapped cell, and every row is verified. Report this test change with its reason.
+
+PART C. Understanding and questions
+1. Ambiguous place names: when the quoted place words match the names of more than one place in the geography list, the pick follows the existing rule; the understood line and result title show the type ("Georgia (US state)"). Add the switch button, which re-runs the same form with only that place changed, unless another named place settled the pick (e.g. "Georgia and Armenia": show the type, no button). Detection comes from the geography list; no name list in code.
+2. Product and activity clarification buttons are built by code from the coverage table: only what is mapped for the places already known (all mapped products/activities if no place is known). Always include free text.
+3. Groups of US states: when the request asks for all US states and the measure has state rows, the place question offers "All US states" (keeping any excluded places) instead of the country buttons; a click fills in every state from the geography list minus exclusions, following the Job 3 region pattern. If this needs a schema change, stop and ask.
+4. Front page: change "major data providers" (SearchWorkspace.js ~271 and ~341) to "the U.S. Energy Information Administration (EIA)". No other wording changes.
+
+PART D. Result display
+1. Status per place, over the shown years: "No data for these years" when every value is missing; "Reported as zero every year" when at least one value exists and every existing value is 0; otherwise "Available". Places that are all zero or all missing stay out of the chart and stay in the table and Excel.
+2. Series column: plain description (EIA name, basis label, unit), not raw facet codes. Facet codes stay in the Excel Metadata sheet.
+3. Numbers on screen use the existing lib/client/formatting.js rules; Excel keeps the full value.
+4. "Not available" screens: alternative buttons appear once; no empty result card.
+5. Headline sentence above each result, built by code from the fetched data (never by the AI): place, what, latest value rounded, unit written out in words, year, "(EIA)". Example shape: "Brazil produced about <value> quadrillion Btu of energy in <year> (EIA)." For several places, one sentence per place up to 3, then "and N more in the table".
+
+PART E. Offline tests
+DESIGN.md exists; coverage generator (mapped cell -> valid row; subset cell never becomes a row); every generated row passes the row-checker shape; ambiguous-place detection from the geography list (Georgia is the only current case; add a synthetic second case); the switch button and the no-button exception; buttons built from the coverage table; All US states with exclusions; status labels (all zero, all missing, zeros mixed with missing, mixed values); series description; rounding on screen vs full value in Excel; no duplicate buttons; no empty card; headline sentence; front-page wording. Existing tests pass unchanged except where listed with a reason. Never change an expected meaning. npm run build passes.
+
+PART F. Live checks
+1. EIA (free): stay at or below 4 requests per second and 8,000 per hour; several facet values per request where possible; page with offset and length until the row total EIA reports is reached (a cell checked without full paging cannot be marked "does not publish"). Record call counts. If EIA blocks the key for more than 10 minutes, or 3 times, stop and report.
+2. OpenAI (paid): Set D x 2 with steps, Set C (20 outcomes), I1-I12 x 2; gpt-6-luna, reasoning low, passed explicitly. Compute the worst case first. Ceiling $1.50.
+3. Browser, local (LOGIN_REQUIRED=off): D1, D2, D3, D4 then the switch button, D5 (chart vs table), D6, D13; download one Excel file and check full values and Metadata. Screenshots if a tool is available.
+
+SCORED RUNS: each live scored set runs exactly once, in a new evidence folder (evidence/eia-coverage/live/), with request hashes frozen before the run. If any pass mark fails: do not push, do not re-run, report the failures with cause and proposed fix.
+
+REPO SIZE: the app fetches data live; the repo stores only definitions. Committed files from this job total under 15 MB, no single file over 5 MB. Do not commit raw EIA responses; keep them in ~/Documents/EIAapp-Evidence/<date>/coverage/ and commit only a call log (URL without key, row total, SHA-256 of the saved response). Report the committed size.
+
+LIMITS: stop and report if implementation goes through 3 full offline test cycles without all Part E tests passing.
+
+STOP CONDITIONS: start SHA mismatch; a front-page example whose data EIA does not publish as a whole-product total (report what EIA has and ask); EIA blocking as in F.1; worst-case cost over $1.50; a needed schema, vocabulary or owner-decision change; an EIA notation finding as in Design basis 2; any product decision not settled here (ask one short question with options).
+
+REPORT (plain language, short). The job ends with this report; the owner's 5-minute exploratory test on the preview comes next and is not part of this job.
+1. PASS/FAIL per pass mark.
+2. Route census counts; coverage as mapped/672 per place kind, per place code and per route, and the 10 most likely-to-be-asked things still missing, with why.
+3. The three front-page examples: exactly what the screen shows, including the headline sentence.
+4. Set D table: question/step, understood line, outcome, right yes/no.
+5. Set C, second set, originals: unchanged scores or every change explained.
+6. Files changed; tests before and after; build; frozen hashes unchanged.
+7. Commits, the pushed branch, the preview URL (labelled preview), main unchanged.
+8. Ten questions for the owner's exploratory test, including the three front-page examples and two questions this job did not test.
