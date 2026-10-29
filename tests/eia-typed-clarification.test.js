@@ -7,7 +7,7 @@ import {convertLockedFormV2,lockedFormRequestV2,checkLockedFormV2} from '../lib/
 import {lockedFormVocabulary,geographyCode,schemaCounts} from '../lib/sources/eia/locked-form-schema.js';
 import {interpretClarification} from '../lib/sources/eia/interpret-query.js';
 import {sourceIntentPayload,clarificationReplyPayload,canSearchIntent,appendLookupChoice} from '../lib/eia-intent-payload.js';
-import {searchLookup} from '../lib/sources/eia/lookup-search.js';
+import {searchLookup,submittedContext} from '../lib/sources/eia/lookup-search.js';
 import {POST as interpretationPost} from '../app/api/interpret-query/route.js';
 import diagnosticHandler from '../lib/server/openai-diagnostic.js';
 function env(t,key,value) { const before=process.env[key];process.env[key]=value;t.after(()=>{if(before===undefined)delete process.env[key];else process.env[key]=before;}); }
@@ -28,13 +28,11 @@ async function recordedData(selector){
  // Explicit synthetic observation verifies routing, not source availability.
  return {rows:[{...selector.facets,period:'2000',[selector.dataColumn]:'1',unitName:'MMcf'}],total:1,complete:true};
 }
-for(const c of cases)test('typed reply end-to-end offline: '+c.id,async()=>{
- const before=JSON.stringify(c.form),request=clarificationReplyPayload(c.query,convertLockedFormV2(c.form,c.query),c.reply);
- let calls=0;
- const intent=await interpretClarification(request.query,request.intentPayload,request.about,request.reply,{...dependencies(answerFor(c)),fetch:async(_url,init)=>{
-  calls++;const body=JSON.parse(init.body);assert.match(body.input,/Current repaired form:/);assert.match(body.input,/Typed reply:/);assert.ok(!body.input.includes(c.query));return response(answerFor(c));
- }});
- assert.equal(calls,1);assert.equal(JSON.stringify(c.form),before);assert.equal(intent.originalQuery,c.query);
+// These frozen expectations describe saved v1 reply history, not the active model contract.
+const historicalIntent=c=>submittedContext(c.query,{...payload(c),originForm:c.form,choiceHistory:[{type:'reply',about:c.about,reply:c.reply,answer:answerFor(c)}]}).intent;
+for(const c of cases)test('historical field-only reply replay: '+c.id,async()=>{
+ const before=JSON.stringify(c.form),intent=historicalIntent(c);
+ assert.equal(JSON.stringify(c.form),before);assert.equal(intent.originalQuery,c.query);
  assert.deepEqual(intent.validatedGeographies.map(g=>g.code),c.expected.geographies);
  assert.equal(intent.product,c.expected.product);assert.equal(intent.activity,c.expected.activity);
  assert.deepEqual({start:intent.years.start,end:intent.years.end},c.expected.years);
@@ -89,7 +87,7 @@ test('typed frequency answer preserves all other fields and retains its separate
  assert.deepEqual(result.form.frequency,{value:'monthly',explicit:true,quoted_words:'monthly'});assert.deepEqual(result.form.years,form.years);assert.equal(result.form.clarification.about,'geography');assert.equal(checkLockedFormV2(result.form,c.query,result.quoteSources).valid,true);
 });
 test('typed answer, next-question button and serialization preserve both evidence sources',async()=>{
- const c=cases[3],intent=await interpretClarification(c.query,payload(c),c.about,c.reply,dependencies(answerFor(c)));
+ const c=cases[3],intent=historicalIntent(c);
  const first=await searchLookup(c.query,sourceIntentPayload(intent),{},{fetchData:noFetch});
  const regions=await searchLookup(c.query,sourceIntentPayload(first.intent),first.choices[1],{fetchData:noFetch});
  const params=appendLookupChoice(new URLSearchParams(),regions.intent,regions.choices.find(c=>c.label==='Europe'));
@@ -97,13 +95,13 @@ test('typed answer, next-question button and serialization preserve both evidenc
  assert.equal(result.intent.lockedForm.topics[0].activity,'production');assert.equal(result.intent.choiceHistory.length,3);assert.equal(result.intent.lockedForm.geographies.length,1);assert.equal(result.intent.needsClarification,false);
 });
 test('unrelated fields in submitted merged form cannot override replayed history',async()=>{
- const c=cases[0],intent=await interpretClarification(c.query,payload(c),c.about,c.reply,dependencies(answerFor(c)));
+ const c=cases[0],intent=historicalIntent(c);
  const submitted=sourceIntentPayload(intent);submitted.lockedForm.years={start:1900,end:1901,quoted_words:'1900-1901'};
  const result=await searchLookup(c.query,submitted,{},{fetchData:recordedData});assert.deepEqual(result.intent.lockedForm.years,c.form.years);
 });
-test('HTTP POST and client payload perform field-only interpretation without concatenation',async t=>{
+test('HTTP POST and client payload perform current interpretation without concatenation',async t=>{
  const c=cases[0];env(t,'LOGIN_REQUIRED','off');env(t,'OPENAI_API_KEY','offline-placeholder');
- t.mock.method(globalThis,'fetch',async(_url,init)=>{assert.equal(JSON.parse(init.body).text.format.name,'eia_field_reply');return response(answerFor(c));});
+ t.mock.method(globalThis,'fetch',async(_url,init)=>{assert.equal(JSON.parse(init.body).text.format.name,'eia_reply_update');return response({geographies:answerFor(c).values,excluded_geographies:null,topics:null,excluded_topics:null,sector:null,frequency:null,years:null,resolved_words:[],unresolved:[]});});
  const request=clarificationReplyPayload(c.query,convertLockedFormV2(c.form,c.query),c.reply);
  const result=await interpretationPost(new Request('http://localhost/api/interpret-query',{method:'POST',body:JSON.stringify(request)}));assert.equal(result.status,200);const {intent}=await result.json();assert.equal(intent.originalQuery,c.query);assert.equal(intent.needsClarification,false);
  const invalid=await interpretationPost(new Request('http://localhost/api/interpret-query',{method:'POST',body:JSON.stringify({...request,about:'product'})}));assert.equal(invalid.status,400);

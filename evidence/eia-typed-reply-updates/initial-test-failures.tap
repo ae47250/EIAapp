@@ -1,0 +1,141 @@
+✔ historical field-only reply replay: place-exact (44.265125ms)
+✔ historical field-only reply replay: place-typos (19.591416ms)
+✔ historical field-only reply replay: product (35.588791ms)
+✔ historical field-only reply replay: activity-rich-answer (9.569666ms)
+✔ field schemas stay strict and never permit unrelated model edits (0.787542ms)
+✔ new quotes must be in reply, not borrowed from the original request; old fields cannot borrow reply text (0.293834ms)
+✔ an invalid answer gets one reask, then preserves the current form and useful question (14.811708ms)
+✔ genuine ambiguity remains unresolved; a valid country does not erase unknown countries (0.234916ms)
+✔ geography reply preserves earlier countries, ordered additions and explicit exclusions (0.360375ms)
+✔ product reply updates missing topics only and retains other activities, topics and quotes (0.215ms)
+✔ typed frequency answer preserves all other fields and retains its separate quote (0.24725ms)
+✔ typed answer, next-question button and serialization preserve both evidence sources (14.120125ms)
+✔ unrelated fields in submitted merged form cannot override replayed history (13.193292ms)
+✔ HTTP POST and client payload perform current interpretation without concatenation (16.383291ms)
+✔ search and diagnostic use the same Luna default and honor OPENAI_MODEL (0.372375ms)
+✔ typed-reply expected meanings remain frozen (0.373209ms)
+✔ clarification POST keeps the existing authentication boundary (2.422542ms)
+✖ multi-field reply -> checked serialization -> data: activity-rich-answer (36.979709ms)
+✖ multi-field reply -> checked serialization -> data: place-exact (18.094ms)
+✖ multi-field reply -> checked serialization -> data: product (39.268625ms)
+✖ multi-field reply -> checked serialization -> data: place-years-replacement (14.863167ms)
+✔ all six fields may change together and every updated quote is checked against reply (0.733125ms)
+✔ unstated fields are unchanged across seeded single-field updates (seed 29102026) (10.954333ms)
+✔ stated countries replace earlier countries in mention order; exclusions cannot turn positive (0.416083ms)
+✔ partial topic updates retain every unstated activity; complete pairs keep their relationships (0.253959ms)
+✔ unresolved wording and unrelated constraints survive other field updates (0.312542ms)
+✔ year range replacement rejects inherited end dates without reply evidence and supports all available (0.3115ms)
+✔ unambiguous country spelling corrections still work and strict schema rejects extra fields (0.43975ms)
+✖ current HTTP POST accepts multi-field updates; client-derived fields cannot override replay (11.61275ms)
+✔ new expectations and historical frozen files remain unchanged (6.486375ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 25
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 219.717958
+
+✖ failing tests:
+
+test at tests/eia-typed-reply-updates.test.js:29:22
+✖ multi-field reply -> checked serialization -> data: activity-rich-answer (36.979709ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.results[0].countries.every(g=>g.series?.points.length))
+  
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-reply-updates.test.js:41:99)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-typed-reply-updates.test.js:29:22
+✖ multi-field reply -> checked serialization -> data: place-exact (18.094ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.results[0].countries.every(g=>g.series?.points.length))
+  
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-reply-updates.test.js:41:99)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-typed-reply-updates.test.js:29:22
+✖ multi-field reply -> checked serialization -> data: product (39.268625ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.results[0].countries.every(g=>g.series?.points.length))
+  
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-reply-updates.test.js:41:99)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-typed-reply-updates.test.js:29:22
+✖ multi-field reply -> checked serialization -> data: place-years-replacement (14.863167ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.results[0].countries.every(g=>g.series?.points.length))
+  
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-reply-updates.test.js:41:99)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/eia-typed-reply-updates.test.js:91:1
+✖ current HTTP POST accepts multi-field updates; client-derived fields cannot override replay (11.61275ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      clarification: {
+        about: null,
+        needed: false,
+        options: []
+  ...
+      years: {
+  +     end: null,
+  +     quoted_words: null,
+  +     start: null
+  -     end: 1901,
+  -     quoted_words: '1900-1901',
+  -     start: 1900
+      }
+    }
+  
+      at TestContext.<anonymous> (file:///Users/agust/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-typed-reply-updates.test.js:99:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { geographies: [ [Object] ], excluded_geographies: [], topics: [ [Object] ], excluded_topics: [], sector: { value: null, quoted_words: null }, frequency: { value: 'annual', explicit: false, quoted_words: null }, years: { start: null, end: null, quoted_words: null }, unsupported_words: [], clarification: { needed: false, about: null, options: [] } },
+    expected: { geographies: [ [Object] ], excluded_geographies: [], topics: [ [Object] ], excluded_topics: [], sector: { value: null, quoted_words: null }, frequency: { value: 'annual', explicit: false, quoted_words: null }, years: { start: 1900, end: 1901, quoted_words: '1900-1901' }, unsupported_words: [], clarification: { needed: false, about: null, options: [] } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

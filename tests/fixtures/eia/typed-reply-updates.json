@@ -1,0 +1,277 @@
+{
+  "base": "43f9f6335d25aae3fe234ecf5bf3069a8ad5647d",
+  "rule": "Every explicitly stated field replaces its previous values; unmentioned fields and evidence persist. Changed field evidence must come from this reply. Years replace as a whole, including an open-ended latest endpoint. Resolve vague wording only when this reply supplies its meaning; retain unsupported constraints otherwise. No query concatenation.",
+  "cases": [
+    {
+      "id": "activity-rich-answer",
+      "query": "energy stuff",
+      "form": {
+        "geographies": [],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "total energy",
+            "activity": null,
+            "quoted_words": "energy"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "years": {
+          "start": null,
+          "end": null,
+          "quoted_words": null
+        },
+        "unsupported_words": [
+          "stuff"
+        ],
+        "clarification": {
+          "needed": true,
+          "about": "activity",
+          "options": [
+            {
+              "label": "Sales",
+              "value": "sales"
+            },
+            {
+              "label": "Customers",
+              "value": "customers"
+            },
+            {
+              "label": "Consumption",
+              "value": "consumption"
+            },
+            {
+              "label": "Production",
+              "value": "production"
+            },
+            {
+              "label": "Generation",
+              "value": "generation"
+            },
+            {
+              "label": "Imports",
+              "value": "imports"
+            },
+            {
+              "label": "Exports",
+              "value": "exports"
+            },
+            {
+              "label": "Reserves",
+              "value": "reserves"
+            },
+            {
+              "label": "Capacity",
+              "value": "capacity"
+            },
+            {
+              "label": "Storage",
+              "value": "storage"
+            },
+            {
+              "label": "Prices",
+              "value": "prices"
+            },
+            {
+              "label": "Expenditures",
+              "value": "expenditures"
+            }
+          ]
+        }
+      },
+      "reply": "coal production in Australia",
+      "about": "activity",
+      "expected": {
+        "geographies": [
+          "AUS"
+        ],
+        "product": "coal",
+        "activity": "production",
+        "years": {
+          "start": null,
+          "end": null
+        },
+        "outcome": "data",
+        "nextQuestion": null
+      }
+    },
+    {
+      "id": "place-exact",
+      "query": "Looking for data on energy consumption for many countries from 2000-2019",
+      "form": {
+        "geographies": [],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "quoted_words": "energy consumption"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "years": {
+          "start": 2000,
+          "end": 2019,
+          "quoted_words": "2000-2019"
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "geography",
+          "options": []
+        }
+      },
+      "reply": "iceland and norway",
+      "about": "geography",
+      "expected": {
+        "geographies": [
+          "ISL",
+          "NOR"
+        ],
+        "product": "total energy",
+        "activity": "consumption",
+        "years": {
+          "start": 2000,
+          "end": 2019
+        },
+        "outcome": "data",
+        "nextQuestion": null
+      }
+    },
+    {
+      "id": "product",
+      "query": "gas consumption in the United States",
+      "form": {
+        "geographies": [
+          {
+            "geography": "USA | United States | national",
+            "quoted_words": "United States",
+            "is_default": false
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": null,
+            "activity": "consumption",
+            "quoted_words": "gas consumption"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "product",
+          "options": [
+            {
+              "value": "natural gas",
+              "label": "natural gas"
+            },
+            {
+              "value": "petroleum",
+              "label": "petroleum (gasoline)"
+            }
+          ]
+        },
+        "years": {
+          "start": null,
+          "end": null,
+          "quoted_words": null
+        }
+      },
+      "reply": "natural gas",
+      "about": "product",
+      "expected": {
+        "geographies": [
+          "USA"
+        ],
+        "product": "natural gas",
+        "activity": "consumption",
+        "years": {
+          "start": null,
+          "end": null
+        },
+        "outcome": "data",
+        "nextQuestion": null
+      }
+    },
+    {
+      "id": "place-years-replacement",
+      "query": "Looking for data on energy consumption for many countries from 2000-2019",
+      "form": {
+        "geographies": [],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "quoted_words": "energy consumption"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "years": {
+          "start": 2000,
+          "end": 2019,
+          "quoted_words": "2000-2019"
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "geography",
+          "options": []
+        }
+      },
+      "reply": "Japan from 2005",
+      "about": "geography",
+      "expected": {
+        "geographies": [
+          "JPN"
+        ],
+        "product": "total energy",
+        "activity": "consumption",
+        "years": {
+          "start": 2005,
+          "end": "latest"
+        },
+        "outcome": "data",
+        "nextQuestion": null
+      }
+    }
+  ]
+}

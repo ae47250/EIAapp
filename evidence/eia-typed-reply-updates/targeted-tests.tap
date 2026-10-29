@@ -1,0 +1,39 @@
+✔ historical field-only reply replay: place-exact (42.929417ms)
+✔ historical field-only reply replay: place-typos (20.197334ms)
+✔ historical field-only reply replay: product (35.346584ms)
+✔ historical field-only reply replay: activity-rich-answer (9.960792ms)
+✔ field schemas stay strict and never permit unrelated model edits (0.838083ms)
+✔ new quotes must be in reply, not borrowed from the original request; old fields cannot borrow reply text (0.301833ms)
+✔ an invalid answer gets one reask, then preserves the current form and useful question (14.877583ms)
+✔ genuine ambiguity remains unresolved; a valid country does not erase unknown countries (0.353708ms)
+✔ geography reply preserves earlier countries, ordered additions and explicit exclusions (0.370667ms)
+✔ product reply updates missing topics only and retains other activities, topics and quotes (0.228708ms)
+✔ typed frequency answer preserves all other fields and retains its separate quote (0.237958ms)
+✔ typed answer, next-question button and serialization preserve both evidence sources (14.565708ms)
+✔ unrelated fields in submitted merged form cannot override replayed history (13.017625ms)
+✔ HTTP POST and client payload perform current interpretation without concatenation (18.641541ms)
+✔ search and diagnostic use the same Luna default and honor OPENAI_MODEL (0.331792ms)
+✔ typed-reply expected meanings remain frozen (0.327917ms)
+✔ clarification POST keeps the existing authentication boundary (2.409167ms)
+✔ multi-field reply -> checked serialization -> data: activity-rich-answer (39.767958ms)
+✔ multi-field reply -> checked serialization -> data: place-exact (21.367875ms)
+✔ multi-field reply -> checked serialization -> data: product (48.002ms)
+✔ multi-field reply -> checked serialization -> data: place-years-replacement (19.358542ms)
+✔ all six fields may change together and every updated quote is checked against reply (0.871292ms)
+✔ unstated fields are unchanged across seeded single-field updates (seed 29102026) (10.877666ms)
+✔ stated countries replace earlier countries in mention order; exclusions cannot turn positive (0.387209ms)
+✔ partial topic updates retain every unstated activity; complete pairs keep their relationships (0.249208ms)
+✔ unresolved wording and unrelated constraints survive other field updates (0.328584ms)
+✔ year range replacement rejects inherited end dates without reply evidence and supports all available (0.406958ms)
+✔ unambiguous country spelling corrections still work and strict schema rejects extra fields (0.427583ms)
+✔ current HTTP POST accepts multi-field updates; client-derived fields cannot override replay (11.499583ms)
+✔ new expectations and historical frozen files remain unchanged (6.641791ms)
+✔ a volunteered field does not erase a still-unanswered clarification (0.358333ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 222.192708
