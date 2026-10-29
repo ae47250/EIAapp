@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-29",
+  "method": "UNSD correspondence tables with separate whole/narrower concepts, as documented in DESIGN.md. No standard public EIA mapping benchmark found; tests are source-based regressions.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec4_n.pdf",
+      "document": "Monthly Energy Review natural-gas notes",
+      "findings": [
+        "Natural-gas plant liquids are transferred to petroleum supply; NGPL must not be treated as total natural gas.",
+        "Storage stocks and injections/withdrawals are distinct measures.",
+        "Industrial use includes lease/plant fuel and other industrial deliveries; transportation includes pipeline/distribution and vehicle use. Individual components are not whole-sector totals.",
+        "Bilateral import/export country labels are U.S. trade partners, not the subject country."
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_n.pdf",
+      "document": "Monthly Energy Review electricity notes, note 1",
+      "quote": "The generation, consumption, and stocks data in Section 7 are for utility-scale facilities",
+      "findings": [
+        "Facility threshold is at least 1 MW. Small-scale facilities are excluded. All-sectors wording alone is insufficient to establish all-size coverage."
+      ],
+      "decisionStatus": "Owner question pending; generation classifications remain unaccepted."
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec10_12.pdf",
+      "document": "Table 10.6 Solar Electricity Net Generation",
+      "findings": [
+        "Table distinguishes small-scale and utility-scale generation and publishes their combined total.",
+        "Small-scale estimates cover grid-connected photovoltaic generation.",
+        "Geographic scope is the 50 states and District of Columbia.",
+        "Nonnumeric legend: NA means Not available; dash means No data reported."
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec8_3.pdf",
+      "document": "Table 8.1 Nuclear Energy Overview",
+      "findings": [
+        "Net generation is distinct from operable-unit count and capacity factor.",
+        "Capacity is the net summer capacity of operable units.",
+        "Geographic scope is the 50 states and District of Columbia.",
+        "Nonnumeric (s) in the percentage column means less than 0.05%; percentage columns are outside the authorized activities. Never convert a source symbol to numeric zero."
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec9_n.pdf",
+      "document": "Monthly Energy Review energy-price notes",
+      "findings": [
+        "Electricity annual price coverage before 1984 and monthly coverage through 1985 used selected utilities; early periods are not national averages.",
+        "Resale, end-user and acquisition costs describe distinct price bases; preserve basis and tax labels."
+      ],
+      "coverageCaution": "Before B1 acceptance/default-history ranking, resolve temporal population changes. Metadata period bounds alone do not establish compatible national coverage."
+    }
+  ],
+  "draftCounterexamplesRetained": [
+    {
+      "case": "Electric power inside Nuclear Electric Power and Hydroelectric Power",
+      "failure": "Substring sector detection narrowed a whole-product title to a sector.",
+      "correction": "Only explicit electric power sector denotes that sector; use word boundaries for other sectors."
+    },
+    {
+      "case": "Electricity Sales to Ultimate Customers in the End-Use Sectors",
+      "failure": "Generic end-use restriction incorrectly narrowed total retail electricity sales.",
+      "correction": "All retail end-use sectors remain the whole electricity sales market; total-primary-energy end-use restriction remains a subset."
+    },
+    {
+      "case": "Energy Imports/Exports in Million Dollars",
+      "failure": "Monetary trade values were labelled total energy expenditures.",
+      "correction": "Keep import/export activity and label monetary trade value as its basis."
+    }
+  ],
+  "notClaims": "No observations, coverage completeness, standard-benchmark score, or independent holdout claim."
+}

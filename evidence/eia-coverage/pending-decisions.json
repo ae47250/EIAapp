@@ -47,5 +47,17 @@
     "status": "resolved by owner",
     "conflict": "New work order expects 2005-2019 for only from 2005; prior approved whole-interval replacement expects 2005-latest for from 2005. Need reconcile intended general rule without modifying earlier frozen expectations.",
     "resolution": "See owner-clarifications.json yearBoundarySlots. D12 remains 2005-2019. Earlier whole-interval rule superseded; add open-ended form regression."
+  },
+  "utilityScaleGeneration": {
+    "status": "awaiting owner",
+    "question": "May generation totals limited to utility-scale facilities (at least 1 MW) count as whole-product coverage when labelled, or must they remain subset only?",
+    "recommendedDecision": "Subset only; require total across facility sizes.",
+    "alternative": "Accept EIA utility-scale total as a labelled measurement basis.",
+    "whyExistingRuleNeedsReconciliation": "Whole-product totals and EIA-defined measurement bases are accepted, but facility-size subsets are not explicitly resolved. EIA labels some utility-scale series all sectors and separately publishes a combined solar total.",
+    "sources": [
+      "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_n.pdf",
+      "https://www.eia.gov/totalenergy/data/monthly/pdf/sec10_12.pdf"
+    ],
+    "gate": "Do not accept affected generation classifications, freeze grid or begin B1 before resolution. Existing frozen expectations and application code unchanged."
   }
 }

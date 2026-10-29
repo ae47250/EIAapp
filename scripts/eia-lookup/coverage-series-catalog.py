@@ -13,16 +13,16 @@ def build_node(node):
     for fid,rows in source.items():
         if fid not in MEASURE_FACETS:continue
         result['facets'][fid]=[dict(row,classification='pending') for row in rows]
-    if node['route']=='seds':
-        review=i.read(i.EVIDENCE/'seds-classification.json')
-        decisions={r['sourceDefinition']['id']:r for r in review['series']}
-        for row in result['facets']['seriesId']:
-            decision=decisions[row['definition']['id']]
-            if decision['sourceDefinition']!=row['definition']:
-                raise ValueError('SEDS classification source definition changed')
+    reviews={'seds':('seds-classification.json','seriesId'),'total-energy':('total-energy-classification.json','msn')}
+    if node['route'] in reviews:
+        filename,facet=reviews[node['route']]
+        review=i.read(i.EVIDENCE/filename)
+        decisions={json.dumps(r['sourceDefinition'],sort_keys=True):r for r in review['series']}
+        for row in result['facets'][facet]:
+            decision=decisions[json.dumps(row['definition'],sort_keys=True)]
             row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
-        result['dataColumns'][0]['classification']='via seriesId'
-        result['classificationComplete']=all(r['classification']!='pending' for r in result['facets']['seriesId'])
+        result['dataColumns'][0]['classification']='via '+facet
+        result['classificationComplete']=review['complete'] and all(r['classification']!='pending' for r in result['facets'][facet])
     if node['route']=='international':
         review=i.read(i.EVIDENCE/'international-classification.json')
         for facet,key in [('productId','products'),('activityId','activities')]:
