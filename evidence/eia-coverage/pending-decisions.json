@@ -1,0 +1,49 @@
+{
+  "explicitQualifiers": {
+    "status": "awaiting owner",
+    "conflict": "D14 requires U.S. weekly/monthly gasoline prices, but B.1/B.3 permit generated rows only from whole-product cells; the base vocabulary has petroleum, not gasoline.",
+    "existingRows": "Only state-gasoline-prices (annual SEDS) and us-gasoline-consumption; neither serves D14.",
+    "EIAcandidate": {
+      "route": "petroleum/pri/gnd",
+      "product": {
+        "id": "EPM0",
+        "name": "Total Gasoline"
+      },
+      "process": [
+        {
+          "id": "PTE",
+          "name": "Retail Sales"
+        }
+      ],
+      "series": {
+        "id": "EMM_EPM0_PTE_NUS_DPG",
+        "name": "U.S. All Grades All Formulations Retail Gasoline Prices (Dollars per Gallon)"
+      },
+      "facetCalls": {
+        "duoarea": [
+          545
+        ],
+        "product": [
+          546
+        ],
+        "process": [
+          547
+        ],
+        "series": [
+          548
+        ]
+      },
+      "frequenciesInspected": [
+        "monthly",
+        "weekly",
+        "annual"
+      ],
+      "observations": "Not checked yet; this is metadata evidence, not a coverage result."
+    },
+    "recommendedDecision": "Keep the 672 whole-product cells unchanged. Add separately counted cells for explicitly requested existing qualifiers, with generated rows restricted to that qualifier. No schema/vocabulary or original owner-decisions.json changes."
+  },
+  "D12Years": {
+    "status": "unresolved before Set D freeze",
+    "conflict": "New work order expects 2005-2019 for only from 2005; prior approved whole-interval replacement expects 2005-latest for from 2005. Need reconcile intended general rule without modifying earlier frozen expectations."
+  }
+}
