@@ -1,0 +1,155 @@
+{
+  "tests": [
+    {
+      "file": "scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-coal-classification.test.py",
+      "tests": 15,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-crosswalk.test.py",
+      "tests": 10,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-electricity-classification.test.py",
+      "tests": 19,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-facets.test.py",
+      "tests": 6,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-international-import-classification.test.py",
+      "tests": 15,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-mer-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-components-classification.test.py",
+      "tests": 20,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-crude-classification.test.py",
+      "tests": 12,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-price-classification.test.py",
+      "tests": 20,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-refinery-classification.test.py",
+      "tests": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-stock-cons-classification.test.py",
+      "tests": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-summary-classification.test.py",
+      "tests": 29,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-trade-classification.test.py",
+      "tests": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-series-catalog.test.py",
+      "tests": 12,
+      "exitCode": 0
+    }
+  ],
+  "total": 302,
+  "failedSuites": 0,
+  "pythonASTFiles": 41,
+  "date": "2026-10-30",
+  "researchOnly": true,
+  "seed": 20261029,
+  "newSeededUnknownDefinitionCases": 100,
+  "EIA_API_calls": 1424,
+  "newEIA_API_callsThisCheckpoint": 0,
+  "newPublicSourceSnapshots": 5,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "classificationCompleteRoutes": 153,
+  "classificationTotalRoutes": 154,
+  "unresolvedRouteFamilies": {
+    "electricity": 1
+  },
+  "frozenFilesChanged": false,
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not independent reference alignment or standard benchmark scores.",
+  "notRun": "Application offline suite/build/browser: no application edits; implementation remains gated by owner checkpoint go. Live B1 data and frozen scored runs not started.",
+  "existingResearchTestChange": "International definition completeness changed false to true after official source resolution. Added injected unknown-definition check that still requires false. No frozen/application/scorer test changed.",
+  "developmentCounterexamples": [
+    "Japan and Canada each have two approved equivalent native country codes; a fixed importing subject remains one geography, so multiple matching aliases must not be rejected.",
+    "Import source country cannot become importing subject, even when both are valid countries.",
+    "OECD importers cannot be expanded to member-country totals.",
+    "Public electricity browser pinned requests returned no definitions; no missing-data conclusion drawn."
+  ],
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-international-import-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-international-import-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-components-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-price-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-refinery-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-stock-cons-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-summary-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-trade-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py"
+  ],
+  "preservation": {
+    "destination": "~/Documents/EIAapp-Evidence/20261029/coverage/checkpoint-18/",
+    "originalsUntouched": true,
+    "unrelatedUntracked": [
+      "docs/eia-interpretation-audit.md",
+      "scripts/eia-lookup/__pycache__/"
+    ],
+    "remoteBackup": "Not pushed; push gate not met."
+  },
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1424,
+  "sourceSnapshotHashesVerified": 99,
+  "credentialScanFiles": 632,
+  "credentialFindings": 0,
+  "localMainUnchanged": true,
+  "job5BaseBranchUnchanged": true,
+  "applicationAndEarlierFrozenFilesUnchanged": true
+}

@@ -1616,5 +1616,28 @@
     "source": "owner-clarifications.json#standingScopeRule",
     "expectations": "headline-scope-source-review.json",
     "effect": "Supersedes earlier generation-only and survey-population-only exclusions. Labelled headline scope is conditionally accepted with broader-total preference. Product, sector, ownership and geography distinctions remain."
+  },
+  "additionalBrowserDefinitionAttempts": {
+    "status": "unresolved",
+    "configFinding": "Existing official browser config gives BIO total and component hierarchy but contains none of OB2, OBW or sector 95. Missing config entries do not establish code meaning.",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/electricity/data/browser/data/index.php?method=getAggregateData&topic=0&agg=2,0,1&fuel=vtvv&geo=g&sec=g&ids=ELEC.GEN.OB2-US-99.A;ELEC.GEN.OBW-US-99.A;ELEC.GEN.ALL-US-95.A&freq=A&rtype=s",
+        "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/electricity-definitions-e151ff69a4a0.json",
+        "sha256": "e151ff69a4a0ef1626986e1827e00e4482740b6f580f6ff3b6d0bf53e5eb4801",
+        "bytes": 108334,
+        "pinnedDefinitionRows": 0,
+        "interpretation": "No requested pinned definitions returned. This is not evidence of no observations or no published series. Initial semicolon separator was incorrect; corrected tilde separator also yielded no definitions. No classification changed."
+      },
+      {
+        "url": "https://www.eia.gov/electricity/data/browser/data/index.php?method=getAggregateData&topic=0&agg=2,0,1&fuel=vtvv&geo=g&sec=g&ids=ELEC.GEN.OB2-US-99.A~ELEC.GEN.OBW-US-99.A~ELEC.GEN.ALL-US-95.A&freq=A&rtype=s",
+        "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/electricity-pinned-definitions-e151ff69a4a0.json",
+        "sha256": "e151ff69a4a0ef1626986e1827e00e4482740b6f580f6ff3b6d0bf53e5eb4801",
+        "bytes": 108334,
+        "pinnedDefinitionRows": 0,
+        "interpretation": "No requested pinned definitions returned. This is not evidence of no observations or no published series. Initial semicolon separator was incorrect; corrected tilde separator also yielded no definitions. No classification changed."
+      }
+    ],
+    "nextBoundedLead": "Inspect official legacy electricity bulk-series metadata if available; do not infer exact code definitions from numeric agreement alone."
   }
 }

@@ -1,5 +1,6 @@
 """Offline correspondence tests against source definitions, not app outputs."""
-import importlib.util,unittest
+import copy,importlib.util,unittest
+from unittest.mock import patch
 from pathlib import Path
 BASE=Path(__file__).parent
 def module(name,file):
@@ -49,5 +50,14 @@ class SeriesClassificationTests(unittest.TestCase):
         node=next(n for n in c.i.read(c.i.EVIDENCE/'route-census.json')['nodes'] if n['route']=='international')
         out=c.build_node(node)
         self.assertTrue(all(r['publicationStatus']=='unverified' for r in out['candidateCombinations']))
-        self.assertFalse(out['classificationComplete'])
+        self.assertTrue(out['classificationComplete'])
+        # Completed definitions are not verified coverage; an unknown definition still blocks.
+        original_read=c.i.read
+        def unresolved(path):
+            data=original_read(path)
+            if path.name=='international-classification.json':
+                data=copy.deepcopy(data);data['products']['78']['classification']='pending'
+            return data
+        with patch.object(c.i,'read',side_effect=unresolved):
+            self.assertFalse(c.build_node(node)['classificationComplete'])
 if __name__=='__main__':unittest.main()

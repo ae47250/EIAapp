@@ -60,7 +60,7 @@ def build_node(node):
                 statuses={product['classification'],activity['classification']}
                 status=next((x for x in ['out of vocabulary','pending','subset'] if x in statuses),'whole product')
                 item={'productId':product['definition']['id'],'activityId':activity['definition']['id'],'frequencies':frequencies,'classification':status,'publicationStatus':'unverified'}
-                for key in ['product','qualifier','qualifierClassification','placeRole']:
+                for key in ['product','qualifier','qualifierClassification','placeRole','basisLabel','subjectName','subjectGeographyCode','subjectPlaceKind','geographyConstraint','partnerCoverageConstraint','sourceRestriction','coverageEligible','coverageEligibilityReason','definitionEvidence']:
                     if key in product:item[key]=product[key]
                 if 'activity' in activity:item['activity']=activity['activity']
                 if activity.get('geographicRestriction'):item['geographicRestriction']=activity['geographicRestriction']

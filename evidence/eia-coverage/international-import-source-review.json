@@ -1,0 +1,508 @@
+{
+  "status": "Definition review only; B1 aggregate and observation checks remain required.",
+  "method": "UNSD correspondence-table method recorded in DESIGN.md. Separate product correspondence from subject/partner geography and publication.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/international/api/products/data",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/intl-products-56beb1eefb75.json",
+      "sha256": "56beb1eefb75905c3afe78ddc23fa5d3719eef37c784cc5dcb1ca8089e41b0b2",
+      "bytes": 4565,
+      "role": "Official EIA browser metadata; definition evidence only, not v2 observation coverage."
+    },
+    {
+      "url": "https://www.eia.gov/international/api/product_activities/data",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/intl-product-activities-3e54538d8e53.json",
+      "sha256": "3e54538d8e53c29f7d13c292de091c01e8933c4b217ef51ab3a930d203daf387",
+      "bytes": 49487,
+      "role": "Official EIA browser metadata; definition evidence only, not v2 observation coverage."
+    },
+    {
+      "url": "https://www.eia.gov/international/api/selection_trees/data",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/intl-selection-trees-caa7108f6607.json",
+      "sha256": "caa7108f66070ef107a1612423e7b9aac76414fa0acaf1e7df0067582455d6c0",
+      "bytes": 191649,
+      "role": "Official EIA browser metadata; definition evidence only, not v2 observation coverage."
+    }
+  ],
+  "expectationsRecordedBeforeClassifierEdit": [
+    "All ten codes describe petroleum and other liquids imports; other activities are invalid combinations.",
+    "The importing subject is fixed by the product definition. The countryRegionId is the supplier, never the importing subject.",
+    "OECD and OECD Europe subjects are not a country, World, US or state; do not expand them into their members.",
+    "No supplier-specific or supplier-group flow is an all-partner import total. Require an independently documented all-source aggregate before coverage eligibility; never sum partners.",
+    "Product 78 specifically names imports from OPEC; it must never be treated as all-source OECD imports.",
+    "All existing normal international product/activity definitions and original source quotations remain unchanged.",
+    "Unknown or changed metadata blocks classification; no loose text fallback."
+  ],
+  "products": {
+    "78": {
+      "productDefinition": {
+        "id": 78,
+        "name": "OECD imports",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 78,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports",
+        "proddisplayname": "OECD Imports from OPEC, Bahrain\r\n",
+        "displayorder": 3,
+        "title": "OECD petroleum and other liquids gross imports from OPEC",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 233,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 78,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "OECD imports",
+          "bitmap_index": 233,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 66,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "OECD",
+      "subjectName": "OECD",
+      "subjectGeographyCode": null,
+      "subjectPlaceKind": null,
+      "allPartnerAggregateVerified": false
+    },
+    "781": {
+      "productDefinition": {
+        "id": 781,
+        "name": "OECD Europe imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 781,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "OECD Europe Imports from OPEC, Bahrain\r\n",
+        "displayorder": 4,
+        "title": "OECD Europe petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 267,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 781,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "OECD Europe imports, by source",
+          "bitmap_index": 267,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 67,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "OECD Europe",
+      "subjectName": "OECD - Europe",
+      "subjectGeographyCode": null,
+      "subjectPlaceKind": null,
+      "allPartnerAggregateVerified": false
+    },
+    "782": {
+      "productDefinition": {
+        "id": 782,
+        "name": "France imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 782,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "France Imports from OPEC, Bahrain\r\n",
+        "displayorder": 5,
+        "title": "France petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 268,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 782,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "France imports, by source",
+          "bitmap_index": 268,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 68,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "France",
+      "subjectName": "France",
+      "subjectGeographyCode": "FRA",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    },
+    "783": {
+      "productDefinition": {
+        "id": 783,
+        "name": "Germany imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 783,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "Germany Imports from OPEC, Bahrain\r\n",
+        "displayorder": 6,
+        "title": "Germany petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 269,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 783,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "Germany imports, by source",
+          "bitmap_index": 269,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 69,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "Germany",
+      "subjectName": "Germany",
+      "subjectGeographyCode": "DEU",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    },
+    "784": {
+      "productDefinition": {
+        "id": 784,
+        "name": "Italy imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 784,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "Italy Imports from OPEC, Bahrain\r\n",
+        "displayorder": 7,
+        "title": "Italy petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 270,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 784,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "Italy imports, by source",
+          "bitmap_index": 270,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 70,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "Italy",
+      "subjectName": "Italy",
+      "subjectGeographyCode": "ITA",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    },
+    "785": {
+      "productDefinition": {
+        "id": 785,
+        "name": "Japan imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 785,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "Japan Imports from OPEC, Bahrain\r\n",
+        "displayorder": 8,
+        "title": "Japan petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 271,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 785,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "Japan imports, by source",
+          "bitmap_index": 271,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 71,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "Japan",
+      "subjectName": "Japan",
+      "subjectGeographyCode": "JPN",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    },
+    "786": {
+      "productDefinition": {
+        "id": 786,
+        "name": "South Korea imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 786,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "South Korea Imports from OPEC, Bahrain\r\n",
+        "displayorder": 9,
+        "title": "South Korea petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 272,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 786,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "South Korea imports, by source",
+          "bitmap_index": 272,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 72,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "South Korea",
+      "subjectName": "South Korea",
+      "subjectGeographyCode": "KOR",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    },
+    "787": {
+      "productDefinition": {
+        "id": 787,
+        "name": "U.S. imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 787,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "U.S. Imports from OPEC, Bahrain\r\n",
+        "displayorder": 10,
+        "title": "U.S. petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 273,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 787,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "U.S. imports, by source",
+          "bitmap_index": 273,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 73,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "U.S.",
+      "subjectName": "United States",
+      "subjectGeographyCode": "USA",
+      "subjectPlaceKind": "US",
+      "allPartnerAggregateVerified": false
+    },
+    "788": {
+      "productDefinition": {
+        "id": 788,
+        "name": "Canada imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 788,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "Total Gross Imports, Canada, by Source",
+        "displayorder": 11,
+        "title": "Canada petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 297,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 788,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "Canada imports, by source",
+          "bitmap_index": 297,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 74,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "Canada",
+      "subjectName": "Canada",
+      "subjectGeographyCode": "CAN",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    },
+    "789": {
+      "productDefinition": {
+        "id": 789,
+        "name": "United Kingdom imports, by source",
+        "parent": 5
+      },
+      "productActivityDefinition": {
+        "productid": 789,
+        "activityid": 3,
+        "publishableyn": 1,
+        "stdunit": "TBPD",
+        "monthlyyn": 1,
+        "actdisplayname": "Imports from a Country/Country Group",
+        "proddisplayname": "Total Gross Imports, United Kingdom, by Source",
+        "displayorder": 12,
+        "title": "United Kingdom petroleum and other liquids gross imports",
+        "base_unit": "TBPD",
+        "default_sourceid": 1,
+        "is_ff_ranked": null,
+        "bitmap_index": 298,
+        "suppress_selection": 1
+      },
+      "selectionDefinitions": [
+        {
+          "toplevelproductid": 5,
+          "toplevelproductname": "petroleum and other liquids",
+          "toplevelproductsiblingorder": 1,
+          "unitgroupcode": "STD",
+          "frequencycode": "M",
+          "productid": 789,
+          "activityid": 3,
+          "lvl": 2,
+          "name": "United Kingdom imports, by source",
+          "bitmap_index": 298,
+          "has_data": true,
+          "unitcode": "TBPD",
+          "treeorder": 75,
+          "suppress_selection": 1,
+          "suppressSelection": true
+        }
+      ],
+      "subjectLabel": "United Kingdom",
+      "subjectName": "United Kingdom",
+      "subjectGeographyCode": "GBR",
+      "subjectPlaceKind": "country",
+      "allPartnerAggregateVerified": false
+    }
+  }
+}
