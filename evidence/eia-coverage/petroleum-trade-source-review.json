@@ -1,0 +1,996 @@
+{
+  "status": "Source-definition correspondence only; observations and default selection pending.",
+  "method": "Native code/full definition correspondence, preserving statistical subject versus partner and gross versus net flows. No directly applicable reference alignment benchmark.",
+  "routes": [
+    "petroleum/move/wkly",
+    "petroleum/move/wimpc",
+    "petroleum/move/imp",
+    "petroleum/move/res",
+    "petroleum/move/exp",
+    "petroleum/move/expc",
+    "petroleum/move/neti",
+    "petroleum/move/impcus",
+    "petroleum/move/railNA"
+  ],
+  "sources": [
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_wkly_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-6d226daccb94.html",
+      "sha256": "6d226daccb9461ee20c2f5249e59f262760195969916208fec31aff5d97b3d91"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_imp_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-99dd7c54da9a.html",
+      "sha256": "99dd7c54da9a65940f701635b48aaa7e93ce831833c43f04c89f853f03a8519a"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_res_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-e5072add4940.html",
+      "sha256": "e5072add4940f94f9b37b677930adc48493086c2ca5540e9b45837085fc6c8d3"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_expc_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-be928a23045a.html",
+      "sha256": "be928a23045a1590ca6842ee987f24696b75d4b612f97c847a8fc8f433f38495"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_neti_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-b931a8dd7db7.html",
+      "sha256": "b931a8dd7db7f032d3438e23bb049dbc572d0c4b4a462515dc8bc17ad704ad55"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_impcus_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-4f0fba4e915b.html",
+      "sha256": "4f0fba4e915b51ee746b7faa358aaf7111e9aba8ee019e35ca511ae6e6b977bf"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_railna_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-ca955c65d380.html",
+      "sha256": "ca955c65d38041a586524d41ad5910223d0d854b16e774961a4b2f89c90237f9"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/pet_move_railNA_a_EPC0_RAIL_mbbl_m.htm",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-trade-9c8a9b9c8265.html",
+      "sha256": "9c8a9b9c8265f500bf984cdaf2e035a6022869e554bb9639bc3a04f5324aff5a"
+    }
+  ],
+  "reviewedProducts": [
+    {
+      "id": "EPC0",
+      "name": "Crude Oil"
+    },
+    {
+      "id": "EPM0R",
+      "name": "Reformulated Motor Gasoline"
+    },
+    {
+      "id": "EPPO4",
+      "name": "Other Oils"
+    },
+    {
+      "id": "EPD0",
+      "name": "Distillate Fuel Oil"
+    },
+    {
+      "id": "EPM0",
+      "name": "Total Gasoline"
+    },
+    {
+      "id": "EPOBGRRA",
+      "name": "Reformulated RBOB with Alcohol Gasoline Blending Components"
+    },
+    {
+      "id": "EPM0RO",
+      "name": "Finished Motor Gasoline Reformulated Other"
+    },
+    {
+      "id": "EPOBG",
+      "name": "Gasoline Blending Components"
+    },
+    {
+      "id": "EPDM10",
+      "name": "Distillate Fuel Oil, Greater than 15 to 500 ppm Sulfur"
+    },
+    {
+      "id": "EPDM20",
+      "name": "Distillate Fuel Oil, Greater than 500 to 2000 ppm Sulfur"
+    },
+    {
+      "id": "EPM0RA",
+      "name": "Reformulated Motor Gasoline with Alcohol"
+    },
+    {
+      "id": "EPM0CO",
+      "name": "Other Conventional Motor Gasoline"
+    },
+    {
+      "id": "EPOBGCO",
+      "name": "Conventional Other Gasoline Blending Components"
+    },
+    {
+      "id": "EPLLPZ",
+      "name": "Propane and Propylene"
+    },
+    {
+      "id": "EPM0CAL55",
+      "name": "Motor Gasoline, Finished, Conventional, Ed55 and Lower"
+    },
+    {
+      "id": "EPPK",
+      "name": "Kerosene"
+    },
+    {
+      "id": "EPOBGRRE",
+      "name": "Reformulated RBOB with Ether Gasoline Blending Components"
+    },
+    {
+      "id": "EPOBGCC",
+      "name": "Conventional CBOB Gasoline Blending Components"
+    },
+    {
+      "id": "EPOBGCG",
+      "name": "Conventional GTAB Gasoline Blending Components"
+    },
+    {
+      "id": "EPP0",
+      "name": "Total Petroleum Products"
+    },
+    {
+      "id": "EPM0CAG55",
+      "name": "Finished Motor Gasoline Conventional >55"
+    },
+    {
+      "id": "EPOBGRR",
+      "name": "Motor Gasoline Blending Components Reformulated RBOB"
+    },
+    {
+      "id": "EPOOXE",
+      "name": "Fuel Ethanol"
+    },
+    {
+      "id": "EPDXL0",
+      "name": "Distillate Fuel Oil, 0 to 15 ppm Sulfur"
+    },
+    {
+      "id": "EPDXH0",
+      "name": "Distillate Fuel Oil, Greater than 2000 ppm Sulfur"
+    },
+    {
+      "id": "EPPR",
+      "name": "Residual Fuel Oil"
+    },
+    {
+      "id": "EPM0CA",
+      "name": "Conventional Motor Gasoline with Alcohol"
+    },
+    {
+      "id": "EP00",
+      "name": "Crude Oil and Petroleum Products"
+    },
+    {
+      "id": "EPL0XP",
+      "name": "NGPLs/LRGs (Excluding Propane/Propylene)"
+    },
+    {
+      "id": "EPPO6",
+      "name": "Other Oils (Excluding Fuel Ethanol)"
+    },
+    {
+      "id": "EPM0C",
+      "name": "Conventional Motor Gasoline"
+    },
+    {
+      "id": "EPJK",
+      "name": "Kerosene-Type Jet Fuel"
+    },
+    {
+      "id": "EPM0F",
+      "name": "Finished Motor Gasoline"
+    },
+    {
+      "id": "EPDM2B",
+      "name": "Distillate Fuel Oil, Greater than 500 to 2000 ppm Sulfur, Bonded"
+    },
+    {
+      "id": "EPLLEA",
+      "name": "Ethane"
+    },
+    {
+      "id": "EPOUK",
+      "name": "Kerosene and Light Oils"
+    },
+    {
+      "id": "EPPPO",
+      "name": "Other Oils for Petrochemical Feedstock Use"
+    },
+    {
+      "id": "EPOUR",
+      "name": "Residuum"
+    },
+    {
+      "id": "EPPRY",
+      "name": "Residual Fuel Oil, 0.31 to 1.00% Sulfur"
+    },
+    {
+      "id": "EPOORDO",
+      "name": "Renewable Diesel Fuel"
+    },
+    {
+      "id": "EPLLEY",
+      "name": "Ethylene"
+    },
+    {
+      "id": "EPJKB",
+      "name": "Kerosene-Type Jet Fuel, Bonded"
+    },
+    {
+      "id": "EPL0",
+      "name": "Natural Gas Liquids and Liquid Refinery Gases"
+    },
+    {
+      "id": "EPPNS",
+      "name": "Special Naphthas"
+    },
+    {
+      "id": "EPP2",
+      "name": "Finished Petroleum Products"
+    },
+    {
+      "id": "EPL2",
+      "name": "Natural Gas Plant Liquids"
+    },
+    {
+      "id": "EPOOXXFE",
+      "name": "Oxygenates (excluding Fuel Ethanol)"
+    },
+    {
+      "id": "EPOBV",
+      "name": "Aviation Gasoline Blending Components"
+    },
+    {
+      "id": "EPLLBAN",
+      "name": "Normal Butane"
+    },
+    {
+      "id": "EPLLBYN",
+      "name": "Normal Butylene"
+    },
+    {
+      "id": "EPLL",
+      "name": "Liquified Petroleum Gases"
+    },
+    {
+      "id": "EPPM",
+      "name": "Miscellaneous Petroleum Products"
+    },
+    {
+      "id": "EPPP0",
+      "name": "Petrochemical Feedstocks"
+    },
+    {
+      "id": "EPOOR",
+      "name": "Biofuel Fuels (including Fuel Ethanol)"
+    },
+    {
+      "id": "EPDXLB",
+      "name": "Distillate Fuel Oil, 0 to 15 ppm Sulfur, Bonded"
+    },
+    {
+      "id": "EPDM1O",
+      "name": "Distillate Fuel Oil, Greater than 15 to 500 ppm Sulfur, Not Bonded"
+    },
+    {
+      "id": "EPDM2O",
+      "name": "Distillate Fuel Oil, Greater than 500 to 2000 ppm Sulfur, Not Bonded"
+    },
+    {
+      "id": "EPD00H",
+      "name": "Distillate Fuel Oil, Greater Than 500 ppm Sulfur"
+    },
+    {
+      "id": "EPOOXT",
+      "name": "MTBE"
+    },
+    {
+      "id": "EPOUN",
+      "name": "Naphthas and Lighter"
+    },
+    {
+      "id": "EPLLPY",
+      "name": "Propylene"
+    },
+    {
+      "id": "EPOOOXH",
+      "name": "Other Hydrocarbons"
+    },
+    {
+      "id": "EPOUH",
+      "name": "Heavy Gas Oils"
+    },
+    {
+      "id": "EPLLBAI",
+      "name": "Isobutane"
+    },
+    {
+      "id": "EPOL",
+      "name": "Other Liquids"
+    },
+    {
+      "id": "EPOOXO",
+      "name": "Other Oxygenates"
+    },
+    {
+      "id": "EPLOLE",
+      "name": "Refinery Olefins "
+    },
+    {
+      "id": "EPPA",
+      "name": "Asphalt and Road Oil"
+    },
+    {
+      "id": "EPDM1B",
+      "name": "Distillate Fuel Oil, Greater than 15 to 500 ppm Sulfur, Bonded"
+    },
+    {
+      "id": "EPJKO",
+      "name": "Other Kerosene-Type Jet Fuel"
+    },
+    {
+      "id": "EPLP",
+      "name": "Pentanes Plus"
+    },
+    {
+      "id": "EPLLNG",
+      "name": "Natural Gasoline"
+    },
+    {
+      "id": "EPDXHB",
+      "name": "Distillate Fuel Oil, Greater than 2000 ppm Sulfur, Bonded"
+    },
+    {
+      "id": "EPDXLO",
+      "name": "Distillate Fuel Oil, 0 to 15 ppm Sulfur, Not Bonded"
+    },
+    {
+      "id": "EPDXHO",
+      "name": "Distillate Fuel Oil, Greater than 2000 ppm Sulfur, Not Bonded"
+    },
+    {
+      "id": "EPOBGC0",
+      "name": "Conventional Gasoline Blending Components"
+    },
+    {
+      "id": "EPOO",
+      "name": "Hydrogen, Oxygenates, Renewables Fuels, and Other Hydrocarbons"
+    },
+    {
+      "id": "EPPW",
+      "name": "Waxes"
+    },
+    {
+      "id": "EPPC",
+      "name": "Petroleum Coke"
+    },
+    {
+      "id": "EPPV",
+      "name": "Aviation Gasoline"
+    },
+    {
+      "id": "EPLLBYI",
+      "name": "Isobutylene"
+    },
+    {
+      "id": "EPPL",
+      "name": "Lubricants"
+    },
+    {
+      "id": "EPPPN",
+      "name": "Naphtha for Petrochemical Feedstock Use"
+    },
+    {
+      "id": "EPLLPA",
+      "name": "Propane"
+    },
+    {
+      "id": "EPPRX",
+      "name": "Residual Fuel Oil, Less than 0.31% Sulfur"
+    },
+    {
+      "id": "EPPRH",
+      "name": "Residual Fuel Oil, Greater Than 1% Sulfur"
+    },
+    {
+      "id": "EPPU",
+      "name": "Unfinished Oils"
+    },
+    {
+      "id": "EPOORDB",
+      "name": "Biodiesel"
+    },
+    {
+      "id": "EPOORO",
+      "name": "Other Biofuels"
+    },
+    {
+      "id": "EPOBGR0",
+      "name": "Reformulated Gasoline Blending Components"
+    },
+    {
+      "id": "EPLLE",
+      "name": "Ethane-Ethylene"
+    },
+    {
+      "id": "EPLLB0I",
+      "name": "Isobutane-Isobutylene"
+    },
+    {
+      "id": "EPLLB0N",
+      "name": "Normal Butane-Butylene"
+    },
+    {
+      "id": "EPPCM",
+      "name": "Petroleum Coke Marketable"
+    }
+  ],
+  "reviewedProcesses": [
+    {
+      "id": "IMN",
+      "name": "Net Imports"
+    },
+    {
+      "id": "IM0",
+      "name": "Imports"
+    },
+    {
+      "id": "IMX",
+      "name": "Imports Excluding SPR"
+    },
+    {
+      "id": "EEX",
+      "name": "Exports"
+    },
+    {
+      "id": "IMS",
+      "name": "Imports by SPR"
+    },
+    {
+      "id": "IMU",
+      "name": "Imports by Others for SPR"
+    },
+    {
+      "id": "RAIL",
+      "name": "Receipts by Rail"
+    }
+  ],
+  "expectationsBeforeClassifierEdit": [
+    "Gross imports and gross exports are separate activities. Net imports (imports minus exports) are out of the fixed activity vocabulary, not an alternative import total.",
+    "Full crude-and-petroleum-products totals can represent whole petroleum. Individual fuels, finished-products-only, grades, bonded status, SPR-only and excluding-SPR flows are narrower. Crude and gasoline remain explicit qualifiers, never whole petroleum.",
+    "EIA total motor gasoline includes finished motor gasoline and blending components in trade; finished gasoline and blending components alone remain narrower when a broader total exists.",
+    "Country names in U.S. imports-from and exports-to are partners. Whole U.S. trade requires all partners, not one country or group. Never interpret a partner code as that country total.",
+    "Import area of entry is not destination consumption; PADD/refining districts never become states. State residual-fuel import series remain petroleum components.",
+    "Rail receipts from within the U.S. are domestic movements, not imports, sales, production or consumption. Cross-border Canada/US rail movements are transport-mode components of trade, never all-modal totals.",
+    "Preserve EIA territorial scope: trade into/out of 50 states and DC includes Puerto Rico, Virgin Islands and other possessions as partners.",
+    "Weekly export values are estimates; label that source basis. Earlier restrictive legal wording in a weekly note is historical, not a present routing or eligibility rule.",
+    "Original codes/names/frequencies/call references are preserved. Unknown or contradictory metadata remains pending. Missing units remain ineligible, never guessed.",
+    "No summing countries, fuels or modal components to invent unpublished totals."
+  ],
+  "findings": [
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_wkly_tbldef2.asp",
+      "finding": "Weekly total gasoline includes finished gasoline and blending components. Weekly exports are estimates; contemporary monthly notes supersede old export-restriction wording."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_imp_tbldef2.asp",
+      "finding": "Imports count bonded quantities upon withdrawal under stated customs conditions; bonded and non-bonded series are components."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_res_tbldef2.asp",
+      "finding": "Residual-fuel state imports are a fuel component, not whole petroleum; U.S. scope is 50 states plus DC."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_expc_tbldef2.asp",
+      "finding": "Export subject is U.S.; foreign and territorial names identify destinations, not their own total exports."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_neti_tbldef2.asp",
+      "finding": "Net imports are a balance rather than gross imports; some component balances use assumed zero exports."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_impcus_tbldef2.asp",
+      "finding": "Imports include SPR and are reported by PADD entry; named foreign origin does not become requested-country total."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_move_railna_tbldef2.asp",
+      "finding": "Rail data are EIA estimates using Surface Transportation Board and other information; cover domestic and Canada cross-border movements."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/pet_move_railNA_a_EPC0_RAIL_mbbl_m.htm",
+      "finding": "Rail table explicitly separates intra-U.S. movements, U.S. exports to Canada and U.S. imports from Canada."
+    }
+  ],
+  "scopeCasesForCheckpoint": [
+    {
+      "case": "trade subject and partner",
+      "decision": "Only all-partner totals qualify for whole subject trade. Regional/bilateral/modal flows remain components; net trade stays outside fixed activities."
+    },
+    {
+      "case": "weekly export estimates",
+      "decision": "Keep official weekly estimates with explicit basis label and compare compatible monthly/annual source totals before default selection."
+    },
+    {
+      "case": "gasoline trade total",
+      "decision": "EIA total includes blending components; finished-only and blendstock-only remain product components; no invented sum."
+    }
+  ],
+  "metadataIssues": {
+    "ineligibleEntries": 58,
+    "ineligibleUniqueSeries": 54,
+    "entries": [
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPOBGRR_IM0_R20-Z00_MBBLD",
+          "name": "Midwest (PADD 2) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPOBGRR_IM0_R40-Z00_MBBLD",
+          "name": "Rocky Mountain (PADD 4) Imports from  All Countries of Motor Gasoline Blending Components Reformulated RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPOBGRR_IM0_R10-Z00_MBBLD",
+          "name": "East Coast (PADD 1) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPOBGRR_IM0_R50-Z00_MBBLD",
+          "name": "West Coast (PADD 5) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPOBGRR_IM0_NUS-Z00_MBBLD",
+          "name": "U.S. Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPLLPZ_IM0_R45-Z00_MBBLD",
+          "name": "Rocky Mountain (PADD 4) and West Coast (PADD 5) Imports of Propane and Propylene (Thousand Barrels per Day)"
+        },
+        "reason": "Native area absent from advertised place facet; do not guess a crosswalk entry."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPM0CAL55_IM0_R50-Z00_MBBLD",
+          "name": "West Coast (PADD 5) Imports from of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/wkly",
+        "sourceDefinition": {
+          "id": "W_EPOBGRR_IM0_R30-Z00_MBBLD",
+          "name": "Gulf Coast (PADD 3) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_NUS-Z00_MBBLD",
+          "name": "U.S. Imports From U.S. of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R40-Z00_MBBLD",
+          "name": "Rocky Mountain (PADD 4) Imports From Rocky Mountain (PADD 4) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R10-Z00_MBBLD",
+          "name": "East Coast (PADD I) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R10-Z00_MBBL",
+          "name": "East Coast (PADD 1) Imports From East Coast (PADD 1) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R50-Z00_MBBL",
+          "name": "West Coast (PADD 5) Imports From West Coast (PADD 5) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0CAL55_IM0_NUS-Z00_MBBL",
+          "name": "U.S. Imports from  All Countries of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0CAL55_IM0_NUS-Z00_MBBLD",
+          "name": "U.S. Imports from  All Countries of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R20-Z00_MBBLD",
+          "name": "Midwest (PADD II) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R30-Z00_MBBLD",
+          "name": "Gulf Coast (PADD 3) Imports From Gulf Coast (PADD 3) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_NUS-Z00_MBBL",
+          "name": "U.S. Imports From U.S. of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R20-Z00_MBBL",
+          "name": "Midwest (PADD 2) Imports From Midwest (PADD 2) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R30-Z00_MBBL",
+          "name": "Gulf Coast (PADD 3) Imports From Gulf Coast (PADD 3) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R20-Z00_MBBL",
+          "name": "Midwest (PADD II) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R50-Z00_MBBLD",
+          "name": "West Coast (PADD 5) Imports From West Coast (PADD 5) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R10-Z00_MBBL",
+          "name": "East Coast (PADD I) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R50-Z00_MBBLD",
+          "name": "West Coast (PADD V) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R10-Z00_MBBLD",
+          "name": "East Coast (PADD 1) Imports From East Coast (PADD 1) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R20-Z00_MBBLD",
+          "name": "Midwest (PADD 2) Imports From Midwest (PADD 2) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0RO_IM0_NUS-Z00_MBBL",
+          "name": "U.S. Imports from All Countries of Other Reformulated Motor Gasoline (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0CAL55_IM0_R10-Z00_MBBL",
+          "name": "East Coast (PADD I) Imports from  All Countries of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0CAL55_IM0_R10-Z00_MBBLD",
+          "name": "East Coast (PADD I) Imports from  All Countries of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0CAL55_IM0_R20-Z00_MBBLD",
+          "name": "Midwest (PADD II) Imports from  All Countries of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0RO_IM0_R10-Z00_MBBL",
+          "name": "East Coast (PADD 1) Imports from All Countries of Other Reformulated Motor Gasoline (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_NUS-Z00_MBBL",
+          "name": "U.S. Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R30-Z00_MBBLD",
+          "name": "Gulf Coast (PADD III) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_R40-Z00_MBBL",
+          "name": "Rocky Mountain (PADD 4) Imports From Rocky Mountain (PADD 4) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPM0CAL55_IM0_R20-Z00_MBBL",
+          "name": "Midwest (PADD II) Imports from  All Countries of Motor Gasoline, Finished, Conventional, Ed55 and Lower (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_NUS-Z00_MBBLD",
+          "name": "U.S. Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R30-Z00_MBBL",
+          "name": "Gulf Coast (PADD III) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/imp",
+        "sourceDefinition": {
+          "id": "M_EPOBGRR_IM0_R50-Z00_MBBL",
+          "name": "West Coast (PADD V) Imports from  All Countries of Motor Gasoline Blending Components, RBOB (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/res",
+        "sourceDefinition": {
+          "id": "M_EPPR_IM0_SAZ-Z00_MBBL",
+          "name": "Arizona Imports from All Countries of Residual Fuel Oil (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/res",
+        "sourceDefinition": {
+          "id": "M_EPPR_IM0_SAZ-Z00_MBBLD",
+          "name": "Arizona Imports from All Countries of Residual Fuel Oil (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/res",
+        "sourceDefinition": {
+          "id": "M_EPPRH_IM0_SAZ-Z00_MBBL",
+          "name": "Arizona Imports from All Countries of Residual Fuel Oil, Greater Than 1% Sulfur (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/res",
+        "sourceDefinition": {
+          "id": "M_EPPRH_IM0_SAZ-Z00_MBBLD",
+          "name": "Arizona Imports from All Countries of Residual Fuel Oil, Greater Than 1% Sulfur (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R20-Z00_MBBL",
+          "name": "Midwest (PADD 2) Exports to Midwest (PADD 2) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R50-Z00_MBBLD",
+          "name": "West Coast (PADD 5) Exports to West Coast (PADD 5) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R10-Z00_MBBL",
+          "name": "East Coast (PADD 1) Exports to East Coast (PADD 1) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R10-Z00_MBBLD",
+          "name": "East Coast (PADD 1) Exports to East Coast (PADD 1) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R30-Z00_MBBLD",
+          "name": "Gulf Coast (PADD 3) Exports to Gulf Coast (PADD 3) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R40-Z00_MBBL",
+          "name": "Rocky Mountain (PADD 4) Exports to Rocky Mountain (PADD 4) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R50-Z00_MBBL",
+          "name": "West Coast (PADD 5) Exports to West Coast (PADD 5) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_NUS-Z00_MBBLD",
+          "name": "U.S. Exports to U.S. of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_NUS-Z00_MBBL",
+          "name": "U.S. Exports to U.S. of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R20-Z00_MBBLD",
+          "name": "Midwest (PADD 2) Exports to Midwest (PADD 2) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R30-Z00_MBBL",
+          "name": "Gulf Coast (PADD 3) Exports to Gulf Coast (PADD 3) of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/exp",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_R40-Z00_MBBLD",
+          "name": "Rocky Mountain (PADD 4) Exports to Rocky Mountain (PADD 4) of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/expc",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_NUS-Z00_MBBLD",
+          "name": "U.S. Exports to U.S. of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/expc",
+        "sourceDefinition": {
+          "id": "M_EPL2_EEX_NUS-Z00_MBBL",
+          "name": "U.S. Exports to U.S. of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/impcus",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_NUS-Z00_MBBLD",
+          "name": "U.S. Imports From U.S. of Natural Gas Liquids (Thousand Barrels per Day)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      },
+      {
+        "route": "petroleum/move/impcus",
+        "sourceDefinition": {
+          "id": "M_EPL2_IM0_NUS-Z00_MBBL",
+          "name": "U.S. Imports From U.S. of Natural Gas Liquids (Thousand Barrels)"
+        },
+        "reason": "Full title names a partner but native code is all-partner; verify observation facets before coverage."
+      }
+    ],
+    "legacyUnitNotation": "Native suffixes 1 and 2 correspond to source-title Thousand Barrels and Thousand Barrels per Day; accepted only when the full source unit agrees. No observations inferred."
+  }
+}

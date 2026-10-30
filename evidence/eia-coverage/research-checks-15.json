@@ -1,0 +1,135 @@
+{
+  "tests": [
+    {
+      "file": "scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-coal-classification.test.py",
+      "tests": 15,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-crosswalk.test.py",
+      "tests": 10,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-electricity-classification.test.py",
+      "tests": 19,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-facets.test.py",
+      "tests": 6,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-mer-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-components-classification.test.py",
+      "tests": 20,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-crude-classification.test.py",
+      "tests": 12,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-price-classification.test.py",
+      "tests": 20,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-stock-cons-classification.test.py",
+      "tests": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-trade-classification.test.py",
+      "tests": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-series-catalog.test.py",
+      "tests": 12,
+      "exitCode": 0
+    }
+  ],
+  "total": 236,
+  "failedSuites": 0,
+  "pythonASTFiles": 35,
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "seed": 20261029,
+  "newSeededUnknownDefinitionCases": 200,
+  "EIA_API_calls": 1424,
+  "newEIA_API_callsThisCheckpoint": 0,
+  "newPublicSourceSnapshots": 16,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "classificationCompleteRoutes": 130,
+  "classificationTotalRoutes": 154,
+  "unresolvedRouteFamilies": {
+    "petroleum": 22,
+    "international": 1,
+    "electricity": 1
+  },
+  "frozenFilesChanged": false,
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not independent reference alignment or standard benchmark scores.",
+  "notRun": "Application offline suite/build/browser: no application edits; implementation remains gated by owner checkpoint go. Live B1 data and frozen scored runs not started.",
+  "developmentCounterexamples": [
+    "Legacy numeric unit suffixes and source full-word variants initially remained pending; accepted only with matching reviewed full source unit/name.",
+    "Native all-partner place codes sometimes conflict with named-partner titles; 58 entries remain ineligible, including one absent advertised place.",
+    "Two gas-plant production titles omit units; retained and ineligible."
+  ],
+  "firstComponentTestRun": {
+    "failedTests": 1,
+    "cause": "Test referenced a nonexistent coal series suffix TST instead of the saved EIA identifier suffix MST.",
+    "resolution": "Corrected identifier only; expected coal/industrial consumption subset unchanged."
+  },
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-petroleum-trade-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-components-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-components-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-price-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-stock-cons-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-trade-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "git diff --check"
+  ],
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1424,
+  "sourceSnapshotHashesVerified": 74,
+  "credentialScanFiles": 618,
+  "credentialFindings": 0,
+  "localMainUnchanged": true,
+  "job5BaseBranchUnchanged": true,
+  "applicationAndEarlierFrozenFilesUnchanged": true
+}
