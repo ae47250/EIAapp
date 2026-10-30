@@ -36,3 +36,5 @@ python3 -B scripts/eia-lookup/coverage-table.py
 The full application suite passed 537/537 with keys blank, and the local build passed. These do not certify the unfinished coverage or the user-visible application workflow. Research tests and all frozen hashes must be checked again before the checkpoint commit.
 
 Research unit ranking correction: EIA unitName establishes TJ as terajoules and MTOE as million metric tons of oil equivalent. The former Btu-only test misranked them as physical units. The corrected selector keeps all candidates and prefers conventional physical product units where available, retaining energy-equivalent fallbacks and original labels. See unit-preference-review.json; no app change.
+
+A fresh-attempt replay boundary is now tested: old pages cannot enter a new attempt after an EIA source revision. A guarded local helper can preserve the original state and restart changed-total parts once, only after the downloader stops and with seven minutes remaining. It has not been run while the current downloader is active. See checkpoint-tooling.json; short-page anomalies are not retried by this helper.

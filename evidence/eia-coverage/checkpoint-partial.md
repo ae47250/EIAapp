@@ -1,23 +1,23 @@
 # Partial coverage checkpoint
 
-Recorded 2026-10-30T15:09:08.397577+00:00. The formal coverage/Set D checkpoint is **not reached**. Implementation remains gated.
+Recorded 2026-10-30T15:50:21.167367+00:00. The formal coverage/Set D checkpoint is **not reached**. Implementation remains gated.
 
-Coverage: **298 mapped; 1790 not checked**, retaining all 2,088 frozen cells. No absence or subset-only certification has been inferred from unfinished work.
+Coverage: **312 mapped; 1776 not checked**, retaining all 2,088 frozen cells. No absence or subset-only certification has been inferred from unfinished work.
 
 | Place kind | Base mapped / total | All mapped / total |
 |---|---:|---:|
-| country | 27 / 168 | 31 / 522 |
-| World | 37 / 168 | 41 / 522 |
-| US | 16 / 168 | 77 / 522 |
-| state | 50 / 168 | 149 / 522 |
+| country | 29 / 168 | 34 / 522 |
+| World | 39 / 168 | 44 / 522 |
+| US | 19 / 168 | 83 / 522 |
+| state | 50 / 168 | 151 / 522 |
 
-Calls: 4,391 total reserved (1,464 earlier + 2,927 coverage), against the 20,000 estimate threshold / 25,000 cap. Paid calls: zero. Recorded peak: 2/second and 1,652/hour.
+Calls: 5,660 total reserved (1,464 earlier + 4,196 coverage), against the 20,000 estimate threshold / 25,000 cap. Paid calls: zero. Recorded peak: 2/second and 2,269/hour.
 
-Retrieval: 248/262 complete groups, 13,025,726 saved rows. Stop reason: still running at report snapshot. The approved deadline is 16:12:35 UTC (12:12:35 p.m. ET), 30 October 2026.
+Retrieval: 258/262 complete groups, 19,166,874 saved rows. Stop reason: still running at report snapshot. The approved deadline is 16:12:35 UTC (12:12:35 p.m. ET), 30 October 2026.
 
 Census: 242 nodes; 27 branches; 154 eligible and 61 excluded leaves, plus AEO/IEO release families. All 61 exclusions reviewed; seed 20261029; no quote mismatch. OB2, OBW and sector 95 remain explicit unresolved exceptions, never usable for results or nonpublication.
 
-Validation: 247/247 audited groups pass. Existing row checker: 17,117 passed, 0 failed, 145 unsupported in offline replay of fully saved live responses. Research tests: 393; app tests: 537/537; local build passed, keys blank. These do not establish unfinished coverage or live application behavior.
+Validation: 258/258 audited groups pass. Existing row checker: 18,275 passed, 0 failed, 151 unsupported in offline replay of fully saved live responses. Research tests: 396; app tests: 537/537; local build passed, keys blank. These do not establish unfinished coverage or live application behavior.
 
 ## Unfinished work and source issues
 
@@ -38,6 +38,96 @@ Authoritative raw evidence and resume state: `~/Documents/EIAapp-Evidence/202610
 Application source, earlier frozen inputs, main and the no-dead-ends branch are unchanged. No push, paid model call, deployment or settings change. Unrelated untracked `docs/eia-interpretation-audit.md` and `scripts/eia-lookup/__pycache__/` are preserved.
 
 Commands and prior test records: `execution-notes.md`, `execution-test-records.json`. Resume downloading only after authorization for a new time window; do not silently change the expired deadline.
+
+## Where the unchecked cells stand
+
+These categories are disjoint; they do not certify absence or subset-only status.
+
+- No eligible metadata candidate; absence not certified: 706.
+- Whole-product groups await complete retrieval or audit: 333.
+- Whole-product scope/default reconciliation pending: 64.
+- mapped: 312.
+- Whole groups audited with no numeric whole-product observation; negative proof pending: 226.
+- Only subset candidates; absence of whole product not certified: 364.
+- Defaults selected but existing app row checker cannot verify every selection: 83.
+
+## Numeric zero check
+
+Bermuda, Greenland and Saint Pierre and Miquelon each returned 45 annual coal-production values for 1980–2024, all numeric text `0`, with no missing-value symbols. EIA call 243 and the response hash are in `coal-zero-check.json`. Their eventual screen status must be “Reported as zero every year”; the app change is still gated.
+
+## Compatibility decision for the next phase
+
+`check-rows.js` calls the app selector in `lib/sources/eia/lookup-list.js`, which always adds a geography facet. Documented US-only routes without that facet cannot pass it. Supporting them requires a narrowly guarded US-only selector path with explicit source-scope evidence and tests rejecting state/country use. No such app change was made during the research gate. Resolve this sequencing issue before requiring all mapped cells to pass the app checker at the formal checkpoint.
+
+## Excluded route census
+
+The 61 excluded leaves below remain separately accounted for from the AEO and IEO release families. Full source quotes and call IDs are in `route-census.json` and `exclusion-review.json`.
+
+- `co2-emissions/co2-emissions-aggregates`: no measure in our 14 products
+- `co2-emissions/co2-emissions-and-carbon-coefficients`: no measure in our 14 products
+- `coal/mine-production`: plant/facility-level
+- `coal/shipments/by-mine-by-plant`: plant/facility-level
+- `coal/shipments/mine-aggregates`: plant/facility-level
+- `coal/shipments/plant-aggregates`: plant/facility-level
+- `coal/shipments/receipts`: plant/facility-level
+- `densified-biomass/characteristics-by-region`: no measure in our 14 products
+- `densified-biomass/wood-pellet-plants`: plant/facility-level
+- `electricity/facility-fuel`: plant/facility-level
+- `electricity/operating-generator-capacity`: plant/facility-level
+- `electricity/rto/daily-fuel-type-data`: no place facet at country, US or state level
+- `electricity/rto/daily-interchange-data`: no place facet at country, US or state level
+- `electricity/rto/daily-region-data`: no place facet at country, US or state level
+- `electricity/rto/daily-region-sub-ba-data`: no place facet at country, US or state level
+- `electricity/rto/fuel-type-data`: sub-daily/hourly
+- `electricity/rto/interchange-data`: sub-daily/hourly
+- `electricity/rto/region-data`: sub-daily/hourly
+- `electricity/rto/region-sub-ba-data`: sub-daily/hourly
+- `electricity/state-electricity-profiles/emissions-by-state-by-fuel`: no measure in our 14 products
+- `electricity/state-electricity-profiles/energy-efficiency`: no measure in our 14 products
+- `electricity/state-electricity-profiles/meters`: no measure in our 14 products
+- `natural-gas/cons/heat`: no measure in our 14 products
+- `natural-gas/cons/pns`: no measure in our 14 products
+- `natural-gas/enr/deep`: no place facet at country, US or state level
+- `natural-gas/enr/drill`: no measure in our 14 products
+- `natural-gas/enr/seis`: no measure in our 14 products
+- `natural-gas/enr/wellcost`: no measure in our 14 products
+- `natural-gas/enr/welldep`: no measure in our 14 products
+- `natural-gas/enr/wellend`: no measure in our 14 products
+- `natural-gas/enr/wellfoot`: no measure in our 14 products
+- `natural-gas/pri/fut`: trading-hub/spot (excluded by owner)
+- `natural-gas/prod/deep`: no place facet at country, US or state level
+- `natural-gas/prod/off`: no place facet at country, US or state level
+- `natural-gas/prod/oilwells`: no measure in our 14 products
+- `natural-gas/prod/wells`: no measure in our 14 products
+- `nuclear-outages/facility-nuclear-outages`: outages
+- `nuclear-outages/generator-nuclear-outages`: outages
+- `nuclear-outages/us-nuclear-outages`: outages
+- `petroleum/crd/drill`: no measure in our 14 products
+- `petroleum/crd/gom`: no place facet at country, US or state level
+- `petroleum/crd/seis`: no measure in our 14 products
+- `petroleum/crd/wellcost`: no measure in our 14 products
+- `petroleum/crd/welldep`: no measure in our 14 products
+- `petroleum/crd/wellend`: no measure in our 14 products
+- `petroleum/crd/wellfoot`: no measure in our 14 products
+- `petroleum/move/expcp`: no place facet at country, US or state level
+- `petroleum/move/imp2`: no place facet at country, US or state level
+- `petroleum/move/impcp`: no place facet at country, US or state level
+- `petroleum/move/ipct`: no measure in our 14 products
+- `petroleum/move/netr`: no place facet at country, US or state level
+- `petroleum/move/pipe`: no place facet at country, US or state level
+- `petroleum/move/ptb`: no place facet at country, US or state level
+- `petroleum/move/rail`: no place facet at country, US or state level
+- `petroleum/move/tb`: no place facet at country, US or state level
+- `petroleum/pnp/crq`: no measure in our 14 products
+- `petroleum/pnp/pct`: no measure in our 14 products
+- `petroleum/pri/fut`: trading-hub/spot (excluded by owner)
+- `petroleum/pri/ipct`: no measure in our 14 products
+- `petroleum/pri/spt`: trading-hub/spot (excluded by owner)
+- `steo`: forecast (STEO/AEO/IEO)
+
+## Front-page evidence found
+
+`front-page-evidence-partial.json` contains audited annual candidates for all three examples: Brazil primary-energy production, Japan petroleum consumption, US nuclear generation and US nuclear consumption. These are candidate observations only: not final defaults, frozen Set D expectations, scored model results, or live application outcomes.
 
 ## Standing-scope decisions for owner review
 

@@ -103,7 +103,7 @@ def run(max_new_pages=None):
     terminal=read_lines(log);buffer={};taskmap={p['id']:(g,p) for g in state['groups'] for p in g['parts']}
     for r in terminal:
         g,p=taskmap[r['part']]
-        if p['status'] in ['error','complete'] or r['status']!=200 or r.get('error') or r['offset']<p['nextOffset'] or any(x['id']==r['id'] for x in p['pages']):continue
+        if not replayable(p,r):continue
         body=(RUN/r['file']).read_bytes();assert sha(body)==r['sha256'];response=json.loads(gzip.decompress(body)).get('response',{})
         buffer.setdefault(p['id'],{})[r['offset']]=(r,response)
     for g,p in taskmap.values():
@@ -160,6 +160,13 @@ def run(max_new_pages=None):
                 if p['status']=='running':p['status']='not checked'
         atomic(RUN/'state.json',state);print(json.dumps(progress(state,limiter)),flush=True)
         if log.exists():(E/'coverage-calls.jsonl.gz').write_bytes(gzip.compress(log.read_bytes(),mtime=0))
+
+def replayable(part,record):
+    # A fresh attempt after a source revision must not import older pages.
+    return (part['status'] not in ['error','complete'] and record['status']==200
+        and not record.get('error') and record['id']>=part.get('minimumReplayCall',0)
+        and record['offset']>=part['nextOffset']
+        and not any(page['id']==record['id'] for page in part['pages']))
 
 def available_offsets(part,occupied,slots):
     if part['status'] in ['error','complete']:return []

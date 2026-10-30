@@ -43,6 +43,19 @@ class FetchTests(unittest.TestCase):
   self.assertEqual(len(p['pages']),1)
  def test_zero_total_is_complete_but_has_no_positive_observations(self):
   p=self.part();m.accept_page(p,self.rec(0,0),{'total':'0','data':[]});self.assertEqual(p['status'],'complete');self.assertEqual(p['rowsSaved'],0)
+class ReplayAttemptTests(unittest.TestCase):
+ def part(self):return {'status':'not checked','nextOffset':0,'pages':[],'minimumReplayCall':100}
+ def record(self,id=100):return {'id':id,'status':200,'offset':0}
+ def test_fresh_attempt_rejects_every_page_from_earlier_attempt(self):
+  p=self.part();self.assertFalse(m.replayable(p,self.record(99)));self.assertTrue(m.replayable(p,self.record(100)))
+ def test_completed_or_failed_parts_never_replay(self):
+  for status in ['complete','error']:
+   p=self.part();p['status']=status;self.assertFalse(m.replayable(p,self.record()))
+ def test_existing_saved_pages_and_failed_responses_never_replay(self):
+  p=self.part();p['pages']=[{'id':100}];self.assertFalse(m.replayable(p,self.record()))
+  p=self.part();r=self.record();r['status']=429;self.assertFalse(m.replayable(p,r))
+  r=self.record();r['error']='APIErrorResponse';self.assertFalse(m.replayable(p,r))
+
 class ParallelPageTests(unittest.TestCase):
  def part(self):return {'status':'not checked','total':10001,'nextOffset':0,'pages':[]}
  def rec(self,offset,n):return {'id':offset+1,'offset':offset,'rows':n,'file':'test','sha256':'test'}
