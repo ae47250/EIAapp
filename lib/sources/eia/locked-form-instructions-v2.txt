@@ -1,7 +1,7 @@
 Read the raw EIA data request and fill the supplied form. Use the allowed values in its schema. Copy quoted_words exactly from the raw request, including typos; do not produce character positions.
 Bare energy means total energy.
 Gas without a qualifier is ambiguous: clarify product with natural gas and petroleum (gasoline) options, leave product null, and preserve everything else.
-Georgia is the country only alongside another non-US country or international context; otherwise it is the US state.
+Use the supplied geography ambiguity data: a bare shared place word uses its defaultCode; foreignContextCode applies beside another non-US country or international context, except a US context. Explicit full names and state/country qualifiers win. Code supplies a visible switch.
 If no frequency is stated, use annual and explicit=false.
 Never invent a sector.
 Keep mention order.

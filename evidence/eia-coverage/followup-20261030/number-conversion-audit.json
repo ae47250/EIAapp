@@ -1,0 +1,401 @@
+{
+  "scope": "Every Number() call in lib/components/app JS; classify observation paths separately from counters, offsets and year/index controls. No credentials read.",
+  "sites": 79,
+  "records": [
+    {
+      "path": "lib/auth.js",
+      "line": 151,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/auth.js",
+      "line": 152,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/auth.js",
+      "line": 153,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/client/formatting.js",
+      "line": 5,
+      "review": "Observation values now reject missing/blank/boolean/container values before coercion; period parsing converts a matched year only."
+    },
+    {
+      "path": "lib/client/formatting.js",
+      "line": 69,
+      "review": "Observation values now reject missing/blank/boolean/container values before coercion; period parsing converts a matched year only."
+    },
+    {
+      "path": "lib/client/xlsx.js",
+      "line": 192,
+      "review": "Latest value now uses numericValue; XML cell serializer requires original typeof number."
+    },
+    {
+      "path": "lib/sources/eia/plant-metadata.js",
+      "line": 133,
+      "review": "nullableNumber now rejects whitespace/bools/containers as well as null; other conversions are directory IDs and bounded pagination."
+    },
+    {
+      "path": "lib/sources/eia/plant-metadata.js",
+      "line": 317,
+      "review": "nullableNumber now rejects whitespace/bools/containers as well as null; other conversions are directory IDs and bounded pagination."
+    },
+    {
+      "path": "lib/sources/eia/plant-metadata.js",
+      "line": 329,
+      "review": "nullableNumber now rejects whitespace/bools/containers as well as null; other conversions are directory IDs and bounded pagination."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "line": 165,
+      "review": "Raw observations require number or nonblank decimal string and finite conversion; other conversions are year/choice indexes."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "line": 167,
+      "review": "Raw observations require number or nonblank decimal string and finite conversion; other conversions are year/choice indexes."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "line": 168,
+      "review": "Raw observations require number or nonblank decimal string and finite conversion; other conversions are year/choice indexes."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "line": 185,
+      "review": "Raw observations require number or nonblank decimal string and finite conversion; other conversions are year/choice indexes."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "line": 186,
+      "review": "Raw observations require number or nonblank decimal string and finite conversion; other conversions are year/choice indexes."
+    },
+    {
+      "path": "lib/sources/eia/lookup-search.js",
+      "line": 213,
+      "review": "Raw observations require number or nonblank decimal string and finite conversion; other conversions are year/choice indexes."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 210,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 274,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 279,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 295,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 393,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 406,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 407,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 447,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 448,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/intent-routing.js",
+      "line": 449,
+      "review": "Legacy source offsets, edit distances and sorting order only; no EIA observation conversion. Optional null offset/order may coerce to 0; not an observed data value or an export path. Left outside this observation-value fix."
+    },
+    {
+      "path": "lib/sources/eia/result-certainty.js",
+      "line": 54,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/result-certainty.js",
+      "line": 55,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/result-certainty.js",
+      "line": 59,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/candidate-search.js",
+      "line": 524,
+      "review": "toNumber accepts numbers or nonblank strings, rejecting null and other types."
+    },
+    {
+      "path": "lib/sources/eia/lookup-list.js",
+      "line": 88,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/lookup-list.js",
+      "line": 89,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/lookup-list.js",
+      "line": 90,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/lookup-list.js",
+      "line": 123,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/multi-country-comparison.js",
+      "line": 229,
+      "review": "Ranking component points deliberately default to zero; unit scale must be >0, rejecting coerced null zero."
+    },
+    {
+      "path": "lib/sources/eia/multi-country-comparison.js",
+      "line": 231,
+      "review": "Ranking component points deliberately default to zero; unit scale must be >0, rejecting coerced null zero."
+    },
+    {
+      "path": "lib/sources/eia/multi-country-comparison.js",
+      "line": 300,
+      "review": "Ranking component points deliberately default to zero; unit scale must be >0, rejecting coerced null zero."
+    },
+    {
+      "path": "lib/sources/eia/semantic-reranking.js",
+      "line": 151,
+      "review": "Confidence null zero fails minimum threshold; usage counters and rounding are ranking diagnostics, not observations."
+    },
+    {
+      "path": "lib/sources/eia/semantic-reranking.js",
+      "line": 152,
+      "review": "Confidence null zero fails minimum threshold; usage counters and rounding are ranking diagnostics, not observations."
+    },
+    {
+      "path": "lib/sources/eia/semantic-reranking.js",
+      "line": 285,
+      "review": "Confidence null zero fails minimum threshold; usage counters and rounding are ranking diagnostics, not observations."
+    },
+    {
+      "path": "lib/sources/eia/semantic-reranking.js",
+      "line": 286,
+      "review": "Confidence null zero fails minimum threshold; usage counters and rounding are ranking diagnostics, not observations."
+    },
+    {
+      "path": "lib/sources/eia/semantic-reranking.js",
+      "line": 287,
+      "review": "Confidence null zero fails minimum threshold; usage counters and rounding are ranking diagnostics, not observations."
+    },
+    {
+      "path": "lib/sources/eia/semantic-reranking.js",
+      "line": 325,
+      "review": "Confidence null zero fails minimum threshold; usage counters and rounding are ranking diagnostics, not observations."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 49,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 115,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 450,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 633,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 634,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 693,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 745,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 746,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 756,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 763,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 764,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 770,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 771,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 772,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-ranking.js",
+      "line": 865,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-fetch.js",
+      "line": 75,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-fetch.js",
+      "line": 103,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-fetch.js",
+      "line": 104,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-fetch.js",
+      "line": 105,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 16,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 20,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 22,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 26,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 28,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 29,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/eia-period-bounds.js",
+      "line": 30,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 77,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 188,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 190,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 304,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 305,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 307,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 308,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "lib/sources/eia/local-retrieval.js",
+      "line": 310,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "components/search/SeriesChart.js",
+      "line": 43,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "components/search/RecentObservations.js",
+      "line": 6,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    },
+    {
+      "path": "components/search/RecentObservations.js",
+      "line": 7,
+      "review": "Dates, validated pagination, auth parameters, chart-control indexes or ranking counters; not raw EIA observations. No missing observation is made numeric here."
+    }
+  ]
+}
