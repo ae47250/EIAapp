@@ -1,0 +1,10 @@
+import fs from 'node:fs';import os from 'node:os';import {createHash} from 'node:crypto';import {gunzipSync} from 'node:zlib';import assert from 'node:assert/strict';import {scoreE} from './score-e-finish-revision-2.js';
+const root='evidence/eia-finish',local=os.homedir()+'/Documents/EIAapp-Evidence/20261030/finish/scored-live',read=p=>JSON.parse(fs.readFileSync(p)),E=read(root+'/set-e.json').cases,policy=read(root+'/set-e-policy.json'),changes=[];
+const freeze={at:new Date().toISOString(),authority:'Owner Job 6 standing scorer version rule; rendered HTML collapses whitespace, which cannot establish a mislabeled series',original:'scripts/eia-lookup/score-e-finish.js',revision:'scripts/eia-lookup/score-e-finish-revision-2.js',revisionSHA256:createHash('sha256').update(fs.readFileSync(new URL('./score-e-finish-revision-2.js',import.meta.url))).digest('hex'),scope:'Unit-label whitespace only; original result and pass marks unchanged; exposed offline re-score, not a new live run'};
+fs.writeFileSync(root+'/label-audit-freeze.json',JSON.stringify(freeze,null,2)+'\n',{flag:'wx'});
+for(const c of E)for(let repeat=1;repeat<=(c.expected.repetitions||1);repeat++){
+ const id=c.id+'-'+repeat,r=read(local+'/'+id+'-result.json'),p=read(local+'/browser/'+id+'-ui.json').presentation,old=JSON.parse(gunzipSync(fs.readFileSync(root+'/live/'+id+'-score.json.gz'))),score=scoreE(r,c,policy,p);
+ assert.equal(score.correct,old.score.correct,'Outcome score must not change');if(score.unlabelledWrongData!==old.unlabelledWrongData)changes.push({id,before:old.unlabelledWrongData,after:score.unlabelledWrongData});
+ if(c.id==='E9'){const bad=structuredClone(p);bad.text=bad.text.replace(/Cents per Kilowatthour,\s+Including Taxes/g,'REMOVED UNIT');assert.equal(scoreE(r,c,policy,bad).unlabelledWrongData,true,'Missing unit must still be detected');}
+}
+fs.writeFileSync(root+'/label-audit-result.json',JSON.stringify({at:new Date().toISOString(),outcomesChecked:16,changes,missingUnitNegativeControl:'pass',newCalls:0,originalOverallStatus:'FAIL, retained'},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({outcomesChecked:16,changes,negativeControl:'pass'}));

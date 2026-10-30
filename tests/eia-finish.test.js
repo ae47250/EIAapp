@@ -92,3 +92,17 @@ test('R14 a kind-only reply cannot choose arbitrarily between two country candid
   assert.deepEqual(codes(m.form),[want]);assert.equal(m.form.clarification.needed,asked);assert.equal(m.form.topics[0].product,'natural gas');
  }
 });
+test('R9 exact approved concepts beat fuzzy place matches, while explicit and misspelled places survive',()=>{
+ for(const q of ['marine capaicty in World','marine capacity in World']){
+  const f=norm(q,form(q,[g('WLD','World')],'marine','capacity'));assert.deepEqual(codes(f),['WLD']);
+  const original=form('marine capacity',[],'marine','capacity'),m=applyReplyUpdate(original,'marine capacity',{about:'geography',reply:q,answer:{...answer(),geographies:[{value:g('WLD','World').geography,quoted_words:'World'}]}});assert.deepEqual(codes(m.form),['WLD']);
+ }
+ const q='marine capacity in Maine and nebraksa';assert.deepEqual(codes(norm(q,form(q,[],'marine','capacity'))),['ME','NE']);
+ const vocabulary=JSON.parse(readFileSync(new URL('../data/eia/phase4-routing-config.json',import.meta.url))).vocabulary;
+ for(const category of ['products','activities','sectors','frequencies'])for(const word of Object.keys(vocabulary[category])){const text=word+' in World';assert.deepEqual(codes(norm(text,form(text,[g('WLD','World')]))),['WLD'],word);}
+});
+test('R7 status descriptions deduplicate names and cards retain alternative and scope information',()=>{
+ const s={country:'Ohio',product:'coal',activity:'consumption',eiaName:'Coal total consumption',basisLabel:'Coal total consumption',description:'Coal total consumption',unit:'Thousand short tons',frequency:'annual',sectorLabel:'All sectors',alternative:true,otherBases:['metric tons','metric tons']};
+ assert.equal(display.seriesDescription(s),'Coal total consumption; Thousand short tons');const card=display.seriesCardText(s);
+ assert.equal(card.lines.filter(x=>x.includes('metric tons')).length,1);assert.ok(card.lines.some(x=>x.includes('All sectors')));assert.ok(card.lines.some(x=>x.includes('annual')));assert.ok(card.lines.some(x=>x.includes('Alternative selected')));
+});
