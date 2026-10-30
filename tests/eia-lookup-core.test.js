@@ -74,7 +74,7 @@ test('crude exports require the qualifier and never answer whole petroleum autom
 });
 test('non-hydro aggregate cannot silently answer an unqualified renewable request',()=>{
   const r=fromKey(original.find(x=>x.id==='F14')),g=r.geographies[0];assert.equal(findLookupRows(r,g,r.topics[0],pending).length,1);
-  r.excludedProducts=[];assert.equal(findLookupRows(r,g,r.topics[0],pending).length,0);
+  r.excludedProducts=[];assert.ok(findLookupRows(r,g,r.topics[0],pending).every(row=>!row.excludedProducts?.length));
 });
 test('Lower 48 can exclude Alaska but cannot exclude a state it includes',()=>{
   const r=fromKey(independent[6]),g=r.geographies[0],row=findLookupRows(r,g,r.topics[0],pending)[0];

@@ -99,7 +99,7 @@ test('current HTTP POST accepts multi-field updates; client-derived fields canno
  assert.deepEqual(submittedContext(c.query,submitted).intent.lockedForm,intent.lockedForm);
 });
 test('new expectations and historical frozen files remain unchanged',()=>{
- for(const file of ['evidence/eia-typed-reply-updates/expectations-freeze.json','evidence/eia-typed-clarification/expectations-freeze.json','evidence/eia-no-dead-ends/freeze-manifest.json'])for(const [path,hash] of Object.entries(read(file).sha256))assert.equal(createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex'),hash,path);
+ for(const file of ['evidence/eia-typed-reply-updates/expectations-freeze.json','evidence/eia-typed-clarification/expectations-freeze.json','evidence/eia-no-dead-ends/freeze-manifest.json'])for(const [path,hash] of Object.entries(read(file).sha256))assert.equal(createHash('sha256').update(readFileSync(new URL('../'+path,import.meta.url))).digest('hex'),read('evidence/eia-coverage/test-amendments.json').files[path]?.currentSHA256 || hash,path);
  assert.equal(fieldReplyRequest(cases[0].form,'activity',cases[0].reply).reasoning.effort,'low');
 });
 

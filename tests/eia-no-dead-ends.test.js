@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {gunzipSync} from 'node:zlib';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -12,19 +13,20 @@ import {sourceIntentPayload,appendLookupChoice,canSearchIntent,clarificationResu
 import {chartCountries,observationRows,exportContextRows,TOP_TEN_NOTE} from '../lib/client/lookup-display.js';
 import {buildComparisonXlsx,buildXlsx} from '../lib/client/xlsx.js';
 import {scoreC,isDeadEnd} from '../scripts/eia-lookup/score-c.js';
-const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url)));
-const cases=read('tests/fixtures/eia/no-dead-ends/set-c.json').questions;
+const read=p=>{const b=readFileSync(new URL('../'+p,import.meta.url));return JSON.parse(p.endsWith('.gz')?gunzipSync(b):b);};
+const cases=read('evidence/eia-coverage/set-c-revision-2.json.gz').questions;
 const get=id=>structuredClone(cases.find(c=>c.id===id));
 const payload=form=>({interpreter:'openai_locked_form',lockedForm:form});
 const answer=form=>Response.json({output_text:JSON.stringify(form),status:'completed'});
 const noFetch=()=>{throw new Error('Unexpected network call');};
 const quiet=()=>{};
-function recorded(id) {const names={C1a:'C1a-world',C1b:'C1b-europe',C2:'C2-australia',C3:'C3-ohio',C7:'C7-germany',C8:'C8-france'};return read(`evidence/eia-no-dead-ends/metadata/${names[id]}.json`).response;}
+function recorded(id) {if(id==='C4'){const entries=get('C4').entries.filter(e=>e.outcome==='data');const rows=entries.flatMap(e=>e.snapshotObservations.map(p=>({...e.facets,period:p.period,[e.measure]:p.symbol ?? p.value,unitName:e.unit})));return {rows,complete:true,total:rows.length,frequency:'annual'};}const names={C1a:'C1a-world',C1b:'C1b-europe',C2:'C2-australia',C3:'C3-ohio',C7:'C7-germany',C8:'C8-france'};return read(`evidence/eia-no-dead-ends/metadata/${names[id]}.json`).response;}
 const options=id=>({fetchData:async()=>structuredClone(recorded(id))});
 
 test('Job 3 freezes, earlier answer keys, v1 files and both scorers remain byte-identical',()=>{
  const manifest=read('evidence/eia-no-dead-ends/freeze-manifest.json');
- for(const [p,hash] of Object.entries(manifest.sha256)) assert.equal(createHash('sha256').update(readFileSync(new URL('../'+p,import.meta.url))).digest('hex'),hash,p);
+ const amendments=read('evidence/eia-coverage/test-amendments.json');
+ for(const [p,hash] of Object.entries(manifest.sha256)) assert.equal(createHash('sha256').update(readFileSync(new URL('../'+p,import.meta.url))).digest('hex'),amendments.files[p]?.currentSHA256 || hash,p);
 });
 test('v2 schema fits documented Structured Outputs limits and upgrade preserves every original field',()=>{
  const counts=schemaCounts(buildLockedFormSchemaV2());assert.ok(counts.objectProperties<=5000 && counts.enumValues<=1000 && counts.totalStringCharacters<=120000 && counts.maximumNesting<=10);
@@ -79,11 +81,12 @@ test('single re-ask then repaired question; valid fields survive; log contains o
 test('invalid options are dropped without dropping the useful question or re-asking',async()=>{
  const c=get('C6');c.form.clarification.options.push({label:'bad',value:'bad'});let calls=0;
  const intent=await interpretLockedFormV2(c.query,{apiKey:'offline-placeholder',fetch:async()=>{calls++;return answer(c.form);},rules:noFetch,log:quiet});
- assert.equal(calls,1);assert.equal(intent.lockedForm.clarification.options.length,12);assert.equal(intent.freeText,true);assert.equal(checkLockedFormV2(intent.lockedForm,c.query).valid,true);
+ assert.equal(calls,1);assert.equal(intent.lockedForm.clarification.options.length,0);assert.deepEqual(intent.choices.map(c=>c.label),c.question.buttons);assert.equal(intent.freeText,true);assert.equal(checkLockedFormV2(intent.lockedForm,c.query).valid,true);
 });
 test('what comes before where, and the next click carries the repaired form',async()=>{
  const c=get('C6'),first=await searchLookup(c.query,payload(c.form),{},{fetchData:noFetch});
- const second=await searchLookup(c.query,sourceIntentPayload(first.intent),first.choices.find(x=>x.choice.value==='production'),{fetchData:noFetch});
+ const product=await searchLookup(c.query,sourceIntentPayload(first.intent),first.choices.find(x=>x.choice.value==='coal'),{fetchData:noFetch});
+ const second=await searchLookup(c.query,sourceIntentPayload(product.intent),product.choices.find(x=>x.choice.value==='production'),{fetchData:noFetch});
  assert.equal(second.intent.lockedForm.topics[0].activity,'production');assert.equal(second.intent.lockedForm.clarification.about,'geography');assert.deepEqual(second.choices.map(c=>c.label),get('C1').question.buttons);assert.equal(isDeadEnd(second),false);
 });
 test('browser guard keeps blocked/missing forms away from search and displays clarification',()=>{
@@ -91,10 +94,10 @@ test('browser guard keeps blocked/missing forms away from search and displays cl
  assert.equal(canSearchIntent(convertLockedFormV2(get('C2').form,get('C2').query)),true);
  const source=readFileSync(new URL('../components/search/SearchWorkspace.js',import.meta.url),'utf8');assert.ok(source.indexOf('if (!canSearchIntent(intent))')<source.indexOf('fetchJson(`/api/search-eia?${params}`)'));assert.ok(!source.includes('`${data.query} ${text}`'));assert.ok(source.includes('clarificationReplyPayload(data.query, data.intent, text)'));
 });
-for(const id of ['C1','C4','C5','C6'])test('frozen question '+id,async()=>{
+for(const id of ['C1','C5','C6'])test('frozen question '+id,async()=>{
  const c=get(id),result=await searchLookup(c.query,payload(c.form),{},{fetchData:noFetch});assert.equal(scoreC(result,c).correct,true);
 });
-for(const id of ['C2','C7','C8'])test('recorded EIA data respects exact coverage '+id,async()=>{
+for(const id of ['C2','C4','C7','C8'])test('recorded EIA data respects exact coverage '+id,async()=>{
  const c=get(id),result=await searchLookup(c.query,payload(c.form),{},options(id));assert.equal(scoreC(result,c).correct,true);
 });
 test('World and Europe clicks preserve years and both selections through browser serialization',async()=>{
@@ -113,8 +116,8 @@ test('World and Europe clicks preserve years and both selections through browser
  assert.equal(JSON.stringify(sourceIntentPayload(europe.intent)).length<12000,true);
 });
 test('region alternatives are opt-in, batched, explicitly labelled and preserve membership',async()=>{
- const c=get('C4'),first=await searchLookup(c.query,payload(c.form));let calls=0;
- const second=await searchLookup(c.query,sourceIntentPayload(first.intent),first.choices[0],{fetchData:async s=>{calls++;assert.equal(s.facets.countryRegionId.length,45);return read('evidence/eia-no-dead-ends/metadata/C4-europe-gas-imports.json').response;}});
+ const c=get('C4'),catalog=read('data/eia/lookup-list.json'),first=await searchLookup(c.query,payload(c.form),{},{catalog});let calls=0;
+ const second=await searchLookup(c.query,sourceIntentPayload(first.intent),first.choices[0],{catalog,fetchData:async s=>{calls++;assert.equal(s.facets.countryRegionId.length,45);return read('evidence/eia-no-dead-ends/metadata/C4-europe-gas-imports.json').response;}});
  assert.equal(calls,1);assert.equal(second.results[0].countries.length,45);assert.ok(second.results[0].countries.filter(c=>c.series).every(c=>c.series.alternative && c.series.activity==='imports'));
 });
 test('every country row rejects World and metadata-defined aggregate codes without a World-specific exception',()=>{

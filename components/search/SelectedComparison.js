@@ -1,6 +1,7 @@
 import {formatNumber} from '../../lib/client/formatting.js';
 import { downloadComparisonWorkbook } from "../../lib/client/xlsx.js";
 import { chartCountries, observationRows, TOP_TEN_NOTE, observationStatus, seriesDescription, headlineFor } from "../../lib/client/lookup-display.js";
+import SeriesChart from './SeriesChart.js';
 import ComparisonChart from "./ComparisonChart.js";
 
 export default function SelectedComparison({ comparison, source }) {
@@ -26,7 +27,7 @@ export default function SelectedComparison({ comparison, source }) {
             <div className="muted" key={country.geography.code}>
               <p><strong>{country.geography.displayName || country.geography.name}:</strong> {country.series.title}. {country.series.description}</p>
               <p>Measurement basis: {country.series.basisLabel}. {country.series.sectorLabel}. Units: {country.series.unit}. Frequency: {country.series.frequency}.</p>
-              {country.series.otherMeasuresExist ? <p>Other measures exist</p> : null}
+              {country.series.otherMeasuresExist ? <p>Other bases exist (Other measures exist).</p> : null}
               {country.series.regionLabel ? <p>{country.series.regionLabel}</p> : null}
               {country.series.fallbackLabel ? <p>{country.series.fallbackLabel}</p> : null}
               {country.series.alternative ? <p>Alternative selected: {country.series.basisLabel}. This differs from the original request.</p> : null}
@@ -38,7 +39,7 @@ export default function SelectedComparison({ comparison, source }) {
       ) : null}
       {comparison.lookup && comparison.chartCompatible!==false && chart.countries.length===10 && comparison.countries.filter(c=>observationStatus(c.series?.points)==='Available').length>10 ? <p role="status">{TOP_TEN_NOTE}</p> : null}
       {comparison.chartCompatible === false
-        ? <p role="status">These measures use different units, frequencies or definitions, so they are not plotted on one chart axis. Each unit is shown in the table and Excel.</p>
+        ? <div><p role="status">These measures use different units, frequencies or definitions. Each chart has its own labelled axis; units are also in the table and Excel.</p>{chart.countries.map(c=><section key={c.geography.code} data-chart-place={c.geography.code}><h3>{c.geography.displayName || c.geography.name}: {c.series.unit}</h3><SeriesChart series={c.series}/></section>)}</div>
         : <ComparisonChart comparison={chart} />}
       {comparison.lookup ? <div className="table-wrap"><table aria-label="All country observations">
         <thead><tr><th>Period</th>{comparison.countries.map(c=><th key={c.geography.code}>{c.geography.displayName || c.geography.name}{c.series ? ` (${c.series.unit})` : ""}</th>)}</tr></thead>

@@ -1,4 +1,8 @@
 import test from 'node:test';
+import {understoodLine} from '../lib/sources/eia/lookup-context.js';
+import {gunzipSync} from 'node:zlib';
+import {isDeepStrictEqual} from 'node:util';
+import {scoreD} from '../scripts/eia-lookup/score-d.js';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {lookupCatalog,buildLookupSelector,rowFitsGeography} from '../lib/sources/eia/lookup-list.js';
@@ -62,8 +66,8 @@ test('nonnumeric EIA symbols survive parser, table and Excel; only numeric zero 
  const geo=resolveApprovedGeography('BRA'),request={frequency:'annual',sector:null},selector={route:'test',dataColumn:'value',facets:{country:'BRA'},frequency:'annual'};
  const raw=['--','NA','W',0,52317.55723326];
  const series=lookupSeries(row,geo,request,selector,{rows:raw.map((value,i)=>({period:String(2000+i),country:'BRA',value,unit:'Btu'})),total:5,complete:true});
- assert.deepEqual(series.points.map(p=>p.value),[null,null,null,0,52317.55723326]);
- assert.equal(observationText(series.points[0]),'Not applicable');assert.equal(getCleanPoints(series.points).length,2);
+ assert.deepEqual(series.observations.map(p=>p.value),[null,null,null,0,52317.55723326]);assert.deepEqual(series.points.map(p=>p.value),[0,52317.55723326]);
+ assert.equal(observationText(series.observations[0]),'Not applicable');assert.equal(getCleanPoints(series.points).length,2);
  const text=new TextDecoder().decode(await buildXlsx(series).arrayBuffer());
  for(const s of ['Not applicable','Not available','Withheld','--','52317.55723326','Native facets','BRA'])assert.ok(text.includes(s),s);
  assert.equal(formatNumber(series.points.at(-1).value),'52,317.5572');assert.match(headlineFor(series),/52,317.5572 Btu in 2004 \(EIA\)/);
@@ -75,4 +79,44 @@ test('nonnumeric EIA symbols survive parser, table and Excel; only numeric zero 
 test('front page has one choice list, no empty lookup card and only EIA provider wording',()=>{
  const ui=readFileSync(new URL('../components/search/SearchWorkspace.js',import.meta.url),'utf8');assert.doesNotMatch(ui,/major data providers/);assert.equal((ui.match(/the U\.S\. Energy Information Administration \(EIA\)/g)||[]).length,2);assert.doesNotMatch(ui,/<LookupChoices choices=\{country\.alternatives/);
  const chart=readFileSync(new URL('../components/search/ComparisonChart.js',import.meta.url),'utf8');assert.match(chart,/different units/i);
+});
+test('original defaults win and other checked bases are disclosed without replacing them',async()=>{
+ const c=get('D11');const r=await searchLookup(c.query,{interpreter:'openai_locked_form',lockedForm:c.form},{},{fetchData:async s=>({rows:[{...s.facets,period:'2015',sales:'1.23456789','sales-units':'million kilowatt hours'}],total:1,complete:true})});
+ assert.equal(r.selectedSeries.selector.route,'electricity/retail-sales');assert.equal(r.selectedSeries.selector.facets.sectorid,'RES');assert.equal(r.selectedSeries.otherMeasuresExist,true);assert.equal(r.selectedSeries.points[0].value,1.23456789);
+});
+test('a current-year default may fill an empty annual gap with a checked monthly series, never an explicit annual request',async()=>{
+ const c=get('D14');assert.equal(checkLockedFormV2(c.form,c.query).valid,true);
+ const calls=[];const fetchData=async s=>{calls.push(s);return {rows:s.frequency==='monthly'?[{...s.facets,period:'2026-01',value:3.45,unitName:'Dollars per Gallon Including Taxes'}]:[],total:s.frequency==='monthly'?1:0,complete:true};};
+ const r=await searchLookup(c.query,{interpreter:'openai_locked_form',lockedForm:c.form},{},{fetchData});assert.equal(r.selectedSeries.frequency,'monthly');assert.match(r.selectedSeries.fallbackLabel,/annual data is not available/);assert.equal(calls[0].frequency,'annual');
+ const f=structuredClone(c.form);f.frequency={value:'annual',explicit:true,quoted_words:'annual'};calls.length=0;
+ const empty=await searchLookup(c.query+' annual',{interpreter:'openai_locked_form',lockedForm:f},{},{fetchData});assert.equal(empty.selectedSeries,null);assert.ok(calls.every(s=>s.frequency==='annual'));
+});
+
+test('a blank-quote US default is rejected where country coverage exists',()=>{
+ const f=structuredClone(get('D1').form);f.geographies=[{geography:'USA | United States | country',is_default:true,quoted_words:''}];
+ assert.equal(checkLockedFormV2(f,'energy production').valid,false);
+});
+const revisedD=JSON.parse(gunzipSync(readFileSync(new URL('../evidence/eia-coverage/set-d-revision-3.json.gz',import.meta.url)))).questions;
+for(const c of revisedD.filter(c=>!c.parentId))test('frozen Set D injected form to data/question '+c.id,async()=>{
+ const fetchData=async s=>{
+  const matches=(c.entries||[]).filter(e=>e.route===s.route&&e.measure===s.dataColumn&&e.frequency===s.frequency&&Object.entries(s.facets).every(([k,v])=>(Array.isArray(v)?v:[v]).map(String).includes(String(e.facets[k]))));
+  const rows=matches.flatMap(e=>(e.snapshotObservations||e.snapshotPoints||[]).map(p=>({...e.facets,period:p.period,[e.measure]:p.symbol??p.value,unitName:e.unit})));
+  return {rows,complete:true,total:rows.length,frequency:s.frequency};
+ };
+ const r=await searchLookup(c.query,{interpreter:'openai_locked_form',lockedForm:c.form},{},{fetchData});
+ const liveEvidence=Object.fromEntries((c.entries||[]).filter(e=>e.snapshotPoints?.length).map(e=>[[e.geographyCode,e.product,e.activity].join('|'),{retrievedAt:'2026-10-30',complete:true,selector:{route:e.route,dataColumn:e.measure,frequency:e.frequency,facets:e.facets},points:e.snapshotPoints}]));
+ const scored=scoreD(r,c,{liveEvidence});
+ assert.deepEqual(scored.formErrors,[]);assert.deepEqual(scored.outcomeErrors,[]);
+ // Presentation is checked separately in a rendered browser, never synthesized here.
+ for(const e of c.entries||[]){const a=r.results.flatMap(g=>g.countries).find(x=>x.geography.code===e.geographyCode&&x.product===e.product&&x.activity===e.activity);if(e.snapshotObservations?.length)assert.deepEqual((a.series||a.observationSeries)?.observations,e.snapshotObservations,c.id+' full source observations');}
+});
+
+test('missing-series cards show the required nonnumeric status without an empty result article',()=>{
+ const ui=readFileSync(new URL('../components/search/SearchWorkspace.js',import.meta.url),'utf8');assert.match(ui,/data-status-label>\{country.statusLabel/);assert.match(ui,/No data for these years/);
+});
+
+test('understood regions identify all included members and omit excluded members',()=>{
+ const f=structuredClone(get('D5b').form);const line=understoodLine(f);
+ for(const name of ['Bermuda','Canada','Greenland','Mexico','Saint Pierre and Miquelon','United States'])assert.ok(line.includes(name));
+ f.excluded_geographies=[{geography:'CAN | Canada | country',quoted_words:'Canada',is_default:false}];assert.ok(!understoodLine(f).includes('Canada'));
 });

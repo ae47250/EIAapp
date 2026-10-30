@@ -299,7 +299,7 @@ export default function SearchWorkspace({ showLogout }) {
             : null}
           {result.countries.filter(country => !country.series).map(country => (
             <div className="card compact-card" key={country.geography.code}>
-              <p role="status">{country.message}</p>
+              <p role="status"><span data-status-label>{country.statusLabel || "No data for these years"}</span>. {country.message}</p>
 
             </div>
           ))}

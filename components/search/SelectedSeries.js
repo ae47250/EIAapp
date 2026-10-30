@@ -19,7 +19,7 @@ export default function SelectedSeries({ series, source }) {
         <div className="muted">
           <p>{series.description}</p>
           <p>Measurement basis: {series.basisLabel}. {series.sectorLabel}. Units: {series.unit}. Frequency: {series.frequency}.</p>
-          {series.otherMeasuresExist ? <p>Other measures exist</p> : null}
+          {series.otherMeasuresExist ? <p>Other bases exist (Other measures exist).</p> : null}
           {series.regionLabel ? <p>{series.regionLabel}</p> : null}
           {series.fallbackLabel ? <p>{series.fallbackLabel}</p> : null}
           {series.alternative ? <p>Alternative selected: {series.basisLabel}. This differs from the original request.</p> : null}
