@@ -1,10 +1,10 @@
 {
-  "recordedAt": "2026-10-30T01:23:40.627611+00:00",
+  "recordedAt": "2026-10-30T01:36:40.787853+00:00",
   "branch": "codex/eia-coverage",
   "startSHA": "bbff3bf4edf76935b5700b6ca702fa93071d624e",
   "workOrderSHA256": "c878980d594337a14ac089181b75862824165d34f1b70c63ca441dfd7c9fac0c",
   "phase": "2: all FITS measure definitions inventoried; draft international and SEDS correspondence; remaining classifications/grid/coverage pending",
-  "state": "active: 137 of 154 FITS route definition drafts complete; 15 petroleum summary/refining routes, one electricity route and international definitions remain, followed by cross-route scope reconciliation before grid/B1.",
+  "state": "active: 152 of 154 FITS route definition drafts complete; one electricity route and international definitions remain, followed by cross-route scope reconciliation before grid/B1.",
   "trigger": "Owner approves sector gas sales prices and standing broader-total/headline scope rule.",
   "EIA_API_calls": 1424,
   "OpenAI_calls": 0,
@@ -12,7 +12,7 @@
   "pushed": false,
   "implementationAuthorizedAfterCheckpointGo": false,
   "unrelatedUntrackedPreserved": "docs/eia-interpretation-audit.md",
-  "previousGoalTurnClassification": "Progress: seven refinery capacity/receipt/processing routes classified; 258 research tests pass. No B1/app changes.",
+  "previousGoalTurnClassification": "Progress: remaining 15 petroleum summary/refining routes classified; 287 research tests pass. No B1/app changes.",
   "defaultFacetRoutes": 193,
   "allFrequencyRoutes": 170,
   "leafClassifications": {
@@ -117,7 +117,7 @@
     "acceptedForCoverage": false
   },
   "scopeReviewRegister": "scope-review-register.json",
-  "classificationCompleteRoutes": 137,
+  "classificationCompleteRoutes": 152,
   "biomassCrudeDraft": {
     "routes": 7,
     "classificationCompleteRoutes": 7,
@@ -190,6 +190,78 @@
       }
     },
     "newTests": 22,
+    "seededUnknownDefinitionCases": 100,
+    "acceptedForCoverage": false
+  },
+  "petroleumSummaryDraft": {
+    "routes": 15,
+    "seriesDefinitions": 14584,
+    "identicalPriorDefinitionsReused": 4628,
+    "classificationCounts": {
+      "petroleum/sum/snd": {
+        "subset": 2976,
+        "out of vocabulary": 1693,
+        "whole product": 96
+      },
+      "petroleum/sum/sndw": {
+        "subset": 541,
+        "out of vocabulary": 52,
+        "whole product": 15
+      },
+      "petroleum/sum/crdsnd": {
+        "subset": 18,
+        "out of vocabulary": 9
+      },
+      "petroleum/sum/mkt": {
+        "subset": 2084
+      },
+      "petroleum/pnp/wiup": {
+        "out of vocabulary": 42,
+        "subset": 12,
+        "whole product": 6
+      },
+      "petroleum/pnp/wprodrb": {
+        "subset": 111,
+        "out of vocabulary": 1
+      },
+      "petroleum/pnp/wprodr": {
+        "subset": 21
+      },
+      "petroleum/pnp/wprodb": {
+        "subset": 20
+      },
+      "petroleum/pnp/inpt": {
+        "out of vocabulary": 869,
+        "subset": 234
+      },
+      "petroleum/pnp/inpt2": {
+        "out of vocabulary": 814,
+        "subset": 230
+      },
+      "petroleum/pnp/inpt3": {
+        "out of vocabulary": 652,
+        "subset": 188
+      },
+      "petroleum/pnp/refp": {
+        "subset": 1497,
+        "out of vocabulary": 32,
+        "whole product": 32
+      },
+      "petroleum/pnp/refp2": {
+        "subset": 1575,
+        "out of vocabulary": 32
+      },
+      "petroleum/pnp/refp3": {
+        "subset": 620,
+        "out of vocabulary": 32
+      },
+      "petroleum/pnp/unc": {
+        "out of vocabulary": 32,
+        "subset": 32,
+        "whole product": 16
+      }
+    },
+    "newTests": 29,
     "seededUnknownDefinitionCases": 100,
     "acceptedForCoverage": false
   }

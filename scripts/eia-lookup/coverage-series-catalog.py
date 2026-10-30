@@ -5,7 +5,7 @@ import gzip,hashlib,importlib.util,json
 from pathlib import Path
 spec=importlib.util.spec_from_file_location('inventory',Path(__file__).with_name('coverage-inventory.py'))
 i=importlib.util.module_from_spec(spec);spec.loader.exec_module(i)
-PETROLEUM_REVIEWS={route:family+'-classification.json.gz' for family in ['petroleum-price','petroleum-crude','petroleum-stock-cons','petroleum-trade','petroleum-components','petroleum-refinery'] for route in i.read(i.EVIDENCE/(family+'-source-review.json'))['routes']}
+PETROLEUM_REVIEWS={route:family+'-classification.json.gz' for family in ['petroleum-price','petroleum-crude','petroleum-stock-cons','petroleum-trade','petroleum-components','petroleum-refinery','petroleum-summary'] for route in i.read(i.EVIDENCE/(family+'-source-review.json'))['routes']}
 MEASURE_FACETS={'productId','activityId','seriesId','msn','series','product','process','coalRankId','mineTypeId','marketTypeId','exportImportType','sector','sectorid','fueltypeid','fuelTypeId','technology','producertypeid','energysourceid','gradeId'}
 def encoded(data):return (json.dumps(data,separators=(',',':'))+'\n').encode()
 def build_node(node):

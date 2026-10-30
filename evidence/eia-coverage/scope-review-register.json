@@ -191,6 +191,40 @@
         "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_caprec_tbldef2.asp",
         "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_dwns_tbldef2.asp"
       ]
+    },
+    {
+      "id": "crude-refinery-demand-proxy",
+      "status": "draft correspondence under standing headline rule; B1 and broader comparison pending",
+      "decision": "EIA explicitly uses crude refinery inputs as proxy for demand. Accept only for explicitly named crude oil, with proxy label. Never use as whole petroleum consumption. Generic gross/intermediate inputs do not become consumption. Biofuel blending inputs are a component of broader MER consumption.",
+      "label": "Refinery inputs; EIA proxy for crude-oil demand",
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_sum_sndw_tbldef2.asp",
+      "remaining": "Compare any broader compatible published crude demand total and preserve source population; no sum of processing flows."
+    },
+    {
+      "id": "refinery-secondary-output",
+      "status": "draft headline basis; all-route default selection pending",
+      "decision": "Combined refinery/blender EP00 total is a labelled secondary-production basis. Refinery-only and blender-only are narrower populations; field extraction and secondary net output are different bases, never added or silently interchanged. Broader compatible all-plant totals take precedence.",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_refp_tbldef2.asp",
+        "https://www.eia.gov/tools/FAQs/faq.php?id=1394&t=10",
+        "https://www.eia.gov/dnav/pet/pet_pnp_refp_dc_nus_mbblpd_m.htm"
+      ],
+      "remaining": "Default selection must preserve requested production meaning, physical units and broader-total preference; do not pick secondary output simply because its history is longer."
+    },
+    {
+      "id": "gasoline-production-populations",
+      "status": "applied to draft definitions",
+      "decision": "Finished motor gasoline is the whole finished-fuel production basis. Grades/blendstocks and plant-only, refinery-only or blender-only outputs remain narrower. Prefer combined and any broader all-plant published total; net values may be negative.",
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_wprodrb_tbldef2.asp"
+    },
+    {
+      "id": "petroleum-balance-nonactivities",
+      "status": "applied across summary and refining drafts",
+      "decision": "Stock changes, supply adjustments, transfers, net receipts, days of supply, utilization percentages and processing gain remain accounting/ratio measures, not whole stock, production, trade or capacity.",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_sum_snd_tbldef2.asp",
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_sum_crdsnd_tbldef2.asp"
+      ]
     }
   ],
   "pendingReconciliation": [
