@@ -15,13 +15,14 @@ def write(path,data):
     body=(json.dumps(data,separators=(',',':'))+'\n').encode() if path.suffix=='.gz' else (json.dumps(data,indent=2)+'\n').encode()
     temp.write_bytes(gzip.compress(body,mtime=0) if path.suffix=='.gz' else body);temp.replace(path)
 class Collector:
-    def __init__(self):
+    def __init__(self,max_new_calls=None):
         self.key=KEYFILE.read_text().strip()
         if not self.key:raise RuntimeError('Existing EIA key is empty')
         RAW.mkdir(parents=True,exist_ok=True)
         self.records=[json.loads(line) for line in LOG.read_text().splitlines()] if LOG.exists() else []
         self.cached={r['url']:r for r in self.records if r.get('status')==200 and not r.get('error')}
         self.last=0;self.blocks=sum(r.get('status') in [403,429] for r in self.records)
+        self.call_limit=None if max_new_calls is None else len(self.records)+max_new_calls
     def get(self,route='',params=None,kind='metadata',fresh=False):
         if '..' in route or '?' in route or route.startswith('/'):raise ValueError('Unsafe route')
         pairs=list((params or {}).items()) if isinstance(params,dict) else (params or [])
@@ -32,6 +33,7 @@ class Collector:
         if url in self.cached and not fresh:
             rec=self.cached[url];path=RAW/rec['file'];assert digest(path.read_bytes())==rec['sha256'];return json.loads(path.read_text()),rec
         for retry in range(3):
+            if self.call_limit is not None and len(self.records)>=self.call_limit:raise RuntimeError('Authorized per-run call limit reached; no retry sent')
             if len(self.records)>=25000:raise RuntimeError('Job 5 25000-call stop reached')
             recent=[r for r in self.records if time.time()-r['timestamp']<3600]
             if len(recent)>=7900:raise RuntimeError('Hourly safety guard reached; resume after oldest calls expire')

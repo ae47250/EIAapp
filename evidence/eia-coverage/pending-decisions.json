@@ -93,9 +93,26 @@
     "furtherResearch": "Stopped at owner instruction. Preserve all prior evidence."
   },
   "B1Sizing": {
-    "status": "owner approval requested; no sizing calls made",
+    "status": "Completed: 40 authorized sizing calls, no coverage calls",
     "reason": "Full conservative candidate plan exceeds mandatory B.0e estimate threshold; actual observation counts unknown.",
     "proposal": "At most 40 one-row EIA sizing calls, with no coverage claims, to refine the dominant-route estimates; 25000 actual-call cap and four-hour deadline unchanged.",
-    "evidence": "b1-call-estimate.json"
+    "evidence": "b1-call-estimate.json",
+    "resolution": "Recalculate afterward. If still over 20000, do not start coverage. Propose reduced plan fitting threshold and wait for owner approval. Actual cap, deadline and gate unchanged.",
+    "results": "sizing-results.json",
+    "recalculatedOriginalPlan": 76874
+  },
+  "ReducedCoveragePlan": {
+    "status": "awaiting owner approval; no coverage calls started",
+    "proposal": "reduced-plan-proposal.json",
+    "retrievalProjection": 8539,
+    "verificationAndRetryAllowance": 1000,
+    "totalPlanningAllowance": 9539,
+    "allFrozenCellsRetained": 2088,
+    "nativeRequestGroups": 262,
+    "concurrentRequests": 4,
+    "globalStartSpacingSeconds": 0.55,
+    "deadlineUTC": "2026-10-30T06:23:21Z",
+    "requiredAmendment": "Share native filtered retrieval across cells and return ten electricity measure columns together. Exact original allowed combinations still determine cell acceptance.",
+    "timeCaveat": "Approximately 2.85 hours extrapolating one-row latency with four concurrent requests and allowance; full pages and checkpoint processing can take longer. Stop at unchanged deadline with unfinished work disclosed."
   }
 }
