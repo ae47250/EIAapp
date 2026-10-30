@@ -1,6 +1,6 @@
+import {formatNumber} from '../../lib/client/formatting.js';
 import { downloadComparisonWorkbook } from "../../lib/client/xlsx.js";
-import { chartCountries, observationRows, TOP_TEN_NOTE } from "../../lib/client/lookup-display.js";
-import SelectedSeries from "./SelectedSeries.js";
+import { chartCountries, observationRows, TOP_TEN_NOTE, observationStatus, seriesDescription, headlineFor } from "../../lib/client/lookup-display.js";
 import ComparisonChart from "./ComparisonChart.js";
 
 export default function SelectedComparison({ comparison, source }) {
@@ -12,6 +12,8 @@ export default function SelectedComparison({ comparison, source }) {
       <div className="selected-series-heading">
         <h2>{comparison.lookup ? comparison.title : `Rank ${comparison.rank}: ${comparison.title}`}</h2>
       </div>
+      {comparison.lookup ? comparison.countries.filter(c=>c.series).slice(0,3).map(c=><p key={c.geography.code} data-headline={c.geography.code}>{headlineFor(c.series)}</p>) : null}
+      {comparison.lookup && comparison.countries.length>3 ? <p data-headline-remainder>and {comparison.countries.length-3} more in the table</p> : null}
       <div className="selected-source">Source: {source || "EIA"}</div>
       {comparison.warnings?.length ? (
         <ul className="candidate-warning-list">
@@ -22,7 +24,7 @@ export default function SelectedComparison({ comparison, source }) {
         <>
           {comparison.countries.filter(country => country.series).map(country => (
             <div className="muted" key={country.geography.code}>
-              <p><strong>{country.geography.name}:</strong> {country.series.title}. {country.series.description}</p>
+              <p><strong>{country.geography.displayName || country.geography.name}:</strong> {country.series.title}. {country.series.description}</p>
               <p>Measurement basis: {country.series.basisLabel}. {country.series.sectorLabel}. Units: {country.series.unit}. Frequency: {country.series.frequency}.</p>
               {country.series.otherMeasuresExist ? <p>Other measures exist</p> : null}
               {country.series.regionLabel ? <p>{country.series.regionLabel}</p> : null}
@@ -34,13 +36,13 @@ export default function SelectedComparison({ comparison, source }) {
           <button className="ghost-button" type="button" onClick={() => downloadComparisonWorkbook([comparison])}>Excel</button>
         </>
       ) : null}
-      {comparison.lookup && comparison.countries.length > 10 ? <p role="status">{TOP_TEN_NOTE}</p> : null}
+      {comparison.lookup && comparison.chartCompatible!==false && chart.countries.length===10 && comparison.countries.filter(c=>observationStatus(c.series?.points)==='Available').length>10 ? <p role="status">{TOP_TEN_NOTE}</p> : null}
       {comparison.chartCompatible === false
-        ? chart.countries.filter(country => country.series).map(country => <SelectedSeries key={country.geography.code} series={country.series} source={source} />)
+        ? <p role="status">These measures use different units, frequencies or definitions, so they are not plotted on one chart axis. Each unit is shown in the table and Excel.</p>
         : <ComparisonChart comparison={chart} />}
       {comparison.lookup ? <div className="table-wrap"><table aria-label="All country observations">
-        <thead><tr><th>Period</th>{comparison.countries.map(c=><th key={c.geography.code}>{c.geography.name}{c.series ? ` (${c.series.unit})` : ""}</th>)}</tr></thead>
-        <tbody>{observationRows(comparison.countries).map(row=><tr key={row.period}><td>{row.period}</td>{row.values.map((value,i)=><td key={comparison.countries[i].geography.code}>{value ?? "Unavailable"}</td>)}</tr>)}</tbody>
+        <thead><tr><th>Period</th>{comparison.countries.map(c=><th key={c.geography.code}>{c.geography.displayName || c.geography.name}{c.series ? ` (${c.series.unit})` : ""}</th>)}</tr></thead>
+        <tbody>{observationRows(comparison.countries).map(row=><tr key={row.period}><td>{row.period}</td>{row.values.map((value,i)=><td key={comparison.countries[i].geography.code}>{typeof value==='number'?formatNumber(value):value ?? "Not available"}</td>)}</tr>)}</tbody>
       </table></div> : null}
       <div className="table-wrap">
         <table className="comparison-status-table">
@@ -48,9 +50,9 @@ export default function SelectedComparison({ comparison, source }) {
           <tbody>
             {comparison.countries.map(country => (
               <tr key={country.geography.code}>
-                <td><strong>{country.geography.name}</strong></td>
-                <td>{statusLabel(country.status)}</td>
-                <td>{country.seriesId || "Unavailable"}</td>
+                <td><strong>{country.geography.displayName || country.geography.name}</strong></td>
+                <td>{comparison.lookup?observationStatus(country.series?.points):statusLabel(country.status)}</td>
+                <td>{comparison.lookup?seriesDescription(country.series):country.seriesId || "Unavailable"}</td>
                 <td>{country.series ? `${country.series.coverage.start} to ${country.series.coverage.end}` : country.coverage}</td>
                 <td>{country.series?.unit || country.unit || "Unavailable"}</td>
               </tr>

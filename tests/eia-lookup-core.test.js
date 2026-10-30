@@ -31,11 +31,13 @@ test('lookup freeze and mechanical form checks remain unchanged',()=>{
 });
 test('lookup rows have all required fields and only explicit checked combinations',()=>{
   assert.equal(new Set(lookupCatalog.rows.map(row=>row.key)).size,lookupCatalog.rows.length);
-  assert.ok(lookupCatalog.rows.filter(row=>!row.required).length<=40);
+  const originals=JSON.parse(readFileSync(new URL('../data/eia/lookup-list.json',import.meta.url))).rows;
+  assert.deepEqual(lookupCatalog.rows.slice(0,originals.length),originals);
+  assert.ok(lookupCatalog.rows.slice(originals.length).every(row=>row.generatedFrom && row.verification==='verified'));
   for(const row of lookupCatalog.rows){
     for(const field of ['product','activity','geographyKind','route','dataColumn','unit','basisLabel','description','eiaName','verification']) assert.ok(row[field],row.key+':'+field);
     assert.ok(row.metadataReferences.length&&row.frequencies.length);assert.equal(typeof row.otherMeasuresExist,'boolean');
-    assert.ok(lookupCatalog.routes[row.route].geographies[row.region?.code||row.sampleGeography]);
+    assert.ok(row.generatedFrom ? Object.hasOwn(row.placeFacets,row.sampleGeography) : lookupCatalog.routes[row.route].geographies[row.region?.code||row.sampleGeography]);
     assert.ok(Object.hasOwn(row,'qualifier')&&Object.hasOwn(row,'sectorSupported')&&Object.hasOwn(row,'sectorMapping'));
   }
 });

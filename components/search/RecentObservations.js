@@ -1,7 +1,9 @@
+import {observationText} from '../../lib/client/lookup-display.js';
 import { formatNumber, getRecentYears } from "../../lib/client/formatting.js";
 
 export default function RecentObservations({ series }) {
-  const points = getRecentYears(series?.points, 4).slice().reverse();
+  const latest=Number(series?.points?.at(-1)?.period.slice(0,4));
+  const points = (series?.lookup?(series.points||[]).filter(p=>Number(p.period.slice(0,4))>=latest-3):getRecentYears(series?.points,4)).slice().reverse();
   if (!points.length) return null;
 
   return (
@@ -14,7 +16,7 @@ export default function RecentObservations({ series }) {
           {points.map(point => (
             <div className="compact-observation" key={point.period}>
               <div className="compact-observation-period">{point.period}</div>
-              <div className="compact-observation-value">{formatNumber(point.value)}</div>
+              <div className="compact-observation-value">{series.lookup?observationText(point):formatNumber(point.value)}</div>
               <div className="compact-observation-unit">{series.unit}</div>
             </div>
           ))}

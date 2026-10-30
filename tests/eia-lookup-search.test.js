@@ -95,7 +95,7 @@ test('rules outage path keeps explicit qualifiers and clarifies ambiguous gas',a
 });
 test('observation cleanup retains missingness, rejects wrong facets/units and conflicting duplicates',async()=>{
  const r=await run('O8'),s=r.selectedSeries,row=lookupCatalog.rows.find(row=>row.key===s.lookupRowKey),request=lookupRequestFromIntent(r.intent),geo=request.geographies[0],response=await recorded(s.selector),sample=response.rows[0];
- const cleaned=lookupSeries(row,geo,request,s.selector,{...response,complete:false,total:5,rows:[{...sample,period:'2022',sales:null},sample,sample]});assert.equal(cleaned.points.length,1);assert.equal(cleaned.missingValues,1);assert.equal(cleaned.duplicateRows,1);assert.match(cleaned.completenessNote,/Incomplete/);
+ const cleaned=lookupSeries(row,geo,request,s.selector,{...response,complete:false,total:5,rows:[{...sample,period:'2022',sales:null},sample,sample]});assert.equal(cleaned.points.length,2);assert.equal(cleaned.points[0].value,null);assert.equal(cleaned.missingValues,1);assert.equal(cleaned.duplicateRows,1);assert.match(cleaned.completenessNote,/Incomplete/);
  for(const bad of [{...sample,stateid:'TX'},{...sample,'sales-units':'wrong'}])assert.throws(()=>lookupSeries(row,geo,request,s.selector,{...response,rows:[bad]}));
  assert.throws(()=>lookupSeries(row,geo,request,s.selector,{...response,rows:[sample,{...sample,sales:Number(sample.sales)+1}]}),/invalid response/);
 });

@@ -268,7 +268,7 @@ export default function SearchWorkspace({ showLogout }) {
         </div>
 
         <p className="ai-description">
-          Unclear wording, typos, and grammatical errors are interpreted and corrected by AI. The request is then converted into structured search instructions used to retrieve the intended data from major data providers through direct API requests.
+          Unclear wording, typos, and grammatical errors are interpreted and corrected by AI. The request is then converted into structured search instructions used to retrieve the intended data from the U.S. Energy Information Administration (EIA) through direct API requests.
         </p>
 
         <div className="examples">
@@ -289,18 +289,18 @@ export default function SearchWorkspace({ showLogout }) {
       <SearchStatus status={status} />
       {lookupMode ? <LookupChoices choices={data.choices} onChoose={chooseLookup} disabled={loading} freeText={data.freeText}
         onFreeText={text => {
-          if (data.intent?.lockedForm?.clarification.needed) searchEia(data.query, clarificationReplyPayload(data.query, data.intent, text));
+          if (data.intent?.lockedForm?.clarification.needed || data.intent?.replyAbout) searchEia(data.query, clarificationReplyPayload(data.query, data.intent, text));
           else { setQuery(text); searchEia(text); }
         }} /> : null}
       {lookupMode ? (data.results || []).map(result => (
         <section className="results-pair single-result" key={result.topicIndex} aria-label={result.title}>
           {result.selectedComparison ? <SelectedComparison comparison={result.selectedComparison} source={data.source} />
             : result.selectedSeries ? <SelectedSeries series={result.selectedSeries} source={data.source} />
-            : <article className="card"><h2>{result.title}</h2></article>}
+            : null}
           {result.countries.filter(country => !country.series).map(country => (
             <div className="card compact-card" key={country.geography.code}>
               <p role="status">{country.message}</p>
-              <LookupChoices choices={country.alternatives} onChoose={chooseLookup} disabled={loading} />
+
             </div>
           ))}
           {result.selectedSeries ? <RecentObservations series={result.selectedSeries} /> : null}
@@ -338,7 +338,7 @@ export default function SearchWorkspace({ showLogout }) {
         <h2>About</h2>
         <ul className="muted">
           <li>The tool interprets unclear wording, corrects typos and grammar, and converts the request into structured search instructions.</li>
-          <li>All data is retrieved directly from major data providers through API requests.</li>
+          <li>All data is retrieved directly from the U.S. Energy Information Administration (EIA) through API requests.</li>
           <li>In plain English, the app determines what the user is asking for, finds the matching data, and returns it in an organized format.</li>
         </ul>
       </section>

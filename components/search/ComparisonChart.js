@@ -17,9 +17,10 @@ export default function ComparisonChart({ comparison }) {
       points: getCleanPoints(country.series.points)
     }));
 
+  const mixedUnits=new Set(series.map(s=>s.unit)).size>1;
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return undefined;
+    if (!canvas || mixedUnits) return undefined;
     const draw = () => drawComparisonChart(canvas, series);
     draw();
     if (typeof ResizeObserver === "undefined") {
@@ -29,8 +30,9 @@ export default function ComparisonChart({ comparison }) {
     const observer = new ResizeObserver(draw);
     observer.observe(canvas);
     return () => observer.disconnect();
-  }, [series]);
+  }, [series,mixedUnits]);
 
+  if(mixedUnits)return <p role="status">Different units cannot share one chart axis. See the labelled table.</p>;
   if (series.length === 0) return <p className="muted">No numeric observations are available to graph.</p>;
 
   return (
