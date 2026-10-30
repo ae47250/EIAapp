@@ -1,0 +1,848 @@
+{
+  "status": "Research definitions only; no accepted coverage or observations.",
+  "method": "Native EIA definitions and published table hierarchy correspondence. Source expectations recorded before classifier; no applicable public reference alignment benchmark.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_psup_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-0c21ddf8c809.html",
+      "sha256": "0c21ddf8c809fd4c6a81cf9d2504da6268e2c7c8ff6d089a1f71c2ec99e597f8"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_stoc_typ_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-809dc5fc8bae.html",
+      "sha256": "809dc5fc8baeb199ccd852b1f942c1ee98ef795b424011f5362163197b56b2cc"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_prim_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-adb8245f30bd.html",
+      "sha256": "adb8245f30bddea324d9702faede0db77e45517e92189ff9bd0ad1a5b7de2662"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_821use_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-b3026d897831.html",
+      "sha256": "b3026d89783127842cce4535b13082458dbb4632813a15b1c0ced335946f49aa"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_refmg_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-6e20a5c39569.html",
+      "sha256": "6e20a5c3956935b9b977b1f85d9bafeebc89bda047878f56df69bf002e568a28"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_821usea_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-ee63de0207c0.html",
+      "sha256": "ee63de0207c00e0355bd0357be0fcea50e88f4a6a03e72e67669b04b8fef1ec8"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_stoc_st_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-2cd9ba88588c.html",
+      "sha256": "2cd9ba88588c493f5f2f0f11b022a97bdd5c906696598e3fcfc2850333d76d1f"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/pet_stoc_wstk_dcu_nus_w.htm",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-b6f813dcd6c1.html",
+      "sha256": "b6f813dcd6c13a9e0166b962442d0b648a61b68f2072498b6a699f1dd2f3ac25"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/pet_cons_psup_dc_nus_mbbl_m.htm",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-1c9886dcf602.html",
+      "sha256": "1c9886dcf602b187278fd03362772c4ac3d3a34bd62b970962df6ad30b281904"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/pet_stoc_typ_d_nus_SAE_mbbl_m.htm",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-95b19638ecc1.html",
+      "sha256": "95b19638ecc1066fd4b414708177c6c8d0b9610a8971b91b92842e61058c9d83"
+    },
+    {
+      "url": "https://www.eia.gov/outlooks/steo/archives/notice_data_02_08_2022.php",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-stock-cons-0db4a8cb7245.html",
+      "sha256": "0db4a8cb7245469ca643c74c4feea0f8de342ef634215840f569265130e4a7e8"
+    }
+  ],
+  "routes": [
+    "petroleum/stoc/ts",
+    "petroleum/stoc/wstk",
+    "petroleum/stoc/typ",
+    "petroleum/stoc/st",
+    "petroleum/stoc/cu",
+    "petroleum/stoc/ref",
+    "petroleum/stoc/gp",
+    "petroleum/cons/wpsup",
+    "petroleum/cons/psup",
+    "petroleum/cons/prim",
+    "petroleum/cons/refmg",
+    "petroleum/cons/refoth",
+    "petroleum/cons/refres",
+    "petroleum/cons/821dst",
+    "petroleum/cons/821dsta",
+    "petroleum/cons/821rsd",
+    "petroleum/cons/821rsda",
+    "petroleum/cons/821ker",
+    "petroleum/cons/821kera",
+    "petroleum/cons/821use",
+    "petroleum/cons/821usea"
+  ],
+  "reviewedProducts": [
+    {
+      "id": "EPD0",
+      "name": "Distillate Fuel Oil"
+    },
+    {
+      "id": "EPM0",
+      "name": "Total Gasoline"
+    },
+    {
+      "id": "EPD00H",
+      "name": "Distillate Fuel Oil, Greater Than 500 ppm Sulfur"
+    },
+    {
+      "id": "EPDM10",
+      "name": "Distillate Fuel Oil, Greater than 15 to 500 ppm Sulfur"
+    },
+    {
+      "id": "EPLLPZ",
+      "name": "Propane and Propylene"
+    },
+    {
+      "id": "EPDXL0",
+      "name": "Distillate Fuel Oil, 0 to 15 ppm Sulfur"
+    },
+    {
+      "id": "EPPR",
+      "name": "Residual Fuel Oil"
+    },
+    {
+      "id": "EPC0",
+      "name": "Crude Oil"
+    },
+    {
+      "id": "EPM0R",
+      "name": "Reformulated Motor Gasoline"
+    },
+    {
+      "id": "EPOBGRG",
+      "name": "Reformulated GTAB Gasoline Blending Components"
+    },
+    {
+      "id": "EPOBGRRA",
+      "name": "Reformulated RBOB with Alcohol Gasoline Blending Components"
+    },
+    {
+      "id": "EPLLPYN",
+      "name": "Propylene NonFuel Use"
+    },
+    {
+      "id": "EPOBG",
+      "name": "Gasoline Blending Components"
+    },
+    {
+      "id": "EPM0RA",
+      "name": "Reformulated Motor Gasoline with Alcohol"
+    },
+    {
+      "id": "EPM0CO",
+      "name": "Other Conventional Motor Gasoline"
+    },
+    {
+      "id": "EPOBGCO",
+      "name": "Conventional Other Gasoline Blending Components"
+    },
+    {
+      "id": "EPPK",
+      "name": "Kerosene"
+    },
+    {
+      "id": "EPOBGRRE",
+      "name": "Reformulated RBOB with Ether Gasoline Blending Components"
+    },
+    {
+      "id": "EPOBGCC",
+      "name": "Conventional CBOB Gasoline Blending Components"
+    },
+    {
+      "id": "EPOBGCG",
+      "name": "Conventional GTAB Gasoline Blending Components"
+    },
+    {
+      "id": "EPM0CAG55",
+      "name": "Finished Motor Gasoline Conventional >55"
+    },
+    {
+      "id": "EPOBGRR",
+      "name": "Motor Gasoline Blending Components Reformulated RBOB"
+    },
+    {
+      "id": "EPOOXE",
+      "name": "Fuel Ethanol"
+    },
+    {
+      "id": "EPPA",
+      "name": "Asphalt and Road Oil"
+    },
+    {
+      "id": "EPM0CA",
+      "name": "Conventional Motor Gasoline with Alcohol"
+    },
+    {
+      "id": "EP00",
+      "name": "Crude Oil and Petroleum Products"
+    },
+    {
+      "id": "EPL0XP",
+      "name": "NGPLs/LRGs (Excluding Propane/Propylene)"
+    },
+    {
+      "id": "EPPO6",
+      "name": "Other Oils (Excluding Fuel Ethanol)"
+    },
+    {
+      "id": "EPM0C",
+      "name": "Conventional Motor Gasoline"
+    },
+    {
+      "id": "EPM0F",
+      "name": "Finished Motor Gasoline"
+    },
+    {
+      "id": "EPJK",
+      "name": "Kerosene-Type Jet Fuel"
+    },
+    {
+      "id": "EPPU",
+      "name": "Unfinished Oils"
+    },
+    {
+      "id": "EPLLP0C",
+      "name": "Propane, fractionated and ready for sale"
+    },
+    {
+      "id": "EPOUK",
+      "name": "Kerosene and Light Oils"
+    },
+    {
+      "id": "EPPPO",
+      "name": "Other Oils for Petrochemical Feedstock Use"
+    },
+    {
+      "id": "EPPRY",
+      "name": "Residual Fuel Oil, 0.31 to 1.00% Sulfur"
+    },
+    {
+      "id": "EPOUR",
+      "name": "Residuum"
+    },
+    {
+      "id": "EPLLEA",
+      "name": "Ethane"
+    },
+    {
+      "id": "EPOORDO",
+      "name": "Renewable Diesel Fuel"
+    },
+    {
+      "id": "EPLLEY",
+      "name": "Ethylene"
+    },
+    {
+      "id": "EPL0",
+      "name": "Natural Gas Liquids and Liquid Refinery Gases"
+    },
+    {
+      "id": "EPPNS",
+      "name": "Special Naphthas"
+    },
+    {
+      "id": "EPOBGR0",
+      "name": "Reformulated Gasoline Blending Components"
+    },
+    {
+      "id": "EPP2",
+      "name": "Finished Petroleum Products"
+    },
+    {
+      "id": "EPL2",
+      "name": "Natural Gas Plant Liquids"
+    },
+    {
+      "id": "EPM0RO",
+      "name": "Finished Motor Gasoline Reformulated Other"
+    },
+    {
+      "id": "EPOOXXFE",
+      "name": "Oxygenates (excluding Fuel Ethanol)"
+    },
+    {
+      "id": "EPOBV",
+      "name": "Aviation Gasoline Blending Components"
+    },
+    {
+      "id": "EPLLE",
+      "name": "Ethane-Ethylene"
+    },
+    {
+      "id": "EPLL",
+      "name": "Liquified Petroleum Gases"
+    },
+    {
+      "id": "EPPM",
+      "name": "Miscellaneous Petroleum Products"
+    },
+    {
+      "id": "EPPP0",
+      "name": "Petrochemical Feedstocks"
+    },
+    {
+      "id": "EPLLBAN",
+      "name": "Normal Butane"
+    },
+    {
+      "id": "EPLLBYN",
+      "name": "Normal Butylene"
+    },
+    {
+      "id": "EPOORD",
+      "name": "Biodiesel/Renewable Diesel Fuel"
+    },
+    {
+      "id": "EPOOR",
+      "name": "Biofuel Fuels (including Fuel Ethanol)"
+    },
+    {
+      "id": "EPOOXT",
+      "name": "MTBE"
+    },
+    {
+      "id": "EPOUN",
+      "name": "Naphthas and Lighter"
+    },
+    {
+      "id": "EPLLPY",
+      "name": "Propylene"
+    },
+    {
+      "id": "EPM0CAL55",
+      "name": "Motor Gasoline, Finished, Conventional, Ed55 and Lower"
+    },
+    {
+      "id": "EPOOOXH",
+      "name": "Other Hydrocarbons"
+    },
+    {
+      "id": "EPP0",
+      "name": "Total Petroleum Products"
+    },
+    {
+      "id": "EPLLB0I",
+      "name": "Isobutane-Isobutylene"
+    },
+    {
+      "id": "EPOUH",
+      "name": "Heavy Gas Oils"
+    },
+    {
+      "id": "EPOL",
+      "name": "Other Liquids"
+    },
+    {
+      "id": "EPOOXO",
+      "name": "Other Oxygenates"
+    },
+    {
+      "id": "EPLLBAI",
+      "name": "Isobutane"
+    },
+    {
+      "id": "EPLOLE",
+      "name": "Refinery Olefins "
+    },
+    {
+      "id": "EPOORXFE",
+      "name": "Biofuel Fuels excluding Fuel Ethanol"
+    },
+    {
+      "id": "EPLP",
+      "name": "Pentanes Plus"
+    },
+    {
+      "id": "EPLLNG",
+      "name": "Natural Gasoline"
+    },
+    {
+      "id": "EPLLB0NR",
+      "name": "Refinery Grade Butane"
+    },
+    {
+      "id": "EPOBGC0",
+      "name": "Conventional Gasoline Blending Components"
+    },
+    {
+      "id": "EPOO",
+      "name": "Hydrogen, Oxygenates, Renewables Fuels, and Other Hydrocarbons"
+    },
+    {
+      "id": "EPPW",
+      "name": "Waxes"
+    },
+    {
+      "id": "EPLLCS",
+      "name": "Condensate and Scrubber Oil"
+    },
+    {
+      "id": "EPLLB0N",
+      "name": "Normal Butane-Butylene"
+    },
+    {
+      "id": "EPPC",
+      "name": "Petroleum Coke"
+    },
+    {
+      "id": "EPPV",
+      "name": "Aviation Gasoline"
+    },
+    {
+      "id": "EPPL",
+      "name": "Lubricants"
+    },
+    {
+      "id": "EPPPN",
+      "name": "Naphtha for Petrochemical Feedstock Use"
+    },
+    {
+      "id": "EPPRH",
+      "name": "Residual Fuel Oil, Greater Than 1% Sulfur"
+    },
+    {
+      "id": "EPPRX",
+      "name": "Residual Fuel Oil, Less than 0.31% Sulfur"
+    },
+    {
+      "id": "EPLLBYI",
+      "name": "Isobutylene"
+    },
+    {
+      "id": "EPLLPA",
+      "name": "Propane"
+    },
+    {
+      "id": "EPOORDB",
+      "name": "Biodiesel"
+    },
+    {
+      "id": "EPOORO",
+      "name": "Other Biofuels"
+    },
+    {
+      "id": "EPPCM",
+      "name": "Petroleum Coke Marketable"
+    },
+    {
+      "id": "EPPO4",
+      "name": "Other Oils"
+    },
+    {
+      "id": "EPPS",
+      "name": "Still Gas"
+    },
+    {
+      "id": "EPPCC",
+      "name": "Petroleum Coke Catalyst"
+    },
+    {
+      "id": "EPMMR",
+      "name": "Gasoline Reformulated Midgrade"
+    },
+    {
+      "id": "EPMP",
+      "name": "Premium Gasoline"
+    },
+    {
+      "id": "EPD4",
+      "name": "No 4 Distillate"
+    },
+    {
+      "id": "EPJN",
+      "name": "Naphtha-Type Jet Fuel"
+    },
+    {
+      "id": "EPMRX",
+      "name": "Oxygenated Regular Gasoline"
+    },
+    {
+      "id": "EPMR",
+      "name": "Regular Gasoline"
+    },
+    {
+      "id": "EPMPX",
+      "name": "Oxygenated Premium Gasoline"
+    },
+    {
+      "id": "EPD2DH",
+      "name": "No 2 Diesel High Sulfur"
+    },
+    {
+      "id": "EPMM",
+      "name": "Midgrade Gasoline"
+    },
+    {
+      "id": "EPPRL",
+      "name": "Residual Fuel Oil, 0 to 1.0% Sulfur"
+    },
+    {
+      "id": "EPD2DXL0",
+      "name": "No 2 Diesel Low Sulfur (0-15 ppm)"
+    },
+    {
+      "id": "EPM0U",
+      "name": "Conventional Gasoline (No Oxy)"
+    },
+    {
+      "id": "EPD2",
+      "name": "No 2 Distillate"
+    },
+    {
+      "id": "EPD2F",
+      "name": "No 2 Fuel Oil / Heating Oil"
+    },
+    {
+      "id": "EPMPR",
+      "name": "Reformulated Premium Gasoline"
+    },
+    {
+      "id": "EPDED_K",
+      "name": "Special Distillate plus Kerosene"
+    },
+    {
+      "id": "EPM0X",
+      "name": "Oxygenated Gasoline"
+    },
+    {
+      "id": "EPMRR",
+      "name": "Reformulated Regular Gasoline"
+    },
+    {
+      "id": "EPMMX",
+      "name": "Gasoline Oxygenated Midgrade"
+    },
+    {
+      "id": "EPMRU",
+      "name": "Conventional Regular Gasoline"
+    },
+    {
+      "id": "EPMPU",
+      "name": "Conventional Premium Gasoline"
+    },
+    {
+      "id": "EPD2DM10",
+      "name": "No 2 Diesel Low Sulfur (15-500 ppm)"
+    },
+    {
+      "id": "EPD1",
+      "name": "No 1 Distillate"
+    },
+    {
+      "id": "EPMMU",
+      "name": "Gasoline Conventional Midgrade"
+    },
+    {
+      "id": "EPD2D",
+      "name": "No 2 Diesel"
+    },
+    {
+      "id": "EPDOD",
+      "name": "Distillate Other than Diesel"
+    },
+    {
+      "id": "EPD2DL",
+      "name": "No 2 Diesel Low Sulfur"
+    }
+  ],
+  "reviewedProcesses": [
+    {
+      "id": "SAE",
+      "name": "Ending Stocks"
+    },
+    {
+      "id": "SAXP",
+      "name": "Ending Stocks Excluding Propylene at Terminal"
+    },
+    {
+      "id": "SAXL",
+      "name": "Ending Stocks Excluding SPR and Lease"
+    },
+    {
+      "id": "SKB",
+      "name": "Stocks at Bulk Terminals"
+    },
+    {
+      "id": "SAS",
+      "name": "Ending Stocks SPR"
+    },
+    {
+      "id": "SKA",
+      "name": "Stocks in Transit (on Ships) from Alaska"
+    },
+    {
+      "id": "SAX",
+      "name": "Ending Stocks Excluding SPR"
+    },
+    {
+      "id": "SKL",
+      "name": "Stocks at Leases"
+    },
+    {
+      "id": "SKN",
+      "name": "Natural Gas Plant Stocks"
+    },
+    {
+      "id": "SAEL",
+      "name": "Ending Stocks"
+    },
+    {
+      "id": "SKP",
+      "name": "Stocks in Pipelines"
+    },
+    {
+      "id": "SKR",
+      "name": "Stocks at Refineries"
+    },
+    {
+      "id": "STT",
+      "name": "Stocks at Tank Farms"
+    },
+    {
+      "id": "STR",
+      "name": "Stocks at Refineries, Bulk Terminals, and Natural Gas Plants"
+    },
+    {
+      "id": "VPP",
+      "name": "Product Supplied"
+    },
+    {
+      "id": "P00",
+      "name": "All Sales/Deliveries"
+    },
+    {
+      "id": "VWR",
+      "name": "Wholesale/Resale Volume by Refiners and Gas Plants"
+    },
+    {
+      "id": "VTR",
+      "name": "Retail Sales by Refiners and Gas Plants"
+    },
+    {
+      "id": "VBS",
+      "name": "Bulk Sales (Volume)"
+    },
+    {
+      "id": "VRK",
+      "name": "Rack Sales Volume"
+    },
+    {
+      "id": "VTC",
+      "name": "Through Company Outlets Volume by Refiners and Gas Plants"
+    },
+    {
+      "id": "VDS",
+      "name": "DTW Sales Volume"
+    },
+    {
+      "id": "VCS",
+      "name": "Commercial Consumption"
+    },
+    {
+      "id": "VMI",
+      "name": "Sales/Deliveries to Military Consumers"
+    },
+    {
+      "id": "VRR",
+      "name": "Sales/Deliveries to Railroad Consumers"
+    },
+    {
+      "id": "VOE",
+      "name": "Sales/Deliveries to Other End Users"
+    },
+    {
+      "id": "VRS",
+      "name": "Residential Consumption"
+    },
+    {
+      "id": "VTE",
+      "name": "Retail Deliveries"
+    },
+    {
+      "id": "VVB",
+      "name": "Sales/Deliveries to Vessel Bunkering Consumers"
+    },
+    {
+      "id": "VHF",
+      "name": "Sales/Deliveries to Off-Highway Consumers"
+    },
+    {
+      "id": "VHN",
+      "name": "Sales/Deliveries to On-Highway Consumers"
+    },
+    {
+      "id": "VFM",
+      "name": "Sales/Deliveries to Farm Consumers"
+    },
+    {
+      "id": "VOC",
+      "name": "Sales/Deliveries to Oil Company Consumers"
+    },
+    {
+      "id": "VEU",
+      "name": "Electric Power Consumption"
+    },
+    {
+      "id": "VIN",
+      "name": "Industrial Consumption"
+    },
+    {
+      "id": "VAA",
+      "name": "Adj Sales/Deliveries Total to End Users"
+    },
+    {
+      "id": "VAM",
+      "name": "Adj Sales/Deliveries to Military Consumers"
+    },
+    {
+      "id": "VAE",
+      "name": "Adj Sales/Deliveries to Elect. Utility Consumers"
+    },
+    {
+      "id": "VAL",
+      "name": "Adj Sales/Deliveries to Railroad Consumers"
+    },
+    {
+      "id": "VAC",
+      "name": "Adj Sales/Deliveries to Commercial Consumers"
+    },
+    {
+      "id": "VAI",
+      "name": "Adj Sales/Deliveries to Industrial Consumers"
+    },
+    {
+      "id": "VAR",
+      "name": "Adj Sales/Deliveries to Residential Consumers"
+    },
+    {
+      "id": "VAF",
+      "name": "Adj Sales/Deliveries to Farm Consumers"
+    },
+    {
+      "id": "VAU",
+      "name": "Adj Sales/Deliveries to Other End users"
+    },
+    {
+      "id": "VAH",
+      "name": "Adj Sales/Deliveries to On-Highway Consumers"
+    },
+    {
+      "id": "VAW",
+      "name": "Adj Sales/Deliveries to Off-Highway Consumers"
+    },
+    {
+      "id": "VAB",
+      "name": "Adj Sales/Deliveries to Vessel Bunker Consumers"
+    },
+    {
+      "id": "VAO",
+      "name": "Adj Sales/Deliveries to Oil Company Consumers"
+    },
+    {
+      "id": "VAT",
+      "name": "Adj Sales/Deliveries Transportation Total"
+    },
+    {
+      "id": "VTT",
+      "name": "Transportation Total"
+    },
+    {
+      "id": "VCN",
+      "name": "Sales/Deliveries to Off-Highway Construction"
+    },
+    {
+      "id": "VFO",
+      "name": "Off-Highway Other"
+    },
+    {
+      "id": "VAG",
+      "name": "Adj Sales/Deliveries for Off-Highway Construction"
+    },
+    {
+      "id": "VAY",
+      "name": "Adj Sales/Deliveries for Off-Highway Other"
+    }
+  ],
+  "expectationsBeforeClassifierEdit": [
+    "Product supplied is a labelled approximation of petroleum consumption; never production or sales. Crude supplied is direct fuel use on leases/pipelines, not refinery input consumption.",
+    "Crude and petroleum products combined is the broad stock/consumption candidate; finished products, grades and individual fuels remain components. Weekly total petroleum products supplied is EIA headline consumption basis; prefer broader compatible total if published at requested frequency.",
+    "Total gasoline stocks include finished gasoline and blending components. Finished gasoline alone is a component of stock totals; finished motor gasoline supplied is whole motor-gasoline consumption. Never add components to invent totals.",
+    "Biofuels including fuel ethanol stock total is labelled liquid-biofuel stock basis; ethanol/biodiesel/renewable diesel/other biofuels alone remain components. Biofuel products supplied excludes refinery/blender inputs included in broader MER consumption and remains narrower.",
+    "Stocks include SPR where EIA total publishes it. Excluding SPR, stocks at one facility type, in-transit, lease-only and component products cannot displace broader totals. Preserve EIA survey exclusions and historical scope changes.",
+    "Prime supplier sales are sales for local consumption, not observed consumption. All-grade gasoline may qualify for sales with prime-supplier scope label under standing rule, subject to broader total preference. Individual refiner sales channels remain narrower than all supplier sales.",
+    "Fuel-oil/kerosene survey and adjusted sales remain distinct labelled sales bases; neither is total petroleum. Native facet names saying Consumption do not override full series/source definitions saying sales.",
+    "End-use categories that do not match form sectors remain narrower or unmapped; military/farm/off-highway are not silently recast as complete sectors.",
+    "Units preserve gallons/barrels and rate/period-total distinction; unknown native codes, changed definitions, malformed units or contradicting full names stay pending.",
+    "Every source definition, frequency and call provenance is retained; regional/refining districts never become states through a name fragment."
+  ],
+  "findings": [
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_psup_tbldef2.asp",
+      "finding": "Product supplied approximates consumption via supply-disposition accounting; crude supplied specifically means direct burning on leases and pipelines."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_stoc_typ_tbldef2.asp",
+      "finding": "Stocks are end-period. SPR includes some non-US ownership. Total stocks omit specified Northeast/New York fuel reserves; lease stocks omitted beginning 2005. Preserve these headline scope labels."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_prim_tbldef2.asp",
+      "finding": "Prime suppliers sell into local markets; all-grade gasoline includes historic leaded grade not shown as a current component. Do not reconstruct totals."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_821use_tbldef2.asp",
+      "finding": "Fuel-oil and kerosene end-use survey measures sales; farmhouses/apartments follow survey-specific end-use categories, not generic residential assumptions."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_refmg_tbldef2.asp",
+      "finding": "Refiners/gas plants are a seller population; sales to end users and resale/channel volumes differ; not direct fuel consumption."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_cons_821usea_tbldef2.asp",
+      "finding": "Adjusted sales scale to published products supplied; state allocation and electric-power estimation methods change by period."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/pet_stoc_wstk_dcu_nus_w.htm",
+      "finding": "Published stock hierarchy puts finished motor gasoline and blendstocks under total motor gasoline; includes versus excludes SPR totals remain separate."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/pet_stoc_typ_d_nus_SAE_mbbl_m.htm",
+      "finding": "Published monthly hierarchy shows biofuels including ethanol total separately from components; all oils excluding crude is narrower than crude-and-products stocks."
+    },
+    {
+      "source": "https://www.eia.gov/outlooks/steo/archives/notice_data_02_08_2022.php",
+      "finding": "MER biofuel consumption adds refinery/blender inputs to PSM product supplied; PSM supplied alone is narrower. STEO page used only for documented accounting, never forecast observations."
+    }
+  ],
+  "scopeCasesForCheckpoint": [
+    {
+      "case": "petroleum consumption supplied basis",
+      "decision": "Accept labelled EIA all-product supplied headline; retain direct-use crude limitation and liquid-biofuel supplied omission of blending inputs."
+    },
+    {
+      "case": "petroleum stock reporting population",
+      "decision": "Broader inclusive SPR total preferred; preserve end-period, regional reserve exclusions and post-2004 lease exclusion labels. Component stocks remain narrower."
+    },
+    {
+      "case": "gasoline sales population",
+      "decision": "Prime-supplier all-grade total conditionally accepted for sales with source label; refiner/channel and grade components remain narrower."
+    }
+  ],
+  "metadataIssues": [
+    {
+      "finding": "Four source series titles lack units; preserve original definitions and classify known product/activity, but mark unit unresolved and coverageEligible false. No inferred unit from identifier."
+    },
+    {
+      "finding": "Legacy names use Hydrocarbon Gas Liquids, Total Distillate, Jet Fuel Naphtha and reordered gasoline grade names while product facets use earlier/alternate names. Reviewed correspondences classify components; no application aliases added."
+    }
+  ]
+}
