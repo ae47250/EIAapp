@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "pythonASTFiles": 23,
+  "offlineTests": {
+    "coalCorrespondence": 15,
+    "electricityCorrespondence": 18,
+    "MERCorrespondence": 24,
+    "seriesCorrespondence": 11,
+    "placeCrosswalk": 10,
+    "facetInventory": 6,
+    "gasReservesCorrespondence": 14,
+    "gasCorrespondence": 24,
+    "total": 122,
+    "failed": 0
+  },
+  "seed": 20261029,
+  "newSeededMeasureInvarianceCases": 100,
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1424,
+  "sourceSnapshotHashesVerified": 15,
+  "EIA_API_calls": 1424,
+  "newEIA_API_callsThisTurn": 1,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "naturalGasDraft": {
+    "routes": 27,
+    "classificationCompleteRoutes": 24,
+    "seriesDefinitions": 10365,
+    "classifications": {
+      "out of vocabulary": 4361,
+      "whole product": 1067,
+      "subset": 4937
+    },
+    "facetDefinitions": 10648,
+    "pendingSectorScopeRecords": 340,
+    "pendingOwnerDecision": "Headline sector gas-price averages: labelled whole-sector basis or subset-only",
+    "acceptedForCoverage": false
+  },
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not independent reference alignment or standard benchmark scores.",
+  "notRun": "Application offline suite/build/browser: app unchanged and implementation gated.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "git diff --check"
+  ]
+}
