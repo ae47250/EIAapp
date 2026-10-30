@@ -3,8 +3,8 @@
   "branch": "codex/eia-coverage",
   "startSHA": "bbff3bf4edf76935b5700b6ca702fa93071d624e",
   "workOrderSHA256": "c878980d594337a14ac089181b75862824165d34f1b70c63ca441dfd7c9fac0c",
-  "phase": "2: definition review with approved exceptions complete; cell grid built, local commit and B1 estimate next",
-  "state": "active: definition review can proceed with three owner-approved unresolved electricity exceptions; remaining unverified scope notes disclosed under owner research limit. Grid and B1 next.",
+  "phase": "2: B.0 grid frozen in c239e65; B1 stopped at mandatory estimate gate",
+  "state": "Awaiting owner sizing-pass decision. No B1 observations or further scope research started.",
   "trigger": "Owner approves sector gas sales prices and standing broader-total/headline scope rule.",
   "EIA_API_calls": 1424,
   "OpenAI_calls": 0,
@@ -12,7 +12,7 @@
   "pushed": false,
   "implementationAuthorizedAfterCheckpointGo": false,
   "unrelatedUntrackedPreserved": "docs/eia-interpretation-audit.md",
-  "previousGoalTurnClassification": "Progress: approved exceptions isolated; capacity annotations verified; duplicate evidence preserved locally; fixed grid and 316 research tests pass.",
+  "previousGoalTurnClassification": "Progress: source scope annotations and exceptions committed; grid frozen; call plan exposes estimate limit before requests.",
   "defaultFacetRoutes": 193,
   "allFrequencyRoutes": 170,
   "leafClassifications": {
@@ -274,7 +274,7 @@
     "allSourceAggregatesVerified": 0,
     "acceptedForCoverage": false
   },
-  "pendingOwnerDecision": null,
+  "pendingOwnerDecision": "pending-decisions.json#B1Sizing",
   "sedsSectorBoundaryCorrection": {
     "affectedDefinition": "HVGBP",
     "sourceMeaning": "Conventional hydroelectric power generating units net summer capacity in all sectors",
@@ -296,5 +296,8 @@
     "sector": 1280,
     "qualifier": 96,
     "qualifier-sector": 40
-  }
+  },
+  "cellGridCommit": "c239e65",
+  "callsUsed": 1424,
+  "B1Started": false
 }
