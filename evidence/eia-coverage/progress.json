@@ -1,10 +1,10 @@
 {
-  "recordedAt": "2026-10-30T01:55:08.502467+00:00",
+  "recordedAt": "2026-10-30T02:09:30.045699+00:00",
   "branch": "codex/eia-coverage",
   "startSHA": "bbff3bf4edf76935b5700b6ca702fa93071d624e",
   "workOrderSHA256": "c878980d594337a14ac089181b75862824165d34f1b70c63ca441dfd7c9fac0c",
   "phase": "2: all FITS measure definitions inventoried; draft international and SEDS correspondence; remaining classifications/grid/coverage pending",
-  "state": "active: 153 of 154 FITS route definition drafts complete; electricity OB2/OBW/95 and cross-route scope reconciliation remain before grid/B1.",
+  "state": "active: 153/154 definition drafts complete. Owner decision pending on three undocumented electricity codes; no exception applied. Independent cross-route scope reconciliation remains before grid/B1.",
   "trigger": "Owner approves sector gas sales prices and standing broader-total/headline scope rule.",
   "EIA_API_calls": 1424,
   "OpenAI_calls": 0,
@@ -12,7 +12,7 @@
   "pushed": false,
   "implementationAuthorizedAfterCheckpointGo": false,
   "unrelatedUntrackedPreserved": "docs/eia-interpretation-audit.md",
-  "previousGoalTurnClassification": "Progress: international import product definitions resolved with fixed-importer and supplier restrictions; 302 research tests pass. No B1/app changes.",
+  "previousGoalTurnClassification": "Progress: scanned 808188 official bulk records for unresolved electricity definitions; documented missing definitions without inferring nonpublication. Corrected SEDS sector substring error; 305 research tests pass.",
   "defaultFacetRoutes": 193,
   "allFrequencyRoutes": 170,
   "leafClassifications": {
@@ -273,5 +273,19 @@
     "classificationComplete": true,
     "allSourceAggregatesVerified": 0,
     "acceptedForCoverage": false
-  }
+  },
+  "pendingOwnerDecision": "pending-decisions.json#unidentifiedElectricityMetadata",
+  "sedsSectorBoundaryCorrection": {
+    "affectedDefinition": "HVGBP",
+    "sourceMeaning": "Conventional hydroelectric power generating units net summer capacity in all sectors",
+    "before": "Incorrectly assigned electric power sector by substring",
+    "after": "No named sector; whole hydro capacity concept. Facility scope/coverage still unverified.",
+    "otherSEDSDefinitionsChanged": 0,
+    "evidence": "seds-boundary-review.json"
+  },
+  "remainingIndependentScopeAudit": [
+    "Annotate capacity facility-size scope in MER and SEDS even when titles omit utility-scale; compare official broader totals.",
+    "Resolve electric-power fuel-consumption/stock scope and coal-stock fuel definitions from official sources.",
+    "Reconcile different production stages and other cross-route bases before selecting defaults."
+  ]
 }

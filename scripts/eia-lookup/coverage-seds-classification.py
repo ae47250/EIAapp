@@ -48,7 +48,7 @@ def classify(definition):
         if re.search(pattern,text):activity=value;break
     if not activity:return dict(result,product=product,reason='Activity needs individual review; no default inferred from product prefix.')
     result.update(classification=status,product=product,activity=activity,basisLabel=name,reason=reason)
-    sectors=[sector for sector in ['residential','commercial','industrial','transportation','electric power'] if sector in text]
+    sectors=[sector for sector in ['residential','commercial','industrial','transportation','electric power'] if re.search(r'\b'+re.escape(sector)+r'\b',text)]
     if len(sectors)==1:
         result['sector']=sectors[0]
         result['sectorCellClassification']=status

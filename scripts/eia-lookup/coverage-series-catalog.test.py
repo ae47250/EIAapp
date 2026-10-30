@@ -36,6 +36,17 @@ class SeriesClassificationTests(unittest.TestCase):
         for code in ['NGRCD','NGCCD','NGICD']:
             r=self.item(code);self.assertEqual(r['classification'],'subset');self.assertEqual(r['sectorCellClassification'],'whole product');self.assertIn('sales price; excludes gas transported for other sellers',r['basisLabel']);self.assertIn('1987',r['historicalScope']);self.assertIn('broader EIA total',r['selectionConstraint'])
         self.assertIn('assigned prices',self.item('NGEID')['basisLabel'])
+    def test_hydroelectric_is_not_an_electric_power_sector_mention(self):
+        r=self.item('HVGBP');self.assertEqual((r['classification'],r['product'],r['activity']),('whole product','hydro','capacity'))
+        self.assertNotIn('sector',r)
+    def test_explicit_sector_words_survive_boundary_check(self):
+        for sector in ['residential','commercial','industrial','transportation','electric power']:
+            r=s.classify({'id':'CLTCB','name':'Coal consumption in the '+sector+' sector'})
+            self.assertEqual(r.get('sector'),sector);self.assertEqual(r['sectorCellClassification'],'whole product')
+    def test_substrings_inside_longer_words_are_not_sectors(self):
+        for word in ['residentially','commercialization','preindustrial','transportational','hydroelectric power']:
+            r=s.classify({'id':'CLTCB','name':'Coal consumption; '+word+' context'})
+            self.assertNotIn('sector',r)
     def test_all_seds_definitions_are_accounted_for(self):
         self.assertEqual(len(self.rows),968)
         self.assertTrue(all(s.classify(v)['classification']!='pending' for v in self.rows.values()))
