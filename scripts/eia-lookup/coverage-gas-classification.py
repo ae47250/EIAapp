@@ -35,7 +35,9 @@ def process(d):
     if code.startswith('R'):return r.process(d)
     if code in SECTORS:
         result=sector(*SECTORS[code])
-        if code in ['PCS','PRS','PIN']:result['sectorCellClassification']='pending owner price-basis decision'
+        if code in ['PCS','PRS','PIN']:
+            result.update(sectorCellClassification='whole product',basisLabel='sales price; excludes gas transported for other sellers',scopeDecision='headlineSectorGasPrices',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published.')
+        if code=='PEU':result.update(sectorCellClassification='whole product',basisLabel='Average cost of natural gas delivered for electricity generation; EIA-923 reporting plants',scopeDecision='standingScopeRule',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.')
         return result
     if code in ['VG9','YGT']:return r.mark('subset','Extracted gas liquids are a liquid component of petroleum, including gaseous-equivalent reporting.',product='petroleum',activity='production')
     for group,codes in GROUPS.items():
@@ -94,8 +96,10 @@ def series(d,route):
         sec=next((s for s in ['residential','commercial','industrial','electric power'] if s in low),None)
         if sec:
             result=sector('prices',sec,False)
-            if sec in ['residential','commercial','industrial'] and not ('by local distributor companies' in low or 'by marketers' in low):result['sectorCellClassification']='pending owner price-basis decision'
+            headline=sec in ['residential','commercial','industrial'] and not ('by local distributor companies' in low or 'by marketers' in low)
             result.update(basisLabel='Natural gas '+sec+' price; reported sales/receipt population',populationRestriction='Sales exclude deliveries for the account of others; electric-power receipt population and historical utility-only restrictions remain.')
+            if headline:result.update(sectorCellClassification='whole product',basisLabel='Natural gas '+sec+' sales price; excludes gas transported for other sellers',scopeDecision='headlineSectorGasPrices',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published.')
+            if sec=='electric power':result.update(sectorCellClassification='whole product',basisLabel='Average cost of natural gas delivered for electricity generation; EIA-923 reporting plants',scopeDecision='standingScopeRule',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.',historicalScope='Electric utilities only through 2001; verify and label historical population before choosing history.')
             return result
         if 'vehicle fuel' in low:return sector('prices','transportation',False)
         if 'pipeline' in low:return sector('prices','transportation',False)

@@ -64,6 +64,16 @@ def classify(definition):
         if result.get('qualifierClassification'):result['qualifierClassification']='subset'
         if result.get('qualifierSectorCellClassification'):result['qualifierSectorCellClassification']='subset'
         result['reason']+=' Additional scope restriction: '+narrower.group(0)+'.'
+    if product=='natural gas' and activity=='prices' and result.get('sector') in ['residential','commercial','industrial'] and result.get('sectorCellClassification')=='whole product':
+        result['basisLabel']+='; sales price; excludes gas transported for other sellers'
+        result['scopeDecision']='headlineSectorGasPrices'
+        result['scopeEvidence']='headline-scope-source-review.json'
+        result['historicalScope']='SEDS onsystem-sales definition documented from 1987; retain earlier source-method notes.'
+        result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+    if product=='natural gas' and activity=='prices' and result.get('sector')=='electric power':
+        result['basisLabel']+='; EIA sector price estimates, including assigned prices where source values are missing'
+        result['scopeEvidence']='headline-scope-source-review.json'
+        result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
     return result
 
 def main():

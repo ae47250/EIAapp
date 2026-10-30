@@ -39,9 +39,12 @@ class ElectricityTests(unittest.TestCase):
     def test_state_profile_alias_cannot_widen_utility_ownership(self):
         for key in ['generation-elect-utils','generation-ipp','capacity-elec-utilities','capacity-ipp']:
             r=self.col(m.PREFIX+'summary',key);self.assertEqual(r['classification'],'subset');self.assertNotIn('sectorCellClassification',r)
-    def test_no_generation_policy_extension_to_capacity(self):
-        self.assertEqual(self.col(m.PREFIX+'capability','capability')['classification'],'subset')
-        self.assertEqual(self.col(m.PREFIX+'summary','net-summer-capacity')['classification'],'subset')
+    def test_owner_standing_rule_accepts_labelled_capacity_with_broader_preference(self):
+        for route,key in [(m.PREFIX+'capability','capability'),(m.PREFIX+'summary','net-summer-capacity')]:
+            r=self.col(route,key);self.assertEqual(r['classification'],'whole product');self.assertIn('utility-scale (1 MW and larger)',r['basisLabel']);self.assertIn('broader EIA total',r['selectionConstraint'])
+    def test_receipt_price_acceptance_does_not_make_it_economy_wide(self):
+        for key in ['cost','cost-per-btu']:
+            r=self.col(m.OPS,key);self.assertEqual(r['classification'],'subset');self.assertEqual(r['sectorCellOverrides']['electric power'],'whole product');self.assertEqual(r['sectorCellOverrides']['industrial'],'subset');self.assertIn('EIA-923 reporting plants',r['basisLabel']);self.assertIn('broader EIA total',r['selectionConstraint'])
     def test_no_net_flow_or_balance_as_gross_trade(self):
         route=m.PREFIX+'source-disposition'
         for key in ['net-interstate-trade','total-supply','total-disposition','net-trade-index','estimated-losses']:self.assertEqual(self.col(route,key)['classification'],'out of vocabulary')

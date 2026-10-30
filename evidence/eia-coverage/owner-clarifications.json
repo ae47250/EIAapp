@@ -32,5 +32,22 @@
     "noticeCondition": "EIA publishes a small-scale estimate for that fuel and place which the shown total omits.",
     "verificationRequired": "Verify from EIA which fuels and places have small-scale generation estimates; record source.",
     "scope": "Generation only. Does not make individual technologies, fuel components, sector subsets or facility capacities into whole-product totals. Existing schema/vocabulary and earlier frozen records remain unchanged."
+  },
+  "headlineSectorGasPrices": {
+    "date": "2026-10-29",
+    "source": "Owner direct reply during Job 5",
+    "decision": "Accept EIA headline residential, commercial and industrial natural-gas price averages as whole-product prices in the named sector.",
+    "label": "sales price; excludes gas transported for other sellers"
+  },
+  "standingScopeRule": {
+    "date": "2026-10-29",
+    "source": "Owner direct reply during Job 5",
+    "rules": [
+      "If EIA publishes a broader total for the same product, activity, place and sector, use the broader one.",
+      "Otherwise EIA own headline published figure counts as the whole product, labelled on screen with EIA own scope wording.",
+      "Subset only is reserved for a component of the product (one fuel type, one coal rank, crude-only for petroleum) or one sector when the user asked for all sectors."
+    ],
+    "application": "Apply to all remaining scope cases without asking; list every case in checkpoint report for owner review. Ask only if a case fits none of these.",
+    "supersedes": "Earlier research treated survey-population restrictions alone as subset-only, and limited the headline facility-size fallback to generation. This standing rule replaces that restriction; broader-total preference and exact scope labels remain required."
   }
 }

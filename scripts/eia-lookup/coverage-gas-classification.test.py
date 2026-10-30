@@ -68,16 +68,19 @@ class GasTests(unittest.TestCase):
             d=f['sourceDefinition'];r=m.series(d,'natural-gas/move/poe2');self.assertEqual((r['classification'],r['activity'],r['verifiedUnit']),('subset','prices','$/MCF'))
     def test_unknown_native_definition_does_not_pass(self):
         self.assertEqual(m.process({'id':'NEW'})['classification'],'pending');self.assertEqual(self.row('U.S. Natural Gas New Measure (Unknown Units)')['classification'],'pending')
-    def test_pending_owner_price_scope_is_not_accepted(self):
-        r=self.row('Texas Price of Natural Gas Delivered to Residential Consumers (Dollars per Thousand Cubic Feet)');self.assertTrue(r['sectorCellClassification'].startswith('pending'))
+    def test_owner_approved_headline_price_keeps_scope_and_broader_preference(self):
+        r=self.row('Texas Price of Natural Gas Delivered to Residential Consumers (Dollars per Thousand Cubic Feet)');self.assertEqual(r['sectorCellClassification'],'whole product');self.assertIn('sales price; excludes gas transported for other sellers',r['basisLabel']);self.assertIn('broader EIA total',r['selectionConstraint'])
         part=self.row('Texas Price of Natural Gas Delivered to Residential Consumers by Marketers (Dollars per Thousand Cubic Feet)');self.assertEqual(part['sectorCellClassification'],'subset')
+    def test_electric_power_price_keeps_population_and_history(self):
+        r=self.row('U.S. Natural Gas Electric Power Price (Dollars per Thousand Cubic Feet)');self.assertEqual(r['classification'],'subset');self.assertEqual(r['sectorCellClassification'],'whole product');self.assertIn('EIA-923 reporting plants',r['basisLabel']);self.assertIn('through 2001',r['historicalScope']);self.assertIn('broader EIA total',r['selectionConstraint'])
+        self.assertEqual(m.process({'id':'PEU'})['sectorCellClassification'],'whole product')
     def test_seeded_geography_text_cannot_change_measure(self):
         rng=random.Random(20261029)
         for _ in range(100):
             place=rng.choice(['U.S.','Texas','Other States','Federal Offshore'])
             phrase,status=rng.choice([('Total Consumption','whole product'),('Gross Withdrawals from Gas Wells','subset'),('Underground Storage Withdrawals','out of vocabulary')])
             self.assertEqual(self.row(place+' Natural Gas '+phrase+' (MMcf)')['classification'],status)
-    def test_source_definitions_and_pending_scope_are_preserved(self):
+    def test_source_definitions_and_scope_are_preserved(self):
         nodes=[n for n in m.i.read(m.i.EVIDENCE/'route-census.json')['nodes'] if n.get('classification')=='FITS' and n['route'].startswith('natural-gas/') and '/enr/' not in n['route']]
         self.assertEqual(len(nodes),27)
         for node in nodes:
@@ -86,5 +89,5 @@ class GasTests(unittest.TestCase):
                 self.assertEqual([x['sourceDefinition'] for x in rows],[x['definition'] for x in m.i.inventory(node['route'])[fid]])
                 self.assertTrue(all(x['classification']!='pending' for x in rows),node['route'])
                 self.assertTrue(all(x['publicationStatus']=='unverified' for x in rows))
-            if node['route'] in ['natural-gas/pri/sum','natural-gas/pri/rescom','natural-gas/sum/lsum']:self.assertFalse(r['complete'])
+            self.assertTrue(r['complete'],node['route'])
 if __name__=='__main__':unittest.main()

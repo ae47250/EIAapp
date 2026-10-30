@@ -5,7 +5,8 @@
       "route": "electricity/retail-sales",
       "sources": [
         "electricity-source-review.json",
-        "generation-scope-review.json"
+        "generation-scope-review.json",
+        "headline-scope-source-review.json"
       ],
       "publicationStatus": "unverified",
       "dataColumns": [
@@ -213,7 +214,8 @@
       "route": "electricity/electric-power-operational-data",
       "sources": [
         "electricity-source-review.json",
-        "generation-scope-review.json"
+        "generation-scope-review.json",
+        "headline-scope-source-review.json"
       ],
       "publicationStatus": "unverified",
       "dataColumns": [
@@ -326,10 +328,18 @@
             "alias": "Average Cost of Fuels (per Physical Unit)"
           },
           "classification": "subset",
-          "reason": "Delivered fuel cost at generating facilities, not all product purchases.",
+          "reason": "Delivered fuel cost at generating facilities, not all product purchases. Whole named fuel and whole electric-power sector required.",
           "publicationStatus": "unverified",
           "activity": "prices",
-          "sectorCandidate": "electric power, subject to population verification"
+          "sectorCellClassification": "via sector facet",
+          "sectorCellOverrides": {
+            "electric power": "whole product",
+            "commercial": "subset",
+            "industrial": "subset"
+          },
+          "basisLabel": "Average cost of fossil fuels delivered for electricity generation; EIA-923 reporting plants",
+          "scopeDecision": "standingScopeRule",
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection."
         },
         {
           "id": "cost-per-btu",
@@ -337,10 +347,18 @@
             "alias": "Average Cost of Fuels (per BTU)"
           },
           "classification": "subset",
-          "reason": "Delivered fuel cost at generating facilities, not all product purchases.",
+          "reason": "Delivered fuel cost at generating facilities, not all product purchases. Whole named fuel and whole electric-power sector required.",
           "publicationStatus": "unverified",
           "activity": "prices",
-          "sectorCandidate": "electric power, subject to population verification"
+          "sectorCellClassification": "via sector facet",
+          "sectorCellOverrides": {
+            "electric power": "whole product",
+            "commercial": "subset",
+            "industrial": "subset"
+          },
+          "basisLabel": "Average cost of fossil fuels delivered for electricity generation; EIA-923 reporting plants",
+          "scopeDecision": "standingScopeRule",
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection."
         },
         {
           "id": "sulfur-content",
@@ -1619,7 +1637,8 @@
       "route": "electricity/state-electricity-profiles/source-disposition",
       "sources": [
         "electricity-source-review.json",
-        "generation-scope-review.json"
+        "generation-scope-review.json",
+        "headline-scope-source-review.json"
       ],
       "publicationStatus": "unverified",
       "dataColumns": [
@@ -1892,7 +1911,8 @@
       "route": "electricity/state-electricity-profiles/capability",
       "sources": [
         "electricity-source-review.json",
-        "generation-scope-review.json"
+        "generation-scope-review.json",
+        "headline-scope-source-review.json"
       ],
       "publicationStatus": "unverified",
       "dataColumns": [
@@ -1902,11 +1922,13 @@
             "alias": "Net Summer Capacity ",
             "units": "megawatts"
           },
-          "classification": "subset",
-          "reason": "EIA-860 utility-scale capacity excludes smaller facilities. Owner facility-size exception is generation-only.",
+          "classification": "whole product",
+          "reason": "EIA headline net summer capacity; all fuel/producer restrictions still apply.",
           "publicationStatus": "unverified",
           "activity": "capacity",
-          "basisLabel": "Net summer capacity; utility-scale (1 MW and larger)"
+          "basisLabel": "Net summer capacity; utility-scale (1 MW and larger)",
+          "scopeDecision": "standingScopeRule",
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection."
         }
       ],
       "facets": {
@@ -2385,7 +2407,8 @@
       "route": "electricity/state-electricity-profiles/net-metering",
       "sources": [
         "electricity-source-review.json",
-        "generation-scope-review.json"
+        "generation-scope-review.json",
+        "headline-scope-source-review.json"
       ],
       "publicationStatus": "unverified",
       "dataColumns": [
@@ -2566,7 +2589,8 @@
       "route": "electricity/state-electricity-profiles/summary",
       "sources": [
         "electricity-source-review.json",
-        "generation-scope-review.json"
+        "generation-scope-review.json",
+        "headline-scope-source-review.json"
       ],
       "publicationStatus": "unverified",
       "dataColumns": [
@@ -2576,11 +2600,14 @@
             "alias": "Net Summer Capacity, All Sectors",
             "units": "megawatts"
           },
-          "classification": "subset",
-          "reason": "Utility-scale capacity; producer group may further restrict it. Generation-only owner amendment does not apply.",
+          "classification": "whole product",
+          "reason": "EIA headline net summer capacity across producers.",
           "publicationStatus": "unverified",
           "product": "electricity",
-          "activity": "capacity"
+          "activity": "capacity",
+          "basisLabel": "Net summer capacity; utility-scale (1 MW and larger)",
+          "scopeDecision": "standingScopeRule",
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection."
         },
         {
           "id": "net-summer-capacity-rank",
@@ -2599,10 +2626,11 @@
             "units": "megawatts"
           },
           "classification": "subset",
-          "reason": "Utility-scale capacity; producer group may further restrict it. Generation-only owner amendment does not apply.",
+          "reason": "One producer ownership group, not all capacity.",
           "publicationStatus": "unverified",
           "product": "electricity",
-          "activity": "capacity"
+          "activity": "capacity",
+          "basisLabel": "Net summer capacity; utility-scale (1 MW and larger); ownership component"
         },
         {
           "id": "capacity-elect-utilities-rank",
@@ -2621,10 +2649,11 @@
             "units": "megawatts"
           },
           "classification": "subset",
-          "reason": "Utility-scale capacity; producer group may further restrict it. Generation-only owner amendment does not apply.",
+          "reason": "One producer ownership group, not all capacity.",
           "publicationStatus": "unverified",
           "product": "electricity",
-          "activity": "capacity"
+          "activity": "capacity",
+          "basisLabel": "Net summer capacity; utility-scale (1 MW and larger); ownership component"
         },
         {
           "id": "capacity-ipp-rank",

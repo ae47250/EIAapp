@@ -31,6 +31,10 @@ class SeriesClassificationTests(unittest.TestCase):
         r=self.item('CLCCP');self.assertEqual(r['classification'],'subset');self.assertEqual(r['sector'],'commercial');self.assertEqual(r['sectorCellClassification'],'whole product')
     def test_approved_liquid_biofuels_basis_survives(self):
         r=self.item('BFPRP');self.assertEqual(r['classification'],'whole product');self.assertEqual(r['product'],'biofuels');self.assertEqual(r['activity'],'production')
+    def test_seds_gas_price_label_is_consistent_with_source(self):
+        for code in ['NGRCD','NGCCD','NGICD']:
+            r=self.item(code);self.assertEqual(r['classification'],'subset');self.assertEqual(r['sectorCellClassification'],'whole product');self.assertIn('sales price; excludes gas transported for other sellers',r['basisLabel']);self.assertIn('1987',r['historicalScope']);self.assertIn('broader EIA total',r['selectionConstraint'])
+        self.assertIn('assigned prices',self.item('NGEID')['basisLabel'])
     def test_all_seds_definitions_are_accounted_for(self):
         self.assertEqual(len(self.rows),968)
         self.assertTrue(all(s.classify(v)['classification']!='pending' for v in self.rows.values()))

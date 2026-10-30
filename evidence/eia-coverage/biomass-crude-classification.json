@@ -1,0 +1,543 @@
+{
+  "method": "Source-definition correspondence; all facet and place restrictions must be combined. No publication claim.",
+  "routes": {
+    "crude-oil-imports": {
+      "route": "crude-oil-imports",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "subject": "U.S. imports",
+        "originRole": "Foreign trade partner; never subject-country imports",
+        "destinationRoles": {
+          "RS": "Processing/refinery state",
+          "PS": "Port-of-entry state",
+          "US": "United States"
+        },
+        "restriction": "Preserve destinationType with destinationId. Do not equate port state with processing state. Apply place crosswalk and every grade restriction; no aggregate inferred.",
+        "source": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php"
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "thousand barrels"
+          },
+          "classification": "subset",
+          "reason": "Crude import quantity is a petroleum component; combine grade and place restrictions before qualification.",
+          "publicationStatus": "unverified",
+          "product": "petroleum",
+          "activity": "imports",
+          "qualifier": "crude oil",
+          "qualifierClassification": "whole product",
+          "basisLabel": "Company-reported crude oil imports; excludes estimates included in aggregate imports",
+          "selectionConstraint": "Prefer broader published EIA aggregate imports. Every advertised grade is only a crude component; no summation or unfiltered-total assumption."
+        }
+      ],
+      "facets": {
+        "gradeId": [
+          {
+            "sourceDefinition": {
+              "id": "HSW",
+              "name": "Heavy Sweet"
+            },
+            "frequencies": [
+              "monthly",
+              "annual"
+            ],
+            "calls": [
+              265,
+              990
+            ],
+            "classification": "subset",
+            "reason": "One crude grade; not all crude and never whole petroleum.",
+            "publicationStatus": "unverified",
+            "product": "petroleum",
+            "qualifier": "crude oil",
+            "qualifierClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "MED",
+              "name": "Medium"
+            },
+            "frequencies": [
+              "monthly",
+              "annual"
+            ],
+            "calls": [
+              265,
+              990
+            ],
+            "classification": "subset",
+            "reason": "One crude grade; not all crude and never whole petroleum.",
+            "publicationStatus": "unverified",
+            "product": "petroleum",
+            "qualifier": "crude oil",
+            "qualifierClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "HSO",
+              "name": "Heavy Sour"
+            },
+            "frequencies": [
+              "monthly",
+              "annual"
+            ],
+            "calls": [
+              265,
+              990
+            ],
+            "classification": "subset",
+            "reason": "One crude grade; not all crude and never whole petroleum.",
+            "publicationStatus": "unverified",
+            "product": "petroleum",
+            "qualifier": "crude oil",
+            "qualifierClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "LSW",
+              "name": "Light Sweet"
+            },
+            "frequencies": [
+              "monthly",
+              "annual"
+            ],
+            "calls": [
+              265,
+              990
+            ],
+            "classification": "subset",
+            "reason": "One crude grade; not all crude and never whole petroleum.",
+            "publicationStatus": "unverified",
+            "product": "petroleum",
+            "qualifier": "crude oil",
+            "qualifierClassification": "subset"
+          },
+          {
+            "sourceDefinition": {
+              "id": "LSO",
+              "name": "Light Sour"
+            },
+            "frequencies": [
+              "monthly",
+              "annual"
+            ],
+            "calls": [
+              265,
+              990
+            ],
+            "classification": "subset",
+            "reason": "One crude grade; not all crude and never whole petroleum.",
+            "publicationStatus": "unverified",
+            "product": "petroleum",
+            "qualifier": "crude oil",
+            "qualifierClassification": "subset"
+          }
+        ]
+      },
+      "complete": true
+    },
+    "densified-biomass/capacity-by-region": {
+      "route": "densified-biomass/capacity-by-region",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "url": "https://www.eia.gov/biofuels/biomass/",
+        "quote": "operating pellet fuel manufacturing facilities in the United States",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "restriction": "US-TOTAL only; wood pellets remain a subset of the broader energy product, not whole biofuels."
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "number-of-facilities",
+          "sourceDefinition": {
+            "units": "number of facilities"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Manufacturing facility/employee count, not energy-product customers or capacity.",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "capacity",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "capacity",
+          "basisLabel": "Densified biomass manufacturing capacity; excludes planned and small annually reporting facilities",
+          "unitNote": "API says tons; EIA published table defines annual capacity in tons per year. Retain original unit, do not silently convert."
+        },
+        {
+          "id": "number-of-fte-employees",
+          "sourceDefinition": {
+            "units": "number of fte employees"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Manufacturing facility/employee count, not energy-product customers or capacity.",
+          "publicationStatus": "unverified"
+        }
+      ],
+      "facets": {},
+      "complete": true
+    },
+    "densified-biomass/sales-and-price-by-region": {
+      "route": "densified-biomass/sales-and-price-by-region",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "url": "https://www.eia.gov/biofuels/biomass/",
+        "quote": "operating pellet fuel manufacturing facilities in the United States",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "restriction": "US-TOTAL only; wood pellets remain a subset of the broader energy product, not whole biofuels."
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "sales",
+          "basisLabel": "Densified biomass domestic sales; retail and wholesale"
+        },
+        {
+          "id": "average-price",
+          "sourceDefinition": {
+            "units": "USD per ton"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "prices",
+          "basisLabel": "Densified biomass domestic sales price; retail and wholesale"
+        }
+      ],
+      "facets": {},
+      "complete": true
+    },
+    "densified-biomass/export-sales-and-price": {
+      "route": "densified-biomass/export-sales-and-price",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "url": "https://www.eia.gov/biofuels/biomass/",
+        "quote": "operating pellet fuel manufacturing facilities in the United States.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "U.S. reporting facilities only; densified biomass is a subset of biofuels. No state or country mapping.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "exports",
+          "basisLabel": "Densified biomass U.S. export sales"
+        },
+        {
+          "id": "average-price",
+          "sourceDefinition": {
+            "units": "USD per ton"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "prices",
+          "basisLabel": "Densified biomass export sales price"
+        }
+      ],
+      "facets": {},
+      "complete": true
+    },
+    "densified-biomass/feedstocks-and-cost": {
+      "route": "densified-biomass/feedstocks-and-cost",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "url": "https://www.eia.gov/biofuels/biomass/",
+        "quote": "operating pellet fuel manufacturing facilities in the United States.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "U.S. reporting facilities only; densified biomass is a subset of biofuels. No state or country mapping.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "quantity",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Purchased manufacturing feedstocks or their input cost; not fuel production, energy consumption or a finished-fuel price.",
+          "publicationStatus": "unverified"
+        },
+        {
+          "id": "cost",
+          "sourceDefinition": {
+            "units": "USD per ton"
+          },
+          "classification": "out of vocabulary",
+          "reason": "Purchased manufacturing feedstocks or their input cost; not fuel production, energy consumption or a finished-fuel price.",
+          "publicationStatus": "unverified"
+        }
+      ],
+      "facets": {
+        "fuelTypeId": [
+          {
+            "sourceDefinition": {
+              "id": "SR",
+              "name": "Sawmill Residuals"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              284
+            ],
+            "classification": "out of vocabulary",
+            "reason": "Manufacturing raw material input, not a finished fuel product/activity.",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "OR",
+              "name": "Other Residuals"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              284
+            ],
+            "classification": "out of vocabulary",
+            "reason": "Manufacturing raw material input, not a finished fuel product/activity.",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "RP",
+              "name": "Roundwood/Pulpwood"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              284
+            ],
+            "classification": "out of vocabulary",
+            "reason": "Manufacturing raw material input, not a finished fuel product/activity.",
+            "publicationStatus": "unverified"
+          },
+          {
+            "sourceDefinition": {
+              "id": "WPMR",
+              "name": "Wood Product Manufacturing Residuals"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              284
+            ],
+            "classification": "out of vocabulary",
+            "reason": "Manufacturing raw material input, not a finished fuel product/activity.",
+            "publicationStatus": "unverified"
+          }
+        ]
+      },
+      "complete": true
+    },
+    "densified-biomass/production-by-region": {
+      "route": "densified-biomass/production-by-region",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "url": "https://www.eia.gov/biofuels/biomass/",
+        "quote": "operating pellet fuel manufacturing facilities in the United States",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "restriction": "US-TOTAL only; wood pellets remain a subset of the broader energy product, not whole biofuels."
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "production",
+          "sourceDefinition": {
+            "units": "tons"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "production",
+          "basisLabel": "Densified biomass production"
+        }
+      ],
+      "facets": {
+        "fuelTypeId": [
+          {
+            "sourceDefinition": {
+              "id": "WPPS",
+              "name": "Wood Pellets Premium Standard"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              285
+            ],
+            "classification": "subset",
+            "reason": "One densified wood-fuel component of biofuels; no new qualifier authorized.",
+            "publicationStatus": "unverified",
+            "product": "biofuels"
+          },
+          {
+            "sourceDefinition": {
+              "id": "WPU",
+              "name": "Wood Pellets Utility"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              285
+            ],
+            "classification": "subset",
+            "reason": "One densified wood-fuel component of biofuels; no new qualifier authorized.",
+            "publicationStatus": "unverified",
+            "product": "biofuels"
+          },
+          {
+            "sourceDefinition": {
+              "id": "CBL",
+              "name": "Compressed Bricks Log"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              285
+            ],
+            "classification": "subset",
+            "reason": "One densified wood-fuel component of biofuels; no new qualifier authorized.",
+            "publicationStatus": "unverified",
+            "product": "biofuels"
+          }
+        ]
+      },
+      "complete": true
+    },
+    "densified-biomass/inventories-by-region": {
+      "route": "densified-biomass/inventories-by-region",
+      "sources": [
+        "biomass-crude-source-review.json"
+      ],
+      "scope": {
+        "url": "https://www.eia.gov/biofuels/biomass/",
+        "quote": "operating pellet fuel manufacturing facilities in the United States",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "restriction": "US-TOTAL only; wood pellets remain a subset of the broader energy product, not whole biofuels."
+      },
+      "publicationStatus": "unverified",
+      "dataColumns": [
+        {
+          "id": "inventory",
+          "sourceDefinition": {
+            "unit": "tons"
+          },
+          "classification": "subset",
+          "reason": "Densified wood fuels are a component of biofuels, not a whole-product total.",
+          "publicationStatus": "unverified",
+          "product": "biofuels",
+          "activity": "storage",
+          "basisLabel": "Densified biomass end-of-month inventories"
+        }
+      ],
+      "facets": {
+        "fuelTypeId": [
+          {
+            "sourceDefinition": {
+              "id": "WPPS",
+              "name": "Wood Pellets Premium Standard"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              287
+            ],
+            "classification": "subset",
+            "reason": "One densified wood-fuel component of biofuels; no new qualifier authorized.",
+            "publicationStatus": "unverified",
+            "product": "biofuels"
+          },
+          {
+            "sourceDefinition": {
+              "id": "WPU",
+              "name": "Wood Pellets Utility"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              287
+            ],
+            "classification": "subset",
+            "reason": "One densified wood-fuel component of biofuels; no new qualifier authorized.",
+            "publicationStatus": "unverified",
+            "product": "biofuels"
+          },
+          {
+            "sourceDefinition": {
+              "id": "CBL",
+              "name": "Compressed Bricks Log"
+            },
+            "frequencies": [
+              "monthly"
+            ],
+            "calls": [
+              287
+            ],
+            "classification": "subset",
+            "reason": "One densified wood-fuel component of biofuels; no new qualifier authorized.",
+            "publicationStatus": "unverified",
+            "product": "biofuels"
+          }
+        ]
+      },
+      "complete": true
+    }
+  }
+}

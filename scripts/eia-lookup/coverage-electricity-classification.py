@@ -9,7 +9,7 @@ i=importlib.util.module_from_spec(spec);spec.loader.exec_module(i)
 OPS='electricity/electric-power-operational-data'
 RETAIL='electricity/retail-sales'
 PREFIX='electricity/state-electricity-profiles/'
-SOURCES=['electricity-source-review.json','generation-scope-review.json']
+SOURCES=['electricity-source-review.json','generation-scope-review.json','headline-scope-source-review.json']
 
 def decision(status,reason,**extra):
     return dict(classification=status,reason=reason,publicationStatus='unverified',**extra)
@@ -76,18 +76,19 @@ def column(route,key,d):
             if key.startswith('total-consumption'):r['sectorCandidate']='electric power: total generation plus useful thermal output, subject to facility-scope verification'
             return r
         if key=='stocks':return subset('Fuel held by generating facilities, not all product stockholders.',activity='storage',sectorCandidate='electric power, subject to full stock definition and fuel-scope verification')
-        if key in ['cost','cost-per-btu']:return subset('Delivered fuel cost at generating facilities, not all product purchases.',activity='prices',sectorCandidate='electric power, subject to population verification')
+        if key in ['cost','cost-per-btu']:return subset('Delivered fuel cost at generating facilities, not all product purchases. Whole named fuel and whole electric-power sector required.',activity='prices',sectorCellClassification='via sector facet',sectorCellOverrides={'electric power':'whole product','commercial':'subset','industrial':'subset'},basisLabel='Average cost of fossil fuels delivered for electricity generation; EIA-923 reporting plants',scopeDecision='standingScopeRule',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.')
         if key in ['receipts','receipts-btu']:return outside('Receipts at plants are not production, imports, sales or consumption; no receipts activity in locked vocabulary.')
         if key in ['sulfur-content','ash-content','heat-content']:return outside('Fuel composition or conversion factor, not a locked quantity/activity.')
     if route==PREFIX+'net-metering':
         if key in ['capacity','customers']:return subset('Net-metered systems only, not the whole capacity/customer population.',activity=key)
-    if route==PREFIX+'capability' and key=='capability':return subset('EIA-860 utility-scale capacity excludes smaller facilities. Owner facility-size exception is generation-only.',activity='capacity',basisLabel='Net summer capacity; utility-scale (1 MW and larger)')
+    if route==PREFIX+'capability' and key=='capability':return whole('EIA headline net summer capacity; all fuel/producer restrictions still apply.',activity='capacity',basisLabel='Net summer capacity; utility-scale (1 MW and larger)',scopeDecision='standingScopeRule',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.')
     if route==PREFIX+'summary':
         if key.endswith('-rank') or '-rank-' in key or d.get('units')=='rank':return outside('Rank is not the requested level of a product/activity.')
         if key.startswith(('sulfer-','nitrogen-','carbon-')) or key=='prime-source':return outside('Emission measure or primary-source category is outside the locked activities.')
         if key=='net-generation':return whole('All-sector utility-scale generation, subject to owner all-size preference.',product='electricity',activity='generation',generationScope='utility-scale')
         if key in ['generation-elect-utils','generation-ipp']:return subset('Electric utilities or IPP/CHP ownership group, not the full electric-power sector. Published Table 1 overrides misleading API alias.',product='electricity',activity='generation',generationScope='utility-scale')
-        if key.startswith(('net-summer-capacity','capacity-')):return subset('Utility-scale capacity; producer group may further restrict it. Generation-only owner amendment does not apply.',product='electricity',activity='capacity')
+        if key=='net-summer-capacity':return whole('EIA headline net summer capacity across producers.',product='electricity',activity='capacity',basisLabel='Net summer capacity; utility-scale (1 MW and larger)',scopeDecision='standingScopeRule',selectionConstraint='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.')
+        if key.startswith('capacity-'):return subset('One producer ownership group, not all capacity.',product='electricity',activity='capacity',basisLabel='Net summer capacity; utility-scale (1 MW and larger); ownership component')
         if key=='total-retail-sales':return whole('Whole retail electricity market.',product='electricity',activity='sales',activities=['sales','consumption'],basisLabel='Retail sales; excludes electricity generated and used on-site')
         if key in ['fsp-service-provider-sales','eop-sales']:return subset('Selected retailer classes.',product='electricity',activity='sales')
         if key=='direct-use':return subset('Direct-use component, not total electricity consumption.',product='electricity',activity='consumption')

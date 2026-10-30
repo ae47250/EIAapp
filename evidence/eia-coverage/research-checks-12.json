@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "tests": [
+    {
+      "file": "scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-coal-classification.test.py",
+      "tests": 15,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-crosswalk.test.py",
+      "tests": 10,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-electricity-classification.test.py",
+      "tests": 19,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-facets.test.py",
+      "tests": 6,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-mer-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-series-catalog.test.py",
+      "tests": 12,
+      "exitCode": 0
+    }
+  ],
+  "total": 140,
+  "failedSuites": 0,
+  "pythonASTFiles": 25,
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1424,
+  "sourceSnapshotHashesVerified": 37,
+  "credentialScanFiles": 594,
+  "credentialFindings": 0,
+  "localMainUnchanged": true,
+  "job5BaseBranchUnchanged": true,
+  "applicationAndEarlierFrozenFilesUnchanged": true,
+  "seed": 20261029,
+  "newSeededUnknownDefinitionCases": 100,
+  "EIA_API_calls": 1424,
+  "newEIA_API_callsThisCheckpoint": 0,
+  "newPublicSourceSnapshots": 7,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "classificationCompleteRoutes": 61,
+  "classificationTotalRoutes": 154,
+  "unresolvedRouteFamilies": {
+    "petroleum": 91,
+    "international": 1,
+    "electricity": 1
+  },
+  "firstFullRun": {
+    "failedTests": 1,
+    "cause": "A research assertion still prohibited selection constraints outside generation; superseded by owner standing scope rule.",
+    "resolution": "Amended assertion now requires documented scope decision, explicit label and broader-total condition; retains no generation metadata on other measures."
+  },
+  "ownerAmendedResearchExpectations": [
+    "gas headline sector sales acceptance",
+    "coal receipt price conditional sector acceptance and destination role",
+    "electricity utility-scale capacity conditional acceptance",
+    "MER generation-only constraint replaced by separate labelled scope conditions"
+  ],
+  "frozenFilesChanged": false,
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not independent reference alignment or standard benchmark scores.",
+  "notRun": "Application offline suite/build/browser: no application edits; implementation remains gated by owner checkpoint go. Live B1 data and frozen scored runs not started.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-biomass-crude-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-seds-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "git diff --check"
+  ]
+}

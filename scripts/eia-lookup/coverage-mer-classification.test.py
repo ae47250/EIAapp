@@ -46,6 +46,9 @@ class MERTests(unittest.TestCase):
     def test_gasoline_grade_stays_narrower_than_all_gasoline(self):
         r=self.item('PUUCUUS') if 'PUUCUUS' in self.rows else next(m.classify(d) for d in self.rows.values() if d['name'].startswith('Unleaded Premium Gasoline'))
         self.assertEqual(r['qualifier'],'gasoline');self.assertEqual(r['qualifierClassification'],'subset')
+    def test_owner_gas_price_label_preserves_sector_and_units(self):
+        for code in ['NGRCUUS','NGCCUUS','NGINUUS']:
+            r=self.item(code);self.assertEqual(r['classification'],'subset');self.assertEqual(r['sectorCellClassification'],'whole product');self.assertIn('sales price; excludes gas transported for other sellers',r['basisLabel']);self.assertIn('Dollars per Thousand Cubic Feet',r['basisLabel']);self.assertIn('broader EIA total',r['selectionConstraint'])
     def test_other_customer_price_not_total(self):
         self.assertEqual(self.item('ESOTUUS')['classification'],'subset')
     def test_whole_electricity_retail_sales_basis_not_lost_to_end_use_wording(self):
@@ -84,12 +87,16 @@ class MERTests(unittest.TestCase):
             r=self.item(code)
             self.assertEqual(r['generationScope'],'utility-scale')
             self.assertNotIn('omittedSmallScaleEstimate',r)
-    def test_generation_policy_does_not_relax_other_measures(self):
+    def test_scope_labels_keep_generation_and_other_measures_distinct(self):
         for d in self.rows.values():
             r=m.classify(d)
             if r.get('activity')!='generation':
                 self.assertNotIn('generationScope',r)
-                self.assertNotIn('selectionConstraint',r)
+                if 'selectionConstraint' in r:
+                    self.assertIn(r['activity'],['capacity','prices'])
+                    self.assertIn(r['scopeDecision'],['standingScopeRule','headlineSectorGasPrices'])
+                    self.assertIn('broader EIA total',r['selectionConstraint'])
+                    self.assertTrue(any(x in r['basisLabel'] for x in ['utility-scale (1 MW and larger)','excludes gas transported for other sellers','EIA-923 reporting plants']))
     def test_generation_scope_no_longer_awaits_owner(self):
         for d in self.rows.values():self.assertNotIn('scopeReview',m.classify(d))
     def test_all_source_definitions_retained(self):

@@ -155,9 +155,11 @@
         "product": "natural gas",
         "activity": "prices",
         "sector": "industrial",
-        "sectorCellClassification": "pending owner price-basis decision",
-        "basisLabel": "Natural gas industrial price; reported sales population",
-        "publicationStatus": "unverified"
+        "sectorCellClassification": "whole product",
+        "basisLabel": "Natural gas industrial sales price; excludes gas transported for other sellers",
+        "publicationStatus": "unverified",
+        "scopeDecision": "headlineSectorGasPrices",
+        "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published."
       }
     },
     {
@@ -250,10 +252,17 @@
       "sha256": "f4cf2168d67ba8822f69ed3e7078cecd5ccf1f11507f373a665e409e05f4e8e7"
     }
   ],
-  "pendingOwnerDecision": {
+  "resolvedOwnerDecision": {
     "topic": "Headline residential/commercial/industrial gas-price averages based on sales",
     "question": "Accept labelled EIA headline sector price averages excluding transported-for-others transactions, or subset only?",
-    "status": "asked; no acceptance inferred",
-    "scope": "Aggregate sector price only. Marketer-only/LDC-only components remain subsets. Electric-power receipt-population restrictions separate."
+    "status": "resolved by owner: accept labelled headline sector averages",
+    "scope": "Aggregate sector price only. Marketer-only/LDC-only components remain subsets. Electric-power receipt-population restrictions separate.",
+    "label": "sales price; excludes gas transported for other sellers",
+    "decisionRecord": "owner-clarifications.json#headlineSectorGasPrices"
+  },
+  "standingScopeAmendment": {
+    "source": "owner-clarifications.json#standingScopeRule",
+    "expectations": "headline-scope-source-review.json",
+    "effect": "Power-sector receipt prices may be labelled headline sector averages, with broader-total preference and historical utility-only notes. Product/sector components remain narrower."
   }
 }

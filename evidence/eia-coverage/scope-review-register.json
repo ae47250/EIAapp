@@ -1,0 +1,88 @@
+{
+  "status": "Open research register; all cases must be reconciled before grid/B1. Not an accepted coverage table.",
+  "ownerRule": "owner-clarifications.json#standingScopeRule",
+  "comparisonRule": "Compare same product, activity, place and sector using documented scope inclusion, never numeric size. Preserve frequency and geography restrictions.",
+  "cases": [
+    {
+      "id": "gas-sector-sales-price",
+      "status": "applied consistently to natural-gas, MER and SEDS drafts",
+      "scope": "Residential, commercial and industrial headline prices",
+      "decision": "whole product within named sector; still a sector subset of all-sector requests",
+      "label": "sales price; excludes gas transported for other sellers",
+      "source": "https://www.eia.gov/dnav/ng/TblDefs/ng_pri_sum_tbldef2.asp",
+      "broaderPreference": "Use a broader published EIA sector average if one exists; distributor/marketer components remain narrower.",
+      "remaining": "B1 observations and broader candidate selection; SEDS historical source definitions retained."
+    },
+    {
+      "id": "biomass-component",
+      "status": "applied to draft definitions; B1 pending",
+      "scope": "Six densified-biomass routes",
+      "decision": "wood-fuel component of biofuels; headline rule does not make it whole biofuels",
+      "source": "https://www.eia.gov/biofuels/biomass/"
+    },
+    {
+      "id": "crude-import-components",
+      "status": "applied to draft definitions; B1 pending",
+      "scope": "crude-oil-imports route",
+      "decision": "Crude is a petroleum component; individual grades are crude components; prefer published aggregate imports including estimates over company-level sums.",
+      "source": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php"
+    },
+    {
+      "id": "power-sector-receipt-prices",
+      "status": "conditional headline acceptance applied to coal, natural-gas, electricity and MER gas-price drafts",
+      "decision": "Whole-product price only in the electric-power sector, with whole fuel/sector facets and labelled EIA-923 receipt population; never all-sector economy price. Coal mine-origin series is not destination-state consumer price.",
+      "label": "Average cost delivered for electricity generation; EIA-923 reporting plants",
+      "broaderCandidates": "SEDS documented sector estimates fill missing official prices; compare available compatible totals before B1 selection.",
+      "sources": [
+        "headline-scope-source-review.json"
+      ],
+      "remaining": "MER unqualified generating-plant series includes mixed consuming sectors; does not automatically become electric-power sector. Reconcile those separately."
+    },
+    {
+      "id": "utility-scale-capacity",
+      "status": "conditional headline acceptance applied to electricity and explicit utility-scale MER capacity drafts",
+      "decision": "Use broader all-size total where published; otherwise accept EIA headline net summer capacity with utility-scale label. Ownership and fuel components remain narrower.",
+      "label": "Net summer capacity; utility-scale (1 MW and larger)",
+      "sources": [
+        "headline-scope-source-review.json"
+      ],
+      "remaining": "All-size comparison by product/place/sector and SEDS capacity boundary review before B1."
+    }
+  ],
+  "pendingReconciliation": [
+    {
+      "id": "electricity-capacity",
+      "files": [
+        "electricity-classification.json",
+        "total-energy-classification.json"
+      ],
+      "issue": "Earlier generation-only approval excluded utility-scale capacity. Check broader all-size capacity and source headline before accepting labelled fallback."
+    },
+    {
+      "id": "coal-reserves-stocks",
+      "files": [
+        "coal-classification.json",
+        "total-energy-classification.json"
+      ],
+      "issue": "Compare producing-mine reserves with EIA estimated recoverable reserves, and producer/distributor stocks with published total stocks. Record broader sources and API availability separately."
+    },
+    {
+      "id": "other-headline-populations",
+      "files": [
+        "electricity-classification.json",
+        "natural-gas-classification.json.gz",
+        "seds-classification.json",
+        "total-energy-classification.json"
+      ],
+      "issue": "Review restricted population labels consistently, including net-metering, consumer deliveries, wellhead reports and storage. Broader totals take priority; individual components do not become headline totals."
+    },
+    {
+      "id": "remaining-price-boundaries",
+      "files": [
+        "total-energy-classification.json",
+        "seds-classification.json"
+      ],
+      "issue": "Review mixed generating-plant-sector averages, all-end-use versus all-sector totals, transportation vehicle-fuel price, and source estimates before default selection. Do not convert a sector/ownership component to a whole total without source reconciliation."
+    }
+  ]
+}

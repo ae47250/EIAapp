@@ -104,8 +104,8 @@ def classify(definition):
         (r'refinery and blender|field production','Production/processing stage component'),
     ]:
         if re.search(pattern,text):
-            if activity=='generation' and why=='Utility-scale facilities only':
-                continue  # Owner accepts this labelled basis, subject to all-size preference.
+            if activity in ['generation','capacity'] and why=='Utility-scale facilities only':
+                continue  # Owner standing rule: labelled headline basis, broader total preferred.
             if product=='electricity' and activity=='sales' and why=='Selected consuming/holding sectors' and 'end-use' in text:
                 continue  # All retail end-use sectors are the whole sales market.
             restrictions.append(why)
@@ -140,6 +140,21 @@ def classify(definition):
         elif scope=='all sizes':
             result['basisLabel']+='; utility-scale and small-scale generation'
             result['selectionPreference']='Prefer over utility-scale-only totals with compatible dimensions.'
+    if activity=='capacity' and 'utility-scale' in text:
+        result['basisLabel']+='; utility-scale (1 MW and larger)'
+        result['scopeDecision']='standingScopeRule'
+        result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+    if product=='natural gas' and activity=='prices' and result.get('sector') in ['residential','commercial','industrial'] and result.get('sectorCellClassification')=='whole product':
+        result['basisLabel']+='; sales price; excludes gas transported for other sellers'
+        result['scopeDecision']='headlineSectorGasPrices'
+        result['scopeEvidence']='headline-scope-source-review.json'
+        result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+    if product=='natural gas' and activity=='prices' and result.get('sector')=='electric power' and result.get('sectorCellClassification')=='whole product':
+        result['basisLabel']+='; average cost delivered for electricity generation; EIA-923 reporting plants'
+        result['scopeDecision']='standingScopeRule'
+        result['scopeEvidence']='headline-scope-source-review.json'
+        result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+        result['historicalScope']='Electric utilities only through 2001; preserve historical population notes.'
     return result
 
 def main():

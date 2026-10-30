@@ -40,8 +40,11 @@ def column(route,key,d):
         if activity:
             r=subset('Sector-specific coal measure; no all-sector facet total published in this inventory.',activity=activity,sectorCellClassification='via sector facet',basisLabel={'consumption':'Coal consumption','stocks':'Coal stocks held by consuming sector','price':'Average delivered coal price by consuming sector'}[key])
             if key=='price':
-                r['sectorCellOverrides']={'electric power':'subset'}
-                r['populationRestriction']='Power-sector delivered prices use the restricted EIA-923 receipt population; an all-sector label cannot broaden that population.'
+                r['sectorCellOverrides']={'electric power':'whole product'}
+                r['sectorBasisLabels']={'electric power':'Average cost of coal delivered for electricity generation; EIA-923 reporting plants'}
+                r['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+                r['scopeDecision']='standingScopeRule'
+                r['populationRestriction']='EIA-923 receipt population: coal-primary plants of at least 50 MW; headline acceptance does not remove this label or broaden other facets.'
             return r
         if key=='receipts':return out('Receipts are not consumption, production, imports or sales.')
     if leaf=='exports-imports-quantity-price':
@@ -57,7 +60,9 @@ def column(route,key,d):
         if key=='producer-distributor-stocks':return subset('Producer/distributor holdings exclude consumer stocks.',activity='storage',basisLabel='Coal producer and distributor stocks')
     if '/shipments/' in route:
         if key=='quantity':return out('Shipments/receipts to electric-power facilities are neither total production nor consumption; no shipments activity.')
-        if key=='price':return subset('Delivered price for coal shipped to reporting electric-power facilities, not all coal sales; receipt-survey size restrictions remain. Preserve origin versus destination geography.',activity='prices',sector='electric power',sectorCellClassification='subset',basisLabel='Delivered coal price for electric-power shipments')
+        if key=='price':
+            destination=leaf=='plant-state-aggregates'
+            return subset('Delivered price for coal shipped to reporting electric-power facilities, not all coal sales. Origin state is not the consumer state.',activity='prices',sector='electric power',sectorCellClassification='whole product' if destination else 'subset',basisLabel='Average cost of coal delivered for electricity generation; EIA-923 reporting plants; '+('destination plant state' if destination else 'origin mine state'),selectionConstraint='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.',scopeDecision='standingScopeRule')
     return pending('Unreviewed coal data column.')
 
 def build(node):

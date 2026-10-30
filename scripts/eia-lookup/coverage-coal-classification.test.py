@@ -38,14 +38,14 @@ class CoalTests(unittest.TestCase):
     def test_shipments_and_receipts_not_consumption(self):
         for leaf in ['shipments/mine-state-aggregates','shipments/plant-state-aggregates']:
             self.assertEqual(self.col(leaf,'quantity')['classification'],'out of vocabulary')
-            r=self.col(leaf,'price');self.assertEqual((r['classification'],r['sectorCellClassification']),('subset','subset'))
+            r=self.col(leaf,'price');self.assertEqual(r['classification'],'subset');self.assertEqual(r['sectorCellClassification'],'whole product' if leaf.endswith('plant-state-aggregates') else 'subset');self.assertIn('EIA-923 reporting plants',r['basisLabel']);self.assertIn('broader EIA total',r['selectionConstraint'])
         self.assertEqual(self.col('consumption-and-quality','receipts')['classification'],'out of vocabulary')
     def test_origin_and_destination_not_interchangeable(self):
         a=m.build(self.nodes['coal/shipments/mine-state-aggregates']);b=m.build(self.nodes['coal/shipments/plant-state-aggregates']);self.assertEqual(a['scope']['placeRole'],'origin mine state');self.assertEqual(b['scope']['placeRole'],'destination plant state')
     def test_bad_heat_content_unit_cannot_become_quantity(self):
         self.assertEqual(self.col('consumption-and-quality','heat-content')['classification'],'out of vocabulary')
-    def test_sector_total_cannot_widen_receipt_price_population(self):
-        r=self.col('consumption-and-quality','price');self.assertEqual(r['sectorCellOverrides']['electric power'],'subset')
+    def test_owner_headline_acceptance_requires_label_and_broader_comparison(self):
+        r=self.col('consumption-and-quality','price');self.assertEqual(r['sectorCellOverrides']['electric power'],'whole product');self.assertIn('EIA-923 reporting plants',r['sectorBasisLabels']['electric power']);self.assertIn('50 MW',r['populationRestriction']);self.assertIn('broader EIA total',r['selectionConstraint'])
         self.assertNotIn('sectorCellOverrides',self.col('consumption-and-quality','consumption'))
     def test_unreviewed_definition_stays_pending(self):
         self.assertEqual(m.facet('coalRankId',{'id':'NEW'})['classification'],'pending')

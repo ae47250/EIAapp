@@ -57,9 +57,14 @@
           "sectorCellClassification": "via sector facet",
           "basisLabel": "Average delivered coal price by consuming sector",
           "sectorCellOverrides": {
-            "electric power": "subset"
+            "electric power": "whole product"
           },
-          "populationRestriction": "Power-sector delivered prices use the restricted EIA-923 receipt population; an all-sector label cannot broaden that population."
+          "sectorBasisLabels": {
+            "electric power": "Average cost of coal delivered for electricity generation; EIA-923 reporting plants"
+          },
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+          "scopeDecision": "standingScopeRule",
+          "populationRestriction": "EIA-923 receipt population: coal-primary plants of at least 50 MW; headline acceptance does not remove this label or broaden other facets."
         },
         {
           "id": "heat-content",
@@ -966,13 +971,15 @@
             "units": "average dollars per ton"
           },
           "classification": "subset",
-          "reason": "Delivered price for coal shipped to reporting electric-power facilities, not all coal sales; receipt-survey size restrictions remain. Preserve origin versus destination geography.",
+          "reason": "Delivered price for coal shipped to reporting electric-power facilities, not all coal sales. Origin state is not the consumer state.",
           "product": "coal",
           "publicationStatus": "unverified",
           "activity": "prices",
           "sector": "electric power",
           "sectorCellClassification": "subset",
-          "basisLabel": "Delivered coal price for electric-power shipments"
+          "basisLabel": "Average cost of coal delivered for electricity generation; EIA-923 reporting plants; origin mine state",
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+          "scopeDecision": "standingScopeRule"
         },
         {
           "id": "heat-content",
@@ -1182,13 +1189,15 @@
             "units": "average dollars per ton"
           },
           "classification": "subset",
-          "reason": "Delivered price for coal shipped to reporting electric-power facilities, not all coal sales; receipt-survey size restrictions remain. Preserve origin versus destination geography.",
+          "reason": "Delivered price for coal shipped to reporting electric-power facilities, not all coal sales. Origin state is not the consumer state.",
           "product": "coal",
           "publicationStatus": "unverified",
           "activity": "prices",
           "sector": "electric power",
-          "sectorCellClassification": "subset",
-          "basisLabel": "Delivered coal price for electric-power shipments"
+          "sectorCellClassification": "whole product",
+          "basisLabel": "Average cost of coal delivered for electricity generation; EIA-923 reporting plants; destination plant state",
+          "selectionConstraint": "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+          "scopeDecision": "standingScopeRule"
         },
         {
           "id": "heat-content",
