@@ -72,6 +72,9 @@ def choose(candidates,product):
  """Within one place and frequency only; no unit conversion or data stitching."""
  if not candidates:return None,'No numeric whole-product observation'
  if len({(c['place']['geographyCode'],c['series']['frequency']) for c in candidates})!=1:raise ValueError('Mixed place or frequency')
+ # A country's own native record precedes regional aliases for the same measure.
+ native=[c for c in candidates if c['series']['route']=='international' and c['series'].get('measureFacets',{}).get('countryRegionTypeId')=='c' and str(c['place']['nativePlaceFilters'].get('countryRegionId'))==c['place']['geographyCode']]
+ if native:candidates=[c for c in candidates if not (c['series']['route']=='international' and c['series'].get('measureFacets',{}).get('countryRegionTypeId')=='r')]
  # A broader total mentioned by verified metadata must be reconciled explicitly.
  if any(c['constraints']['pending'] for c in candidates):return None,'Explicit broader-total or historical-scope reconciliation pending'
  eligible=[c for c in candidates if c['constraints']['facilityScope']!='small-scale only']
@@ -110,7 +113,7 @@ def main():
     if not place['numeric']:continue
     if 'geographyCode' not in place:raise ValueError('Stale observation audit; refresh before selection')
     candidates[series['cellId']].append({'group':gid,'series':{k:v for k,v in series.items() if k!='places'},'place':place,'constraints':for_place(con,place['geographyCode'])})
- results=[];pending=[]
+ cross=i.read(E/'place-crosswalk.json')['routes'];results=[];pending=[]
  for cell in grid['cells']:
   cid=cell['id']
   if cid not in ready:continue
@@ -120,7 +123,10 @@ def main():
   for (place,freq),cs in sorted(byplacefreq.items()):
    chosen,reason=choose(cs,cell['product'])
    if chosen:
-    ser=chosen['series'];p=chosen['place'];defaults.append({'geographyCode':place,'frequency':freq,'route':ser['route'],'dataColumn':ser['column'],'facets':{**ser['measureFacets'],**p['nativePlaceFilters']},'unit':ser['unit'],'unitName':ser['unitName'],'basisLabel':ser['selectedBasisLabel'],'sourceBasisLabel':ser['basis']['label'],'scopeNotes':ser['basis']['scopeNotes'],'firstPeriod':p['firstNumeric'],'lastPeriod':p['lastNumeric'],'numericObservations':p['numeric'],'reportedZeroCount':p['zero'],'symbols':p['symbols'],'firstCall':p['firstCall'],'lastCall':p['lastCall'],'group':chosen['group'],'seriesId':ser['id'],'alternativeCount':len(cs)-1,'tieRule':'Whole product and documented broader facility total, requested frequency, physical units (Btu for total energy), longest observed numeric history; deterministic route/native identity for ties.'})
+    ser=chosen['series'];p=chosen['place']
+    alias=next((r['definition']['name'] for r in cross.get(ser['route'],{}).get('facets',{}).get('countryRegionId',[]) if r.get('status')=='mapped' and r.get('geographyCode')==place and str(r['definition']['id'])==str(p['nativePlaceFilters'].get('countryRegionId')) and r.get('alternateCode')),None)
+    label=ser['selectedBasisLabel']+('; EIA place: '+alias if alias else '')
+    defaults.append({'geographyCode':place,'frequency':freq,'route':ser['route'],'dataColumn':ser['column'],'facets':{**ser['measureFacets'],**p['nativePlaceFilters']},'unit':ser['unit'],'unitName':ser['unitName'],'basisLabel':label,'sourceBasisLabel':ser['basis']['label'],'scopeNotes':ser['basis']['scopeNotes'],'firstPeriod':p['firstNumeric'],'lastPeriod':p['lastNumeric'],'numericObservations':p['numeric'],'reportedZeroCount':p['zero'],'symbols':p['symbols'],'firstCall':p['firstCall'],'lastCall':p['lastCall'],'group':chosen['group'],'seriesId':ser['id'],'alternativeCount':len(cs)-1,'tieRule':'Native country code before same-country regional aliases; whole product and documented broader facility total, requested frequency, physical units (Btu for total energy), longest observed numeric history; deterministic route/native identity for ties.'})
    else:unresolved.append({'geographyCode':place,'frequency':freq,'reason':reason})
   record={'cellId':cid,'defaults':defaults,'unresolved':unresolved,'wholeGroups':sorted(needed[cid]),'candidateCount':len(candidates[cid]),'alternatives':candidates[cid]}
   if defaults and not unresolved:results.append(record)

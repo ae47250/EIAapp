@@ -80,4 +80,13 @@ class SelectionTests(unittest.TestCase):
   review=m.i.read(m.E/'basis-equivalence-review.json');e=next(e for e in review['entries'] if e.get('activities')==['generation']);r={'sourceFacet':e['facet'],'definition':e['definition'],'product':'electricity'}
   self.assertEqual(m.constraints([r],e['route'],'generation')['verifiedBasisGroup'],e['group'])
   self.assertIsNone(m.constraints([r],e['route'],'consumption')['verifiedBasisGroup'])
+ def test_native_country_beats_longer_regional_alias(self):
+  a=self.candidate('a',first='1900');b=self.candidate('b',first='2010')
+  for c,t,code in [(a,'r','WP13'),(b,'c','BRA')]:c['series'].update(route='international',measureFacets={'countryRegionTypeId':t});c['place'].update(geographyCode='BRA',nativePlaceFilters={'countryRegionId':code})
+  self.assertEqual(m.choose([a,b],'coal')[0],b)
+  self.assertEqual(m.choose([a],'coal')[0],a)
+ def test_other_country_is_never_native_evidence(self):
+  a=self.candidate('a');b=self.candidate('b')
+  for c,t,code in [(a,'r','WP13'),(b,'c','CAN')]:c['series'].update(route='international',measureFacets={'countryRegionTypeId':t});c['place'].update(geographyCode='BRA',nativePlaceFilters={'countryRegionId':code})
+  self.assertEqual(m.choose([a,b],'coal')[0],a)
 if __name__=='__main__':unittest.main()
