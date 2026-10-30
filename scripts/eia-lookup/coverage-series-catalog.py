@@ -5,6 +5,7 @@ import gzip,hashlib,importlib.util,json
 from pathlib import Path
 spec=importlib.util.spec_from_file_location('inventory',Path(__file__).with_name('coverage-inventory.py'))
 i=importlib.util.module_from_spec(spec);spec.loader.exec_module(i)
+PETROLEUM_REVIEWS={route:family+'-classification.json.gz' for family in ['petroleum-price','petroleum-crude'] for route in i.read(i.EVIDENCE/(family+'-source-review.json'))['routes']}
 MEASURE_FACETS={'productId','activityId','seriesId','msn','series','product','process','coalRankId','mineTypeId','marketTypeId','exportImportType','sector','sectorid','fueltypeid','fuelTypeId','technology','producertypeid','energysourceid','gradeId'}
 def encoded(data):return (json.dumps(data,separators=(',',':'))+'\n').encode()
 def build_node(node):
@@ -23,10 +24,11 @@ def build_node(node):
             row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
         result['dataColumns'][0]['classification']='via '+facet
         result['classificationComplete']=review['complete'] and all(r['classification']!='pending' for r in result['facets'][facet])
-    if node['route'].split('/')[0] in ['electricity','coal','densified-biomass','crude-oil-imports','natural-gas']:
+    if node['route'].split('/')[0] in ['electricity','coal','densified-biomass','crude-oil-imports','natural-gas'] or node['route'] in PETROLEUM_REVIEWS:
         family=node['route'].split('/')[0]
         filename=('natural-gas-reserves-classification.json.gz' if '/enr/' in node['route'] else 'natural-gas-classification.json.gz') if family=='natural-gas' else family+'-classification.json'
         if family in ['densified-biomass','crude-oil-imports']:filename='biomass-crude-classification.json'
+        if node['route'] in PETROLEUM_REVIEWS:filename=PETROLEUM_REVIEWS[node['route']]
         review=i.read(i.EVIDENCE/filename)['routes'][node['route']]
         columns={r['id']:r for r in review['dataColumns']}
         for row in result['dataColumns']:
