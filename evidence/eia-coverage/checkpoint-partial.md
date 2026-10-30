@@ -1,6 +1,6 @@
 # Partial coverage checkpoint
 
-Recorded 2026-10-30T15:50:21.167367+00:00. The formal coverage/Set D checkpoint is **not reached**. Implementation remains gated.
+Recorded 2026-10-30T16:12:40.578751+00:00. The formal coverage/Set D checkpoint is **not reached**. Implementation remains gated.
 
 Coverage: **312 mapped; 1776 not checked**, retaining all 2,088 frozen cells. No absence or subset-only certification has been inferred from unfinished work.
 
@@ -11,9 +11,9 @@ Coverage: **312 mapped; 1776 not checked**, retaining all 2,088 frozen cells. No
 | US | 19 / 168 | 83 / 522 |
 | state | 50 / 168 | 151 / 522 |
 
-Calls: 5,660 total reserved (1,464 earlier + 4,196 coverage), against the 20,000 estimate threshold / 25,000 cap. Paid calls: zero. Recorded peak: 2/second and 2,269/hour.
+Calls: 5,862 total reserved (1,464 earlier + 4,398 coverage), against the 20,000 estimate threshold / 25,000 cap. Paid calls: zero. Recorded peak: 2/second and 2,271/hour.
 
-Retrieval: 258/262 complete groups, 19,166,874 saved rows. Stop reason: still running at report snapshot. The approved deadline is 16:12:35 UTC (12:12:35 p.m. ET), 30 October 2026.
+Retrieval: 258/262 complete groups, 20,196,874 saved rows. Stop reason: Owner three-hour limit; saved partial coverage. The approved deadline is 16:12:35 UTC (12:12:35 p.m. ET), 30 October 2026.
 
 Census: 242 nodes; 27 branches; 154 eligible and 61 excluded leaves, plus AEO/IEO release families. All 61 exclusions reviewed; seed 20261029; no quote mismatch. OB2, OBW and sector 95 remain explicit unresolved exceptions, never usable for results or nonpublication.
 
@@ -22,7 +22,7 @@ Validation: 258/258 audited groups pass. Existing row checker: 18,275 passed, 0 
 ## Unfinished work and source issues
 
 - Finish retrieval and observation audits, retaining source anomalies as incomplete until reconciled.
-- Owner decision pending on metadata-only absence evidence for 706 cells without eligible series; all remain not checked.
+- Implement the approved catalogue-absence proof with separate labels, complete code-list citations and the seeded 5% broad-call re-check; the 706 candidate cells remain not checked pending gap assessment and verification.
 - Finish whole-product scope/default comparisons and any unsupported row-check mappings.
 - Complete seeded 5% negative-cell live rechecks only after negative evidence is established.
 - Write and freeze Set D and scorer after coverage, then stop for owner implementation go.
@@ -50,6 +50,10 @@ These categories are disjoint; they do not certify absence or subset-only status
 - Whole groups audited with no numeric whole-product observation; negative proof pending: 226.
 - Only subset candidates; absence of whole product not certified: 364.
 - Defaults selected but existing app row checker cannot verify every selection: 83.
+
+## Approved absence-proof amendment
+
+The owner approved the separate labels **not in EIA’s catalogue** and **EIA returns no data**, with complete code-list citations and inclusion in the seeded 5% live re-check. Each sampled catalogue-absence cell needs one broad native product/activity-only call on the most likely route, all places. Unknown definitions and metadata gaps cannot support absence. All 154 complete all-frequency inventories are indexed by SHA-256 in `catalogue-absence-evidence-index.json`. No live re-check has run yet; the 706 candidate cells remain not checked. This is remaining work under an approved rule, not an unanswered owner question.
 
 ## Numeric zero check
 

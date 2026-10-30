@@ -29,7 +29,7 @@ python3 -B scripts/eia-lookup/coverage-table.py
 - Monthly natural-gas consumption changed its reported total from 106,856 to 107,171 between pages (calls 2773 and 3437–3440). This group remains incomplete; preserved pages cannot certify coverage or absence.
 - EIA international flag 5 can accompany a small nonzero numeric download. It is not zero. `international-flag-review.json` records a 1,540,000-row prefix and source calls. Unknown flags and numeric/no-value flag conflicts fail certification.
 - The existing app selector requires a separate geography facet. Documented US-only routes lacking one remain unsupported by the unchanged app row checker; no app fix has been made behind the implementation gate.
-- `metadata-absence-decision.json` records 706 cells with no eligible native candidate. Owner confirmation is pending on whether complete official metadata may establish absence where no unresolved definition could fit. Keep them not checked until that decision and its conditions are implemented.
+- `metadata-absence-decision.json` records 706 cells with no eligible native candidate. Owner approved catalogue evidence only with the separate label not in EIA's catalogue, source-code-list citations and a broad-call 5% live re-check. See absence-proof-amendment.json. These cells remain not checked pending gap assessment and verification.
 - Scope comparisons still pending include state solar capacity (a broader all-size total is published outside the currently verified API mapping) and crude-only versus crude-plus-condensate reserves. No additional PDF research.
 - `docs/eia-interpretation-audit.md` and `scripts/eia-lookup/__pycache__/` are unrelated pre-existing untracked items; preserve and do not stage them.
 
@@ -38,3 +38,7 @@ The full application suite passed 537/537 with keys blank, and the local build p
 Research unit ranking correction: EIA unitName establishes TJ as terajoules and MTOE as million metric tons of oil equivalent. The former Btu-only test misranked them as physical units. The corrected selector keeps all candidates and prefers conventional physical product units where available, retaining energy-equivalent fallbacks and original labels. See unit-preference-review.json; no app change.
 
 A fresh-attempt replay boundary is now tested: old pages cannot enter a new attempt after an EIA source revision. A guarded local helper can preserve the original state and restart changed-total parts once, only after the downloader stops and with seven minutes remaining. It has not been run while the current downloader is active. See checkpoint-tooling.json; short-page anomalies are not retried by this helper.
+
+## Time-limited closeout
+
+Downloader stopped; exact timing, rate peaks, reservations and resume-state hash are recorded in execution-closeout.json. The partial coverage table retains all frozen cells; unresolved cells remain not checked. No app implementation, paid call, push or deployment. The fresh-attempt helper was not run within this window.
