@@ -74,6 +74,9 @@ def basis(row,column,catalog,frequency):
   label=r.get('basisLabel')
   if not label:
    definition=r.get('definition',{});label=(definition.get('name') or definition.get('alias')) if isinstance(definition,dict) else None
+  if not label:
+   activity=r.get('activity') or ' / '.join(r.get('activities',[]))
+   if activity:label=' '.join(x for x in [r.get('product'),activity] if x)
   if label and label not in labels:labels.append(label)
   for key in ['basisRestriction','selectionConstraint','selectionPreference','generationScope','scopeNote','scopeWarning','scopeConstraints','historicalScope','capacityScope','broaderPublishedTotal','omittedSmallScaleEstimate','historicalFuelScope','populationRestriction','unitNote','sourcePeriodNote','sourceScope','broaderCandidate','capacityBasis','frequencyBasis','geographicScope','scopeRestriction','broaderMeasure','broaderComparison','referenceTime','sectorScope','restrictions']:
    if r.get(key) and str(r[key]) not in notes:notes.append(str(r[key]))

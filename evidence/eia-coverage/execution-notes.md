@@ -24,8 +24,9 @@ python3 -B scripts/eia-lookup/coverage-table.py
 ## Known limitations to preserve
 
 - Crude-imports calls 1782 (annual) and 2771 (monthly) return short final pages relative to EIA's advertised totals. Both groups remain incomplete; their pages cannot certify absence or final coverage. See `retrieval-anomalies.json`.
-- Parallel-run startup replay counted five already completed, empty pages twice in the state manifest. Actual requests, raw rows and raw response files are unchanged. The source fix and regression pass. After the active downloader stops, retain the original state snapshot and remove only identical duplicate zero-row manifest references. Do not mutate the state underneath the active writer.
-- The running download began before the latest resume-bookkeeping source fixes; those fixes take effect on a subsequent run. The active version is archived under `retrieval/programs/`.
+- Parallel-run startup replay counted five already completed, empty pages twice in the state manifest. Actual requests, raw rows and raw response files are unchanged. The source fix and regression pass. Repaired after the downloader stopped at 14:52:50 UTC: the original state was hash-preserved and only those five identical zero-row references were removed. See retrieval-anomalies.json.
+- The earlier running download began before the resume-bookkeeping fixes. Subsequent runs use the corrected, tested source; both source versions are archived under `retrieval/programs/`.
+- Monthly natural-gas consumption changed its reported total from 106,856 to 107,171 between pages (calls 2773 and 3437–3440). This group remains incomplete; preserved pages cannot certify coverage or absence.
 - EIA international flag 5 can accompany a small nonzero numeric download. It is not zero. `international-flag-review.json` records a 1,540,000-row prefix and source calls. Unknown flags and numeric/no-value flag conflicts fail certification.
 - The existing app selector requires a separate geography facet. Documented US-only routes lacking one remain unsupported by the unchanged app row checker; no app fix has been made behind the implementation gate.
 - `metadata-absence-decision.json` records 706 cells with no eligible native candidate. Owner confirmation is pending on whether complete official metadata may establish absence where no unresolved definition could fit. Keep them not checked until that decision and its conditions are implemented.
@@ -33,3 +34,5 @@ python3 -B scripts/eia-lookup/coverage-table.py
 - `docs/eia-interpretation-audit.md` and `scripts/eia-lookup/__pycache__/` are unrelated pre-existing untracked items; preserve and do not stage them.
 
 The full application suite passed 537/537 with keys blank, and the local build passed. These do not certify the unfinished coverage or the user-visible application workflow. Research tests and all frozen hashes must be checked again before the checkpoint commit.
+
+Research unit ranking correction: EIA unitName establishes TJ as terajoules and MTOE as million metric tons of oil equivalent. The former Btu-only test misranked them as physical units. The corrected selector keeps all candidates and prefers conventional physical product units where available, retaining energy-equivalent fallbacks and original labels. See unit-preference-review.json; no app change.

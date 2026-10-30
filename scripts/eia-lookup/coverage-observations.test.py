@@ -14,6 +14,9 @@ class ObservationTests(unittest.TestCase):
   cat={'dataColumns':[{'id':'inventory','definition':{'unit':'tons'}}]}
   self.assertEqual(m.unit_for({},'inventory',cat),'tons');self.assertIsNone(m.unit_for({},'unknown',cat))
   self.assertEqual(m.unit_for({'inventory-units':'kg'},'inventory',cat),'kg')
+ def test_id_only_trade_direction_retains_its_verified_meaning(self):
+  cat={'dataColumns':[{'id':'price','basisLabel':'Coal trade unit value'}],'facets':{'direction':[{'definition':{'id':'Exports'},'frequencies':['annual'],'product':'coal','activity':'exports','calls':[1]}]}}
+  label=m.basis({'direction':'Exports'},'price',cat,'annual')['label'];self.assertIn('exports',label);self.assertIn('Coal trade unit value',label)
  def fixtures(self):
   p={'cellId':'country|coal|production||','column':'value','placeFacetKeys':['place'],'placeCodes':['ISL','NOR'],'filters':{'place':['IC','NO'],'product':['coal','gas'],'activity':['production','consumption']},'cells':[{'cellId':'country|coal|production||','candidateStatus':'whole product','allowedMeasureFilters':[{'product':['coal'],'activity':['production']},{'product':['gas'],'activity':['consumption']}]}]}
   cross={'facets':{'place':[{'definition':{'id':n},'status':'mapped','geographyCode':c,'frequencies':['annual']} for n,c in [('IC','ISL'),('NO','NOR')]]}}

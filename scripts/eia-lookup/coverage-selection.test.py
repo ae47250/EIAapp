@@ -8,6 +8,17 @@ class SelectionTests(unittest.TestCase):
   a=self.candidate('a',scope='utility-scale',first='1949');b=self.candidate('b',scope='all sizes',first='2014');self.assertEqual(m.choose([a,b],'electricity')[0],b)
  def test_physical_units_precede_thermal_for_electricity(self):
   a=self.candidate('a',unit='Btu',first='1949');b=self.candidate('b');self.assertEqual(m.choose([a,b],'electricity')[0],b)
+ def test_joules_and_oil_equivalent_do_not_outrank_physical_product_units(self):
+  for unit,name in [('TJ','terajoules'),('MTOE','million metric tons of oil equivalent'),('GJ','gigajoules')]:
+   with self.subTest(unit=unit):
+    thermal=self.candidate('a',unit=unit,first='1949');thermal['series']['unitName']=name
+    physical=self.candidate('z',unit='short tons',first='1980')
+    self.assertEqual(m.choose([thermal,physical],'coal')[0],physical)
+ def test_approved_energy_codes_work_when_unit_name_is_absent(self):
+  for unit in ['TJ','MTOE']:
+   thermal=self.candidate('a',unit=unit,first='1949');thermal['series'].pop('unitName');physical=self.candidate('z',unit='BCF');self.assertEqual(m.choose([thermal,physical],'natural gas')[0],physical)
+ def test_energy_equivalent_remains_eligible_when_physical_unit_is_unavailable(self):
+  a=self.candidate(unit='TJ');self.assertEqual(m.choose([a],'coal')[0],a)
  def test_total_energy_prefers_btu(self):
   a=self.candidate('a',unit='Btu');b=self.candidate('b',first='1949');self.assertEqual(m.choose([a,b],'total energy')[0],a)
  def test_longest_compatible_history(self):

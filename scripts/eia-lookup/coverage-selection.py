@@ -63,8 +63,12 @@ def choose(candidates,product):
  definitions={tuple(c['constraints'].get('nativeProductDefinitions',[])) for c in eligible if c['constraints'].get('nativeProductDefinitions')}
  if len(definitions)>1:return None,'Different native whole-product definitions; broader-scope comparison pending (no automatic preference by numeric size)'
  def score(c):
-  ser=c['series'];place=c['place'];thermal='btu' in (ser['unit']+' '+ser.get('unitName','')).lower()
-  unit_preferred=thermal if product=='total energy' else not thermal
+  ser=c['series'];place=c['place'];unit_text=(ser['unit']+' '+ser.get('unitName','')).lower()
+  btu='btu' in unit_text
+  # EIA's recorded names establish these as energy-equivalent bases; kWh
+  # remains the conventional electricity measure, and prices retain their unit.
+  energy_equivalent=btu or 'joule' in unit_text or 'oil equivalent' in unit_text or ser['unit'].upper() in {'TJ','MTOE'}
+  unit_preferred=btu if product=='total energy' else not energy_equivalent
   return (not unit_preferred,-span(place['firstNumeric'],place['lastNumeric'],ser['frequency']),-place['numeric'],ser['route'],ser['id'],canonical(place['nativePlaceFilters']))
  return min(eligible,key=score),None
 
@@ -104,6 +108,7 @@ def main():
   else:pending.append(record)
  output={'status':'Partial scope/default selection; requires existing row-checker verification before implementation use','mappedCandidateCells':results,'pendingCells':pending,'counts':{'scopeDefaultsSelected':len(results),'scopeReconciliationPending':sum(bool(c['unresolved']) for c in pending),'noNumericWholeObservationsAfterWholeGroupsAudited':sum(not c['defaults'] and not c['unresolved'] for c in pending)},'notAbsenceEvidence':'A missing candidate or numeric observation is not an EIA-does-not-publish decision; subset routes, exceptions and seeded rechecks remain separate.'}
  i.write_review(E/'coverage-selection-details.json',output)
+ pointer=json.loads((E/'coverage-selection-details.json').read_text());pointer['summary']='Partial default selections and complete alternatives from audited observations; detailed per-place histories and source-call references remain in hash-verified local evidence.';(E/'coverage-selection-details.json').write_text(json.dumps(pointer,indent=2)+'\n')
  summary={'updatedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'counts':output['counts'],'cells':[{'cellId':r['cellId'],'placeCodes':sorted({d['geographyCode'] for d in r['defaults']}),'frequencies':sorted({d['frequency'] for d in r['defaults']}),'routes':sorted({d['route'] for d in r['defaults']}),'defaults':len(r['defaults']),'rowCheckStatus':'pending'} for r in results],'details':'coverage-selection-details.json','status':output['status']}
  (E/'coverage-selection.json').write_text(json.dumps(summary,separators=(',',':'))+'\n');print(json.dumps({'counts':output['counts'],'defaults':sum(len(c['defaults']) for c in results),'readyForSelection':len(ready)}))
 if __name__=='__main__':main()
