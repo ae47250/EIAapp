@@ -352,6 +352,19 @@ Reuse working authentication. Never request plaintext keys, copy credentials int
 Do not merge, deploy, switch live models or broaden cleanup without authorization. Check dependencies before deletion.
 Distinguish proposed, implemented, tested, committed, pushed and deployed. Report outcome, checks, tested identity, blockers and next action. Separate verified evidence, reports, calculations and inference. Correct defective guidance rather than substituting assurances.
 
+### EIAapp data decisions (owner, Oct 2026)
+- Model: gpt-6-luna, reasoning low. No dated snapshot exists; rerun scored sets if results look odd.
+- Places: use a country's own code (type c); never match places or codes by name alone. Lookalike region codes (e.g. WP13 "Brazil") only if the country code has no data, labelled.
+- Ambiguous place names: default kept in the geography data, shown with full name, plus a switch button (Georgia -> US state unless beside another non-US country; Korea -> South Korea). Place words that are also ordinary words are never added or dropped silently.
+- Values: EIA symbols stay non-numeric with EIA's meaning; only numeric 0 is "Reported as zero"; a blank never becomes 0 anywhere (screen, chart, Excel).
+- Scope: use EIA's broader total if published; else EIA's headline figure, labelled with EIA's scope wording; "subset only" means a component or one sector when all were asked. Named parts: only "crude oil" and "gasoline", labelled.
+- Existing lookup rows and defaults win; generated mappings only fill gaps. US-only datasets without a place filter count for the US only.
+- Clarification buttons always come from the checked lookup list, never from the model.
+- Years in typed replies: start and end are separate slots; a reply changes only what it states.
+- Charts: top 10 places by latest value, labelled; all places in table and Excel; never mix units on one axis.
+- Tests: when an older frozen answer conflicts with a recorded owner decision, keep the old one on record, freeze a versioned revision with only that change, list it in the report; do not ask.
+- Every work-order requirement gets a test; the report lists each requirement with its test; no test = not done.
+
 ---
 
 ## Search and Candidate Discovery

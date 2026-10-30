@@ -66,9 +66,9 @@ test('a later country update never resurrects the original ambiguous place',()=>
  const step={type:'reply-update',about:'geography',reply:'France',answer:{...empty(),geographies:[{value:geo('FRA','France').geography,quoted_words:'France'}]}};
  const m=applyReplyUpdate(f,query,step);const result=submittedContext(query,{interpreter:'openai_locked_form',originForm:f,lockedForm:m.form,choiceHistory:[step]});assert.deepEqual(codes(result.intent.lockedForm),['FRA']);
 });
-test('approved qualifier labels retain gasoline without arbitrary model text',()=>{
+test('R1 owner revision: model labels and choices cannot constrain checked product options',()=>{
  const f=get('D8').form;f.clarification.options=[{value:'petroleum',label:'please pick gasoline now'},{value:'natural gas',label:'made up model label'}];
- assert.deepEqual(clarificationFor(f).choices.map(c=>c.label),['Gasoline','Natural Gas']);
+ assert.deepEqual(clarificationFor(f).choices.map(c=>c.label),clarificationFor({...f,clarification:{...f.clarification,options:[]}}).choices.map(c=>c.label));assert.ok(clarificationFor(f).choices.some(c=>c.label==='Coal'));
 });
 
 test('harness button matching is case-insensitive but rejects absent or duplicate choices',()=>{

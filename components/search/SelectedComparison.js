@@ -1,6 +1,6 @@
 import {formatNumber} from '../../lib/client/formatting.js';
 import { downloadComparisonWorkbook } from "../../lib/client/xlsx.js";
-import { chartCountries, observationRows, TOP_TEN_NOTE, observationStatus, seriesDescription, headlineFor } from "../../lib/client/lookup-display.js";
+import { chartCountries, observationRows, TOP_TEN_NOTE, observationStatus, seriesDescription, headlineFor, seriesCardText } from "../../lib/client/lookup-display.js";
 import SeriesChart from './SeriesChart.js';
 import ComparisonChart from "./ComparisonChart.js";
 
@@ -25,13 +25,8 @@ export default function SelectedComparison({ comparison, source }) {
         <>
           {comparison.countries.filter(country => country.series).map(country => (
             <div className="muted" key={country.geography.code}>
-              <p><strong>{country.geography.displayName || country.geography.name}:</strong> {country.series.title}. {country.series.description}</p>
-              <p>Measurement basis: {country.series.basisLabel}. {country.series.sectorLabel}. Units: {country.series.unit}. Frequency: {country.series.frequency}.</p>
-              {country.series.otherMeasuresExist ? <p>Other bases exist (Other measures exist).</p> : null}
-              {country.series.regionLabel ? <p>{country.series.regionLabel}</p> : null}
-              {country.series.fallbackLabel ? <p>{country.series.fallbackLabel}</p> : null}
-              {country.series.alternative ? <p>Alternative selected: {country.series.basisLabel}. This differs from the original request.</p> : null}
-              {country.series.completenessNote ? <p role="status">{country.series.completenessNote}</p> : null}
+              <p><strong>{seriesCardText(country.series).title}</strong></p>
+              {seriesCardText(country.series).lines.map(line=><p key={line}>{line}</p>)}
             </div>
           ))}
           <button className="ghost-button" type="button" onClick={() => downloadComparisonWorkbook([comparison])}>Excel</button>

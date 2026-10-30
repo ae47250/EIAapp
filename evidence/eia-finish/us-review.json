@@ -1,0 +1,3502 @@
+{
+  "baseline": "2968dd7",
+  "researchStartedUTC": "2026-10-30T22:31:18Z",
+  "researchDeadlineUTC": "2026-10-31T00:01:18Z",
+  "method": "Job 5 metadata correspondence + full pagination, unit/facet/duplicate checks and US-only guard; R5 scope only",
+  "before": {
+    "all": {
+      "not in EIA's catalogue": 31,
+      "subset only": 39,
+      "mapped": 257,
+      "not checked": 161,
+      "EIA returns no data": 34
+    },
+    "base": {
+      "not in EIA's catalogue": 27,
+      "subset only": 11,
+      "mapped": 66,
+      "not checked": 35,
+      "EIA returns no data": 29
+    }
+  },
+  "sourceHashes": {
+    "coverage-table.json": "239794be9063447f940fd4a106d3dd067d01b5e195ff8b683a471cf5ff13a2b6",
+    "coverage-selection-details.json": "65d14e9d6e5ca946b1e2647b70aec47b7cbb537dc7c3c09e3442bc62790f0346",
+    "place-crosswalk.json": "101b49ba4946f9513de8b063003df878ca0136e784148dd8175d55f6d4adf1b5"
+  },
+  "candidates": [
+    {
+      "cellId": "US|petroleum|consumption||",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Petroleum Products Supplied/Consumption, United States in Thousand Barrels per Day",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": []
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|petroleum|consumption||",
+          "column": "value",
+          "frequency": "annual",
+          "id": "2826859fcd3229acc0ee5806",
+          "measureFacets": {
+            "msn": "PATCPUS"
+          },
+          "route": "total-energy",
+          "unit": "Thousand Barrels per Day",
+          "unitName": "Thousand Barrels per Day",
+          "selectedBasisLabel": "Petroleum Products Supplied/Consumption, United States in Thousand Barrels per Day"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1949",
+          "firstValue": "5763.038",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "20736.134",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 77,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "unspecified",
+          "scopeNotes": [],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "petroleum/cons/wpsup",
+          "frequency": "weekly",
+          "facets": {
+            "process": "VPP",
+            "product": "EPP0",
+            "series": "WRPUPUS2"
+          },
+          "unit": "MBBL/D",
+          "basis": "Total Petroleum Products; Products supplied; EIA approximation of consumption; U.S. Product Supplied of Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/cons/psup",
+          "frequency": "monthly",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS2"
+          },
+          "unit": "MBBL/D",
+          "basis": "Crude Oil and Petroleum Products; Products supplied; EIA approximation of consumption; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/cons/psup",
+          "frequency": "monthly",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Products supplied; EIA approximation of consumption; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/sum/snd",
+          "frequency": "monthly",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Product Supplied; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/sum/snd",
+          "frequency": "monthly",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS2"
+          },
+          "unit": "MBBL/D",
+          "basis": "Crude Oil and Petroleum Products; Product Supplied; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "PATCBUS"
+          },
+          "unit": "Trillion Btu",
+          "basis": "Total Petroleum Products Supplied in Trillion Btu"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "PATCPUS"
+          },
+          "unit": "Thousand Barrels per Day",
+          "basis": "Petroleum Products Supplied/Consumption, United States in Thousand Barrels per Day"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "PATCBUS"
+          },
+          "unit": "Trillion Btu",
+          "basis": "Total Petroleum Products Supplied in Trillion Btu"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "PATCPUS"
+          },
+          "unit": "Thousand Barrels per Day",
+          "basis": "Petroleum Products Supplied/Consumption, United States in Thousand Barrels per Day"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "2",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "TBPD"
+          },
+          "unit": "thousand barrels per day",
+          "basis": "Petroleum and other liquids; Consumption"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "2",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "MT"
+          },
+          "unit": "1000 metric tons",
+          "basis": "Petroleum and other liquids; Consumption"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "2",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "MTOE"
+          },
+          "unit": "million metric tons of oil equivalent",
+          "basis": "Petroleum and other liquids; Consumption"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "2",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "QBTU"
+          },
+          "unit": "quadrillion Btu",
+          "basis": "Petroleum and other liquids; Consumption"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "2",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "TJ"
+          },
+          "unit": "terajoules",
+          "basis": "Petroleum and other liquids; Consumption"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "2",
+            "countryRegionTypeId": "c",
+            "productId": "4415",
+            "unit": "QBTU"
+          },
+          "unit": "quadrillion Btu",
+          "basis": "Petroleum and other liquids; Consumption"
+        },
+        {
+          "route": "seds",
+          "frequency": "annual",
+          "facets": {
+            "seriesId": "PATCB"
+          },
+          "unit": "Billion Btu",
+          "basis": "All petroleum products total consumption"
+        },
+        {
+          "route": "seds",
+          "frequency": "annual",
+          "facets": {
+            "seriesId": "PATCP"
+          },
+          "unit": "Thousand barrels",
+          "basis": "All petroleum products total consumption"
+        },
+        {
+          "route": "petroleum/cons/psup",
+          "frequency": "annual",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS2"
+          },
+          "unit": "MBBL/D",
+          "basis": "Crude Oil and Petroleum Products; Products supplied; EIA approximation of consumption; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/cons/psup",
+          "frequency": "annual",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Products supplied; EIA approximation of consumption; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/sum/sndw",
+          "frequency": "weekly",
+          "facets": {
+            "process": "VPP",
+            "product": "EPP0",
+            "series": "WRPUPUS2"
+          },
+          "unit": "MBBL/D",
+          "basis": "Total Petroleum Products; Product Supplied; U.S. Product Supplied of Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/sum/snd",
+          "frequency": "annual",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Product Supplied; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        },
+        {
+          "route": "petroleum/sum/snd",
+          "frequency": "annual",
+          "facets": {
+            "process": "VPP",
+            "product": "EP00",
+            "series": "MTTUPUS2"
+          },
+          "unit": "MBBL/D",
+          "basis": "Crude Oil and Petroleum Products; Product Supplied; U.S. Product Supplied of Crude Oil and Petroleum Products; products supplied, EIA approximation of consumption"
+        }
+      ]
+    },
+    {
+      "cellId": "US|natural gas|storage||",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Natural Gas in Underground Storage, End of Period, Total in Billion Cubic Feet",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": []
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|natural gas|storage||",
+          "column": "value",
+          "frequency": "annual",
+          "id": "c6eaf1d86d9910c1013cec01",
+          "measureFacets": {
+            "msn": "NGUSPUS"
+          },
+          "route": "total-energy",
+          "unit": "Billion Cubic Feet",
+          "unitName": "Billion Cubic Feet",
+          "selectedBasisLabel": "Natural Gas in Underground Storage, End of Period, Total in Billion Cubic Feet"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1954",
+          "firstValue": "1281.31",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "7804.982",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 72,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {
+            "Not Available": 5
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "unspecified",
+          "scopeNotes": [],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "natural-gas/stor/type",
+          "frequency": "monthly",
+          "facets": {
+            "process": "SAT",
+            "product": "EPG0",
+            "series": "N5030US2"
+          },
+          "unit": "MMCF",
+          "basis": "Natural Gas; Total Underground Storage; Natural gas underground storage end-period inventory; total base and working gas"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "NGUSPUS"
+          },
+          "unit": "Billion Cubic Feet",
+          "basis": "Natural Gas in Underground Storage, End of Period, Total in Billion Cubic Feet"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "NGUSPUS"
+          },
+          "unit": "Billion Cubic Feet",
+          "basis": "Natural Gas in Underground Storage, End of Period, Total in Billion Cubic Feet"
+        },
+        {
+          "route": "natural-gas/stor/sum",
+          "frequency": "monthly",
+          "facets": {
+            "process": "SAT",
+            "product": "EPG0",
+            "series": "N5030US2"
+          },
+          "unit": "MMCF",
+          "basis": "Natural Gas; Total Underground Storage; Natural gas underground storage end-period inventory; total base and working gas"
+        },
+        {
+          "route": "natural-gas/sum/lsum",
+          "frequency": "monthly",
+          "facets": {
+            "process": "SAT",
+            "product": "EPG0",
+            "series": "N5030US2"
+          },
+          "unit": "MMCF",
+          "basis": "Natural Gas; Total Underground Storage; Natural gas underground storage end-period inventory; total base and working gas"
+        }
+      ]
+    },
+    {
+      "cellId": "US|petroleum|generation||",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Fallback only where EIA does not publish a compatible all-size total; verify across routes, places, sectors and frequencies before acceptance.",
+              "utility-scale"
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|petroleum|generation||",
+          "column": "value",
+          "frequency": "annual",
+          "id": "297f7b0afba07d68c89cb706",
+          "measureFacets": {
+            "msn": "PAETPUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatthours",
+          "unitName": "Million Kilowatthours",
+          "selectedBasisLabel": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger); utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1949",
+          "firstValue": "28547.232",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "19259.558",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 77,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "electricity/electric-power-operational-data",
+          "frequency": "quarterly",
+          "facets": {
+            "fueltypeid": "PET",
+            "sectorid": "99"
+          },
+          "unit": "thousand megawatthours",
+          "basis": "Utility Scale Electricity Net Generation; All Sectors; petroleum"
+        },
+        {
+          "route": "electricity/electric-power-operational-data",
+          "frequency": "monthly",
+          "facets": {
+            "fueltypeid": "PET",
+            "sectorid": "99"
+          },
+          "unit": "thousand megawatthours",
+          "basis": "Utility Scale Electricity Net Generation; All Sectors; petroleum"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "PAETPUS"
+          },
+          "unit": "Million Kilowatthours",
+          "basis": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "PAETPUS"
+          },
+          "unit": "Million Kilowatthours",
+          "basis": "Electricity Net Generation From Petroleum, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "12",
+            "countryRegionTypeId": "c",
+            "productId": "32",
+            "unit": "BKWH"
+          },
+          "unit": "billion kilowatthours",
+          "basis": "Oil; Generation"
+        },
+        {
+          "route": "electricity/electric-power-operational-data",
+          "frequency": "annual",
+          "facets": {
+            "fueltypeid": "PET",
+            "sectorid": "99"
+          },
+          "unit": "thousand megawatthours",
+          "basis": "Utility Scale Electricity Net Generation; All Sectors; petroleum"
+        }
+      ]
+    },
+    {
+      "cellId": "US|petroleum|storage||",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Petroleum Stocks, United States, End of Period in Million Barrels",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": []
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|petroleum|storage||",
+          "column": "value",
+          "frequency": "annual",
+          "id": "14e62c1c941745c2a9b656a1",
+          "measureFacets": {
+            "msn": "PAPSPUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Barrels",
+          "unitName": "Million Barrels",
+          "selectedBasisLabel": "Petroleum Stocks, United States, End of Period in Million Barrels"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1949",
+          "firstValue": "603.119",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "1702.169",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 77,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "unspecified",
+          "scopeNotes": [],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "international",
+          "frequency": "quarterly",
+          "facets": {
+            "activityId": "5",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "MBBL"
+          },
+          "unit": "millions barrels",
+          "basis": "Petroleum and other liquids; Stocks, OECD"
+        },
+        {
+          "route": "petroleum/sum/snd",
+          "frequency": "monthly",
+          "facets": {
+            "process": "SAE",
+            "product": "EP00",
+            "series": "MTTSTUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Ending Stocks; U.S. Ending Stocks of Crude Oil and Petroleum Products; U.S. Ending Stocks of Crude Oil and Petroleum Products"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "PAPSPUS"
+          },
+          "unit": "Million Barrels",
+          "basis": "Petroleum Stocks, United States, End of Period in Million Barrels"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "PAPSPUS"
+          },
+          "unit": "Million Barrels",
+          "basis": "Petroleum Stocks, United States, End of Period in Million Barrels"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "5",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "MBBL"
+          },
+          "unit": "millions barrels",
+          "basis": "Petroleum and other liquids; Stocks, OECD"
+        },
+        {
+          "route": "petroleum/stoc/typ",
+          "frequency": "annual",
+          "facets": {
+            "process": "SAE",
+            "product": "EP00",
+            "series": "MTTSTUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Ending Stocks; U.S. Ending Stocks of Crude Oil and Petroleum Products; U.S. Ending Stocks of Crude Oil and Petroleum Products"
+        },
+        {
+          "route": "petroleum/sum/sndw",
+          "frequency": "weekly",
+          "facets": {
+            "process": "SAE",
+            "product": "EP00",
+            "series": "WTTSTUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Ending Stocks; U.S. Ending Stocks of Crude Oil and Petroleum Products; U.S. Ending Stocks of Crude Oil and Petroleum Products"
+        },
+        {
+          "route": "petroleum/stoc/wstk",
+          "frequency": "weekly",
+          "facets": {
+            "process": "SAE",
+            "product": "EP00",
+            "series": "WTTSTUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Ending Stocks; U.S. Ending Stocks of Crude Oil and Petroleum Products; U.S. Ending Stocks of Crude Oil and Petroleum Products"
+        },
+        {
+          "route": "petroleum/sum/snd",
+          "frequency": "annual",
+          "facets": {
+            "process": "SAE",
+            "product": "EP00",
+            "series": "MTTSTUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Ending Stocks; U.S. Ending Stocks of Crude Oil and Petroleum Products; U.S. Ending Stocks of Crude Oil and Petroleum Products"
+        },
+        {
+          "route": "petroleum/stoc/typ",
+          "frequency": "monthly",
+          "facets": {
+            "process": "SAE",
+            "product": "EP00",
+            "series": "MTTSTUS1"
+          },
+          "unit": "MBBL",
+          "basis": "Crude Oil and Petroleum Products; Ending Stocks; U.S. Ending Stocks of Crude Oil and Petroleum Products; U.S. Ending Stocks of Crude Oil and Petroleum Products"
+        },
+        {
+          "route": "international",
+          "frequency": "monthly",
+          "facets": {
+            "activityId": "5",
+            "countryRegionTypeId": "c",
+            "productId": "5",
+            "unit": "MBBL"
+          },
+          "unit": "millions barrels",
+          "basis": "Petroleum and other liquids; Stocks, OECD"
+        }
+      ]
+    },
+    {
+      "cellId": "US|hydro|generation||",
+      "candidate": {
+        "group": "7007c02d3c8a992b4f71",
+        "series": {
+          "basis": {
+            "label": "Hydroelectricity total net generation",
+            "metadataCalls": [
+              252
+            ],
+            "scopeNotes": []
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|hydro|generation||",
+          "column": "value",
+          "frequency": "annual",
+          "id": "cf12841227ee03558a3f4ef2",
+          "measureFacets": {
+            "seriesId": "HYTCP"
+          },
+          "route": "seds",
+          "unit": "Million kilowatthours",
+          "unitName": "Million kilowatthours",
+          "selectedBasisLabel": "Hydroelectricity total net generation"
+        },
+        "place": {
+          "first": "1960",
+          "firstCall": 1478,
+          "firstNumeric": "1960",
+          "firstValue": "149440",
+          "geographyCode": "USA",
+          "last": "2024",
+          "lastCall": 2589,
+          "lastNumeric": "2024",
+          "lastValue": "242896",
+          "nativePlaceFilters": {
+            "stateId": "US"
+          },
+          "nativePlaces": {
+            "stateId": [
+              "US"
+            ]
+          },
+          "numeric": 65,
+          "observationFlags": {},
+          "rows": 65,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "unspecified",
+          "scopeNotes": [],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": null,
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "electricity/electric-power-operational-data",
+          "frequency": "quarterly",
+          "facets": {
+            "fueltypeid": "HYC",
+            "sectorid": "99"
+          },
+          "unit": "thousand megawatthours",
+          "basis": "Utility Scale Electricity Net Generation; All Sectors; Conventional hydroelectric generation; excludes pumped-storage generation"
+        },
+        {
+          "route": "electricity/electric-power-operational-data",
+          "frequency": "monthly",
+          "facets": {
+            "fueltypeid": "HYC",
+            "sectorid": "99"
+          },
+          "unit": "thousand megawatthours",
+          "basis": "Utility Scale Electricity Net Generation; All Sectors; Conventional hydroelectric generation; excludes pumped-storage generation"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "HVETPUS"
+          },
+          "unit": "Million Kilowatthours",
+          "basis": "Electricity Net Generation From Conventional Hydroelectric Power, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "HVETPUS"
+          },
+          "unit": "Million Kilowatthours",
+          "basis": "Electricity Net Generation From Conventional Hydroelectric Power, All Sectors in Million Kilowatthours; utility-scale (1 MW and larger)"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "12",
+            "countryRegionTypeId": "c",
+            "productId": "33",
+            "unit": "BKWH"
+          },
+          "unit": "billion kilowatthours",
+          "basis": "Hydroelectricity; Generation"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "12",
+            "countryRegionTypeId": "c",
+            "productId": "33",
+            "unit": "MTOE"
+          },
+          "unit": "million metric tons of oil equivalent",
+          "basis": "Hydroelectricity; Generation"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "12",
+            "countryRegionTypeId": "c",
+            "productId": "33",
+            "unit": "QBTU"
+          },
+          "unit": "quadrillion Btu",
+          "basis": "Hydroelectricity; Generation"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "12",
+            "countryRegionTypeId": "c",
+            "productId": "33",
+            "unit": "TJ"
+          },
+          "unit": "terajoules",
+          "basis": "Hydroelectricity; Generation"
+        },
+        {
+          "route": "seds",
+          "frequency": "annual",
+          "facets": {
+            "seriesId": "HYTCP"
+          },
+          "unit": "Million kilowatthours",
+          "basis": "Hydroelectricity total net generation"
+        },
+        {
+          "route": "electricity/electric-power-operational-data",
+          "frequency": "annual",
+          "facets": {
+            "fueltypeid": "HYC",
+            "sectorid": "99"
+          },
+          "unit": "thousand megawatthours",
+          "basis": "Utility Scale Electricity Net Generation; All Sectors; Conventional hydroelectric generation; excludes pumped-storage generation"
+        }
+      ]
+    },
+    {
+      "cellId": "US|wind|capacity||",
+      "candidate": {
+        "group": "f1965e2e0bcc9ffc2ffe",
+        "series": {
+          "basis": {
+            "label": "Net summer capacity; utility-scale (1 MW and larger); All sectors; Wind",
+            "metadataCalls": [
+              307,
+              308
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|wind|capacity||",
+          "column": "capability",
+          "frequency": "annual",
+          "id": "9c12930c8a6b62bf71ae4e85",
+          "measureFacets": {
+            "energysourceid": "WND",
+            "producertypeid": "TOT"
+          },
+          "route": "electricity/state-electricity-profiles/capability",
+          "unit": "megawatts",
+          "unitName": "megawatts",
+          "selectedBasisLabel": "Net summer capacity; utility-scale (1 MW and larger); All sectors; Wind"
+        },
+        "place": {
+          "first": "1990",
+          "firstCall": 2559,
+          "firstNumeric": "1990",
+          "firstValue": "1800",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 2575,
+          "lastNumeric": "2025",
+          "lastValue": "159032.1",
+          "nativePlaceFilters": {
+            "stateId": "US"
+          },
+          "nativePlaces": {
+            "stateId": [
+              "US"
+            ]
+          },
+          "numeric": 36,
+          "observationFlags": {},
+          "rows": 36,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "unspecified",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [
+            "wind"
+          ],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": null,
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "WYGBPUS"
+          },
+          "unit": "Million Kilowatts",
+          "basis": "Wind, Net Summer Capacity in Million Kilowatts; utility-scale; end of period"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "WYGBPUS"
+          },
+          "unit": "Million Kilowatts",
+          "basis": "Wind, Net Summer Capacity in Million Kilowatts; utility-scale; end of period"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "7",
+            "countryRegionTypeId": "c",
+            "productId": "37",
+            "unit": "MK"
+          },
+          "unit": "million kilowatts",
+          "basis": "Wind; Capacity"
+        },
+        {
+          "route": "seds",
+          "frequency": "annual",
+          "facets": {
+            "seriesId": "WYGBP"
+          },
+          "unit": "Thousand kilowatts",
+          "basis": "Wind generating units net summer capacity in all sectors; utility-scale; year-end"
+        },
+        {
+          "route": "electricity/state-electricity-profiles/capability",
+          "frequency": "annual",
+          "facets": {
+            "energysourceid": "WND",
+            "producertypeid": "TOT"
+          },
+          "unit": "megawatts",
+          "basis": "Net summer capacity; utility-scale (1 MW and larger); All sectors; Wind"
+        }
+      ]
+    },
+    {
+      "cellId": "US|geothermal|capacity||",
+      "candidate": {
+        "group": "f1965e2e0bcc9ffc2ffe",
+        "series": {
+          "basis": {
+            "label": "Net summer capacity; utility-scale (1 MW and larger); All sectors; Geothermal",
+            "metadataCalls": [
+              307,
+              308
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|geothermal|capacity||",
+          "column": "capability",
+          "frequency": "annual",
+          "id": "9aefa9b85d9e3e92a2156290",
+          "measureFacets": {
+            "energysourceid": "GEO",
+            "producertypeid": "TOT"
+          },
+          "route": "electricity/state-electricity-profiles/capability",
+          "unit": "megawatts",
+          "unitName": "megawatts",
+          "selectedBasisLabel": "Net summer capacity; utility-scale (1 MW and larger); All sectors; Geothermal"
+        },
+        "place": {
+          "first": "1990",
+          "firstCall": 2559,
+          "firstNumeric": "1990",
+          "firstValue": "2574",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 2575,
+          "lastNumeric": "2025",
+          "lastValue": "2683.9",
+          "nativePlaceFilters": {
+            "stateId": "US"
+          },
+          "nativePlaces": {
+            "stateId": [
+              "US"
+            ]
+          },
+          "numeric": 36,
+          "observationFlags": {},
+          "rows": 36,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [],
+          "facilityScope": "unspecified",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [
+            "geothermal"
+          ],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": null,
+      "decision": "Owner standing scope rule: accept EIA headline whole-product measure, retain native scope; no summing or substitution by numeric magnitude. Capacity is labelled utility-scale; storage scope note not verified where metadata is incomplete. Other native bases remain alternatives, not inferred equal values.",
+      "otherCandidates": [
+        {
+          "route": "total-energy",
+          "frequency": "annual",
+          "facets": {
+            "msn": "GEGBPUS"
+          },
+          "unit": "Million Kilowatts",
+          "basis": "Geothermal, Net Summer Capacity in Million Kilowatts; utility-scale; end of period"
+        },
+        {
+          "route": "total-energy",
+          "frequency": "monthly",
+          "facets": {
+            "msn": "GEGBPUS"
+          },
+          "unit": "Million Kilowatts",
+          "basis": "Geothermal, Net Summer Capacity in Million Kilowatts; utility-scale; end of period"
+        },
+        {
+          "route": "international",
+          "frequency": "annual",
+          "facets": {
+            "activityId": "7",
+            "countryRegionTypeId": "c",
+            "productId": "35",
+            "unit": "MK"
+          },
+          "unit": "million kilowatts",
+          "basis": "Geothermal; Capacity"
+        },
+        {
+          "route": "seds",
+          "frequency": "annual",
+          "facets": {
+            "seriesId": "GEGBP"
+          },
+          "unit": "Thousand kilowatts",
+          "basis": "Geothermal generating units net summer capacity in all sectors; utility-scale; year-end"
+        },
+        {
+          "route": "electricity/state-electricity-profiles/capability",
+          "frequency": "annual",
+          "facets": {
+            "energysourceid": "GEO",
+            "producertypeid": "TOT"
+          },
+          "unit": "megawatts",
+          "basis": "Net summer capacity; utility-scale (1 MW and larger); All sectors; Geothermal"
+        }
+      ]
+    },
+    {
+      "cellId": "US|coal|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Coal Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|coal|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "8e8c984b39f57cdba301459d",
+          "measureFacets": {
+            "msn": "CLC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Coal Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": ".258",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": ".048",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|coal|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Coal Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|coal|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "06b4772a5b6de51855c8b0c4",
+          "measureFacets": {
+            "msn": "CLL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Coal Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1472,
+          "firstNumeric": "1989",
+          "firstValue": "298.011",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "168.379",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {
+            "Not Available": 40
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|coal|capacity|industrial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Coal Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|coal|capacity|industrial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "3a50f9a7b86cf3c7b3d9d91c",
+          "measureFacets": {
+            "msn": "CLI9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Coal Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": "4.839",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "1.353",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|fossil fuels|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Fossil Fuels Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|fossil fuels|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "61b834de3245ff2413f85507",
+          "measureFacets": {
+            "msn": "FFC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Fossil Fuels Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": "1.028",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "3.497",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|fossil fuels|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Fossil Fuels Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|fossil fuels|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "7e9d4618e08ee0842021e76c",
+          "measureFacets": {
+            "msn": "FFL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Fossil Fuels Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1472,
+          "firstNumeric": "1949",
+          "firstValue": "44.887",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "689.005",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 77,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|fossil fuels|capacity|industrial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Fossil Fuels Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|fossil fuels|capacity|industrial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "e3bc4529ac1d08b241924102",
+          "measureFacets": {
+            "msn": "FFI9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Fossil Fuels Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": "16.477",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "19.087",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|geothermal|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Geothermal Commercial Sector, Net Summer Capacity  in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|geothermal|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "543885b7c92265c442bda0f2",
+          "measureFacets": {
+            "msn": "GEC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Geothermal Commercial Sector, Net Summer Capacity  in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "2001",
+          "firstValue": "0",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "0",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 25,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {
+            "No Data Reported": 12
+          },
+          "zero": 21
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|geothermal|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Geothermal Electric Power Sector, Net Summer Capacity  in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|geothermal|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "878a637df57513481e5b8021",
+          "measureFacets": {
+            "msn": "GEL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Geothermal Electric Power Sector, Net Summer Capacity  in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1472,
+          "firstNumeric": "1960",
+          "firstValue": ".011",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "2.696",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 66,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {
+            "Not Available": 11
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|hydro|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Conventional Hydroelectric Power Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|hydro|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "15e334e481b2ca53229a20a2",
+          "measureFacets": {
+            "msn": "HVC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Conventional Hydroelectric Power Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": ".018",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": ".085",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|hydro|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Conventional Hydroelectric Power Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|hydro|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "7d5a27cdcb007257b10bac66",
+          "measureFacets": {
+            "msn": "HVL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Conventional Hydroelectric Power Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1472,
+          "firstNumeric": "1949",
+          "firstValue": "18.5",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "79.607",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 77,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|hydro|capacity|industrial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Conventional Hydroelectric Power Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|hydro|capacity|industrial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "0c81c8acc3b1e1d89064ac13",
+          "measureFacets": {
+            "msn": "HVI9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Conventional Hydroelectric Power Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": ".513",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": ".201",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|natural gas|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Natural Gas Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|natural gas|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "74a21ebeda29dd220780a4a0",
+          "measureFacets": {
+            "msn": "NGC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Natural Gas Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1486,
+          "firstNumeric": "1989",
+          "firstValue": ".579",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1499,
+          "lastNumeric": "2025",
+          "lastValue": "2.439",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|natural gas|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Natural Gas Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|natural gas|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "bfa3dee40a7d92d9882adb79",
+          "measureFacets": {
+            "msn": "NGL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Natural Gas Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1989",
+          "firstValue": "125.38",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "493.699",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {
+            "Not Available": 40
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|natural gas|capacity|industrial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Natural Gas Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|natural gas|capacity|industrial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "ff6175d3ece631a58851fbf0",
+          "measureFacets": {
+            "msn": "NGI9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Natural Gas Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1488,
+          "firstNumeric": "1989",
+          "firstValue": "9.719",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "15.965",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|nuclear|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Nuclear Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|nuclear|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "11bd44d48f0bf50945914a5d",
+          "measureFacets": {
+            "msn": "NUL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Nuclear Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1949",
+          "firstValue": "0",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "96.88",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 77,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {},
+          "zero": 8
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|petroleum|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Petroleum Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|petroleum|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "96eef6606a6da078ba225ab1",
+          "measureFacets": {
+            "msn": "PAC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Petroleum Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1488,
+          "firstNumeric": "1989",
+          "firstValue": ".191",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "1.01",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|petroleum|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Petroleum Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|petroleum|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "375b0b3515f1e4dd04dd4545",
+          "measureFacets": {
+            "msn": "PAL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Petroleum Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1989",
+          "firstValue": "78.131",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "26.593",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {
+            "Not Available": 40
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|petroleum|capacity|industrial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Petroleum Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|petroleum|capacity|industrial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "c04de9b6ca2b0748e20f93cd",
+          "measureFacets": {
+            "msn": "PAI9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Petroleum Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1488,
+          "firstNumeric": "1989",
+          "firstValue": ".738",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": ".488",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 37,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {},
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|wind|capacity|commercial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Wind Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|wind|capacity|commercial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "a4f1225c285c9dad186d635c",
+          "measureFacets": {
+            "msn": "WYC9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Wind Commercial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1488,
+          "firstNumeric": "2009",
+          "firstValue": ".001",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": ".069",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 17,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {
+            "No Data Reported": 20
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|wind|capacity|electric power|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Wind Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|wind|capacity|electric power|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "2711ee9a10227a146843e484",
+          "measureFacets": {
+            "msn": "WYL9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Wind Electric Power Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1949",
+          "firstCall": 1474,
+          "firstNumeric": "1981",
+          "firstValue": "0",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": "158.125",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 45,
+          "observationFlags": {},
+          "rows": 77,
+          "symbols": {
+            "Not Available": 32
+          },
+          "zero": 1
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "historicalScope": "MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population."
+            },
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    },
+    {
+      "cellId": "US|wind|capacity|industrial|",
+      "candidate": {
+        "group": "5b84deacae2bc535e0bc",
+        "series": {
+          "basis": {
+            "label": "Wind Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period",
+            "metadataCalls": [
+              245,
+              985
+            ],
+            "scopeNotes": [
+              "Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.",
+              "utility-scale",
+              "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            ]
+          },
+          "candidateStatus": "whole product",
+          "cellId": "US|wind|capacity|industrial|",
+          "column": "value",
+          "frequency": "annual",
+          "id": "0e460be7f397466a0c211cd6",
+          "measureFacets": {
+            "msn": "WYI9PUS"
+          },
+          "route": "total-energy",
+          "unit": "Million Kilowatts",
+          "unitName": "Million Kilowatts",
+          "selectedBasisLabel": "Wind Industrial Sector, Net Summer Capacity in Million Kilowatts; utility-scale; end of period; utility-scale (1 MW and larger)"
+        },
+        "place": {
+          "first": "1989",
+          "firstCall": 1488,
+          "firstNumeric": "2010",
+          "firstValue": ".002",
+          "geographyCode": "USA",
+          "last": "2025",
+          "lastCall": 1508,
+          "lastNumeric": "2025",
+          "lastValue": ".077",
+          "nativePlaceFilters": {},
+          "nativePlaces": {},
+          "numeric": 16,
+          "observationFlags": {},
+          "rows": 37,
+          "symbols": {
+            "No Data Reported": 21
+          },
+          "zero": 0
+        },
+        "constraints": {
+          "pending": [
+            {
+              "field": "historicalFuelScope",
+              "value": "Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods."
+            }
+          ],
+          "facilityScope": "utility-scale",
+          "scopeNotes": [
+            {
+              "scopeDecision": "standingScopeRule"
+            }
+          ],
+          "nativeProductDefinitions": [],
+          "verifiedBasisGroup": null
+        }
+      },
+      "scope": {
+        "url": "https://www.eia.gov/totalenergy/data/monthly/",
+        "quote": "A publication of recent and historical U.S. energy statistics.",
+        "checked": "2026-10-29",
+        "placeKind": "US",
+        "placeFilter": null,
+        "restriction": "Only whole-US series qualify; bilateral partner names do not establish country scope. No country or state mappings from this route.",
+        "ownerDecision": "owner-clarifications.json#documentedUSScope"
+      },
+      "decision": "Existing native headline sector generating-capacity total, utility-scale (1 MW and larger). Historical fuel-scope notes are retained verbatim; EIA scope note not verified. Broader solar/all-fuel measures excluded from this resolution.",
+      "otherCandidates": []
+    }
+  ],
+  "remaining": [
+    {
+      "cellId": "US|natural gas|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|production||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|reserves||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|capacity||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|coal|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|capacity||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|production||",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|prices||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|generation||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|storage||",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|biofuels|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|coal|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|coal|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|capacity|commercial|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|capacity|electric power|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|capacity|industrial|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|consumption|electric power|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|electricity|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|fossil fuels|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|generation|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|geothermal|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|consumption|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|hydro|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|natural gas|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|natural gas|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|natural gas|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|natural gas|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|consumption|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|consumption|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|consumption|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|generation|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|generation|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|nuclear|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|capacity|commercial|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|capacity|electric power|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|capacity|industrial|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|renewable|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|capacity|commercial|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|capacity|electric power|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|capacity|industrial|",
+      "reason": "Whole observations exist; scope/default reconciliation pending",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|solar|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|generation|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|generation|electric power|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|generation|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|storage|electric power|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|total energy|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|consumption|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|generation|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|prices|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|prices|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|prices|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|storage|commercial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|storage|industrial|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|wind|storage|residential|",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|production||crude oil",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|generation||crude oil",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|imports||crude oil",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|exports||crude oil",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|reserves||crude oil",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|capacity||crude oil",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|consumption||gasoline",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|production||gasoline",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|generation||gasoline",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|reserves||gasoline",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    },
+    {
+      "cellId": "US|petroleum|capacity||gasoline",
+      "reason": "Unresolved metadata could fit",
+      "resolution": "No verified broader/compatible definition within bounded review; remain not checked. OB2/OBW/95 never support absence."
+    }
+  ]
+}

@@ -14,7 +14,7 @@ import {GET,POST} from '../app/api/search-eia/route.js';
 const read=path=>JSON.parse(readFileSync(new URL('../'+path,import.meta.url)));
 const keys=read('tests/fixtures/eia/locked-form/answer-key.json');
 const gold=read('tests/fixtures/eia/locked-form/gold-forms.json');
-const oracle=read('evidence/eia-lookup-list/expected-data.json');
+const oracle=read('evidence/eia-finish/expected-data-revision.json');
 const checks=[...read('evidence/eia-lookup-list/row-checks-1.json').records,...read('evidence/eia-lookup-list/row-checks-2.json').records];
 const key=id=>keys.find(k=>k.id===id);
 const payload=id=>({interpreter:'openai_locked_form',lockedForm:upgradeV1Form(gold.find(g=>g.id===id).form)});
@@ -87,7 +87,7 @@ test('different units, definitions or frequencies never share a comparison chart
 test('no result for an unchecked concept is not called EIA nonpublication',async()=>{
  const p=payload('O1');p.lockedForm.topics[0]={product:'coal',activity:'prices',quoted_words:'coal prices'};
  const catalog=structuredClone(lookupCatalog);catalog.rows=catalog.rows.filter(r=>!(r.product==='coal'&&r.activity==='prices'));
- const result=await searchLookup('united states coal prices',p,{},{catalog,fetchData:()=>{throw Error('Unchecked measure must not fetch');}});const entry=result.results[0].countries[0];assert.equal(entry.status,'not_supported');assert.match(entry.message,/has no checked/);assert.equal(new Set(entry.alternatives.map(a=>a.label)).size,entry.alternatives.length);assert.equal(result.freeText,true);
+ const result=await searchLookup('united states coal prices',p,{},{catalog,fetchData:()=>{throw Error('Unchecked measure must not fetch');}});const entry=result.results[0].countries[0];assert.equal(entry.status,'not_supported');assert.match(entry.message,/Not yet in our checked list/);assert.equal(new Set(entry.alternatives.map(a=>a.label)).size,entry.alternatives.length);assert.equal(result.freeText,true);
 });
 test('rules outage path keeps explicit qualifiers and clarifies ambiguous gas',async()=>{
  const fallback={interpreter:'rules',outageReason:'openai_not_configured'};

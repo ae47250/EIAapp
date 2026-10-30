@@ -70,7 +70,7 @@ test('nonnumeric EIA symbols survive parser, table and Excel; only numeric zero 
  assert.equal(observationText(series.observations[0]),'Not applicable');assert.equal(getCleanPoints(series.points).length,2);
  const text=new TextDecoder().decode(await buildXlsx(series).arrayBuffer());
  for(const s of ['Not applicable','Not available','Withheld','--','52317.55723326','Native facets','BRA'])assert.ok(text.includes(s),s);
- assert.equal(formatNumber(series.points.at(-1).value),'52,317.5572');assert.match(headlineFor(series),/52,317.5572 Btu in 2004 \(EIA\)/);
+ assert.equal(formatNumber(series.points.at(-1).value),'52,318');assert.match(headlineFor(series),/52,318 Btu in 2004 \(EIA\)/);
  assert.doesNotMatch(seriesDescription(series),/country=BRA/);
  const countries=[{geography:geo,series},{geography:{code:'X',name:'X'},series:{...series,unit:'short tons',points:[{period:'2004',value:0}]}},{geography:{code:'Y',name:'Y'},series:{...series,points:[{period:'2004',value:null,symbol:'W',meaning:'Withheld'}]}}];
  assert.equal(chartCountries(countries).length,1);
@@ -87,7 +87,7 @@ test('original defaults win and other checked bases are disclosed without replac
 test('a current-year default may fill an empty annual gap with a checked monthly series, never an explicit annual request',async()=>{
  const c=get('D14');assert.equal(checkLockedFormV2(c.form,c.query).valid,true);
  const calls=[];const fetchData=async s=>{calls.push(s);return {rows:s.frequency==='monthly'?[{...s.facets,period:'2026-01',value:3.45,unitName:'Dollars per Gallon Including Taxes'}]:[],total:s.frequency==='monthly'?1:0,complete:true};};
- const r=await searchLookup(c.query,{interpreter:'openai_locked_form',lockedForm:c.form},{},{fetchData});assert.equal(r.selectedSeries.frequency,'monthly');assert.match(r.selectedSeries.fallbackLabel,/annual data is not available/);assert.equal(calls[0].frequency,'annual');
+ const r=await searchLookup(c.query,{interpreter:'openai_locked_form',lockedForm:c.form},{},{fetchData});assert.equal(r.selectedSeries.frequency,'monthly');assert.match(r.selectedSeries.fallbackLabel,/annual data is not available/);assert.equal(calls[0].frequency,'monthly');
  const f=structuredClone(c.form);f.frequency={value:'annual',explicit:true,quoted_words:'annual'};calls.length=0;
  const empty=await searchLookup(c.query+' annual',{interpreter:'openai_locked_form',lockedForm:f},{},{fetchData});assert.equal(empty.selectedSeries,null);assert.ok(calls.every(s=>s.frequency==='annual'));
 });

@@ -1,29 +1,23 @@
-import {observationStatus,headlineFor} from '../../lib/client/lookup-display.js';
+import {observationStatus,headlineFor,seriesCardText} from '../../lib/client/lookup-display.js';
 import { downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
 import { formatCoverageParts, formatLatestValue } from "../../lib/client/formatting.js";
 import SeriesChart from "./SeriesChart.js";
 
 export default function SelectedSeries({ series, source }) {
+  const card=series.lookup?seriesCardText(series):null;
   const coverage = formatCoverageParts(series.coverage);
   const chartKey = `${series.countryCode}-${series.productId}-${series.activityId}-${series.unitFacet}`;
 
   return (
     <article className="card">
       <div className="selected-series-heading">
-        <h2>{series.placeDisplayName || series.country || ""}</h2>
-        <h2>{series.title || ""}</h2>
+        {card?<h2>{card.title}</h2>:<><h2>{series.placeDisplayName || series.country || ""}</h2><h2>{series.title || ""}</h2></>}
       </div>
       {series.lookup ? <><p data-headline={series.countryCode}>{headlineFor(series)}</p><p data-status-label>{observationStatus(series.points)}</p></> : null}
       <div className="selected-source">Source: {source || "EIA"}</div>
       {series.lookup ? (
         <div className="muted">
-          <p>{series.description}</p>
-          <p>Measurement basis: {series.basisLabel}. {series.sectorLabel}. Units: {series.unit}. Frequency: {series.frequency}.</p>
-          {series.otherMeasuresExist ? <p>Other bases exist (Other measures exist).</p> : null}
-          {series.regionLabel ? <p>{series.regionLabel}</p> : null}
-          {series.fallbackLabel ? <p>{series.fallbackLabel}</p> : null}
-          {series.alternative ? <p>Alternative selected: {series.basisLabel}. This differs from the original request.</p> : null}
-          {series.completenessNote ? <p role="status">{series.completenessNote}</p> : null}
+          {card.lines.map(line=><p key={line}>{line}</p>)}
           <button className="ghost-button" type="button" onClick={() => downloadSeriesWorkbook(series)}>Excel</button>
         </div>
       ) : null}

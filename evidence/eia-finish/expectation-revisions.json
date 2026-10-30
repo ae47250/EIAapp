@@ -1,0 +1,55 @@
+{
+  "authority": "Owner Job 6 R1/R4/R6/R12 and standing version rule; historical tests preserved unchanged as gzip plus Git base. No pass mark change.",
+  "changes": [
+    {
+      "case": "F2",
+      "before": "EIA does not publish total petroleum exports for Mexico.",
+      "after": "Not yet in our checked list: total petroleum exports for Mexico.",
+      "ownerRequirement": "R4"
+    },
+    {
+      "case": "F2",
+      "before": "EIA does not publish total petroleum exports for Canada.",
+      "after": "Not yet in our checked list: total petroleum exports for Canada.",
+      "ownerRequirement": "R4"
+    },
+    {
+      "case": "I6",
+      "before": "EIA does not publish total energy consumption excluding transportation for New York.",
+      "after": "Not yet in our checked list: total energy consumption excluding transportation for New York.",
+      "ownerRequirement": "R4"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/eia-coverage-app.test.js",
+      "changes": [
+        "R6 large-number rounding",
+        "R12 nominal retail gasoline precedes inflation-adjusted annual cost; initial request is monthly"
+      ]
+    },
+    {
+      "file": "tests/eia-coverage-followup.test.js",
+      "changes": [
+        "R1 ignore model choices/labels; retain code-defined approved named parts for actual gas query"
+      ]
+    },
+    {
+      "file": "tests/eia-lookup-search.test.js",
+      "changes": [
+        "R4 exact honest status wording and separately versioned expected-data only"
+      ]
+    }
+  ],
+  "scorerRevision": {
+    "historical": "scripts/eia-lookup/score-d-revision-2.js",
+    "new": "scripts/eia-lookup/score-d-finish.js",
+    "onlyChangedCheck": "R6 headline whole-number/four-significant-digit formatting and actual Excel latest value/period equality; all other D checks and pass marks unchanged",
+    "ownerRefinement": "153.3456 -> 153.3; 0.681696 -> 0.6817; 9.6 unchanged; abs(value) >= 1000 whole; Excel full precision"
+  },
+  "independentDataRevision": {
+    "historical": "evidence/eia-coverage/post-run-audit/independent-data-revision-2.json.gz",
+    "new": "evidence/eia-finish/independent-data-revision.json.gz",
+    "onlyChangedCase": "I6 status wording under R4, preserving the excluded transportation scope"
+  }
+}

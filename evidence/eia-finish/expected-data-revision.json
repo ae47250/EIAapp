@@ -1,0 +1,1656 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "9e6dda37443383fb2abce06a60f281c1bcd135a4",
+  "provenance": "Written from the owner meaning keys, owner measurement decisions and official EIA metadata/observations before any lookup row. No application output used. Self-adjudicated until independently checked.",
+  "rules": {
+    "allEntriesRequired": true,
+    "everyEntryMustBeShown": true,
+    "wrongDataMustNeverBeUnlabelled": true,
+    "units": "EIA published units; no conversion",
+    "wholeProduct": "EIA's own total counts as the whole product under its labelled definition. Subsets require explicit qualification or user selection as alternatives.",
+    "fallback": "A different frequency is accepted only with an explicit label.",
+    "notAvailable": "Matches the frozen entry only when its message and available labelled alternatives are shown; not counted from an API error.",
+    "clarification": "Requires the original meaning key clarification about and options."
+  },
+  "passMarks": {
+    "original24": {
+      "minimumCorrect": 23,
+      "maximumUnlabelledWrongData": 0
+    },
+    "independent24Responses": {
+      "minimumCorrect": 21,
+      "maximumUnlabelledWrongData": 0
+    },
+    "requiredRows": "Every row needed by the 36 questions survives C.3 without changing route or measure."
+  },
+  "questions": [
+    {
+      "id": "O1",
+      "query": "total energy consumption united states",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "USA",
+          "product": "total energy",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "seds",
+          "measure": "value",
+          "facets": {
+            "seriesId": "TETCB",
+            "stateId": "US"
+          },
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "eiaName": "Total energy consumption",
+          "acceptableMeasurementBases": [
+            "Total energy consumption across all sectors"
+          ],
+          "requiredLabels": [
+            "Total energy consumption across all sectors"
+          ],
+          "metadataReferences": [
+            "metadata/sample-seds-TETCB-US.json",
+            "metadata/seds-route.json",
+            "metadata/seds-series.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O2",
+      "query": "total energyy consumption usa",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "USA",
+          "product": "total energy",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "seds",
+          "measure": "value",
+          "facets": {
+            "seriesId": "TETCB",
+            "stateId": "US"
+          },
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "eiaName": "Total energy consumption",
+          "acceptableMeasurementBases": [
+            "Total energy consumption across all sectors"
+          ],
+          "requiredLabels": [
+            "Total energy consumption across all sectors"
+          ],
+          "metadataReferences": [
+            "metadata/sample-seds-TETCB-US.json",
+            "metadata/seds-route.json",
+            "metadata/seds-series.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O3",
+      "query": "brazil and japan electrciity consumption",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "BRA",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "2",
+            "activityId": "2",
+            "countryRegionId": "BRA",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Electricity net consumption",
+          "acceptableMeasurementBases": [
+            "Electricity net consumption"
+          ],
+          "requiredLabels": [
+            "Electricity net consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-2-2-BRA.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "JPN",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "2",
+            "activityId": "2",
+            "countryRegionId": "JPN",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Electricity net consumption",
+          "acceptableMeasurementBases": [
+            "Electricity net consumption"
+          ],
+          "requiredLabels": [
+            "Electricity net consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-2-2-JPN.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O4",
+      "query": "energy consumption iceland",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "ISL",
+          "product": "total energy",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "44",
+            "activityId": "2",
+            "countryRegionId": "ISL",
+            "unit": "QBTU"
+          },
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "eiaName": "Total energy consumption",
+          "acceptableMeasurementBases": [
+            "Primary energy consumption"
+          ],
+          "requiredLabels": [
+            "Primary energy consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-44-2-ISL.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O5",
+      "query": "energy consumption icealnd",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "ISL",
+          "product": "total energy",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "44",
+            "activityId": "2",
+            "countryRegionId": "ISL",
+            "unit": "QBTU"
+          },
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "eiaName": "Total energy consumption",
+          "acceptableMeasurementBases": [
+            "Primary energy consumption"
+          ],
+          "requiredLabels": [
+            "Primary energy consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-44-2-ISL.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O6",
+      "query": "energy consumption iceland not ireland",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "ISL",
+          "product": "total energy",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "44",
+            "activityId": "2",
+            "countryRegionId": "ISL",
+            "unit": "QBTU"
+          },
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "eiaName": "Total energy consumption",
+          "acceptableMeasurementBases": [
+            "Primary energy consumption"
+          ],
+          "requiredLabels": [
+            "Primary energy consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-44-2-ISL.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O7",
+      "query": "natural gas production and consumption in Texas annually",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": true,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "TX",
+          "product": "natural gas",
+          "activity": "production",
+          "outcome": "data",
+          "route": "natural-gas/prod/sum",
+          "measure": "value",
+          "facets": {
+            "product": "EPG0",
+            "process": "VGM",
+            "duoarea": "STX"
+          },
+          "frequency": "annual",
+          "unit": "Million cubic feet",
+          "eiaName": "Texas Natural Gas Marketed Production (MMcf)",
+          "acceptableMeasurementBases": [
+            "Marketed production"
+          ],
+          "requiredLabels": [
+            "Marketed production"
+          ],
+          "metadataReferences": [
+            "metadata/sample-ng-market-TX.json",
+            "metadata/ng-production-route.json",
+            "metadata/ng-production-processes.json"
+          ]
+        },
+        {
+          "geographyCode": "TX",
+          "product": "natural gas",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "natural-gas/cons/sum",
+          "measure": "value",
+          "facets": {
+            "product": "EPG0",
+            "process": "VC0",
+            "duoarea": "STX"
+          },
+          "frequency": "annual",
+          "unit": "Million cubic feet",
+          "eiaName": "Texas Natural Gas Total Consumption (MMcf)",
+          "acceptableMeasurementBases": [
+            "Total consumption"
+          ],
+          "requiredLabels": [
+            "Total consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-ng-consume-TX.json",
+            "metadata/ng-consumption-route.json",
+            "metadata/ng-consumption-processes.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O8",
+      "query": "monthly electricity consumption in California",
+      "requestedFrequency": "monthly",
+      "frequencyExplicit": true,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "CA",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "sales",
+          "facets": {
+            "stateid": "CA",
+            "sectorid": "ALL"
+          },
+          "frequency": "monthly",
+          "unit": "million kilowatt hours",
+          "eiaName": "Electricity Sales to Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "requiredLabels": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-sales-CA-monthly.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json",
+            "owner-decisions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O9",
+      "query": "electricity consumption in Georgia and France",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "GEO",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "2",
+            "activityId": "2",
+            "countryRegionId": "GEO",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Electricity net consumption",
+          "acceptableMeasurementBases": [
+            "Electricity net consumption"
+          ],
+          "requiredLabels": [
+            "Electricity net consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-2-2-GEO.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "FRA",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "2",
+            "activityId": "2",
+            "countryRegionId": "FRA",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Electricity net consumption",
+          "acceptableMeasurementBases": [
+            "Electricity net consumption"
+          ],
+          "requiredLabels": [
+            "Electricity net consumption"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-2-2-FRA.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O10",
+      "query": "gas consumption in the United States",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "USA",
+          "product": null,
+          "activity": "consumption",
+          "outcome": "clarification: product"
+        }
+      ]
+    },
+    {
+      "id": "F1",
+      "query": "coal production in germany, not poland",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "DEU",
+          "product": "coal",
+          "activity": "production",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "1",
+            "countryRegionId": "DEU",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal production",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-1-DEU.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "MEX",
+          "product": "petroleum",
+          "activity": "exports",
+          "outcome": "not_available",
+          "scope": "The complete annual exports returned by the EIA international route for this country, all products and units, plus explicit checks of petroleum aggregate codes 5 and 53.",
+          "metadataReferences": [
+            "metadata/intl-export-products-MEX.json",
+            "metadata/sample-intl-5-4-MEX.json",
+            "metadata/sample-intl-53-4-MEX.json",
+            "metadata/international-route.json"
+          ],
+          "message": "Not yet in our checked list: total petroleum exports for Mexico.",
+          "requiredAlternatives": [
+            {
+              "label": "Crude oil including lease condensate exports",
+              "selector": {
+                "outcome": "data",
+                "route": "international",
+                "measure": "value",
+                "facets": {
+                  "productId": "57",
+                  "activityId": "4",
+                  "countryRegionId": "MEX",
+                  "unit": "TBPD"
+                },
+                "frequency": "annual",
+                "unit": "thousand barrels per day",
+                "eiaName": "Crude oil including lease condensate exports",
+                "acceptableMeasurementBases": [
+                  "Crude oil including lease condensate"
+                ],
+                "requiredLabels": [
+                  "Crude oil including lease condensate"
+                ],
+                "metadataReferences": [
+                  "metadata/sample-intl-57-4-MEX.json",
+                  "metadata/international-route.json",
+                  "metadata/cached-selected-definitions.json"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "geographyCode": "CAN",
+          "product": "petroleum",
+          "activity": "exports",
+          "outcome": "not_available",
+          "scope": "The complete annual exports returned by the EIA international route for this country, all products and units, plus explicit checks of petroleum aggregate codes 5 and 53.",
+          "metadataReferences": [
+            "metadata/intl-export-products-CAN.json",
+            "metadata/sample-intl-5-4-CAN.json",
+            "metadata/sample-intl-53-4-CAN.json",
+            "metadata/international-route.json"
+          ],
+          "message": "Not yet in our checked list: total petroleum exports for Canada.",
+          "requiredAlternatives": [
+            {
+              "label": "Crude oil including lease condensate exports",
+              "selector": {
+                "outcome": "data",
+                "route": "international",
+                "measure": "value",
+                "facets": {
+                  "productId": "57",
+                  "activityId": "4",
+                  "countryRegionId": "CAN",
+                  "unit": "TBPD"
+                },
+                "frequency": "annual",
+                "unit": "thousand barrels per day",
+                "eiaName": "Crude oil including lease condensate exports",
+                "acceptableMeasurementBases": [
+                  "Crude oil including lease condensate"
+                ],
+                "requiredLabels": [
+                  "Crude oil including lease condensate"
+                ],
+                "metadataReferences": [
+                  "metadata/sample-intl-57-4-CAN.json",
+                  "metadata/international-route.json",
+                  "metadata/cached-selected-definitions.json"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F3",
+      "query": "electricity prices in georgia",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "GA",
+          "product": "electricity",
+          "activity": "prices",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "price",
+          "facets": {
+            "stateid": "GA",
+            "sectorid": "ALL"
+          },
+          "frequency": "annual",
+          "unit": "cents per kilowatt-hour",
+          "eiaName": "Average Price of Electricity to Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Average retail price, all sectors"
+          ],
+          "requiredLabels": [
+            "Average retail price, all sectors"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-prices-GA-annual.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F4",
+      "query": "solar generation in the gambia",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "GMB",
+          "product": "solar",
+          "activity": "generation",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "116",
+            "activityId": "12",
+            "countryRegionId": "GMB",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Solar electricity net generation",
+          "acceptableMeasurementBases": [
+            "Solar electricity net generation"
+          ],
+          "requiredLabels": [
+            "Solar electricity net generation"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-116-12-GMB.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F5",
+      "query": "can you show us wind capacity in Denmark",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "DNK",
+          "product": "wind",
+          "activity": "capacity",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "37",
+            "activityId": "7",
+            "countryRegionId": "DNK",
+            "unit": "MK"
+          },
+          "frequency": "annual",
+          "unit": "million kilowatts",
+          "eiaName": "Wind electricity installed capacity",
+          "acceptableMeasurementBases": [
+            "Installed wind electricity capacity"
+          ],
+          "requiredLabels": [
+            "Installed wind electricity capacity"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-37-7-DNK.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F6",
+      "query": "quarterly natural gas imports to Japan",
+      "requestedFrequency": "quarterly",
+      "frequencyExplicit": true,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "JPN",
+          "product": "natural gas",
+          "activity": "imports",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "26",
+            "activityId": "3",
+            "countryRegionId": "JPN",
+            "unit": "BCF"
+          },
+          "frequency": "annual",
+          "unit": "billion cubic feet",
+          "eiaName": "Dry natural gas imports",
+          "acceptableMeasurementBases": [
+            "Dry natural gas imports"
+          ],
+          "requiredLabels": [
+            "Dry natural gas imports",
+            "Annual data shown; quarterly data is not available for this measure."
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-26-3-JPN.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json",
+            "metadata/ng-imports-JPN-quarterly.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F7",
+      "query": "nuclear generaton france and germnay",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "FRA",
+          "product": "nuclear",
+          "activity": "generation",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "27",
+            "activityId": "12",
+            "countryRegionId": "FRA",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Nuclear electricity net generation",
+          "acceptableMeasurementBases": [
+            "Nuclear electricity net generation"
+          ],
+          "requiredLabels": [
+            "Nuclear electricity net generation"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-27-12-FRA.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "DEU",
+          "product": "nuclear",
+          "activity": "generation",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "27",
+            "activityId": "12",
+            "countryRegionId": "DEU",
+            "unit": "BKWH"
+          },
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "eiaName": "Nuclear electricity net generation",
+          "acceptableMeasurementBases": [
+            "Nuclear electricity net generation"
+          ],
+          "requiredLabels": [
+            "Nuclear electricity net generation"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-27-12-DEU.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F8",
+      "query": "coal consumption in China and India but not Japan",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "CHN",
+          "product": "coal",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "2",
+            "countryRegionId": "CHN",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal consumption",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-2-CHN.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "IND",
+          "product": "coal",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "2",
+            "countryRegionId": "IND",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal consumption",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-2-IND.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F9",
+      "query": "gas prices in Ohio",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "OH",
+          "product": null,
+          "activity": "prices",
+          "outcome": "clarification: product"
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "query": "electricity consumption in Georgia and Florida",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "GA",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "sales",
+          "facets": {
+            "stateid": "GA",
+            "sectorid": "ALL"
+          },
+          "frequency": "annual",
+          "unit": "million kilowatt hours",
+          "eiaName": "Electricity Sales to Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "requiredLabels": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-sales-GA-annual.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json",
+            "owner-decisions.json"
+          ]
+        },
+        {
+          "geographyCode": "FL",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "sales",
+          "facets": {
+            "stateid": "FL",
+            "sectorid": "ALL"
+          },
+          "frequency": "annual",
+          "unit": "million kilowatt hours",
+          "eiaName": "Electricity Sales to Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "requiredLabels": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-sales-FL-annual.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json",
+            "owner-decisions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F11",
+      "query": "monthly crude oil production in North Dakota",
+      "requestedFrequency": "monthly",
+      "frequencyExplicit": true,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "ND",
+          "product": "petroleum",
+          "activity": "production",
+          "outcome": "data",
+          "route": "petroleum/crd/crpdn",
+          "measure": "value",
+          "facets": {
+            "product": "EPC0",
+            "process": "FPF",
+            "duoarea": "SND"
+          },
+          "frequency": "monthly",
+          "unit": "Thousand barrels",
+          "eiaName": "North Dakota Field Production of Crude Oil (Thousand Barrels)",
+          "acceptableMeasurementBases": [
+            "Crude oil field production"
+          ],
+          "requiredLabels": [
+            "Crude oil field production"
+          ],
+          "metadataReferences": [
+            "metadata/sample-crude-production-ND.json",
+            "metadata/petroleum-production-route.json",
+            "metadata/petroleum-production-products.json",
+            "metadata/petroleum-production-processes.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F12",
+      "query": "Texas electricity consumption annual",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": true,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "TX",
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "sales",
+          "facets": {
+            "stateid": "TX",
+            "sectorid": "ALL"
+          },
+          "frequency": "annual",
+          "unit": "million kilowatt hours",
+          "eiaName": "Electricity Sales to Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "requiredLabels": [
+            "Retail sales; excludes electricity generated and used on-site"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-sales-TX-annual.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json",
+            "owner-decisions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F13",
+      "query": "electricity consumption in springfield",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": null,
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "clarification: geography"
+        }
+      ]
+    },
+    {
+      "id": "F14",
+      "query": "renewable generation in Texas except hydro",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "TX",
+          "product": "renewable",
+          "activity": "generation",
+          "outcome": "data",
+          "route": "electricity/electric-power-operational-data",
+          "measure": "generation",
+          "facets": {
+            "fueltypeid": "AOR",
+            "sectorid": "99",
+            "location": "TX"
+          },
+          "frequency": "annual",
+          "unit": "thousand megawatthours",
+          "eiaName": "Net generation : Texas : all sectors : other renewables (total) : annual",
+          "acceptableMeasurementBases": [
+            "Utility-scale non-hydro renewable net generation, all sectors"
+          ],
+          "requiredLabels": [
+            "Utility-scale non-hydro renewable net generation, all sectors"
+          ],
+          "metadataReferences": [
+            "metadata/sample-generation-AOR-TX.json",
+            "metadata/electricity-generation-route.json",
+            "metadata/electricity-generation-fuels-default.json",
+            "metadata/electricity-generation-sectors-default.json",
+            "metadata/cached-selected-definitions.json",
+            "metadata/generation-TX-fuels-2024.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I1",
+      "query": "how much crude oil does saudi arabia export? not sure if eia even has that",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "SAU",
+          "product": "petroleum",
+          "activity": "exports",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "57",
+            "activityId": "4",
+            "countryRegionId": "SAU",
+            "unit": "TBPD"
+          },
+          "frequency": "annual",
+          "unit": "thousand barrels per day",
+          "eiaName": "Crude oil including lease condensate exports",
+          "acceptableMeasurementBases": [
+            "Crude oil including lease condensate"
+          ],
+          "requiredLabels": [
+            "Crude oil including lease condensate"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-57-4-SAU.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I2",
+      "query": "residential electricity prices in pensilvania per month",
+      "requestedFrequency": "monthly",
+      "frequencyExplicit": true,
+      "sector": "residential",
+      "entries": [
+        {
+          "geographyCode": "PA",
+          "product": "electricity",
+          "activity": "prices",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "price",
+          "facets": {
+            "stateid": "PA",
+            "sectorid": "RES"
+          },
+          "frequency": "monthly",
+          "unit": "cents per kilowatt-hour",
+          "eiaName": "Average Price of Electricity to Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Average retail price, residential sector"
+          ],
+          "requiredLabels": [
+            "Average retail price, residential sector"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-prices-PA-monthly.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I3",
+      "query": "coal production and exports for australia and indonesia",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "AUS",
+          "product": "coal",
+          "activity": "production",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "1",
+            "countryRegionId": "AUS",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal production",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-1-AUS.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "AUS",
+          "product": "coal",
+          "activity": "exports",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "4",
+            "countryRegionId": "AUS",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal exports",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-4-AUS.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "IDN",
+          "product": "coal",
+          "activity": "production",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "1",
+            "countryRegionId": "IDN",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal production",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-1-IDN.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "IDN",
+          "product": "coal",
+          "activity": "exports",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "7",
+            "activityId": "4",
+            "countryRegionId": "IDN",
+            "unit": "TST"
+          },
+          "frequency": "annual",
+          "unit": "thousand short tons",
+          "eiaName": "Coal exports",
+          "acceptableMeasurementBases": [
+            "All coal types"
+          ],
+          "requiredLabels": [
+            "All coal types"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-7-4-IDN.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I4",
+      "query": "what are gas prices like in michigan lately",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "MI",
+          "product": null,
+          "activity": "prices",
+          "outcome": "clarification: product"
+        }
+      ]
+    },
+    {
+      "id": "I5",
+      "query": "electricity consumption in riverton",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": null,
+          "product": "electricity",
+          "activity": "consumption",
+          "outcome": "clarification: geography"
+        }
+      ]
+    },
+    {
+      "id": "I6",
+      "query": "energy consumption in new york excluding the transportation sector",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "NY",
+          "product": "total energy",
+          "activity": "consumption",
+          "outcome": "not_available",
+          "scope": "SEDS complete 968-series metadata has the all-sector total and separate sector totals; no published total excluding transportation. No computation is authorized by this work order.",
+          "metadataReferences": [
+            "metadata/seds-route.json",
+            "metadata/seds-series.json"
+          ],
+          "message": "Not yet in our checked list: total energy consumption excluding transportation for New York.",
+          "requiredAlternatives": [
+            {
+              "label": "Total energy consumption \u2014 all sectors, including transportation",
+              "route": "seds",
+              "measure": "value",
+              "facets": {
+                "seriesId": "TETCB",
+                "stateId": "NY"
+              },
+              "frequency": "annual",
+              "unit": "Billion Btu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I7",
+      "query": "natural gas reserves for all the US states except alaska",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "USA",
+          "product": "natural gas",
+          "activity": "reserves",
+          "outcome": "data",
+          "route": "natural-gas/enr/dry",
+          "measure": "value",
+          "facets": {
+            "product": "EPG0",
+            "process": "R11",
+            "duoarea": "R48"
+          },
+          "frequency": "annual",
+          "unit": "Billion cubic feet",
+          "eiaName": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+          "acceptableMeasurementBases": [
+            "Dry natural gas proved reserves as of December 31"
+          ],
+          "requiredLabels": [
+            "Dry natural gas proved reserves as of December 31",
+            "Lower 48 states (excludes Alaska; includes federal offshore)"
+          ],
+          "metadataReferences": [
+            "metadata/sample-ng-reserves-R48.json",
+            "metadata/ng-reserves-route.json",
+            "metadata/ng-reserves-products.json",
+            "metadata/ng-reserves-processes.json",
+            "https://www.eia.gov/dnav/ng/ng_enr_dry_a_epg0_r11_bcf_a.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I8",
+      "query": "hydroelectic capacity in norway and sweden",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "NOR",
+          "product": "hydro",
+          "activity": "capacity",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "33",
+            "activityId": "7",
+            "countryRegionId": "NOR",
+            "unit": "MK"
+          },
+          "frequency": "annual",
+          "unit": "million kilowatts",
+          "eiaName": "Hydroelectricity installed capacity",
+          "acceptableMeasurementBases": [
+            "Installed hydroelectricity capacity"
+          ],
+          "requiredLabels": [
+            "Installed hydroelectricity capacity"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-33-7-NOR.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "SWE",
+          "product": "hydro",
+          "activity": "capacity",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "33",
+            "activityId": "7",
+            "countryRegionId": "SWE",
+            "unit": "MK"
+          },
+          "frequency": "annual",
+          "unit": "million kilowatts",
+          "eiaName": "Hydroelectricity installed capacity",
+          "acceptableMeasurementBases": [
+            "Installed hydroelectricity capacity"
+          ],
+          "requiredLabels": [
+            "Installed hydroelectricity capacity"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-33-7-SWE.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I9",
+      "query": "weekly natural gas storage numbers for the US please, thanks so much",
+      "requestedFrequency": "weekly",
+      "frequencyExplicit": true,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "USA",
+          "product": "natural gas",
+          "activity": "storage",
+          "outcome": "data",
+          "route": "natural-gas/stor/wkly",
+          "measure": "value",
+          "facets": {
+            "product": "EPG0",
+            "process": "SWO",
+            "duoarea": "R48"
+          },
+          "frequency": "weekly",
+          "unit": "Billion cubic feet",
+          "eiaName": "Weekly Lower 48 States Natural Gas Working Underground Storage (Billion Cubic Feet)",
+          "acceptableMeasurementBases": [
+            "Working natural gas in underground storage"
+          ],
+          "requiredLabels": [
+            "Working natural gas in underground storage",
+            "Lower 48 states (excludes Alaska and Hawaii)"
+          ],
+          "metadataReferences": [
+            "metadata/sample-ng-storage-R48.json",
+            "metadata/ng-storage-route.json",
+            "metadata/ng-storage-processes.json",
+            "metadata/ng-storage-products.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I10",
+      "query": "uh hi so basically im trying to figure out like how many electricity customers there are in arizona and nevada, its for a class thing",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "AZ",
+          "product": "electricity",
+          "activity": "customers",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "customers",
+          "facets": {
+            "stateid": "AZ",
+            "sectorid": "ALL"
+          },
+          "frequency": "annual",
+          "unit": "number of customers",
+          "eiaName": "Number of Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Ultimate customers, all sectors"
+          ],
+          "requiredLabels": [
+            "Ultimate customers, all sectors"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-customers-AZ-annual.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json"
+          ]
+        },
+        {
+          "geographyCode": "NV",
+          "product": "electricity",
+          "activity": "customers",
+          "outcome": "data",
+          "route": "electricity/retail-sales",
+          "measure": "customers",
+          "facets": {
+            "stateid": "NV",
+            "sectorid": "ALL"
+          },
+          "frequency": "annual",
+          "unit": "number of customers",
+          "eiaName": "Number of Ultimate Customers",
+          "acceptableMeasurementBases": [
+            "Ultimate customers, all sectors"
+          ],
+          "requiredLabels": [
+            "Ultimate customers, all sectors"
+          ],
+          "metadataReferences": [
+            "metadata/sample-retail-customers-NV-annual.json",
+            "metadata/electricity-retail-route.json",
+            "metadata/retail-sectors-default.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I11",
+      "query": "compare georgia and armenia natural gas imports",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "GEO",
+          "product": "natural gas",
+          "activity": "imports",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "26",
+            "activityId": "3",
+            "countryRegionId": "GEO",
+            "unit": "BCF"
+          },
+          "frequency": "annual",
+          "unit": "billion cubic feet",
+          "eiaName": "Dry natural gas imports",
+          "acceptableMeasurementBases": [
+            "Dry natural gas imports"
+          ],
+          "requiredLabels": [
+            "Dry natural gas imports"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-26-3-GEO.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        },
+        {
+          "geographyCode": "ARM",
+          "product": "natural gas",
+          "activity": "imports",
+          "outcome": "data",
+          "route": "international",
+          "measure": "value",
+          "facets": {
+            "productId": "26",
+            "activityId": "3",
+            "countryRegionId": "ARM",
+            "unit": "BCF"
+          },
+          "frequency": "annual",
+          "unit": "billion cubic feet",
+          "eiaName": "Dry natural gas imports",
+          "acceptableMeasurementBases": [
+            "Dry natural gas imports"
+          ],
+          "requiredLabels": [
+            "Dry natural gas imports"
+          ],
+          "metadataReferences": [
+            "metadata/sample-intl-26-3-ARM.json",
+            "metadata/international-route.json",
+            "metadata/cached-selected-definitions.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I12",
+      "query": "biofuel production in iowa and nebraksa",
+      "requestedFrequency": "annual",
+      "frequencyExplicit": false,
+      "sector": null,
+      "entries": [
+        {
+          "geographyCode": "IA",
+          "product": "biofuels",
+          "activity": "production",
+          "outcome": "data",
+          "route": "seds",
+          "measure": "value",
+          "facets": {
+            "seriesId": "BFPRP",
+            "stateId": "IA"
+          },
+          "frequency": "annual",
+          "unit": "Thousand barrels",
+          "eiaName": "Biofuels liquid production",
+          "acceptableMeasurementBases": [
+            "Biofuels liquid production"
+          ],
+          "requiredLabels": [
+            "Biofuels liquid production"
+          ],
+          "metadataReferences": [
+            "metadata/sample-seds-BFPRP-IA.json",
+            "metadata/seds-route.json",
+            "metadata/seds-series.json"
+          ]
+        },
+        {
+          "geographyCode": "NE",
+          "product": "biofuels",
+          "activity": "production",
+          "outcome": "data",
+          "route": "seds",
+          "measure": "value",
+          "facets": {
+            "seriesId": "BFPRP",
+            "stateId": "NE"
+          },
+          "frequency": "annual",
+          "unit": "Thousand barrels",
+          "eiaName": "Biofuels liquid production",
+          "acceptableMeasurementBases": [
+            "Biofuels liquid production"
+          ],
+          "requiredLabels": [
+            "Biofuels liquid production"
+          ],
+          "metadataReferences": [
+            "metadata/sample-seds-BFPRP-NE.json",
+            "metadata/seds-route.json",
+            "metadata/seds-series.json"
+          ]
+        }
+      ]
+    }
+  ]
+}
