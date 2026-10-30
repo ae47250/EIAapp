@@ -1,0 +1,41 @@
+{
+  "status": "Unresolved source response; excluded from completeness claims",
+  "records": [
+    {
+      "call": 1782,
+      "route": "crude-oil-imports",
+      "frequency": "annual",
+      "offset": 20000,
+      "advertisedTotal": 24752,
+      "expectedRows": 4752,
+      "returnedRows": 3924,
+      "shortfall": 828,
+      "action": "Retain all pages; part remains error/incomplete. Continue unrelated approved groups. Do not infer absence or final coverage from this group."
+    },
+    {
+      "call": 2771,
+      "route": "crude-oil-imports",
+      "frequency": "monthly",
+      "offset": 160000,
+      "advertisedTotal": 164681,
+      "expectedRows": 4681,
+      "returnedRows": 1017,
+      "shortfall": 3664,
+      "action": "Retain pages; group remains incomplete. No coverage or nonpublication certification."
+    }
+  ],
+  "researchBookkeeping": [
+    {
+      "issue": "Parallel-run startup replay counted five already-completed zero-row pages twice in the local state manifest; raw responses and row totals unchanged.",
+      "calls": [
+        2118,
+        2119,
+        2120,
+        2124,
+        2127
+      ],
+      "correction": "Completed parts and accepted call IDs excluded from replay; regression added. Deduplicate only identical zero-row manifest entries after the active downloader stops, retaining the original state snapshot.",
+      "status": "Source corrected and tested; active process uses prior version; state repair pending safe stop."
+    }
+  ]
+}

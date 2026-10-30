@@ -1,0 +1,41 @@
+{
+  "time": "2026-10-30T14:22:25.565411+00:00",
+  "records": [
+    {
+      "sourceLocalFile": "~/Documents/EIAapp-Evidence/20261029/coverage/execution-records/eia-coverage-offline-app-tests-02f9918da536f4ba68f29b135b867266c0dcbb2d1cdf4de62c3c09add56200da.log",
+      "sourceSHA256": "02f9918da536f4ba68f29b135b867266c0dcbb2d1cdf4de62c3c09add56200da",
+      "committedCopy": "eia-coverage-offline-app-tests.log",
+      "committedSHA256": "02f9918da536f4ba68f29b135b867266c0dcbb2d1cdf4de62c3c09add56200da",
+      "redactions": []
+    },
+    {
+      "sourceLocalFile": "~/Documents/EIAapp-Evidence/20261029/coverage/execution-records/eia-coverage-build-aea615aea79c1a729ae95a6216554ed9a773619d41f96d289c19cbbc01a52e45.log",
+      "sourceSHA256": "aea615aea79c1a729ae95a6216554ed9a773619d41f96d289c19cbbc01a52e45",
+      "committedCopy": "eia-coverage-build.log",
+      "committedSHA256": "816d07c228ce864ebae31936ee76c1352c3c1f08f75909ebbe755cbbf9a5e4a8",
+      "redactions": [],
+      "formattingChanges": [
+        "Removed extra blank line at end of committed log copy; authoritative original unchanged."
+      ]
+    },
+    {
+      "sourceLocalFile": "~/Documents/EIAapp-Evidence/20261029/coverage/execution-records/eia-coverage-tests-23-763ae8a505038093fb6e00992fe35fc2ac8669128bed3a64078bffdd882d7633.json",
+      "sourceSHA256": "763ae8a505038093fb6e00992fe35fc2ac8669128bed3a64078bffdd882d7633",
+      "committedCopy": "eia-coverage-tests-23.json",
+      "committedSHA256": "763ae8a505038093fb6e00992fe35fc2ac8669128bed3a64078bffdd882d7633",
+      "redactions": []
+    }
+  ],
+  "appTests": {
+    "command": "OPENAI_API_KEY= EIA_API_KEY= npm test",
+    "passed": 537,
+    "failed": 0,
+    "exitCode": 0
+  },
+  "build": {
+    "command": "OPENAI_API_KEY= EIA_API_KEY= NEXT_TELEMETRY_DISABLED=1 npm run build",
+    "exitCode": 0
+  },
+  "researchTests": "Each scripts/eia-lookup/coverage*.test.py with python3 -B; source AST parsing; node --check scripts/eia-lookup/coverage-row-replay.mjs",
+  "boundary": "Offline tests, local build and offline replay of recorded live EIA responses. No deployment or paid calls."
+}
