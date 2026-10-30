@@ -19,4 +19,20 @@ class MappingGateTests(unittest.TestCase):
  def test_selected_defaults_and_all_row_checks_required(self):
   self.assertEqual(self.result()['cells'][0]['status'],'mapped');self.assertEqual(self.result(False)['cells'][0]['status'],'not checked');self.assertEqual(self.result(count=0)['cells'][0]['status'],'not checked')
  def test_surplus_row_checks_are_not_silently_accepted(self):self.assertEqual(self.result(count=2)['cells'][0]['status'],'not checked')
+class NegativeCertificationTests(unittest.TestCase):
+ def setup_data(self):
+  return {'cells':[{'id':'a','status':'not checked'}]}, {'candidates':[{'id':'a','status':"not in EIA's catalogue",'reason':'Complete census','evidence':'catalogue'}],'pending':[]}, {'requests':[{'cell':{'id':'a'}}],'sampleSize':1,'seed':20261030,'population':1}, {'complete':True,'pass':True,'records':[{'cellId':'a','pass':True}]}
+ def test_passed_frozen_sample_permits_separate_catalogue_label(self):
+  a,b,c,d=self.setup_data();out=m.certify_negatives(a,b,c,d);self.assertEqual(out['counts'],{"not in EIA's catalogue":1})
+ def test_failed_or_incomplete_sample_never_certifies(self):
+  for key in ['complete','pass']:
+   a,b,c,d=self.setup_data();d[key]=False
+   with self.assertRaises(ValueError):m.certify_negatives(a,b,c,d)
+ def test_duplicate_or_replaced_sample_never_certifies(self):
+  for rows in [[{'cellId':'a','pass':True}]*2,[{'cellId':'other','pass':True}]]:
+   a,b,c,d=self.setup_data();d['records']=rows
+   with self.assertRaises(ValueError):m.certify_negatives(a,b,c,d)
+ def test_positive_conflict_cannot_be_overwritten(self):
+  a,b,c,d=self.setup_data();a['cells'][0]['status']='mapped'
+  with self.assertRaises(ValueError):m.certify_negatives(a,b,c,d)
 if __name__=='__main__':unittest.main()

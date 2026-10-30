@@ -10,6 +10,8 @@ PLACE_FACETS={'duoarea','countryRegionId','stateId','stateid','stateID','locatio
 def norm(value):return re.sub(r'\s+',' ',str(value or '').strip()).casefold()
 def classify(route,fid,value,geos,approved):
     code=str(value['id']);name=norm(value.get('name'))
+    if name.startswith('federal offshore'):
+        return {'status':'not a place we use','reason':'EIA explicitly identifies federal offshore waters, not a US state; legacy geography type cannot establish state scope.'}
     if (route=='coal/exports-imports-quantity-price' and fid in ['countryId','customsDistrictId']) or (route=='crude-oil-imports' and fid=='originId'):
         return {'status':'not a place we use','reason':'Trade partner or customs district filter, not requested-country/state scope. National subject scope is recorded separately.'}
     if route=='natural-gas/stor/wkly':
@@ -28,7 +30,9 @@ def classify(route,fid,value,geos,approved):
             target=matches[0]['code']
             return {'status':'mapped','geographyCode':target,'basis':'Unique exact approved place name in a direct EIA geography facet. Alternate codes remain separate candidate filters; observations must confirm coverage.','alternateCode':route=='international' and code.startswith('WP')}
     reverse={str(v):k for k,v in approved.get(route,{}).get('geographies',{}).items()}
-    if fid==approved.get(route,{}).get('geographyFacet') and code in reverse:
+    # Domestic duoarea codes are route-specific; inherited ISO-code collisions
+    # cannot overrule the EIA state/US definition checked below.
+    if fid!='duoarea' and fid==approved.get(route,{}).get('geographyFacet') and code in reverse:
         target=reverse[code]
         if target in geos:
             return {'status':'mapped','geographyCode':target,'basis':'Previously approved route-specific mapping, with code re-confirmed in current EIA facet inventory.'}
@@ -102,7 +106,7 @@ def build():
     return result
 if __name__=='__main__':
     result=build()
-    path=i.EVIDENCE/'place-crosswalk.json';path.write_text(json.dumps(result,indent=2)+'\n')
+    path=i.EVIDENCE/'place-crosswalk.json';path.write_text(json.dumps(result,separators=(',',':'))+'\n')
     from collections import Counter
     counts=Counter(r['status'] for x in result['routes'].values() for rows in x['facets'].values() for r in rows)
     print(json.dumps({'routes':len(result['routes']),'counts':counts,'bytes':path.stat().st_size}))

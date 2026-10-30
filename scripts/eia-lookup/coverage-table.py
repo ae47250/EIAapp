@@ -31,8 +31,26 @@ def build(grid,original,plan,audit,selected=None,checks=None):
   cells.append({**c,'status':'not checked','pendingReason':reason,'candidateGroups':len(expected[cid]),'auditedGroups':len(checked),'remainingGroupIds':sorted(expected[cid]-checked),'wholeCandidateGroups':len(whole[cid]),'wholeGroupsAudited':len(whole[cid]&checked),'wholeProductObservationGroupIds':sorted(positive[cid]),'subsetObservationGroupIds':sorted(subset[cid])})
   selection=selected.get(cid);rowchecks=checkedrows[cid]
   if selection and len(rowchecks)==len(selection['defaults']) and rowchecks and all(r['pass'] for r in rowchecks):
-   ds=selection['defaults'];cells[-1].update({'status':'mapped','pendingReason':None,'placeCodes':sorted({d['geographyCode'] for d in ds}),'routes':sorted({d['route'] for d in ds}),'frequencies':sorted({d['frequency'] for d in ds}),'units':sorted({d['unit'] for d in ds}),'sampleDefault':ds[0],'completeDefaultsAndAlternatives':'coverage-selection-details.json#'+cid,'rowChecks':{'mode':checks['mode'],'passed':len(rowchecks),'record':'row-replay-checks.json'}})
+   ds=selection['defaults'];cells[-1].update({'status':'mapped','pendingReason':None,'placeCodes':sorted({d['geographyCode'] for d in ds}),'routes':sorted({d['route'] for d in ds}),'frequencies':sorted({d['frequency'] for d in ds}),'units':sorted({d['unit'] for d in ds}),'sampleDefault':ds[0],'completeDefaultsAndAlternatives':'coverage-selection-details.json#'+cid,'rowChecks':{'mode':checks['mode'],'passed':len(rowchecks),'record':'row-replay-checks.json','researchUSChecks':sum(r.get('verificationEngine')=='research-documented-US' for r in rowchecks)},'appSelectorSupport':'guarded US-only support pending owner go' if any(r.get('verificationEngine')=='research-documented-US' for r in rowchecks) else 'existing selector verified by offline replay'})
  return {'status':'Partial research table; unverified cells remain not checked; no negative claims','updatedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'counts':dict(collections.Counter(c['status'] for c in cells)),'progress':{'cellsWithWholeProductObservations':sum(bool(v) for v in positive.values()),'cellsWithSubsetObservations':sum(bool(v) for v in subset.values()),'cellsWithAllCandidateGroupsAudited':sum(c['candidateGroups']>0 and not c['remainingGroupIds'] for c in cells),'cellsWithAllWholeGroupsAuditedAndPositive':sum(c['wholeCandidateGroups']>0 and c['wholeCandidateGroups']==c['wholeGroupsAudited'] and bool(c['wholeProductObservationGroupIds']) for c in cells),'cellsWithoutEligibleMetadataCandidates':sum(not c['candidateGroups'] for c in cells)},'evidence':'observation-audit.json links hash-verified per-series/place histories, units, scope annotations and call IDs stored locally. Native place aliases and units remain separate.','unresolvedExceptions':{'codes':['OB2','OBW','95'],'resultsAllowed':False,'nonpublicationEvidenceAllowed':False},'cells':cells}
+
+def certify_negatives(table,negative,freeze,recheck):
+ """A completed, unmodified frozen sample is necessary before negative labels."""
+ expected={r['cell']['id'] for r in freeze['requests']};actual=[r['cellId'] for r in recheck['records']]
+ if not recheck.get('complete') or not recheck.get('pass') or len(actual)!=freeze['sampleSize'] or len(set(actual))!=len(actual) or set(actual)!=expected or not all(r.get('pass') for r in recheck['records']):raise ValueError('Negative recheck incomplete or failed')
+ candidates={r['id']:r for r in negative['candidates']};pending={r['id']:r for r in negative['pending']}
+ for c in table['cells']:
+  cid=c['id']
+  if cid in candidates:
+   if c['status']=='mapped':raise ValueError('Negative proof conflicts with positive mapping: '+cid)
+   proof=candidates[cid]
+   c.update(status=proof['status'],pendingReason=None,negativeProof={'record':'negative-candidates.json#'+cid,'reason':proof['reason'],'evidence':proof['evidence'],'groups':proof.get('groups',[]),'seededRecheck':'negative-recheck-results.json','sourceSnapshots':'negative-proof-snapshots.json'})
+   if proof['status']=='subset only':c['wholeProductComparisonEvidence']='negative-comparison-details.json#'+cid
+  elif c['status']=='not checked' and cid in pending:
+   c['pendingReason']=pending[cid]['reason'];c['unresolvedMetadataGaps']=pending[cid].get('gaps',[])
+ table['counts']=dict(collections.Counter(c['status'] for c in table['cells']));table['status']='Research coverage with verified positive selections and certified negative evidence; remaining not-checked cells and implementation gate are explicit.'
+ table['negativeRecheck']={'seed':freeze['seed'],'population':freeze['population'],'sampleSize':freeze['sampleSize'],'passed':len(actual),'record':'negative-recheck-results.json'}
+ return table
 
 def main():
  grid=i.read(E/'cell-grid.json');freeze=i.read(E/'cell-grid-freeze.json');assert hashlib.sha256((E/'cell-grid.json').read_bytes()).hexdigest()==freeze['files']['cell-grid.json']
@@ -40,5 +58,14 @@ def main():
  selected=i.read(E/'coverage-selection-details.json') if (E/'coverage-selection-details.json').exists() else None;checks=i.read(E/'row-replay-checks.json') if (E/'row-replay-checks.json').exists() else None
  if checks and checks['selectionPointerSHA256']!=hashlib.sha256((E/'coverage-selection-details.json').read_bytes()).hexdigest():raise ValueError('Row checks are for an earlier selection; refresh replay')
  result=build(grid,original,plan,audit,selected,checks);result['frozenGridSHA256']=freeze['files']['cell-grid.json']
+ if (E/'negative-recheck-results.json').exists():
+  nf=i.read(E/'negative-recheck-freeze.json');nr=i.read(E/'negative-recheck-results.json');negative=i.read(E/'negative-candidates.json')
+  if nr.get('complete') and nr.get('pass'):
+   sha=lambda b:hashlib.sha256(b).hexdigest()
+   if nr['freezeSHA256']!=sha((E/'negative-recheck-freeze.json').read_bytes()) or nf['populationSHA256']!=sha((E/'negative-candidates.json').read_bytes()):raise ValueError('Frozen negative proof changed')
+   for name,digest in nf['sourceSHA256'].items():
+    if name!='coverage-table.json' and sha((E/name).read_bytes())!=digest:raise ValueError('Negative proof source changed: '+name)
+   result=certify_negatives(result,negative,nf,nr)
+
  (E/'coverage-table.json').write_text(json.dumps(result,separators=(',',':'))+'\n');print(json.dumps({'counts':result['counts'],'progress':result['progress']}))
 if __name__=='__main__':main()

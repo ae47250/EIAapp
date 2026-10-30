@@ -1,0 +1,2319 @@
+{
+  "seed": 20261030,
+  "method": "Simple random sample without replacement from sorted frozen union of all negative statuses; ceil(5%); no resampling or replacing failures.",
+  "population": 891,
+  "sampleSize": 45,
+  "populationSHA256": "0216b1b7977c9589e7441b3df1af8361a53dd7dba5cc840700e4f28a0980652b",
+  "counts": {
+    "subset only": 86,
+    "not in EIA's catalogue": 659,
+    "EIA returns no data": 146
+  },
+  "sampleCounts": {
+    "not in EIA's catalogue": 39,
+    "EIA returns no data": 4,
+    "subset only": 2
+  },
+  "requests": [
+    {
+      "cell": {
+        "id": "country|biofuels|sales||",
+        "group": "base",
+        "placeKind": "country",
+        "product": "biofuels",
+        "activity": "sales",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "BIO",
+            "LFG",
+            "MLG",
+            "MSB",
+            "OB2",
+            "OBW",
+            "WAS",
+            "WWW"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|fossil fuels|generation|commercial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "fossil fuels",
+        "activity": "generation",
+        "sector": "commercial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "1",
+            "21",
+            "28",
+            "4002"
+          ],
+          "activityId": [
+            "12"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|electricity|capacity|industrial|",
+        "group": "sector",
+        "placeKind": "country",
+        "product": "electricity",
+        "activity": "capacity",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "2",
+            "82"
+          ],
+          "activityId": [
+            "7"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|natural gas|sales||",
+        "group": "base",
+        "placeKind": "World",
+        "product": "natural gas",
+        "activity": "sales",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "26",
+            "3",
+            "3002",
+            "31",
+            "4010",
+            "43",
+            "4413",
+            "48"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "state|wind|expenditures||",
+        "group": "base",
+        "placeKind": "state",
+        "product": "wind",
+        "activity": "expenditures",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "seds",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {},
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": []
+    },
+    {
+      "cell": {
+        "id": "World|renewable|generation|electric power|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "renewable",
+        "activity": "generation",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "29",
+            "34"
+          ],
+          "activityId": [
+            "12"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "US|marine|customers||",
+        "group": "base",
+        "placeKind": "US",
+        "product": "marine",
+        "activity": "customers",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "117"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "state|biofuels|reserves||",
+        "group": "base",
+        "placeKind": "state",
+        "product": "biofuels",
+        "activity": "reserves",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "BIO",
+            "LFG",
+            "MLG",
+            "MSB",
+            "OB2",
+            "OBW",
+            "WAS",
+            "WWW"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "state|natural gas|sales||",
+        "group": "base",
+        "placeKind": "state",
+        "product": "natural gas",
+        "activity": "sales",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "NG"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|wind|generation|residential|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "wind",
+        "activity": "generation",
+        "sector": "residential",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "37"
+          ],
+          "activityId": [
+            "12"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|geothermal|capacity|industrial|",
+        "group": "sector",
+        "placeKind": "country",
+        "product": "geothermal",
+        "activity": "capacity",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "35"
+          ],
+          "activityId": [
+            "7"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "state|solar|sales||",
+        "group": "base",
+        "placeKind": "state",
+        "product": "solar",
+        "activity": "sales",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "DPV",
+            "SPV",
+            "STH",
+            "SUN",
+            "TPV",
+            "TSN"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|geothermal|storage|electric power|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "geothermal",
+        "activity": "storage",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "35"
+          ],
+          "activityId": [
+            "5"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|nuclear|capacity|commercial|",
+        "group": "sector",
+        "placeKind": "country",
+        "product": "nuclear",
+        "activity": "capacity",
+        "sector": "commercial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "27",
+            "4417"
+          ],
+          "activityId": [
+            "7"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|hydro|consumption|electric power|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "hydro",
+        "activity": "consumption",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "33"
+          ],
+          "activityId": [
+            "13",
+            "2"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|biofuels|imports||",
+        "group": "base",
+        "placeKind": "World",
+        "product": "biofuels",
+        "activity": "imports",
+        "sector": null,
+        "qualifier": null,
+        "status": "EIA returns no data",
+        "reason": "No numeric whole or subset observations after complete exact candidate joins",
+        "groups": [
+          "6e37fe9853ca467e4064"
+        ],
+        "evidence": "negative-source-groups.json",
+        "wholeProductComparison": "Every whole-product candidate in the source plan was checked; if none is listed, none exists in the checked catalogue."
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "79",
+            "80",
+            "81"
+          ],
+          "activityId": [
+            "3"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|nuclear|capacity|commercial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "nuclear",
+        "activity": "capacity",
+        "sector": "commercial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "27",
+            "4417"
+          ],
+          "activityId": [
+            "7"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|hydro|sales||",
+        "group": "base",
+        "placeKind": "World",
+        "product": "hydro",
+        "activity": "sales",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "33"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|renewable|generation|industrial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "renewable",
+        "activity": "generation",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "29",
+            "34"
+          ],
+          "activityId": [
+            "12"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|coal|consumption|industrial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "coal",
+        "activity": "consumption",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "11",
+            "119",
+            "12",
+            "130",
+            "14",
+            "30",
+            "4411",
+            "7"
+          ],
+          "activityId": [
+            "13",
+            "2"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|petroleum|sales|electric power|",
+        "group": "sector",
+        "placeKind": "country",
+        "product": "petroleum",
+        "activity": "sales",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "crude-oil-imports",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "quantity"
+        ],
+        "facets": {},
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": []
+    },
+    {
+      "cell": {
+        "id": "World|coal|expenditures|industrial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "coal",
+        "activity": "expenditures",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "11",
+            "119",
+            "12",
+            "130",
+            "14",
+            "30",
+            "4411",
+            "7"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|coal|prices||",
+        "group": "base",
+        "placeKind": "World",
+        "product": "coal",
+        "activity": "prices",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "11",
+            "119",
+            "12",
+            "130",
+            "14",
+            "30",
+            "4411",
+            "7"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "US|solar|sales||",
+        "group": "base",
+        "placeKind": "US",
+        "product": "solar",
+        "activity": "sales",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "total-energy",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {},
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": []
+    },
+    {
+      "cell": {
+        "id": "US|geothermal|customers||",
+        "group": "base",
+        "placeKind": "US",
+        "product": "geothermal",
+        "activity": "customers",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "GEO"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|hydro|prices|residential|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "hydro",
+        "activity": "prices",
+        "sector": "residential",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "33"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|coal|consumption|electric power|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "coal",
+        "activity": "consumption",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "11",
+            "119",
+            "12",
+            "130",
+            "14",
+            "30",
+            "4411",
+            "7"
+          ],
+          "activityId": [
+            "13",
+            "2"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|renewable|reserves||",
+        "group": "base",
+        "placeKind": "country",
+        "product": "renewable",
+        "activity": "reserves",
+        "sector": null,
+        "qualifier": null,
+        "status": "EIA returns no data",
+        "reason": "No numeric whole or subset observations after complete exact candidate joins",
+        "groups": [
+          "6e37fe9853ca467e4064"
+        ],
+        "evidence": "negative-source-groups.json",
+        "wholeProductComparison": "Every whole-product candidate in the source plan was checked; if none is listed, none exists in the checked catalogue."
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "29",
+            "34"
+          ],
+          "activityId": [
+            "6"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|nuclear|generation|commercial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "nuclear",
+        "activity": "generation",
+        "sector": "commercial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "27",
+            "4417"
+          ],
+          "activityId": [
+            "12"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "state|coal|reserves||",
+        "group": "base",
+        "placeKind": "state",
+        "product": "coal",
+        "activity": "reserves",
+        "sector": null,
+        "qualifier": null,
+        "status": "subset only",
+        "reason": "No numeric whole-product observations after complete exact candidate joins; subset observations exist",
+        "groups": [
+          "d21acd78db2e82d30473"
+        ],
+        "evidence": "negative-source-groups.json",
+        "wholeProductComparison": "Every whole-product candidate in the source plan was checked; if none is listed, none exists in the checked catalogue."
+      },
+      "route": "coal/reserves-capacity",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "recoverable-reserves"
+        ],
+        "facets": {},
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": []
+    },
+    {
+      "cell": {
+        "id": "World|solar|customers|transportation|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "solar",
+        "activity": "customers",
+        "sector": "transportation",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "116"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|biofuels|expenditures|residential|",
+        "group": "sector",
+        "placeKind": "country",
+        "product": "biofuels",
+        "activity": "expenditures",
+        "sector": "residential",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "BIO",
+            "LFG",
+            "MLG",
+            "MSB",
+            "OB2",
+            "OBW",
+            "WAS",
+            "WWW"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|renewable|prices|electric power|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "renewable",
+        "activity": "prices",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "29",
+            "34"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|natural gas|generation|electric power|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "natural gas",
+        "activity": "generation",
+        "sector": "electric power",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "26",
+            "3",
+            "3002",
+            "31",
+            "4010",
+            "43",
+            "4413",
+            "48"
+          ],
+          "activityId": [
+            "12"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "US|wind|capacity|transportation|",
+        "group": "sector",
+        "placeKind": "US",
+        "product": "wind",
+        "activity": "capacity",
+        "sector": "transportation",
+        "qualifier": null,
+        "status": "subset only",
+        "reason": "No numeric whole-product observations after complete exact candidate joins; subset observations exist",
+        "groups": [
+          "579e5e2bdcc0fc0cdc5f"
+        ],
+        "evidence": "negative-source-groups.json",
+        "wholeProductComparison": "Every whole-product candidate in the source plan was checked; if none is listed, none exists in the checked catalogue."
+      },
+      "route": "electricity/state-electricity-profiles/capability",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "capability"
+        ],
+        "facets": {
+          "energysourceid": [
+            "WND"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "energysourceid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "US|petroleum|customers||",
+        "group": "base",
+        "placeKind": "US",
+        "product": "petroleum",
+        "activity": "customers",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "crude-oil-imports",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "quantity"
+        ],
+        "facets": {},
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": []
+    },
+    {
+      "cell": {
+        "id": "World|total energy|imports||",
+        "group": "base",
+        "placeKind": "World",
+        "product": "total energy",
+        "activity": "imports",
+        "sector": null,
+        "qualifier": null,
+        "status": "EIA returns no data",
+        "reason": "No numeric whole or subset observations after complete exact candidate joins",
+        "groups": [
+          "6e37fe9853ca467e4064"
+        ],
+        "evidence": "negative-source-groups.json",
+        "wholeProductComparison": "Every whole-product candidate in the source plan was checked; if none is listed, none exists in the checked catalogue."
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "2890",
+            "36",
+            "38",
+            "44",
+            "4418",
+            "4419"
+          ],
+          "activityId": [
+            "3"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|natural gas|storage|residential|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "natural gas",
+        "activity": "storage",
+        "sector": "residential",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "26",
+            "3",
+            "3002",
+            "31",
+            "4010",
+            "43",
+            "4413",
+            "48"
+          ],
+          "activityId": [
+            "5"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|petroleum|sales|industrial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "petroleum",
+        "activity": "sales",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "13",
+            "32",
+            "4006",
+            "4415",
+            "5",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "6798",
+            "6799",
+            "68",
+            "6899",
+            "8399",
+            "8499"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "state|hydro|reserves||",
+        "group": "base",
+        "placeKind": "state",
+        "product": "hydro",
+        "activity": "reserves",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "electricity/electric-power-operational-data",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "generation",
+          "total-consumption",
+          "consumption-for-eg",
+          "consumption-uto",
+          "total-consumption-btu",
+          "consumption-for-eg-btu",
+          "consumption-uto-btu",
+          "stocks",
+          "cost",
+          "cost-per-btu"
+        ],
+        "facets": {
+          "fueltypeid": [
+            "HYC"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "fueltypeid chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|total energy|storage|industrial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "total energy",
+        "activity": "storage",
+        "sector": "industrial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "2890",
+            "36",
+            "38",
+            "44",
+            "4418",
+            "4419"
+          ],
+          "activityId": [
+            "5"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|electricity|expenditures|residential|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "electricity",
+        "activity": "expenditures",
+        "sector": "residential",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "2",
+            "82"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "country|marine|prices||",
+        "group": "base",
+        "placeKind": "country",
+        "product": "marine",
+        "activity": "prices",
+        "sector": null,
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "117"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": false,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|geothermal|consumption|commercial|",
+        "group": "sector",
+        "placeKind": "World",
+        "product": "geothermal",
+        "activity": "consumption",
+        "sector": "commercial",
+        "qualifier": null,
+        "status": "not in EIA's catalogue",
+        "reason": "No eligible whole or subset candidate in complete checked native code lists",
+        "evidence": "catalogue-absence-evidence-index.json"
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "35"
+          ],
+          "activityId": [
+            "13",
+            "2"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    },
+    {
+      "cell": {
+        "id": "World|marine|storage||",
+        "group": "base",
+        "placeKind": "World",
+        "product": "marine",
+        "activity": "storage",
+        "sector": null,
+        "qualifier": null,
+        "status": "EIA returns no data",
+        "reason": "No numeric whole or subset observations after complete exact candidate joins",
+        "groups": [
+          "6e37fe9853ca467e4064"
+        ],
+        "evidence": "negative-source-groups.json",
+        "wholeProductComparison": "Every whole-product candidate in the source plan was checked; if none is listed, none exists in the checked catalogue."
+      },
+      "route": "international",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "facets": {
+          "productId": [
+            "117"
+          ],
+          "activityId": [
+            "5"
+          ]
+        },
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "offset": 0,
+        "length": 5000
+      },
+      "routeSelection": {
+        "method": "Maximize exact product, activity and requested place-kind metadata fit (weights 5,2,4), then stable route name. No place or sector filter.",
+        "match": {
+          "product": true,
+          "activity": true,
+          "placeKind": true
+        }
+      },
+      "filterEvidence": [
+        "productId chosen from exact product/activity correspondence",
+        "activityId chosen from exact product/activity correspondence"
+      ]
+    }
+  ],
+  "sourceSHA256": {
+    "place-crosswalk.json": "101b49ba4946f9513de8b063003df878ca0136e784148dd8175d55f6d4adf1b5",
+    "b1-request-plan.json": "ee4c0262b2cde0b676e25dfa9f5e53f2fb709149b9756dd23ee57789eda23289",
+    "reduced-request-plan.json": "9fc739f27a58fd5680b87b6fef6a997f367f8794938212c5e7212597b27beadd",
+    "coverage-table.json": "b01448482c5858c73387176825bedc25f320eb3aee86e07309bf2b72b61cab4d",
+    "observation-audit.json": "fdb2c4a5192bd7567a8af159adcf7ea5f7b7f4a484d44f4c6bccea06ec6a443d"
+  },
+  "interpretation": "A broad probe is a counterexample search, not new exhaustive absence proof. Complete baseline native-code census and complete paginated source joins remain required. Unknown returned definitions or matching numeric whole data fail the recheck; a catalogue-absence cell also fails on a matching subset."
+}

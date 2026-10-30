@@ -43,6 +43,29 @@ class CrosswalkTests(unittest.TestCase):
             for rows in entry['facets'].values():
                 for r in rows:
                     if r['status']=='mapped':self.assertIn(r['geographyCode'],self.geos)
+    def test_inherited_country_collision_cannot_override_domestic_definition(self):
+        route='natural-gas/prod/sum'
+        approved={route:{'geographyFacet':'duoarea','geographies':{'SSD':'SSD'}}}
+        d=c.classify(route,'duoarea',{'id':'SSD','name':'USA-SD'},self.geos,approved)
+        self.assertEqual(d['geographyCode'],'SD')
+        d=c.classify('international','countryRegionId',{'id':'SSD','name':'South Sudan'},self.geos,approved)
+        self.assertEqual(d['geographyCode'],'SSD')
+    def test_all_explicit_domestic_state_names_survive_competing_inherited_mapping(self):
+        for code,g in self.geos.items():
+            if g['type']!='state' or not c.re.fullmatch('[A-Z]{2}',code):continue
+            for name in [g['name'],'USA-'+code]:
+                route='natural-gas/prod/sum';native='S'+code
+                approved={route:{'geographyFacet':'duoarea','geographies':{'SSD':native}}}
+                d=c.classify(route,'duoarea',{'id':native,'name':name},self.geos,approved)
+                self.assertEqual(d.get('geographyCode'),code,(code,name,d))
+    def test_inherited_mapping_does_not_bypass_bilateral_or_regional_scope(self):
+        route='natural-gas/move/impc'
+        for native in ['NUS-NCA','R20','Y123']:
+            approved={route:{'geographyFacet':'duoarea','geographies':{'USA':native}}}
+            self.assertEqual(c.classify(route,'duoarea',{'id':native,'name':'United States'},self.geos,approved)['status'],'not a place we use')
+    def test_offshore_metadata_is_not_a_state_even_if_legacy_geography_says_state(self):
+        for code,name in [('X3','Federal Offshore - Gulf of America'),('X5','Federal Offshore - Pacific')]:
+            self.assertEqual(self.decision('seds','stateId',{'id':code,'name':name})['status'],'not a place we use')
     def test_lower48_never_becomes_new_us_coverage(self):
         rows=self.result['routes']['natural-gas/stor/wkly']['facets']['duoarea']
         self.assertTrue(rows);self.assertTrue(all(r['status']=='not a place we use' for r in rows))

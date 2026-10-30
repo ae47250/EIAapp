@@ -168,11 +168,12 @@ def main():
   if partial_mode:
    if g['status']=='complete' or not any(p['pages'] for p in g['parts']):continue
   elif g['status']!='complete':continue
-  stamp=sha(canonical([g,sha(Path(__file__).read_bytes())]).encode());old=manifest['groups'].get(g['id'])
+  group_plan=groups[g['id']];source_plans=[original[pid] for pid in group_plan['originalPlanIds']];route_catalog=i.read(E/catalog[g['route']]['file'])
+  stamp=sha(canonical([g,group_plan,source_plans,cross[g['route']],route_catalog,sha(Path(__file__).read_bytes())]).encode());old=manifest['groups'].get(g['id'])
   if old and old['stateSHA256']==stamp:
    if sha(Path(old['localFile']).expanduser().read_bytes())!=old['sha256']:raise ValueError('Audit summary hash mismatch')
    continue
-  result=audit_group({**groups[g['id']],**g},original,cross[g['route']],nodes[g['route']],i.read(E/catalog[g['route']]['file']));body=gzip.compress((canonical(result)+'\n').encode(),mtime=0);digest=sha(body);target=OUT/(g['id']+'-'+digest+'.json.gz');target.write_bytes(body)
+  result=audit_group({**groups[g['id']],**g},original,cross[g['route']],nodes[g['route']],route_catalog);body=gzip.compress((canonical(result)+'\n').encode(),mtime=0);digest=sha(body);target=OUT/(g['id']+'-'+digest+'.json.gz');target.write_bytes(body)
   summary={k:v for k,v in result.items() if k not in ['series','calls','errors']};summary['errors']=result['errors'][:12];summary.update({'stateSHA256':stamp,'localFile':str(target).replace(str(Path.home()),'~',1),'sha256':digest,'bytes':len(body),'seriesCount':len(result['series']),'wholePositiveCells':sorted({r['cellId'] for r in result['series'] if r['candidateStatus']=='whole product' and any(p['numeric'] for p in r['places'].values())}),'subsetPositiveCells':sorted({r['cellId'] for r in result['series'] if r['candidateStatus']=='subset' and any(p['numeric'] for p in r['places'].values())})})
   manifest['groups'][g['id']]=summary;manifest['updatedAt']=datetime.datetime.now(datetime.timezone.utc).isoformat();atomic(manifestpath,manifest);print(json.dumps({'group':g['id'],'route':g['route'],'validated':result['validated'],'counts':result['counts'],'errors':result['errors'][:2]}),flush=True)
  print(json.dumps({'groupsAudited':len(manifest['groups']),'valid':sum(g['validated'] for g in manifest['groups'].values())}),flush=True)

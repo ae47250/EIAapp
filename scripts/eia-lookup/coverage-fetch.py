@@ -114,12 +114,12 @@ def run(max_new_pages=None):
     running={};new_pages=0;errors=[]
     def priority(g,p):
         # Preserve all groups; small complete groups give resumable evidence early.
-        front=g['route'] in ['international','total-energy','seds','electricity/retail-sales'] and g['frequency']=='annual'
-        return (not front,g['projectedPages'],g['route'],p['id'])
+        tier=approval.get('priorityGroups',{}).get(g['id'],2)
+        return (tier,g['projectedPages'],g['route'],p['id'])
     try:
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
             while True:
-                if time.time()>=deadline-60:state['stopReason']='Owner three-hour limit; saved partial coverage';limiter.stop.set()
+                if time.time()>=deadline-60:state['stopReason']='Authorized retrieval cutoff; saved partial coverage';limiter.stop.set()
                 if max_new_pages is not None and new_pages>=max_new_pages:state['stopReason']='Bounded transport check complete';limiter.stop.set()
                 candidates=sorted([(g,p) for g in state['groups'] for p in g['parts'] if p['status'] not in ['complete','error']],key=lambda pair:priority(*pair))
                 for g,p in candidates:

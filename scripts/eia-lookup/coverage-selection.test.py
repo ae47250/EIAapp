@@ -43,4 +43,41 @@ class SelectionTests(unittest.TestCase):
   self.assertIn('1 MW and larger',m.selection_label({'basis':{'label':'Wind generation'}},{'facilityScope':'utility-scale'},[]))
  def test_calendar_spans(self):
   self.assertEqual(m.span('2000-12','2001-01','monthly'),1);self.assertEqual(m.span('2000-Q4','2001-Q1','quarterly'),1)
+ def test_verified_whole_basis_correspondence_preserves_physical_unit_preference(self):
+  a=self.candidate('a',unit='BCF');b=self.candidate('b',unit='QBTU',first='1949')
+  for c,name in [(a,'dry natural gas'),(b,'natural gas')]:c['constraints'].update(nativeProductDefinitions=[name],verifiedBasisGroup='whole natural gas measurement bases')
+  self.assertEqual(m.choose([a,b],'natural gas')[0],a)
+ def test_unverified_definition_cannot_join_reviewed_group(self):
+  a=self.candidate('a');b=self.candidate('b')
+  a['constraints'].update(nativeProductDefinitions=['dry natural gas'],verifiedBasisGroup='whole natural gas measurement bases')
+  b['constraints'].update(nativeProductDefinitions=['unknown gas'])
+  self.assertIsNone(m.choose([a,b],'natural gas')[0])
+ def test_two_different_reviewed_products_do_not_become_equivalent(self):
+  a=self.candidate('a');b=self.candidate('b')
+  a['constraints'].update(nativeProductDefinitions=['dry natural gas'],verifiedBasisGroup='whole natural gas measurement bases')
+  b['constraints'].update(nativeProductDefinitions=['petroleum and other liquids'],verifiedBasisGroup='petroleum and other liquids total')
+  self.assertIsNone(m.choose([a,b],'natural gas')[0])
+ def test_basis_review_matches_route_facet_code_and_name(self):
+  r={'sourceFacet':'productId','product':'natural gas','definition':{'id':'26','name':'Dry natural gas'}}
+  self.assertEqual(m.constraints([r],'international')['verifiedBasisGroup'],'whole natural gas measurement bases')
+  self.assertIsNone(m.constraints([r],'unknown')['verifiedBasisGroup'])
+  r['definition']['name']='Unknown gas';self.assertIsNone(m.constraints([r],'international')['verifiedBasisGroup'])
+ def test_verified_basis_never_removes_explicit_scope_blocker(self):
+  a=self.candidate();a['constraints'].update(nativeProductDefinitions=['dry natural gas'],verifiedBasisGroup='whole natural gas measurement bases',pending=[{'field':'broaderPublishedTotal','value':'unresolved'}])
+  self.assertIsNone(m.choose([a],'natural gas')[0])
+ def test_explicit_us_restriction_does_not_block_states(self):
+  c={'pending':[{'field':'scopeConstraints','value':[{'placeCode':'USA','wholeScopeFrom':'2013','reason':'US excludes Alaska before 2013'}]}],'facilityScope':'unspecified'}
+  self.assertTrue(m.for_place(c,'USA')['pending'])
+  for place in ['AK','TX','SD','GEO']:self.assertFalse(m.for_place(c,place)['pending'])
+  self.assertTrue(c['pending'])
+ def test_unscoped_and_other_constraints_still_block(self):
+  c={'pending':[{'field':'scopeConstraints','value':[{'reason':'scope unknown'}]},{'field':'broaderPublishedTotal','value':'unknown'}]}
+  self.assertEqual(len(m.for_place(c,'TX')['pending']),2)
+ def test_verified_all_size_total_precedes_unspecified_scope(self):
+  a=self.candidate('a',scope='unspecified',first='1949');b=self.candidate('b',scope='all sizes',first='2014')
+  self.assertEqual(m.choose([a,b],'solar')[0],b)
+ def test_generation_basis_correspondence_does_not_apply_to_other_activity(self):
+  review=m.i.read(m.E/'basis-equivalence-review.json');e=next(e for e in review['entries'] if e.get('activities')==['generation']);r={'sourceFacet':e['facet'],'definition':e['definition'],'product':'electricity'}
+  self.assertEqual(m.constraints([r],e['route'],'generation')['verifiedBasisGroup'],e['group'])
+  self.assertIsNone(m.constraints([r],e['route'],'consumption')['verifiedBasisGroup'])
 if __name__=='__main__':unittest.main()

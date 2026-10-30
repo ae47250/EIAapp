@@ -15,7 +15,7 @@ def source_records(series,catalog):
   out.extend({**r,'sourceFacet':fid} for r in rows if series['frequency'] in r['frequencies'] and str(r['definition']['id'])==str(series['measureFacets'].get(fid)))
  return out
 
-def constraints(records):
+def constraints(records,route=None,activity=None):
  blockers=[];scope='unspecified';notes=[];products=[]
  for r in records:
   if r.get('sourceFacet') in ['product','productId','fueltypeid','fuelTypeId','energysourceid'] and r.get('product'):
@@ -30,7 +30,24 @@ def constraints(records):
   if r.get('selectionPreference'):scope='all sizes'
   for key in ['basisRestriction','historicalScope','populationRestriction','scopeRestriction','sourcePeriodNote','scopeDecision','unitNote','sourceScope','frequencyBasis','sectorScope']:
    if r.get(key):notes.append({key:r[key]})
- return {'pending':blockers,'facilityScope':scope,'scopeNotes':notes,'nativeProductDefinitions':sorted(set(products))}
+ review=i.read(E/'basis-equivalence-review.json') if route else {'entries':[]}
+ definition_groups=[]
+ for r in records:
+  if r.get('sourceFacet') in ['product','productId','fueltypeid','fuelTypeId','energysourceid'] and r.get('product'):
+   matches=[e for e in review['entries'] if e['route']==route and e['facet']==r['sourceFacet'] and e['definition']==r.get('definition') and (not e.get('activities') or activity in e['activities'])]
+   definition_groups.append(matches[0]['group'] if len(matches)==1 else None)
+ group=definition_groups[0] if definition_groups and None not in definition_groups and len(set(definition_groups))==1 else None
+ return {'pending':blockers,'facilityScope':scope,'scopeNotes':notes,'nativeProductDefinitions':sorted(set(products)),'verifiedBasisGroup':group}
+
+def for_place(con,geography):
+ """A source restriction with an explicit subject cannot spread to other places."""
+ out={**con,'pending':[]}
+ for item in con['pending']:
+  if item['field']=='scopeConstraints' and isinstance(item['value'],list):
+   relevant=[r for r in item['value'] if not r.get('placeCode') or r['placeCode']==geography]
+   if relevant:out['pending'].append({**item,'value':relevant})
+  else:out['pending'].append(item)
+ return out
 
 def selection_label(series,con,records):
  label=series['basis']['label']
@@ -59,9 +76,11 @@ def choose(candidates,product):
  if any(c['constraints']['pending'] for c in candidates):return None,'Explicit broader-total or historical-scope reconciliation pending'
  eligible=[c for c in candidates if c['constraints']['facilityScope']!='small-scale only']
  if not eligible:return None,'Only small-scale components'
- if any(c['constraints']['facilityScope']=='all sizes' for c in eligible):eligible=[c for c in eligible if c['constraints']['facilityScope']!='utility-scale']
+ if any(c['constraints']['facilityScope']=='all sizes' for c in eligible):eligible=[c for c in eligible if c['constraints']['facilityScope']=='all sizes']
  definitions={tuple(c['constraints'].get('nativeProductDefinitions',[])) for c in eligible if c['constraints'].get('nativeProductDefinitions')}
- if len(definitions)>1:return None,'Different native whole-product definitions; broader-scope comparison pending (no automatic preference by numeric size)'
+ if len(definitions)>1:
+  groups=[c['constraints'].get('verifiedBasisGroup') for c in eligible if c['constraints'].get('nativeProductDefinitions')]
+  if not groups or None in groups or len(set(groups))!=1:return None,'Different native whole-product definitions; broader-scope comparison pending (no automatic preference by numeric size)'
  def score(c):
   ser=c['series'];place=c['place'];unit_text=(ser['unit']+' '+ser.get('unitName','')).lower()
   btu='btu' in unit_text
@@ -86,11 +105,11 @@ def main():
   if route not in catalogs:catalogs[route]=i.read(E/catrefs[route]['file'])
   for series in data['series']:
    if series['cellId'] not in ready or series['candidateStatus']!='whole product':continue
-   records=source_records(series,catalogs[route]);con=constraints(records);series={**series,'selectedBasisLabel':selection_label(series,con,records)}
+   records=source_records(series,catalogs[route]);con=constraints(records,route,series['cellId'].split('|')[2]);series={**series,'selectedBasisLabel':selection_label(series,con,records)}
    for place in series['places'].values():
     if not place['numeric']:continue
     if 'geographyCode' not in place:raise ValueError('Stale observation audit; refresh before selection')
-    candidates[series['cellId']].append({'group':gid,'series':{k:v for k,v in series.items() if k!='places'},'place':place,'constraints':con})
+    candidates[series['cellId']].append({'group':gid,'series':{k:v for k,v in series.items() if k!='places'},'place':place,'constraints':for_place(con,place['geographyCode'])})
  results=[];pending=[]
  for cell in grid['cells']:
   cid=cell['id']
