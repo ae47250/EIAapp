@@ -133,7 +133,7 @@ def build(node):
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n.get('classification')=='FITS' and n['route'].startswith('natural-gas/') and '/enr/' not in n['route']]
     result={'method':'Reviewed native definitions; no coverage claim.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'natural-gas-classification.json.gz').write_bytes(gzip.compress((json.dumps(result,separators=(',',':'))+'\n').encode(),mtime=0))
+    i.write_review(i.EVIDENCE/'natural-gas-classification.json.gz',result)
     from collections import Counter
     pendingrows=[]
     for route,d in result['routes'].items():

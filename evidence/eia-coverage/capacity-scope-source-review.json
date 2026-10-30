@@ -1,0 +1,128 @@
+{
+  "status": "Expected scope annotations recorded before classifier edits; publication and broader API availability unverified.",
+  "method": "UNSD correspondence-table method and source-based regressions per DESIGN.md; no independent standard reference alignment is claimed.",
+  "ownerRule": "owner-clarifications.json#standingScopeRule",
+  "sources": [
+    {
+      "id": "mer-capacity-all",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_20.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-capacity-all-281eaaf1c9bf.pdf",
+      "sha256": "281eaaf1c9bf9d499e340d0aa537946de3047f428e5bda58c7ad733225536602",
+      "bytes": 249020
+    },
+    {
+      "id": "mer-capacity-power",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_21.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-capacity-power-a91f5506da90.pdf",
+      "sha256": "a91f5506da90f81d054a07933f6031229627ada9d8edd28c05c45f9c28c04541",
+      "bytes": 251982
+    },
+    {
+      "id": "mer-capacity-commercial",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_22.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-capacity-commercial-f1cf44f0fffa.pdf",
+      "sha256": "f1cf44f0fffac752a5e25e7cf686cf4f8faed06a231ddc8434f826d98adf0d8f",
+      "bytes": 184966
+    },
+    {
+      "id": "mer-capacity-industrial",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_23.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-capacity-industrial-5845ffad9acd.pdf",
+      "sha256": "5845ffad9acdd718a7d8aa17d72c2dd2dee4b5a5a50053f877f27c6fae34b6fe",
+      "bytes": 191327
+    },
+    {
+      "id": "mer-nuclear-overview",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec8_3.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-nuclear-overview-d6e44ac1d30d.pdf",
+      "sha256": "d6e44ac1d30df7f4a3a52a640edb64c691e91b8c359f5b3728736507894cb252",
+      "bytes": 102263
+    },
+    {
+      "id": "seds-capacity-notes",
+      "url": "https://www.eia.gov/state/seds/sep_indicators/ei_indicators.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/seds-capacity-notes-7c69e6ecf875.pdf",
+      "sha256": "7c69e6ecf875f412d9c461c961e84ba2c33a64ac02e6c0dd3756a76377e32639",
+      "bytes": 445849
+    },
+    {
+      "id": "capacity-broader-solar",
+      "url": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_2_b",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/capacity-broader-solar-34df3a0377b4.html",
+      "sha256": "34df3a0377b41d0d1588ce2dfaa929017c7232b4fe8d79cf8274bf2a6bfa2687",
+      "bytes": 161455
+    },
+    {
+      "id": "mer-sector-stocks",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_17.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-sector-stocks-ee4ba86bcbb3.pdf",
+      "sha256": "ee4ba86bcbb3a936ab25c7b18d4cf2b131f143b513276c7cab57a63eb60a77b4",
+      "bytes": 201358
+    },
+    {
+      "id": "mer-sector-total-fuel",
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_14.pdf",
+      "localFile": "/Users/agust/Documents/EIAapp-Evidence/20261029/coverage/source-pages/mer-sector-total-fuel-f020a8eb872c.pdf",
+      "sha256": "f020a8eb872c050a5cdd14ece89e29e838777397ec2380343fbe1414e1038d18",
+      "bytes": 235080
+    }
+  ],
+  "findings": [
+    {
+      "sources": [
+        "mer-capacity-all",
+        "mer-capacity-power",
+        "mer-capacity-commercial",
+        "mer-capacity-industrial"
+      ],
+      "where": "Tables 7.7a-d, October 2026, footnotes and notes; visually inspected rendered pages",
+      "quotes": [
+        "Data are for utility-scale facilities.",
+        "Data are at end of period."
+      ],
+      "meaning": "Net summer capacity; predominant source attribution for multifuel plants. Solar includes thermal and PV, excludes small-scale PV. All-sector and electric-power histories through 1988 cover electric utilities only; from 1989 include the additional producers described in each table. Hydro includes pumped storage through 1988; solar is in wind through 1988; wood includes waste through 1984; waste includes nonrenewable material through 2000. These are historical scope changes, not a stable total across all years."
+    },
+    {
+      "sources": [
+        "seds-capacity-notes"
+      ],
+      "where": "State Energy Data System 2024 Energy indicators, printed pages 6-7",
+      "quotes": [
+        "EIA\u2019s net summer capacity data are for utility-scale (>1 megawatt capacity) facilities only"
+      ],
+      "meaning": "All 17 listed capacity definitions use net summer capacity, exclude small-scale systems, assign multifuel plants to predominant fuel, and report year-end values. Net summer is different from nameplate and winter capacity. US source is MER December; state source is State Electricity Profiles. Keep source threshold wording verbatim in evidence; display utility-scale, not an invented numeric boundary."
+    },
+    {
+      "sources": [
+        "mer-nuclear-overview"
+      ],
+      "where": "Table 8.1, October 2026, footnotes a-c",
+      "quotes": [
+        "At end of period."
+      ],
+      "meaning": "NUGBPUS is separate nuclear operable-unit net summer capacity. Full-power license/equivalent permission defines operable population. From 2011 monthly capacity adds reported uprates/derates, then assigns the difference from final EIA-860 year-end capacity to January. Do not apply MER Table 7.7 utility-only-through-1988 notes to this separate series."
+    },
+    {
+      "sources": [
+        "capacity-broader-solar"
+      ],
+      "where": "Table 6.2.B, August 2026 and 2025, column groups and notes",
+      "quotes": [
+        "Estimated Total Solar",
+        "Capacity From Utility and Small Scale Facilities"
+      ],
+      "meaning": "Published US and state solar totals include utility-scale PV, solar thermal and estimated small-scale PV. Broader solar total exists. This is distinct from estimated total solar PV. Alabama small-scale and combined columns are NM, not numerical zero. API availability remains unverified; do not substitute utility-scale as whole where broader compatible total exists, and do not invent a sum or off-API retrieval."
+    }
+  ],
+  "expectedChanges": {
+    "MER": "60 capacity records get end-period and basis annotations: 59 Table 7.7 utility-scale records and distinct NUGBPUS nuclear basis. Preserve product, activity, sector, whole/subset classes and source metadata. Historical restrictions must be preserved. No generation flags on capacity.",
+    "SEDS": "17 capacity records gain utility-scale, year-end and broader-total-preference annotations; all other 951 definitions unchanged. Components such as wood and battery remain subsets.",
+    "electricity": "Existing capability and summary capacity labels stay; annotate source and end-year meaning only where source supports it. Net-metered capacity stays restricted.",
+    "exceptions": "Exactly OPS fueltypeid OB2/OBW and sectorid 95 remain pending but carry explicit owner exception, coverageEligible=false and nonpublicationEvidenceEligible=false. Review may proceed with exceptions while classification completeness stays false. Unknown definitions elsewhere still block review."
+  },
+  "limitations": [
+    "This source review is not the B1 coverage table. Broader solar API mapping and observations remain to check.",
+    "Earlier web PDF renderings may have older report months; these findings use hashed local October 2026 MER source snapshots.",
+    "This does not authorize application code, schema, frozen scorer, model or deployment changes."
+  ]
+}

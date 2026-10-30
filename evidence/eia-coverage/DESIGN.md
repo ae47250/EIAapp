@@ -117,3 +117,12 @@ The classifier preserves all 4,624 native series definitions and provenance. Twe
 Combined refinery/blender totals retain a secondary net-production basis and negative values; they do not become domestic primary extraction. Refinery-only, blender-only and renewable-plant-only components do not replace broader compatible totals. The scope register requires reconciliation before default selection. Stock changes, receipts, transfers, adjustments, utilization, days/percent ratios and processing gains do not become the corresponding whole stock/flow measure. Native calendar-day capacity wording and a documented legacy nonoxygenated-gasoline spelling variant are retained without app query aliases.
 
 Twenty-nine new source-based tests pass, including 100 seeded unknown-process cases (20261029) and consistency across duplicate series. A first-run test selector incorrectly expected parsed codes on legacy net-import definitions; it now selects the three actual source definitions, retaining the same out-of-vocabulary expectation. All 287 research tests pass. These are regressions, not an independent holdout or standard benchmark. Catalogue drafts are complete for 152/154 routes. International/electricity definitions, scope reconciliation, grid freeze and B1 remain; no app edits, paid calls or push.
+
+
+## Owner research limits and unresolved metadata exceptions
+
+The owner approved three unresolved electricity definitions (OB2, OBW, sector 95) as exceptions to exhaustive classification. They remain explicitly pending, cannot supply results or support nonpublication, and must be listed at the checkpoint. No further resolution research is authorized.
+
+Use the established correspondence-table method with API metadata and route descriptions. Further PDF footnote research stops; suspected restrictions not established by metadata carry **EIA scope note not verified**, listed in scope-review-register.json. Previously verified scope evidence is preserved. The four-hour research limit ends at **2026-10-30 06:23:21 UTC**; if the checkpoint cannot be reached, stop and report progress and remaining work. Application implementation still requires the separate owner go.
+
+Duplicate classification details are stored locally with content hashes and summarized in Git, while the complete candidate catalogue remains committed. See research-storage-manifest.json. Regeneration requires local evidence (or rebuilding it from committed metadata); missing or altered local evidence stops rather than producing an empty catalogue.

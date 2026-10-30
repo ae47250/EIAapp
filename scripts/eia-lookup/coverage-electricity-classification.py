@@ -17,12 +17,17 @@ def whole(reason,**extra):return decision('whole product',reason,**extra)
 def subset(reason,**extra):return decision('subset',reason,**extra)
 def outside(reason):return decision('out of vocabulary',reason)
 def pending(reason,**extra):return decision('pending',reason,**extra)
+def approved_exception(reason,**extra):
+    # Only the three explicitly approved calls below use this; unknowns stay pending.
+    return pending(reason,ownerException='unidentifiedElectricityMetadata',
+                   coverageEligible=False,nonpublicationEvidenceEligible=False,
+                   exceptionEvidence='owner-clarifications.json#unidentifiedElectricityMetadata',**extra)
 
 def fuel(code):
     totals={'COW':'coal','PET':'petroleum','REN':'renewable','WND':'wind','NUC':'nuclear','BIO':'biofuels','SUN':'solar','TSN':'solar','NG':'natural gas','GEO':'geothermal','HYC':'hydro','FOS':'fossil fuels'}
     parts={'coal':'RC LIG BIT ANT SUB WOC BIS COL','solar':'SPV STH TPV DPV','biofuels':'WAS LFG MLG WWW MSB','renewable':'AOR ORW','wind':'WNT WNS','petroleum':'PC PEL RFO WOO DFO','fossil fuels':'NGO OOG','electricity':'HPS','total energy':'OTH'}
     if code=='ALL':return whole('All electricity output; all-fuel input belongs to total energy, not electricity.',product='electricity',inputProduct='total energy')
-    if code in ['OB2','OBW']:return pending('API biomass label does not distinguish this code from the documented BIO total. Source component definition unresolved.',product='biofuels')
+    if code in ['OB2','OBW']:return approved_exception('API biomass label does not distinguish this code from the documented BIO total. Source component definition unresolved.',product='biofuels')
     if code in totals:
         r=whole('EIA named total; preserve its documented basis.',product=totals[code])
         if code=='TSN':r.update(generationScope='all sizes',selectionPreference='Prefer compatible all-size total over utility-scale-only total.')
@@ -60,7 +65,7 @@ def facet(route,fid,d):
         component={'1':'electric power','94':'electric power','2':'electric power','3':'electric power','90':'electric power','4':'commercial','5':'commercial','6':'industrial','7':'industrial'}.get(code)
         if component:return subset('Ownership or CHP component is not a whole sector.',sector=component,sectorCellClassification='subset')
         if code=='OTH':return subset('Legacy other customers is not one of the locked sectors.')
-        if code=='95':return pending('Sector value labelled Coal Consumption does not identify a locked sector; verify source definition.')
+        if code=='95':return approved_exception('Sector value labelled Coal Consumption does not identify a locked sector; verify source definition.')
     return pending('Unreviewed facet definition; preserve unresolved.')
 
 def column(route,key,d):
@@ -113,11 +118,13 @@ def build(node):
         out['facets'][fid]=[dict(sourceDefinition=r['definition'],frequencies=r['frequencies'],calls=r['calls'],**facet(route,fid,r['definition'])) for r in rows]
     decisions=out['dataColumns']+[r for rows in out['facets'].values() for r in rows]
     out['complete']=all(r['classification']!='pending' for r in decisions)
+    out['reviewCompleteWithExceptions']=all(r['classification']!='pending' or r.get('ownerException')=='unidentifiedElectricityMetadata' for r in decisions)
+    out['unresolvedExceptions']=[{'facet':fid,'code':r['sourceDefinition']['id']} for fid,rows in out['facets'].items() for r in rows if r.get('ownerException')]
     return out
 
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n.get('classification')=='FITS' and n['route'].startswith('electricity/')]
     result={'method':'Source correspondence; dimension classifications must be combined without dropping restrictions. No publication claim.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'electricity-classification.json').write_text(json.dumps(result,indent=2)+'\n')
+    i.write_review(i.EVIDENCE/'electricity-classification.json',result)
     print(json.dumps({route:{'complete':r['complete'],'pending':[x.get('id',x.get('sourceDefinition',{}).get('id')) for x in r['dataColumns']+[y for rows in r['facets'].values() for y in rows] if x['classification']=='pending']} for route,r in result['routes'].items()}))
 if __name__=='__main__':main()

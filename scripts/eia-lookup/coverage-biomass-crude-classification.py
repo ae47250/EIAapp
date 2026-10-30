@@ -63,6 +63,6 @@ def build(node):
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n.get('classification')=='FITS' and (n['route']=='crude-oil-imports' or n['route'].startswith('densified-biomass/'))]
     result={'method':'Source-definition correspondence; all facet and place restrictions must be combined. No publication claim.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'biomass-crude-classification.json').write_text(json.dumps(result,indent=2)+'\n')
+    i.write_review(i.EVIDENCE/'biomass-crude-classification.json',result)
     print(json.dumps({r:{'complete':v['complete'],'columns':len(v['dataColumns']),'facetDefinitions':sum(len(x) for x in v['facets'].values())} for r,v in result['routes'].items()}))
 if __name__=='__main__':main()

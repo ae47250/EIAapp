@@ -80,7 +80,7 @@ def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n.get('classification')=='FITS' and n['route'].startswith('natural-gas/enr/')]
     out={'method':'Native definition correspondence, not application interpretation or accepted coverage.','routes':{n['route']:build(n) for n in nodes}}
     body=(json.dumps(out,separators=(',',':'))+'\n').encode()
-    (i.EVIDENCE/'natural-gas-reserves-classification.json.gz').write_bytes(gzip.compress(body,mtime=0))
+    i.write_review(i.EVIDENCE/'natural-gas-reserves-classification.json.gz',out)
     from collections import Counter
     for route,r in out['routes'].items():print(route,r['complete'],dict(Counter(x['classification'] for x in r['facets']['series'])))
     pending=[(route,fid,r['sourceDefinition']) for route,d in out['routes'].items() for fid,rows in d['facets'].items() for r in rows if r['classification']=='pending']

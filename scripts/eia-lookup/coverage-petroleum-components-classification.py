@@ -74,7 +74,7 @@ def build(node):
 def main():
  nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n['route'] in ROUTES]
  result={'method':'Definition correspondence, not a publication claim.','routes':{n['route']:build(n) for n in nodes}}
- (i.EVIDENCE/'petroleum-components-classification.json.gz').write_bytes(gzip.compress((json.dumps(result,separators=(',',':'))+'\n').encode(),mtime=0))
+ i.write_review(i.EVIDENCE/'petroleum-components-classification.json.gz',result)
  rows=[{'route':route,'facet':fid,**x} for route,v in result['routes'].items() for fid,entries in v['facets'].items() for x in entries if x['classification']=='pending']
  Path('/private/tmp/eia-components-pending.json').write_text(json.dumps(rows,indent=2)+'\n');print(json.dumps({'routes':len(nodes),'complete':sum(x['complete'] for x in result['routes'].values()),'pending':len(rows),'examples':rows[:3]}))
 if __name__=='__main__':main()

@@ -107,7 +107,7 @@ def build(node):
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n['route'] in ROUTES and n.get('classification')=='FITS']
     result={'method':'Reviewed native definitions, not a coverage claim.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'petroleum-price-classification.json.gz').write_bytes(gzip.compress((json.dumps(result,separators=(',',':'))+'\n').encode(),mtime=0))
+    i.write_review(i.EVIDENCE/'petroleum-price-classification.json.gz',result)
     pendingrows=[{'route':route,'facet':fid,**r} for route,v in result['routes'].items() for fid,rows in v['facets'].items() for r in rows if r['classification']=='pending']
     Path('/private/tmp/eia-petroleum-price-pending.json').write_text(json.dumps(pendingrows,indent=2)+'\n')
     print(json.dumps({'routes':len(nodes),'complete':sum(r['complete'] for r in result['routes'].values()),'pending':len(pendingrows),'examples':pendingrows[:3]}))

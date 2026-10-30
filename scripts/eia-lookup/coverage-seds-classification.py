@@ -74,12 +74,23 @@ def classify(definition):
         result['basisLabel']+='; EIA sector price estimates, including assigned prices where source values are missing'
         result['scopeEvidence']='headline-scope-source-review.json'
         result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+    if activity=='capacity':
+        result['capacityScope']='utility-scale'
+        result['basisLabel']+='; utility-scale; year-end'
+        result['timeMeaning']='End of year (December); not an annual sum or average'
+        result['capacityFuelAssignment']='Predominant energy source for multifuel plants'
+        result['scopeDecision']='standingScopeRule'
+        result['scopeEvidence']='capacity-scope-source-review.json'
+        result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+        if product=='solar':
+            result['basisLabel']+='; excludes small-scale solar photovoltaic capacity'
+            result['broaderPublishedTotal']='EPM Table 6.2.B estimated total solar includes small-scale PV; compatible API mapping unverified.'
     return result
 
 def main():
     rows=i.inventory('seds')['seriesId'];records=[dict(classify(r['definition']),frequencies=r['frequencies'],calls=r['calls']) for r in rows]
     result={'route':'seds','complete':not any(r['classification']=='pending' for r in records),'reviewStatus':'Draft: systematic metadata correspondence requires boundary-case review before grid freeze.','scope':'Concept classifications only; no observations or coverage claims.','series':records}
-    (i.EVIDENCE/'seds-classification.json').write_text(json.dumps(result,indent=2)+'\n')
+    i.write_review(i.EVIDENCE/'seds-classification.json',result)
     from collections import Counter
     print(json.dumps({'counts':dict(Counter(r['classification'] for r in records)),'pending':[r['sourceDefinition'] for r in records if r['classification']=='pending']}))
 if __name__=='__main__':main()

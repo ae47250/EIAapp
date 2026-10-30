@@ -41,6 +41,9 @@ def build_node(node):
                 decision=decisions[json.dumps(row['definition'],sort_keys=True)]
                 row.update({k:v for k,v in decision.items() if k not in ['sourceDefinition','frequencies','calls']})
         result['classificationComplete']=review['complete']
+        if review.get('unresolvedExceptions'):
+            result['unresolvedExceptions']=review['unresolvedExceptions']
+            result['reviewCompleteWithExceptions']=review['reviewCompleteWithExceptions']
         result['classificationSources']=review['sources']
         if review.get('scope'):result['scope']=review['scope']
     if node['route']=='international':
@@ -87,6 +90,9 @@ def main():
         from collections import Counter
         classCounts=Counter(r['classification'] for rows in data['facets'].values() for r in rows)
         summary['routes'][node['route']]={'file':str(target.relative_to(i.EVIDENCE)),'sha256':hashlib.sha256(body).hexdigest(),'counts':per,'classificationCounts':dict(classCounts),'classificationComplete':data['classificationComplete']}
+        if data.get('unresolvedExceptions'):
+            summary['routes'][node['route']]['unresolvedExceptions']=data['unresolvedExceptions']
+            summary['routes'][node['route']]['reviewCompleteWithExceptions']=data['reviewCompleteWithExceptions']
         if 'candidateCombinations' in data:summary['routes'][node['route']]['combinationClassifications']=dict(Counter(r['classification'] for r in data['candidateCombinations']))
     summary['counts']=counts
     (i.EVIDENCE/'series-catalog-summary.json').write_text(json.dumps(summary,indent=2)+'\n')

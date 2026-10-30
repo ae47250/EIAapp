@@ -140,10 +140,25 @@ def classify(definition):
         elif scope=='all sizes':
             result['basisLabel']+='; utility-scale and small-scale generation'
             result['selectionPreference']='Prefer over utility-scale-only totals with compatible dimensions.'
-    if activity=='capacity' and 'utility-scale' in text:
-        result['basisLabel']+='; utility-scale (1 MW and larger)'
+    if activity=='capacity':
         result['scopeDecision']='standingScopeRule'
+        result['scopeEvidence']='capacity-scope-source-review.json'
+        result['timeMeaning']='End of period; not a period sum or average'
         result['selectionConstraint']='Use broader EIA total for same product/activity/place/sector if published; verify before B1 selection.'
+        if code=='NUGBPUS':
+            result['capacityScope']='Operable nuclear generating units'
+            result['basisLabel']+='; operable nuclear generating units'
+            result['historicalScope']='MER Table 8.1: from 2011 monthly uprates/derates plus final year-end capacity reconciliation assigned to January; not Table 7.7 utility-only history.'
+        else:
+            result['capacityScope']='utility-scale'
+            result['basisLabel']+='; utility-scale; end of period'
+            result['capacityFuelAssignment']='Predominant energy source for multifuel plants'
+            if result.get('sector') not in ['commercial','industrial']:
+                result['historicalScope']='MER Table 7.7: through 1988 electric utilities only; beginning 1989 includes other producers in the named total. Do not treat earlier years as the current population.'
+            result['historicalFuelScope']='Through 1988 conventional hydro includes pumped storage and solar is included in wind; through 1984 wood includes waste; through 2000 waste includes nonrenewable waste. Apply relevant source footnotes before selecting periods.'
+            if product=='solar':
+                result['basisLabel']+='; excludes small-scale solar photovoltaic capacity'
+                result['broaderPublishedTotal']='EPM Table 6.2.B estimated total solar includes small-scale PV; compatible API mapping unverified.'
     if product=='natural gas' and activity=='prices' and result.get('sector') in ['residential','commercial','industrial'] and result.get('sectorCellClassification')=='whole product':
         result['basisLabel']+='; sales price; excludes gas transported for other sellers'
         result['scopeDecision']='headlineSectorGasPrices'
@@ -161,7 +176,7 @@ def main():
     rows=i.inventory('total-energy')['msn']
     records=[dict(classify(r['definition']),frequencies=r['frequencies'],calls=r['calls']) for r in rows]
     result={'route':'total-energy','complete':not any(r['classification']=='pending' or r.get('scopeReview') for r in records),'reviewStatus':'Draft: inspect whole/sector candidates and source notes before grid freeze.','scope':'Concept correspondence, not availability or period verification.','methodSources':['https://unstats.un.org/unsd/classifications/ExpertGroup/EGM2011/AC234-6.PDF','https://www.w3.org/TR/skos-reference/#mapping','https://www.eia.gov/totalenergy/data/monthly/'],'series':records}
-    (i.EVIDENCE/'total-energy-classification.json').write_text(json.dumps(result,indent=2)+'\n')
+    i.write_review(i.EVIDENCE/'total-energy-classification.json',result)
     from collections import Counter
     print(json.dumps({'counts':dict(Counter(r['classification'] for r in records)),'pending':[r['sourceDefinition'] for r in records if r['classification']=='pending']}))
 if __name__=='__main__':main()

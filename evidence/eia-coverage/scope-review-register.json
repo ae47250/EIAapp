@@ -1,5 +1,5 @@
 {
-  "status": "Open research register; all cases must be reconciled before grid/B1. Not an accepted coverage table.",
+  "status": "Scope correspondence uses API metadata and route descriptions under owner research limit. Remaining suspected restrictions are disclosed, not researched further.",
   "ownerRule": "owner-clarifications.json#standingScopeRule",
   "comparisonRule": "Compare same product, activity, place and sector using documented scope inclusion, never numeric size. Preserve frequency and geography restrictions.",
   "cases": [
@@ -40,13 +40,13 @@
     },
     {
       "id": "utility-scale-capacity",
-      "status": "conditional headline acceptance applied to electricity and explicit utility-scale MER capacity drafts",
+      "status": "MER and SEDS capacity scope annotated from sources already verified; no further PDF review",
       "decision": "Use broader all-size total where published; otherwise accept EIA headline net summer capacity with utility-scale label. Ownership and fuel components remain narrower.",
       "label": "Net summer capacity; utility-scale (1 MW and larger)",
       "sources": [
-        "headline-scope-source-review.json"
+        "capacity-scope-source-review.json"
       ],
-      "remaining": "All-size comparison by product/place/sector and SEDS capacity boundary review before B1."
+      "remaining": "Broader API candidate selection and observations in B1; known solar total exists in EPM 6.2.B."
     },
     {
       "id": "petroleum-gasoline-retail-survey",
@@ -243,7 +243,9 @@
         "electricity-classification.json",
         "total-energy-classification.json"
       ],
-      "issue": "Earlier generation-only approval excluded utility-scale capacity. Check broader all-size capacity and source headline before accepting labelled fallback."
+      "issue": "Earlier generation-only approval excluded utility-scale capacity. Check broader all-size capacity and source headline before accepting labelled fallback.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
     },
     {
       "id": "coal-reserves-stocks",
@@ -251,7 +253,9 @@
         "coal-classification.json",
         "total-energy-classification.json"
       ],
-      "issue": "Compare producing-mine reserves with EIA estimated recoverable reserves, and producer/distributor stocks with published total stocks. Record broader sources and API availability separately."
+      "issue": "Compare producing-mine reserves with EIA estimated recoverable reserves, and producer/distributor stocks with published total stocks. Record broader sources and API availability separately.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
     },
     {
       "id": "other-headline-populations",
@@ -261,7 +265,9 @@
         "seds-classification.json",
         "total-energy-classification.json"
       ],
-      "issue": "Review restricted population labels consistently, including net-metering, consumer deliveries, wellhead reports and storage. Broader totals take priority; individual components do not become headline totals."
+      "issue": "Review restricted population labels consistently, including net-metering, consumer deliveries, wellhead reports and storage. Broader totals take priority; individual components do not become headline totals.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
     },
     {
       "id": "remaining-price-boundaries",
@@ -269,7 +275,20 @@
         "total-energy-classification.json",
         "seds-classification.json"
       ],
-      "issue": "Review mixed generating-plant-sector averages, all-end-use versus all-sector totals, transportation vehicle-fuel price, and source estimates before default selection. Do not convert a sector/ownership component to a whole total without source reconciliation."
+      "issue": "Review mixed generating-plant-sector averages, all-end-use versus all-sector totals, transportation vehicle-fuel price, and source estimates before default selection. Do not convert a sector/ownership component to a whole total without source reconciliation.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
     }
-  ]
+  ],
+  "unresolvedExceptions": {
+    "evidence": "owner-clarifications.json#unidentifiedElectricityMetadata",
+    "codes": [
+      "OB2",
+      "OBW",
+      "95"
+    ],
+    "resultsAllowed": false,
+    "nonpublicationEvidenceAllowed": false,
+    "furtherResearch": "Stopped by owner"
+  }
 }

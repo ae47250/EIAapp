@@ -1,10 +1,10 @@
 {
-  "recordedAt": "2026-10-30T02:09:30.045699+00:00",
+  "recordedAt": "2026-10-30T02:26:37.630016+00:00",
   "branch": "codex/eia-coverage",
   "startSHA": "bbff3bf4edf76935b5700b6ca702fa93071d624e",
   "workOrderSHA256": "c878980d594337a14ac089181b75862824165d34f1b70c63ca441dfd7c9fac0c",
-  "phase": "2: all FITS measure definitions inventoried; draft international and SEDS correspondence; remaining classifications/grid/coverage pending",
-  "state": "active: 153/154 definition drafts complete. Owner decision pending on three undocumented electricity codes; no exception applied. Independent cross-route scope reconciliation remains before grid/B1.",
+  "phase": "2: definition review with approved exceptions complete; cell grid built, local commit and B1 estimate next",
+  "state": "active: definition review can proceed with three owner-approved unresolved electricity exceptions; remaining unverified scope notes disclosed under owner research limit. Grid and B1 next.",
   "trigger": "Owner approves sector gas sales prices and standing broader-total/headline scope rule.",
   "EIA_API_calls": 1424,
   "OpenAI_calls": 0,
@@ -12,7 +12,7 @@
   "pushed": false,
   "implementationAuthorizedAfterCheckpointGo": false,
   "unrelatedUntrackedPreserved": "docs/eia-interpretation-audit.md",
-  "previousGoalTurnClassification": "Progress: scanned 808188 official bulk records for unresolved electricity definitions; documented missing definitions without inferring nonpublication. Corrected SEDS sector substring error; 305 research tests pass.",
+  "previousGoalTurnClassification": "Progress: approved exceptions isolated; capacity annotations verified; duplicate evidence preserved locally; fixed grid and 316 research tests pass.",
   "defaultFacetRoutes": 193,
   "allFrequencyRoutes": 170,
   "leafClassifications": {
@@ -274,7 +274,7 @@
     "allSourceAggregatesVerified": 0,
     "acceptedForCoverage": false
   },
-  "pendingOwnerDecision": "pending-decisions.json#unidentifiedElectricityMetadata",
+  "pendingOwnerDecision": null,
   "sedsSectorBoundaryCorrection": {
     "affectedDefinition": "HVGBP",
     "sourceMeaning": "Conventional hydroelectric power generating units net summer capacity in all sectors",
@@ -284,8 +284,17 @@
     "evidence": "seds-boundary-review.json"
   },
   "remainingIndependentScopeAudit": [
-    "Annotate capacity facility-size scope in MER and SEDS even when titles omit utility-scale; compare official broader totals.",
-    "Resolve electric-power fuel-consumption/stock scope and coal-stock fuel definitions from official sources.",
-    "Reconcile different production stages and other cross-route bases before selecting defaults."
-  ]
+    "No further PDF footnote research. Carry EIA scope note not verified from scope-review-register.json into checkpoint.",
+    "Use metadata-based broader-total comparison while building coverage candidates."
+  ],
+  "metadataExceptions": "owner-clarifications.json#unidentifiedElectricityMetadata",
+  "researchDeadlineUTC": "2026-10-30T06:23:21Z",
+  "classificationReviewedRoutesIncludingExceptions": 154,
+  "researchChecks": "research-checks-20.json",
+  "cellGridCounts": {
+    "base": 672,
+    "sector": 1280,
+    "qualifier": 96,
+    "qualifier-sector": 40
+  }
 }

@@ -56,7 +56,7 @@ def build(node):
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n['route'] in ROUTES]
     result={'method':'Definition correspondence only; no publication claim.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'petroleum-crude-classification.json.gz').write_bytes(gzip.compress((json.dumps(result,separators=(',',':'))+'\n').encode(),mtime=0))
+    i.write_review(i.EVIDENCE/'petroleum-crude-classification.json.gz',result)
     pending=[{'route':route,**x} for route,v in result['routes'].items() for rows in v['facets'].values() for x in rows if x['classification']=='pending']
     print(json.dumps({'routes':len(nodes),'complete':sum(x['complete'] for x in result['routes'].values()),'pending':pending[:10],'pendingCount':len(pending)}))
 if __name__=='__main__':main()

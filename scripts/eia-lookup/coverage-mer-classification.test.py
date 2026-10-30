@@ -96,7 +96,12 @@ class MERTests(unittest.TestCase):
                     self.assertIn(r['activity'],['capacity','prices'])
                     self.assertIn(r['scopeDecision'],['standingScopeRule','headlineSectorGasPrices'])
                     self.assertIn('broader EIA total',r['selectionConstraint'])
-                    self.assertTrue(any(x in r['basisLabel'] for x in ['utility-scale (1 MW and larger)','excludes gas transported for other sellers','EIA-923 reporting plants']))
+                    if r['activity']=='capacity':
+                        self.assertIn('capacity-scope-source-review.json',r['scopeEvidence'])
+                        self.assertIn('End of period',r['timeMeaning'])
+                        self.assertIn('operable nuclear generating units' if d['id']=='NUGBPUS' else 'utility-scale',r['basisLabel'])
+                    else:
+                        self.assertTrue(any(x in r['basisLabel'] for x in ['excludes gas transported for other sellers','EIA-923 reporting plants']))
     def test_generation_scope_no_longer_awaits_owner(self):
         for d in self.rows.values():self.assertNotIn('scopeReview',m.classify(d))
     def test_all_source_definitions_retained(self):

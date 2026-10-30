@@ -77,6 +77,6 @@ def build(node):
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n.get('classification')=='FITS' and n['route'].startswith('coal/')]
     result={'method':'Definition correspondence; combine every facet and source restriction before B1 acceptance.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'coal-classification.json').write_text(json.dumps(result,indent=2)+'\n')
+    i.write_review(i.EVIDENCE/'coal-classification.json',result)
     print(json.dumps({r:{'complete':x['complete'],'dataColumns':len(x['dataColumns']),'facetDefinitions':sum(len(y) for y in x['facets'].values())} for r,x in result['routes'].items()}))
 if __name__=='__main__':main()

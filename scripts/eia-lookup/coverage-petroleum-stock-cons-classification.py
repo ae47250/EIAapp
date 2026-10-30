@@ -131,7 +131,7 @@ def build(node):
 def main():
     nodes=[n for n in i.read(i.EVIDENCE/'route-census.json')['nodes'] if n['route'] in ROUTES]
     result={'method':'Source correspondence only; publication and exact geography remain unverified.','routes':{n['route']:build(n) for n in nodes}}
-    (i.EVIDENCE/'petroleum-stock-cons-classification.json.gz').write_bytes(gzip.compress((json.dumps(result,separators=(',',':'))+'\n').encode(),mtime=0))
+    i.write_review(i.EVIDENCE/'petroleum-stock-cons-classification.json.gz',result)
     pendingrows=[{'route':route,'facet':fid,**x} for route,v in result['routes'].items() for fid,rows in v['facets'].items() for x in rows if x['classification']=='pending']
     Path('/private/tmp/eia-stock-cons-pending.json').write_text(json.dumps(pendingrows,indent=2)+'\n')
     print(json.dumps({'routes':len(nodes),'complete':sum(x['complete'] for x in result['routes'].values()),'pending':len(pendingrows),'examples':pendingrows[:4]}))
