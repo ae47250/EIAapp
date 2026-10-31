@@ -4,7 +4,7 @@ The comparison was stopped before ON. Four Set I cases have empty expected looku
 
 **This is a process failure.** The offline gate should have rejected empty expected row lists and reconciled historical selectors with the recorded country-type decision. Its passing result does not establish a valid scorer. The freeze was honored: no code, suite, scorer, runner, or tests changed afterward. Further paid/scored work stopped.
 
-Preview: pending the authorized automatic GitHub preview. The preview uses the flag's existing **on** default; no Vercel setting or production model was changed.
+Preview: [branch preview](https://eiaappv3-git-codex-eia-measure-ea47243.vercel.app). The automatic preview for evidence commit `6f8df37` is READY; its [immutable URL](https://eiaappv3-2wjk4cui3-ea47243.vercel.app) redirects to the app login page (HTTP 200), and its unauthenticated search API returns the expected 401. Authenticated live search remains untested after the measurement stop. The preview uses the flag's existing **on** default; no Vercel setting or production model was changed.
 
 | Work | Result |
 |---|---|
