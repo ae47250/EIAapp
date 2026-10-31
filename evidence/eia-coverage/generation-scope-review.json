@@ -1,0 +1,784 @@
+{
+  "status": "Source-scope review; not a coverage table or complete availability check.",
+  "method": "UNSD correspondence table / SKOS whole versus narrower concept; owner-approved generation facility-size basis. See DESIGN.md for benchmark applicability.",
+  "ownerDecision": "Prefer published all-size total; accept labelled utility-scale headline total only where all-size total is not published. Warn when a published small-scale estimate is omitted.",
+  "labels": {
+    "utilityScale": "utility-scale (1 MW and larger)",
+    "omittedSmallScale": "excludes small-scale (e.g. rooftop) generation"
+  },
+  "sourceFiles": [
+    {
+      "url": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_1_17_a",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/small-scale-state-table-e3ed49dc0c9c.html",
+      "sha256": "e3ed49dc0c9c70e889df5bbce647001a5efe992729ea546fadd3831ceabdb9e3"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/browser/data/index.php?method=getConfigJSON",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/electricity-browser-config-6b663bfa3cd4.json",
+      "sha256": "6b663bfa3cd44fe8c53f878996159965057674876436067c6a76963f0eedc634"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/browser/",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/electricity-browser-911b21487630.html",
+      "sha256": "911b21487630856a01d08d0661f35b84c081a33d89d2f13f9095fb958a196022"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/browser/main.js?v=1.20",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/electricity-browser-main.js",
+      "sha256": "de44695d0cfbec4a384ec25a30937162541ba4e3bef61ec8a0fbe93c677d8092"
+    }
+  ],
+  "documentation": [
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861m/",
+      "finding": "Small-scale PV capacity and generation estimates are published. Other-technology net-metering capacity/customer/surplus-sales data are not total generation estimates."
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_n.pdf",
+      "finding": "Section 7 generation covers utility-scale facilities at least 1 MW; small-scale is excluded. Small-scale solar PV is in Table 10.6."
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/sec10_12.pdf",
+      "finding": "Solar table separately publishes small-scale PV, utility-scale PV and thermal, and their combined solar total for 50 states and DC."
+    },
+    {
+      "url": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_1_01",
+      "finding": "All-fuels utility-scale total and separate total-solar, total-PV and small-PV measures. Do not calculate an all-size all-fuels total without authorization."
+    }
+  ],
+  "smallScaleEstimate": {
+    "fuel": "solar photovoltaic",
+    "wholeProduct": "solar",
+    "alsoComponentOf": [
+      "renewable",
+      "electricity"
+    ],
+    "sectors": [
+      "residential",
+      "commercial",
+      "industrial"
+    ],
+    "placeVerification": "Exact state names matched to routing metadata; table rows have 26 cells; columns 6 and 7 are small-scale August 2026 and August 2025. No observation values stored here.",
+    "places": [
+      {
+        "code": "CT",
+        "name": "Connecticut",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "ME",
+        "name": "Maine",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MA",
+        "name": "Massachusetts",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NH",
+        "name": "New Hampshire",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "RI",
+        "name": "Rhode Island",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "VT",
+        "name": "Vermont",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NJ",
+        "name": "New Jersey",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NY",
+        "name": "New York",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "PA",
+        "name": "Pennsylvania",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "IL",
+        "name": "Illinois",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "IN",
+        "name": "Indiana",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MI",
+        "name": "Michigan",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "OH",
+        "name": "Ohio",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "WI",
+        "name": "Wisconsin",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "IA",
+        "name": "Iowa",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "KS",
+        "name": "Kansas",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MN",
+        "name": "Minnesota",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MO",
+        "name": "Missouri",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NE",
+        "name": "Nebraska",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "ND",
+        "name": "North Dakota",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "SD",
+        "name": "South Dakota",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "DE",
+        "name": "Delaware",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "DC",
+        "name": "District of Columbia",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "FL",
+        "name": "Florida",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "GA",
+        "name": "Georgia",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MD",
+        "name": "Maryland",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NC",
+        "name": "North Carolina",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "SC",
+        "name": "South Carolina",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "VA",
+        "name": "Virginia",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "WV",
+        "name": "West Virginia",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "AL",
+        "name": "Alabama",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "NM",
+          "NM"
+        ]
+      },
+      {
+        "code": "KY",
+        "name": "Kentucky",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MS",
+        "name": "Mississippi",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "TN",
+        "name": "Tennessee",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "AR",
+        "name": "Arkansas",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "LA",
+        "name": "Louisiana",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "OK",
+        "name": "Oklahoma",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "TX",
+        "name": "Texas",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "AZ",
+        "name": "Arizona",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "CO",
+        "name": "Colorado",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "ID",
+        "name": "Idaho",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "MT",
+        "name": "Montana",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NV",
+        "name": "Nevada",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "NM",
+        "name": "New Mexico",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "UT",
+        "name": "Utah",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "WY",
+        "name": "Wyoming",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "CA",
+        "name": "California",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "OR",
+        "name": "Oregon",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "WA",
+        "name": "Washington",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "AK",
+        "name": "Alaska",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "HI",
+        "name": "Hawaii",
+        "placeKind": "state",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      },
+      {
+        "code": "USA",
+        "name": "U.S. Total",
+        "placeKind": "US",
+        "publishedSmallScalePVColumn": true,
+        "sampleStatuses": [
+          "numeric",
+          "numeric"
+        ]
+      }
+    ],
+    "counts": {
+      "US": 1,
+      "statesIncludingDC": 51,
+      "numericInSample": 51,
+      "symbolOnlyInSample": 1
+    },
+    "limitation": "A published estimate column does not imply a numeric value in every period; Alabama has NM in both sampled columns. No country/World inference. B1 must establish actual period coverage."
+  },
+  "notation": {
+    "NM": {
+      "meaning": "Not meaningful due to large relative standard error or excessive percentage change.",
+      "source": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_1_17_a",
+      "handling": "Nonnumeric; never zero. Publication of a column is distinct from a usable observation."
+    }
+  },
+  "fuelSearchScope": "All 154 FITS-route measure inventories and EIA EPM / EIA-861M documentation: small-scale generation estimates found for solar PV. Other technologies have small-installation capacity records, which cannot prove generation estimates. This is bounded evidence, not a claim that no other source publication exists.",
+  "nativeBrowserDefinitions": [
+    {
+      "id": "26-0",
+      "filterGroupId": 26,
+      "valueId": 0,
+      "filterValue": "ALL",
+      "description": "all fuels (utility-scale)",
+      "dataDescription": "all fuels",
+      "displayOrder": 0,
+      "level": 0,
+      "parentValueId": null,
+      "hasChildren": 1,
+      "isTotal": null,
+      "units": null,
+      "notes": "Summation of all fuels used for electricity generation",
+      "noDataBreakdown": 0
+    },
+    {
+      "id": "26-8",
+      "filterGroupId": 26,
+      "valueId": 8,
+      "filterValue": "AOR",
+      "description": "other renewables",
+      "dataDescription": "other renewables (total)",
+      "displayOrder": 8,
+      "level": 1,
+      "parentValueId": 0,
+      "hasChildren": 1,
+      "isTotal": null,
+      "units": null,
+      "notes": "Summation of all renewable sources including wind, solar, biomass, geothermal and other renewable sources other than hydroelectric dams",
+      "noDataBreakdown": 0
+    },
+    {
+      "id": "26-12",
+      "filterGroupId": 26,
+      "valueId": 12,
+      "filterValue": "SUN",
+      "description": "all utility-scale solar",
+      "dataDescription": "all utility-scale solar",
+      "displayOrder": 10,
+      "level": 2,
+      "parentValueId": 8,
+      "hasChildren": 1,
+      "isTotal": null,
+      "units": null,
+      "notes": "All solar powered electricity generation (including photovoltaic and thermal)",
+      "noDataBreakdown": 0
+    },
+    {
+      "id": "26-16",
+      "filterGroupId": 26,
+      "valueId": 16,
+      "filterValue": "BIO",
+      "description": "biomass",
+      "dataDescription": "biomass (total)",
+      "displayOrder": 14,
+      "level": 2,
+      "parentValueId": 8,
+      "hasChildren": 1,
+      "isTotal": null,
+      "units": null,
+      "notes": "Summation of Wood and Wood-Derived Fuels and Other Biomass.",
+      "noDataBreakdown": 0
+    },
+    {
+      "id": "26-17",
+      "filterGroupId": 26,
+      "valueId": 17,
+      "filterValue": "TSN",
+      "description": "all solar",
+      "dataDescription": "all solar",
+      "displayOrder": 19,
+      "level": 0,
+      "parentValueId": null,
+      "hasChildren": 1,
+      "isTotal": null,
+      "units": null,
+      "notes": null,
+      "noDataBreakdown": 1
+    },
+    {
+      "id": "26-18",
+      "filterGroupId": 26,
+      "valueId": 18,
+      "filterValue": "DPV",
+      "description": "small-scale solar photovoltaic",
+      "dataDescription": "small-scale solar photovoltaic",
+      "displayOrder": 20,
+      "level": 1,
+      "parentValueId": 17,
+      "hasChildren": null,
+      "isTotal": null,
+      "units": null,
+      "notes": "All solar powered electricity generation (including photovoltaic and thermal)",
+      "noDataBreakdown": 1
+    },
+    {
+      "id": "26-19",
+      "filterGroupId": 26,
+      "valueId": 19,
+      "filterValue": "SUN",
+      "description": "all utility-scale solar",
+      "dataDescription": "all utility-scale solar",
+      "displayOrder": 21,
+      "level": 1,
+      "parentValueId": 17,
+      "hasChildren": 1,
+      "isTotal": null,
+      "units": null,
+      "notes": null,
+      "noDataBreakdown": 0
+    }
+  ],
+  "metadataConflicts": [
+    {
+      "code": "AOR",
+      "apiLabel": "all renewables",
+      "officialBrowserMeaning": "other renewables, excluding hydroelectric dams",
+      "decision": "Subset of renewable; use whole renewable candidate only after full definition verification."
+    },
+    {
+      "code": "DPV",
+      "conflict": "Browser notes copy a generic solar including thermal description, while its name, tree and EIA-861M survey explicitly identify small-scale PV.",
+      "decision": "Use specific documented PV definition; not total solar."
+    },
+    {
+      "code": "SOETPUS",
+      "conflict": "All Sectors in title does not mean all facility sizes.",
+      "decision": "Utility-scale. Prefer combined SOTEPUS for matched place/sector/frequency where published."
+    },
+    {
+      "codes": [
+        "BIO",
+        "OB2",
+        "OBW"
+      ],
+      "conflict": "API labels all say biomass despite differing measures.",
+      "decision": "BIO is documented total wood plus other biomass. OB2 and OBW remain unaccepted until their components are verified."
+    }
+  ],
+  "definitionProbes": {
+    "calls": [
+      1418,
+      1419
+    ],
+    "period": "2024",
+    "purpose": "Same-period source-definition cross-check, not B1. Arithmetic agreement corroborates documented definitions but does not alone prove semantics.",
+    "comparisons": [
+      {
+        "relationship": "TSN = SUN + DPV",
+        "agreesWithinRounding": true,
+        "absoluteTolerance": 0.0001
+      },
+      {
+        "relationship": "TPV = SPV + DPV",
+        "agreesWithinRounding": true,
+        "absoluteTolerance": 0.0001
+      },
+      {
+        "relationship": "REN = AOR + HYC",
+        "agreesWithinRounding": true,
+        "absoluteTolerance": 0.0001
+      },
+      {
+        "relationship": "MER SOETPUS = SOT5PUS = electricity SUN",
+        "agreesWithinRounding": true,
+        "absoluteTolerance": 0.001
+      },
+      {
+        "relationship": "MER SOTEPUS = electricity TSN",
+        "agreesWithinRounding": true,
+        "absoluteTolerance": 0.001
+      }
+    ]
+  },
+  "frozenResearchExpectationsBeforeClassifierEdit": [
+    "SOTEPUS is all-size solar; prefer it over utility-scale solar when available for the requested dimensions.",
+    "SOETPUS and SOT5PUS are utility-scale solar and carry both size and small-scale exclusion labels.",
+    "Utility-scale solar commercial/industrial/electric-power entries stay subsets of all sectors; may qualify in their own whole-sector cell subject to preferred all-size availability.",
+    "Small-scale-only PV remains a subset of solar; PV-only and thermal-only remain product subsets even when facility-size totals are complete.",
+    "ELETPUS includes solar and omits published small-scale PV, so it carries the exclusion notice. Electric-power-sector generation does not inherit residential/commercial/industrial small-PV notice.",
+    "NGETPUS is utility-scale with no solar exclusion notice. Facility-size approval does not relax consumption, capacity, technology, sector or product-component restrictions."
+  ]
+}

@@ -1,0 +1,82 @@
+# EIAapp external review bundle — authorized scope-evidence correction
+
+The authorized contract change is implemented and verified offline. **621 tests: 620 passed, 0 failed, 1 pre-existing disputed skip.** The production build passes. The independent review and known semantic limitation are retained; this is not a claim of universal language understanding.
+
+Base: {{base}}
+Current HEAD: {{head}}
+Branch: {{branch}}
+Repository: https://github.com/ae47250/EIAapp
+
+This is the isolated, uncommitted working-tree snapshot: {{trackedCount}} tracked modifications and {{untrackedCount}} untracked additions, {{changedCount}} exact final file copies. Nothing is staged, and there are no commits beyond the base. No push, merge, deployment, model switch, dependency addition or paid/live call occurred. The original checkout is unchanged. This is a review overlay, not a standalone full repository.
+
+## Contents
+
+- `diff/tracked-changes.patch`: complete binary/full-index Git diff against the base, including every tracked modification.
+- `diff/complete-changes.patch`: tracked diff plus every new/untracked file. Replay against temporary base blobs reproduces every final copy.
+- `files/`: exact final source, configuration, metadata, tests, fixtures and `docs/eia-interpretation-audit.md`.
+- `context/`: unchanged AGENTS.md, package.json and package-lock.json.
+- `evidence/scope-contract/`: current starting state/specification, frozen independent inputs, intermediate counterexamples, final tests/build/static checks and independent final review. Final records have `final` or `r4` in their names; earlier results show the development history, not current failures.
+- Other evidence directories: historical exact-base comparison, original audit, earlier follow-up, and rejected negation prototype. **The rejected prototype under `evidence/rejected-prototype/` is archival evidence, not part of the final patch.**
+- `MANIFEST.json`, `SHA256SUMS.txt`, `REDACTIONS.md`: contents/provenance/checksums and the bounded secret scan/redaction disclosure.
+
+## Outcomes and limits
+
+The prior correct-model suffix-negation failures are corrected using exact source-span dispositions, local metadata validation and revalidation through the actual browser serializer/public endpoint. Direct exclusions, annual/explicit=false default, explicitly requested frequencies/sectors, ordered countries and product/activity pairs remain tested. Unrepresentable or ambiguous scopes clarify before retrieval. Country-name repair is unchanged. A small state-label correction covers regeneration and display, with matching code/identifier/title guards and unchanged raw caches, identifiers, units and coverage.
+
+- Starting complete suite: 530 tests, 500 pass, 29 fail, 1 skip. Final: 621 tests, 620 pass, 0 fail, 1 skip.
+- Frozen primary34 and earlier independent32 now pass through schema-aware companion tests. Original fixtures are unchanged; six disputed model readings have explicit independent adjudications, and rules-only mode expectations record the newly authorized conservative clarification behavior.
+- Fresh reviewer:28/28 model-boundary meanings (18 requested results,10 clarifications),16/16 safe integrity outcomes,6/6 exposed follow-up checks. These are now regressions, not untouched holdouts. New retained suite:57/57, including4 supplemental contract checks and3 metadata tests.
+- Cases are enumerated; earlier general properties use seed47250.
+- Rules-only grammar is degraded for eight independent cases; some terms survive only as unresolved raw spans, not normalized fields. The shared trailing-country fallback clarifies instead of returning a guessed result.
+- A deliberately wrong but structurally valid `not convinced` model proposal still causes incorrect exclusions. Its standalone counterexample is included. Exact source/metadata validation cannot prove arbitrary scope semantics; live-model accuracy is untested. This known limit must not be hidden by the passing correct-model cases.
+- No new rendered-browser, live EIA observations/export, live model, deployment verification or full original-source cache regeneration. See missing records below. Existing historical browser evidence is labelled as such.
+
+Read the latest authorized-contract section of `files/docs/eia-interpretation-audit.md` first. Earlier incomplete status and prototype conclusions describe historical snapshots and are superseded only where explicitly stated.
+
+## Changed and new files
+
+| Status | Repository-relative path |
+| --- | --- |
+{{fileTable}}
+
+## Evidence included
+
+{{evidenceList}}
+
+## Missing records and limits
+
+{{missingList}}
+
+Every changed/new worktree file and every available evidence item listed above is verified in the reopened archive. Exact source copies and patches are unredacted; log redactions are disclosed. Credentials, `.env`, node_modules, `.git`, generated builds and unrelated files are excluded.
+
+## Reproduce
+
+Use a separate checkout at the exact base. Set `BUNDLE` to the extracted ZIP directory. Dependencies require registry access unless the locked packages are already cached; the tests/build below use no credentials. Do not apply archived rejected-prototype files.
+
+```sh
+git clone --no-checkout https://github.com/ae47250/EIAapp.git EIAapp-review
+cd EIAapp-review
+git checkout --detach {{base}}
+git apply --check "$BUNDLE/diff/complete-changes.patch"
+git apply "$BUNDLE/diff/complete-changes.patch"
+npm ci --ignore-scripts --no-audit --no-fund
+OPENAI_API_KEY= EIA_API_KEY= node --test --test-reporter=tap tests/eia-scope-independent.test.js tests/eia-scope-metadata-labels.test.js
+OPENAI_API_KEY= EIA_API_KEY= node --test --test-reporter=tap
+OPENAI_API_KEY= EIA_API_KEY= NEXT_TELEMETRY_DISABLED=1 npm run build
+git diff --check
+git diff --cached --check
+```
+
+Syntax checks (the JSX component is checked by the production build):
+
+```sh
+{{syntaxCommands}}
+```
+
+The new independent tests use literal frozen payloads and intercept model transport. Archival standalone reviewer scripts retain original absolute paths; use the portable repository regressions for reproduction. Original and bundled hashes identify any log-path redactions. Historical exact-base comparison commands and results are in the audit and baseline logs; do not mix their versions with current source.
+
+Verify extracted payloads from the extracted bundle directory:
+
+```sh
+shasum -a 256 -c SHA256SUMS.txt
+```

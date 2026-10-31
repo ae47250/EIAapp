@@ -1,0 +1,885 @@
+{
+  "freeze_stage": "Requirements and approved metadata only; no production code, tests, fixtures, or diff inspected before this file was written.",
+  "base_head_supplied_by_parent": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "created_at_utc": "2026-10-27T21:47:51.533246+00:00",
+  "source_hashes": {
+    "AGENTS.md": "7cc12a30a75c9044e3276b05c8536f3bae420232f5c8093c0fcee73bce760ae3",
+    "data/eia/routing-metadata.json": "8cee62e497af1701405a86561a9a9dd9ba39f607ac092820ccd1a09aa8306558",
+    "data/eia/phase4-routing-config.json": "c20f43fb9738a95e229d460e0d8b49913a6526420bfa0bab58dd5b14240c123e"
+  },
+  "scope": "Independent bounded meaning and contract-integrity challenge matrix. No repo edits, live calls, paid calls, dependencies or external changes.",
+  "evaluation_policy": [
+    "Meaning expectations describe intended data, not a preselected internal JSON schema.",
+    "For exact_or_conservative_clarification cases, model-assisted interpretation should preserve intended meaning; unsupported rules-only grammar may clarify while preserving established parts. Any exclusion that contradicts expected requested parts is failure.",
+    "Unresolved/disputed text is intentionally not assigned an exact requested/excluded reading.",
+    "Annual with explicit=false is the task-level default, even though route metadata defaults may be monthly.",
+    "Explicit and excluded frequencies are independent facts; excluding monthly must not make monthly the chosen frequency.",
+    "Metadata validity is necessary but cannot prove semantic scope. Model meaning claims remain proposals.",
+    "No fabricated geography/product/activity codes and no live retrieval. Evaluation is bounded to interpretation and resubmission.",
+    "M19 is deliberately context-sensitive: preserve the lexical coal exclusion, but clarification of request intent is allowed.",
+    "M25 tests preservation via clarification, not an authorization to redesign the app to support per-clause plans."
+  ],
+  "meaning_cases": [
+    {
+      "id": "M01",
+      "query": "I don't know Canada's natural gas production.",
+      "requested": {
+        "products": [
+          "natural gas"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 45
+    },
+    {
+      "id": "M02",
+      "query": "I'm not sure about monthly residential electricity consumption in Texas.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "geographies": [
+          "TX"
+        ],
+        "sectors": [
+          "residential"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "monthly",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 72
+    },
+    {
+      "id": "M03",
+      "query": "Without knowing the exact values, show coal production for Canada and Mexico.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN",
+          "MEX"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 77
+    },
+    {
+      "id": "M04",
+      "query": "Show coal production for Canada, not Mexico.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {
+        "geographies": [
+          "MEX"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 44
+    },
+    {
+      "id": "M05",
+      "query": "Show natural gas production, not consumption, for Canada.",
+      "requested": {
+        "products": [
+          "natural gas"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {
+        "activities": [
+          "consumption"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 57
+    },
+    {
+      "id": "M06",
+      "query": "Show coal production for Canada without monthly data.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {
+        "frequencies": [
+          "monthly"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 53
+    },
+    {
+      "id": "M07",
+      "query": "Show electricity generation in Texas, excluding coal.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "generation"
+        ],
+        "geographies": [
+          "TX"
+        ]
+      },
+      "excluded": {
+        "products": [
+          "coal"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 53
+    },
+    {
+      "id": "M08",
+      "query": "Show monthly electricity consumption in Texas, not residential.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "geographies": [
+          "TX"
+        ]
+      },
+      "excluded": {
+        "sectors": [
+          "residential"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "monthly",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 63
+    },
+    {
+      "id": "M09",
+      "query": "Show coal production for Canada; I do not know Mexico's figures.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "Whether Mexico is also requested; it must not be silently excluded."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 64
+    },
+    {
+      "id": "M10",
+      "query": "I'm not saying coal production for Canada is unnecessary.",
+      "requested": {},
+      "excluded": {},
+      "unresolved": [
+        "Whether data is requested at all; speech and double negation do not prove a data exclusion."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 57
+    },
+    {
+      "id": "M11",
+      "query": "Show coal production for Canada, except maybe Mexico.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "The tentative exception does not establish an unambiguous request or exclusion for Mexico."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 53
+    },
+    {
+      "id": "M12",
+      "query": "Show annual nebularium production for Canada and Mexico.",
+      "requested": {
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN",
+          "MEX"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "Unknown product nebularium must remain unresolved with its exact source phrase."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 56
+    },
+    {
+      "id": "M13",
+      "query": "Show gas production in Canada.",
+      "requested": {
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "Gas is ambiguous between natural gas and petroleum."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 30
+    },
+    {
+      "id": "M14",
+      "query": "Show coal production and natural gas consumption for Mexico and Canada.",
+      "requested": {
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "production",
+          "consumption"
+        ],
+        "geographies": [
+          "MEX",
+          "CAN"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": [
+        [
+          "coal",
+          "production"
+        ],
+        [
+          "natural gas",
+          "consumption"
+        ]
+      ],
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 71
+    },
+    {
+      "id": "M15",
+      "query": "Show annual coal production in the country Georgia.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "GEO"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 51
+    },
+    {
+      "id": "M16",
+      "query": "Show annual residential electricity consumption in the state of Georgia.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "geographies": [
+          "GA"
+        ],
+        "sectors": [
+          "residential"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 72
+    },
+    {
+      "id": "M17",
+      "query": "Show coal production in Georgia.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "Georgia has both state GA and country GEO meanings in approved metadata."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 32
+    },
+    {
+      "id": "M18",
+      "query": "I don't know whether monthly electricity consumption in Texas is higher; show it.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "geographies": [
+          "TX"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "monthly",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 81
+    },
+    {
+      "id": "M19",
+      "query": "I'm not sure how to exclude coal from electricity generation in Texas.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "generation"
+        ],
+        "geographies": [
+          "TX"
+        ]
+      },
+      "excluded": {
+        "products": [
+          "coal"
+        ]
+      },
+      "unresolved": [
+        "If the system cannot determine whether this is a data request or a how-to question, it may clarify without losing the explicit exclusion intent."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 70
+    },
+    {
+      "id": "M20",
+      "query": "Show coal production for Canada and Mexico, excluding Germany.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN",
+          "MEX"
+        ]
+      },
+      "excluded": {
+        "geographies": [
+          "DEU"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 62
+    },
+    {
+      "id": "M21",
+      "query": "Show coal production for Canada, not monthly but annual.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {
+        "frequencies": [
+          "monthly"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 56
+    },
+    {
+      "id": "M22",
+      "query": "I have no idea what annual commercial electricity sales in Texas look like.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "sales"
+        ],
+        "geographies": [
+          "TX"
+        ],
+        "sectors": [
+          "commercial"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": true
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 75
+    },
+    {
+      "id": "M23",
+      "query": "Show coal production and natural gas consumption for Canada, but not natural gas production.",
+      "requested": {
+        "products": [
+          "coal",
+          "natural gas"
+        ],
+        "activities": [
+          "production",
+          "consumption"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {
+        "pairs": [
+          [
+            "natural gas",
+            "production"
+          ]
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": [
+        [
+          "coal",
+          "production"
+        ],
+        [
+          "natural gas",
+          "consumption"
+        ]
+      ],
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 92
+    },
+    {
+      "id": "M24",
+      "query": "Show coal production for Canada. Do not exclude Mexico.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN",
+          "MEX"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 55
+    },
+    {
+      "id": "M25",
+      "query": "Show coal production for Canada. Also show monthly electricity consumption for Texas.",
+      "requested": {
+        "products": [
+          "coal",
+          "electricity"
+        ],
+        "activities": [
+          "production",
+          "consumption"
+        ],
+        "geographies": [
+          "CAN",
+          "TX"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "Independent per-clause geography and frequency cannot be flattened into one cross product; clarify if representation cannot preserve them."
+      ],
+      "frequency": {
+        "value": null,
+        "explicit": true
+      },
+      "pairs": [
+        [
+          "coal",
+          "production"
+        ],
+        [
+          "electricity",
+          "consumption"
+        ]
+      ],
+      "policy": "clarification_required_if_unrepresentable",
+      "source_length_utf16": 85
+    },
+    {
+      "id": "M26",
+      "query": "Show electricity generation in Texas, but not from an unknown fuel called nebularium.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "generation"
+        ],
+        "geographies": [
+          "TX"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [
+        "Unknown excluded fuel must remain an exclusion of unresolved source text; do not invent an approved product."
+      ],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "clarification_required",
+      "source_length_utf16": 85
+    },
+    {
+      "id": "M27",
+      "query": "Show electricity consumption in Texas, without residential or commercial data.",
+      "requested": {
+        "products": [
+          "electricity"
+        ],
+        "activities": [
+          "consumption"
+        ],
+        "geographies": [
+          "TX"
+        ]
+      },
+      "excluded": {
+        "sectors": [
+          "residential",
+          "commercial"
+        ]
+      },
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 78
+    },
+    {
+      "id": "M28",
+      "query": "Show coal production for Canada, no certainty needed.",
+      "requested": {
+        "products": [
+          "coal"
+        ],
+        "activities": [
+          "production"
+        ],
+        "geographies": [
+          "CAN"
+        ]
+      },
+      "excluded": {},
+      "unresolved": [],
+      "frequency": {
+        "value": "annual",
+        "explicit": false
+      },
+      "pairs": null,
+      "policy": "exact_or_conservative_clarification",
+      "source_length_utf16": 53
+    }
+  ],
+  "integrity_cases": [
+    {
+      "id": "I01",
+      "seed": "M02",
+      "mutation": "Use an otherwise plausible relation with start/end outside query bounds or end <= start.",
+      "expect": "Reject that contract; do not execute its intent. Preserve safe established fields or clarify."
+    },
+    {
+      "id": "I02",
+      "seed": "M02",
+      "mutation": "Source slice is monthly but model claims sourceText residential.",
+      "expect": "Reject mismatch; offsets and exact source text must agree against original unmodified query."
+    },
+    {
+      "id": "I03",
+      "seed": "M04",
+      "mutation": "Claim product value uranium from source coal or claim geography code FRA from Canada.",
+      "expect": "Reject metadata mismatch even when the forged value exists in some catalog."
+    },
+    {
+      "id": "I04",
+      "seed": "M02",
+      "mutation": "Claim category product for span residential, or frequency for Texas.",
+      "expect": "Reject category mismatch against approved metadata or retain as unresolved; never silently map a wrong category."
+    },
+    {
+      "id": "I05",
+      "seed": "M20",
+      "mutation": "Omit Germany and its excluding relation while returning valid Canada and Mexico spans.",
+      "expect": "Never silently accept a complete interpretation that loses a recognized explicit exclusion; require local coverage gate or clarification."
+    },
+    {
+      "id": "I06",
+      "seed": "M14",
+      "mutation": "Omit natural gas or consumption while claiming interpretation complete.",
+      "expect": "Do not silently drop an established requested mention; fail completeness or clarify while preserving recognized parts."
+    },
+    {
+      "id": "I07",
+      "seed": "M05",
+      "mutation": "Put the same consumption mention in both requested and excluded relations.",
+      "expect": "Reject conflicting assignment or mark unresolved; no arbitrary precedence."
+    },
+    {
+      "id": "I08",
+      "seed": "M14",
+      "mutation": "Use overlapping spans to claim natural gas and gas as different simultaneously requested products.",
+      "expect": "Do not double count nested lexical matches; allow only explicitly documented compatible cross-category reuse."
+    },
+    {
+      "id": "I09",
+      "seed": "M02",
+      "mutation": "Reference a nonexistent mention id from a requested/excluded relation or duplicate ids with different spans.",
+      "expect": "Reject dangling or ambiguous relation references."
+    },
+    {
+      "id": "I10",
+      "seed": "M14",
+      "mutation": "Reverse country and pair arrays despite unchanged source offsets.",
+      "expect": "Local canonicalization restores source order; order must not be trusted from model arrays."
+    },
+    {
+      "id": "I11",
+      "seed": "M23",
+      "mutation": "Flatten exclusion of natural gas production into exclusion of every production activity or every natural gas product.",
+      "expect": "Preserve pair-scoped exclusion or clarify if representation cannot express it; never globally remove requested natural gas consumption or coal production."
+    },
+    {
+      "id": "I12",
+      "seed": "M02",
+      "mutation": "Change query after initial interpretation but retain prior serialized contract, or corrupt source text/offsets in browser payload.",
+      "expect": "Revalidate against authoritative request text on resubmission; stale or corrupt payload cannot authorize different results."
+    },
+    {
+      "id": "I13",
+      "seed": "M04",
+      "mutation": "Submit an old payload without the new contract, unknown contract version, unknown relation string, or extra authority-like fields.",
+      "expect": "Explicit safe compatibility path rebuilds locally or clarifies. Reject unsupported contract semantics rather than trusting legacy derived arrays."
+    },
+    {
+      "id": "I14",
+      "seed": "M02",
+      "mutation": "Round-trip a valid source contract through browser JSON and route submission.",
+      "expect": "Preserve exact source spans, relations, requested fields, monthly explicit=true and residential; revalidate without new paid/live call."
+    },
+    {
+      "id": "I15",
+      "seed": "M01",
+      "mutation": "Supply structurally valid, metadata-valid spans but mark natural gas production excluded solely because of do not know.",
+      "expect": "Semantic scope is incorrect. Acknowledge span/metadata validation cannot independently prove grammar; evaluate a meaning case or reject/clarify on known conflict."
+    },
+    {
+      "id": "I16",
+      "seed": "M12",
+      "mutation": "Model returns all known fields but omits unknown nebularium and says no unresolved text.",
+      "expect": "Coverage must expose unresolved material or clarification; known fields retained and no guessed substitute."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "authorization": "2026-10-27: Authorize the bounded contract change",
+  "productionFiles": ["lib/sources/eia/request-evidence.js", "lib/sources/eia/interpret-query.js", "lib/sources/eia/intent-routing.js", "components/search/SearchWorkspace.js"],
+  "contract": {
+    "requestEvidence": "version=1, exact original query, ordered scopes with integer UTF-16 start/end, exact text, status, target and optional exact operator span",
+    "status": ["requested", "excluded", "unresolved", "context"],
+    "target": ["data", "action", "knowledge", "condition", "unknown"]
+  },
+  "invariants": [
+    "Source text, bounds, token boundaries, order and complete coverage are validated; no overlap, hidden or split metadata mention.",
+    "Canonical data values, metadata identity and geometry context stay locally validated; scopes cannot supply series IDs.",
+    "Direct supported data exclusions cannot be relabeled positive. Negating knowledge cannot itself exclude data.",
+    "Non-exclusion does not imply positive request; undecided requests remain unresolved.",
+    "Positive projection retains source positions and punctuation; it cannot create a metadata phrase absent from raw source.",
+    "Unrepresentable scoped constraints, conflicting dispositions and incompatible requested frequencies require clarification.",
+    "Unsupported deterministic grammar requires clarification while preserving independently established requests. This is the newly authorized rules-only behavior, not a change to the frozen query meanings.",
+    "Valid model evidence is independently revalidated after actual browser serialization against raw q; stale/missing/corrupt evidence cannot become authoritative derived arrays.",
+    "Scope semantics proposed by a model remain fallible; structural validation does not certify universal language understanding.",
+    "The current model, country repair, UI/auth, retrieval, units, dependencies and offline transport policy are preserved."
+  ],
+  "frozenMatrices": [
+    {"path": "tests/fixtures/eia/negation-target.json", "cases":34,"sha256":"e36b72f26bde670855b9c246919726926c4849798bb21c1b1d3aae9617cf52ae"},
+    {"path": "tests/fixtures/eia/negation-independent.json", "cases":32,"sha256":"5c911f9c2b7b47748f510eed4031cf1b49423ac1e39519764b8a691215c003ff"},
+    {"path": "/private/tmp/eia-scope-contract-independent-matrix.json", "meaningCases":28,"integrityCases":16,"sha256":"7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0"}
+  ],
+  "disputes": ["Bare Georgia follows the user's actual existing state/country context rule; a review expectation of unconditional ambiguity is not controlling.", "Not entirely include, no need, and do not exclude do not have unconditional full-exclusion meanings; original fixtures and independent adjudications remain available."]
+}

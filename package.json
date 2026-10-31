@@ -4,8 +4,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --test",
-    "generate-password-hash": "node scripts/generate-password-hash.js"
+    "test": "node --test tests/*.test.js scripts/eia-lookup/*.test.mjs",
+    "generate-password-hash": "node scripts/generate-password-hash.js",
+    "test:offline": "node scripts/eia-lookup/check-suite.mjs",
+    "measure": "node scripts/eia-lookup/run-suite.mjs"
   },
   "dependencies": {
     "next": "^16.2.10",

@@ -1,0 +1,1015 @@
+{
+  "auditedAt": "2026-10-28T11:16:06.019226+00:00",
+  "scheduledCalls": 40,
+  "actualCalls": 40,
+  "retries": 0,
+  "modelAccessGETs": 2,
+  "hiddenGenerationProbes": 0,
+  "apiSuccesses": 40,
+  "replays": 40,
+  "externalReplayCalls": 0,
+  "browserSerializerPublicSearchChecks": 40,
+  "sourceEvidencePreservedDuringResubmission": 40,
+  "observedMeaningChangesDuringResubmission": 0,
+  "startET": "2026-10-28T07:06:45.744000-04:00",
+  "endET": "2026-10-28T07:10:15.743000-04:00",
+  "generationWallSecondsIncludingReplayBetweenCalls": 209.999,
+  "sumAttemptSeconds": 202.27613254399995,
+  "tokenCostUSD": 0.025524650000000003,
+  "ceilingUSD": 0.5,
+  "requestSettingsAndReturnedModelsVerified": 40,
+  "frozenInputHashesVerified": 12,
+  "snapshotAndSourceFilesVerified": 221,
+  "branch": "codex/eia-interpretation-audit",
+  "HEAD": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "base": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "trackedDiffSHA256": "f536b003086728374331a087cc86907570d3925ca4af18fd900af76dc42ab062",
+  "bundleSHA256": "d73f0caf30793b0274d247207136f951c4cf558209bdaf7032c2834ee727b6bf",
+  "gitStatusUnchanged": true,
+  "preexistingTrackedModifications": 11,
+  "preexistingUntrackedFiles": 22,
+  "newAppChanges": 0,
+  "credentialCopied": false,
+  "credentialArtifactFilesScanned": 227,
+  "credentialOccurrences": 0,
+  "credentialRedactions": 0,
+  "modelSummaries": [
+    {
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPasses": 1,
+      "semanticPassesAfterOnlyUSAliasEquivalence": 4,
+      "contractPasses": 2,
+      "responsesDisplayingResults": 4,
+      "clarifications": 16,
+      "rulesFallbacks": 1,
+      "appExtractedNonStrictJSON": 0,
+      "gasRequestsBlockedWithoutProductGuess": 2,
+      "gasSpecificNaturalGasVsGasolineClarificationMessages": 0
+    },
+    {
+      "model": "gpt-6-luna",
+      "frozenSemanticPasses": 3,
+      "semanticPassesAfterOnlyUSAliasEquivalence": 7,
+      "contractPasses": 0,
+      "responsesDisplayingResults": 1,
+      "clarifications": 19,
+      "rulesFallbacks": 2,
+      "appExtractedNonStrictJSON": 2,
+      "gasRequestsBlockedWithoutProductGuess": 2,
+      "gasSpecificNaturalGasVsGasolineClarificationMessages": 0
+    }
+  ],
+  "scoringCaveats": [
+    "Frozen scorer maps United States to US but compares against USA. Both are the same national entity in approved metadata. Supplemental alias-only counts apply the frozen same-meaning acceptance rule; original scores and responses remain unchanged.",
+    "Null singular country/activity compatibility summaries are labelled contradictions even when the ordered arrays preserve the full request. This is a scoring limitation for states and multiple entities; those scores were not rewritten after seeing outputs. Do not interpret the aggregate frozen semantic score as a clean measure of understanding."
+  ],
+  "retrievalCaveats": [
+    "California monthly consumption has no exact match in this partial cache; displayed SEDS annual fallback is labelled, but its first candidate is carbon intensity SEDS.CDTCR.CA.A, not electricity consumption.",
+    "Iceland candidates include total and fuel components with aggregation warnings and different MTOE/QBTU units; displayed rows do not prove equivalence.",
+    "All four Texas responses retain both requested activities but block for scope clarification; the known routing/eligibility problem remains unchanged.",
+    "All four gas requests are blocked without choosing a product, but the displayed clarification is generic invalid-scope wording rather than a specific natural-gas/gasoline choice. Do not count that as a fully correct clarification experience."
+  ],
+  "limits": [
+    "Ten queries with two repeats cannot establish statistical equivalence or general complex-negation correctness.",
+    "Actual browser serializer function executed offline; no live UI/deployed-commit verification.",
+    "Cached metadata only; no live EIA requests.",
+    "No app fixes, model changes, commits, pushes, merges or deployment."
+  ],
+  "rows": [
+    {
+      "id": 1,
+      "query": 9,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "geographies_or_order",
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 2,
+      "query": 9,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 3,
+      "query": 3,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "no_original_JSON_interpretation"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "rules",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 4,
+      "query": 3,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction",
+        "frequency_or_explicit_flag"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": true,
+      "needsClarification": false,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 5,
+      "query": 7,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "compatibility_summary_contradiction",
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 6,
+      "query": 7,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "compatibility_summary_contradiction",
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 7,
+      "query": 4,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": true,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 8,
+      "query": 4,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "product_activity_pairs_or_order",
+        "frequency_or_explicit_flag"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": true,
+      "needsClarification": false,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [
+        {
+          "seriesId": "INTL.44-2-ISL-MTOE.A",
+          "title": "Total energy consumption, Iceland, Annual",
+          "frequency": "annual",
+          "unit": "million metric tons of oil equivalent",
+          "coverage": "1980 to 2024",
+          "fallback": false,
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "INTL.4411-2-ISL-QBTU.A",
+          "title": "Total energy consumption from coal, Iceland, Annual",
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "coverage": "1980 to 2024",
+          "fallback": false,
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "INTL.4413-2-ISL-QBTU.A",
+          "title": "Total energy consumption from natural gas, Iceland, Annual",
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "coverage": "1980 to 2024",
+          "fallback": false,
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "INTL.4415-2-ISL-QBTU.A",
+          "title": "Total energy consumption from petroleum and other liquids, Iceland, Annual",
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "coverage": "1980 to 2024",
+          "fallback": false,
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "INTL.4417-2-ISL-QBTU.A",
+          "title": "Total energy consumption from nuclear, Iceland, Annual",
+          "frequency": "annual",
+          "unit": "quadrillion Btu",
+          "coverage": "1980 to 2024",
+          "fallback": false,
+          "warnings": [
+            "aggregation_relationship_not_verified"
+          ]
+        }
+      ],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 9,
+      "query": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 10,
+      "query": 2,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 11,
+      "query": 5,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": true,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 12,
+      "query": 5,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "unnecessary_clarification",
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 13,
+      "query": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 14,
+      "query": 1,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 15,
+      "query": 8,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "no_original_JSON_interpretation"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": true,
+      "needsClarification": false,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": true,
+      "candidateMetadata": [
+        {
+          "seriesId": "SEDS.CDTCR.CA.A",
+          "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+          "frequency": "annual",
+          "unit": "Metric tons CO2 per billion Btu",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.ESSCB.CA.A",
+          "title": "Electricity total consumption adjusted for process fuel, California",
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "coverage": "1970 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.TEEIB.CA.A",
+          "title": "Total energy consumption in the electric power sector plus net imports of electricity into the United States, California",
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.ESTCB.CA.A",
+          "title": "Electricity total consumption (electricity sales to ultimate customers), California",
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.ESTPP.CA.A",
+          "title": "Electricity total consumption (electricity sales to ultimate customers) per capita, California",
+          "frequency": "annual",
+          "unit": "Kilowatthours",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        }
+      ],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 16,
+      "query": 8,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 17,
+      "query": 6,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "geographies_or_order",
+        "product_activity_pairs_or_order",
+        "compatibility_summary_contradiction",
+        "frequency_or_explicit_flag",
+        "unsupported_flat_exclusions",
+        "requested_data_hidden_in_context",
+        "unsupported_excluded_scope"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 18,
+      "query": 6,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "product_activity_pairs_or_order",
+        "compatibility_summary_contradiction",
+        "unnecessary_clarification",
+        "unsupported_flat_exclusions"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 19,
+      "query": 10,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "gas_choice_not_clearly_clarified"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": true
+    },
+    {
+      "id": 20,
+      "query": 10,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "gas_choice_not_clearly_clarified",
+        "guessed_product_or_lost_consumption",
+        "frequency_or_explicit_flag"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": true
+    },
+    {
+      "id": 21,
+      "query": 4,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "product_activity_pairs_or_order",
+        "compatibility_summary_contradiction",
+        "unnecessary_clarification",
+        "frequency_or_explicit_flag"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 22,
+      "query": 4,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": true,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 23,
+      "query": 9,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 24,
+      "query": 9,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": true,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": true,
+      "resultsDisplayed": true,
+      "needsClarification": false,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 25,
+      "query": 6,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "geographies_or_order",
+        "product_activity_pairs_or_order",
+        "compatibility_summary_contradiction",
+        "unsupported_flat_exclusions",
+        "unsupported_excluded_scope"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 26,
+      "query": 6,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "unsupported_flat_exclusions"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 27,
+      "query": 2,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 28,
+      "query": 2,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "no_original_JSON_interpretation"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "rules",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 29,
+      "query": 8,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction"
+      ],
+      "contractPass": true,
+      "resultsDisplayed": true,
+      "needsClarification": false,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [
+        {
+          "seriesId": "SEDS.CDTCR.CA.A",
+          "title": "Carbon intensity of energy supply (CO2 emissions divided by total energy consumption less interstate flow of electricity), California",
+          "frequency": "annual",
+          "unit": "Metric tons CO2 per billion Btu",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.ESSCB.CA.A",
+          "title": "Electricity total consumption adjusted for process fuel, California",
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "coverage": "1970 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.TEEIB.CA.A",
+          "title": "Total energy consumption in the electric power sector plus net imports of electricity into the United States, California",
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.ESTCB.CA.A",
+          "title": "Electricity total consumption (electricity sales to ultimate customers), California",
+          "frequency": "annual",
+          "unit": "Billion Btu",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        },
+        {
+          "seriesId": "SEDS.ESTPP.CA.A",
+          "title": "Electricity total consumption (electricity sales to ultimate customers) per capita, California",
+          "frequency": "annual",
+          "unit": "Kilowatthours",
+          "coverage": "1960 to 2024",
+          "fallback": true,
+          "warnings": [
+            "seds_annual_state_fallback",
+            "wrong_frequency_fallback",
+            "product_contains_unrequested_concepts",
+            "activity_contains_unrequested_concepts",
+            "aggregation_relationship_not_verified"
+          ]
+        }
+      ],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 30,
+      "query": 8,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "no_original_JSON_interpretation"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": true,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 31,
+      "query": 7,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 32,
+      "query": 7,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "compatibility_summary_contradiction",
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 33,
+      "query": 3,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction",
+        "frequency_or_explicit_flag"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 34,
+      "query": 3,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "country_summary_contradiction"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 35,
+      "query": 5,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "no_original_JSON_interpretation"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "rules",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 36,
+      "query": 5,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": false,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "product_activity_pairs_or_order",
+        "compatibility_summary_contradiction",
+        "unnecessary_clarification",
+        "frequency_or_explicit_flag"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 37,
+      "query": 1,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 38,
+      "query": 1,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": true,
+      "remainingSemanticErrors": [],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": false
+    },
+    {
+      "id": 39,
+      "query": 10,
+      "model": "gpt-6-luna",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "gas_choice_not_clearly_clarified",
+        "guessed_product_or_lost_consumption"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": true
+    },
+    {
+      "id": 40,
+      "query": 10,
+      "model": "gpt-5.4-nano-2026-03-17",
+      "frozenSemanticPass": false,
+      "sameMeaningUSAliasAdjustment": true,
+      "semanticPassAfterOnlyUSAliasEquivalence": false,
+      "remainingSemanticErrors": [
+        "gas_choice_not_clearly_clarified",
+        "guessed_product_or_lost_consumption"
+      ],
+      "contractPass": false,
+      "resultsDisplayed": false,
+      "needsClarification": true,
+      "initialInterpreter": "openai",
+      "appExtractedNonStrictJSON": false,
+      "candidateMetadata": [],
+      "gasRequestBlockedWithoutProductGuess": true
+    }
+  ]
+}

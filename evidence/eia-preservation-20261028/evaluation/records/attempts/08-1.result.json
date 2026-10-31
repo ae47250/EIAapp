@@ -1,0 +1,179 @@
+{
+  "scheduledId": 8,
+  "queryId": 4,
+  "repeat": 1,
+  "model": "gpt-5.4-nano-2026-03-17",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:07:28.521Z",
+  "requestedModel": "gpt-5.4-nano-2026-03-17",
+  "requestSHA256": "0f3576b836bbe8955cccb55348f87a9dfaaaff67f3a53ce4fff656e8933e1443",
+  "promptSHA256": "86b67b371b4c15d70ddd06c7922373cb7b72a2e425586c23736d98dc8666217a",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.00762,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:07:17 GMT",
+    "openai-processing-ms": "5091",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999540",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "2ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-5.4-nano-2026-03-17",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 794,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 623,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1417
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:07:33.805Z",
+  "elapsedMs": 5284.322374999996,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "{\n  \"correctedQuery\": \"energy consumption Iceland\",\n  \"confidence\": 0.87,\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"Iceland\",\n      \"value\": \"Iceland\",\n      \"confidence\": 0.96,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"energy\",\n      \"value\": \"total energy\",\n      \"confidence\": 0.52,\n      \"ambiguityReason\": \"The query says only 'energy' without specifying a supported product; mapped to 'total energy' as the closest category, but evidence is not explicit.\"\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 0.98,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 0.0,\n      \"ambiguityReason\": \"No sector is explicitly stated.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 0.2,\n      \"ambiguityReason\": \"No frequency is stated in the query; defaulted to annual with explicit=false.\"\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Iceland\",\n      \"confidence\": 0.96\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": {\n        \"rawValue\": \"energy\",\n        \"value\": \"total energy\",\n        \"confidence\": 0.52,\n        \"ambiguityReason\": \"Mapped from generic 'energy' to supported 'total energy' but not explicitly stated.\"\n      },\n      \"activity\": {\n        \"rawValue\": \"consumption\",\n        \"value\": \"consumption\",\n        \"confidence\": 0.98,\n        \"ambiguityReason\": null\n      },\n      \"order\": 1,\n      \"confidence\": 0.77\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"energy consumption iceland\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 6,\n        \"text\": \"energy\",\n        \"status\": \"requested\",\n        \"target\": \"data\",\n        \"operator\": null\n      },\n      {\n        \"start\": 7,\n        \"end\": 18,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\",\n        \"operator\": null\n      },\n      {\n        \"start\": 19,\n        \"end\": 26,\n        \"text\": \"iceland\",\n        \"status\": \"requested\",\n        \"target\": \"data\",\n        \"operator\": null\n      }\n    ]\n  }\n}",
+    "parsed": {
+      "correctedQuery": "energy consumption Iceland",
+      "confidence": 0.87,
+      "ambiguity": null,
+      "fields": {
+        "country": {
+          "rawValue": "Iceland",
+          "value": "Iceland",
+          "confidence": 0.96,
+          "ambiguityReason": null
+        },
+        "product": {
+          "rawValue": "energy",
+          "value": "total energy",
+          "confidence": 0.52,
+          "ambiguityReason": "The query says only 'energy' without specifying a supported product; mapped to 'total energy' as the closest category, but evidence is not explicit."
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 0.98,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 0,
+          "ambiguityReason": "No sector is explicitly stated."
+        },
+        "frequency": {
+          "rawValue": null,
+          "value": "annual",
+          "confidence": 0.2,
+          "ambiguityReason": "No frequency is stated in the query; defaulted to annual with explicit=false."
+        }
+      },
+      "geographies": [
+        {
+          "value": "Iceland",
+          "confidence": 0.96
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": {
+            "rawValue": "energy",
+            "value": "total energy",
+            "confidence": 0.52,
+            "ambiguityReason": "Mapped from generic 'energy' to supported 'total energy' but not explicitly stated."
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.98,
+            "ambiguityReason": null
+          },
+          "order": 1,
+          "confidence": 0.77
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "energy consumption iceland",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 6,
+            "text": "energy",
+            "status": "requested",
+            "target": "data",
+            "operator": null
+          },
+          {
+            "start": 7,
+            "end": 18,
+            "text": "consumption",
+            "status": "requested",
+            "target": "data",
+            "operator": null
+          },
+          {
+            "start": 19,
+            "end": 26,
+            "text": "iceland",
+            "status": "requested",
+            "target": "data",
+            "operator": null
+          }
+        ]
+      }
+    },
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "product_activity_pairs_or_order",
+        "frequency_or_explicit_flag"
+      ],
+      "signature": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            "[object Object]",
+            "[object Object]"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": []
+      }
+    },
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": true,
+      "errors": [
+        "missing_frequency_explicit",
+        "invalid_pair_item"
+      ]
+    }
+  },
+  "replayFile": "attempts/08-1.replay.json"
+}

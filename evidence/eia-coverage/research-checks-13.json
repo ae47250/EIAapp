@@ -1,0 +1,112 @@
+{
+  "tests": [
+    {
+      "file": "scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-coal-classification.test.py",
+      "tests": 15,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-crosswalk.test.py",
+      "tests": 10,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-electricity-classification.test.py",
+      "tests": 19,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-facets.test.py",
+      "tests": 6,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+      "tests": 14,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-mer-classification.test.py",
+      "tests": 25,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-crude-classification.test.py",
+      "tests": 12,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-petroleum-price-classification.test.py",
+      "tests": 20,
+      "exitCode": 0
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-series-catalog.test.py",
+      "tests": 12,
+      "exitCode": 0
+    }
+  ],
+  "total": 172,
+  "failedSuites": 0,
+  "pythonASTFiles": 29,
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "seed": 20261029,
+  "newSeededUnknownDefinitionCases": 100,
+  "EIA_API_calls": 1424,
+  "newEIA_API_callsThisCheckpoint": 0,
+  "newPublicSourceSnapshots": 10,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "classificationCompleteRoutes": 91,
+  "classificationTotalRoutes": 154,
+  "unresolvedRouteFamilies": {
+    "petroleum": 61,
+    "international": 1,
+    "electricity": 1
+  },
+  "frozenFilesChanged": false,
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not independent reference alignment or standard benchmark scores.",
+  "notRun": "Application offline suite/build/browser: no application edits; implementation remains gated by owner checkpoint go. Live B1 data and frozen scored runs not started.",
+  "developmentCounterexamples": [
+    "Native price parser initially indexed a nonexistent regex group; corrected to actual unit group before tests.",
+    "Reviewed crude gravity-band titles say Crude with API Gravity; preserved as components, never whole crude.",
+    "Malformed crude production unit suffix retained; coverageEligible false."
+  ],
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-petroleum-price-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-crude-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-biomass-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-coal-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-electricity-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-gas-reserves-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-crude-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-petroleum-price-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "git diff --check"
+  ],
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1424,
+  "sourceSnapshotHashesVerified": 47,
+  "credentialScanFiles": 604,
+  "credentialFindings": 0,
+  "localMainUnchanged": true,
+  "job5BaseBranchUnchanged": true,
+  "applicationAndEarlierFrozenFilesUnchanged": true
+}

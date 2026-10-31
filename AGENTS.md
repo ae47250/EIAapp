@@ -58,6 +58,12 @@ If tests cannot be run, state why and provide manual test steps.
 
 ---
 
+## Python Test Verification
+
+Run each `scripts/eia-lookup/*.test.py` file individually with `python3 -B` and aggregate exit statuses; `unittest discover` does not find these hyphenated test module names.
+
+---
+
 ## Secrets and Environment Variables
 
 Never expose API keys, tokens, or secrets in frontend files or public code.
@@ -316,3 +322,77 @@ If implementation choices differ:
 5. Ask only if ambiguity materially changes the result.
 
 Do not guess silently when source, variable, unit, frequency, or coverage ambiguity affects results.
+
+
+---
+
+## EIAapp Execution and Evidence Guardrails
+
+Supplement existing guidance; explicit user authorization determines scope.
+
+### Outcome and scope
+Success means useful, compatible data or necessary clarification with understandable choices. Passing tests, JSON and candidate lists alone do not establish success.
+Maintain one objective, authorized scope and completion criteria. Check whether another agent already started or completed the work. Backlog unrelated findings.
+
+### State and preservation
+Inspect applicable instructions, branch, commit, uncommitted changes and relevant evidence. Identify the deployed version when relevant. Never substitute stale work for current work.
+Before substantial changes, establish a verified durable checkpoint within authorization. Preserve irreplaceable evidence outside temporary directories. Report remote-backup gaps. Authorized WIP preservation need not wait for passing tests; disclose failures. Never include credentials or private evidence.
+
+### Research and native capabilities
+Inspect current official OpenAI, EIA and Vercel documentation and relevant code as applicable. Use original papers for research claims. Check versions, applicability and exact support; cite material recommendations. Defaults, snippets and AI reports do not prove suitability.
+Evaluate native capabilities before custom logic, including Structured Outputs, schema support, model compatibility, refusals and incomplete responses. Schema compliance does not guarantee meaning.
+Use code for reliable bookkeeping such as locating quoted text; handle repeated and ambiguous matches explicitly.
+
+### Requirements and shared causes
+Reconcile intended behavior, prompt, schema, metadata, clarification and expected answers before implementation or paid testing. Freeze consistent expectations. Version changes and preserve historical results. Never redefine success to raise scores.
+Correct shared causes rather than individual queries. Avoid growing phrase whitelists or rules silently overriding correct meaning. Reassess the design when successive fixes expose the same failure class.
+
+### Verification and cost
+Check the relevant request-to-data flow, including clarification, browser resubmission, routing, compatible series and observations/display/export.
+Separate meaning, structure, evidence, availability and app behavior. Distinguish injected tests, real-model calls, offline replay and live-browser checks. Disclose unrun checks. Exposed challenges become regressions, not untouched holdouts.
+Finish when agreed criteria are met; avoid endless review cycles.
+Before paid calls, verify model IDs, supported settings and prices. Justify reasoning effort, validate scorers and calculate maximum cost including reasoning tokens and bounded retries. Distinguish maximum from expected spending. Stay within authorized ceilings. Preserve outputs and usage; never retry wrong answers to improve scores.
+
+### Access, authorization and reporting
+Reuse working authentication. Never request plaintext keys, copy credentials into evidence or create replacement keys merely because environments differ. State access limitations promptly.
+Do not merge, deploy, switch live models or broaden cleanup without authorization. Check dependencies before deletion.
+Distinguish proposed, implemented, tested, committed, pushed and deployed. Report outcome, checks, tested identity, blockers and next action. Separate verified evidence, reports, calculations and inference. Correct defective guidance rather than substituting assurances.
+
+### EIAapp data decisions (owner, Oct 2026)
+- Model: gpt-6-luna, reasoning low. No dated snapshot exists; rerun scored sets if results look odd.
+- Places: use a country's own code (type c); never match places or codes by name alone. Lookalike region codes (e.g. WP13 "Brazil") only if the country code has no data, labelled.
+- Never choose silently: ambiguous input uses a stated default (listed here) with a switch button, or buttons for each candidate; place words that are also ordinary words are never added or dropped silently; lowercase two-letter words never trigger suggestions.
+- Approved ambiguity defaults: Georgia -> US state unless beside another non-US country; Korea -> South Korea.
+- Values: EIA symbols stay non-numeric with EIA's meaning; only numeric 0 is "Reported as zero"; a blank never becomes 0 anywhere (screen, chart, Excel).
+- Scope: use EIA's broader total if published; else EIA's headline figure, labelled with EIA's scope wording; "subset only" means a component or one sector when all were asked. Named parts: only "crude oil" and "gasoline", labelled.
+- Existing lookup rows and defaults win; generated mappings only fill gaps. US-only datasets without a place filter count for the US only.
+- Clarification buttons always come from the checked lookup list, never from the model.
+- Years in typed replies: start and end are separate slots; a reply changes only what it states.
+- Charts: top 10 places by latest value, labelled; all places in table and Excel; never mix units on one axis.
+- Tests: when an older frozen answer conflicts with a recorded owner decision, keep the old one on record, freeze a versioned revision with only that change, list it in the report; do not ask.
+- Every work-order requirement gets a test; the report lists each requirement with its test; no test = not done.
+- Before any paid or scored test run, run the complete offline test suite against the final code, including replays of saved AI responses, and fix every failure first. If the AI's instructions or input format changed, say which saved responses are out of date. A scored run that fails on something the offline suite would have caught is a process failure; report it as one.
+
+---
+
+## Search and Candidate Discovery
+
+1. Separate interpretation, metadata discovery, candidate validation and observation retrieval. Search hits are candidates, not verified answers.
+
+2. Preserve the interpreted request separately from keyword queries. Respect the search tool's matching behavior; retain geography, exclusions, frequency and other constraints.
+
+3. Resolve supplied identifiers against authoritative metadata first. Never silently replace an unrecognized identifier with a loose text match.
+
+4. Search approved names, descriptions, routes and relevant filter values. Inspect full shortlisted metadata; titles and snippets are insufficient.
+
+5. Check measure, product, activity, geography, units and frequency compatibility before ranking. Prefer exact requested concepts. Clearly label alternatives, breakdowns and substitutions.
+
+6. Use bounded fallback searches: supported terminology, catalog browsing or broader keywords. Never silently relax actual user constraints. Record changed searches.
+
+7. Report searched coverage, unavailable metadata, limits and truncation. No match within searched coverage does not establish that the source has no data.
+
+8. Treat fuzzy scores as retrieval signals, not correctness probabilities. Calibrate thresholds on relevant and irrelevant cases; reassess after index or algorithm changes.
+
+9. Verify route/series, filters, units, frequency and coverage before fetching. Track pagination and observation completeness separately from search relevance.
+
+10. When materially different interpretations remain, offer focused, metadata-supported clarification choices and free text.

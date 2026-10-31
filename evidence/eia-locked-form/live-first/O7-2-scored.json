@@ -1,0 +1,1210 @@
+{
+  "id": "O7",
+  "repeat": 2,
+  "query": "natural gas production and consumption in Texas annually",
+  "attempts": [
+    {
+      "id": "O7",
+      "repeat": 2,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "TX"
+        ],
+        "rawGeographies": [
+          "TX | Texas | US state"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": true,
+        "reason": "Owner-approved whole-product measurement basis: marketed natural gas. Labelled frequency fallback is accepted where used.",
+        "first": [
+          {
+            "candidateId": "eia:1:cc257910ac901838eb403912bd5d96695a90a1388636c87217a21cd662ba7f8e",
+            "seriesId": "SEDS.NGMPB.TX.A",
+            "title": "Natural gas marketed production, Texas",
+            "product": "natural gas",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 87.5,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_natural_gas",
+              "activity_exact_production",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_natural",
+              "lexical_title_gas",
+              "lexical_title_production",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "exact",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ]
+      },
+      "elapsedMs": 4042,
+      "usage": {
+        "input_tokens": 5497,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 5494
+        },
+        "output_tokens": 124,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 5621
+      },
+      "costUSD": 0.00011724000000000001,
+      "costUpperUSD": 0.000117315,
+      "responseId": "resp_02e08e2ba92d21d9006ae26f109b1487d28a480643e5073f3d",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "natural gas production and consumption in Texas annually",
+        "intent": {
+          "originalQuery": "natural gas production and consumption in Texas annually",
+          "cleanedQuery": "natural gas production and consumption in Texas annually",
+          "normalizedQuery": "natural gas production and consumption in Texas annually",
+          "correctedQuery": "natural gas production and consumption in Texas annually",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "TX | Texas | US state",
+                "quoted_words": "Texas"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "natural gas",
+                "activity": "production",
+                "quoted_words": "natural gas production"
+              },
+              {
+                "product": "natural gas",
+                "activity": "consumption",
+                "quoted_words": "natural gas production and consumption"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": true,
+              "quoted_words": "annually"
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Texas",
+            "code": "TX",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          },
+          "countryCode": "TX",
+          "validatedGeographies": [
+            {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "natural gas",
+          "activity": "production",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "natural gas",
+              "activity": "production",
+              "order": 0,
+              "source": "validated_interpreter"
+            },
+            {
+              "product": "natural gas",
+              "activity": "consumption",
+              "order": 1,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": "annual",
+          "frequencyExplicit": true,
+          "fields": {
+            "country": {
+              "normalizedValue": "TX",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "natural gas",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "production",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": true
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "natural gas",
+              "activity": "production",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            },
+            {
+              "order": 1,
+              "product": "natural gas",
+              "activity": "consumption",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [],
+            "routeFamily": "seds",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "natural gas production and consumption in Texas annually",
+            "normalizedQuery": "natural gas production and consumption in texas annually",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Texas",
+                    "code": "TX",
+                    "type": "state",
+                    "routeFamilies": [
+                      "domestic",
+                      "seds"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "natural gas",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "production",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 2,
+                  "text": null,
+                  "type": "product",
+                  "value": "natural gas",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 3,
+                  "text": null,
+                  "type": "activity",
+                  "value": "consumption",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "frequency",
+                  "value": "annual",
+                  "source": "validated_interpreter"
+                }
+              ]
+            },
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Texas",
+                "code": "TX",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            ],
+            "product": "natural gas",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "production",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "natural gas",
+                "activity": "production",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              },
+              {
+                "order": 1,
+                "product": "natural gas",
+                "activity": "consumption",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [],
+              "routeFamily": "seds",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": "annual",
+            "frequencyExplicit": true,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "none",
+              "reasons": []
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "seds",
+              "label": "SEDS",
+              "reason": "A state-level energy request uses SEDS.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "TX",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter",
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "validated_interpreter",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "seds",
+            "label": "SEDS",
+            "reason": "A state-level energy request uses SEDS.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "none",
+            "reasons": []
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [
+          {
+            "candidateId": "eia:1:cc257910ac901838eb403912bd5d96695a90a1388636c87217a21cd662ba7f8e",
+            "seriesId": "SEDS.NGMPB.TX.A",
+            "title": "Natural gas marketed production, Texas",
+            "product": "natural gas",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 87.5,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_natural_gas",
+              "activity_exact_production",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_natural",
+              "lexical_title_gas",
+              "lexical_title_production",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "exact",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:0300957d2ad5d39ae3f9af0a2dd3dd6c4594cce043fbb0d787c1ed92ea950dc4",
+            "seriesId": "SEDS.NGCCB.TX.A",
+            "title": "Natural gas delivered to the commercial sector, used as consumption (including supplemental gaseous fuels), Texas",
+            "product": "natural gas",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 84.8,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_natural_gas",
+              "activity_exact_consumption",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_natural",
+              "lexical_title_gas",
+              "lexical_title_consumption",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "exact",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:666f29f410fb3a585c14d6bc09d8eb927811c3f9a69562d9e978e0003c22a4b2",
+            "seriesId": "SEDS.NGRCB.TX.A",
+            "title": "Natural gas delivered to the residential sector, used as consumption (including supplemental gaseous fuels), Texas",
+            "product": "natural gas",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 84.8,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_natural_gas",
+              "activity_exact_consumption",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_natural",
+              "lexical_title_gas",
+              "lexical_title_consumption",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "exact",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:0dff4a1d9e361e967265c6fd30a3f784067eedb57e4b66e712493068148e6b7c",
+            "seriesId": "SEDS.NGTCB.TX.A",
+            "title": "Natural gas total consumption (including supplemental gaseous fuels), Texas",
+            "product": "natural gas",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Billion Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 84.8,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_natural_gas",
+              "activity_exact_consumption",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_natural",
+              "lexical_title_gas",
+              "lexical_title_consumption",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "exact",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:597abe3489a241c11d9b69038a0dea57cac72822ebdc6ddf5c543595d1321eac",
+            "seriesId": "SEDS.NGTPB.TX.A",
+            "title": "Natural gas total consumption (including supplemental gaseous fuels) per capita, Texas",
+            "product": "natural gas",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state"
+            },
+            "routeFamily": "seds",
+            "frequency": "annual",
+            "unit": "Million Btu",
+            "coverage": "1960 to 2024",
+            "dateStart": "1960",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 84.8,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_natural_gas",
+              "activity_exact_consumption",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_natural",
+              "lexical_title_gas",
+              "lexical_title_consumption",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "exact",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ],
+        "candidateGroups": [
+          {
+            "id": "TX:natural gas:production:quantity",
+            "label": "Production: Energy or physical quantity",
+            "product": "natural gas",
+            "activity": "production",
+            "measureType": "quantity",
+            "technical": false,
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "warnings": [],
+            "candidates": [
+              {
+                "candidateId": "eia:1:cc257910ac901838eb403912bd5d96695a90a1388636c87217a21cd662ba7f8e",
+                "seriesId": "SEDS.NGMPB.TX.A",
+                "title": "Natural gas marketed production, Texas",
+                "product": "natural gas",
+                "activity": "production",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Texas",
+                  "code": "TX",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 87.5,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_natural_gas",
+                  "activity_exact_production",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_natural",
+                  "lexical_title_gas",
+                  "lexical_title_production",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "exact",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              }
+            ]
+          },
+          {
+            "id": "TX:natural gas:consumption:quantity",
+            "label": "Consumption: Energy or physical quantity",
+            "product": "natural gas",
+            "activity": "consumption",
+            "measureType": "quantity",
+            "technical": false,
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "warnings": [],
+            "candidates": [
+              {
+                "candidateId": "eia:1:0300957d2ad5d39ae3f9af0a2dd3dd6c4594cce043fbb0d787c1ed92ea950dc4",
+                "seriesId": "SEDS.NGCCB.TX.A",
+                "title": "Natural gas delivered to the commercial sector, used as consumption (including supplemental gaseous fuels), Texas",
+                "product": "natural gas",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Texas",
+                  "code": "TX",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 84.8,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_natural_gas",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_natural",
+                  "lexical_title_gas",
+                  "lexical_title_consumption",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "exact",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              },
+              {
+                "candidateId": "eia:1:666f29f410fb3a585c14d6bc09d8eb927811c3f9a69562d9e978e0003c22a4b2",
+                "seriesId": "SEDS.NGRCB.TX.A",
+                "title": "Natural gas delivered to the residential sector, used as consumption (including supplemental gaseous fuels), Texas",
+                "product": "natural gas",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Texas",
+                  "code": "TX",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 84.8,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_natural_gas",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_natural",
+                  "lexical_title_gas",
+                  "lexical_title_consumption",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "exact",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              },
+              {
+                "candidateId": "eia:1:0dff4a1d9e361e967265c6fd30a3f784067eedb57e4b66e712493068148e6b7c",
+                "seriesId": "SEDS.NGTCB.TX.A",
+                "title": "Natural gas total consumption (including supplemental gaseous fuels), Texas",
+                "product": "natural gas",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Texas",
+                  "code": "TX",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Billion Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 84.8,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_natural_gas",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_natural",
+                  "lexical_title_gas",
+                  "lexical_title_consumption",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "exact",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              },
+              {
+                "candidateId": "eia:1:597abe3489a241c11d9b69038a0dea57cac72822ebdc6ddf5c543595d1321eac",
+                "seriesId": "SEDS.NGTPB.TX.A",
+                "title": "Natural gas total consumption (including supplemental gaseous fuels) per capita, Texas",
+                "product": "natural gas",
+                "activity": "consumption",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Texas",
+                  "code": "TX",
+                  "type": "state"
+                },
+                "routeFamily": "seds",
+                "frequency": "annual",
+                "unit": "Million Btu",
+                "coverage": "1960 to 2024",
+                "dateStart": "1960",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 84.8,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_natural_gas",
+                  "activity_exact_consumption",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_natural",
+                  "lexical_title_gas",
+                  "lexical_title_consumption",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "exact",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              }
+            ]
+          }
+        ],
+        "comparisonDefinitions": [],
+        "userWarnings": [],
+        "needsClarification": false,
+        "userMessage": null,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 5,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "Choose Graph or Excel for one of the 5 displayed series. No series was selected automatically."
+      }
+    }
+  ],
+  "events": []
+}

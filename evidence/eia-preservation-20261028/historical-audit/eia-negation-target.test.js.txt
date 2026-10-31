@@ -1,0 +1,101 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
+import { after, before, test } from 'node:test';
+import { gunzipSync } from 'node:zlib';
+import { interpretQuery, interpretQueryWithRules, normalizeSubmittedIntent } from '../lib/sources/eia/interpret-query.js';
+import { GET as searchEia } from '../app/api/search-eia/route.js';
+
+const matrix = JSON.parse(readFileSync(new URL('./fixtures/eia/negation-target.json', import.meta.url)));
+const source = readFileSync(new URL('../components/search/SearchWorkspace.js', import.meta.url), 'utf8');
+const serialize = runInNewContext(`(${source.slice(source.indexOf('function appendIntentParams('), source.indexOf('\nfunction formatInterpreter('))})`);
+const saved = Object.fromEntries(['LOGIN_REQUIRED', 'OPENAI_API_KEY', 'EIA_API_KEY'].map(key => [key, process.env[key]]));
+const savedFetch = globalThis.fetch;
+let injected;
+let calls = 0;
+before(() => {
+  process.env.LOGIN_REQUIRED = 'off';
+  process.env.OPENAI_API_KEY = 'offline-test';
+  delete process.env.EIA_API_KEY;
+  globalThis.fetch = async (url, options) => {
+    assert.equal(url, 'https://api.openai.com/v1/responses', 'Only the injected model transport may be used');
+    assert.equal(options.method, 'POST');
+    calls++;
+    return Response.json({ output_text: JSON.stringify(injected) });
+  };
+});
+after(() => {
+  globalThis.fetch = savedFetch;
+  for (const [key, value] of Object.entries(saved)) {
+    if (value === undefined) delete process.env[key]; else process.env[key] = value;
+  }
+  assert.ok(calls >= matrix.cases.length, 'Cases exercised interpretQuery with injected responses');
+});
+const geographies = JSON.parse(readFileSync(new URL('../data/eia/routing-metadata.json', import.meta.url))).geographies;
+const records = new Map(['international', 'domestic', 'natural-gas', 'seds'].flatMap(family =>
+  gunzipSync(readFileSync(new URL(`../data/eia/builds/phase1b/${family}.jsonl.gz`, import.meta.url)))
+    .toString().trim().split('\n').map(line => { const r = JSON.parse(line); return [r.series_id, r]; })
+));
+function model(expected) {
+  const field = value => ({ value, confidence: 0.99 });
+  return { confidence: 0.99, geographies: expected.codes.map(field),
+    conceptPairs: expected.pairs.map(([product, activity], order) => ({ product, activity, order, confidence: 0.99 })),
+    fields: { country: field(expected.codes[0]), product: field(expected.pairs[0]?.[0]), activity: field(expected.pairs[0]?.[1] || 'consumption'),
+      frequency: { ...field(expected.frequency), explicit: expected.explicit }, sector: field(expected.sector) } };
+}
+function meaning(intent) {
+  return { codes: intent.structuredIntent.geographies.map(g => g.code),
+    pairs: intent.structuredIntent.conceptPairs.map(p => [p.product, p.activity]),
+    frequency: intent.frequency, explicit: intent.frequencyExplicit, sector: intent.sector,
+    clarify: intent.needsClarification, exclusions: intent.exclusions.map(e => [e.type, e.value]) };
+}
+for (const item of matrix.cases) test(`negation target ${item.id}: ${item.q}`, async () => {
+  const errors = [];
+  const { available, ...expected } = item.expected;
+  expected.exclusions ||= [];
+  const check = (phase, intent) => {
+    try {
+      assert.deepEqual(meaning(intent), expected);
+      if (item.unresolvedPairing) {
+        assert.equal(intent.structuredIntent.conceptPairStatus, 'unresolved');
+        for (const [key, type] of [['products', 'product'], ['activities', 'activity']]) {
+          assert.deepEqual([...new Set(intent.structuredIntent.mentions.concepts.filter(m => m.type === type).map(m => m.value))], item.unresolvedPairing[key]);
+        }
+      }
+    }
+    catch { errors.push({ phase, expected, actual: meaning(intent) }); }
+  };
+  injected = model(expected);
+  check('rules', interpretQueryWithRules(item.q));
+  const intent = await interpretQuery(item.q);
+  assert.equal(intent.interpreter, 'openai', 'Must not silently test a fallback instead of the injected response');
+  check('interpretQuery', intent);
+  const params = serialize(new URLSearchParams({ q: item.q }), intent);
+  check('browser-serialization', normalizeSubmittedIntent(JSON.parse(params.get('intentPayload')), params.get('q')));
+  const response = await searchEia(new Request(`http://example.test/api/search-eia?${params}`));
+  const body = await response.json();
+  assert.equal(response.status, 200);
+  check('public-search', body.intent);
+  assert.equal(body.selectedSeries, null);
+  const candidates = [...body.variables, ...(body.comparisonDefinitions || []).flatMap(d => d.countries.filter(c => c.seriesId))];
+  if (!expected.clarify) {
+    try {
+      assert.ok(candidates.length, 'Expected cached source candidates');
+      for (const candidate of candidates) {
+        assert.ok(expected.codes.includes(candidate.geography.code));
+        const record = records.get(candidate.seriesId);
+        assert.ok(record, 'Candidate exists in unchanged source metadata');
+        assert.equal(candidate.unit, record.unit);
+        assert.equal(candidate.geography.name, geographies.find(g => g.code === candidate.geography.code).name);
+        assert.equal(candidate.dateStart, record.date_start);
+        assert.equal(candidate.dateEnd, record.date_end);
+      }
+    } catch (error) { errors.push({ phase: 'public-candidates', error: error.message, series: body.variables.map(c => c.seriesId) }); }
+  }
+  if (expected.clarify) {
+    assert.equal(body.needsClarification, true);
+    assert.equal(candidates.length, 0, 'Ambiguous scope must not select data');
+    if (item.id !== 'gas-still-ambiguous') assert.match(body.intent.clarificationMessage, /negat|exclu|scope|intend|request/i);
+  }
+  assert.deepEqual(errors, [], JSON.stringify(errors));
+});

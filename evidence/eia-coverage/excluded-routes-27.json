@@ -1,0 +1,5993 @@
+{
+  "leaves": [
+    {
+      "route": "steo",
+      "name": "Short Term Energy Outlook",
+      "reason": "forecast (STEO/AEO/IEO)",
+      "quote": {
+        "field": "description",
+        "value": "Monthly short term (18 month) projections using STEO model.  \r\n        Report and interactive projection data browser:  STEO (www.eia.gov/steo/)"
+      },
+      "metadataCall": 10
+    },
+    {
+      "route": "coal/mine-production",
+      "name": "Mine Production",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Coal mine-level data, including production, region, state, \r\n        county, rank, status, type, name and description.  Source: EIA Form 7A and MSHA \r\n        Form 7000-2.  Interactive browser:  https://www.eia.gov/coal/data/browser/"
+      },
+      "metadataCall": 21
+    },
+    {
+      "route": "electricity/operating-generator-capacity",
+      "name": "Inventory of Operable Generators",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Inventory of operable generators in the U.S.\n    Source: Forms EIA-860, EIA-860M"
+      },
+      "metadataCall": 28
+    },
+    {
+      "route": "electricity/facility-fuel",
+      "name": "Electric Power Operations for Individual Power Plants (Annual and Monthly)",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Annual and monthly electric power operations for individual power plants, by energy source and prime mover\n    Source: Form EIA-923"
+      },
+      "metadataCall": 29
+    },
+    {
+      "route": "nuclear-outages/us-nuclear-outages",
+      "name": "U.S. Nuclear Outages",
+      "reason": "outages",
+      "quote": {
+        "field": "name",
+        "value": "U.S. Nuclear Outages"
+      },
+      "metadataCall": 37
+    },
+    {
+      "route": "nuclear-outages/generator-nuclear-outages",
+      "name": "Generator Level Nuclear Outages",
+      "reason": "outages",
+      "quote": {
+        "field": "name",
+        "value": "Generator Level Nuclear Outages"
+      },
+      "metadataCall": 38
+    },
+    {
+      "route": "nuclear-outages/facility-nuclear-outages",
+      "name": "Facility Level Nuclear Outages",
+      "reason": "outages",
+      "quote": {
+        "field": "name",
+        "value": "Facility Level Nuclear Outages"
+      },
+      "metadataCall": 39
+    },
+    {
+      "route": "densified-biomass/characteristics-by-region",
+      "name": "Characteristics by Region",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "description",
+        "value": "Densified biomass characteristics includes \r\n        fuel type, average ash, heat, and moisture content by region. \r\n        Source: EIA-63C  Report:  www.eia.gov/biomass/"
+      },
+      "metadataCall": 52
+    },
+    {
+      "route": "densified-biomass/wood-pellet-plants",
+      "name": "Wood Pellet Plant Capacity",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Details on wood pellet plants includes region, respondent, \r\n    capacity, and status.  Source: EIA-63C  Report:  www.eia.gov/biomass/"
+      },
+      "metadataCall": 54
+    },
+    {
+      "route": "co2-emissions/co2-emissions-aggregates",
+      "name": "Total CO2 Emissions by Sector and Fuel - deprecated: see SEDS",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "description",
+        "value": "CO2 emission aggregates by fuel, state, and sector.  Report and documentation: https://www.eia.gov/environment/emissions/state/. \"This route is deprecated and no longer receiving fresh data.\n     For state-level CO2 emissions data, please use the /v2/seds/ API route."
+      },
+      "metadataCall": 55
+    },
+    {
+      "route": "co2-emissions/co2-emissions-and-carbon-coefficients",
+      "name": "CO2 Emissions and Carbon Coefficients by Product - deprecated: see SEDS",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "description",
+        "value": "CO2 emissions and carbon coefficients by fuel, state, and sector. Report and documentation: https://www.eia.gov/environment/emissions/state/.\n    \"This route is deprecated and no longer receiving fresh data. For state-level CO2 emissions data, please use the /v2/seds/ API route."
+      },
+      "metadataCall": 56
+    },
+    {
+      "route": "coal/shipments/receipts",
+      "name": "Receipts",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Coal shipment detailed by reciepient data, including transportation type, \r\n        supplier, mine, coal basin, county, state, rank, contract type, price, quantity, and quality. \r\n        Source: EIA Form 7A and MSHA Form 7000-2.  Interactive browser:  https://www.eia.gov/coal/data/browser/"
+      },
+      "metadataCall": 58
+    },
+    {
+      "route": "coal/shipments/mine-aggregates",
+      "name": "Mine Aggregates",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Coal shipments aggregated at mine-level data, \r\n        including price, quantity, quality, and rank.  Source: EIA Form 7A and \r\n        MSHA Form 7000-2.  Interactive browser:  https://www.eia.gov/coal/data/browser/"
+      },
+      "metadataCall": 59
+    },
+    {
+      "route": "coal/shipments/plant-aggregates",
+      "name": "Plant Aggregates",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Coal reciepts aggregated to plant-level data, \n        including price, quantity, quality, and rank.  Source: EIA Form 7A \n            and MSHA Form 7000-2.  Interactive browser:  https://www.eia.gov/coal/data/browser/"
+      },
+      "metadataCall": 61
+    },
+    {
+      "route": "coal/shipments/by-mine-by-plant",
+      "name": "By Mine, By Plant",
+      "reason": "plant/facility-level",
+      "quote": {
+        "field": "description",
+        "value": "Coal shipments from mine- to plant-level data, including price, quantity, quality, and rank.  Source: EIA Form 7A and MSHA Form 7000-2.  Interactive browser:  https://www.eia.gov/coal/data/browser/"
+      },
+      "metadataCall": 62
+    },
+    {
+      "route": "electricity/rto/region-data",
+      "name": "Hourly Demand, Demand Forecast, Generation, and Interchange",
+      "reason": "sub-daily/hourly",
+      "quote": {
+        "field": "frequencies",
+        "value": [
+          "hourly",
+          "local-hourly"
+        ]
+      },
+      "metadataCall": 63
+    },
+    {
+      "route": "electricity/rto/fuel-type-data",
+      "name": "Hourly Generation by Energy Source",
+      "reason": "sub-daily/hourly",
+      "quote": {
+        "field": "frequencies",
+        "value": [
+          "hourly",
+          "local-hourly"
+        ]
+      },
+      "metadataCall": 64
+    },
+    {
+      "route": "electricity/rto/region-sub-ba-data",
+      "name": "Hourly Demand by Subregion",
+      "reason": "sub-daily/hourly",
+      "quote": {
+        "field": "frequencies",
+        "value": [
+          "hourly",
+          "local-hourly"
+        ]
+      },
+      "metadataCall": 65
+    },
+    {
+      "route": "electricity/rto/interchange-data",
+      "name": "Hourly Interchange by Neighboring Balancing Authority",
+      "reason": "sub-daily/hourly",
+      "quote": {
+        "field": "frequencies",
+        "value": [
+          "hourly",
+          "local-hourly"
+        ]
+      },
+      "metadataCall": 66
+    },
+    {
+      "route": "electricity/rto/daily-region-data",
+      "name": "Daily Demand, Demand Forecast, Generation, and Interchange",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "description",
+        "value": "Daily demand, day-ahead demand forecast, net generation, and interchange by balancing authority.  \n    Source: Form EIA-930\n    Product: Hourly Electric Grid Monitor"
+      },
+      "metadataCall": 67
+    },
+    {
+      "route": "electricity/rto/daily-region-sub-ba-data",
+      "name": "Daily Demand by Subregion",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "description",
+        "value": "Daily demand by balancing authority subregion.  \n    Source: Form EIA-930\n    Product: Hourly Electric Grid Monitor"
+      },
+      "metadataCall": 68
+    },
+    {
+      "route": "electricity/rto/daily-fuel-type-data",
+      "name": "Daily Generation by Energy Source",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "description",
+        "value": "Daily net generation by balancing authority and energy source.  \n    Source: Form EIA-930\n    Product: Hourly Electric Grid Monitor"
+      },
+      "metadataCall": 69
+    },
+    {
+      "route": "electricity/rto/daily-interchange-data",
+      "name": "Daily Interchange by Neighboring Balancing Authority",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "description",
+        "value": "Hourly interchange between neighboring balancing authorities.  \n    Source: Form EIA-930\n    Product: Hourly Electric Grid Monitor"
+      },
+      "metadataCall": 70
+    },
+    {
+      "route": "electricity/state-electricity-profiles/emissions-by-state-by-fuel",
+      "name": "Emissions from Energy Consumption at Conventional Power Plants and Combined-Heat-and-Power Plants",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "description",
+        "value": "Emissions from electricity generation and the production of useful thermal output at conventional power plants and combined-heat-and-power plants.\n    See Electric Power Annual, Technical Notes for a description of the sources and methodology used to develop the emissions estimates.\n    Sources: Forms EIA-860, EIA-923, and calculations made by the Office of  Energy Production, Conversion & Delivery (EPCD)\n    Product: State Electricity Profiles, Table 7"
+      },
+      "metadataCall": 71
+    },
+    {
+      "route": "electricity/state-electricity-profiles/energy-efficiency",
+      "name": "Costs and Savings from Energy Efficiency Programs",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "description",
+        "value": "Costs and savings from energy efficiency programs by state and sector\n    Source: Form EIA-861\n    Product: State Electricity Profiles, Table 13"
+      },
+      "metadataCall": 74
+    },
+    {
+      "route": "electricity/state-electricity-profiles/meters",
+      "name": "Advanced Metering Infrastructure",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "description",
+        "value": "Advanced meterting counts by technology, state, and sector\n    Source: Forms EIA-861, EIA-861S\n    Product: State Electricity Profiles, Table 12"
+      },
+      "metadataCall": 76
+    },
+    {
+      "route": "natural-gas/pri/fut",
+      "name": "natural-gas",
+      "reason": "trading-hub/spot (excluded by owner)",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Spot Price",
+          "Future Contract 2",
+          "Future Contract 1",
+          "Future Contract 3",
+          "Future Contract 4"
+        ]
+      },
+      "metadataCall": 82
+    },
+    {
+      "route": "natural-gas/enr/deep",
+      "name": "natural-gas",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/series/name",
+        "value": [
+          "Gulf of America Federal Offshore Crude Oil Proved Reserves from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Proved Reserves from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Dry Natural Gas Proved Reserves from Greater than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Percentage of Dry Natural Gas Proved Reserves from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Proved Reserves from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Dry Natural Gas Proved Reserves from Less than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Crude Oil Proved Reserves (Million Barrels)",
+          "Gulf of America Federal Offshore Crude Oil Proved Reserves from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Proved Reserves (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Natural Gas, Wet After Lease Separation, Proved Reserves from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Proved Reserves from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Proved Reserves from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Proved Reserves from Less than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Percentage of Crude Oil Proved Reserves from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Proved Reserves (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Natural Gas Liquids Proved Reserves from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Percentage of Natural Gas Liquids Lease Condensate Proved Reserves from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Proved Reserves (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Proved Reserves from Greater than 200 Meters Deep (Billion Cubic Feet)"
+        ]
+      },
+      "metadataCall": 95
+    },
+    {
+      "route": "natural-gas/enr/drill",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Active Well Service Rigs in operation",
+          "Rotary Rigs in Operation"
+        ]
+      },
+      "metadataCall": 97
+    },
+    {
+      "route": "natural-gas/enr/wellend",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Footage Drilled for Exploratory and Developmental  Wells",
+          "Exploratory Wells Drilled",
+          "Developmental Wells Drilled",
+          "Exploratory and Developmental Wells Drilled"
+        ]
+      },
+      "metadataCall": 98
+    },
+    {
+      "route": "natural-gas/enr/seis",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Maximum Number of Active Crews Engaged in Sismic Surveying",
+          "Maximum Number of Active Crews Engaged in Four-Dimensional Seismic Surveying",
+          "Maximum Number of Active Crews Engaged in Two-Dimensional Seismic Surveying",
+          "Maximum Number of Active Crews Engaged in Three-Dimensional Seismic Surveying"
+        ]
+      },
+      "metadataCall": 99
+    },
+    {
+      "route": "natural-gas/enr/wellfoot",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Footage Drilled for Exploratory and Developmental  Wells",
+          "Footage Drilled for Developmental Wells",
+          "Footage Drilled for Exploratory  Wells"
+        ]
+      },
+      "metadataCall": 100
+    },
+    {
+      "route": "natural-gas/enr/welldep",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Average Depth of Developmental Wells Drilled",
+          "Average Depth of Exploratory Wells Drilled",
+          "Average Depth of Exploratory and Developmental  Wells Drilled"
+        ]
+      },
+      "metadataCall": 101
+    },
+    {
+      "route": "natural-gas/enr/wellcost",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Real Cost",
+          "Real Cost per Foot",
+          "Nominal Cost per Foot of Dry Wells Drilled",
+          "Nominal Cost per Well Drilled"
+        ]
+      },
+      "metadataCall": 102
+    },
+    {
+      "route": "natural-gas/prod/oilwells",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Number of Oil Wells"
+        ]
+      },
+      "metadataCall": 103
+    },
+    {
+      "route": "natural-gas/prod/off",
+      "name": "natural-gas",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/series/name",
+        "value": [
+          "Federal Offshore--Gulf of America Natural Gas Gross Withdrawals (MMcf)",
+          "Federal Offshore--Gulf of America Natural Gas Gross Withdrawals from Gas Wells (MMcf)",
+          "Federal Offshore--Gulf of America Natural Gas Gross Withdrawals from Oil Wells (MMcf)"
+        ]
+      },
+      "metadataCall": 106
+    },
+    {
+      "route": "natural-gas/prod/deep",
+      "name": "natural-gas",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/series/name",
+        "value": [
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Production (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Dry Natural Gas Production from Greater than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Production (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Production (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Production from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Dry Natural Gas Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Crude Oil Production (Million Barrels)",
+          "Gulf of America Federal Offshore Crude Oil Production from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Natural Gas Liquids Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Dry Natural Gas Production (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Production from Greater than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Production from Less than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Crude Oil Production from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Crude Oil Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Natural Gas Liquids Production from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Production from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Production from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Dry Natural Gas Production from Less than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Percentage of Natural Gas, Wet After Lease Separation, Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Percentage of Natural Gas Liquids Lease Condensate Production from Greater than 200 Meters Deep"
+        ]
+      },
+      "metadataCall": 107
+    },
+    {
+      "route": "natural-gas/prod/wells",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Number of Gas and Gas Condensate Wells"
+        ]
+      },
+      "metadataCall": 113
+    },
+    {
+      "route": "natural-gas/cons/pns",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "% of Total Electric Utility Deliveries",
+          "% of Total Vehicle Fuel Deliveries",
+          "% Total Commercial Deliveries",
+          "% of Total Residential Deliveries",
+          "% Total Industrial Deliveries"
+        ]
+      },
+      "metadataCall": 128
+    },
+    {
+      "route": "natural-gas/cons/heat",
+      "name": "natural-gas",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Heat Content Delivered to Consumers"
+        ]
+      },
+      "metadataCall": 130
+    },
+    {
+      "route": "petroleum/pri/spt",
+      "name": "petroleum",
+      "reason": "trading-hub/spot (excluded by owner)",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Spot Price FOB"
+        ]
+      },
+      "metadataCall": 137
+    },
+    {
+      "route": "petroleum/pri/fut",
+      "name": "petroleum",
+      "reason": "trading-hub/spot (excluded by owner)",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Future Contract 2",
+          "Future Contract 1",
+          "Future Contract 3",
+          "Future Contract 4"
+        ]
+      },
+      "metadataCall": 138
+    },
+    {
+      "route": "petroleum/pri/ipct",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Percent Total Imported by API Gravity"
+        ]
+      },
+      "metadataCall": 157
+    },
+    {
+      "route": "petroleum/crd/gom",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/series/name",
+        "value": [
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Production (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Dry Natural Gas Production from Greater than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Production (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Production (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Production from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Dry Natural Gas Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Crude Oil Production (Million Barrels)",
+          "Gulf of America Federal Offshore Crude Oil Production from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Natural Gas Liquids Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Dry Natural Gas Production (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Production from Greater than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Natural Gas, Wet After Lease Separation, Production from Less than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Crude Oil Production from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Percentage of Crude Oil Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Natural Gas Liquids Production from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Production from Less than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Natural Gas Liquids Lease Condensate Production from Greater than 200 Meters Deep (Million Barrels)",
+          "Gulf of America Federal Offshore Dry Natural Gas Production from Less than 200 Meters Deep (Billion Cubic Feet)",
+          "Gulf of America Federal Offshore Percentage of Natural Gas, Wet After Lease Separation, Production from Greater than 200 Meters Deep",
+          "Gulf of America Federal Offshore Percentage of Natural Gas Liquids Lease Condensate Production from Greater than 200 Meters Deep"
+        ]
+      },
+      "metadataCall": 163
+    },
+    {
+      "route": "petroleum/crd/drill",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Active Well Service Rigs in operation",
+          "Rotary Rigs in Operation"
+        ]
+      },
+      "metadataCall": 164
+    },
+    {
+      "route": "petroleum/crd/wellend",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Footage Drilled for Exploratory and Developmental  Wells",
+          "Exploratory Wells Drilled",
+          "Developmental Wells Drilled",
+          "Exploratory and Developmental Wells Drilled"
+        ]
+      },
+      "metadataCall": 165
+    },
+    {
+      "route": "petroleum/crd/seis",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Maximum Number of Active Crews Engaged in Sismic Surveying",
+          "Maximum Number of Active Crews Engaged in Four-Dimensional Seismic Surveying",
+          "Maximum Number of Active Crews Engaged in Two-Dimensional Seismic Surveying",
+          "Maximum Number of Active Crews Engaged in Three-Dimensional Seismic Surveying"
+        ]
+      },
+      "metadataCall": 166
+    },
+    {
+      "route": "petroleum/crd/wellfoot",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Footage Drilled for Exploratory and Developmental  Wells",
+          "Footage Drilled for Developmental Wells",
+          "Footage Drilled for Exploratory  Wells"
+        ]
+      },
+      "metadataCall": 167
+    },
+    {
+      "route": "petroleum/crd/welldep",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Average Depth of Developmental Wells Drilled",
+          "Average Depth of Exploratory Wells Drilled",
+          "Average Depth of Exploratory and Developmental  Wells Drilled"
+        ]
+      },
+      "metadataCall": 168
+    },
+    {
+      "route": "petroleum/crd/wellcost",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Real Cost",
+          "Real Cost per Foot",
+          "Nominal Cost per Foot of Dry Wells Drilled",
+          "Nominal Cost per Well Drilled"
+        ]
+      },
+      "metadataCall": 169
+    },
+    {
+      "route": "petroleum/pnp/crq",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Oil Refinery Inputs, Average Sulfur Content",
+          "Refinery Inputs, Average API Gravity"
+        ]
+      },
+      "metadataCall": 185
+    },
+    {
+      "route": "petroleum/pnp/pct",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Refinery Yield"
+        ]
+      },
+      "metadataCall": 187
+    },
+    {
+      "route": "petroleum/move/expcp",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R10-NBC",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R10-NBP",
+            "name": "SLB"
+          },
+          {
+            "id": "R10-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R10-NCK",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R10-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R10-NGI",
+            "name": "GIB"
+          },
+          {
+            "id": "R10-NGJ",
+            "name": "GRD"
+          },
+          {
+            "id": "R10-NGL",
+            "name": "GRL"
+          },
+          {
+            "id": "R10-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R10-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R10-NHA",
+            "name": "HTI"
+          },
+          {
+            "id": "R10-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R10-NIO",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R10-NKE",
+            "name": "KEN"
+          },
+          {
+            "id": "R10-NKG",
+            "name": "KGZ"
+          },
+          {
+            "id": "R10-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R10-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R10-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R10-NMA",
+            "name": "MDG"
+          },
+          {
+            "id": "R10-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R10-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R10-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R10-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R10-NUZ",
+            "name": "UZB"
+          },
+          {
+            "id": "R10-NVI",
+            "name": "VGB"
+          },
+          {
+            "id": "R10-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R20-NAE",
+            "name": "ARM"
+          },
+          {
+            "id": "R20-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R20-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R20-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R20-NBB",
+            "name": "BRB"
+          },
+          {
+            "id": "R20-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R20-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R20-NCJ",
+            "name": "CYM"
+          },
+          {
+            "id": "R20-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R20-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R20-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R20-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R20-NKG",
+            "name": "KGZ"
+          },
+          {
+            "id": "R20-NLA",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NMC",
+            "name": "MAC"
+          },
+          {
+            "id": "R20-NMJ",
+            "name": "MNE"
+          },
+          {
+            "id": "R20-NMK",
+            "name": "MKD"
+          },
+          {
+            "id": "R20-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R20-NNU",
+            "name": "NIC"
+          },
+          {
+            "id": "R20-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R20-NPK",
+            "name": "PAK"
+          },
+          {
+            "id": "R20-NSL",
+            "name": "SLE"
+          },
+          {
+            "id": "R20-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R20-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R30-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R30-NAL",
+            "name": "ALB"
+          },
+          {
+            "id": "R30-NAU",
+            "name": "AUT"
+          },
+          {
+            "id": "R30-NBK",
+            "name": "BIH"
+          },
+          {
+            "id": "R30-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R30-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R30-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R30-NCZ",
+            "name": "CZE"
+          },
+          {
+            "id": "R30-NDJ",
+            "name": "DJI"
+          },
+          {
+            "id": "R30-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R30-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R30-NFM",
+            "name": "FSM"
+          },
+          {
+            "id": "R30-NGI",
+            "name": "GIB"
+          },
+          {
+            "id": "R30-NGJ",
+            "name": "GRD"
+          },
+          {
+            "id": "R30-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R30-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R30-NLA",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R30-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R30-NNC",
+            "name": "NCL"
+          },
+          {
+            "id": "R30-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R30-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R30-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R30-NPU",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R30-NRI",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R30-NTO",
+            "name": "TGO"
+          },
+          {
+            "id": "R30-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R30-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R40-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R40-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R40-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R40-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R40-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R50-NBK",
+            "name": "BIH"
+          },
+          {
+            "id": "R50-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R50-NBN",
+            "name": "BEN"
+          },
+          {
+            "id": "R50-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R50-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R50-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R50-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R50-NMC",
+            "name": "MAC"
+          },
+          {
+            "id": "R50-NNS",
+            "name": "SUR"
+          },
+          {
+            "id": "R50-NPS",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NTN",
+            "name": "TON"
+          },
+          {
+            "id": "R50-NTO",
+            "name": "TGO"
+          },
+          {
+            "id": "R10-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R10-NBB",
+            "name": "BRB"
+          },
+          {
+            "id": "R10-NBM",
+            "name": "BUR"
+          },
+          {
+            "id": "R10-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R10-NCB",
+            "name": "KHM"
+          },
+          {
+            "id": "R10-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R10-NCN",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R10-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R10-NGA",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NGG",
+            "name": "GEO"
+          },
+          {
+            "id": "R10-NIC",
+            "name": "ISL"
+          },
+          {
+            "id": "R10-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R10-NLE",
+            "name": "LBN"
+          },
+          {
+            "id": "R10-NML",
+            "name": "MLI"
+          },
+          {
+            "id": "R10-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R10-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R10-NNS",
+            "name": "SUR"
+          },
+          {
+            "id": "R10-NPA",
+            "name": "PRY"
+          },
+          {
+            "id": "R10-NPZ",
+            "name": "PRI"
+          },
+          {
+            "id": "R10-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R10-NUG",
+            "name": "UGA"
+          },
+          {
+            "id": "R20-NAF",
+            "name": "AFG"
+          },
+          {
+            "id": "R20-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R20-NER",
+            "name": "ERI"
+          },
+          {
+            "id": "R20-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R20-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R20-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R20-NLU",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NMG",
+            "name": "MNG"
+          },
+          {
+            "id": "R20-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R20-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R20-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R30-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R30-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R30-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R30-NCJ",
+            "name": "CYM"
+          },
+          {
+            "id": "R30-NCV",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NCY",
+            "name": "CYP"
+          },
+          {
+            "id": "R30-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R30-NFJ",
+            "name": "FJI"
+          },
+          {
+            "id": "R30-NGA",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R30-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R30-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R30-NHA",
+            "name": "HTI"
+          },
+          {
+            "id": "R30-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R30-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R30-NNA",
+            "name": "ANT"
+          },
+          {
+            "id": "R30-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R30-NNP",
+            "name": "NPL"
+          },
+          {
+            "id": "R30-NRM",
+            "name": "MHL"
+          },
+          {
+            "id": "R30-NSK",
+            "name": "SVK"
+          },
+          {
+            "id": "R30-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R30-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R30-NWI",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NWZ",
+            "name": "SWZ"
+          },
+          {
+            "id": "R40-NAF",
+            "name": "AFG"
+          },
+          {
+            "id": "R40-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R50-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R50-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R50-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R50-NCB",
+            "name": "KHM"
+          },
+          {
+            "id": "R50-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R50-NET",
+            "name": "ETH"
+          },
+          {
+            "id": "R50-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R50-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R50-NIR",
+            "name": "IRN"
+          },
+          {
+            "id": "R50-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R50-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R50-NJO",
+            "name": "JOR"
+          },
+          {
+            "id": "R50-NKG",
+            "name": "KGZ"
+          },
+          {
+            "id": "R50-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R50-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R50-NMZ",
+            "name": "MOZ"
+          },
+          {
+            "id": "R50-NNP",
+            "name": "NPL"
+          },
+          {
+            "id": "R50-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R50-NRM",
+            "name": "MHL"
+          },
+          {
+            "id": "R50-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R50-NSL",
+            "name": "SLE"
+          },
+          {
+            "id": "R50-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R50-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R50-NTZ",
+            "name": "TZA"
+          },
+          {
+            "id": "R50-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R10-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R10-NBH",
+            "name": "BLZ"
+          },
+          {
+            "id": "R10-NDJ",
+            "name": "DJI"
+          },
+          {
+            "id": "R10-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R10-NGP",
+            "name": "GLP"
+          },
+          {
+            "id": "R10-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R10-NHO",
+            "name": "HND"
+          },
+          {
+            "id": "R10-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R10-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R10-NMV",
+            "name": "MDV"
+          },
+          {
+            "id": "R10-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R10-NRM",
+            "name": "MHL"
+          },
+          {
+            "id": "R10-NSK",
+            "name": "SVK"
+          },
+          {
+            "id": "R10-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R10-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R10-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R10-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R10-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R10-NVC",
+            "name": "VCT"
+          },
+          {
+            "id": "R10-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R20-NBD",
+            "name": "BMU"
+          },
+          {
+            "id": "R20-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R20-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R20-NCY",
+            "name": "CYP"
+          },
+          {
+            "id": "R20-NCZ",
+            "name": "CZE"
+          },
+          {
+            "id": "R20-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R20-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R20-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R20-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R20-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R20-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R20-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R20-NNG",
+            "name": "NER"
+          },
+          {
+            "id": "R20-NNZ",
+            "name": "NZL"
+          },
+          {
+            "id": "R20-NRI",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R20-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R20-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R20-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R20-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R20-NUG",
+            "name": "UGA"
+          },
+          {
+            "id": "R20-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R30-NAE",
+            "name": "ARM"
+          },
+          {
+            "id": "R30-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R30-NBM",
+            "name": "BUR"
+          },
+          {
+            "id": "R30-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R30-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R30-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R30-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R30-NHO",
+            "name": "HND"
+          },
+          {
+            "id": "R30-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R30-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R30-NMD",
+            "name": "MDA"
+          },
+          {
+            "id": "R30-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R30-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R30-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R30-NNG",
+            "name": "NER"
+          },
+          {
+            "id": "R30-NNS",
+            "name": "SUR"
+          },
+          {
+            "id": "R30-NNU",
+            "name": "NIC"
+          },
+          {
+            "id": "R30-NPZ",
+            "name": "PRI"
+          },
+          {
+            "id": "R30-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R30-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R30-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R30-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R30-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R30-NTN",
+            "name": "TON"
+          },
+          {
+            "id": "R30-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R30-NVC",
+            "name": "VCT"
+          },
+          {
+            "id": "R30-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R40-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R50-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R50-NAU",
+            "name": "AUT"
+          },
+          {
+            "id": "R50-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R50-NBP",
+            "name": "SLB"
+          },
+          {
+            "id": "R50-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R50-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R50-NFJ",
+            "name": "FJI"
+          },
+          {
+            "id": "R50-NGA",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R50-NIO",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R50-NLU",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R50-NMP",
+            "name": "MUS"
+          },
+          {
+            "id": "R50-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R50-NPZ",
+            "name": "PRI"
+          },
+          {
+            "id": "R50-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R50-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R50-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R50-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R10-Z00",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-Z00",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-Z00",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-NAL",
+            "name": "ALB"
+          },
+          {
+            "id": "R10-NBK",
+            "name": "BIH"
+          },
+          {
+            "id": "R10-NBO",
+            "name": "BLR"
+          },
+          {
+            "id": "R10-NCU",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NCY",
+            "name": "CYP"
+          },
+          {
+            "id": "R10-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R10-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R10-NFJ",
+            "name": "FJI"
+          },
+          {
+            "id": "R10-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R10-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R10-NLS",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NMC",
+            "name": "MAC"
+          },
+          {
+            "id": "R10-NMH",
+            "name": "MSR"
+          },
+          {
+            "id": "R10-NMJ",
+            "name": "MNE"
+          },
+          {
+            "id": "R10-NMK",
+            "name": "MKD"
+          },
+          {
+            "id": "R10-NMN",
+            "name": "MCO"
+          },
+          {
+            "id": "R10-NMZ",
+            "name": "MOZ"
+          },
+          {
+            "id": "R10-NNG",
+            "name": "NER"
+          },
+          {
+            "id": "R10-NNP",
+            "name": "NPL"
+          },
+          {
+            "id": "R10-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R10-NSE",
+            "name": "SYC"
+          },
+          {
+            "id": "R10-NSY",
+            "name": "SYR"
+          },
+          {
+            "id": "R10-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R10-NTO",
+            "name": "TGO"
+          },
+          {
+            "id": "R10-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R10-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R10-NWI",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R20-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R20-NCB",
+            "name": "KHM"
+          },
+          {
+            "id": "R20-NCE",
+            "name": "LKA"
+          },
+          {
+            "id": "R20-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R20-NCV",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NGG",
+            "name": "GEO"
+          },
+          {
+            "id": "R20-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R20-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R20-NJO",
+            "name": "JOR"
+          },
+          {
+            "id": "R20-NKE",
+            "name": "KEN"
+          },
+          {
+            "id": "R20-NLG",
+            "name": "LVA"
+          },
+          {
+            "id": "R20-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R20-NMA",
+            "name": "MDG"
+          },
+          {
+            "id": "R20-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R20-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R20-NPZ",
+            "name": "PRI"
+          },
+          {
+            "id": "R20-NSI",
+            "name": "SVN"
+          },
+          {
+            "id": "R20-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R20-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R20-NUZ",
+            "name": "UZB"
+          },
+          {
+            "id": "R20-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R30-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R30-NBO",
+            "name": "BLR"
+          },
+          {
+            "id": "R30-NCE",
+            "name": "LKA"
+          },
+          {
+            "id": "R30-NET",
+            "name": "ETH"
+          },
+          {
+            "id": "R30-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R30-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R30-NJO",
+            "name": "JOR"
+          },
+          {
+            "id": "R30-NLU",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NMC",
+            "name": "MAC"
+          },
+          {
+            "id": "R30-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R30-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R30-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R30-NTP",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NWA",
+            "name": "NAM"
+          },
+          {
+            "id": "R30-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R40-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R40-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R50-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R50-NBB",
+            "name": "BRB"
+          },
+          {
+            "id": "R50-NBM",
+            "name": "BUR"
+          },
+          {
+            "id": "R50-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R50-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R50-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R50-NCY",
+            "name": "CYP"
+          },
+          {
+            "id": "R50-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R50-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R50-NFP",
+            "name": "PYF"
+          },
+          {
+            "id": "R50-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R50-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R50-NLA",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R50-NMD",
+            "name": "MDA"
+          },
+          {
+            "id": "R50-NMJ",
+            "name": "MNE"
+          },
+          {
+            "id": "R50-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R50-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R50-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R50-NPA",
+            "name": "PRY"
+          },
+          {
+            "id": "R50-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R50-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R50-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R50-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R50-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R50-NUZ",
+            "name": "UZB"
+          },
+          {
+            "id": "R50-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R50-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R10-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R10-NAU",
+            "name": "AUT"
+          },
+          {
+            "id": "R10-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R10-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R10-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R10-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R10-NCJ",
+            "name": "CYM"
+          },
+          {
+            "id": "R10-NCV",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NDO",
+            "name": "DMA"
+          },
+          {
+            "id": "R10-NET",
+            "name": "ETH"
+          },
+          {
+            "id": "R10-NFG",
+            "name": "GUF"
+          },
+          {
+            "id": "R10-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R10-NIR",
+            "name": "IRN"
+          },
+          {
+            "id": "R10-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R10-NJO",
+            "name": "JOR"
+          },
+          {
+            "id": "R10-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R10-NKT",
+            "name": "CXR"
+          },
+          {
+            "id": "R10-NLG",
+            "name": "LVA"
+          },
+          {
+            "id": "R10-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R10-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R10-NNU",
+            "name": "NIC"
+          },
+          {
+            "id": "R10-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R10-NSI",
+            "name": "SVN"
+          },
+          {
+            "id": "R10-NTK",
+            "name": "TCA"
+          },
+          {
+            "id": "R10-NTZ",
+            "name": "TZA"
+          },
+          {
+            "id": "R10-NUV",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R10-NWA",
+            "name": "NAM"
+          },
+          {
+            "id": "R20-NAL",
+            "name": "ALB"
+          },
+          {
+            "id": "R20-NBG",
+            "name": "BGD"
+          },
+          {
+            "id": "R20-NCD",
+            "name": "TCD"
+          },
+          {
+            "id": "R20-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R20-NDJ",
+            "name": "DJI"
+          },
+          {
+            "id": "R20-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R20-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R20-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R20-NGI",
+            "name": "GIB"
+          },
+          {
+            "id": "R20-NHO",
+            "name": "HND"
+          },
+          {
+            "id": "R20-NIC",
+            "name": "ISL"
+          },
+          {
+            "id": "R20-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R20-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R20-NLE",
+            "name": "LBN"
+          },
+          {
+            "id": "R20-NMI",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NML",
+            "name": "MLI"
+          },
+          {
+            "id": "R20-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R20-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R20-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R20-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R20-NSK",
+            "name": "SVK"
+          },
+          {
+            "id": "R20-NST",
+            "name": "LCA"
+          },
+          {
+            "id": "R30-NAN",
+            "name": "AND"
+          },
+          {
+            "id": "R30-NBC",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NBG",
+            "name": "BGD"
+          },
+          {
+            "id": "R30-NBN",
+            "name": "BEN"
+          },
+          {
+            "id": "R30-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R30-NCB",
+            "name": "KHM"
+          },
+          {
+            "id": "R30-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R30-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R30-NGP",
+            "name": "GLP"
+          },
+          {
+            "id": "R30-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R30-NIC",
+            "name": "ISL"
+          },
+          {
+            "id": "R30-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R30-NMB",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NMG",
+            "name": "MNG"
+          },
+          {
+            "id": "R30-NML",
+            "name": "MLI"
+          },
+          {
+            "id": "R30-NMN",
+            "name": "MCO"
+          },
+          {
+            "id": "R30-NMP",
+            "name": "MUS"
+          },
+          {
+            "id": "R30-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R30-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R30-NNN",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NPA",
+            "name": "PRY"
+          },
+          {
+            "id": "R30-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R30-NUZ",
+            "name": "UZB"
+          },
+          {
+            "id": "R40-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R40-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R40-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R50-NAF",
+            "name": "AFG"
+          },
+          {
+            "id": "R50-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R50-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R50-NCZ",
+            "name": "CZE"
+          },
+          {
+            "id": "R50-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R50-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R50-NLE",
+            "name": "LBN"
+          },
+          {
+            "id": "R50-NLG",
+            "name": "LVA"
+          },
+          {
+            "id": "R50-NMH",
+            "name": "MSR"
+          },
+          {
+            "id": "R50-NNH",
+            "name": "VUT"
+          },
+          {
+            "id": "R50-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R50-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R50-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R50-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R50-NUG",
+            "name": "UGA"
+          },
+          {
+            "id": "R50-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R20-Z00",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R40-Z00",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R10-NAC",
+            "name": "ATG"
+          },
+          {
+            "id": "R10-NAE",
+            "name": "ARM"
+          },
+          {
+            "id": "R10-NAN",
+            "name": "AND"
+          },
+          {
+            "id": "R10-NBD",
+            "name": "BMU"
+          },
+          {
+            "id": "R10-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R10-NBG",
+            "name": "BGD"
+          },
+          {
+            "id": "R10-NCE",
+            "name": "LKA"
+          },
+          {
+            "id": "R10-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R10-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R10-NFP",
+            "name": "PYF"
+          },
+          {
+            "id": "R10-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R10-NNA",
+            "name": "ANT"
+          },
+          {
+            "id": "R10-NNN",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R10-NPK",
+            "name": "PAK"
+          },
+          {
+            "id": "R10-NPU",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NRI",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R10-NSL",
+            "name": "SLE"
+          },
+          {
+            "id": "R10-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R10-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R10-NWZ",
+            "name": "SWZ"
+          },
+          {
+            "id": "R20-NAC",
+            "name": "ATG"
+          },
+          {
+            "id": "R20-NBK",
+            "name": "BIH"
+          },
+          {
+            "id": "R20-NBM",
+            "name": "BUR"
+          },
+          {
+            "id": "R20-NBO",
+            "name": "BLR"
+          },
+          {
+            "id": "R20-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R20-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R20-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R20-NET",
+            "name": "ETH"
+          },
+          {
+            "id": "R20-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R20-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R20-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R20-NMV",
+            "name": "MDV"
+          },
+          {
+            "id": "R20-NPA",
+            "name": "PRY"
+          },
+          {
+            "id": "R20-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R20-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R20-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R30-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R30-NBB",
+            "name": "BRB"
+          },
+          {
+            "id": "R30-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R30-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R30-NCU",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R30-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R30-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R30-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R30-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R30-NKT",
+            "name": "CXR"
+          },
+          {
+            "id": "R30-NNH",
+            "name": "VUT"
+          },
+          {
+            "id": "R30-NSB",
+            "name": "SPM"
+          },
+          {
+            "id": "R30-NSC",
+            "name": "KNA"
+          },
+          {
+            "id": "R30-NSE",
+            "name": "SYC"
+          },
+          {
+            "id": "R30-NTK",
+            "name": "TCA"
+          },
+          {
+            "id": "R30-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R30-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R40-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R40-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R40-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R40-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R40-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R50-NBG",
+            "name": "BGD"
+          },
+          {
+            "id": "R50-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R50-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R50-NGG",
+            "name": "GEO"
+          },
+          {
+            "id": "R50-NGI",
+            "name": "GIB"
+          },
+          {
+            "id": "R50-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R50-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R50-NIC",
+            "name": "ISL"
+          },
+          {
+            "id": "R50-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R50-NKT",
+            "name": "CXR"
+          },
+          {
+            "id": "R50-NNZ",
+            "name": "NZL"
+          },
+          {
+            "id": "R50-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R50-NSK",
+            "name": "SVK"
+          },
+          {
+            "id": "R50-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R10-NAF",
+            "name": "AFG"
+          },
+          {
+            "id": "R10-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R10-NCD",
+            "name": "TCD"
+          },
+          {
+            "id": "R10-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R10-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R10-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R10-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R10-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R10-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R10-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R10-NLA",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NMG",
+            "name": "MNG"
+          },
+          {
+            "id": "R10-NMP",
+            "name": "MUS"
+          },
+          {
+            "id": "R10-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R10-NNC",
+            "name": "NCL"
+          },
+          {
+            "id": "R10-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R10-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R10-NSC",
+            "name": "KNA"
+          },
+          {
+            "id": "R10-NST",
+            "name": "LCA"
+          },
+          {
+            "id": "R10-NTP",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R20-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R20-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R20-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R20-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R20-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R20-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R20-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R20-NMZ",
+            "name": "MOZ"
+          },
+          {
+            "id": "R20-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R20-NSC",
+            "name": "KNA"
+          },
+          {
+            "id": "R20-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R20-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R20-NTZ",
+            "name": "TZA"
+          },
+          {
+            "id": "R20-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R20-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R30-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R30-NBH",
+            "name": "BLZ"
+          },
+          {
+            "id": "R30-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R30-NFP",
+            "name": "PYF"
+          },
+          {
+            "id": "R30-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R30-NIO",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NKE",
+            "name": "KEN"
+          },
+          {
+            "id": "R30-NKG",
+            "name": "KGZ"
+          },
+          {
+            "id": "R30-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R30-NMK",
+            "name": "MKD"
+          },
+          {
+            "id": "R30-NMV",
+            "name": "MDV"
+          },
+          {
+            "id": "R30-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R30-NSI",
+            "name": "SVN"
+          },
+          {
+            "id": "R30-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R30-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R30-NTZ",
+            "name": "TZA"
+          },
+          {
+            "id": "R30-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R30-NUV",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R40-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R40-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R50-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R50-NBH",
+            "name": "BLZ"
+          },
+          {
+            "id": "R50-NCE",
+            "name": "LKA"
+          },
+          {
+            "id": "R50-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R50-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R50-NDJ",
+            "name": "DJI"
+          },
+          {
+            "id": "R50-NFM",
+            "name": "FSM"
+          },
+          {
+            "id": "R50-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R50-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R50-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R50-NKE",
+            "name": "KEN"
+          },
+          {
+            "id": "R50-NKR",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R50-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R50-NMG",
+            "name": "MNG"
+          },
+          {
+            "id": "R50-NMV",
+            "name": "MDV"
+          },
+          {
+            "id": "R50-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R50-NPK",
+            "name": "PAK"
+          },
+          {
+            "id": "R50-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R50-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R50-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R10-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R10-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R10-NAV",
+            "name": "AIA"
+          },
+          {
+            "id": "R10-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R10-NBN",
+            "name": "BEN"
+          },
+          {
+            "id": "R10-NCZ",
+            "name": "CZE"
+          },
+          {
+            "id": "R10-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R10-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R10-NFK",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R10-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R10-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R10-NLU",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NMB",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NMD",
+            "name": "MDA"
+          },
+          {
+            "id": "R10-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R10-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R10-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R10-NNZ",
+            "name": "NZL"
+          },
+          {
+            "id": "R10-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R10-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R10-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R10-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R10-NWS",
+            "name": "WSM"
+          },
+          {
+            "id": "R10-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R20-NAN",
+            "name": "AND"
+          },
+          {
+            "id": "R20-NAU",
+            "name": "AUT"
+          },
+          {
+            "id": "R20-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R20-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R20-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R20-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R20-NFG",
+            "name": "GUF"
+          },
+          {
+            "id": "R20-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R20-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R20-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R20-NMD",
+            "name": "MDA"
+          },
+          {
+            "id": "R20-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R20-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R20-NNS",
+            "name": "SUR"
+          },
+          {
+            "id": "R20-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R20-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R20-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R20-NTO",
+            "name": "TGO"
+          },
+          {
+            "id": "R20-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R20-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R20-NUV",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NVI",
+            "name": "VGB"
+          },
+          {
+            "id": "R30-NAC",
+            "name": "ATG"
+          },
+          {
+            "id": "R30-NAF",
+            "name": "AFG"
+          },
+          {
+            "id": "R30-NAV",
+            "name": "AIA"
+          },
+          {
+            "id": "R30-NBD",
+            "name": "BMU"
+          },
+          {
+            "id": "R30-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R30-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R30-NCD",
+            "name": "TCD"
+          },
+          {
+            "id": "R30-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R30-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R30-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R30-NDO",
+            "name": "DMA"
+          },
+          {
+            "id": "R30-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R30-NFG",
+            "name": "GUF"
+          },
+          {
+            "id": "R30-NGG",
+            "name": "GEO"
+          },
+          {
+            "id": "R30-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R30-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R30-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R30-NLE",
+            "name": "LBN"
+          },
+          {
+            "id": "R30-NLG",
+            "name": "LVA"
+          },
+          {
+            "id": "R30-NMA",
+            "name": "MDG"
+          },
+          {
+            "id": "R30-NMH",
+            "name": "MSR"
+          },
+          {
+            "id": "R30-NMJ",
+            "name": "MNE"
+          },
+          {
+            "id": "R30-NMZ",
+            "name": "MOZ"
+          },
+          {
+            "id": "R30-NNZ",
+            "name": "NZL"
+          },
+          {
+            "id": "R30-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R30-NPK",
+            "name": "PAK"
+          },
+          {
+            "id": "R30-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R30-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R30-NSL",
+            "name": "SLE"
+          },
+          {
+            "id": "R30-NST",
+            "name": "LCA"
+          },
+          {
+            "id": "R30-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R30-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R30-NUG",
+            "name": "UGA"
+          },
+          {
+            "id": "R30-NVI",
+            "name": "VGB"
+          },
+          {
+            "id": "R30-NWS",
+            "name": "WSM"
+          },
+          {
+            "id": "R40-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R40-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R40-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R40-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R40-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R50-NAE",
+            "name": "ARM"
+          },
+          {
+            "id": "R50-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R50-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R50-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R50-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R50-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R50-NHO",
+            "name": "HND"
+          },
+          {
+            "id": "R50-NMN",
+            "name": "MCO"
+          },
+          {
+            "id": "R50-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R50-NNC",
+            "name": "NCL"
+          },
+          {
+            "id": "R50-NNG",
+            "name": "NER"
+          },
+          {
+            "id": "R50-NNN",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R50-NNU",
+            "name": "NIC"
+          },
+          {
+            "id": "R50-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R50-NRI",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R50-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R50-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R50-NWS",
+            "name": "WSM"
+          },
+          {
+            "id": "R50-NWZ",
+            "name": "SWZ"
+          },
+          {
+            "id": "R50-NYE",
+            "name": "YEM"
+          }
+        ]
+      },
+      "metadataCall": 198
+    },
+    {
+      "route": "petroleum/move/imp2",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R10-Z00",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-Z00",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-Z00",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R20-Z00",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R40-Z00",
+            "name": "PADD 4"
+          }
+        ]
+      },
+      "metadataCall": 202
+    },
+    {
+      "route": "petroleum/move/ipct",
+      "name": "petroleum",
+      "reason": "no measure in our 14 products",
+      "quote": {
+        "field": "facet/process/name",
+        "value": [
+          "Percent Total Imported by API Gravity"
+        ]
+      },
+      "metadataCall": 213
+    },
+    {
+      "route": "petroleum/move/ptb",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R20-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R40-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R50-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R40-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R40",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R20-R40",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R40-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R10",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R40-R20",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R40-R30",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R20-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R40-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 1"
+          }
+        ]
+      },
+      "metadataCall": 214
+    },
+    {
+      "route": "petroleum/move/pipe",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R20-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R40-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R40-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R40",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R40",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R20-R10",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R40-R20",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R40-R30",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R20-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R40-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 1"
+          }
+        ]
+      },
+      "metadataCall": 215
+    },
+    {
+      "route": "petroleum/move/tb",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R20-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R1Z-R30",
+            "name": "PADD 1C"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R50-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R1Y-R30",
+            "name": "PADD 1B"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R1X-R30",
+            "name": "PADD 1A"
+          },
+          {
+            "id": "R1Y-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R1Z-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R1X-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R10",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 1"
+          }
+        ]
+      },
+      "metadataCall": 216
+    },
+    {
+      "route": "petroleum/move/netr",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R30-Z0P",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-Z0P",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-Z0P",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R40-Z0P",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R20-Z0P",
+            "name": "PADD 2"
+          }
+        ]
+      },
+      "metadataCall": 217
+    },
+    {
+      "route": "petroleum/move/impcp",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R10-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R50-MN0",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R10-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R20-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R30-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R30-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R30-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R10-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R30-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R30-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R30-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R10-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R10-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R10-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R10-NKG",
+            "name": "KGZ"
+          },
+          {
+            "id": "R10-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R10-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R10-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R10-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R10-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R20-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R30-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R30-NBK",
+            "name": "BIH"
+          },
+          {
+            "id": "R30-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R30-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R30-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R30-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R30-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R30-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R50-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R20-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R10-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R10-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R10-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R20-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R20-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R20-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R20-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R30-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R50-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R50-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R50-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R10-NGI",
+            "name": "GIB"
+          },
+          {
+            "id": "R50-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R40-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R50-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R20-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R20-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R30-NAU",
+            "name": "AUT"
+          },
+          {
+            "id": "R30-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R30-NCW",
+            "name": "COK"
+          },
+          {
+            "id": "R30-NCZ",
+            "name": "CZE"
+          },
+          {
+            "id": "R30-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R30-NAL",
+            "name": "ALB"
+          },
+          {
+            "id": "R30-NTO",
+            "name": "TGO"
+          },
+          {
+            "id": "R30-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R50-NBN",
+            "name": "BEN"
+          },
+          {
+            "id": "R20-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R20-NSY",
+            "name": "SYR"
+          },
+          {
+            "id": "R20-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R20-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R20-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R30-NRI",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NSS",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NNA",
+            "name": "ANT"
+          },
+          {
+            "id": "R40-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R50-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R20-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R30-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R50-ME0",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R10-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R10-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R10-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R30-MP0",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R50-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R10-NBB",
+            "name": "BRB"
+          },
+          {
+            "id": "R10-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R10-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R10-NGG",
+            "name": "GEO"
+          },
+          {
+            "id": "R10-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R10-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R10-NNS",
+            "name": "SUR"
+          },
+          {
+            "id": "R30-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R30-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R30-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R30-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R30-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R30-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R30-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R30-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R50-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R50-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R50-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R50-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R50-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R20-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R20-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R20-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R20-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R30-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R40-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R50-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R50-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R50-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R50-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R50-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R10-NPZ",
+            "name": "PRI"
+          },
+          {
+            "id": "R50-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R20-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R50-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R40-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R40-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R50-NRM",
+            "name": "MHL"
+          },
+          {
+            "id": "R10-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R30-NSK",
+            "name": "SVK"
+          },
+          {
+            "id": "R50-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R50-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R20-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R30-NCY",
+            "name": "CYP"
+          },
+          {
+            "id": "R10-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R30-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R30-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R10-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R20-ME0",
+            "name": "NA"
+          },
+          {
+            "id": "R40-MP0",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R10-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R30-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R30-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R50-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R50-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R10-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R10-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R10-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R10-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R10-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R10-NSK",
+            "name": "SVK"
+          },
+          {
+            "id": "R10-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R10-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R30-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R30-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R30-NIR",
+            "name": "IRN"
+          },
+          {
+            "id": "R30-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R30-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R30-NMQ",
+            "name": "UMI-71"
+          },
+          {
+            "id": "R30-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R30-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R30-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R30-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R30-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R50-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R50-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R50-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R50-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R50-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R50-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R20-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R10-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R10-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R30-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R30-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R30-NSG",
+            "name": "SEN"
+          },
+          {
+            "id": "R50-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R50-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R50-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R40-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R10-NBH",
+            "name": "BLZ"
+          },
+          {
+            "id": "R20-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R30-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R30-NBM",
+            "name": "BUR"
+          },
+          {
+            "id": "R30-NPZ",
+            "name": "PRI"
+          },
+          {
+            "id": "R50-NPG",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NSY",
+            "name": "SYR"
+          },
+          {
+            "id": "R20-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R20-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R30-NNS",
+            "name": "SUR"
+          },
+          {
+            "id": "R30-NSS",
+            "name": "NA"
+          },
+          {
+            "id": "R10-Z00",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R10-MN0",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R30-Z00",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-Z00",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R50-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R10-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R30-ME0",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R10-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R10-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R30-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R50-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R50-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R50-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R50-NVQ",
+            "name": "VIR"
+          },
+          {
+            "id": "R10-NBK",
+            "name": "BIH"
+          },
+          {
+            "id": "R10-NBO",
+            "name": "BLR"
+          },
+          {
+            "id": "R10-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R10-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R10-NTO",
+            "name": "TGO"
+          },
+          {
+            "id": "R10-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R10-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R30-NBO",
+            "name": "BLR"
+          },
+          {
+            "id": "R30-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R30-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R30-NSY",
+            "name": "SYR"
+          },
+          {
+            "id": "R50-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R50-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R50-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R50-NLH",
+            "name": "LTU"
+          },
+          {
+            "id": "R50-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R50-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R50-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R50-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R20-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R20-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R30-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R10-NAL",
+            "name": "ALB"
+          },
+          {
+            "id": "R10-NSY",
+            "name": "SYR"
+          },
+          {
+            "id": "R20-NBL",
+            "name": "BOL"
+          },
+          {
+            "id": "R30-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R50-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R50-NCD",
+            "name": "TCD"
+          },
+          {
+            "id": "R50-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R50-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R50-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R10-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R40-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R10-NCY",
+            "name": "CYP"
+          },
+          {
+            "id": "R40-NAG",
+            "name": "DZA"
+          },
+          {
+            "id": "R40-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R50-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R20-NSW",
+            "name": "SWE"
+          },
+          {
+            "id": "R30-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R20-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R30-NJO",
+            "name": "JOR"
+          },
+          {
+            "id": "R50-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R10-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R10-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R30-NMX",
+            "name": "MEX"
+          },
+          {
+            "id": "R10-ME0",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R50-NSP",
+            "name": "ESP"
+          },
+          {
+            "id": "R10-MP0",
+            "name": "NA"
+          },
+          {
+            "id": "R50-NCH",
+            "name": "CHN"
+          },
+          {
+            "id": "R10-NAO",
+            "name": "AGO"
+          },
+          {
+            "id": "R10-NAU",
+            "name": "AUT"
+          },
+          {
+            "id": "R10-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R10-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R10-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R10-NIR",
+            "name": "IRN"
+          },
+          {
+            "id": "R10-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R10-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R10-NLG",
+            "name": "LVA"
+          },
+          {
+            "id": "R10-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R30-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R30-NES",
+            "name": "SLV"
+          },
+          {
+            "id": "R30-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R30-NMB",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R30-NUZ",
+            "name": "UZB"
+          },
+          {
+            "id": "R50-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R50-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R20-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R20-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R30-NCG",
+            "name": "COD"
+          },
+          {
+            "id": "R10-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R10-NGY",
+            "name": "GUY"
+          },
+          {
+            "id": "R10-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R20-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R20-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R20-NMU",
+            "name": "OMN"
+          },
+          {
+            "id": "R30-NBN",
+            "name": "BEN"
+          },
+          {
+            "id": "R30-NGV",
+            "name": "GIN"
+          },
+          {
+            "id": "R50-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R50-NEK",
+            "name": "GNQ"
+          },
+          {
+            "id": "R20-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R50-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R10-NWA",
+            "name": "NAM"
+          },
+          {
+            "id": "R50-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R50-NTS",
+            "name": "TUN"
+          },
+          {
+            "id": "R50-NTX",
+            "name": "TKM"
+          },
+          {
+            "id": "R30-NRB",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NNA",
+            "name": "ANT"
+          },
+          {
+            "id": "R20-Z00",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R20-MN0",
+            "name": "NA"
+          },
+          {
+            "id": "R30-MN0",
+            "name": "NA"
+          },
+          {
+            "id": "R40-Z00",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R10-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R30-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R10-NBF",
+            "name": "BHS"
+          },
+          {
+            "id": "R10-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R10-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R30-NBE",
+            "name": "BEL"
+          },
+          {
+            "id": "R30-NCO",
+            "name": "COL"
+          },
+          {
+            "id": "R30-NEG",
+            "name": "EGY"
+          },
+          {
+            "id": "R10-NCE",
+            "name": "LKA"
+          },
+          {
+            "id": "R10-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R10-NEI",
+            "name": "IRL"
+          },
+          {
+            "id": "R10-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R10-NTW",
+            "name": "TWN"
+          },
+          {
+            "id": "R10-NWZ",
+            "name": "SWZ"
+          },
+          {
+            "id": "R30-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R30-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R30-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R30-NUY",
+            "name": "URY"
+          },
+          {
+            "id": "R50-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R50-NTH",
+            "name": "THA"
+          },
+          {
+            "id": "R20-NKU",
+            "name": "KWT"
+          },
+          {
+            "id": "R20-NLY",
+            "name": "LBY"
+          },
+          {
+            "id": "R30-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R30-NBB",
+            "name": "BRB"
+          },
+          {
+            "id": "R30-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R40-NSA",
+            "name": "SAU"
+          },
+          {
+            "id": "R50-NNZ",
+            "name": "NZL"
+          },
+          {
+            "id": "R10-NPK",
+            "name": "PAK"
+          },
+          {
+            "id": "R50-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R50-NHR",
+            "name": "HRV"
+          },
+          {
+            "id": "R50-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R40-NIZ",
+            "name": "IRQ"
+          },
+          {
+            "id": "R40-NVE",
+            "name": "VEN"
+          },
+          {
+            "id": "R20-NGM",
+            "name": "DEU"
+          },
+          {
+            "id": "R50-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R40-NNI",
+            "name": "NGA"
+          },
+          {
+            "id": "R50-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R10-NRI",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NCM",
+            "name": "CMR"
+          },
+          {
+            "id": "R10-NIT",
+            "name": "ITA"
+          },
+          {
+            "id": "R40-ME0",
+            "name": "NA"
+          },
+          {
+            "id": "R40-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R10-NJA",
+            "name": "JPN"
+          },
+          {
+            "id": "R10-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R30-NAR",
+            "name": "ARG"
+          },
+          {
+            "id": "R30-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R30-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R30-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R10-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R10-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R10-NGH",
+            "name": "GHA"
+          },
+          {
+            "id": "R10-NHK",
+            "name": "HKG"
+          },
+          {
+            "id": "R10-NJM",
+            "name": "JAM"
+          },
+          {
+            "id": "R10-NMY",
+            "name": "MYS"
+          },
+          {
+            "id": "R10-NRO",
+            "name": "ROU"
+          },
+          {
+            "id": "R20-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R30-NBU",
+            "name": "BGR"
+          },
+          {
+            "id": "R30-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R30-NSN",
+            "name": "SGP"
+          },
+          {
+            "id": "R50-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R50-NBO",
+            "name": "BLR"
+          },
+          {
+            "id": "R50-NDA",
+            "name": "DNK"
+          },
+          {
+            "id": "R50-NID",
+            "name": "IDN"
+          },
+          {
+            "id": "R50-NIN",
+            "name": "IND"
+          },
+          {
+            "id": "R50-NIS",
+            "name": "ISR"
+          },
+          {
+            "id": "R50-NKS",
+            "name": "KOR"
+          },
+          {
+            "id": "R50-NNA",
+            "name": "ANT"
+          },
+          {
+            "id": "R50-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R50-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R50-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R20-NTD",
+            "name": "TTO"
+          },
+          {
+            "id": "R50-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R10-NCD",
+            "name": "TCD"
+          },
+          {
+            "id": "R20-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R20-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R30-NBH",
+            "name": "BLZ"
+          },
+          {
+            "id": "R30-NKG",
+            "name": "KGZ"
+          },
+          {
+            "id": "R30-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R30-NVM",
+            "name": "VNM"
+          },
+          {
+            "id": "R50-NBH",
+            "name": "BLZ"
+          },
+          {
+            "id": "R50-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R50-NLI",
+            "name": "LBR"
+          },
+          {
+            "id": "R20-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R10-NPP",
+            "name": "PNG"
+          },
+          {
+            "id": "R20-NGR",
+            "name": "GRC"
+          },
+          {
+            "id": "R50-NUC",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NNL",
+            "name": "NLD"
+          },
+          {
+            "id": "R20-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R30-NCA",
+            "name": "CAN"
+          },
+          {
+            "id": "R40-MN0",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NMO",
+            "name": "MAR"
+          },
+          {
+            "id": "R10-NEC",
+            "name": "ECU"
+          },
+          {
+            "id": "R30-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R50-MP0",
+            "name": "NA"
+          },
+          {
+            "id": "R10-NAA",
+            "name": "ABW"
+          },
+          {
+            "id": "R10-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R10-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R10-NGB",
+            "name": "GAB"
+          },
+          {
+            "id": "R10-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R10-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R10-NMT",
+            "name": "MLT"
+          },
+          {
+            "id": "R10-NNE",
+            "name": "NIU"
+          },
+          {
+            "id": "R10-NPM",
+            "name": "PAN"
+          },
+          {
+            "id": "R10-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R10-NTC",
+            "name": "ARE"
+          },
+          {
+            "id": "R10-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R10-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R20-NFI",
+            "name": "FIN"
+          },
+          {
+            "id": "R30-NBR",
+            "name": "BRA"
+          },
+          {
+            "id": "R30-NCI",
+            "name": "CHL"
+          },
+          {
+            "id": "R30-NCS",
+            "name": "CRI"
+          },
+          {
+            "id": "R30-NEN",
+            "name": "EST"
+          },
+          {
+            "id": "R30-NGG",
+            "name": "GEO"
+          },
+          {
+            "id": "R30-NHU",
+            "name": "HUN"
+          },
+          {
+            "id": "R30-NLG",
+            "name": "LVA"
+          },
+          {
+            "id": "R30-NPE",
+            "name": "PER"
+          },
+          {
+            "id": "R30-NPL",
+            "name": "POL"
+          },
+          {
+            "id": "R30-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R50-NBX",
+            "name": "BRN"
+          },
+          {
+            "id": "R50-NFR",
+            "name": "FRA"
+          },
+          {
+            "id": "R50-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R50-NPO",
+            "name": "PRT"
+          },
+          {
+            "id": "R50-NRP",
+            "name": "PHL"
+          },
+          {
+            "id": "R50-NTU",
+            "name": "TUR"
+          },
+          {
+            "id": "R20-NNO",
+            "name": "NOR"
+          },
+          {
+            "id": "R20-MP0",
+            "name": "NA"
+          },
+          {
+            "id": "R30-NCF",
+            "name": "COG"
+          },
+          {
+            "id": "R10-NAS",
+            "name": "AUS"
+          },
+          {
+            "id": "R20-NIV",
+            "name": "CIV"
+          },
+          {
+            "id": "R20-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R20-NQA",
+            "name": "QAT"
+          },
+          {
+            "id": "R20-NUK",
+            "name": "GBR"
+          },
+          {
+            "id": "R30-NCD",
+            "name": "TCD"
+          },
+          {
+            "id": "R30-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R30-NKZ",
+            "name": "KAZ"
+          },
+          {
+            "id": "R50-NAJ",
+            "name": "AZE"
+          },
+          {
+            "id": "R50-NMR",
+            "name": "MRT"
+          },
+          {
+            "id": "R50-NYE",
+            "name": "YEM"
+          },
+          {
+            "id": "R10-NBA",
+            "name": "BHR"
+          },
+          {
+            "id": "R50-NGT",
+            "name": "GTM"
+          },
+          {
+            "id": "R50-NNU",
+            "name": "NIC"
+          },
+          {
+            "id": "R50-NSF",
+            "name": "ZAF"
+          },
+          {
+            "id": "R40-NRS",
+            "name": "RUS"
+          },
+          {
+            "id": "R30-NSZ",
+            "name": "CHE"
+          },
+          {
+            "id": "R50-NDR",
+            "name": "DOM"
+          },
+          {
+            "id": "R30-NFG",
+            "name": "GUF"
+          },
+          {
+            "id": "R30-NMZ",
+            "name": "MOZ"
+          },
+          {
+            "id": "R30-NPK",
+            "name": "PAK"
+          },
+          {
+            "id": "R30-NNZ",
+            "name": "NZL"
+          },
+          {
+            "id": "R10-NMB",
+            "name": "NA"
+          },
+          {
+            "id": "R20-NUR",
+            "name": "UKR"
+          },
+          {
+            "id": "R30-NTN",
+            "name": "TON"
+          },
+          {
+            "id": "R10-NTN",
+            "name": "TON"
+          }
+        ]
+      },
+      "metadataCall": 219
+    },
+    {
+      "route": "petroleum/move/rail",
+      "name": "petroleum",
+      "reason": "no place facet at country, US or state level",
+      "quote": {
+        "field": "facet/duoarea",
+        "value": [
+          {
+            "id": "R20-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R50-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R40-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R50-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R10-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R40-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R50-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R10-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R20-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R20-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R10-R30",
+            "name": "PADD 3"
+          },
+          {
+            "id": "R30-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R30-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R40-R10",
+            "name": "PADD 1"
+          },
+          {
+            "id": "R20-R40",
+            "name": "PADD 4"
+          },
+          {
+            "id": "R30-R20",
+            "name": "PADD 2"
+          },
+          {
+            "id": "R30-R50",
+            "name": "PADD 5"
+          },
+          {
+            "id": "R40-R50",
+            "name": "PADD 5"
+          }
+        ]
+      },
+      "metadataCall": 220
+    }
+  ],
+  "families": [
+    {
+      "route": "aeo",
+      "releaseSubtrees": [
+        "2026",
+        "2025",
+        "2023",
+        "2022",
+        "2021",
+        "2020",
+        "2019",
+        "2018",
+        "2017",
+        "2016",
+        "2015",
+        "2014",
+        "2014-er"
+      ],
+      "releaseCount": 13,
+      "classification": "DOES NOT FIT",
+      "reason": "forecast (STEO/AEO/IEO)",
+      "quote": {
+        "field": "name",
+        "value": "Annual Energy Outlook"
+      },
+      "metadataCall": 13
+    },
+    {
+      "route": "ieo",
+      "releaseSubtrees": [
+        "2023",
+        "2021",
+        "2019",
+        "2017"
+      ],
+      "releaseCount": 4,
+      "classification": "DOES NOT FIT",
+      "reason": "forecast (STEO/AEO/IEO)",
+      "quote": {
+        "field": "name",
+        "value": "International Energy Outlook"
+      },
+      "metadataCall": 14
+    }
+  ],
+  "review": "exclusion-review.json; all 61 leaves checked, no mismatch."
+}

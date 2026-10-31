@@ -1,0 +1,517 @@
+{
+  "frozenAt": "2026-10-28T00:14:16.164Z",
+  "basis": "User-specified meanings and approved metadata; no model generation received. No app output used to derive expected meanings.",
+  "cases": [
+    {
+      "id": 1,
+      "query": "total energy consumption united states",
+      "expected": {
+        "geographies": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "United States national total energy consumption; no sector or frequency stated."
+    },
+    {
+      "id": 2,
+      "query": "total energyy consumption usa",
+      "expected": {
+        "geographies": [
+          "USA"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Same meaning as #1; obvious energy spelling error."
+    },
+    {
+      "id": 3,
+      "query": "brazil and japan electrciity consumption",
+      "expected": {
+        "geographies": [
+          "BRA",
+          "JPN"
+        ],
+        "pairs": [
+          [
+            "electricity",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Electricity consumption for Brazil then Japan; preserve both countries despite the electricity typo."
+    },
+    {
+      "id": 4,
+      "query": "energy consumption iceland",
+      "expected": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Iceland total energy consumption; Ireland is not requested."
+    },
+    {
+      "id": 5,
+      "query": "energy consumption icealnd",
+      "expected": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Iceland total energy consumption with an unambiguous transposition spelling error; Ireland is not requested."
+    },
+    {
+      "id": 6,
+      "query": "energy consumption iceland not ireland",
+      "expected": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [
+          "IRL"
+        ],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Iceland total energy consumption, explicitly excluding Ireland."
+    },
+    {
+      "id": 7,
+      "query": "natural gas production and consumption in Texas annually",
+      "expected": {
+        "geographies": [
+          "TX"
+        ],
+        "pairs": [
+          [
+            "natural gas",
+            "production"
+          ],
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": true,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Texas state natural-gas production AND consumption, in that order, annual explicitly requested. Both activities must survive."
+    },
+    {
+      "id": 8,
+      "query": "monthly electricity consumption in California",
+      "expected": {
+        "geographies": [
+          "CA"
+        ],
+        "pairs": [
+          [
+            "electricity",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "monthly",
+        "frequencyExplicit": true,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "California state electricity consumption, monthly explicitly requested; no sector stated."
+    },
+    {
+      "id": 9,
+      "query": "electricity consumption in Georgia and France",
+      "expected": {
+        "geographies": [
+          "GEO",
+          "FRA"
+        ],
+        "pairs": [
+          [
+            "electricity",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": false
+      },
+      "meaning": "Electricity consumption for the country Georgia then France. Another foreign country invokes the existing country-context rule."
+    },
+    {
+      "id": 10,
+      "query": "gas consumption in the United States",
+      "expected": {
+        "geographies": [
+          "USA"
+        ],
+        "pairs": [],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "exclusions": [],
+        "clarification": true,
+        "product": null,
+        "activity": "consumption",
+        "ambiguity": "natural gas versus gasoline; no unsupported choice"
+      },
+      "meaning": "United States national consumption of ambiguous gas. Ask natural gas versus gasoline, preserve consumption and geography, do not select one product."
+    }
+  ],
+  "settings": {
+    "endpoint": "https://api.openai.com/v1/responses",
+    "models": [
+      "gpt-5.4-nano-2026-03-17",
+      "gpt-6-luna"
+    ],
+    "reasoning": {
+      "effort": "none"
+    },
+    "max_output_tokens": 4096,
+    "service_tier": "default",
+    "store": false,
+    "stream": false,
+    "timeoutMs": 30000,
+    "scheduledCalls": 40,
+    "maxAttemptsPerScheduledCall": 2,
+    "maxTotalAttempts": 80,
+    "inputTokenUpperBound": 10000,
+    "schedulingSeed": 47250,
+    "retryHttpStatuses": [
+      408,
+      409,
+      429,
+      500,
+      502,
+      503,
+      504
+    ],
+    "retryPolicy": "At most one retry only for transient transport/service errors; no retry for permanent HTTP, model refusal, malformed output, incomplete output or wrong interpretation. HTTP429 insufficient_quota is permanent. An uncertain transport failure consumes an attempt and full conservative cost reservation.",
+    "settingsDepartures": "Production sends only model and the exact input prompt, with30s timeout. Evaluation explicitly chooses the requested two models, none reasoning,4096 output limit, Standard/default service tier,store=false,stream=false. Temperature/top_p/text-format/seed/cache overrides are omitted identically. No JSON repair or model-specific tuning."
+  },
+  "schedule": [
+    {
+      "scheduledId": 1,
+      "queryId": 9,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 2,
+      "queryId": 9,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 3,
+      "queryId": 3,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 4,
+      "queryId": 3,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 5,
+      "queryId": 7,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 6,
+      "queryId": 7,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 7,
+      "queryId": 4,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 8,
+      "queryId": 4,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 9,
+      "queryId": 2,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 10,
+      "queryId": 2,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 11,
+      "queryId": 5,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 12,
+      "queryId": 5,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 13,
+      "queryId": 1,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 14,
+      "queryId": 1,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 15,
+      "queryId": 8,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 16,
+      "queryId": 8,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 17,
+      "queryId": 6,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 18,
+      "queryId": 6,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 19,
+      "queryId": 10,
+      "repeat": 1,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 20,
+      "queryId": 10,
+      "repeat": 1,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 21,
+      "queryId": 4,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 22,
+      "queryId": 4,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 23,
+      "queryId": 9,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 24,
+      "queryId": 9,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 25,
+      "queryId": 6,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 26,
+      "queryId": 6,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 27,
+      "queryId": 2,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 28,
+      "queryId": 2,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 29,
+      "queryId": 8,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 30,
+      "queryId": 8,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 31,
+      "queryId": 7,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 32,
+      "queryId": 7,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 33,
+      "queryId": 3,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 34,
+      "queryId": 3,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 35,
+      "queryId": 5,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 36,
+      "queryId": 5,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 37,
+      "queryId": 1,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    },
+    {
+      "scheduledId": 38,
+      "queryId": 1,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 39,
+      "queryId": 10,
+      "repeat": 2,
+      "model": "gpt-6-luna"
+    },
+    {
+      "scheduledId": 40,
+      "queryId": 10,
+      "repeat": 2,
+      "model": "gpt-5.4-nano-2026-03-17"
+    }
+  ],
+  "scoring": {
+    "semanticAccuracy": "All-or-nothing per original response, with field-level reasons also reported. Check ordered canonical geographies, every product/activity pair, no invented sector, annual/explicit=false default, explicit annual/monthly where stated, Ireland exclusion in #6, and gas clarification in #10. Confidence does not award correctness. Canonical names/metadata aliases with the same meaning are accepted; equivalent valid span segmentations are accepted. Contradictory requested/excluded/unresolved dispositions fail semantics even when compatibility fields look correct.",
+    "ambiguityPolicy": "Only #10 requires clarification;1–9 establish clear requests and unnecessary clarification fails exact semantic accuracy. #10 must preserve country/consumption, leave product unresolved, and clearly identify natural-gas/gasoline ambiguity rather than guessing; structured ambiguity with equivalent prose is accepted.",
+    "pairsPolicy": "Compare canonical ordered pair arrays. Singular compatibility product/activity fields may summarize the first pair; they cannot replace or contradict ordered pairs. #7 must retain both production and consumption. #10 may use an empty pairs array or null-product/consumption pair while clarifying.",
+    "contractCompliance": "Strict original JSON only (no fenced/substr JSON repair), prompt-required top-level keys and field/item types, finite0..1 confidences, allowed canonical category values, and exact source evidence validated against original raw text. Record syntactic JSON, shape, and span compliance separately. App built-in tolerant extraction is replayed unchanged and explicitly labelled if it recovers a non-strict answer.",
+    "downstream": "Replay every received original response verbatim through interpretQuery with injected transport, validateAiInterpretation (where JSON parses), actual browser appendIntentParams, normalizeSubmittedIntent, public search GET, and cached candidate pipeline. No additional model/EIA calls. Record semantic changes, clarification, fallback, routes, units, frequencies, source coverage, eligible/ranked/displayed counts and candidate IDs. Correct labelled frequency fallback is not itself a model mistake. Empty metadata results and the known Texas routing/eligibility problem are reported separately; no fixes.",
+    "usableInterpretation": "Original semantic pass AND JSON/source-evidence contract pass. A downstream rescue/fallback never upgrades model success. Report downstream-safe outcomes separately.",
+    "consistency": "For each query/model, compare normalized original semantic signatures from both scheduled repeats; count missing/error repeats as not consistent. Also report strict pass agreement separately. Byte-identical wording/span splits are not required.",
+    "latency": "Wall time for each actual attempt. Report median/min/max of successful scheduled generation latency; separately report end-to-end time including retry and failed attempts.",
+    "cost": "Use returned input/output/cache-write/cache-hit token usage and official Standard rates. Include all retries with reported usage. For transport failures without usage disclose unknown billed cost and reserve full per-attempt ceiling. Cost per usable interpretation uses all actual known generation cost divided by usable original responses.",
+    "decision": "Provisionally prefer Luna only if frozen semantic and contract scores are no worse and measured token cost is lower; if neither is adequate say so. Ten queries and two repeats do not establish statistical equivalence or general complex-negation validity."
+  }
+}

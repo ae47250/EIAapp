@@ -1,0 +1,102 @@
+{
+  "id": "<REDACTED_PROVIDER_ID>",
+  "object": "response",
+  "created_at": 1793188934,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1793188942,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 32768,
+  "max_tool_calls": null,
+  "model": "gpt-6-luna",
+  "moderation": null,
+  "output": [
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "<REDACTED_ENCRYPTED_REASONING>",
+      "summary": []
+    },
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\n  \"correctedQuery\": \"electricity consumption in Georgia and France\",\n  \"confidence\": 1.0,\n  \"ambiguity\": [\n    \"Two countries are requested, so the singular country summary is null.\"\n  ],\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"Georgia and France\",\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": \"The query names two countries; both are preserved in geographies.\"\n    },\n    \"product\": {\n      \"rawValue\": \"electricity\",\n      \"value\": \"electricity\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1.0,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1.0,\n      \"ambiguityReason\": \"No sector is explicitly stated.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 1.0,\n      \"explicit\": false,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Georgia\",\n      \"confidence\": 1.0\n    },\n    {\n      \"value\": \"France\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"electricity\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 1.0\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"electricity consumption in Georgia and France\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 23,\n        \"text\": \"electricity consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 23,\n        \"end\": 27,\n        \"text\": \" in \",\n        \"status\": \"context\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 27,\n        \"end\": 45,\n        \"text\": \"Georgia and France\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "low",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 797,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 822,
+    "output_tokens_details": {
+      "reasoning_tokens": 278
+    },
+    "total_tokens": 1619
+  },
+  "user": null,
+  "metadata": {}
+}

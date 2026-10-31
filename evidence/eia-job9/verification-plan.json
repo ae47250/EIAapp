@@ -1,0 +1,44 @@
+{
+  "baselineCommit": "23495ba44499491a63db468988d66d7e27415775",
+  "baselineValidator": {
+    "path": "/Users/agust/Documents/EIAapp-Evidence/20261031/job9/baseline/validator.log",
+    "tests": 17,
+    "passed": 7,
+    "failed": 10,
+    "requiredFailThenPass": [
+      "initial product",
+      "reply product",
+      "initial activity",
+      "reply activity",
+      "initial sector",
+      "reply sector",
+      "initial frequency",
+      "reply frequency"
+    ],
+    "existingPlaceTests": "tests/eia-job8b.test.js: Q5 raw validation; quote supports place; fallback/browser resubmission"
+  },
+  "tests": [
+    "tests/eia-job9-validator.test.js",
+    "tests/eia-job9-switch.test.js",
+    "tests/eia-job9-runner.test.js"
+  ],
+  "supersededMeasurementRunners": [
+    "evidence/eia-job8b/run-scored.mjs",
+    "evidence/eia-job8/run-scored-revision-4.mjs",
+    "scripts/eia-lookup/replay-polish-final.js",
+    "evidence/eia-job8b/replay-126.mjs",
+    "evidence/eia-job8b/replay-78.mjs"
+  ],
+  "preservation": "All old sets and runners remain. They are superseded for measurement and are not invoked by npm test or npm run test:offline. Their independent unit tests still run.",
+  "sources": {
+    "spelling": "https://doi.org/10.1145/363958.363994",
+    "structuredOfficialData": "https://www.imf.org/-/media/files/publications/dp/2026/english/saiosea.pdf",
+    "correctionCascadeAnalogy": "https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/",
+    "exactMatch": "https://aclanthology.org/P19-1443/",
+    "jointGoalAndSlotAccuracy": "https://aclanthology.org/2022.acl-short.33/",
+    "tokenMeasurement": "https://developers.openai.com/api/reference/resources/responses/subresources/input_tokens/methods/count",
+    "eia": "https://www.eia.gov/opendata/documentation.php"
+  },
+  "method": "Standard single-edit distance and exact-match/joint-field accuracy. SParC/MultiWOZ measure other interfaces and ontologies; no published benchmark supplies this EIA app\u2019s expected selectors and buttons. The owner-prescribed historical EIA suite is used; no new question set invented.",
+  "outOfDate": "Prompt and schemas unchanged. Saved initial prompts with another date and typed replies with changed parent state do not test how the model reads the current prompt. Offline archive reports old schemas as no fixture."
+}

@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: state-series metadata regeneration uses the verified code, not an energy qualifier as part of the place name
+not ok 1 - state-series metadata regeneration uses the verified code, not an energy qualifier as part of the place name
+  ---
+  duration_ms: 0.670166
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:18:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Frozen source inventory
+    
+    4441 !== 2655
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2655
+  actual: 4441
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:19:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: display repair applies across affected states and preserves source identifiers, units, coverage and provenance
+not ok 2 - display repair applies across affected states and preserves source identifiers, units, coverage and provenance
+  ---
+  duration_ms: 0.13775
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:34:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'name')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:35:69
+    Array.filter (<anonymous>)
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:35:45)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: unverified regional and mismatched series identifiers do not receive a state-wide label
+not ok 3 - unverified regional and mismatched series identifiers do not receive a state-wide label
+  ---
+  duration_ms: 0.065458
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:51:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'name')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:52:53
+    Array.find (<anonymous>)
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-metadata-labels.test.js:52:31)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 92.959334

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "pythonASTFiles": 14,
+  "offlineTests": {
+    "MERCorrespondence": 24,
+    "seriesCorrespondence": 11,
+    "placeCrosswalk": 10,
+    "facetInventory": 6,
+    "failed": 0
+  },
+  "catalogueHashesVerified": 154,
+  "rawResponseHashesVerified": 1419,
+  "EIA_API_calls": 1419,
+  "newEIA_API_callsThisTurn": 2,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "generationScopeGate": "Owner decision resolved; 47 MER generation entries annotated (42 utility-scale, 4 small-scale-only, 1 combined). Whole/sector classification changes are exactly SOT5PUS, SOC5PUS, SOI5PUS, SOEGPUS. No availability acceptance.",
+  "generationSourceReview": {
+    "placesWithSmallPVColumns": 52,
+    "numericSamplePlaces": 51,
+    "symbolOnlySamplePlaces": 1,
+    "samePeriodDefinitionComparisons": 5
+  },
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions, not an independent reference-alignment benchmark. No applicable public EIA mapping reference alignment found in the documented bounded search.",
+  "notRun": "Application offline suite/build/live browser: application unchanged, implementation checkpoint not reached.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-generation-source-review.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "git diff --check"
+  ],
+  "remaining": "Finish every FITS definition classification, resolve recorded metadata conflicts, freeze grid, estimate/run B1, freeze Set D and stop for owner go."
+}

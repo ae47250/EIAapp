@@ -1,0 +1,489 @@
+{
+  "id": "O10",
+  "repeat": 1,
+  "query": "gas consumption in the United States",
+  "attempts": [
+    {
+      "id": "O10",
+      "repeat": 1,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "USA"
+        ],
+        "rawGeographies": [
+          "USA | United States | national"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": true,
+      "rightData": {
+        "correct": true,
+        "reason": "clarification and no retrieval"
+      },
+      "elapsedMs": 2893,
+      "usage": {
+        "input_tokens": 5495,
+        "input_tokens_details": {
+          "cache_write_tokens": 197,
+          "cached_tokens": 5295
+        },
+        "output_tokens": 193,
+        "output_tokens_details": {
+          "reasoning_tokens": 62
+        },
+        "total_tokens": 5688
+      },
+      "costUSD": 0.00016945,
+      "costUpperUSD": 0.00017444999999999998,
+      "responseId": "resp_0536e39079152704006ae26ece95d087d2b1c7875e37a76897",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "gas consumption in the United States",
+        "intent": {
+          "originalQuery": "gas consumption in the United States",
+          "cleanedQuery": "gas consumption in the United States",
+          "normalizedQuery": "gas consumption in the United States",
+          "correctedQuery": "gas consumption in the United States",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "USA | United States | national",
+                "quoted_words": "United States"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": null,
+                "activity": "consumption",
+                "quoted_words": "gas consumption"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": true,
+              "about": "product",
+              "options": [
+                {
+                  "label": "Natural gas",
+                  "value": "natural gas"
+                },
+                {
+                  "label": "Petroleum (gasoline)",
+                  "value": "petroleum"
+                }
+              ]
+            }
+          },
+          "country": {
+            "name": "United States",
+            "code": "USA",
+            "type": "national",
+            "routeFamilies": [
+              "domestic",
+              "international",
+              "seds"
+            ]
+          },
+          "countryCode": "USA",
+          "validatedGeographies": [
+            {
+              "name": "United States",
+              "code": "USA",
+              "type": "national",
+              "routeFamilies": [
+                "domestic",
+                "international",
+                "seds"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": null,
+          "activity": "consumption",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": null,
+              "activity": "consumption",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "USA",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "ambiguous",
+              "normalizedValue": null,
+              "breadth": "ambiguous",
+              "alternatives": [
+                "natural gas",
+                "petroleum"
+              ]
+            },
+            "activity": {
+              "normalizedValue": "consumption",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": true,
+          "blockingClarification": true,
+          "conceptPairStatus": "partial",
+          "missingFields": [],
+          "ambiguousFields": [
+            "product"
+          ],
+          "clarificationMessage": "Please clarify the product: natural gas and petroleum (including gasoline). No series will be selected until it is resolved.",
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": null,
+              "activity": "consumption",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [
+              "USA"
+            ],
+            "routeFamily": "international",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "gas consumption in the United States",
+            "normalizedQuery": "gas consumption in the united states",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "United States",
+                    "code": "USA",
+                    "type": "national",
+                    "routeFamilies": [
+                      "domestic",
+                      "international",
+                      "seds"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "consumption",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "national",
+              "routeFamilies": [
+                "domestic",
+                "international",
+                "seds"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "United States",
+                "code": "USA",
+                "type": "national",
+                "routeFamilies": [
+                  "domestic",
+                  "international",
+                  "seds"
+                ]
+              }
+            ],
+            "product": null,
+            "productBreadth": "ambiguous",
+            "productAlternatives": [
+              "natural gas",
+              "petroleum"
+            ],
+            "activity": "consumption",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": null,
+                "activity": "consumption",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "partial",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [
+                "USA"
+              ],
+              "routeFamily": "international",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "ambiguous",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "ambiguous",
+              "reasons": [
+                "product_or_scope_missing",
+                "product_ambiguous"
+              ]
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "USA",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": true,
+            "blockingClarification": true,
+            "missingFields": [],
+            "clarificationMessage": "Please clarify the product: natural gas and petroleum (including gasoline). No series will be selected until it is resolved."
+          },
+          "route": {
+            "family": "international",
+            "label": "International",
+            "reason": "A U.S. non-electricity request uses the available International metadata.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "ambiguous",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "ambiguous",
+            "reasons": [
+              "product_or_scope_missing",
+              "product_ambiguous"
+            ]
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [],
+        "candidateGroups": [],
+        "comparisonDefinitions": [],
+        "userWarnings": [],
+        "needsClarification": true,
+        "userMessage": "Please clarify the product: natural gas and petroleum (including gasoline). No series will be selected until it is resolved.",
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": false,
+          "clarificationBlocked": true,
+          "clarificationReasons": [
+            "product_or_scope_missing",
+            "product_ambiguous"
+          ],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "No observations were fetched."
+      }
+    }
+  ],
+  "events": []
+}

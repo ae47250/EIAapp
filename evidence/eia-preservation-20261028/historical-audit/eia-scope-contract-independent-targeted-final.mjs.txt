@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {interpretQueryWithRules} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+import {GET} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/app/api/search-eia/route.js';
+process.env.LOGIN_REQUIRED='off';delete process.env.OPENAI_API_KEY;delete process.env.EIA_API_KEY;
+let externalCalls=0;globalThis.fetch=()=>{externalCalls++;throw Error('No live calls permitted')};
+const cases=[
+ {id:'approved-internal-no-1',query:'Show annual electricity generation in Texas with no direct fuel costs.',blocked:false},
+ {id:'approved-internal-no-2',query:'Show annual electricity generation in Texas with no direct cost.',blocked:false},
+ {id:'internal-scope-overflow',query:'Show natural gas production for Canada. '+'not coal; '.repeat(19),blocked:true},
+ {id:'rules-independent-requests',query:'Show coal production for Canada. Also show monthly electricity consumption for Texas.',blocked:true},
+ {id:'scope-only-process-fuel',query:'Show electricity generation in Texas, not process fuel.',blocked:false},
+ {id:'scope-only-plant',query:'Show electricity generation in Texas, excluding plant.',blocked:false}
+];
+const results=[];
+for(const c of cases){try{const x=interpretQueryWithRules(c.query);const resp=await GET(new Request('https://example.test/api/search-eia?q='+encodeURIComponent(c.query)));const b=await resp.json();results.push({...c,actualBlocked:x.needsClarification,passed:x.needsClarification===c.blocked&&resp.status===200,publicStatus:resp.status,publicBlocked:b.diagnostics?.clarificationBlocked,scopes:x.requestEvidence.scopes.length,geographies:x.validatedGeographies.map(g=>g.code),exclusions:x.exclusions,scopeValidation:x.scopeValidation});}catch(e){results.push({...c,error:String(e),passed:false})}}
+const report={results,externalCalls,sourceHashes:Object.fromEntries(['request-evidence.js','interpret-query.js'].map(p=>[p,crypto.createHash('sha256').update(fs.readFileSync('<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/'+p)).digest('hex')]))};
+fs.writeFileSync('/private/tmp/eia-scope-contract-independent-targeted-final.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

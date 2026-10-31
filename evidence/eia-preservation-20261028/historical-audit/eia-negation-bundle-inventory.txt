@@ -1,0 +1,93 @@
+# EIAapp external review bundle — negation correction unresolved
+
+**The negation mechanism remains unsound. No new production correction was accepted.** The latest tests are deliberately failing regressions. Historical green records do not establish that the newly exposed failures are fixed.
+
+Base: {{base}}
+Current HEAD: {{head}}
+Branch: {{branch}}
+Repository: https://github.com/ae47250/EIAapp
+
+This is the isolated uncommitted working-tree snapshot. It contains {{trackedCount}} tracked modifications and {{untrackedCount}} untracked additions ({{changedCount}} exact final file copies), nothing staged and no new commits beyond the base. No commit, push, merge, deployment, dependency/model change or paid/live API call occurred. The production files are byte-identical to the starting snapshot for this reassessment; only two new test harnesses, two frozen fixtures and the audit update were added in this phase. The prior country-name repair remains intact.
+
+## Contents and evidence status
+
+- `diff/tracked-changes.patch`: complete binary/full-index tracked Git diff against the base.
+- `diff/complete-changes.patch`: the same diff plus all untracked additions. Replaying it against temporary base blobs reproduced all {{changedCount}} final file copies.
+- `files/`: exact final changed/new source, configuration, metadata, test, fixture and audit copies, using repository-relative paths.
+- `context/`: unchanged AGENTS.md, package.json and package-lock.json.
+- `evidence/negation/`: current frozen matrices, starting-state hashes, current failing results, build/static results, independent reviews and explicit design decision.
+- `evidence/rejected-prototype/`: the two disposable prototype source files, separate from the final files and final applied patch. Other prototype runs/diffs under `evidence/negation` are clearly named. **Do not apply these as a completed fix.**
+- Other evidence directories: historical original audit and prior follow-up comparisons/reviews/builds, retained with their original scope and dates.
+- `REDACTIONS.md`: secret-scan scope and log redactions. No secret values are printed.
+- `MANIFEST.json` and `SHA256SUMS.txt`: payload provenance, sizes and hashes. The manifest excludes only itself from its payload list.
+
+## Current results
+
+| Check | Current app | Rejected prototype |
+| --- | --- | --- |
+| Frozen primary 34 | 16 pass / 18 fail | 31 pass / 3 fail |
+| Frozen independent 32 | 21 pass / 11 fail | 28 pass / 4 fail |
+| Full current suite, including both matrices | **530 total / 500 pass / 29 fail / 1 existing disputed skip** | Not a final-production result |
+| Current prior 464 tests, subset of full run | 463 pass / 0 fail / 1 disputed skip | No claim |
+| Changed/new JavaScript syntax; JSON parsing; diff whitespace | Pass | Two prototype modules passed syntax only |
+| Current Next.js production build | Pass | Not built as accepted production |
+
+The independent 28/32 figure checks its frozen assertions and does not forbid all unnecessary clarification. Review also found a clause-boundary failure in a nominally passing case and eight supplemental structural counterexamples that fail across interpretation, resubmission and public GET. All supplemental inputs and outputs are retained. Their exposure means they are no longer untouched holdouts.
+
+The main 34-case prototype run has two clear modified-command failures and a separate metadata/display label discrepancy (`Texas Dry` versus approved `Texas`). No unrelated metadata repair was added. Some negative-action meanings, including `no need` and `do not exclude`, are disputed; original expectations and separate adjudications are both retained, not rewritten to fit the implementation. Earlier assertions that “not entirely include” requires full exclusion are explicitly challenged by the independent review.
+
+There is no accepted before/after production improvement in this phase: the production source did not change. The prototype results must not be presented as final app results. The recommended next decision is whether to authorize a bounded interpretation-evidence/schema change that records source spans and scoped request/exclusion/uncertainty relations, uses the existing model's proposed relations, and permits conservative rules-only clarification for unsupported grammar. See the latest section of `files/docs/eia-interpretation-audit.md` and the independent final reviews. No model switch or new dependency is proposed.
+
+Both new matrices are enumerated (34 and 32), not random; historical general-property tests use seed 47250. Correct model outputs are injected through `interpretQuery`, the actual browser serializer and normalization, and the public GET handler. The primary suite also checks rules and cached candidate metadata. No live model or data retrieval is used.
+
+## Changed and new files
+
+| Status | Repository-relative path |
+| --- | --- |
+{{fileTable}}
+
+## Evidence included
+
+{{evidenceList}}
+
+## Missing records and limits
+
+{{missingList}}
+
+All current changed/new files and available evidence selected above were included and verified in the reopened archive. The source diff and final file copies are unredacted. Logs may have local-home/temporary-baseline path substitutions; consult REDACTIONS.md and original/bundled hashes. Credentials, .env files, node_modules, .git, generated builds and unrelated files are excluded. This is a review overlay, not a standalone full repository.
+
+## Reproduce current checks
+
+In a separate fresh checkout at the exact base, set BUNDLE to the extracted bundle directory. Dependency installation needs the package registry unless the locked packages are cached; tests/build themselves use empty credentials. Do not apply the rejected-prototype files to the final snapshot.
+
+```sh
+git clone --no-checkout https://github.com/ae47250/EIAapp.git EIAapp-review
+cd EIAapp-review
+git checkout --detach {{base}}
+git apply --check "$BUNDLE/diff/complete-changes.patch"
+git apply "$BUNDLE/diff/complete-changes.patch"
+npm ci --ignore-scripts --no-audit --no-fund
+OPENAI_API_KEY= EIA_API_KEY= node --test --test-reporter=tap tests/eia-negation-target.test.js
+OPENAI_API_KEY= EIA_API_KEY= node --test --test-reporter=tap tests/eia-negation-independent.test.js
+OPENAI_API_KEY= EIA_API_KEY= node --test --test-reporter=tap
+OPENAI_API_KEY= EIA_API_KEY= NEXT_TELEMETRY_DISABLED=1 npm run build
+git diff --check
+```
+
+The first three test commands exit nonzero because the disclosed defects remain. The full run should reproduce 29 failures, not green. Build success does not validate natural-language meaning.
+
+Syntax commands:
+
+```sh
+{{syntaxCommands}}
+```
+
+To reproduce the rejected experiment, first copy the final snapshot to a separate disposable directory, then replace only its two interpreter modules with the corresponding `evidence/rejected-prototype/` copies and run the primary test command. Archival review runners retain original absolute paths; adapt their module root to that disposable directory, their manifest path to the frozen evidence, and their output destination to a temporary directory. Do not modify expected meanings. Source hashes and exact original runners are retained for audit.
+
+Historical exact-base comparison instructions and counts are in the audit and original logs. Those precede this reassessment and must not be conflated with current source or prototype results.
+
+Verify extracted payloads from the extracted bundle directory:
+
+```sh
+shasum -a 256 -c SHA256SUMS.txt
+```

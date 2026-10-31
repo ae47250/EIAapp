@@ -1,0 +1,80 @@
+function resolveRequestEvidence(query, proposed = null) {
+  const mentions = listRequestEvidenceMentions(query);
+  const ruleEvidence = ruleRequestEvidence(query, mentions);
+  let resolution = validateRequestEvidence(proposed || ruleEvidence, query, mentions, { source: proposed ? "model" : "rules" });
+  const invalidReasons = resolution.valid ? [] : resolution.errors;
+  if (!resolution.valid) resolution = validateRequestEvidence(ruleEvidence, query, mentions, { source: "rules" });
+  if (!resolution.valid) throw new Error("Internal request-evidence construction failed.");
+  // Projection may remove words, but must never invent a new complete metadata term.
+  const invented = listRequestEvidenceMentions(resolution.positiveQuery).filter(m =>
+    !mentions.some(raw => raw.start === m.start && raw.end === m.end && raw.type === m.type && raw.value === m.value));
+  if (invented.length) invalidReasons.push("projection_created_metadata_term");
+  return { ...resolution, invalidReasons };
+}
+
+function interpretWithEvidence(parsed, query, countries, fallbackReason = "scope_rules", correctionEvidence = []) {
+  const resolved = resolveRequestEvidence(query, parsed?.requestEvidence);
+  const inner = (parsed && validateAiInterpretation({ ...parsed, requestEvidence: undefined }, resolved.positiveQuery, countries, null, true))
+    || interpretQueryWithRules(resolved.positiveQuery, countries, fallbackReason, correctionEvidence, true);
+  const requested = resolved.mentions.filter(m => m.status === "requested");
+  const excluded = resolved.mentions.filter(m => m.status === "excluded");
+  const same = (a, b) => a.type === b.type && a.value === b.value;
+  const exclusions = [];
+  for (const mention of excluded) {
+    if (!["product", "activity", "sector", "scope"].includes(mention.type) || requested.some(m => same(m, mention))) continue;
+    const type = mention.type === "scope" ? "conceptType" : mention.type;
+    if (!exclusions.some(item => item.type === type && item.value === mention.value)) {
+      exclusions.push({ type, value: mention.value, order: exclusions.length, confidence: 1, source: "validated_source_scope" });
+    }
+  }
+  const issues = [...resolved.invalidReasons];
+  for (const scope of resolved.evidence.scopes.filter(s => s.status === "excluded")) {
+    const members = excluded.filter(m => m.start >= scope.start && m.end <= scope.end);
+    const concepts = members.filter(m => ["product", "activity", "sector"].includes(m.type));
+    if (concepts.length && concepts.every(m => requested.some(p => same(p, m)))) issues.push("scoped_exclusion_not_representable");
+    if (!concepts.length && members.some(m => m.type === "geography" && requested.some(p => same(p, m)))) issues.push("conflicting_geography_scope");
+    if (members.some(m => m.type === "frequency" && m.value === inner.frequency)) issues.push("excluded_selected_frequency");
+  }
+  for (const type of ["frequency", "sector"]) {
+    if (new Set(requested.filter(m => m.type === type).map(m => m.value)).size > 1) issues.push(`multiple_requested_${type}_scopes`);
+  }
+  const unresolved = resolved.unresolved;
+  const blocked = inner.needsClarification || unresolved.length > 0 || issues.length > 0;
+  const message = issues.length > 0
+    ? "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected."
+    : unresolved.length > 0
+      ? `Please clarify what is requested or excluded in ${unresolved.map(s => JSON.stringify(s.text.trim())).join("; ")}. Established request fields are preserved; no series will be selected until this is resolved.`
+      : inner.clarificationMessage;
+  const forms = buildQueryForms(query);
+  const structuredIntent = {
+    ...inner.structuredIntent,
+    originalQuery: forms.originalQuery,
+    exclusions,
+    needsClarification: blocked,
+    blockingClarification: blocked,
+    clarificationMessage: message,
+    requestEvidence: resolved.evidence,
+    scopeValidation: { source: resolved.source, issues: [...new Set(issues)], unresolved: unresolved.length },
+    ambiguity: {
+      ...inner.structuredIntent.ambiguity,
+      status: blocked ? "ambiguous" : inner.structuredIntent.ambiguity.status,
+      reasons: [...new Set([...inner.structuredIntent.ambiguity.reasons, ...(unresolved.length || issues.length ? ["request_scope_unresolved"] : [])])]
+    },
+    provenance: { ...inner.structuredIntent.provenance, query: "validated_source_scopes", scopeSemantics: resolved.source === "model" ? "model_proposed_locally_validated" : "bounded_deterministic_grammar" }
+  };
+  return {
+    ...inner, ...forms,
+    correctedQuery: forms.cleanedQuery,
+    correctedQuerySource: "unchanged",
+    evidenceQuery: resolved.positiveQuery,
+    requestEvidence: resolved.evidence,
+    scopeValidation: structuredIntent.scopeValidation,
+    exclusions,
+    needsClarification: blocked,
+    blockingClarification: blocked,
+    clarificationMessage: message,
+    ambiguity: structuredIntent.ambiguity,
+    structuredIntent
+  };
+}
+

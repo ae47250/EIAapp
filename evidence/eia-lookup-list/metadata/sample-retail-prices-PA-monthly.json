@@ -1,0 +1,57 @@
+{
+  "retrievedAt": "2026-10-28T23:55:33.634818+00:00",
+  "url": "https://api.eia.gov/v2/electricity/retail-sales/data/",
+  "params": {
+    "frequency": "monthly",
+    "data[]": "price",
+    "facets[stateid][]": "PA",
+    "facets[sectorid][]": "RES",
+    "length": 1
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "308",
+      "dateFormat": "YYYY-MM",
+      "frequency": "monthly",
+      "data": [
+        {
+          "period": "2026-08",
+          "stateid": "PA",
+          "stateDescription": "Pennsylvania",
+          "sectorid": "RES",
+          "sectorName": "residential",
+          "price": "21.77",
+          "price-units": "cents per kilowatt-hour"
+        }
+      ],
+      "description": "Electricity sales to ultimate customer by state and sector (number of customers, average price, revenue, and megawatthours of sales).  \n    Sources: Forms EIA-826, EIA-861, EIA-861M"
+    },
+    "request": {
+      "command": "/v2/electricity/retail-sales/data/",
+      "params": {
+        "frequency": "monthly",
+        "data": [
+          "price"
+        ],
+        "facets": {
+          "stateid": [
+            "PA"
+          ],
+          "sectorid": [
+            "RES"
+          ]
+        },
+        "length": "1"
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

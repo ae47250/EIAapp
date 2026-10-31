@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+const src='/private/tmp/build-eia-review-bundle.mjs';
+let s=fs.readFileSync(src,'utf8');
+s=s.replace("const output = '<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/EIAapp_Review_Bundle.zip';", "const output = '<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/followup/EIAapp_Review_Bundle.zip';\nfs.mkdirSync(path.dirname(output), {recursive:true});");
+s=s.replace("const records = [",`const records = [
+  ['eia-followup-before-final.log', 'followup'],
+  ['eia-followup-after.log', 'followup'],
+  ['eia-followup-full-tests.log', 'followup'],
+  ['eia-followup-build.log', 'followup'],
+  ['eia-followup-static-checks.json', 'followup'],
+  ['eia-followup-freeze.json', 'followup'],
+  ['eia-followup-freeze-final.json', 'followup'],
+  ['eia-followup-state-check.json', 'followup'],
+  ['eia-followup-independent-challenges.json', 'followup'],
+  ['eia-followup-independent-review.md', 'followup'],`);
+s=s.replace("put('evidence/review/final-review-message.md'", "put('evidence/review/prior-review-message.md'");
+s=s.replace('# Independent final review — conversation record','# Prior audit independent review — conversation record');
+s=s.replace('The completed task\'s code was not edited and no tests or new investigation were run.', 'The bounded follow-up changed two shared interpretation mechanisms and added regression coverage; no model or data API calls were made. Records under evidence/followup are current; evidence/tests, baseline, build and review retain the earlier audit evidence for comparison.');
+s=s.replace('including the original audit.', 'including the updated audit.');
+s=s.replace('Recorded results: final full suite 385 tests / 384 passed / 0 failed / 1 disputed skip;', 'Current follow-up results are detailed in files/docs/eia-interpretation-audit.md and evidence/followup. The follow-up 37-case matrix had 24 failures before production changes and now passes all 37. The current full suite has 422 tests / 421 passed / 0 failed / 1 disputed skip, and the production build passed. Historical prior-audit results: full suite 385 tests / 384 passed / 0 failed / 1 disputed skip;');
+s=s.replace('Records are from the completed task, not newly executed checks.', 'The original comparison and original independent-review results predate this follow-up. The current review is evidence/followup/eia-followup-independent-review.md.');
+s=s.replace('No separate raw syntax/import-check transcript or browser console/network capture was saved; their outcomes are documented in the unchanged audit. A browser screenshot is included.', 'Current syntax/import validation has a command/result record. No new rendered-browser console/network capture was made: follow-up checks execute the actual browser serializer and public route with injected model responses. A prior browser screenshot is retained.');
+s=s.replace('These are reproduction instructions only; packaging did not execute tests or builds.', 'These commands reproduce the included checks offline after dependencies are installed; the test harness injects model responses and blocks real transport.');
+s=s.replace('tests/eia-interpretation-audit.test.js tests/eia-independent-challenges.test.js\\nOPENAI_API_KEY=', 'tests/eia-interpretation-audit.test.js tests/eia-independent-challenges.test.js tests/eia-followup-regressions.test.js\\nOPENAI_API_KEY=');
+s=s.replace('all 17 source copies', 'all changed/new source copies');
+fs.writeFileSync('/private/tmp/build-eia-followup-bundle.mjs',s);

@@ -1,0 +1,509 @@
+{
+  "id": "F14",
+  "repeat": 1,
+  "query": "renewable generation in Texas except hydro",
+  "attempts": [
+    {
+      "id": "F14",
+      "repeat": 1,
+      "attempt": 0,
+      "meaning": {
+        "correct": false,
+        "errors": [
+          "excluded_topics"
+        ],
+        "returnedGeographies": [
+          "TX"
+        ],
+        "rawGeographies": [
+          "TX | Texas | US state"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": false,
+        "reason": "Displayed result differs from adjudicated A0 record; not credited without review.",
+        "first": []
+      },
+      "elapsedMs": 2616,
+      "usage": {
+        "input_tokens": 5496,
+        "input_tokens_details": {
+          "cache_write_tokens": 198,
+          "cached_tokens": 5295
+        },
+        "output_tokens": 176,
+        "output_tokens_details": {
+          "reasoning_tokens": 51
+        },
+        "total_tokens": 5672
+      },
+      "costUSD": 0.00016104999999999998,
+      "costUpperUSD": 0.000166075,
+      "responseId": "resp_005b1a397911614d006ae26efe105487d281496022d7d9befe",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "renewable generation in Texas except hydro",
+        "intent": {
+          "originalQuery": "renewable generation in Texas except hydro",
+          "cleanedQuery": "renewable generation in Texas except hydro",
+          "normalizedQuery": "renewable generation in Texas except hydro",
+          "correctedQuery": "renewable generation in Texas except hydro",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "TX | Texas | US state",
+                "quoted_words": "Texas"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "renewable",
+                "activity": "generation",
+                "quoted_words": "renewable generation"
+              }
+            ],
+            "excluded_topics": [
+              {
+                "product": "hydro",
+                "activity": "generation",
+                "sector": null,
+                "quoted_words": "hydro"
+              }
+            ],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Texas",
+            "code": "TX",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          },
+          "countryCode": "TX",
+          "validatedGeographies": [
+            {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "renewable",
+          "activity": "generation",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "renewable",
+              "activity": "generation",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "hydro",
+              "order": 0,
+              "confidence": null,
+              "source": "locked_form"
+            },
+            {
+              "type": "activity",
+              "value": "generation",
+              "order": 1,
+              "confidence": null,
+              "source": "locked_form"
+            }
+          ],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "TX",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "renewable",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "generation",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "renewable",
+              "activity": "generation",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [],
+            "routeFamily": "domestic",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "renewable generation in Texas except hydro",
+            "normalizedQuery": "renewable generation in texas except hydro",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Texas",
+                    "code": "TX",
+                    "type": "state",
+                    "routeFamilies": [
+                      "domestic",
+                      "seds"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "renewable",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "Texas",
+              "code": "TX",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Texas",
+                "code": "TX",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            ],
+            "product": "renewable",
+            "productBreadth": "broad",
+            "productAlternatives": [
+              "wind",
+              "solar",
+              "hydro",
+              "geothermal",
+              "biofuels"
+            ],
+            "activity": "generation",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "renewable",
+                "activity": "generation",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [],
+              "routeFamily": "domestic",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [
+              {
+                "type": "product",
+                "value": "hydro",
+                "order": 0,
+                "confidence": null,
+                "source": "locked_form"
+              },
+              {
+                "type": "activity",
+                "value": "generation",
+                "order": 1,
+                "confidence": null,
+                "source": "locked_form"
+              }
+            ],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly",
+                "weekly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "none",
+              "reasons": []
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A state-level electricity request uses Domestic EIA.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "TX",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [
+                "locked_form",
+                "locked_form"
+              ],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "domestic",
+            "label": "Domestic EIA",
+            "reason": "A state-level electricity request uses Domestic EIA.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly",
+              "weekly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "none",
+            "reasons": []
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [],
+        "candidateGroups": [],
+        "comparisonDefinitions": [],
+        "userWarnings": [
+          {
+            "code": "no_displayable_candidate",
+            "message": "No validated annual renewable generation candidate was found for Texas. No substitute was selected."
+          }
+        ],
+        "needsClarification": false,
+        "userMessage": "No validated EIA candidates were found. No substitute was selected.",
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "No observations were fetched."
+      }
+    }
+  ],
+  "events": []
+}

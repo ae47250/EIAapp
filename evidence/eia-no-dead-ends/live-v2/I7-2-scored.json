@@ -1,0 +1,516 @@
+{
+  "id": "I7",
+  "repeat": 2,
+  "query": "natural gas reserves for all the US states except alaska",
+  "correct": false,
+  "meaning": {
+    "correct": false,
+    "errors": [
+      "geographies_or_order",
+      "clarification_needed",
+      "unexpected_clarification_details"
+    ],
+    "returnedGeographies": [],
+    "rawGeographies": []
+  },
+  "data": {
+    "correct": false,
+    "errors": [
+      "unexpected_clarification",
+      "USA/natural gas/reserves:missing_entry"
+    ],
+    "unlabelledWrongData": false,
+    "entries": [
+      {
+        "geographyCode": "USA",
+        "product": "natural gas",
+        "activity": "reserves",
+        "correct": false,
+        "errors": [
+          "missing_entry"
+        ]
+      }
+    ]
+  },
+  "deadEnd": false,
+  "unlabelledWrongData": false,
+  "attempts": 1,
+  "events": [],
+  "rawChecks": {
+    "valid": true,
+    "errors": []
+  },
+  "returnedModel": "gpt-6-luna",
+  "appFormCheck": {
+    "valid": true,
+    "errors": []
+  },
+  "rawMeaning": {
+    "correct": false,
+    "errors": [
+      "geographies_or_order",
+      "clarification_needed",
+      "unexpected_clarification_details"
+    ],
+    "returnedGeographies": [],
+    "rawGeographies": []
+  },
+  "result": {
+    "mode": "lookup",
+    "query": "natural gas reserves for all the US states except alaska",
+    "intent": {
+      "originalQuery": "natural gas reserves for all the US states except alaska",
+      "cleanedQuery": "natural gas reserves for all the US states except alaska",
+      "normalizedQuery": "natural gas reserves for all the US states except alaska",
+      "correctedQuery": "natural gas reserves for all the US states except alaska",
+      "correctedQuerySource": "unchanged",
+      "interpreter": "openai_locked_form",
+      "formVersion": 2,
+      "years": {
+        "start": null,
+        "end": null,
+        "quoted_words": null
+      },
+      "interpretationMethod": "enforced_form",
+      "lockedForm": {
+        "geographies": [],
+        "excluded_geographies": [
+          {
+            "geography": "AK | Alaska | US state",
+            "quoted_words": "alaska",
+            "is_default": false
+          }
+        ],
+        "topics": [
+          {
+            "product": "natural gas",
+            "activity": "reserves",
+            "quoted_words": "natural gas reserves"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "geography",
+          "options": []
+        },
+        "years": {
+          "start": null,
+          "end": null,
+          "quoted_words": null
+        }
+      },
+      "country": null,
+      "countryCode": null,
+      "validatedGeographies": [],
+      "excludedGeographies": [
+        {
+          "name": "Alaska",
+          "code": "AK",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "product": "natural gas",
+      "activity": "reserves",
+      "sector": null,
+      "validatedConceptPairs": [
+        {
+          "product": "natural gas",
+          "activity": "reserves",
+          "order": 0,
+          "source": "validated_interpreter"
+        }
+      ],
+      "exclusions": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "fields": {
+        "country": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "product": {
+          "normalizedValue": "natural gas",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "activity": {
+          "normalizedValue": "reserves",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "sector": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "fallbackUsed": false,
+          "explicit": false
+        }
+      },
+      "unknownQualifiers": [],
+      "fallback": {
+        "used": false,
+        "method": null,
+        "reasons": []
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "conceptPairStatus": "validated",
+      "missingFields": [
+        "country"
+      ],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the country. Example: United States total energy consumption.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "natural gas",
+          "activity": "reserves",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "USA"
+        ],
+        "routeFamily": "domestic",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "natural gas reserves for all the US states except alaska",
+        "normalizedQuery": "natural gas reserves for all the us states except alaska",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 33,
+              "text": "us",
+              "source": "query",
+              "geography": {
+                "name": "United States",
+                "code": "USA",
+                "type": "national",
+                "routeFamilies": [
+                  "domestic",
+                  "international",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "natural gas",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "reserves",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "United States",
+            "code": "USA",
+            "type": "national",
+            "routeFamilies": [
+              "domestic",
+              "international",
+              "seds"
+            ]
+          }
+        ],
+        "product": "natural gas",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "reserves",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "natural gas",
+            "activity": "reserves",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": null
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [
+            "USA"
+          ],
+          "routeFamily": "domestic",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly",
+            "weekly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "none",
+          "reasons": []
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "domestic",
+          "label": "Domestic EIA",
+          "reason": "A U.S. national Electricity or Natural Gas request uses Domestic EIA.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "mechanically_cleaned_raw_query",
+          "geographies": [
+            "query"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "USA",
+              "rawText": "us",
+              "source": "query",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": []
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [
+          "country"
+        ],
+        "clarificationMessage": "Please clarify the country. Example: United States total energy consumption."
+      },
+      "route": {
+        "family": "domestic",
+        "label": "Domestic EIA",
+        "reason": "A U.S. national Electricity or Natural Gas request uses Domestic EIA.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly",
+          "weekly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "none",
+        "reasons": []
+      },
+      "understood": "place not chosen; natural gas / reserves; all sectors (default); all available years (default); annual (default)",
+      "userMessage": "Which place should I look up?",
+      "freeText": true,
+      "choices": [
+        {
+          "label": "World total",
+          "choice": {
+            "about": "geography",
+            "value": "WLD | World | country"
+          }
+        },
+        {
+          "label": "All countries in a region",
+          "choice": {
+            "about": "geography_scope",
+            "value": "region"
+          }
+        },
+        {
+          "label": "Type countries",
+          "choice": {
+            "about": "geography_scope",
+            "value": "type"
+          }
+        }
+      ]
+    },
+    "understood": "place not chosen; natural gas / reserves; all sectors (default); all available years (default); annual (default)",
+    "source": "U.S. Energy Information Administration",
+    "selectedSeries": null,
+    "selectedComparison": null,
+    "selectedComparisons": [],
+    "results": [],
+    "choices": [
+      {
+        "label": "World total",
+        "choice": {
+          "about": "geography",
+          "value": "WLD | World | country"
+        }
+      },
+      {
+        "label": "All countries in a region",
+        "choice": {
+          "about": "geography_scope",
+          "value": "region"
+        }
+      },
+      {
+        "label": "Type countries",
+        "choice": {
+          "about": "geography_scope",
+          "value": "type"
+        }
+      }
+    ],
+    "freeText": true,
+    "needsClarification": true,
+    "userMessage": "Which place should I look up?"
+  }
+}

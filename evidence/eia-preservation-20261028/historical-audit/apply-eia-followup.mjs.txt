@@ -1,0 +1,46 @@
+import fs from 'node:fs';
+const wd='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const routing=wd+'/lib/sources/eia/intent-routing.js';
+let s=fs.readFileSync(routing,'utf8');
+s=s.replace('export function findGeographyMentions(',`// Derive input forms from complete official labels; never drop a geographic
+// qualifier. Only the grammatical article is optional. Canonical output stays unchanged.
+export function geographyNameForms(name) {
+  const text = String(name || "").trim();
+  const forms = [text];
+  const parts = text.split(",").map(part => part.trim());
+  if (parts.length === 2 && parts.every(Boolean)) {
+    forms.push(parts[1] + " " + parts[0]);
+    if (/^the$/i.test(parts[1])) forms.push(parts[0]);
+  }
+  if (/^the /i.test(text)) {
+    const noun = text.replace(/^the\\s+/i, "");
+    forms.push(noun, noun + ", The");
+  }
+  return [...new Set(forms.filter(Boolean))];
+}
+
+export function findGeographyMentions(`);
+s=s.replace('    addPhraseMatch(matches, normalizedQuery, geography.name, { ...geography, matchPriority: 0 });','    for (const name of geographyNameForms(geography.name)) {\n      addPhraseMatch(matches, normalizedQuery, name, { ...geography, matchPriority: 0 });\n    }');
+s=s.replace('    if (markers.has(token)) scope = token === "not" && tokens[i + 1] === "only" ? null : wordIndex;',`    if (markers.has(token)) {
+      // Negating knowledge/certainty does not negate the data being asked about.
+      // Continue scanning so a later explicit exclusion still opens its own scope.
+      if (token === "not" && tokens[i + 1] === "only") scope = null;
+      else if (!isUncertaintyPredicate(tokens, i)) scope = wordIndex;
+    }`);
+s=s.replace('function disambiguateStateCountryMatches(',`function isUncertaintyPredicate(tokens, index) {
+  const predicate = tokens.slice(index + 1).join(" ");
+  if (tokens[index] === "not") {
+    return /^(?:(?:really|quite|entirely|completely|yet|fully) )*(?:sure|certain|aware|know|knowing|understand|understanding)\\b/.test(predicate);
+  }
+  if (tokens[index] === "no") return /^(?:idea|certainty|knowledge)\\b/.test(predicate);
+  if (tokens[index] === "without") return /^(?:knowing|understanding)\\b/.test(predicate);
+  return false;
+}
+
+function disambiguateStateCountryMatches(`);
+s=s.replace('normalizeText(geography.name) === normalized);','geographyNameForms(geography.name).some(name => normalizeText(name) === normalized));');
+fs.writeFileSync(routing,s);
+const interpret=wd+'/lib/sources/eia/interpret-query.js';s=fs.readFileSync(interpret,'utf8');
+s=s.replace('findGeographyMentions, getNegationScope,','findGeographyMentions, geographyNameForms, getNegationScope,');
+s=s.replace('const exactTerms = [...names, ...COUNTRY_ALIASES.keys(),','const exactTerms = [...names.flatMap(geographyNameForms), ...COUNTRY_ALIASES.keys(),');
+fs.writeFileSync(interpret,s);

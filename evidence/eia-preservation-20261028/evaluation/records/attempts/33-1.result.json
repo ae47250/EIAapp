@@ -1,0 +1,176 @@
+{
+  "scheduledId": 33,
+  "queryId": 3,
+  "repeat": 2,
+  "model": "gpt-5.4-nano-2026-03-17",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:09:39.155Z",
+  "requestedModel": "gpt-5.4-nano-2026-03-17",
+  "requestSHA256": "7388df964ec59672f2b9c86ad69b9ebb64e304c43fcc601550c70478a99ce8e6",
+  "promptSHA256": "82670ce13182b740873a33db02eaf6cc4fbe6b441ec3ea11ddf20c451725e894",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.00762,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:09:26 GMT",
+    "openai-processing-ms": "4023",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999604",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "2ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-5.4-nano-2026-03-17",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 798,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 559,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1357
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:09:43.311Z",
+  "elapsedMs": 4155.685874999996,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "{\n  \"correctedQuery\": \"Brazil and Japan electricity consumption\",\n  \"confidence\": 0.9,\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"brazil and japan\",\n      \"value\": null,\n      \"confidence\": 0.25,\n      \"ambiguityReason\": \"Multiple countries are requested; single-value country field cannot be safely set.\"\n    },\n    \"product\": {\n      \"rawValue\": \"electrciity\",\n      \"value\": \"electricity\",\n      \"confidence\": 0.95,\n      \"ambiguityReason\": null\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 0.95,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 0.2,\n      \"ambiguityReason\": \"No sector is explicitly stated in the query.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 0.2,\n      \"ambiguityReason\": \"No frequency is stated; defaulted to annual with explicit=false.\"\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Brazil\",\n      \"confidence\": 0.95\n    },\n    {\n      \"value\": \"Japan\",\n      \"confidence\": 0.95\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"electricity\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 0.95\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"brazil and japan electrciity consumption\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 15,\n        \"text\": \"brazil and japan\",\n        \"status\": \"requested\",\n        \"target\": \"data\",\n        \"operator\": null\n      },\n      {\n        \"start\": 16,\n        \"end\": 28,\n        \"text\": \"electrciity\",\n        \"status\": \"requested\",\n        \"target\": \"data\",\n        \"operator\": null\n      },\n      {\n        \"start\": 29,\n        \"end\": 40,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\",\n        \"operator\": null\n      }\n    ]\n  }\n}",
+    "parsed": {
+      "correctedQuery": "Brazil and Japan electricity consumption",
+      "confidence": 0.9,
+      "ambiguity": null,
+      "fields": {
+        "country": {
+          "rawValue": "brazil and japan",
+          "value": null,
+          "confidence": 0.25,
+          "ambiguityReason": "Multiple countries are requested; single-value country field cannot be safely set."
+        },
+        "product": {
+          "rawValue": "electrciity",
+          "value": "electricity",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 0.2,
+          "ambiguityReason": "No sector is explicitly stated in the query."
+        },
+        "frequency": {
+          "rawValue": null,
+          "value": "annual",
+          "confidence": 0.2,
+          "ambiguityReason": "No frequency is stated; defaulted to annual with explicit=false."
+        }
+      },
+      "geographies": [
+        {
+          "value": "Brazil",
+          "confidence": 0.95
+        },
+        {
+          "value": "Japan",
+          "confidence": 0.95
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "order": 1,
+          "confidence": 0.95
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "brazil and japan electrciity consumption",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 15,
+            "text": "brazil and japan",
+            "status": "requested",
+            "target": "data",
+            "operator": null
+          },
+          {
+            "start": 16,
+            "end": 28,
+            "text": "electrciity",
+            "status": "requested",
+            "target": "data",
+            "operator": null
+          },
+          {
+            "start": 29,
+            "end": 40,
+            "text": "consumption",
+            "status": "requested",
+            "target": "data",
+            "operator": null
+          }
+        ]
+      }
+    },
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "country_summary_contradiction",
+        "frequency_or_explicit_flag"
+      ],
+      "signature": {
+        "geographies": [
+          "BRA",
+          "JPN"
+        ],
+        "pairs": [
+          [
+            "electricity",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": []
+      }
+    },
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": false,
+      "errors": [
+        "missing_frequency_explicit",
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    }
+  },
+  "replayFile": "attempts/33-1.replay.json"
+}

@@ -1,0 +1,1488 @@
+TAP version 13
+# Subtest: independent negation certainty_even: I'm not even sure what to call it; show USA total energy consumption.
+ok 1 - independent negation certainty_even: I'm not even sure what to call it; show USA total energy consumption.
+  ---
+  duration_ms: 448.607583
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_100: I'm not 100% sure what to call it, but show USA total energy consumption.
+ok 2 - independent negation certainty_100: I'm not 100% sure what to call it, but show USA total energy consumption.
+  ---
+  duration_ms: 100.12625
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_decimal: I'm not 99.5% sure which series name applies: USA total energy consumption.
+ok 3 - independent negation certainty_decimal: I'm not 99.5% sure which series name applies: USA total energy consumption.
+  ---
+  duration_ms: 86.035875
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_unseen_modifier: I'm not remotely certain of the label for USA total energy consumption.
+ok 4 - independent negation certainty_unseen_modifier: I'm not remotely certain of the label for USA total energy consumption.
+  ---
+  duration_ms: 107.375792
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_multiple_modifiers: I'm not yet entirely sure how to name USA total energy consumption.
+ok 5 - independent negation certainty_multiple_modifiers: I'm not yet entirely sure how to name USA total energy consumption.
+  ---
+  duration_ms: 105.781
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_parenthetical: I'm not (100%) sure of the label. Please show USA total energy consumption.
+ok 6 - independent negation certainty_parenthetical: I'm not (100%) sure of the label. Please show USA total energy consumption.
+  ---
+  duration_ms: 87.393458
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_em_dash: I'm not—even now—certain of the label: USA total energy consumption.
+not ok 7 - independent negation certainty_em_dash: I'm not—even now—certain of the label: USA total energy consumption.
+  ---
+  duration_ms: 27.417208
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"ordered-geographies","expected":["USA"],"actual":[]},{"stage":"interpretation","check":"false-exclusion","value":"total energy"},{"stage":"interpretation","check":"false-exclusion","value":"consumption"},{"stage":"resubmission","check":"ordered-geographies","expected":["USA"],"actual":[]},{"stage":"resubmission","check":"false-exclusion","value":"total energy"},{"stage":"resubmission","check":"false-exclusion","value":"consumption"},{"stage":"publicGET","check":"ordered-geographies","expected":["USA"],"actual":[]},{"stage":"publicGET","check":"false-exclusion","value":"total energy"},{"stage":"publicGET","check":"false-exclusion","value":"consumption"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'USA'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'total energy'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'consumption'
+    +   },
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'USA'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'total energy'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'consumption'
+    +   },
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'USA'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'total energy'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'consumption'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'ordered-geographies'
+      expected:
+        0: 'USA'
+      actual:
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'total energy'
+    2:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'consumption'
+    3:
+      stage: 'resubmission'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+    4:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'total energy'
+    5:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'consumption'
+    6:
+      stage: 'publicGET'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+    7:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'total energy'
+    8:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'consumption'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation certainty_country_order: I'm not completely sure of the label for Trinidad and Tobago and Canada total energy consumption.
+ok 8 - independent negation certainty_country_order: I'm not completely sure of the label for Trinidad and Tobago and Canada total energy consumption.
+  ---
+  duration_ms: 175.492417
+  type: 'test'
+  ...
+# Subtest: independent negation knowledge_country_repair: I do not know the name for natural gas production in South Korea.
+ok 9 - independent negation knowledge_country_repair: I do not know the name for natural gas production in South Korea.
+  ---
+  duration_ms: 76.615625
+  type: 'test'
+  ...
+# Subtest: independent negation certainty_frequency_sector: I'm not 80% certain of the name for monthly residential electricity sales in Texas.
+not ok 10 - independent negation certainty_frequency_sector: I'm not 80% certain of the name for monthly residential electricity sales in Texas.
+  ---
+  duration_ms: 27.654583
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"ordered-geographies","expected":["TX"],"actual":[]},{"stage":"interpretation","check":"false-exclusion","value":"electricity"},{"stage":"interpretation","check":"false-exclusion","value":"sales"},{"stage":"resubmission","check":"ordered-geographies","expected":["TX"],"actual":[]},{"stage":"resubmission","check":"false-exclusion","value":"electricity"},{"stage":"resubmission","check":"false-exclusion","value":"sales"},{"stage":"publicGET","check":"ordered-geographies","expected":["TX"],"actual":[]},{"stage":"publicGET","check":"false-exclusion","value":"electricity"},{"stage":"publicGET","check":"false-exclusion","value":"sales"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'TX'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'electricity'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'sales'
+    +   },
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'TX'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'electricity'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'sales'
+    +   },
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'TX'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'electricity'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'sales'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'ordered-geographies'
+      expected:
+        0: 'TX'
+      actual:
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'electricity'
+    2:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'sales'
+    3:
+      stage: 'resubmission'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+    4:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'electricity'
+    5:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'sales'
+    6:
+      stage: 'publicGET'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+    7:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'electricity'
+    8:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'sales'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation direct_product_activity: USA energy consumption, not coal production.
+ok 11 - independent negation direct_product_activity: USA energy consumption, not coal production.
+  ---
+  duration_ms: 79.54175
+  type: 'test'
+  ...
+# Subtest: independent negation direct_country: Natural gas production in Canada, not Mexico.
+ok 12 - independent negation direct_country: Natural gas production in Canada, not Mexico.
+  ---
+  duration_ms: 42.194208
+  type: 'test'
+  ...
+# Subtest: independent negation direct_frequency: Annual USA natural gas consumption, not monthly.
+ok 13 - independent negation direct_frequency: Annual USA natural gas consumption, not monthly.
+  ---
+  duration_ms: 425.921125
+  type: 'test'
+  ...
+# Subtest: independent negation direct_sector: Monthly Texas residential electricity sales, not industrial.
+not ok 14 - independent negation direct_sector: Monthly Texas residential electricity sales, not industrial.
+  ---
+  duration_ms: 51.126292
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"missing-required-exclusion","type":"sector","value":"industrial"},{"stage":"resubmission","check":"missing-required-exclusion","type":"sector","value":"industrial"},{"stage":"publicGET","check":"missing-required-exclusion","type":"sector","value":"industrial"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     check: 'missing-required-exclusion',
+    +     stage: 'interpretation',
+    +     type: 'sector',
+    +     value: 'industrial'
+    +   },
+    +   {
+    +     check: 'missing-required-exclusion',
+    +     stage: 'resubmission',
+    +     type: 'sector',
+    +     value: 'industrial'
+    +   },
+    +   {
+    +     check: 'missing-required-exclusion',
+    +     stage: 'publicGET',
+    +     type: 'sector',
+    +     value: 'industrial'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'missing-required-exclusion'
+      type: 'sector'
+      value: 'industrial'
+    1:
+      stage: 'resubmission'
+      check: 'missing-required-exclusion'
+      type: 'sector'
+      value: 'industrial'
+    2:
+      stage: 'publicGET'
+      check: 'missing-required-exclusion'
+      type: 'sector'
+      value: 'industrial'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation negative_command_show: Do not show coal production; show USA natural gas consumption.
+ok 15 - independent negation negative_command_show: Do not show coal production; show USA natural gas consumption.
+  ---
+  duration_ms: 289.579958
+  type: 'test'
+  ...
+# Subtest: independent negation negative_command_include: Don't include Canada. Show Mexico natural gas production.
+not ok 16 - independent negation negative_command_include: Don't include Canada. Show Mexico natural gas production.
+  ---
+  duration_ms: 375.23725
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"ordered-geographies","expected":["MEX"],"actual":["CAN","MEX"]},{"stage":"interpretation","check":"missing-required-exclusion","type":"geography","value":"CAN"},{"stage":"resubmission","check":"ordered-geographies","expected":["MEX"],"actual":["CAN","MEX"]},{"stage":"resubmission","check":"missing-required-exclusion","type":"geography","value":"CAN"},{"stage":"publicGET","check":"ordered-geographies","expected":["MEX"],"actual":["CAN","MEX"]},{"stage":"publicGET","check":"missing-required-exclusion","type":"geography","value":"CAN"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: [
+    +       'CAN',
+    +       'MEX'
+    +     ],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'MEX'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'missing-required-exclusion',
+    +     stage: 'interpretation',
+    +     type: 'geography',
+    +     value: 'CAN'
+    +   },
+    +   {
+    +     actual: [
+    +       'CAN',
+    +       'MEX'
+    +     ],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'MEX'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'missing-required-exclusion',
+    +     stage: 'resubmission',
+    +     type: 'geography',
+    +     value: 'CAN'
+    +   },
+    +   {
+    +     actual: [
+    +       'CAN',
+    +       'MEX'
+    +     ],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'MEX'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'missing-required-exclusion',
+    +     stage: 'publicGET',
+    +     type: 'geography',
+    +     value: 'CAN'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'ordered-geographies'
+      expected:
+        0: 'MEX'
+      actual:
+        0: 'CAN'
+        1: 'MEX'
+    1:
+      stage: 'interpretation'
+      check: 'missing-required-exclusion'
+      type: 'geography'
+      value: 'CAN'
+    2:
+      stage: 'resubmission'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+        0: 'CAN'
+        1: 'MEX'
+    3:
+      stage: 'resubmission'
+      check: 'missing-required-exclusion'
+      type: 'geography'
+      value: 'CAN'
+    4:
+      stage: 'publicGET'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+        0: 'CAN'
+        1: 'MEX'
+    5:
+      stage: 'publicGET'
+      check: 'missing-required-exclusion'
+      type: 'geography'
+      value: 'CAN'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation negative_command_numeric_modifier: Do not, under any circumstances, show coal production. Show USA total energy consumption.
+ok 17 - independent negation negative_command_numeric_modifier: Do not, under any circumstances, show coal production. Show USA total energy consumption.
+  ---
+  duration_ms: 169.936416
+  type: 'test'
+  ...
+# Subtest: independent negation negative_command_no_need: No need to show coal production; I want USA natural gas consumption.
+ok 18 - independent negation negative_command_no_need: No need to show coal production; I want USA natural gas consumption.
+  ---
+  duration_ms: 569.797042
+  type: 'test'
+  ...
+# Subtest: independent negation mixed_certainty_exclusion: I'm not 100% sure of the title for USA energy consumption, not coal production.
+not ok 19 - independent negation mixed_certainty_exclusion: I'm not 100% sure of the title for USA energy consumption, not coal production.
+  ---
+  duration_ms: 36.701917
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"ordered-geographies","expected":["USA"],"actual":[]},{"stage":"interpretation","check":"false-exclusion","value":"total energy"},{"stage":"interpretation","check":"false-exclusion","value":"consumption"},{"stage":"resubmission","check":"ordered-geographies","expected":["USA"],"actual":[]},{"stage":"resubmission","check":"false-exclusion","value":"total energy"},{"stage":"resubmission","check":"false-exclusion","value":"consumption"},{"stage":"publicGET","check":"ordered-geographies","expected":["USA"],"actual":[]},{"stage":"publicGET","check":"false-exclusion","value":"total energy"},{"stage":"publicGET","check":"false-exclusion","value":"consumption"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'USA'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'total energy'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'consumption'
+    +   },
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'USA'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'total energy'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'consumption'
+    +   },
+    +   {
+    +     actual: [],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'USA'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'total energy'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'consumption'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'ordered-geographies'
+      expected:
+        0: 'USA'
+      actual:
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'total energy'
+    2:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'consumption'
+    3:
+      stage: 'resubmission'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+    4:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'total energy'
+    5:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'consumption'
+    6:
+      stage: 'publicGET'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+    7:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'total energy'
+    8:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'consumption'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation mixed_exclusion_certainty: Show USA energy consumption, not coal production. I'm not even certain of the exact title.
+ok 20 - independent negation mixed_exclusion_certainty: Show USA energy consumption, not coal production. I'm not even certain of the exact title.
+  ---
+  duration_ms: 382.377416
+  type: 'test'
+  ...
+# Subtest: independent negation mixed_independent_commands: Do not show coal production, but show natural gas consumption in Canada and Mexico.
+ok 21 - independent negation mixed_independent_commands: Do not show coal production, but show natural gas consumption in Canada and Mexico.
+  ---
+  duration_ms: 149.409334
+  type: 'test'
+  ...
+# Subtest: independent negation paired_positive_scope: I'm not exactly sure of the names: Canada natural gas production and Mexico coal consumption.
+ok 22 - independent negation paired_positive_scope: I'm not exactly sure of the names: Canada natural gas production and Mexico coal consumption.
+  ---
+  duration_ms: 164.81175
+  type: 'test'
+  ...
+# Subtest: independent negation unknown_bridge: Show USA total energy consumption, not ceremoniously aligned with coal production.
+not ok 23 - independent negation unknown_bridge: Show USA total energy consumption, not ceremoniously aligned with coal production.
+  ---
+  duration_ms: 90.070291
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"false-exclusion","value":"coal"},{"stage":"interpretation","check":"false-exclusion","value":"production"},{"stage":"interpretation","check":"missing-required-clarification"},{"stage":"resubmission","check":"false-exclusion","value":"coal"},{"stage":"resubmission","check":"false-exclusion","value":"production"},{"stage":"resubmission","check":"missing-required-clarification"},{"stage":"publicGET","check":"false-exclusion","value":"coal"},{"stage":"publicGET","check":"false-exclusion","value":"production"},{"stage":"publicGET","check":"missing-required-clarification"},{"stage":"publicGET","check":"public-clarification-required"},{"stage":"publicGET","check":"ambiguous-request-returned-candidates"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'public-clarification-required',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'ambiguous-request-returned-candidates',
+    +     stage: 'publicGET'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'coal'
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'production'
+    2:
+      stage: 'interpretation'
+      check: 'missing-required-clarification'
+    3:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'coal'
+    4:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'production'
+    5:
+      stage: 'resubmission'
+      check: 'missing-required-clarification'
+    6:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'coal'
+    7:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'production'
+    8:
+      stage: 'publicGET'
+      check: 'missing-required-clarification'
+    9:
+      stage: 'publicGET'
+      check: 'public-clarification-required'
+    10:
+      stage: 'publicGET'
+      check: 'ambiguous-request-returned-candidates'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation unknown_relevance: Show USA total energy consumption; I'm not sold on coal production.
+not ok 24 - independent negation unknown_relevance: Show USA total energy consumption; I'm not sold on coal production.
+  ---
+  duration_ms: 86.144083
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"false-exclusion","value":"coal"},{"stage":"interpretation","check":"false-exclusion","value":"production"},{"stage":"interpretation","check":"missing-required-clarification"},{"stage":"resubmission","check":"false-exclusion","value":"coal"},{"stage":"resubmission","check":"false-exclusion","value":"production"},{"stage":"resubmission","check":"missing-required-clarification"},{"stage":"publicGET","check":"false-exclusion","value":"coal"},{"stage":"publicGET","check":"false-exclusion","value":"production"},{"stage":"publicGET","check":"missing-required-clarification"},{"stage":"publicGET","check":"public-clarification-required"},{"stage":"publicGET","check":"ambiguous-request-returned-candidates"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'public-clarification-required',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'ambiguous-request-returned-candidates',
+    +     stage: 'publicGET'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'coal'
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'production'
+    2:
+      stage: 'interpretation'
+      check: 'missing-required-clarification'
+    3:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'coal'
+    4:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'production'
+    5:
+      stage: 'resubmission'
+      check: 'missing-required-clarification'
+    6:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'coal'
+    7:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'production'
+    8:
+      stage: 'publicGET'
+      check: 'missing-required-clarification'
+    9:
+      stage: 'publicGET'
+      check: 'public-clarification-required'
+    10:
+      stage: 'publicGET'
+      check: 'ambiguous-request-returned-candidates'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation unknown_scope_before_head: Show USA total energy consumption; not related to coal production.
+not ok 25 - independent negation unknown_scope_before_head: Show USA total energy consumption; not related to coal production.
+  ---
+  duration_ms: 83.966042
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"false-exclusion","value":"coal"},{"stage":"interpretation","check":"false-exclusion","value":"production"},{"stage":"interpretation","check":"missing-required-clarification"},{"stage":"resubmission","check":"false-exclusion","value":"coal"},{"stage":"resubmission","check":"false-exclusion","value":"production"},{"stage":"resubmission","check":"missing-required-clarification"},{"stage":"publicGET","check":"false-exclusion","value":"coal"},{"stage":"publicGET","check":"false-exclusion","value":"production"},{"stage":"publicGET","check":"missing-required-clarification"},{"stage":"publicGET","check":"public-clarification-required"},{"stage":"publicGET","check":"ambiguous-request-returned-candidates"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'public-clarification-required',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'ambiguous-request-returned-candidates',
+    +     stage: 'publicGET'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'coal'
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'production'
+    2:
+      stage: 'interpretation'
+      check: 'missing-required-clarification'
+    3:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'coal'
+    4:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'production'
+    5:
+      stage: 'resubmission'
+      check: 'missing-required-clarification'
+    6:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'coal'
+    7:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'production'
+    8:
+      stage: 'publicGET'
+      check: 'missing-required-clarification'
+    9:
+      stage: 'publicGET'
+      check: 'public-clarification-required'
+    10:
+      stage: 'publicGET'
+      check: 'ambiguous-request-returned-candidates'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation additive_not_only: Show not only Canada natural gas production but also Mexico coal consumption.
+ok 26 - independent negation additive_not_only: Show not only Canada natural gas production but also Mexico coal consumption.
+  ---
+  duration_ms: 128.19775
+  type: 'test'
+  ...
+# Subtest: independent negation additive_not_just: Show not just Canada natural gas production but also Mexico coal consumption.
+not ok 27 - independent negation additive_not_just: Show not just Canada natural gas production but also Mexico coal consumption.
+  ---
+  duration_ms: 52.954542
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"ordered-geographies","expected":["CAN","MEX"],"actual":["MEX"]},{"stage":"interpretation","check":"ordered-pairs","expected":[{"product":"natural gas","activity":"production"},{"product":"coal","activity":"consumption"}],"actual":[{"product":"coal","activity":"consumption"}]},{"stage":"interpretation","check":"false-exclusion","value":"natural gas"},{"stage":"interpretation","check":"false-exclusion","value":"production"},{"stage":"resubmission","check":"ordered-geographies","expected":["CAN","MEX"],"actual":["MEX"]},{"stage":"resubmission","check":"ordered-pairs","expected":[{"product":"natural gas","activity":"production"},{"product":"coal","activity":"consumption"}],"actual":[{"product":"coal","activity":"consumption"}]},{"stage":"resubmission","check":"false-exclusion","value":"natural gas"},{"stage":"resubmission","check":"false-exclusion","value":"production"},{"stage":"publicGET","check":"ordered-geographies","expected":["CAN","MEX"],"actual":["MEX"]},{"stage":"publicGET","check":"ordered-pairs","expected":[{"product":"natural gas","activity":"production"},{"product":"coal","activity":"consumption"}],"actual":[{"product":"coal","activity":"consumption"}]},{"stage":"publicGET","check":"false-exclusion","value":"natural gas"},{"stage":"publicGET","check":"false-exclusion","value":"production"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: [
+    +       'MEX'
+    +     ],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'CAN',
+    +       'MEX'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     actual: [
+    +       {
+    +         activity: 'consumption',
+    +         product: 'coal'
+    +       }
+    +     ],
+    +     check: 'ordered-pairs',
+    +     expected: [
+    +       {
+    +         activity: 'production',
+    +         product: 'natural gas'
+    +       },
+    +       {
+    +         activity: 'consumption',
+    +         product: 'coal'
+    +       }
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'natural gas'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'production'
+    +   },
+    +   {
+    +     actual: [
+    +       'MEX'
+    +     ],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'CAN',
+    +       'MEX'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     actual: [
+    +       {
+    +         activity: 'consumption',
+    +         product: 'coal'
+    +       }
+    +     ],
+    +     check: 'ordered-pairs',
+    +     expected: [
+    +       {
+    +         activity: 'production',
+    +         product: 'natural gas'
+    +       },
+    +       {
+    +         activity: 'consumption',
+    +         product: 'coal'
+    +       }
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'natural gas'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'production'
+    +   },
+    +   {
+    +     actual: [
+    +       'MEX'
+    +     ],
+    +     check: 'ordered-geographies',
+    +     expected: [
+    +       'CAN',
+    +       'MEX'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     actual: [
+    +       {
+    +         activity: 'consumption',
+    +         product: 'coal'
+    +       }
+    +     ],
+    +     check: 'ordered-pairs',
+    +     expected: [
+    +       {
+    +         activity: 'production',
+    +         product: 'natural gas'
+    +       },
+    +       {
+    +         activity: 'consumption',
+    +         product: 'coal'
+    +       }
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'natural gas'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'production'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'ordered-geographies'
+      expected:
+        0: 'CAN'
+        1: 'MEX'
+      actual:
+        0: 'MEX'
+    1:
+      stage: 'interpretation'
+      check: 'ordered-pairs'
+      expected:
+        0:
+          product: 'natural gas'
+          activity: 'production'
+        1:
+          product: 'coal'
+          activity: 'consumption'
+      actual:
+        0:
+          product: 'coal'
+          activity: 'consumption'
+    2:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'natural gas'
+    3:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'production'
+    4:
+      stage: 'resubmission'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+        0: 'MEX'
+    5:
+      stage: 'resubmission'
+      check: 'ordered-pairs'
+      expected: <Circular>
+      actual:
+        0:
+          product: 'coal'
+          activity: 'consumption'
+    6:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'natural gas'
+    7:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'production'
+    8:
+      stage: 'publicGET'
+      check: 'ordered-geographies'
+      expected: <Circular>
+      actual:
+        0: 'MEX'
+    9:
+      stage: 'publicGET'
+      check: 'ordered-pairs'
+      expected: <Circular>
+      actual:
+        0:
+          product: 'coal'
+          activity: 'consumption'
+    10:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'natural gas'
+    11:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'production'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation nested_negation: Show USA total energy consumption. Do not exclude coal production.
+not ok 28 - independent negation nested_negation: Show USA total energy consumption. Do not exclude coal production.
+  ---
+  duration_ms: 85.446916
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"false-exclusion","value":"coal"},{"stage":"interpretation","check":"false-exclusion","value":"production"},{"stage":"resubmission","check":"false-exclusion","value":"coal"},{"stage":"resubmission","check":"false-exclusion","value":"production"},{"stage":"publicGET","check":"false-exclusion","value":"coal"},{"stage":"publicGET","check":"false-exclusion","value":"production"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'interpretation',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'resubmission',
+    +     value: 'production'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'coal'
+    +   },
+    +   {
+    +     check: 'false-exclusion',
+    +     stage: 'publicGET',
+    +     value: 'production'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'coal'
+    1:
+      stage: 'interpretation'
+      check: 'false-exclusion'
+      value: 'production'
+    2:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'coal'
+    3:
+      stage: 'resubmission'
+      check: 'false-exclusion'
+      value: 'production'
+    4:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'coal'
+    5:
+      stage: 'publicGET'
+      check: 'false-exclusion'
+      value: 'production'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation uncertain_choice: Show USA total energy consumption; I'm not sure whether to include coal production.
+not ok 29 - independent negation uncertain_choice: Show USA total energy consumption; I'm not sure whether to include coal production.
+  ---
+  duration_ms: 131.072167
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:102:24'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"stage":"interpretation","check":"positive-products","expected":["total energy"],"actual":["total energy","coal"]},{"stage":"interpretation","check":"positive-activities","expected":["consumption"],"actual":["consumption","production"]},{"stage":"interpretation","check":"missing-required-clarification"},{"stage":"resubmission","check":"positive-products","expected":["total energy"],"actual":["total energy","coal"]},{"stage":"resubmission","check":"positive-activities","expected":["consumption"],"actual":["consumption","production"]},{"stage":"resubmission","check":"missing-required-clarification"},{"stage":"publicGET","check":"positive-products","expected":["total energy"],"actual":["total energy","coal"]},{"stage":"publicGET","check":"positive-activities","expected":["consumption"],"actual":["consumption","production"]},{"stage":"publicGET","check":"missing-required-clarification"},{"stage":"publicGET","check":"public-clarification-required"},{"stage":"publicGET","check":"ambiguous-request-returned-candidates"}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     actual: [
+    +       'total energy',
+    +       'coal'
+    +     ],
+    +     check: 'positive-products',
+    +     expected: [
+    +       'total energy'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     actual: [
+    +       'consumption',
+    +       'production'
+    +     ],
+    +     check: 'positive-activities',
+    +     expected: [
+    +       'consumption'
+    +     ],
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'interpretation'
+    +   },
+    +   {
+    +     actual: [
+    +       'total energy',
+    +       'coal'
+    +     ],
+    +     check: 'positive-products',
+    +     expected: [
+    +       'total energy'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     actual: [
+    +       'consumption',
+    +       'production'
+    +     ],
+    +     check: 'positive-activities',
+    +     expected: [
+    +       'consumption'
+    +     ],
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'resubmission'
+    +   },
+    +   {
+    +     actual: [
+    +       'total energy',
+    +       'coal'
+    +     ],
+    +     check: 'positive-products',
+    +     expected: [
+    +       'total energy'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     actual: [
+    +       'consumption',
+    +       'production'
+    +     ],
+    +     check: 'positive-activities',
+    +     expected: [
+    +       'consumption'
+    +     ],
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'missing-required-clarification',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'public-clarification-required',
+    +     stage: 'publicGET'
+    +   },
+    +   {
+    +     check: 'ambiguous-request-returned-candidates',
+    +     stage: 'publicGET'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      stage: 'interpretation'
+      check: 'positive-products'
+      expected:
+        0: 'total energy'
+      actual:
+        0: 'total energy'
+        1: 'coal'
+    1:
+      stage: 'interpretation'
+      check: 'positive-activities'
+      expected:
+        0: 'consumption'
+      actual:
+        0: 'consumption'
+        1: 'production'
+    2:
+      stage: 'interpretation'
+      check: 'missing-required-clarification'
+    3:
+      stage: 'resubmission'
+      check: 'positive-products'
+      expected: <Circular>
+      actual:
+        0: 'total energy'
+        1: 'coal'
+    4:
+      stage: 'resubmission'
+      check: 'positive-activities'
+      expected: <Circular>
+      actual:
+        0: 'consumption'
+        1: 'production'
+    5:
+      stage: 'resubmission'
+      check: 'missing-required-clarification'
+    6:
+      stage: 'publicGET'
+      check: 'positive-products'
+      expected: <Circular>
+      actual:
+        0: 'total energy'
+        1: 'coal'
+    7:
+      stage: 'publicGET'
+      check: 'positive-activities'
+      expected: <Circular>
+      actual:
+        0: 'consumption'
+        1: 'production'
+    8:
+      stage: 'publicGET'
+      check: 'missing-required-clarification'
+    9:
+      stage: 'publicGET'
+      check: 'public-clarification-required'
+    10:
+      stage: 'publicGET'
+      check: 'ambiguous-request-returned-candidates'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-negation-independent.test.js:117:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: independent negation interposed_uncertainty_scope: Show USA total energy consumption, not coal production, though I'm not entirely sure about the title.
+ok 30 - independent negation interposed_uncertainty_scope: Show USA total energy consumption, not coal production, though I'm not entirely sure about the title.
+  ---
+  duration_ms: 93.563041
+  type: 'test'
+  ...
+# Subtest: independent negation semicolon_boundary: Not coal production; USA total energy consumption.
+ok 31 - independent negation semicolon_boundary: Not coal production; USA total energy consumption.
+  ---
+  duration_ms: 80.168292
+  type: 'test'
+  ...
+# Subtest: independent negation dash_request_boundary: Not coal production — show USA total energy consumption.
+ok 32 - independent negation dash_request_boundary: Not coal production — show USA total energy consumption.
+  ---
+  duration_ms: 90.706708
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 21
+# fail 11
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4954.203542

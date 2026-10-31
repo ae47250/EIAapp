@@ -1,0 +1,294 @@
+{
+  "status": "Scope correspondence uses API metadata and route descriptions under owner research limit. Remaining suspected restrictions are disclosed, not researched further.",
+  "ownerRule": "owner-clarifications.json#standingScopeRule",
+  "comparisonRule": "Compare same product, activity, place and sector using documented scope inclusion, never numeric size. Preserve frequency and geography restrictions.",
+  "cases": [
+    {
+      "id": "gas-sector-sales-price",
+      "status": "applied consistently to natural-gas, MER and SEDS drafts",
+      "scope": "Residential, commercial and industrial headline prices",
+      "decision": "whole product within named sector; still a sector subset of all-sector requests",
+      "label": "sales price; excludes gas transported for other sellers",
+      "source": "https://www.eia.gov/dnav/ng/TblDefs/ng_pri_sum_tbldef2.asp",
+      "broaderPreference": "Use a broader published EIA sector average if one exists; distributor/marketer components remain narrower.",
+      "remaining": "B1 observations and broader candidate selection; SEDS historical source definitions retained."
+    },
+    {
+      "id": "biomass-component",
+      "status": "applied to draft definitions; B1 pending",
+      "scope": "Six densified-biomass routes",
+      "decision": "wood-fuel component of biofuels; headline rule does not make it whole biofuels",
+      "source": "https://www.eia.gov/biofuels/biomass/"
+    },
+    {
+      "id": "crude-import-components",
+      "status": "applied to draft definitions; B1 pending",
+      "scope": "crude-oil-imports route",
+      "decision": "Crude is a petroleum component; individual grades are crude components; prefer published aggregate imports including estimates over company-level sums.",
+      "source": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php"
+    },
+    {
+      "id": "power-sector-receipt-prices",
+      "status": "conditional headline acceptance applied to coal, natural-gas, electricity and MER gas-price drafts",
+      "decision": "Whole-product price only in the electric-power sector, with whole fuel/sector facets and labelled EIA-923 receipt population; never all-sector economy price. Coal mine-origin series is not destination-state consumer price.",
+      "label": "Average cost delivered for electricity generation; EIA-923 reporting plants",
+      "broaderCandidates": "SEDS documented sector estimates fill missing official prices; compare available compatible totals before B1 selection.",
+      "sources": [
+        "headline-scope-source-review.json"
+      ],
+      "remaining": "MER unqualified generating-plant series includes mixed consuming sectors; does not automatically become electric-power sector. Reconcile those separately."
+    },
+    {
+      "id": "utility-scale-capacity",
+      "status": "MER and SEDS capacity scope annotated from sources already verified; no further PDF review",
+      "decision": "Use broader all-size total where published; otherwise accept EIA headline net summer capacity with utility-scale label. Ownership and fuel components remain narrower.",
+      "label": "Net summer capacity; utility-scale (1 MW and larger)",
+      "sources": [
+        "capacity-scope-source-review.json"
+      ],
+      "remaining": "Broader API candidate selection and observations in B1; known solar total exists in EPM 6.2.B."
+    },
+    {
+      "id": "petroleum-gasoline-retail-survey",
+      "status": "applied to draft definitions; broader comparison and B1 pending",
+      "case": "gasoline retail survey",
+      "decision": "all grades/all formulations with tax label; narrower grades or sales populations remain components; preserve alternate seller-stage bases",
+      "sources": [
+        "petroleum-price-source-review.json"
+      ]
+    },
+    {
+      "id": "petroleum-crude-first-purchase-refiner-import-prices",
+      "status": "applied to draft definitions; broader comparison and B1 pending",
+      "case": "crude first-purchase/refiner/import prices",
+      "decision": "different transaction bases labelled separately; composite preferred to domestic/imported acquisition components; imports totals cover all origins, not one origin",
+      "sources": [
+        "petroleum-price-source-review.json"
+      ]
+    },
+    {
+      "id": "petroleum-refiner-only-product-prices",
+      "status": "applied to draft definitions; broader comparison and B1 pending",
+      "case": "refiner-only product prices",
+      "decision": "broader all-seller series exist as metadata candidates; keep refiner-only prices narrower pending period-compatible B1 comparison",
+      "sources": [
+        "petroleum-price-source-review.json"
+      ]
+    },
+    {
+      "id": "crude-production-bases",
+      "status": "applied to draft definitions; B1 pending",
+      "decision": "Prefer official field-production estimates over reserve-survey estimates where compatible; preserve rate and period-total units and crude-plus-lease-condensate basis. Gravity bands, streams and partial geographies remain components.",
+      "sources": [
+        "petroleum-crude-source-review.json"
+      ]
+    },
+    {
+      "id": "petroleum-consumption-supplied-basis",
+      "status": "applied to draft definitions; broader comparison and B1 pending",
+      "case": "petroleum consumption supplied basis",
+      "decision": "Accept labelled EIA all-product supplied headline; retain direct-use crude limitation and liquid-biofuel supplied omission of blending inputs.",
+      "sources": [
+        "petroleum-stock-cons-source-review.json"
+      ]
+    },
+    {
+      "id": "petroleum-stock-reporting-population",
+      "status": "applied to draft definitions; broader comparison and B1 pending",
+      "case": "petroleum stock reporting population",
+      "decision": "Broader inclusive SPR total preferred; preserve end-period, regional reserve exclusions and post-2004 lease exclusion labels. Component stocks remain narrower.",
+      "sources": [
+        "petroleum-stock-cons-source-review.json"
+      ]
+    },
+    {
+      "id": "gasoline-sales-population",
+      "status": "applied to draft definitions; broader comparison and B1 pending",
+      "case": "gasoline sales population",
+      "decision": "Prime-supplier all-grade total conditionally accepted for sales with source label; refiner/channel and grade components remain narrower.",
+      "sources": [
+        "petroleum-stock-cons-source-review.json"
+      ]
+    },
+    {
+      "id": "trade-subject-and-partner",
+      "status": "applied to draft definitions; cross-route comparison and B1 pending",
+      "case": "trade subject and partner",
+      "decision": "Only all-partner totals qualify for whole subject trade. Regional/bilateral/modal flows remain components; net trade stays outside fixed activities.",
+      "sources": [
+        "petroleum-trade-source-review.json"
+      ]
+    },
+    {
+      "id": "weekly-export-estimates",
+      "status": "applied to draft definitions; cross-route comparison and B1 pending",
+      "case": "weekly export estimates",
+      "decision": "Keep official weekly estimates with explicit basis label and compare compatible monthly/annual source totals before default selection.",
+      "sources": [
+        "petroleum-trade-source-review.json"
+      ]
+    },
+    {
+      "id": "gasoline-trade-total",
+      "status": "applied to draft definitions; cross-route comparison and B1 pending",
+      "case": "gasoline trade total",
+      "decision": "EIA total includes blending components; finished-only and blendstock-only remain product components; no invented sum.",
+      "sources": [
+        "petroleum-trade-source-review.json"
+      ]
+    },
+    {
+      "id": "fuel-versus-manufacturing-input",
+      "status": "applied to draft definitions; cross-route comparison and B1 pending",
+      "case": "fuel versus manufacturing input",
+      "decision": "Feedstocks are not finished fuel; count/stock-change/input measurements cannot fill output/customer/storage levels.",
+      "sources": [
+        "petroleum-components-source-review.json"
+      ]
+    },
+    {
+      "id": "fuel-and-facility-components",
+      "status": "applied to draft definitions; cross-route comparison and B1 pending",
+      "case": "fuel and facility components",
+      "decision": "Biodiesel/ethanol/LPG components and refinery/biofuel-plant fuel use stay narrower. Headline rule does not turn one fuel or industry subsector into the whole requested product/sector.",
+      "sources": [
+        "petroleum-components-source-review.json"
+      ]
+    },
+    {
+      "id": "refinery-operable-capacity",
+      "status": "draft correspondence; broader comparison and B1 pending",
+      "decision": "Headline operable atmospheric crude oil distillation capacity qualifies as a labelled petroleum refining-capacity basis. Operating/idle components do not replace operable. Downstream charge capacities are separate unit components, never summed as total.",
+      "label": "Operable atmospheric crude oil distillation capacity; includes operating and idle",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_cap1_tbldef2.asp",
+        "https://www.eia.gov/petroleum/refinerycapacity/index.php"
+      ],
+      "remaining": "Compare compatible refining bases across remaining weekly/monthly/annual routes; generating MW and storage volume are different bases, not broader refinery totals."
+    },
+    {
+      "id": "refinery-capacity-calendar-stream",
+      "status": "applied to draft definitions",
+      "decision": "Calendar-day usual operation and stream-day maximum continuous operation remain separate labelled units; January 1 reference dates are not annual sums. Facility counts cannot become capacity or customers.",
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_cap1_tbldef2.asp"
+    },
+    {
+      "id": "refinery-storage-capacity-population",
+      "status": "draft correspondence; historical scope reconciliation before grid",
+      "decision": "Refinery-only working/shell storage capacities are narrower facility populations than broader EIA storage reporting. Product components remain components. Capacity volume never becomes observed stocks or refining throughput.",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_capwork_tbldef2.asp",
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_capshell_tbldef2.asp",
+        "https://www.eia.gov/petroleum/storagecapacity/"
+      ],
+      "remaining": "Keep historical 1982-2010 refinery series and 2011-2024 successor separate; report coverage and any broader-source API gap rather than fetching off-API data."
+    },
+    {
+      "id": "refinery-receipts-and-feed",
+      "status": "applied to draft definitions",
+      "decision": "Domestic/foreign refinery receipts are facility deliveries, not customs trade. Downstream fresh-feed input is actual transformation throughput, even where short YDR process name says Capacity. Neither activity is in the fixed vocabulary.",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_caprec_tbldef2.asp",
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_dwns_tbldef2.asp"
+      ]
+    },
+    {
+      "id": "crude-refinery-demand-proxy",
+      "status": "draft correspondence under standing headline rule; B1 and broader comparison pending",
+      "decision": "EIA explicitly uses crude refinery inputs as proxy for demand. Accept only for explicitly named crude oil, with proxy label. Never use as whole petroleum consumption. Generic gross/intermediate inputs do not become consumption. Biofuel blending inputs are a component of broader MER consumption.",
+      "label": "Refinery inputs; EIA proxy for crude-oil demand",
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_sum_sndw_tbldef2.asp",
+      "remaining": "Compare any broader compatible published crude demand total and preserve source population; no sum of processing flows."
+    },
+    {
+      "id": "refinery-secondary-output",
+      "status": "draft headline basis; all-route default selection pending",
+      "decision": "Combined refinery/blender EP00 total is a labelled secondary-production basis. Refinery-only and blender-only are narrower populations; field extraction and secondary net output are different bases, never added or silently interchanged. Broader compatible all-plant totals take precedence.",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_refp_tbldef2.asp",
+        "https://www.eia.gov/tools/FAQs/faq.php?id=1394&t=10",
+        "https://www.eia.gov/dnav/pet/pet_pnp_refp_dc_nus_mbblpd_m.htm"
+      ],
+      "remaining": "Default selection must preserve requested production meaning, physical units and broader-total preference; do not pick secondary output simply because its history is longer."
+    },
+    {
+      "id": "gasoline-production-populations",
+      "status": "applied to draft definitions",
+      "decision": "Finished motor gasoline is the whole finished-fuel production basis. Grades/blendstocks and plant-only, refinery-only or blender-only outputs remain narrower. Prefer combined and any broader all-plant published total; net values may be negative.",
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_pnp_wprodrb_tbldef2.asp"
+    },
+    {
+      "id": "petroleum-balance-nonactivities",
+      "status": "applied across summary and refining drafts",
+      "decision": "Stock changes, supply adjustments, transfers, net receipts, days of supply, utilization percentages and processing gain remain accounting/ratio measures, not whole stock, production, trade or capacity.",
+      "sources": [
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_sum_snd_tbldef2.asp",
+        "https://www.eia.gov/dnav/pet/TblDefs/pet_sum_crdsnd_tbldef2.asp"
+      ]
+    },
+    {
+      "id": "international-import-subject-partner",
+      "status": "product definitions resolved; full-import coverage unverified",
+      "scope": "International products 78 and 781 through 789, activity 3",
+      "decision": "Whole petroleum and other liquids product; fixed importer must be preserved separately from countryRegionId supplier. This product classification does not establish whole import flow coverage. All-source aggregate required. OECD/OECD Europe do not map to the four place kinds.",
+      "source": "https://www.eia.gov/international/api/product_activities/data",
+      "definitionEvidence": "international-import-source-review.json",
+      "remaining": "Verify eligible all-source aggregates and compare broader EIA import totals; no summing supplier groups or substituting partner geography."
+    }
+  ],
+  "pendingReconciliation": [
+    {
+      "id": "electricity-capacity",
+      "files": [
+        "electricity-classification.json",
+        "total-energy-classification.json"
+      ],
+      "issue": "Earlier generation-only approval excluded utility-scale capacity. Check broader all-size capacity and source headline before accepting labelled fallback.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
+    },
+    {
+      "id": "coal-reserves-stocks",
+      "files": [
+        "coal-classification.json",
+        "total-energy-classification.json"
+      ],
+      "issue": "Compare producing-mine reserves with EIA estimated recoverable reserves, and producer/distributor stocks with published total stocks. Record broader sources and API availability separately.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
+    },
+    {
+      "id": "other-headline-populations",
+      "files": [
+        "electricity-classification.json",
+        "natural-gas-classification.json.gz",
+        "seds-classification.json",
+        "total-energy-classification.json"
+      ],
+      "issue": "Review restricted population labels consistently, including net-metering, consumer deliveries, wellhead reports and storage. Broader totals take priority; individual components do not become headline totals.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
+    },
+    {
+      "id": "remaining-price-boundaries",
+      "files": [
+        "total-energy-classification.json",
+        "seds-classification.json"
+      ],
+      "issue": "Review mixed generating-plant-sector averages, all-end-use versus all-sector totals, transportation vehicle-fuel price, and source estimates before default selection. Do not convert a sector/ownership component to a whole total without source reconciliation.",
+      "status": "EIA scope note not verified",
+      "resolution": "Owner directs no further PDF research. Preserve existing confirmed component boundaries; use labelled headline basis where metadata supports it. Carry this note into checkpoint and any affected basis selection."
+    }
+  ],
+  "unresolvedExceptions": {
+    "evidence": "owner-clarifications.json#unidentifiedElectricityMetadata",
+    "codes": [
+      "OB2",
+      "OBW",
+      "95"
+    ],
+    "resultsAllowed": false,
+    "nonpublicationEvidenceAllowed": false,
+    "furtherResearch": "Stopped by owner"
+  }
+}

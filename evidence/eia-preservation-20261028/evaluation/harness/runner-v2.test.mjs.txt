@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {budgetFits,tokenCost,transient,buildRequest} from './run-reasoning-v2.mjs';
+const plan=JSON.parse(fs.readFileSync(new URL('../records/v2/reasoning-schedule.json',import.meta.url)));
+const prompts=JSON.parse(fs.readFileSync(new URL('../records/prompts.json',import.meta.url))).prompts;
+test('old ceiling refuses whole schedule, new approved ceiling fits',()=>{assert.equal(budgetFits(plan,.5),false);assert.equal(budgetFits(plan,3),true);assert.equal(budgetFits(plan,NaN),false);assert.equal(plan.budget.requiredTotalUSD,2.84696465);});
+test('maximum cost includes all 160 attempts plus prior spending',()=>{const maximum=tokenCost({input_tokens:10000,input_tokens_details:{cache_write_tokens:10000},output_tokens:32768},plan.ratesUSDPerMillion);assert.equal(maximum,plan.budget.perAttemptCeilingUSD);assert.equal(maximum*160+plan.budget.alreadySpentUSD,plan.budget.requiredTotalUSD);});
+test('cache writes charged at total write rate and reasoning not double charged',()=>{assert.equal(tokenCost({input_tokens:1000,input_tokens_details:{cached_tokens:200,cache_write_tokens:300},output_tokens:1000,output_tokens_details:{reasoning_tokens:900}},plan.ratesUSDPerMillion),.0005895);});
+test('only transient errors permit retry',()=>{for(const s of [408,409,429,500,502,503,504])assert.equal(transient(s,{}),true);for(const s of [200,400,401,403,404])assert.equal(transient(s,{}),false);assert.equal(transient(429,{error:{code:'insufficient_quota'}}),false);});
+test('80 unique slots, two repeats per query and effort, balanced interleave',()=>{assert.equal(plan.schedule.length,80);assert.equal(new Set(plan.schedule.map(s=>s.scheduledId)).size,80);for(const effort of plan.efforts){for(let q=1;q<=10;q++)assert.deepEqual(plan.schedule.filter(s=>s.effort===effort&&s.queryId===q).map(s=>s.repeat).sort(),[1,2]);for(let pos=0;pos<4;pos++)assert.equal(plan.schedule.filter(s=>s.effort===effort&&s.positionInBlock===pos).length,5);}});
+test('each request preserves exact prompt and common settings',()=>{for(const s of plan.schedule){const p=prompts.find(p=>p.queryId===s.queryId),r=buildRequest(plan,s,p);assert.deepEqual(r,{model:'gpt-6-luna',input:p.input,reasoning:{effort:s.effort},max_output_tokens:32768,service_tier:'default',store:false,stream:false});}});

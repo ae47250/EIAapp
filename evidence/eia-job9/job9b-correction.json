@@ -1,0 +1,133 @@
+{
+  "startCommit": "84acf18545322a7c91c6d10e1b6b4bc4a7fea553",
+  "correctionCommit": "986568a8a69306abd5dd5034c95eb49b78a26b6b",
+  "cases": [
+    {
+      "id": "I-I1",
+      "meaningSource": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "selectorSource": "evidence/eia-finish/independent-data-revision.json.gz",
+      "countryTypeAuthority": "AGENTS.md: use a country own code, type c",
+      "keys": [
+        {
+          "place": "SAU",
+          "product": "petroleum",
+          "activity": "exports",
+          "keys": [
+            "country-crude-oil-exports"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I-I3",
+      "meaningSource": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "selectorSource": "evidence/eia-finish/independent-data-revision.json.gz",
+      "countryTypeAuthority": "AGENTS.md: use a country own code, type c",
+      "keys": [
+        {
+          "place": "AUS",
+          "product": "coal",
+          "activity": "production",
+          "keys": [
+            "country-coal-production"
+          ]
+        },
+        {
+          "place": "AUS",
+          "product": "coal",
+          "activity": "exports",
+          "keys": [
+            "country-coal-exports"
+          ]
+        },
+        {
+          "place": "IDN",
+          "product": "coal",
+          "activity": "production",
+          "keys": [
+            "country-coal-production"
+          ]
+        },
+        {
+          "place": "IDN",
+          "product": "coal",
+          "activity": "exports",
+          "keys": [
+            "country-coal-exports"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I-I8",
+      "meaningSource": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "selectorSource": "evidence/eia-finish/independent-data-revision.json.gz",
+      "countryTypeAuthority": "AGENTS.md: use a country own code, type c",
+      "keys": [
+        {
+          "place": "NOR",
+          "product": "hydro",
+          "activity": "capacity",
+          "keys": [
+            "country-hydro-capacity"
+          ]
+        },
+        {
+          "place": "SWE",
+          "product": "hydro",
+          "activity": "capacity",
+          "keys": [
+            "country-hydro-capacity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I-I11",
+      "meaningSource": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "selectorSource": "evidence/eia-finish/independent-data-revision.json.gz",
+      "countryTypeAuthority": "AGENTS.md: use a country own code, type c",
+      "keys": [
+        {
+          "place": "GEO",
+          "product": "natural gas",
+          "activity": "imports",
+          "keys": [
+            "country-natural-gas-imports"
+          ]
+        },
+        {
+          "place": "ARM",
+          "product": "natural gas",
+          "activity": "imports",
+          "keys": [
+            "country-natural-gas-imports"
+          ]
+        }
+      ]
+    }
+  ],
+  "standaloneTest": "tests/eia-suite-validation.test.js",
+  "testIncludedBy": "package.json existing tests/*.test.js pattern; package unchanged",
+  "catalogFiles": [
+    "data/eia/lookup-list.json",
+    "data/eia/lookup-coverage.json.gz",
+    "data/eia/lookup-us-coverage.json.gz"
+  ],
+  "baselineTest": "job9b-baseline/suite-validation.log: FAIL, nine empty lists across four cases",
+  "fixedTest": "job9b-baseline/suite-validation-fixed.log: PASS",
+  "testMethod": "Referential integrity: recorded keys must exist; explicit nulls pass. https://www.sqlite.org/foreignkeys.html",
+  "noNewScoredField": true,
+  "mergeScriptChangedOrRerun": false,
+  "sourceCasePayloadsUnchanged": true,
+  "nullCountsUnchanged": true,
+  "priorSpendUSD": 0.00479675,
+  "smokeSpendUSD": 0.00477875,
+  "freeze": "freeze.json",
+  "originalFreezePreserved": "job9-original-freeze.json",
+  "offlineGate": "job9b-gate-1",
+  "offlineNodeTests": 883,
+  "offlinePythonFiles": 32,
+  "offlineChecks": 37,
+  "expectedAnswerAudit": "All 86 cases contain expected fields or explicit source acceptance alternatives; all 36 non-null row-key expectations resolve; 50 source-null row keys remain null."
+}

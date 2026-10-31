@@ -1,0 +1,182 @@
+{
+  "scheduledId": 40,
+  "queryId": 10,
+  "repeat": 2,
+  "model": "gpt-5.4-nano-2026-03-17",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:10:10.857Z",
+  "requestedModel": "gpt-5.4-nano-2026-03-17",
+  "requestSHA256": "48f92f29437356e93c3123d4106a7086d48eaf7bf4970b948b838bf5bf07da78",
+  "promptSHA256": "712851d9f5452682772d1c0d194129d197bff135b703c9dfa7ac15679da1ee98",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.00762,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:09:58 GMT",
+    "openai-processing-ms": "4321",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999544",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "2ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-5.4-nano-2026-03-17",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 796,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 619,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1415
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:10:15.743Z",
+  "elapsedMs": 4886.324708,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "{\n  \"correctedQuery\": \"natural gas consumption in the United States\",\n  \"confidence\": 0.93,\n  \"ambiguity\": null,\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"United States\",\n      \"value\": \"United States\",\n      \"confidence\": 0.99,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"gas\",\n      \"value\": \"natural gas\",\n      \"confidence\": 0.9,\n      \"ambiguityReason\": \"Query says 'gas' without specifying natural gas; 'consumption' phrasing most commonly maps to natural gas in EIA contexts.\"\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 0.99,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 0.0,\n      \"ambiguityReason\": \"Sector is not explicitly stated in the query.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 0.0,\n      \"explicit\": false,\n      \"ambiguityReason\": \"No frequency is stated; defaulted to annual with explicit=false.\"\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"United States\",\n      \"confidence\": 0.99\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": {\n        \"rawValue\": \"gas\",\n        \"value\": \"natural gas\",\n        \"confidence\": 0.9,\n        \"ambiguityReason\": \"See product field: 'gas' is underspecified but mapped to natural gas due to query context.\"\n      },\n      \"activity\": {\n        \"rawValue\": \"consumption\",\n        \"value\": \"consumption\",\n        \"confidence\": 0.99,\n        \"ambiguityReason\": null\n      },\n      \"order\": 1,\n      \"confidence\": 0.9\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"gas consumption in the United States\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 3,\n        \"text\": \"gas\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 4,\n        \"end\": 14,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 15,\n        \"end\": 33,\n        \"text\": \"in the United States\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}",
+    "parsed": {
+      "correctedQuery": "natural gas consumption in the United States",
+      "confidence": 0.93,
+      "ambiguity": null,
+      "fields": {
+        "country": {
+          "rawValue": "United States",
+          "value": "United States",
+          "confidence": 0.99,
+          "ambiguityReason": null
+        },
+        "product": {
+          "rawValue": "gas",
+          "value": "natural gas",
+          "confidence": 0.9,
+          "ambiguityReason": "Query says 'gas' without specifying natural gas; 'consumption' phrasing most commonly maps to natural gas in EIA contexts."
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 0.99,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 0,
+          "ambiguityReason": "Sector is not explicitly stated in the query."
+        },
+        "frequency": {
+          "rawValue": null,
+          "value": "annual",
+          "confidence": 0,
+          "explicit": false,
+          "ambiguityReason": "No frequency is stated; defaulted to annual with explicit=false."
+        }
+      },
+      "geographies": [
+        {
+          "value": "United States",
+          "confidence": 0.99
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": {
+            "rawValue": "gas",
+            "value": "natural gas",
+            "confidence": 0.9,
+            "ambiguityReason": "See product field: 'gas' is underspecified but mapped to natural gas due to query context."
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "order": 1,
+          "confidence": 0.9
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "gas consumption in the United States",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 3,
+            "text": "gas",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 4,
+            "end": 14,
+            "text": "consumption",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 15,
+            "end": 33,
+            "text": "in the United States",
+            "status": "requested",
+            "target": "data"
+          }
+        ]
+      }
+    },
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "geographies_or_order",
+        "gas_choice_not_clearly_clarified",
+        "guessed_product_or_lost_consumption",
+        "country_summary_contradiction"
+      ],
+      "signature": {
+        "geographies": [
+          "US"
+        ],
+        "pairs": [
+          [
+            "[object Object]",
+            "[object Object]"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "clarification": false,
+        "unknownQualifiers": []
+      }
+    },
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": false,
+      "errors": [
+        "invalid_pair_item",
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ]
+    }
+  },
+  "replayFile": "attempts/40-1.replay.json"
+}

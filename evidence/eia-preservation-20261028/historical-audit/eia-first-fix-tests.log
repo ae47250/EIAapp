@@ -1,0 +1,210 @@
+✔ routes a country request to International with validated monthly frequency (14.63825ms)
+✔ routes annual state total-energy requests to SEDS (1.951916ms)
+✔ routes state electricity requests to Domestic EIA (1.141625ms)
+✔ blocks an unresolved source qualifier instead of inferring an activity (1.919209ms)
+✔ routes explicit plant requests to Domestic EIA without retrieving plant candidates (1.340542ms)
+✔ preserves geography and concept mention order (0.527916ms)
+✔ preserves only governed product and activity pair scopes (3.259625ms)
+✔ treats a specific source followed by energy as one product (12.540208ms)
+✔ uses context to distinguish the state and country named Georgia (12.086959ms)
+✔ routes mixed U.S. and foreign-country requests through International (1.314584ms)
+✔ canonicalizes U.S. aliases to the governed national geography (0.095958ms)
+✔ routes nonannual U.S. state requests to Domestic before SEDS fallback (1.012041ms)
+✔ represents missing geography and deterministic route fallback (0.845666ms)
+✔ rejects unknown geography text because it is absent from local metadata (0.342042ms)
+✔ does not mistake lowercase filler words for three-letter country codes (0.83425ms)
+✔ accepts an explicitly uppercase local metadata country code (0.994708ms)
+✔ preserves sector, ordered repeated activities, explicit frequency, and negation (3.292333ms)
+✔ does not reinterpret an explicit sector phrase as a second product (1.175208ms)
+✔ preserves a requested unsupported frequency instead of silently replacing it (0.439833ms)
+✔ marks two or more validated countries as a multi-country comparison (0.450084ms)
+✔ does not mark a state and country request as a multi-country comparison (0.363292ms)
+✔ canonicalizes electricity production to generation without changing the query (0.389958ms)
+✔ frozen D01: energy consumption Iceland (28.053875ms)
+✔ frozen D02: energy consumption Ireland (10.29825ms)
+✔ frozen D03: energy consumption Finland (9.403792ms)
+✔ frozen D04: energy consumption Poland (8.724417ms)
+✔ frozen D05: energy consumption Austria (9.32525ms)
+✔ frozen D06: energy consumption Australia (8.612292ms)
+✔ frozen D07: energy consumption Niger (7.710791ms)
+✔ frozen D08: energy consumption Nigeria (8.859375ms)
+✔ frozen D09: energy consumption Guinea (8.685208ms)
+✔ frozen D10: energy consumption Equatorial Guinea (10.0325ms)
+✔ frozen D11: energy consumption Guinea-Bissau (9.370917ms)
+✔ frozen D12: energy consumption New Zealand (8.545416ms)
+✔ frozen D13: energy consumption United Kingdom (9.139917ms)
+✔ frozen D14: energy consumption Gambia, The (8.419334ms)
+✔ frozen D15: energy consumption Germany, East (9.305125ms)
+✔ frozen D16: energy consumption Germany, West (8.755625ms)
+✔ frozen D17: energy consumption uk (7.286458ms)
+✔ frozen D18: energy consumption u.s. (7.919916ms)
+✔ frozen D19: energy consumption uae (7.405916ms)
+✔ frozen D20: energy consumption Czechia (8.991417ms)
+✔ frozen D21: energy consumption south korea (9.637125ms)
+✔ frozen D22: energy consumption icealnd (8.791958ms)
+✔ frozen D23: energy consumption Irelxnd (9.164209ms)
+✔ frozen D24: energy consumption Iland (0.040916ms)
+✔ frozen D25: energy consumption Iceland not Ireland (11.254708ms)
+✔ frozen D26: energy consumption Iceland excluding Ireland (11.401375ms)
+✔ frozen D27: energy consumption Iceland without Ireland (10.733208ms)
+✔ frozen D28: energy consumption Iceland except Ireland (11.503416ms)
+✔ frozen D29: energy consumption France not Canada or Mexico (12.2485ms)
+✔ frozen D30: energy consumption not Ireland but Iceland (10.53175ms)
+✔ frozen D31: energy consumption excluding Ireland (11.929458ms)
+✔ frozen D32: please show the energy consumption for Iceland (11.972541ms)
+✔ frozen D33: show the energy consumption in the United States (17.363292ms)
+✔ frozen D34: energy consumption east of France (9.161125ms)
+✔ frozen D35: energy consumption west of Canada (9.627583ms)
+✔ frozen D36: Georgia energy consumption (8.439542ms)
+✔ frozen D37: Georgia and France energy consumption (10.1475ms)
+✔ frozen D38: Georgia and Alabama energy consumption (10.4595ms)
+✔ frozen D39: Georgia and United States energy consumption (11.103833ms)
+✔ frozen D40: international Georgia energy consumption (9.871542ms)
+✔ frozen D41: international Georgia and United States energy consumption (12.56525ms)
+✔ frozen D42: France then Iceland then Ireland energy consumption (12.533708ms)
+✔ frozen D43: Canada natural gas imports and exports (10.330583ms)
+✔ frozen D44: Brazil petroleum and natural gas consumption (10.431125ms)
+✔ frozen D45: Texas coal production and natural gas consumption (11.591375ms)
+✔ frozen D46: Texas coal and natural gas production and consumption (10.580542ms)
+✔ frozen D47: gas consumption in the United States (8.541125ms)
+✔ frozen D48: United States natural gas consumption (8.510375ms)
+✔ frozen D49: United States gasoline consumption (8.075708ms)
+✔ frozen D50: United States total energy consumption (496.142584ms)
+✔ frozen D51: France weekly solar electricity generation (21.850791ms)
+✔ frozen D52: Texas monthly residential natural gas consumption (11.6775ms)
+✔ frozen D53: France quarterly petroleum consumption (9.128292ms)
+✔ frozen D54: France annual energy consumption (8.384542ms)
+✔ frozen D55: France energy consumption (7.293625ms)
+✔ frozen D56: France energy consumption (8.530625ms)
+✔ every approved complete geography name survives exact and fuzzy competition (4645.609208ms)
+✔ supported aliases remain ordered and wording adds no countries (86.075625ms)
+✔ seed 47250: exact, excluded and filler invariants (835.215042ms)
+✔ builder preserves comma-bearing official geography labels and product punctuation (1.110875ms)
+✔ mechanical cleanup preserves raw input separately and performs no semantic correction (14.623417ms)
+✔ rules recover the requested country, product, activity, and annual default from messy input (1.974292ms)
+✔ rules normalize supported production and consumption typos without broad fuzzy guessing (8.362709ms)
+✔ validated high-confidence AI output uses only supported categories (5.536416ms)
+✖ unsupported AI product and country are discarded while frequency is preserved (4.821667ms)
+✔ validated AI arrays preserve order and prevent negated raw text from overriding intent (9.425416ms)
+✔ AI cannot reintroduce a false total-energy pair inside a specific source phrase (4.761333ms)
+✔ low-confidence AI output is rejected in favor of deterministic rules (0.067708ms)
+✔ submitted intent cannot introduce an unknown country code (3.320083ms)
+✔ AI-corrected product cannot override conflicting raw-derived evidence (3.524875ms)
+✔ AI-corrected text cannot manufacture sector evidence absent from the raw query (4.721ms)
+✖ cross-family ambiguity stays broad for later candidate retrieval (4.425875ms)
+✔ deterministic gas fallback is phrase-first and context-aware (3.286709ms)
+✔ broad approved product families retain narrower options without forced selection (0.975542ms)
+✖ AI-provided ambiguity uses the same approved-alternatives model for any product term (4.490208ms)
+✔ AI timeout is configured for thirty seconds (0.045209ms)
+✔ ordinary lowercase three-letter words are not accepted as country codes (0.80625ms)
+✔ AI receives only the exact raw query while cleaned text remains available locally (5.114041ms)
+✔ raw-only interpretation preserves exact raw and cleaned forms through staged normalization (8.108125ms)
+✔ AI request failure uses deterministic fallback with provenance (0.894333ms)
+✔ unsupported AI category and invented series ID are rejected (2.954167ms)
+✔ clean state request validates every AI field without fallback (4.597792ms)
+✔ AI-corrected concepts control routing instead of misspelled raw mentions (5.158667ms)
+✔ AI cannot replace an explicit local geography or infer an unmentioned sector (4.090584ms)
+✔ an omitted optional sector does not trigger a clarification request (4.466959ms)
+✔ recognized broad products and ordered activities repair AI ambiguity without expansion (4.473458ms)
+✔ an explicit query frequency cannot be weakened or changed by AI (3.800458ms)
+✔ compound carrier wording produces one validated concept pair (4.999541ms)
+✔ AI U.S. aliases cannot create a second noncanonical national geography (6.469333ms)
+✔ explicit deterministic geographies survive low AI confidence and omission (4.684416ms)
+✔ context resolves Georgia as a state beside Texas (4.832167ms)
+✔ AI geography corrections require bounded spelling evidence and official metadata (5.334375ms)
+✔ bounded metadata matching recovers a country typo omitted by AI (5.088875ms)
+✔ explicit deterministic geography wins and records an AI conflict (5.256ms)
+✔ an unsupported geography-like token is not rescued by an unrelated AI claim (3.901958ms)
+✔ bounded AI product corrections validate against the approved product vocabulary (12.18675ms)
+✔ bounded AI activity corrections validate against the approved activity vocabulary (13.037625ms)
+✔ bounded AI sector corrections validate against the approved sector vocabulary (31.323834ms)
+✔ bounded AI frequency corrections validate against the approved frequency vocabulary (25.789875ms)
+✔ multiple approved vocabulary corrections can be validated in one raw query (6.655417ms)
+✔ semantic typo validation rejects low-confidence, unsupported, and tied AI corrections (10.815208ms)
+✔ verified corrections preserve exact negations and corrected excluded products (17.657375ms)
+✔ AI correction cannot remove a raw negation or make its excluded product positive (5.172041ms)
+✔ broad energy and a corrected exclusion stay consistent before browser resubmission (5.023375ms)
+✔ a bounded AI correction can repair a misspelled long negation marker without inventing an exclusion (10.143125ms)
+✔ specific product context resolves AI ambiguity without broadening (5.319ms)
+✔ recognized query phrases cannot become unknown qualifiers (5.687208ms)
+✔ AI cannot collapse an unresolved broad product into one interpretation (2.210042ms)
+✔ AI cannot resolve unsupported product and activity pairing scope (6.133125ms)
+✔ genuinely unknown source terms remain blocking qualifiers (5.177584ms)
+✔ filler words and negated concepts do not become blocking qualifiers (7.158625ms)
+✔ an explicitly excluded product cannot become an approved positive AI field (5.701791ms)
+✔ long AI interpretation respects the selected activity and ignores invented selection fields (11.628375ms)
+✔ unrelated natural wording near gasoline does not become natural gas (1.050833ms)
+✔ invalid AI JSON and timeout both fall back with distinct reasons (1.9505ms)
+ℹ tests 137
+ℹ suites 0
+ℹ pass 134
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6677.699875
+
+✖ failing tests:
+
+test at tests/eia-query-interpretation.test.js:63:1
+✖ unsupported AI product and country are discarded while frequency is preserved (4.821667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'annual' !== 'weekly'
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:78:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'annual',
+    expected: 'weekly',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-query-interpretation.test.js:194:1
+✖ cross-family ambiguity stays broad for later candidate retrieval (4.425875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:212:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-query-interpretation.test.js:241:1
+✖ AI-provided ambiguity uses the same approved-alternatives model for any product term (4.490208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-query-interpretation.test.js:262:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

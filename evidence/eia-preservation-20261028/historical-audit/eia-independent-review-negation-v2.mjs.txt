@@ -1,0 +1,12 @@
+import {interpretQueryWithRules,validateAiInterpretation} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+// Frozen before execution: a negated request verb does not make its object positive; not-only is affirmative;
+// a country's positive consumption remains requested when its production is rejected.
+const cases=[
+ {q:'Energy consumption in France; do not show Canada', codes:['FRA'],pairs:[['total energy','consumption']]},
+ {q:'Energy consumption in France, not including Canada',codes:['FRA'],pairs:[['total energy','consumption']]},
+ {q:'Show energy consumption in France without including Canada',codes:['FRA'],pairs:[['total energy','consumption']]},
+ {q:'Natural gas consumption in Canada, not natural gas production in Canada',codes:['CAN'],pairs:[['natural gas','consumption']]},
+ {q:'Show not only coal production but also coal consumption in Canada',codes:['CAN'],pairs:[['coal','production'],['coal','consumption']]},
+ {q:'Compare natural gas consumption in France to us consumption',codes:['FRA','USA'],pairs:[['natural gas','consumption']]}
+];
+for(const c of cases){const ai={confidence:.99,geographies:c.codes.map(value=>({value,confidence:.99})),conceptPairs:c.pairs.map(([product,activity],order)=>({product,activity,order,confidence:.99})),fields:{country:{value:c.codes[0],confidence:.99},product:{value:c.pairs[0][0],confidence:.99},activity:{value:c.pairs[0][1],confidence:.99}}};const sig=i=>({codes:i.structuredIntent.geographies.map(g=>g.code),pairs:i.structuredIntent.conceptPairs.map(p=>[p.product,p.activity]),clarify:i.needsClarification,exclusions:i.exclusions});console.log(JSON.stringify({q:c.q,expected:{codes:c.codes,pairs:c.pairs},rules:sig(interpretQueryWithRules(c.q)),ai:sig(validateAiInterpretation(ai,c.q))}));}

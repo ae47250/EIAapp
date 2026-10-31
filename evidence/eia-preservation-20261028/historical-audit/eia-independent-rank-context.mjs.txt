@@ -1,0 +1,7 @@
+import {interpretQueryWithRules} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+import {retrieveLocalCandidates} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/local-retrieval.js';
+import {rankLocalCandidates} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/local-ranking.js';
+// Frozen diagnostic: isolate query context while keeping the same candidate pool and concept.
+const i=interpretQueryWithRules('In Texas, show natural gas production, natural gas consumption, and electricity generation.').structuredIntent;
+const pool=await retrieveLocalCandidates(i);
+for(const q of [i.originalQuery,'Natural gas consumption in Texas']){const r=rankLocalCandidates({...i,originalQuery:q,normalizedQuery:q.toLowerCase()},pool).retrievals[1];const desired=[...r.primaryCandidates,...r.fallbackCandidates].find(c=>c.series_id==='NG.NA1490_STX_2.A');console.log(JSON.stringify({q,display:r.displayCandidates.map(c=>({id:c.series_id,title:c.title,score:c.ranking.score})),desired:desired?{score:desired.ranking.score,components:desired.ranking.components}:null}));}

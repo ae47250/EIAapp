@@ -1,8 +1,11 @@
 "use client";
 
+import { appendIntentParams, appendLookupChoice, canSearchIntent, clarificationResult, clarificationReplyPayload } from "../../lib/eia-intent-payload.js";
+
 import { useRef, useState } from "react";
 
 import { downloadComparisonWorkbook, downloadSeriesWorkbook } from "../../lib/client/xlsx.js";
+import LookupChoices from "./LookupChoices.js";
 import CandidateGroups from "./CandidateGroups.js";
 import ComparisonGroups from "./ComparisonGroups.js";
 import MatchingVariables from "./MatchingVariables.js";
@@ -21,9 +24,9 @@ export default function SearchWorkspace({ showLogout }) {
   const [loading, setLoading] = useState(false);
   const seriesCache = useRef(new Map());
 
-  async function searchEia() {
-    const originalQuery = query;
-    const cleanQuery = query.trim().replace(/\s+/g, " ");
+  async function searchEia(nextQuery = query, replyPayload = null) {
+    const originalQuery = typeof nextQuery === 'string' ? nextQuery : query;
+    const cleanQuery = originalQuery.trim().replace(/\s+/g, " ");
     if (!cleanQuery) {
       setStatus({
         error: true,
@@ -36,8 +39,11 @@ export default function SearchWorkspace({ showLogout }) {
     setData(null);
     setStatus({ message: "Interpreting query..." });
     try {
-      const interpretation = await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
+      const interpretation = replyPayload
+        ? await fetchJson('/api/interpret-query', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(replyPayload)})
+        : await fetchJson(`/api/interpret-query?${new URLSearchParams({ q: originalQuery })}`);
       const intent = interpretation.intent;
+      if (!canSearchIntent(intent)) { applySearchResult(clarificationResult(intent,originalQuery)); return; }
       setStatus({ message: `${formatInterpreter(intent, cleanQuery)} Searching EIA data...` });
       const params = appendIntentParams(new URLSearchParams({ q: originalQuery }), intent);
       const nextData = await fetchJson(`/api/search-eia?${params}`);
@@ -47,6 +53,20 @@ export default function SearchWorkspace({ showLogout }) {
     } finally {
       setLoading(false);
     }
+  }
+
+  async function chooseLookup(action) {
+    if (!data?.intent) return;
+    if (action.editSearch) { document.querySelector(".search-form input")?.focus(); return; }
+    setLoading(true);
+    setStatus({ message: "Loading your choice from EIA..." });
+    try {
+      const params = appendLookupChoice(new URLSearchParams({ q: data.query }), data.intent,
+        action);
+      applySearchResult(await fetchJson(`/api/search-eia?${params}`));
+    } catch (error) {
+      setStatus({ error: true, message: error.message });
+    } finally { setLoading(false); }
   }
 
   async function selectSeries(variable) {
@@ -181,6 +201,11 @@ export default function SearchWorkspace({ showLogout }) {
   }
 
   function applySearchResult(nextData) {
+    if (nextData.mode === "lookup") {
+      setData(nextData);
+      setStatus({ message: [nextData.unsupportedMessage, nextData.userMessage].filter(Boolean).join(" ") || nextData.note || "Search complete." });
+      return;
+    }
     if (nextData.needsCountry || nextData.needsClarification) {
       setData(null);
       setStatus({ error: true, message: nextData.userMessage || "Please include a country name." });
@@ -217,6 +242,7 @@ export default function SearchWorkspace({ showLogout }) {
     setStatus({ message: `${interpreter} ${nextData.note || ""}`.trim() });
   }
 
+  const lookupMode = data?.mode === "lookup";
   const series = data?.selectedSeries;
   const variables = data?.variables || [];
   const candidateGroups = data?.candidateGroups || [];
@@ -242,7 +268,7 @@ export default function SearchWorkspace({ showLogout }) {
         </div>
 
         <p className="ai-description">
-          Unclear wording, typos, and grammatical errors are interpreted and corrected by AI. The request is then converted into structured search instructions used to retrieve the intended data from major data providers through direct API requests.
+          Unclear wording, typos, and grammatical errors are interpreted and corrected by AI. The request is then converted into structured search instructions used to retrieve the intended data from the U.S. Energy Information Administration (EIA) through direct API requests.
         </p>
 
         <div className="examples">
@@ -259,9 +285,30 @@ export default function SearchWorkspace({ showLogout }) {
         />
       </section>
 
+      {lookupMode ? <p className="card compact-card" aria-label="Understood request"><strong>Here's what I understood:</strong> {data.understood || data.intent?.understood || "Request needs clarification"}</p> : null}
       <SearchStatus status={status} />
-      {series ? <RecentObservations series={series} /> : null}
-      {candidateMode && comparisonMode && comparisonDefinitions.length ? (
+      {lookupMode ? <LookupChoices choices={data.choices} onChoose={chooseLookup} disabled={loading} freeText={data.freeText}
+        onFreeText={text => {
+          if (data.intent?.lockedForm?.clarification.needed || data.intent?.replyAbout) searchEia(data.query, clarificationReplyPayload(data.query, data.intent, text));
+          else { setQuery(text); searchEia(text); }
+        }} /> : null}
+      {lookupMode ? (data.results || []).map(result => (
+        <section className="results-pair single-result" key={result.topicIndex} aria-label={result.title}>
+          {result.unsupportedNotice ? <p className="card compact-card" role="status">{result.unsupportedNotice}</p> : null}
+          {result.selectedComparison ? <SelectedComparison comparison={result.selectedComparison} source={data.source} />
+            : result.selectedSeries ? <SelectedSeries series={result.selectedSeries} source={data.source} />
+            : null}
+          {result.countries.filter(country => !country.series).map(country => (
+            <div className="card compact-card" key={country.geography.code}>
+              <p role="status"><span data-status-label>{country.statusLabel || "No data for these years"}</span>. {country.message}</p>
+
+            </div>
+          ))}
+          {result.selectedSeries ? <RecentObservations series={result.selectedSeries} /> : null}
+        </section>
+      )) : null}
+      {!lookupMode && series ? <RecentObservations series={series} /> : null}
+      {!lookupMode && (candidateMode && comparisonMode && comparisonDefinitions.length ? (
         <section className={`results-pair${selectedComparison ? "" : " single-result"}`}>
           <ComparisonGroups
             definitions={comparisonDefinitions}
@@ -286,13 +333,13 @@ export default function SearchWorkspace({ showLogout }) {
           <MatchingVariables variables={variables} onSelect={selectSeries} onDownload={downloadSeries} />
           <SelectedSeries series={series} source={data.source} />
         </section>
-      ) : null}
+      ) : null)}
 
       <section className="card about">
         <h2>About</h2>
         <ul className="muted">
           <li>The tool interprets unclear wording, corrects typos and grammar, and converts the request into structured search instructions.</li>
-          <li>All data is retrieved directly from major data providers through API requests.</li>
+          <li>All data is retrieved directly from the U.S. Energy Information Administration (EIA) through API requests.</li>
           <li>In plain English, the app determines what the user is asking for, finds the matching data, and returns it in an organized format.</li>
         </ul>
       </section>
@@ -300,8 +347,8 @@ export default function SearchWorkspace({ showLogout }) {
   );
 }
 
-async function fetchJson(url) {
-  const response = await fetch(url);
+async function fetchJson(url, options) {
+  const response = await fetch(url, options);
   let data;
   try {
     data = await response.json();
@@ -344,42 +391,8 @@ function buildComparisonUrl(definitions, existingData) {
   return `/api/search-eia?${params}`;
 }
 
-function appendIntentParams(params, intent) {
-  if (!intent) return params;
-  params.set("intentReady", "1");
-  params.set("intentPayload", JSON.stringify({
-    originalQuery: intent.originalQuery,
-    cleanedQuery: intent.cleanedQuery,
-    correctedQuery: intent.correctedQuery,
-    correctedQuerySource: intent.correctedQuerySource,
-    interpreter: intent.interpreter,
-    confidence: intent.confidence,
-    fields: intent.fields,
-    geographies: intent.validatedGeographies || intent.geographies,
-    geographyEvidence: intent.geographyEvidence,
-    geographyConflicts: intent.geographyConflicts,
-    conceptPairs: intent.conceptPairs,
-    exclusions: intent.exclusions,
-    unknownQualifiers: intent.unknownQualifiers,
-    frequencyExplicit: intent.frequencyExplicit,
-    requestedFrequency: intent.requestedFrequency,
-    multiCountryComparison: intent.multiCountryComparison,
-    ambiguity: intent.ambiguity,
-    fallback: intent.fallback
-  }));
-  params.set("intentCorrectedQuery", String(intent.correctedQuery || ""));
-  params.set("intentCorrectedQuerySource", String(intent.correctedQuerySource || "unchanged"));
-  params.set("intentInterpreter", String(intent.interpreter || "rules"));
-  params.set("intentCountryCode", String(intent.countryCode || intent.country?.code || ""));
-  params.set("intentProduct", String(intent.product || ""));
-  params.set("intentActivity", String(intent.activity || ""));
-  params.set("intentFrequency", String(intent.frequency || "annual"));
-  params.set("intentConfidence", String(intent.confidence ?? ""));
-  return params;
-}
-
 function formatInterpreter(intent, fallbackQuery) {
-  return `Interpreter: ${intent?.interpreter || "rules"}. Corrected query: ${intent?.correctedQuery || fallbackQuery}.`;
+  return `Interpreter: ${intent?.interpreter || "rules"}.${intent?.interpreter === "rules" ? " AI interpretation unavailable." : ""} Corrected query: ${intent?.correctedQuery || fallbackQuery}.`;
 }
 
 function seriesCacheKey(series) {

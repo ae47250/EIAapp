@@ -1,0 +1,304 @@
+{
+  "recordedAt": "2026-10-30T17:29:06.182951+00:00",
+  "branch": "codex/eia-coverage",
+  "startSHA": "bbff3bf4edf76935b5700b6ca702fa93071d624e",
+  "workOrderSHA256": "c878980d594337a14ac089181b75862824165d34f1b70c63ca441dfd7c9fac0c",
+  "phase": "Step 4: coverage/Set D checkpoint; implementation gated",
+  "state": "Partial coverage, frozen Set D; final zero-unchecked pass mark NOT MET",
+  "trigger": "Owner approves sector gas sales prices and standing broader-total/headline scope rule.",
+  "EIA_API_calls": 1464,
+  "OpenAI_calls": 0,
+  "codeChanges": false,
+  "pushed": false,
+  "implementationAuthorizedAfterCheckpointGo": false,
+  "unrelatedUntrackedPreserved": "docs/eia-interpretation-audit.md",
+  "previousGoalTurnClassification": "Progress: 40 authorized one-row sizing calls, native joint-column verification, full candidate-preserving reduced plan and regression checks.",
+  "defaultFacetRoutes": 193,
+  "allFrequencyRoutes": 170,
+  "leafClassifications": {
+    "FITS": 154,
+    "DOES NOT FIT": 61
+  },
+  "crosswalk": {
+    "entries": 7721,
+    "mapped": 3557,
+    "notUsed": 4164,
+    "unresolved": 0
+  },
+  "nextSteps": [
+    "Classify every series/product/activity definition within FITS routes",
+    "Freeze and commit cell grid, including separately counted crude-oil/gasoline qualifier cells",
+    "Estimate B1 calls and time before full coverage requests",
+    "Complete coverage and freeze Set D/scorer, then stop for owner go"
+  ],
+  "applicationCodeChanges": false,
+  "researchScriptChanges": true,
+  "measureInventoryRoutes": 154,
+  "standardBenchmarkStatus": "Not run: no directly applicable EIA correspondence reference alignment found in bounded search; applicability documented in DESIGN.md.",
+  "MERDraft": {
+    "definitions": 1103,
+    "classifications": {
+      "subset": 659,
+      "out of vocabulary": 354,
+      "whole product": 90
+    },
+    "generationScopePending": 0,
+    "acceptedForCoverage": false,
+    "generationScopeAnnotated": 47
+  },
+  "generationScopeEvidence": "generation-scope-review.json",
+  "remainingElectricityReviewLeads": [
+    {
+      "route": "electricity/state-electricity-profiles/summary",
+      "issue": "API aliases generation-elect-utils and capacity-elec-utilities say Electric Power Sector, but official state profile Table 1 calls them Electric utilities and separately reports IPP & CHP. Do not accept as whole electric-power sector without resolving underlying definition.",
+      "source": "https://www.eia.gov/electricity/state/unitedstates/index.php",
+      "status": "Resolved as utility-only component by published Table 1 and call 1422; classified subset. Original metadata retained."
+    },
+    {
+      "route": "electricity/electric-power-operational-data",
+      "issue": "AOR excludes hydro despite API label all renewables; BIO/OB2/OBW labels collide; classify from full official definitions. generation-scope-review.json records the evidence.",
+      "status": "AOR subset resolved; BIO total documented; OB2/OBW component correspondence corroborated over ten years but exact API code definitions remain pending."
+    }
+  ],
+  "electricityDraft": {
+    "routes": 6,
+    "classificationCompleteRoutes": 5,
+    "dataColumns": 78,
+    "facetDefinitions": 104,
+    "pending": [
+      {
+        "route": "electricity/electric-power-operational-data",
+        "facet": "fueltypeid",
+        "codes": [
+          "OB2",
+          "OBW"
+        ]
+      },
+      {
+        "route": "electricity/electric-power-operational-data",
+        "facet": "sectorid",
+        "codes": [
+          "95"
+        ]
+      }
+    ],
+    "acceptedForCoverage": false
+  },
+  "coalDraft": {
+    "routes": 8,
+    "classificationCompleteRoutes": 8,
+    "dataColumns": 30,
+    "facetDefinitions": 50,
+    "acceptedForCoverage": false
+  },
+  "naturalGasReservesDraft": {
+    "routes": 12,
+    "classificationCompleteRoutes": 12,
+    "seriesDefinitions": 5505,
+    "classifications": {
+      "subset": 1180,
+      "whole product": 306,
+      "out of vocabulary": 4019
+    },
+    "facetDefinitions": 5629,
+    "acceptedForCoverage": false
+  },
+  "naturalGasDraft": {
+    "routes": 27,
+    "classificationCompleteRoutes": 27,
+    "seriesDefinitions": 10365,
+    "classifications": {
+      "out of vocabulary": 4361,
+      "whole product": 1067,
+      "subset": 4937
+    },
+    "facetDefinitions": 10648,
+    "pendingSectorScopeRecords": 0,
+    "acceptedForCoverage": false
+  },
+  "scopeReviewRegister": "scope-review-register.json",
+  "classificationCompleteRoutes": 153,
+  "biomassCrudeDraft": {
+    "routes": 7,
+    "classificationCompleteRoutes": 7,
+    "dataColumns": 12,
+    "facetDefinitions": 15,
+    "acceptedForCoverage": false
+  },
+  "petroleumPriceDraft": {
+    "routes": 25,
+    "classificationCompleteRoutes": 25,
+    "seriesDefinitions": 9071,
+    "acceptedForCoverage": false
+  },
+  "petroleumCrudeDraft": {
+    "routes": 5,
+    "classificationCompleteRoutes": 5,
+    "seriesDefinitions": 1594,
+    "acceptedForCoverage": false
+  },
+  "petroleumStockConsumptionDraft": {
+    "routes": 21,
+    "classificationCompleteRoutes": 21,
+    "seriesDefinitions": 19393,
+    "unresolvedUnitEntries": 4,
+    "unresolvedUnitUniqueSeries": 3,
+    "acceptedForCoverage": false
+  },
+  "petroleumTradeDraft": {
+    "routes": 9,
+    "classificationCompleteRoutes": 9,
+    "seriesDefinitions": 23074,
+    "geographyConflictEntries": 58,
+    "geographyConflictUniqueSeries": 54,
+    "acceptedForCoverage": false
+  },
+  "petroleumComponentsDraft": {
+    "routes": 9,
+    "classificationCompleteRoutes": 9,
+    "seriesDefinitions": 570,
+    "unresolvedUnitEntries": 2,
+    "acceptedForCoverage": false
+  },
+  "petroleumRefineryDraft": {
+    "routes": 7,
+    "seriesDefinitions": 4624,
+    "classificationCounts": {
+      "petroleum/pnp/dwns": {
+        "out of vocabulary": 64
+      },
+      "petroleum/pnp/cap1": {
+        "subset": 1764,
+        "whole product": 98,
+        "out of vocabulary": 147
+      },
+      "petroleum/pnp/capchg": {
+        "subset": 1568
+      },
+      "petroleum/pnp/capprod": {
+        "subset": 441,
+        "out of vocabulary": 98
+      },
+      "petroleum/pnp/capwork": {
+        "subset": 168
+      },
+      "petroleum/pnp/capshell": {
+        "subset": 168
+      },
+      "petroleum/pnp/caprec": {
+        "out of vocabulary": 108
+      }
+    },
+    "newTests": 22,
+    "seededUnknownDefinitionCases": 100,
+    "acceptedForCoverage": false
+  },
+  "petroleumSummaryDraft": {
+    "routes": 15,
+    "seriesDefinitions": 14584,
+    "identicalPriorDefinitionsReused": 4628,
+    "classificationCounts": {
+      "petroleum/sum/snd": {
+        "subset": 2976,
+        "out of vocabulary": 1693,
+        "whole product": 96
+      },
+      "petroleum/sum/sndw": {
+        "subset": 541,
+        "out of vocabulary": 52,
+        "whole product": 15
+      },
+      "petroleum/sum/crdsnd": {
+        "subset": 18,
+        "out of vocabulary": 9
+      },
+      "petroleum/sum/mkt": {
+        "subset": 2084
+      },
+      "petroleum/pnp/wiup": {
+        "out of vocabulary": 42,
+        "subset": 12,
+        "whole product": 6
+      },
+      "petroleum/pnp/wprodrb": {
+        "subset": 111,
+        "out of vocabulary": 1
+      },
+      "petroleum/pnp/wprodr": {
+        "subset": 21
+      },
+      "petroleum/pnp/wprodb": {
+        "subset": 20
+      },
+      "petroleum/pnp/inpt": {
+        "out of vocabulary": 869,
+        "subset": 234
+      },
+      "petroleum/pnp/inpt2": {
+        "out of vocabulary": 814,
+        "subset": 230
+      },
+      "petroleum/pnp/inpt3": {
+        "out of vocabulary": 652,
+        "subset": 188
+      },
+      "petroleum/pnp/refp": {
+        "subset": 1497,
+        "out of vocabulary": 32,
+        "whole product": 32
+      },
+      "petroleum/pnp/refp2": {
+        "subset": 1575,
+        "out of vocabulary": 32
+      },
+      "petroleum/pnp/refp3": {
+        "subset": 620,
+        "out of vocabulary": 32
+      },
+      "petroleum/pnp/unc": {
+        "out of vocabulary": 32,
+        "subset": 32,
+        "whole product": 16
+      }
+    },
+    "newTests": 29,
+    "seededUnknownDefinitionCases": 100,
+    "acceptedForCoverage": false
+  },
+  "internationalImportDraft": {
+    "definitionProducts": 10,
+    "fixedCountrySubjects": 8,
+    "outOfScopeAggregateSubjects": 2,
+    "sourceEvidence": "international-import-source-review.json",
+    "classificationComplete": true,
+    "allSourceAggregatesVerified": 0,
+    "acceptedForCoverage": false
+  },
+  "pendingOwnerDecision": "Owner implementation go; guarded US-only selector remains unmodified. Unchecked coverage is disclosed and the final pass mark is unchanged.",
+  "sedsSectorBoundaryCorrection": {
+    "affectedDefinition": "HVGBP",
+    "sourceMeaning": "Conventional hydroelectric power generating units net summer capacity in all sectors",
+    "before": "Incorrectly assigned electric power sector by substring",
+    "after": "No named sector; whole hydro capacity concept. Facility scope/coverage still unverified.",
+    "otherSEDSDefinitionsChanged": 0,
+    "evidence": "seds-boundary-review.json"
+  },
+  "remainingIndependentScopeAudit": [
+    "No further PDF footnote research. Carry EIA scope note not verified from scope-review-register.json into checkpoint.",
+    "Use metadata-based broader-total comparison while building coverage candidates."
+  ],
+  "metadataExceptions": "owner-clarifications.json#unidentifiedElectricityMetadata",
+  "researchDeadlineUTC": "2026-10-30T06:23:21Z",
+  "classificationReviewedRoutesIncludingExceptions": 154,
+  "researchChecks": "research-checks-20.json",
+  "cellGridCounts": {
+    "base": 672,
+    "sector": 1280,
+    "qualifier": 96,
+    "qualifier-sector": 40
+  },
+  "cellGridCommit": "c239e65",
+  "callsUsed": 6154,
+  "B1Started": true,
+  "currentCheckpoint": "checkpoint-27.json"
+}

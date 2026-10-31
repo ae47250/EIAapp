@@ -1,0 +1,47 @@
+import fs from 'node:fs';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+let s=fs.readFileSync(root+'/lib/sources/eia/intent-routing.js','utf8');
+s=s.replace('import { readFileSync } from "node:fs";', 'import { readFileSync } from "node:fs";\nimport { ruleRequestEvidence } from "./request-evidence.js";');
+s=s.replace('  const authoritativeQuery = authoritativeAi','  const authoritativeQuery = typeof baseIntent?.evidenceQuery === "string" ? baseIntent.evidenceQuery : authoritativeAi');
+s=s.replace('export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {','function collectGeographyMatches(normalizedQuery, originalQuery = "", additionalGeographies = []) {');
+s=s.replace('  // Remove excluded spans before context resolution:', '  return matches;\n}\n\nexport function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {\n  const matches = collectGeographyMatches(normalizedQuery, originalQuery, additionalGeographies);\n  // Remove excluded spans before context resolution:');
+const a=s.indexOf('export function getNegationScope('), b=s.indexOf('\nfunction disambiguateStateCountryMatches',a);
+s=s.slice(0,a)+`// Expose source positions for evidence validation without deciding request polarity.
+export function listRequestEvidenceMentions(query) {
+  const words = [...String(query).matchAll(/[\\p{L}\\p{N}]+|&/gu)];
+  let offset = 0;
+  const tokens = words.map(word => {
+    const text = normalizeText(word[0]);
+    const token = { text, index: offset, start: word.index, end: word.index + word[0].length };
+    offset += text.length + 1;
+    return token;
+  });
+  const normalized = tokens.map(t => t.text).join(" ");
+  const geoMatches = collectGeographyMatches(normalized, query);
+  const complete = geoMatches.filter(match => !geoMatches.some(other => other.length > match.length
+    && other.index <= match.index && other.index + other.length >= match.index + match.length));
+  const raw = [
+    ...complete.filter(m => !isRequestPronoun(normalized, m, query, complete)).map(m => ({ ...m, type: "geography", value: m.code })),
+    ...findConceptMentions(normalized),
+    ...FREQUENCY_RULES.flatMap(rule => rule.terms.flatMap(term => { const found = []; addPhraseMatch(found, normalized, term, { type: "frequency", value: rule.value }); return found; })),
+    ...SECTOR_RULES.flatMap(rule => rule.terms.flatMap(term => { const found = []; addPhraseMatch(found, normalized, term, { type: "sector", value: rule.value }); return found; }))
+  ];
+  return raw.map(m => {
+    const first = tokens.find(t => t.index === m.index);
+    const last = tokens.find(t => t.index + t.text.length === m.index + m.text.length);
+    return first && last ? { start: first.start, end: last.end, text: String(query).slice(first.start, last.end), type: m.type, value: m.value } : null;
+  }).filter(Boolean).filter((m, i, all) => all.findIndex(x => x.start === m.start && x.end === m.end && x.type === m.type && x.value === m.value) === i)
+    .sort((a, b) => a.start - b.start || b.end - a.end);
+}
+
+export function getNegationScope(query, index, originalQuery = query) {
+  const normalizedWords = [...String(query).matchAll(/[a-z0-9]+/g)];
+  const rawWords = [...String(originalQuery || query).matchAll(/[\\p{L}\\p{N}]+|&/gu)];
+  const position = rawWords[normalizedWords.findIndex(word => word.index === index)]?.index;
+  if (position === undefined) return null;
+  const scope = ruleRequestEvidence(originalQuery || query, listRequestEvidenceMentions(originalQuery || query)).scopes
+    .find(s => s.start <= position && position < s.end);
+  return scope?.status === "excluded" ? scope.start : null;
+}
+`+s.slice(b);
+fs.writeFileSync('/private/tmp/eia-scope-intent-routing.js',s);

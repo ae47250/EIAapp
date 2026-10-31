@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-29",
+  "notes": [
+    {
+      "source": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php",
+      "quote": "Estimates are included in aggregate data, but the estimates are not included in the file of Company-Level Imports.",
+      "consequence": "Do not assume company-level totals equal aggregate national imports. Check whether the API crude-oil-imports aggregate contains estimates before calling it a whole national total; petroleum/move aggregate routes remain separate candidates."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_pri_imc1_tbldef2.asp",
+      "quote": "Crude oil produced outside the U.S. and brought into the U.S.",
+      "consequence": "Import-cost partner names describe U.S. imports, not foreign-country price totals."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_pri_imc1_tbldef2.asp",
+      "quote": "For purposes of this survey, the United States includes the 50 States, the District of Columbia, Puerto Rico, the Virgin Islands, and all American territories and possessions.",
+      "consequence": "Retain survey geography basis; do not silently equate all US series scope across sources."
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+TAP version 13
+# Subtest: scope evidence knowledge-0: I'm not sure what's available for USA energy consumption
+ok 1 - scope evidence knowledge-0: I'm not sure what's available for USA energy consumption
+  ---
+  duration_ms: 488.456458
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-1: I'm not even sure what's available for USA energy consumption
+ok 2 - scope evidence knowledge-1: I'm not even sure what's available for USA energy consumption
+  ---
+  duration_ms: 137.859
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-2: I'm not 100% sure what's available for USA energy consumption
+ok 3 - scope evidence knowledge-2: I'm not 100% sure what's available for USA energy consumption
+  ---
+  duration_ms: 118.802667
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-3: I'm not 99.5% sure what's available for USA energy consumption
+ok 4 - scope evidence knowledge-3: I'm not 99.5% sure what's available for USA energy consumption
+  ---
+  duration_ms: 117.23675
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-4: I'm not remotely certain about USA energy consumption
+ok 5 - scope evidence knowledge-4: I'm not remotely certain about USA energy consumption
+  ---
+  duration_ms: 116.719875
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-5: I'm not—in any way—certain about USA energy consumption
+ok 6 - scope evidence knowledge-5: I'm not—in any way—certain about USA energy consumption
+  ---
+  duration_ms: 120.110333
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-6: Without really knowing what's available for USA energy consumption
+ok 7 - scope evidence knowledge-6: Without really knowing what's available for USA energy consumption
+  ---
+  duration_ms: 118.767917
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-7: I have no clear idea what's available for USA energy consumption
+ok 8 - scope evidence knowledge-7: I have no clear idea what's available for USA energy consumption
+  ---
+  duration_ms: 120.557458
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-before-gambia: I'm not 80% sure what is available for The Gambia energy consumption
+ok 9 - scope evidence knowledge-before-gambia: I'm not 80% sure what is available for The Gambia energy consumption
+  ---
+  duration_ms: 116.95875
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-before-state: I'm not even certain about monthly Texas natural gas production
+not ok 10 - scope evidence knowledge-before-state: I'm not even certain about monthly Texas natural gas production
+  ---
+  duration_ms: 434.307042
+  type: 'test'
+  location: '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-evidence.test.js:52:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    [{"phase":"public-candidates","error":"Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Texas Dry'\n- 'Texas'\n        ^\n","series":["NG.N9050TX2.M","NG.NA1160_STX_2.M","NG.NA1150_STX_2.M"]}]
+    + actual - expected
+    
+    + [
+    +   {
+    +     error: 'Expected values to be strictly equal:\n' +
+    +       '+ actual - expected\n' +
+    +       '\n' +
+    +       "+ 'Texas Dry'\n" +
+    +       "- 'Texas'\n" +
+    +       '        ^\n',
+    +     phase: 'public-candidates',
+    +     series: [
+    +       'NG.N9050TX2.M',
+    +       'NG.NA1160_STX_2.M',
+    +       'NG.NA1150_STX_2.M'
+    +     ]
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      phase: 'public-candidates'
+      error: |-
+        Expected values to be strictly equal:
+        + actual - expected
+        
+        + 'Texas Dry'
+        - 'Texas'
+                ^
+        
+      series:
+        0: 'NG.N9050TX2.M'
+        1: 'NG.NA1160_STX_2.M'
+        2: 'NG.NA1150_STX_2.M'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/tests/eia-scope-evidence.test.js:105:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: scope evidence knowledge-sector: I'm not absolutely certain about annual USA residential natural gas consumption
+ok 11 - scope evidence knowledge-sector: I'm not absolutely certain about annual USA residential natural gas consumption
+  ---
+  duration_ms: 149.270417
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-ordered: I'm not even sure about Canada and France natural gas consumption and production
+ok 12 - scope evidence knowledge-ordered: I'm not even sure about Canada and France natural gas consumption and production
+  ---
+  duration_ms: 496.662167
+  type: 'test'
+  ...
+# Subtest: scope evidence bare-exclusion: USA energy consumption, not coal production
+ok 13 - scope evidence bare-exclusion: USA energy consumption, not coal production
+  ---
+  duration_ms: 154.267166
+  type: 'test'
+  ...
+# Subtest: scope evidence geography-exclusion: USA energy consumption, not Canada or Mexico
+ok 14 - scope evidence geography-exclusion: USA energy consumption, not Canada or Mexico
+  ---
+  duration_ms: 132.457709
+  type: 'test'
+  ...
+# Subtest: scope evidence ordinary-negative-action: USA energy consumption; do not show coal production
+ok 15 - scope evidence ordinary-negative-action: USA energy consumption; do not show coal production
+  ---
+  duration_ms: 137.506708
+  type: 'test'
+  ...
+# Subtest: scope evidence modified-negative-action: USA energy consumption; please do not ever include coal production
+ok 16 - scope evidence modified-negative-action: USA energy consumption; please do not ever include coal production
+  ---
+  duration_ms: 136.987875
+  type: 'test'
+  ...
+# Subtest: scope evidence punctuated-negative-action: USA energy consumption; do not, under any circumstances, show coal production
+ok 17 - scope evidence punctuated-negative-action: USA energy consumption; do not, under any circumstances, show coal production
+  ---
+  duration_ms: 139.5425
+  type: 'test'
+  ...
+# Subtest: scope evidence direct-exclude: USA energy consumption excluding coal production
+ok 18 - scope evidence direct-exclude: USA energy consumption excluding coal production
+  ---
+  duration_ms: 135.515791
+  type: 'test'
+  ...
+# Subtest: scope evidence without-data: USA energy consumption without coal production
+ok 19 - scope evidence without-data: USA energy consumption without coal production
+  ---
+  duration_ms: 133.207
+  type: 'test'
+  ...
+# Subtest: scope evidence same-concept-not-negative: Natural gas consumption in Canada, not natural gas production in Canada
+ok 20 - scope evidence same-concept-not-negative: Natural gas consumption in Canada, not natural gas production in Canada
+  ---
+  duration_ms: 84.296625
+  type: 'test'
+  ...
+# Subtest: scope evidence knowledge-then-exclusion: I'm not even sure what's available for USA energy consumption, not coal production
+ok 21 - scope evidence knowledge-then-exclusion: I'm not even sure what's available for USA energy consumption, not coal production
+  ---
+  duration_ms: 144.138709
+  type: 'test'
+  ...
+# Subtest: scope evidence excluded-then-positive: France energy consumption, not Canada; Germany energy consumption
+ok 22 - scope evidence excluded-then-positive: France energy consumption, not Canada; Germany energy consumption
+  ---
+  duration_ms: 212.467167
+  type: 'test'
+  ...
+# Subtest: scope evidence excluded-then-knowledge: France energy consumption, not Canada; I am not 100% sure about Germany energy consumption
+ok 23 - scope evidence excluded-then-knowledge: France energy consumption, not Canada; I am not 100% sure about Germany energy consumption
+  ---
+  duration_ms: 206.370917
+  type: 'test'
+  ...
+# Subtest: scope evidence additive-not-only: Not only USA but also Canada energy consumption
+ok 24 - scope evidence additive-not-only: Not only USA but also Canada energy consumption
+  ---
+  duration_ms: 212.507958
+  type: 'test'
+  ...
+# Subtest: scope evidence action-composition: USA energy consumption; do not exclude coal production
+ok 25 - scope evidence action-composition: USA energy consumption; do not exclude coal production
+  ---
+  duration_ms: 75.5105
+  type: 'test'
+  ...
+# Subtest: scope evidence unknown-bridge: USA energy consumption; not related to coal production
+ok 26 - scope evidence unknown-bridge: USA energy consumption; not related to coal production
+  ---
+  duration_ms: 71.699416
+  type: 'test'
+  ...
+# Subtest: scope evidence undecided-second-request: USA energy consumption; I'm not sure whether to include coal production
+ok 27 - scope evidence undecided-second-request: USA energy consumption; I'm not sure whether to include coal production
+  ---
+  duration_ms: 71.112458
+  type: 'test'
+  ...
+# Subtest: scope evidence uncertain-exclusion: USA energy consumption, not necessarily coal production
+ok 28 - scope evidence uncertain-exclusion: USA energy consumption, not necessarily coal production
+  ---
+  duration_ms: 69.219666
+  type: 'test'
+  ...
+# Subtest: scope evidence unknown-predicate: USA energy consumption; I am not sold on coal production
+ok 29 - scope evidence unknown-predicate: USA energy consumption; I am not sold on coal production
+  ---
+  duration_ms: 70.557584
+  type: 'test'
+  ...
+# Subtest: scope evidence clear-parts-around-ambiguity: France energy consumption; not related to coal production; Germany energy consumption
+ok 30 - scope evidence clear-parts-around-ambiguity: France energy consumption; not related to coal production; Germany energy consumption
+  ---
+  duration_ms: 98.43275
+  type: 'test'
+  ...
+# Subtest: scope evidence unknown-country-scope: USA energy consumption; not necessarily Canada
+ok 31 - scope evidence unknown-country-scope: USA energy consumption; not necessarily Canada
+  ---
+  duration_ms: 62.575041
+  type: 'test'
+  ...
+# Subtest: scope evidence country-adverb-collision: Canada energy consumption, not Italy, sure?
+ok 32 - scope evidence country-adverb-collision: Canada energy consumption, not Italy, sure?
+  ---
+  duration_ms: 108.985625
+  type: 'test'
+  ...
+# Subtest: scope evidence activity-adverb-collision: USA energy consumption, not supply, sure?
+ok 33 - scope evidence activity-adverb-collision: USA energy consumption, not supply, sure?
+  ---
+  duration_ms: 129.659417
+  type: 'test'
+  ...
+# Subtest: scope evidence gas-still-ambiguous: I'm not even sure about USA gas consumption
+ok 34 - scope evidence gas-still-ambiguous: I'm not even sure about USA gas consumption
+  ---
+  duration_ms: 43.084
+  type: 'test'
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 33
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5890.423667

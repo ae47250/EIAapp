@@ -1,0 +1,117 @@
+{
+  "status": "FAIL",
+  "reason": "Frozen consolidated suite contains empty expected lookup row-key lists and rejects the owner-required countryRegionTypeId=c facet absent from historical supplemental expectations. This is a harness/expectation-normalization defect, not model error.",
+  "processFailure": true,
+  "smokeOriginallyReportedPass": true,
+  "smokePassTrusted": false,
+  "freezeHonored": true,
+  "codeChangedAfterFreeze": false,
+  "affectedCases": [
+    {
+      "id": "I-I1",
+      "emptyRowKeys": [
+        {
+          "place": "SAU",
+          "product": "petroleum",
+          "activity": "exports",
+          "keys": []
+        }
+      ],
+      "source": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "supplemental": "evidence/eia-finish/independent-data-revision.json.gz"
+    },
+    {
+      "id": "I-I3",
+      "emptyRowKeys": [
+        {
+          "place": "AUS",
+          "product": "coal",
+          "activity": "production",
+          "keys": []
+        },
+        {
+          "place": "AUS",
+          "product": "coal",
+          "activity": "exports",
+          "keys": []
+        },
+        {
+          "place": "IDN",
+          "product": "coal",
+          "activity": "production",
+          "keys": []
+        },
+        {
+          "place": "IDN",
+          "product": "coal",
+          "activity": "exports",
+          "keys": []
+        }
+      ],
+      "source": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "supplemental": "evidence/eia-finish/independent-data-revision.json.gz"
+    },
+    {
+      "id": "I-I8",
+      "emptyRowKeys": [
+        {
+          "place": "NOR",
+          "product": "hydro",
+          "activity": "capacity",
+          "keys": []
+        },
+        {
+          "place": "SWE",
+          "product": "hydro",
+          "activity": "capacity",
+          "keys": []
+        }
+      ],
+      "source": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "supplemental": "evidence/eia-finish/independent-data-revision.json.gz"
+    },
+    {
+      "id": "I-I11",
+      "emptyRowKeys": [
+        {
+          "place": "GEO",
+          "product": "natural gas",
+          "activity": "imports",
+          "keys": []
+        },
+        {
+          "place": "ARM",
+          "product": "natural gas",
+          "activity": "imports",
+          "keys": []
+        }
+      ],
+      "source": "evidence/eia-coverage/post-run-audit/independent-key-revision-2.json.gz",
+      "supplemental": "evidence/eia-finish/independent-data-revision.json.gz"
+    }
+  ],
+  "paidSpendUSD": 0.00479675,
+  "worstCaseSmokeUSD": 0.076695,
+  "scoredRuns": {
+    "ON": "not run: frozen suite defect",
+    "ON2": "not run: frozen suite defect",
+    "OFF": "not run: frozen suite defect",
+    "OFF2": "not run: frozen suite defect",
+    "TERRA": "not run: frozen suite defect",
+    "TERRA-other-flag": "not run: frozen suite defect",
+    "SOL": "not run: frozen suite defect",
+    "SOL-other-flag": "not run: frozen suite defect",
+    "LUNA-MED": "not run: frozen suite defect",
+    "LUNA-MED-other-flag": "not run: frozen suite defect",
+    "LUNA-HIGH": "not run: frozen suite defect",
+    "LUNA-HIGH-other-flag": "not run: frozen suite defect"
+  },
+  "flagDecision": "off under owner incomplete-live-run rule; no measured on/off decision",
+  "modelRecommendation": null,
+  "existingModel": "gpt-6-luna",
+  "existingEffort": "low",
+  "mainCommit": "0d6d312a89aea9112efff559ba8fc969cafb2780",
+  "implementationCommit": "18d25e9060a0eb49a446f4fcbb16fe40a068a863",
+  "previewDefaultFlag": "on; no Vercel settings changed",
+  "requiredNextJob": "Correct historical country selector expectations under recorded owner decisions and assert every data case maps to at least one valid row before any further paid run. Requires a new work order because this job is frozen."
+}

@@ -1,0 +1,820 @@
+{
+  "id": "C7",
+  "repeat": 2,
+  "query": "electricity consumption in Germny between 1995 and 2005",
+  "correct": true,
+  "meaning": null,
+  "data": {
+    "correct": true,
+    "formCorrect": true,
+    "outcomeCorrect": true,
+    "deadEnd": false,
+    "unlabelledWrongData": false,
+    "formErrors": [],
+    "outcomeErrors": [],
+    "actualMeaning": {
+      "places": [
+        {
+          "code": "DEU",
+          "is_default": false
+        }
+      ],
+      "excludedPlaces": [],
+      "pairs": [
+        [
+          "electricity",
+          "consumption"
+        ]
+      ],
+      "excludedTopics": [],
+      "sector": null,
+      "frequency": "annual",
+      "frequencyExplicit": false,
+      "years": {
+        "start": 1995,
+        "end": 2005
+      },
+      "clarificationAbout": null
+    }
+  },
+  "deadEnd": false,
+  "unlabelledWrongData": false,
+  "attempts": 1,
+  "events": [],
+  "rawChecks": {
+    "valid": true,
+    "errors": []
+  },
+  "returnedModel": "gpt-6-luna",
+  "appFormCheck": {
+    "valid": true,
+    "errors": []
+  },
+  "result": {
+    "mode": "lookup",
+    "query": "electricity consumption in Germny between 1995 and 2005",
+    "intent": {
+      "originalQuery": "electricity consumption in Germny between 1995 and 2005",
+      "cleanedQuery": "electricity consumption in Germny between 1995 and 2005",
+      "normalizedQuery": "electricity consumption in Germny between 1995 and 2005",
+      "correctedQuery": "electricity consumption in Germny between 1995 and 2005",
+      "correctedQuerySource": "unchanged",
+      "interpreter": "openai_locked_form",
+      "formVersion": 2,
+      "years": {
+        "start": 1995,
+        "end": 2005,
+        "quoted_words": "between 1995 and 2005"
+      },
+      "interpretationMethod": "enforced_form",
+      "lockedForm": {
+        "geographies": [
+          {
+            "geography": "DEU | Germany | country",
+            "quoted_words": "Germny",
+            "is_default": false
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "electricity",
+            "activity": "consumption",
+            "quoted_words": "electricity consumption"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": false,
+          "about": null,
+          "options": []
+        },
+        "years": {
+          "start": 1995,
+          "end": 2005,
+          "quoted_words": "between 1995 and 2005"
+        }
+      },
+      "country": {
+        "name": "Germany",
+        "code": "DEU",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "countryCode": "DEU",
+      "validatedGeographies": [
+        {
+          "name": "Germany",
+          "code": "DEU",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "excludedGeographies": [],
+      "product": "electricity",
+      "activity": "consumption",
+      "sector": null,
+      "validatedConceptPairs": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "order": 0,
+          "source": "validated_interpreter"
+        }
+      ],
+      "exclusions": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "fields": {
+        "country": {
+          "normalizedValue": "DEU",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "product": {
+          "normalizedValue": "electricity",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "activity": {
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "sector": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "fallbackUsed": false,
+          "explicit": false
+        }
+      },
+      "unknownQualifiers": [],
+      "fallback": {
+        "used": false,
+        "method": null,
+        "reasons": []
+      },
+      "needsClarification": false,
+      "blockingClarification": false,
+      "conceptPairStatus": "validated",
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "DEU"
+        ],
+        "routeFamily": "international",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "electricity consumption in Germny between 1995 and 2005",
+        "normalizedQuery": "electricity consumption in germny between 1995 and 2005",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": null,
+              "source": "validated_interpreter",
+              "evidence": null,
+              "geography": {
+                "name": "Germany",
+                "code": "DEU",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "electricity",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Germany",
+          "code": "DEU",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Germany",
+            "code": "DEU",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          }
+        ],
+        "product": "electricity",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": null
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [
+            "DEU"
+          ],
+          "routeFamily": "international",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "none",
+          "reasons": []
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "mechanically_cleaned_raw_query",
+          "geographies": [
+            "validated_interpreter"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "DEU",
+              "rawText": null,
+              "source": "validated_interpreter",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": []
+        },
+        "needsClarification": false,
+        "blockingClarification": false,
+        "missingFields": [],
+        "clarificationMessage": null
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "none",
+        "reasons": []
+      },
+      "understood": "Germany; electricity / consumption; all sectors (default); 1995–2005; annual (default)"
+    },
+    "understood": "Germany; electricity / consumption; all sectors (default); 1995–2005; annual (default)",
+    "source": "U.S. Energy Information Administration",
+    "selectedSeries": {
+      "lookup": true,
+      "lookupRowKey": "country-electricity-consumption",
+      "candidateId": "lookup:country-electricity-consumption:DEU",
+      "seriesId": "international | productId=2; activityId=2; unit=BKWH; countryRegionTypeId=c; countryRegionId=DEU | value | annual",
+      "certainty": null,
+      "selectorVerified": true,
+      "selector": {
+        "route": "international",
+        "dataColumn": "value",
+        "frequency": "annual",
+        "start": "1995",
+        "end": "2005",
+        "facets": {
+          "productId": "2",
+          "activityId": "2",
+          "unit": "BKWH",
+          "countryRegionTypeId": "c",
+          "countryRegionId": "DEU"
+        }
+      },
+      "country": "Germany",
+      "countryCode": "DEU",
+      "product": "electricity",
+      "activity": "consumption",
+      "productId": "electricity",
+      "activityId": "consumption",
+      "unitFacet": "billion kilowatthours",
+      "frequency": "annual",
+      "unit": "billion kilowatthours",
+      "title": "Electricity — Consumption",
+      "eiaName": "Electricity — Consumption",
+      "description": "Electricity consumed after the adjustments in EIA’s net-consumption definition.",
+      "basisLabel": "Electricity net consumption",
+      "otherMeasuresExist": false,
+      "regionLabel": null,
+      "sector": null,
+      "sectorLabel": "All sectors",
+      "fallbackLabel": null,
+      "alternative": false,
+      "completenessNote": "",
+      "total": 11,
+      "rowsReceived": 11,
+      "complete": true,
+      "missingValues": 0,
+      "duplicateRows": 0,
+      "points": [
+        {
+          "period": "1995",
+          "value": 482.523
+        },
+        {
+          "period": "1996",
+          "value": 489.296
+        },
+        {
+          "period": "1997",
+          "value": 492.93143
+        },
+        {
+          "period": "1998",
+          "value": 497.445
+        },
+        {
+          "period": "1999",
+          "value": 497.056
+        },
+        {
+          "period": "2000",
+          "value": 530.768
+        },
+        {
+          "period": "2001",
+          "value": 542.085
+        },
+        {
+          "period": "2002",
+          "value": 554.443
+        },
+        {
+          "period": "2003",
+          "value": 562.064
+        },
+        {
+          "period": "2004",
+          "value": 568.5542
+        },
+        {
+          "period": "2005",
+          "value": 567.8362
+        }
+      ],
+      "coverage": {
+        "start": "1995",
+        "end": "2005",
+        "count": 11
+      },
+      "latestPeriod": "2005",
+      "latestValue": 567.8362,
+      "question": "electricity consumption in Germny between 1995 and 2005",
+      "years": {
+        "start": 1995,
+        "end": 2005,
+        "quoted_words": "between 1995 and 2005"
+      },
+      "downloadedAt": "2026-10-29T03:32:32.899Z",
+      "source": "U.S. Energy Information Administration"
+    },
+    "selectedComparison": null,
+    "selectedComparisons": [],
+    "results": [
+      {
+        "topicIndex": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "title": "Electricity consumption",
+        "countries": [
+          {
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "is_default": false
+            },
+            "product": "electricity",
+            "activity": "consumption",
+            "status": "available",
+            "series": {
+              "lookup": true,
+              "lookupRowKey": "country-electricity-consumption",
+              "candidateId": "lookup:country-electricity-consumption:DEU",
+              "seriesId": "international | productId=2; activityId=2; unit=BKWH; countryRegionTypeId=c; countryRegionId=DEU | value | annual",
+              "certainty": null,
+              "selectorVerified": true,
+              "selector": {
+                "route": "international",
+                "dataColumn": "value",
+                "frequency": "annual",
+                "start": "1995",
+                "end": "2005",
+                "facets": {
+                  "productId": "2",
+                  "activityId": "2",
+                  "unit": "BKWH",
+                  "countryRegionTypeId": "c",
+                  "countryRegionId": "DEU"
+                }
+              },
+              "country": "Germany",
+              "countryCode": "DEU",
+              "product": "electricity",
+              "activity": "consumption",
+              "productId": "electricity",
+              "activityId": "consumption",
+              "unitFacet": "billion kilowatthours",
+              "frequency": "annual",
+              "unit": "billion kilowatthours",
+              "title": "Electricity — Consumption",
+              "eiaName": "Electricity — Consumption",
+              "description": "Electricity consumed after the adjustments in EIA’s net-consumption definition.",
+              "basisLabel": "Electricity net consumption",
+              "otherMeasuresExist": false,
+              "regionLabel": null,
+              "sector": null,
+              "sectorLabel": "All sectors",
+              "fallbackLabel": null,
+              "alternative": false,
+              "completenessNote": "",
+              "total": 11,
+              "rowsReceived": 11,
+              "complete": true,
+              "missingValues": 0,
+              "duplicateRows": 0,
+              "points": [
+                {
+                  "period": "1995",
+                  "value": 482.523
+                },
+                {
+                  "period": "1996",
+                  "value": 489.296
+                },
+                {
+                  "period": "1997",
+                  "value": 492.93143
+                },
+                {
+                  "period": "1998",
+                  "value": 497.445
+                },
+                {
+                  "period": "1999",
+                  "value": 497.056
+                },
+                {
+                  "period": "2000",
+                  "value": 530.768
+                },
+                {
+                  "period": "2001",
+                  "value": 542.085
+                },
+                {
+                  "period": "2002",
+                  "value": 554.443
+                },
+                {
+                  "period": "2003",
+                  "value": 562.064
+                },
+                {
+                  "period": "2004",
+                  "value": 568.5542
+                },
+                {
+                  "period": "2005",
+                  "value": 567.8362
+                }
+              ],
+              "coverage": {
+                "start": "1995",
+                "end": "2005",
+                "count": 11
+              },
+              "latestPeriod": "2005",
+              "latestValue": 567.8362,
+              "question": "electricity consumption in Germny between 1995 and 2005",
+              "years": {
+                "start": 1995,
+                "end": 2005,
+                "quoted_words": "between 1995 and 2005"
+              },
+              "downloadedAt": "2026-10-29T03:32:32.899Z",
+              "source": "U.S. Energy Information Administration"
+            },
+            "seriesId": "international | productId=2; activityId=2; unit=BKWH; countryRegionTypeId=c; countryRegionId=DEU | value | annual",
+            "unit": "billion kilowatthours",
+            "coverage": {
+              "start": "1995",
+              "end": "2005",
+              "count": 11
+            },
+            "alternatives": [],
+            "message": null
+          }
+        ],
+        "selectedComparison": null,
+        "selectedSeries": {
+          "lookup": true,
+          "lookupRowKey": "country-electricity-consumption",
+          "candidateId": "lookup:country-electricity-consumption:DEU",
+          "seriesId": "international | productId=2; activityId=2; unit=BKWH; countryRegionTypeId=c; countryRegionId=DEU | value | annual",
+          "certainty": null,
+          "selectorVerified": true,
+          "selector": {
+            "route": "international",
+            "dataColumn": "value",
+            "frequency": "annual",
+            "start": "1995",
+            "end": "2005",
+            "facets": {
+              "productId": "2",
+              "activityId": "2",
+              "unit": "BKWH",
+              "countryRegionTypeId": "c",
+              "countryRegionId": "DEU"
+            }
+          },
+          "country": "Germany",
+          "countryCode": "DEU",
+          "product": "electricity",
+          "activity": "consumption",
+          "productId": "electricity",
+          "activityId": "consumption",
+          "unitFacet": "billion kilowatthours",
+          "frequency": "annual",
+          "unit": "billion kilowatthours",
+          "title": "Electricity — Consumption",
+          "eiaName": "Electricity — Consumption",
+          "description": "Electricity consumed after the adjustments in EIA’s net-consumption definition.",
+          "basisLabel": "Electricity net consumption",
+          "otherMeasuresExist": false,
+          "regionLabel": null,
+          "sector": null,
+          "sectorLabel": "All sectors",
+          "fallbackLabel": null,
+          "alternative": false,
+          "completenessNote": "",
+          "total": 11,
+          "rowsReceived": 11,
+          "complete": true,
+          "missingValues": 0,
+          "duplicateRows": 0,
+          "points": [
+            {
+              "period": "1995",
+              "value": 482.523
+            },
+            {
+              "period": "1996",
+              "value": 489.296
+            },
+            {
+              "period": "1997",
+              "value": 492.93143
+            },
+            {
+              "period": "1998",
+              "value": 497.445
+            },
+            {
+              "period": "1999",
+              "value": 497.056
+            },
+            {
+              "period": "2000",
+              "value": 530.768
+            },
+            {
+              "period": "2001",
+              "value": 542.085
+            },
+            {
+              "period": "2002",
+              "value": 554.443
+            },
+            {
+              "period": "2003",
+              "value": 562.064
+            },
+            {
+              "period": "2004",
+              "value": 568.5542
+            },
+            {
+              "period": "2005",
+              "value": 567.8362
+            }
+          ],
+          "coverage": {
+            "start": "1995",
+            "end": "2005",
+            "count": 11
+          },
+          "latestPeriod": "2005",
+          "latestValue": 567.8362,
+          "question": "electricity consumption in Germny between 1995 and 2005",
+          "years": {
+            "start": 1995,
+            "end": 2005,
+            "quoted_words": "between 1995 and 2005"
+          },
+          "downloadedAt": "2026-10-29T03:32:32.899Z",
+          "source": "U.S. Energy Information Administration"
+        }
+      }
+    ],
+    "choices": [
+      {
+        "label": "Edit search",
+        "editSearch": true
+      }
+    ],
+    "freeText": true,
+    "needsClarification": false,
+    "note": "Search complete. EIA measurement definitions and availability are shown with each result."
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "scheduledId": 12,
+  "queryId": 5,
+  "repeat": 1,
+  "model": "gpt-5.4-nano-2026-03-17",
+  "attempt": 1,
+  "startedAt": "2026-10-28T11:07:44.730Z",
+  "requestedModel": "gpt-5.4-nano-2026-03-17",
+  "requestSHA256": "c2728032d63499dc9584d2487422074d70d790b4770359c377cf0a1f1b883b13",
+  "promptSHA256": "f3476b30a20987336330f5041fbf74fa663fa6f64d886cc93e511dae09c98f35",
+  "timeoutMs": 30000,
+  "ceilingReservedUSD": 0.00762,
+  "headers": {
+    "content-type": "application/json",
+    "date": "Wed, 28 Oct 2026 11:07:32 GMT",
+    "openai-processing-ms": "4505",
+    "x-ratelimit-limit-requests": "10000",
+    "x-ratelimit-limit-tokens": "10000000",
+    "x-ratelimit-remaining-requests": "9999",
+    "x-ratelimit-remaining-tokens": "9999609",
+    "x-ratelimit-reset-requests": "6ms",
+    "x-ratelimit-reset-tokens": "2ms",
+    "x-request-id": "<REDACTED_HEADER>"
+  },
+  "httpStatus": 200,
+  "returnedModel": "gpt-5.4-nano-2026-03-17",
+  "responseId": "<REDACTED_PROVIDER_ID>",
+  "responseStatus": "completed",
+  "usage": {
+    "input_tokens": 795,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 554,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1349
+  },
+  "serviceTier": "default",
+  "responseError": null,
+  "credentialRedactions": false,
+  "completedAt": "2026-10-28T11:07:49.413Z",
+  "elapsedMs": 4683.066834000005,
+  "retryEligible": false,
+  "willRetry": false,
+  "fatal": null,
+  "originalGrade": {
+    "text": "{\n  \"correctedQuery\": \"energy consumption Iceland\",\n  \"confidence\": 0.74,\n  \"ambiguity\": {\n    \"reason\": \"Country/geo parsing is uncertain because the raw query contains a likely misspelling ('icealnd'). Activity and product are not explicitly separated by the query, but 'energy consumption' strongly suggests an energy consumption activity with product left broad.\"\n  },\n  \"fields\": {\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 0.0,\n      \"ambiguityReason\": \"No sector is explicitly stated in the query.\"\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 0.2,\n      \"explicit\": false,\n      \"ambiguityReason\": \"No frequency is stated; defaulted to annual per instructions.\"\n    },\n    \"product\": {\n      \"rawValue\": \"energy\",\n      \"value\": \"total energy\",\n      \"confidence\": 0.55,\n      \"ambiguityReason\": \"The query says 'energy consumption' without specifying a sub-product (e.g., electricity, natural gas). Interpreting 'energy' as 'total energy' is plausible but not fully certain.\"\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 0.9,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Iceland\",\n      \"confidence\": 0.74\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": \"total energy\",\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 0.55\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"energy consumption icealnd\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 6,\n        \"text\": \"energy\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 7,\n        \"end\": 18,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 19,\n        \"end\": 27,\n        \"text\": \"icealnd\",\n        \"status\": \"unresolved\",\n        \"target\": \"condition\"\n      }\n    ]\n  }\n}",
+    "parsed": {
+      "correctedQuery": "energy consumption Iceland",
+      "confidence": 0.74,
+      "ambiguity": {
+        "reason": "Country/geo parsing is uncertain because the raw query contains a likely misspelling ('icealnd'). Activity and product are not explicitly separated by the query, but 'energy consumption' strongly suggests an energy consumption activity with product left broad."
+      },
+      "fields": {
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 0,
+          "ambiguityReason": "No sector is explicitly stated in the query."
+        },
+        "frequency": {
+          "rawValue": null,
+          "value": "annual",
+          "confidence": 0.2,
+          "explicit": false,
+          "ambiguityReason": "No frequency is stated; defaulted to annual per instructions."
+        },
+        "product": {
+          "rawValue": "energy",
+          "value": "total energy",
+          "confidence": 0.55,
+          "ambiguityReason": "The query says 'energy consumption' without specifying a sub-product (e.g., electricity, natural gas). Interpreting 'energy' as 'total energy' is plausible but not fully certain."
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 0.9,
+          "ambiguityReason": null
+        }
+      },
+      "geographies": [
+        {
+          "value": "Iceland",
+          "confidence": 0.74
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "total energy",
+          "activity": "consumption",
+          "order": 1,
+          "confidence": 0.55
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "energy consumption icealnd",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 6,
+            "text": "energy",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 7,
+            "end": 18,
+            "text": "consumption",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 19,
+            "end": 27,
+            "text": "icealnd",
+            "status": "unresolved",
+            "target": "condition"
+          }
+        ]
+      }
+    },
+    "semantic": {
+      "pass": false,
+      "errors": [
+        "unnecessary_clarification",
+        "country_summary_contradiction"
+      ],
+      "signature": {
+        "geographies": [
+          "ISL"
+        ],
+        "pairs": [
+          [
+            "total energy",
+            "consumption"
+          ]
+        ],
+        "sector": null,
+        "frequency": "annual",
+        "frequencyExplicit": false,
+        "excludedGeographies": [],
+        "clarification": true,
+        "unknownQualifiers": []
+      }
+    },
+    "contract": {
+      "pass": false,
+      "json": true,
+      "shape": false,
+      "spans": false,
+      "errors": [
+        "invalid_field_country",
+        "invalid_source_scope",
+        "uncovered_source_text"
+      ]
+    }
+  },
+  "replayFile": "attempts/12-1.replay.json"
+}

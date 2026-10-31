@@ -1,0 +1,754 @@
+{
+  "version": 2,
+  "preparedAt": "2026-10-28T11:46:43.261Z",
+  "model": "gpt-6-luna",
+  "efforts": [
+    "low",
+    "medium",
+    "high",
+    "xhigh"
+  ],
+  "endpoint": "https://api.openai.com/v1/responses",
+  "schedulingSeed": 47250,
+  "schedulingMethod": "Seeded xorshift32 Fisher-Yates query order per repeat; rotate four efforts through every position across 20 query blocks. Five blocks per position/effort.",
+  "scheduledNew": 80,
+  "scheduledOverall": 120,
+  "maxAttemptsPerScheduledCall": 2,
+  "maxAttemptsNew": 160,
+  "settings": {
+    "max_output_tokens": 32768,
+    "timeoutMs": 300000,
+    "service_tier": "default",
+    "store": false,
+    "stream": false,
+    "inputTokenUpperBound": 10000
+  },
+  "retryHttpStatuses": [
+    408,
+    409,
+    429,
+    500,
+    502,
+    503,
+    504
+  ],
+  "ratesUSDPerMillion": {
+    "input": 0.1,
+    "cachedInput": 0.01,
+    "cacheWrite": 0.125,
+    "output": 0.5
+  },
+  "budget": {
+    "currentlyApprovedTotalUSD": 0.5,
+    "alreadySpentUSD": 0.025524650000000003,
+    "perAttemptCeilingUSD": 0.017634,
+    "maxAdditionalUSD": 2.82144,
+    "requiredTotalUSD": 2.84696465,
+    "requestedTotalCeilingUSD": 2.85,
+    "canExecuteUnderCurrentApproval": false
+  },
+  "limitJustification": "Official guidance recommends reserving at least 25000 tokens for initial reasoning/output experiments. Common 32768 leaves additional room for the required JSON; it includes reasoning tokens. Common 300s timeout is an engineering allowance for documented multi-minute reasoning, not a latency promise. Truncation/timeouts remain explicitly classified. Neither limit is tuned by effort or chosen to force the run inside $0.50.",
+  "departuresFromNoneBaseline": {
+    "max_output_tokens": {
+      "old": 4096,
+      "new": 32768
+    },
+    "timeoutMs": {
+      "old": 30000,
+      "new": 300000
+    },
+    "reasoningEffort": "low/medium/high/xhigh; other API settings and the exact app prompt remain unchanged",
+    "scorer": "Version 2, validated on pre-labelled examples and applied to all baseline/new outputs. Original scores preserved."
+  },
+  "officialVerification": {
+    "checkedAt": "2026-10-28T11:46:43.263Z",
+    "supportedEfforts": [
+      "none",
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+    ],
+    "defaultEffort": "medium",
+    "maximumOutputTokens": 128000,
+    "modelAvailability": "Official model page lists gpt-6-luna. The existing credential successfully used this exact model in all 20 baseline calls. Fresh read-only model access check runs after budget approval, before scheduled generations.",
+    "sources": [
+      {
+        "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "supports": "Model availability, efforts, 128000 max output, Standard prices and cache-write price."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/reasoning",
+        "supports": "Reasoning consumes output allowance, billed at output rate; reserve at least25000 tokens when starting; incomplete/max_output_tokens signals truncation."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/background",
+        "supports": "Reasoning can take several minutes; informs common timeout judgment. Background mode is not enabled."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/pricing",
+        "supports": "Standard input/output/cache prices, verified separately."
+      }
+    ]
+  },
+  "versionIdentity": {
+    "branch": "codex/eia-interpretation-audit",
+    "HEAD": "5b60a094ecd10e1ca80492bc8558652768d93366",
+    "base": "5b60a094ecd10e1ca80492bc8558652768d93366",
+    "bundleSHA256": "d73f0caf30793b0274d247207136f951c4cf558209bdaf7032c2834ee727b6bf",
+    "snapshotContentManifestSHA256": "1944633ae032dc07fc967e4c7bf0e5cbc97bcafe02aebad4164b52681f0eb34c",
+    "trackedDiffSHA256": "f536b003086728374331a087cc86907570d3925ca4af18fd900af76dc42ab062",
+    "completePatchSHA256": "9b31ff106ab38c0fa8c5d8e18e351153d07f79c20574419e4a8ab5a204fc7509",
+    "promptTemplateSHA256": "a7e460e5240fff0d43d0f5975c68b7b86d94256697fbf93f97c77f164d41dbc5",
+    "promptsSHA256": "dc88ae5e20837af0581176cd416ee4b753d2fe8f3c70711bedba415d7bead3d8",
+    "expectationsSHA256": "c3ac869810552f656e25555a9f83e60ca66c6d67518bdda3bc1d145d1bcc457b",
+    "scorerSHA256": "5ed19344f49fd41065d782af287fecf2f852f35de1f75eedf4408e15c39887d1"
+  },
+  "credential": {
+    "path": "<LOCAL_HOME>/Downloads/openai-api-key.txt",
+    "method": "Read in place, never copy or print; no key creation."
+  },
+  "schedule": [
+    {
+      "scheduledId": 41,
+      "queryId": 9,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 42,
+      "queryId": 9,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 43,
+      "queryId": 9,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 44,
+      "queryId": 9,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 45,
+      "queryId": 3,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 46,
+      "queryId": 3,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 47,
+      "queryId": 3,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 48,
+      "queryId": 3,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 49,
+      "queryId": 7,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 50,
+      "queryId": 7,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 51,
+      "queryId": 7,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 52,
+      "queryId": 7,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 53,
+      "queryId": 4,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 54,
+      "queryId": 4,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 55,
+      "queryId": 4,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 56,
+      "queryId": 4,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 57,
+      "queryId": 2,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 58,
+      "queryId": 2,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 59,
+      "queryId": 2,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 60,
+      "queryId": 2,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 61,
+      "queryId": 5,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 62,
+      "queryId": 5,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 63,
+      "queryId": 5,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 64,
+      "queryId": 5,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 65,
+      "queryId": 1,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 66,
+      "queryId": 1,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 67,
+      "queryId": 1,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 68,
+      "queryId": 1,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 69,
+      "queryId": 8,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 70,
+      "queryId": 8,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 71,
+      "queryId": 8,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 72,
+      "queryId": 8,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 73,
+      "queryId": 6,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 74,
+      "queryId": 6,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 75,
+      "queryId": 6,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 76,
+      "queryId": 6,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 77,
+      "queryId": 10,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 78,
+      "queryId": 10,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 79,
+      "queryId": 10,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 80,
+      "queryId": 10,
+      "repeat": 1,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 81,
+      "queryId": 4,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 82,
+      "queryId": 4,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 83,
+      "queryId": 4,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 84,
+      "queryId": 4,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 85,
+      "queryId": 9,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 86,
+      "queryId": 9,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 87,
+      "queryId": 9,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 88,
+      "queryId": 9,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 89,
+      "queryId": 6,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 90,
+      "queryId": 6,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 91,
+      "queryId": 6,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 92,
+      "queryId": 6,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 93,
+      "queryId": 2,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 94,
+      "queryId": 2,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 95,
+      "queryId": 2,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 96,
+      "queryId": 2,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 97,
+      "queryId": 8,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 98,
+      "queryId": 8,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 99,
+      "queryId": 8,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 100,
+      "queryId": 8,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 101,
+      "queryId": 7,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 102,
+      "queryId": 7,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 103,
+      "queryId": 7,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 104,
+      "queryId": 7,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 105,
+      "queryId": 3,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 106,
+      "queryId": 3,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 107,
+      "queryId": 3,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 108,
+      "queryId": 3,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 109,
+      "queryId": 5,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 110,
+      "queryId": 5,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 111,
+      "queryId": 5,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 112,
+      "queryId": 5,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 113,
+      "queryId": 1,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 114,
+      "queryId": 1,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 115,
+      "queryId": 1,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 116,
+      "queryId": 1,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 3
+    },
+    {
+      "scheduledId": 117,
+      "queryId": 10,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "xhigh",
+      "positionInBlock": 0
+    },
+    {
+      "scheduledId": 118,
+      "queryId": 10,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "positionInBlock": 1
+    },
+    {
+      "scheduledId": 119,
+      "queryId": 10,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "positionInBlock": 2
+    },
+    {
+      "scheduledId": 120,
+      "queryId": 10,
+      "repeat": 2,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "positionInBlock": 3
+    }
+  ]
+}

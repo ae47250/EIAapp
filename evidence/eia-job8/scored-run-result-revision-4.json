@@ -1,0 +1,304 @@
+{
+  "version": "job8-complete-scored-result-4",
+  "result": "FAIL_COMPLETE",
+  "codeCommit": "87375429987a798550a023c83db9722957d8d2d3",
+  "evidenceParentCommit": "6c923bb2554ad0087eea246eca4648009dacf720",
+  "completedAt": "2026-10-31T12:51:42.832Z",
+  "schedule": {
+    "outcomes": 78,
+    "D": 58,
+    "F": 8,
+    "Q1": 9,
+    "Q4": 3,
+    "modelTurns": 68,
+    "maximumModelCalls": 136,
+    "actualModelCalls": 71,
+    "actualValidationReasks": 3,
+    "actualCallKinds": {
+      "initial": 67,
+      "reply": 4
+    },
+    "buttonOnlyOutcomes": 10,
+    "buttonModelCalls": 0,
+    "recordedClicksPerformed": 10,
+    "typedRepliesPerformed": 4,
+    "scoredReruns": 0
+  },
+  "counts": {
+    "D": {
+      "correct": 55,
+      "total": 58
+    },
+    "F": {
+      "correct": 8,
+      "total": 8
+    },
+    "Q1": {
+      "correct": 9,
+      "total": 9
+    },
+    "Q4": {
+      "correct": 1,
+      "total": 3
+    }
+  },
+  "passMarks": {
+    "complete": true,
+    "modelIdentity": true,
+    "boundedCalls": true,
+    "setD": true,
+    "frontPageAndD21": true,
+    "setF": true,
+    "setQ1": true,
+    "setQ4": false,
+    "zeroDeadEnds": true,
+    "zeroUnlabelledWrongData": false,
+    "withinBudget": true,
+    "noFatalStop": true
+  },
+  "failedCases": [
+    {
+      "set": "D",
+      "id": "D4",
+      "repeat": 1
+    },
+    {
+      "set": "D",
+      "id": "D4a",
+      "repeat": 1
+    },
+    {
+      "set": "D",
+      "id": "D7",
+      "repeat": 2
+    },
+    {
+      "set": "Q4",
+      "id": "Q4-ash",
+      "repeat": 1
+    },
+    {
+      "set": "Q4",
+      "id": "Q4-sulfur",
+      "repeat": 1
+    }
+  ],
+  "deadEnds": 0,
+  "unlabelledWrongDataOutcomes": [
+    {
+      "id": "D4",
+      "repeat": 1
+    },
+    {
+      "id": "D4a",
+      "repeat": 1
+    }
+  ],
+  "causes": {
+    "D6aAndD8a": {
+      "newRun": "Both passed both repetitions, including frozen form, data/question, actual local screen and Excel checks.",
+      "priorRun": "The old runner ignored recorded button clicks and interpreted the original query again. See runner-cause-audit-revision-4.json; historical scores remain unchanged."
+    },
+    "GeorgiaFailures": {
+      "cases": [
+        "D4 repeat 1",
+        "D4a repeat 1",
+        "D7 repeat 2"
+      ],
+      "model": "For D4 repeat 1 and D7 repeat 2, Luna returned AL | Alabama with quoted_words=georgia.",
+      "application": "Geography repair added the intended Georgia state/country but retained Alabama. Quote validation accepted the quote without verifying that it supports the returned place. The D4a switch inherited Alabama from its parent.",
+      "locations": [
+        "lib/sources/eia/lookup-geography.js:39",
+        "lib/sources/eia/locked-form-v2.js:69"
+      ],
+      "impact": "D4 and D4a displayed unrequested Alabama electricity-price data. D7 included an extra Alabama entry. No repair was attempted after the scored run."
+    },
+    "Q4Ash": {
+      "frozenResult": "FAIL",
+      "observed": "Coal and US were retained, but activity was null. The app asked Which activity should I look up? and showed ash content plus receipts delivered as unsupported. It did not offer the frozen Show Coal consumption instead path.",
+      "note": "The unsupported detail was visible; the exact single-phrase display assertion also failed because two unsupported phrases were combined."
+    },
+    "Q4Sulfur": {
+      "frozenResult": "FAIL",
+      "observed": "The model retained weighted average sulfur content and the screen said We can't look up 'weighted average sulfur content' yet, followed by the place question.",
+      "note": "The frozen scorer requires the exact shorter phrase sulfur content. This is an exact-phrase scoring mismatch; the unsupported measure was not silently dropped. The scorer and score were not changed."
+    }
+  },
+  "costUSD": {
+    "newGenerationUsageUpperBound": 0.068750625,
+    "unusedTokenCountReserve": 0.000861125,
+    "newIncludingReserve": 0.06961175,
+    "priorPartialRunRecordedCost": 0.059300625,
+    "cumulativeIncludingReserve": 0.128912375,
+    "newRunFrozenMaximum": 0.324102125,
+    "cumulativeFrozenMaximum": 0.38340275,
+    "cap": 0.4,
+    "basis": "Conservative usage-based estimate at $0.125/M input and $0.50/M output; no cache discounts deducted. The reserve is not a new token-count call or an invoice charge."
+  },
+  "model": {
+    "requested": "gpt-6-luna",
+    "returnedNames": [
+      "gpt-6-luna"
+    ],
+    "reasoning": "low, passed explicitly",
+    "maximumOutputTokens": 2048,
+    "usage": {
+      "input_tokens": 486197,
+      "output_tokens": 15952
+    },
+    "reaskCases": [
+      {
+        "id": "Q1-coal-and-natual-gas",
+        "repeat": 1
+      },
+      {
+        "id": "Q1-national-gas-prices",
+        "repeat": 1
+      },
+      {
+        "id": "Q4-ash",
+        "repeat": 1
+      }
+    ]
+  },
+  "eia": {
+    "calls": 208,
+    "http200": 208,
+    "paceMs": 600,
+    "retries": 0
+  },
+  "browser": {
+    "scope": "Live OpenAI and EIA requests; actual local built UI rendering and Excel downloads using the recorded results. No paid preview or production request.",
+    "consoleErrors": []
+  },
+  "offline": {
+    "recordedAt": "2026-10-31T12:40:46.166051+00:00",
+    "pass": true,
+    "codeCommit": "87375429987a798550a023c83db9722957d8d2d3",
+    "applicationCodeUnchanged": true,
+    "keysBlankForOfflineCommands": true,
+    "javascript": {
+      "passed": 829,
+      "failed": 0
+    },
+    "python": {
+      "files": 32,
+      "passed": 32,
+      "command": "Run each scripts/eia-lookup/*.test.py individually with python3 -B; aggregate exit statuses."
+    },
+    "runnerAndOwnerCorrection": {
+      "passed": 7,
+      "failed": 0
+    },
+    "build": "PASS",
+    "savedReplay": {
+      "outcomes": 126,
+      "modelResponses": 115,
+      "eiaResponses": 306,
+      "networkCalls": 0,
+      "q4InjectedCases": 3,
+      "expectedDifferencesMatch": true,
+      "focusedD6aD8a": [
+        {
+          "id": "D6a",
+          "repeat": 1,
+          "correct": true
+        },
+        {
+          "id": "D8a",
+          "repeat": 1,
+          "correct": true
+        },
+        {
+          "id": "D6a",
+          "repeat": 2,
+          "correct": true
+        },
+        {
+          "id": "D8a",
+          "repeat": 2,
+          "correct": true
+        }
+      ],
+      "browserConsoleErrors": []
+    },
+    "modelInputChanged": false,
+    "staleSavedResponses": [],
+    "resolvedOfflineFailure": "The new Python instruction initially changed the frozen data-decisions section hash. Moving it to a separate Python Test Verification section restored the untouched test; no test or frozen expectation was changed.",
+    "artifactsSHA256": {
+      "evidence/eia-job8/checks-revision-4/npm-test-before-doc-placement-fix.log.gz": "f2362a44f6c86b8e594d350d6c7633ac5645e1d7ba97de18251ecc7a729be57a",
+      "evidence/eia-job8/checks-revision-4/npm-test-final.log.gz": "1594353568419af892997a3230fa376e56c1e2427708b237d6357cd839a309ae",
+      "evidence/eia-job8/checks-revision-4/runner-checks.log.gz": "f98dfbfaf64bc3aaffbed3254b709684a4df12834be34ca4a4657053a77102f5",
+      "evidence/eia-job8/checks-revision-4/python-tests.log.gz": "4b2ec456d345ebece0cac71e5963199820ed1d5bfe633ebb14d313bada6ab602",
+      "evidence/eia-job8/checks-revision-4/python-results.json.gz": "09c64ac8257e26853ba0b2975277c86c543b0c4ce1741cd78f4a20c9ba5cb702",
+      "evidence/eia-job8/checks-revision-4/build.log.gz": "65a23062b27880842da965af9790470b839f4e8a80e841a7aa86f9114c74c4a5",
+      "evidence/eia-job8/checks-revision-4/replay-summary.json.gz": "6d20c2efd565b3f32b7b60d414cac31ef04fb9dadb0efb1541274b952d82ca8b"
+    }
+  },
+  "Q1Baseline": {
+    "baseCommit": "eeefcf72af2fe666d35e6cfd1e0b4f16966a4f4e",
+    "typoRegressionTests": {
+      "failed": 3,
+      "total": 3
+    },
+    "finalOfflineSuite": "all 3 passed within 829/829 JavaScript tests",
+    "natGasOutOfScope": "With model form product=natural gas, 'nat gas production in Texas' remains natural gas production without clarification. If product is unresolved, normal product clarification remains. No live score reached this case."
+  },
+  "natGasObserved": "nat gas production in Texas returned Texas Natural Gas Marketed Production (MMcf), with no clarification.",
+  "naturalGasolineObserved": "The form remained petroleum production and was not changed to natural gas. The result was a no-data response for petroleum production in Texas with alternative activity buttons; the frozen Q1 check passed.",
+  "Q2": {
+    "oldLabel": "No data for these years (EIA returned none)",
+    "newLabel": "Not yet in our checked list",
+    "newLabelSet": [
+      "Available",
+      "Reported as zero every year",
+      "No data for these years",
+      "Not yet in our checked list",
+      "EIA does not publish this",
+      "Not in EIA's catalogue"
+    ],
+    "liveD6aFailuresAreNotWording": [
+      "form:places",
+      "form:clarificationAbout"
+    ]
+  },
+  "Q3ExactText": "- Before any paid or scored test run, run the complete offline test suite against the final code, including replays of saved AI responses, and fix every failure first. If the AI's instructions or input format changed, say which saved responses are out of date. A scored run that fails on something the offline suite would have caught is a process failure; report it as one.",
+  "pythonRule": {
+    "approvedText": "Run each scripts/eia-lookup/*.test.py file individually with python3 -B and aggregate exit statuses; unittest discover does not find these hyphenated test module names.",
+    "location": "AGENTS.md, separate Python Test Verification section",
+    "delivery": "Added locally. Its patch is included in evidence; AGENTS.md itself is excluded from the evidence-only push."
+  },
+  "priorPartialRun": {
+    "status": "FAIL_INCOMPLETE_AND_PROCESS_FAILURE",
+    "path": "evidence/eia-job8/scored-run-result-1.json",
+    "preserved": true
+  },
+  "appScorersAndFrozenExpectationsChanged": false,
+  "evidenceFilesSHA256": {
+    "evidence/eia-job8/scored-complete-revision-4/summary.json.gz": "7080ee05a5de793efd135c16c58771d325c4f8880519d9840a81c8e07c096a2f",
+    "evidence/eia-job8/scored-complete-revision-4/model-attempts.jsonl.gz": "756e4e1d313a9f47d887aedff208820fd6c2791b51d50b6a9b8c4b52e7df4994",
+    "evidence/eia-job8/scored-complete-revision-4/model-requests.jsonl.gz": "b84de081969da7f00ce1b27594e6c78c0e7a4a69d6df432f6f6ce8999d1e9f34",
+    "evidence/eia-job8/scored-complete-revision-4/dialogue-steps.jsonl.gz": "d4edabd4ab972fe3db3d4111ebd7c1d5e3965a0befffd96597202797c5085252",
+    "evidence/eia-job8/scored-complete-revision-4/eia-calls.jsonl.gz": "e9f8b29042a5ae347da85345f0cbff46535f189a7ba66bd1d75c92ef338c240d",
+    "evidence/eia-job8/scored-complete-revision-4/started.json.gz": "a8854d4c4f693d6c53dfbee3b1dbe67c32e93bec292009a99378a54a2a24b990",
+    "evidence/eia-job8/checks-revision-4/build.log.gz": "65a23062b27880842da965af9790470b839f4e8a80e841a7aa86f9114c74c4a5",
+    "evidence/eia-job8/checks-revision-4/npm-test-before-doc-placement-fix.log.redacted.gz": "1c05e6c038709d524b8bbf9808cf60c7fc011037ad7fb8e12d8198e1c74fc034",
+    "evidence/eia-job8/checks-revision-4/npm-test-final.log.gz": "1594353568419af892997a3230fa376e56c1e2427708b237d6357cd839a309ae",
+    "evidence/eia-job8/checks-revision-4/python-results.json.gz": "09c64ac8257e26853ba0b2975277c86c543b0c4ce1741cd78f4a20c9ba5cb702",
+    "evidence/eia-job8/checks-revision-4/python-tests.log.gz": "4b2ec456d345ebece0cac71e5963199820ed1d5bfe633ebb14d313bada6ab602",
+    "evidence/eia-job8/checks-revision-4/replay-summary.json.gz": "6d20c2efd565b3f32b7b60d414cac31ef04fb9dadb0efb1541274b952d82ca8b",
+    "evidence/eia-job8/checks-revision-4/runner-checks.log.gz": "f98dfbfaf64bc3aaffbed3254b709684a4df12834be34ca4a4657053a77102f5"
+  },
+  "redactions": [
+    {
+      "source": "evidence/eia-job8/checks-revision-4/npm-test-before-doc-placement-fix.log.gz",
+      "publishedAs": "evidence/eia-job8/checks-revision-4/npm-test-before-doc-placement-fix.log.redacted.gz",
+      "category": "local home path",
+      "count": 1,
+      "originalSHA256": "f2362a44f6c86b8e594d350d6c7633ac5645e1d7ba97de18251ecc7a729be57a",
+      "publishedSHA256": "1c05e6c038709d524b8bbf9808cf60c7fc011037ad7fb8e12d8198e1c74fc034"
+    }
+  ],
+  "rawRecordsLocation": "~/Documents/EIAapp-Evidence/20261031/job8/scored-complete-4/",
+  "remainingWork": "The release pass marks are not all met. Further app fixes and another scored run require a new work order; none were performed."
+}

@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+let s=fs.readFileSync(root+'/lib/sources/eia/interpret-query.js','utf8');
+s=s.replace('getNegationScope, listApprovedGeographies,','getNegationScope, listRequestEvidenceMentions, listApprovedGeographies,');
+s=s.replace('const ROUTING_CONFIG =', 'import { hasNegation, ruleRequestEvidence, validateRequestEvidence } from "./request-evidence.js";\n\nconst ROUTING_CONFIG =');
+s=s.replace('    correctedQuery: rawIntent.correctedQuery,','    requestEvidence: rawIntent.requestEvidence,\n    correctedQuery: rawIntent.correctedQuery,');
+s=s.replace('export function interpretQueryWithRules(query, countries = [], fallbackReason = "openai_not_used", correctionEvidence = []) {', 'export function interpretQueryWithRules(query, countries = [], fallbackReason = "openai_not_used", correctionEvidence = [], scopeHandled = false) {\n  if (!scopeHandled && hasNegation(query)) return interpretWithEvidence(null, String(query), countries, fallbackReason, correctionEvidence);');
+s=s.replace('export function validateAiInterpretation(parsed, query, countries = [], fallbackIntent = null) {','export function validateAiInterpretation(parsed, query, countries = [], fallbackIntent = null, scopeHandled = false) {');
+s=s.replace('  const forms = buildQueryForms(query);\n  const rawRuleIntent', '  if (!scopeHandled && (parsed.requestEvidence || hasNegation(query))) return interpretWithEvidence(parsed, String(query), countries);\n\n  const forms = buildQueryForms(query);\n  const rawRuleIntent');
+s=s.replace('    "Return only JSON with correctedQuery, confidence, ambiguity, fields, geographies, conceptPairs, exclusions, and unknownQualifiers.",', `    "Return only JSON with correctedQuery, confidence, ambiguity, fields, geographies, conceptPairs, exclusions, unknownQualifiers, and requestEvidence.",
+    "requestEvidence is {version:1, query:<exact raw query>, scopes:[{start,end,text,status,target,operator?}]}. Positions are zero-based UTF-16 character offsets; end is exclusive; text must be the exact raw substring.",
+    "Scopes must be ordered, non-overlapping, and cover every source word. Group contiguous text with the same role; use at most 32 scopes. Never split a word or complete metadata name such as natural gas or United States.",
+    "status is requested, excluded, unresolved, or context. target is data, action, knowledge, condition, or unknown. Keep data mentions in requested, excluded or unresolved scopes, never hidden inside context.",
+    "A knowledge/certainty comment is context, not a data exclusion. Separately mark an established data request as requested; an undecided choice or conditional request is unresolved. Non-exclusion alone does not establish a request.",
+    "Each excluded scope must contain its negative operator, recorded as operator:{start,end,text}, and must target data or an exclusion-request action. A requested scope must not contain a negation operator; put non-excluding grammatical context into its own context scope.",
+    "Preserve genuinely ambiguous extent, conditions, and nested request/exclusion actions as unresolved; never turn unknown intervening words into exclusions. Preserve all clearly established requests around an unresolved scope.",`);
+s=s.replace('export function validateAiInterpretation(',fs.readFileSync('/private/tmp/eia-scope-interpret-helper.txt','utf8')+'export function validateAiInterpretation(');
+fs.writeFileSync('/private/tmp/eia-scope-interpret-query.js',s);
+let ui=fs.readFileSync(root+'/components/search/SearchWorkspace.js','utf8');
+ui=ui.replace('    originalQuery: intent.originalQuery,','    requestEvidence: intent.requestEvidence,\n    originalQuery: intent.originalQuery,');
+fs.writeFileSync('/private/tmp/eia-scope-SearchWorkspace.js',ui);

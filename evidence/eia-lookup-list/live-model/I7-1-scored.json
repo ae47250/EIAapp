@@ -1,0 +1,1232 @@
+{
+  "id": "I7",
+  "repeat": 1,
+  "query": "natural gas reserves for all the US states except alaska",
+  "meaning": {
+    "correct": true,
+    "errors": [],
+    "returnedGeographies": [
+      "USA"
+    ],
+    "rawGeographies": [
+      "USA | United States | national"
+    ]
+  },
+  "checksPassed": true,
+  "firstAttempt": {
+    "meaning": {
+      "correct": true,
+      "errors": [],
+      "returnedGeographies": [
+        "USA"
+      ],
+      "rawGeographies": [
+        "USA | United States | national"
+      ]
+    },
+    "checksPassed": true
+  },
+  "data": {
+    "correct": true,
+    "errors": [],
+    "unlabelledWrongData": false,
+    "entries": [
+      {
+        "geographyCode": "USA",
+        "product": "natural gas",
+        "activity": "reserves",
+        "correct": true,
+        "errors": [],
+        "status": "available",
+        "eiaName": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+        "unit": "Billion cubic feet",
+        "frequency": "annual",
+        "coverage": {
+          "start": "1977",
+          "end": "2021",
+          "count": 45
+        },
+        "rows": 45,
+        "total": 45,
+        "complete": true,
+        "message": null,
+        "labels": [
+          "Dry natural gas proved reserves as of December 31",
+          "Lower 48 states (excludes Alaska; includes federal offshore)"
+        ]
+      }
+    ]
+  },
+  "clarificationNeeded": false,
+  "attemptCount": 1,
+  "usage": [
+    {
+      "input_tokens": 5573,
+      "input_tokens_details": {
+        "cache_write_tokens": 275,
+        "cached_tokens": 5295
+      },
+      "output_tokens": 267,
+      "output_tokens_details": {
+        "reasoning_tokens": 141
+      },
+      "total_tokens": 5840
+    }
+  ],
+  "costUSD": 0.00021424999999999998,
+  "costUpperUSD": 0.00152675,
+  "result": {
+    "mode": "lookup",
+    "query": "natural gas reserves for all the US states except alaska",
+    "intent": {
+      "originalQuery": "natural gas reserves for all the US states except alaska",
+      "cleanedQuery": "natural gas reserves for all the US states except alaska",
+      "normalizedQuery": "natural gas reserves for all the US states except alaska",
+      "correctedQuery": "natural gas reserves for all the US states except alaska",
+      "correctedQuerySource": "unchanged",
+      "interpreter": "openai_locked_form",
+      "interpretationMethod": "enforced_form",
+      "lockedForm": {
+        "geographies": [
+          {
+            "geography": "USA | United States | national",
+            "quoted_words": "all the US states"
+          }
+        ],
+        "excluded_geographies": [
+          {
+            "geography": "AK | Alaska | US state",
+            "quoted_words": "except alaska"
+          }
+        ],
+        "topics": [
+          {
+            "product": "natural gas",
+            "activity": "reserves",
+            "quoted_words": "natural gas reserves"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": false,
+          "about": null,
+          "options": []
+        }
+      },
+      "country": {
+        "name": "United States",
+        "code": "USA",
+        "type": "national",
+        "routeFamilies": [
+          "domestic",
+          "international",
+          "seds"
+        ]
+      },
+      "countryCode": "USA",
+      "validatedGeographies": [
+        {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ]
+        }
+      ],
+      "excludedGeographies": [
+        {
+          "name": "Alaska",
+          "code": "AK",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "product": "natural gas",
+      "activity": "reserves",
+      "sector": null,
+      "validatedConceptPairs": [
+        {
+          "product": "natural gas",
+          "activity": "reserves",
+          "order": 0,
+          "source": "validated_interpreter"
+        }
+      ],
+      "exclusions": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "fields": {
+        "country": {
+          "normalizedValue": "USA",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "product": {
+          "normalizedValue": "natural gas",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "activity": {
+          "normalizedValue": "reserves",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "sector": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "fallbackUsed": false,
+          "explicit": false
+        }
+      },
+      "unknownQualifiers": [],
+      "fallback": {
+        "used": false,
+        "method": null,
+        "reasons": []
+      },
+      "needsClarification": false,
+      "blockingClarification": false,
+      "conceptPairStatus": "validated",
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "natural gas",
+          "activity": "reserves",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [
+          "USA"
+        ],
+        "routeFamily": "domestic",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "natural gas reserves for all the US states except alaska",
+        "normalizedQuery": "natural gas reserves for all the us states except alaska",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": null,
+              "source": "validated_interpreter",
+              "evidence": null,
+              "geography": {
+                "name": "United States",
+                "code": "USA",
+                "type": "national",
+                "routeFamilies": [
+                  "domestic",
+                  "international",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "natural gas",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "reserves",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "United States",
+          "code": "USA",
+          "type": "national",
+          "routeFamilies": [
+            "domestic",
+            "international",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "United States",
+            "code": "USA",
+            "type": "national",
+            "routeFamilies": [
+              "domestic",
+              "international",
+              "seds"
+            ]
+          }
+        ],
+        "product": "natural gas",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "reserves",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "natural gas",
+            "activity": "reserves",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": null
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [
+            "USA"
+          ],
+          "routeFamily": "domestic",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly",
+            "weekly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "none",
+          "reasons": []
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "domestic",
+          "label": "Domestic EIA",
+          "reason": "A U.S. national Electricity or Natural Gas request uses Domestic EIA.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "mechanically_cleaned_raw_query",
+          "geographies": [
+            "validated_interpreter"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "USA",
+              "rawText": null,
+              "source": "validated_interpreter",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": []
+        },
+        "needsClarification": false,
+        "blockingClarification": false,
+        "missingFields": [],
+        "clarificationMessage": null
+      },
+      "route": {
+        "family": "domestic",
+        "label": "Domestic EIA",
+        "reason": "A U.S. national Electricity or Natural Gas request uses Domestic EIA.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly",
+          "weekly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "none",
+        "reasons": []
+      }
+    },
+    "source": "U.S. Energy Information Administration",
+    "selectedSeries": {
+      "lookup": true,
+      "lookupRowKey": "lower48-natural-gas-reserves",
+      "candidateId": "lookup:lower48-natural-gas-reserves:USA",
+      "seriesId": "natural-gas/enr/dry | product=EPG0; process=R11; duoarea=R48 | value | annual",
+      "certainty": null,
+      "selectorVerified": true,
+      "selector": {
+        "route": "natural-gas/enr/dry",
+        "dataColumn": "value",
+        "frequency": "annual",
+        "facets": {
+          "product": "EPG0",
+          "process": "R11",
+          "duoarea": "R48"
+        }
+      },
+      "country": "United States",
+      "countryCode": "USA",
+      "product": "natural gas",
+      "activity": "reserves",
+      "productId": "natural gas",
+      "activityId": "reserves",
+      "unitFacet": "Billion cubic feet",
+      "frequency": "annual",
+      "unit": "Billion cubic feet",
+      "title": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+      "eiaName": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+      "description": "Proved dry natural gas reserves remaining at year end; this API series ends in 2021.",
+      "basisLabel": "Dry natural gas proved reserves as of December 31",
+      "otherMeasuresExist": false,
+      "regionLabel": "Lower 48 states (excludes Alaska; includes federal offshore)",
+      "sector": null,
+      "sectorLabel": "All sectors",
+      "fallbackLabel": null,
+      "alternative": false,
+      "completenessNote": "",
+      "total": 45,
+      "rowsReceived": 45,
+      "complete": true,
+      "missingValues": 0,
+      "duplicateRows": 0,
+      "points": [
+        {
+          "period": "1977",
+          "value": 175170
+        },
+        {
+          "period": "1978",
+          "value": 175988
+        },
+        {
+          "period": "1979",
+          "value": 168738
+        },
+        {
+          "period": "1980",
+          "value": 165639
+        },
+        {
+          "period": "1981",
+          "value": 168693
+        },
+        {
+          "period": "1982",
+          "value": 166522
+        },
+        {
+          "period": "1983",
+          "value": 165964
+        },
+        {
+          "period": "1984",
+          "value": 162987
+        },
+        {
+          "period": "1985",
+          "value": 159522
+        },
+        {
+          "period": "1986",
+          "value": 158922
+        },
+        {
+          "period": "1987",
+          "value": 153986
+        },
+        {
+          "period": "1988",
+          "value": 158946
+        },
+        {
+          "period": "1989",
+          "value": 158177
+        },
+        {
+          "period": "1990",
+          "value": 160046
+        },
+        {
+          "period": "1991",
+          "value": 157509
+        },
+        {
+          "period": "1992",
+          "value": 155377
+        },
+        {
+          "period": "1993",
+          "value": 152508
+        },
+        {
+          "period": "1994",
+          "value": 154104
+        },
+        {
+          "period": "1995",
+          "value": 155649
+        },
+        {
+          "period": "1996",
+          "value": 157180
+        },
+        {
+          "period": "1997",
+          "value": 156661
+        },
+        {
+          "period": "1998",
+          "value": 154114
+        },
+        {
+          "period": "1999",
+          "value": 157672
+        },
+        {
+          "period": "2000",
+          "value": 168190
+        },
+        {
+          "period": "2001",
+          "value": 174660
+        },
+        {
+          "period": "2002",
+          "value": 178478
+        },
+        {
+          "period": "2003",
+          "value": 180759
+        },
+        {
+          "period": "2004",
+          "value": 184106
+        },
+        {
+          "period": "2005",
+          "value": 196214
+        },
+        {
+          "period": "2006",
+          "value": 200840
+        },
+        {
+          "period": "2007",
+          "value": 225809
+        },
+        {
+          "period": "2008",
+          "value": 236957
+        },
+        {
+          "period": "2009",
+          "value": 263408
+        },
+        {
+          "period": "2010",
+          "value": 295787
+        },
+        {
+          "period": "2011",
+          "value": 324643
+        },
+        {
+          "period": "2012",
+          "value": 298457
+        },
+        {
+          "period": "2013",
+          "value": 330948
+        },
+        {
+          "period": "2014",
+          "value": 361959
+        },
+        {
+          "period": "2015",
+          "value": 303164
+        },
+        {
+          "period": "2016",
+          "value": 318918
+        },
+        {
+          "period": "2017",
+          "value": 431939
+        },
+        {
+          "period": "2018",
+          "value": 466010
+        },
+        {
+          "period": "2019",
+          "value": 456108
+        },
+        {
+          "period": "2020",
+          "value": 409123
+        },
+        {
+          "period": "2021",
+          "value": 490395
+        }
+      ],
+      "coverage": {
+        "start": "1977",
+        "end": "2021",
+        "count": 45
+      },
+      "latestPeriod": "2021",
+      "latestValue": 490395,
+      "downloadedAt": "2026-10-29T00:38:52.245Z",
+      "source": "U.S. Energy Information Administration"
+    },
+    "selectedComparison": null,
+    "selectedComparisons": [],
+    "results": [
+      {
+        "topicIndex": 0,
+        "product": "natural gas",
+        "activity": "reserves",
+        "title": "Natural gas reserves",
+        "countries": [
+          {
+            "geography": {
+              "name": "United States",
+              "code": "USA",
+              "type": "national",
+              "routeFamilies": [
+                "domestic",
+                "international",
+                "seds"
+              ]
+            },
+            "product": "natural gas",
+            "activity": "reserves",
+            "status": "available",
+            "series": {
+              "lookup": true,
+              "lookupRowKey": "lower48-natural-gas-reserves",
+              "candidateId": "lookup:lower48-natural-gas-reserves:USA",
+              "seriesId": "natural-gas/enr/dry | product=EPG0; process=R11; duoarea=R48 | value | annual",
+              "certainty": null,
+              "selectorVerified": true,
+              "selector": {
+                "route": "natural-gas/enr/dry",
+                "dataColumn": "value",
+                "frequency": "annual",
+                "facets": {
+                  "product": "EPG0",
+                  "process": "R11",
+                  "duoarea": "R48"
+                }
+              },
+              "country": "United States",
+              "countryCode": "USA",
+              "product": "natural gas",
+              "activity": "reserves",
+              "productId": "natural gas",
+              "activityId": "reserves",
+              "unitFacet": "Billion cubic feet",
+              "frequency": "annual",
+              "unit": "Billion cubic feet",
+              "title": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+              "eiaName": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+              "description": "Proved dry natural gas reserves remaining at year end; this API series ends in 2021.",
+              "basisLabel": "Dry natural gas proved reserves as of December 31",
+              "otherMeasuresExist": false,
+              "regionLabel": "Lower 48 states (excludes Alaska; includes federal offshore)",
+              "sector": null,
+              "sectorLabel": "All sectors",
+              "fallbackLabel": null,
+              "alternative": false,
+              "completenessNote": "",
+              "total": 45,
+              "rowsReceived": 45,
+              "complete": true,
+              "missingValues": 0,
+              "duplicateRows": 0,
+              "points": [
+                {
+                  "period": "1977",
+                  "value": 175170
+                },
+                {
+                  "period": "1978",
+                  "value": 175988
+                },
+                {
+                  "period": "1979",
+                  "value": 168738
+                },
+                {
+                  "period": "1980",
+                  "value": 165639
+                },
+                {
+                  "period": "1981",
+                  "value": 168693
+                },
+                {
+                  "period": "1982",
+                  "value": 166522
+                },
+                {
+                  "period": "1983",
+                  "value": 165964
+                },
+                {
+                  "period": "1984",
+                  "value": 162987
+                },
+                {
+                  "period": "1985",
+                  "value": 159522
+                },
+                {
+                  "period": "1986",
+                  "value": 158922
+                },
+                {
+                  "period": "1987",
+                  "value": 153986
+                },
+                {
+                  "period": "1988",
+                  "value": 158946
+                },
+                {
+                  "period": "1989",
+                  "value": 158177
+                },
+                {
+                  "period": "1990",
+                  "value": 160046
+                },
+                {
+                  "period": "1991",
+                  "value": 157509
+                },
+                {
+                  "period": "1992",
+                  "value": 155377
+                },
+                {
+                  "period": "1993",
+                  "value": 152508
+                },
+                {
+                  "period": "1994",
+                  "value": 154104
+                },
+                {
+                  "period": "1995",
+                  "value": 155649
+                },
+                {
+                  "period": "1996",
+                  "value": 157180
+                },
+                {
+                  "period": "1997",
+                  "value": 156661
+                },
+                {
+                  "period": "1998",
+                  "value": 154114
+                },
+                {
+                  "period": "1999",
+                  "value": 157672
+                },
+                {
+                  "period": "2000",
+                  "value": 168190
+                },
+                {
+                  "period": "2001",
+                  "value": 174660
+                },
+                {
+                  "period": "2002",
+                  "value": 178478
+                },
+                {
+                  "period": "2003",
+                  "value": 180759
+                },
+                {
+                  "period": "2004",
+                  "value": 184106
+                },
+                {
+                  "period": "2005",
+                  "value": 196214
+                },
+                {
+                  "period": "2006",
+                  "value": 200840
+                },
+                {
+                  "period": "2007",
+                  "value": 225809
+                },
+                {
+                  "period": "2008",
+                  "value": 236957
+                },
+                {
+                  "period": "2009",
+                  "value": 263408
+                },
+                {
+                  "period": "2010",
+                  "value": 295787
+                },
+                {
+                  "period": "2011",
+                  "value": 324643
+                },
+                {
+                  "period": "2012",
+                  "value": 298457
+                },
+                {
+                  "period": "2013",
+                  "value": 330948
+                },
+                {
+                  "period": "2014",
+                  "value": 361959
+                },
+                {
+                  "period": "2015",
+                  "value": 303164
+                },
+                {
+                  "period": "2016",
+                  "value": 318918
+                },
+                {
+                  "period": "2017",
+                  "value": 431939
+                },
+                {
+                  "period": "2018",
+                  "value": 466010
+                },
+                {
+                  "period": "2019",
+                  "value": 456108
+                },
+                {
+                  "period": "2020",
+                  "value": 409123
+                },
+                {
+                  "period": "2021",
+                  "value": 490395
+                }
+              ],
+              "coverage": {
+                "start": "1977",
+                "end": "2021",
+                "count": 45
+              },
+              "latestPeriod": "2021",
+              "latestValue": 490395,
+              "downloadedAt": "2026-10-29T00:38:52.245Z",
+              "source": "U.S. Energy Information Administration"
+            },
+            "seriesId": "natural-gas/enr/dry | product=EPG0; process=R11; duoarea=R48 | value | annual",
+            "unit": "Billion cubic feet",
+            "coverage": {
+              "start": "1977",
+              "end": "2021",
+              "count": 45
+            },
+            "alternatives": [],
+            "message": null
+          }
+        ],
+        "selectedComparison": null,
+        "selectedSeries": {
+          "lookup": true,
+          "lookupRowKey": "lower48-natural-gas-reserves",
+          "candidateId": "lookup:lower48-natural-gas-reserves:USA",
+          "seriesId": "natural-gas/enr/dry | product=EPG0; process=R11; duoarea=R48 | value | annual",
+          "certainty": null,
+          "selectorVerified": true,
+          "selector": {
+            "route": "natural-gas/enr/dry",
+            "dataColumn": "value",
+            "frequency": "annual",
+            "facets": {
+              "product": "EPG0",
+              "process": "R11",
+              "duoarea": "R48"
+            }
+          },
+          "country": "United States",
+          "countryCode": "USA",
+          "product": "natural gas",
+          "activity": "reserves",
+          "productId": "natural gas",
+          "activityId": "reserves",
+          "unitFacet": "Billion cubic feet",
+          "frequency": "annual",
+          "unit": "Billion cubic feet",
+          "title": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+          "eiaName": "Lower 48 States Dry Natural Gas Expected Future Production (Billion Cubic Feet)",
+          "description": "Proved dry natural gas reserves remaining at year end; this API series ends in 2021.",
+          "basisLabel": "Dry natural gas proved reserves as of December 31",
+          "otherMeasuresExist": false,
+          "regionLabel": "Lower 48 states (excludes Alaska; includes federal offshore)",
+          "sector": null,
+          "sectorLabel": "All sectors",
+          "fallbackLabel": null,
+          "alternative": false,
+          "completenessNote": "",
+          "total": 45,
+          "rowsReceived": 45,
+          "complete": true,
+          "missingValues": 0,
+          "duplicateRows": 0,
+          "points": [
+            {
+              "period": "1977",
+              "value": 175170
+            },
+            {
+              "period": "1978",
+              "value": 175988
+            },
+            {
+              "period": "1979",
+              "value": 168738
+            },
+            {
+              "period": "1980",
+              "value": 165639
+            },
+            {
+              "period": "1981",
+              "value": 168693
+            },
+            {
+              "period": "1982",
+              "value": 166522
+            },
+            {
+              "period": "1983",
+              "value": 165964
+            },
+            {
+              "period": "1984",
+              "value": 162987
+            },
+            {
+              "period": "1985",
+              "value": 159522
+            },
+            {
+              "period": "1986",
+              "value": 158922
+            },
+            {
+              "period": "1987",
+              "value": 153986
+            },
+            {
+              "period": "1988",
+              "value": 158946
+            },
+            {
+              "period": "1989",
+              "value": 158177
+            },
+            {
+              "period": "1990",
+              "value": 160046
+            },
+            {
+              "period": "1991",
+              "value": 157509
+            },
+            {
+              "period": "1992",
+              "value": 155377
+            },
+            {
+              "period": "1993",
+              "value": 152508
+            },
+            {
+              "period": "1994",
+              "value": 154104
+            },
+            {
+              "period": "1995",
+              "value": 155649
+            },
+            {
+              "period": "1996",
+              "value": 157180
+            },
+            {
+              "period": "1997",
+              "value": 156661
+            },
+            {
+              "period": "1998",
+              "value": 154114
+            },
+            {
+              "period": "1999",
+              "value": 157672
+            },
+            {
+              "period": "2000",
+              "value": 168190
+            },
+            {
+              "period": "2001",
+              "value": 174660
+            },
+            {
+              "period": "2002",
+              "value": 178478
+            },
+            {
+              "period": "2003",
+              "value": 180759
+            },
+            {
+              "period": "2004",
+              "value": 184106
+            },
+            {
+              "period": "2005",
+              "value": 196214
+            },
+            {
+              "period": "2006",
+              "value": 200840
+            },
+            {
+              "period": "2007",
+              "value": 225809
+            },
+            {
+              "period": "2008",
+              "value": 236957
+            },
+            {
+              "period": "2009",
+              "value": 263408
+            },
+            {
+              "period": "2010",
+              "value": 295787
+            },
+            {
+              "period": "2011",
+              "value": 324643
+            },
+            {
+              "period": "2012",
+              "value": 298457
+            },
+            {
+              "period": "2013",
+              "value": 330948
+            },
+            {
+              "period": "2014",
+              "value": 361959
+            },
+            {
+              "period": "2015",
+              "value": 303164
+            },
+            {
+              "period": "2016",
+              "value": 318918
+            },
+            {
+              "period": "2017",
+              "value": 431939
+            },
+            {
+              "period": "2018",
+              "value": 466010
+            },
+            {
+              "period": "2019",
+              "value": 456108
+            },
+            {
+              "period": "2020",
+              "value": 409123
+            },
+            {
+              "period": "2021",
+              "value": 490395
+            }
+          ],
+          "coverage": {
+            "start": "1977",
+            "end": "2021",
+            "count": 45
+          },
+          "latestPeriod": "2021",
+          "latestValue": 490395,
+          "downloadedAt": "2026-10-29T00:38:52.245Z",
+          "source": "U.S. Energy Information Administration"
+        }
+      }
+    ],
+    "choices": [],
+    "choice": null,
+    "needsClarification": false,
+    "note": "Data fetched from checked EIA routes. Measurement definitions and availability are shown with each result."
+  }
+}

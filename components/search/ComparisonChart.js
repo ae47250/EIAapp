@@ -1,5 +1,6 @@
 "use client";
 
+import {chartPeriodCaption} from "../../lib/client/lookup-display.js";
 import { useEffect, useRef } from "react";
 
 import { formatLineChartValue, getCleanPoints } from "../../lib/client/formatting.js";
@@ -14,12 +15,13 @@ export default function ComparisonChart({ comparison }) {
       name: country.geography.name,
       color: COLORS[index % COLORS.length],
       unit: country.series.unit,
-      points: getCleanPoints(country.series.points)
+      points: getCleanPoints((country.series.chartSeries || country.series).points)
     }));
 
+  const mixedUnits=new Set(series.map(s=>s.unit)).size>1;
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return undefined;
+    if (!canvas || mixedUnits) return undefined;
     const draw = () => drawComparisonChart(canvas, series);
     draw();
     if (typeof ResizeObserver === "undefined") {
@@ -29,12 +31,14 @@ export default function ComparisonChart({ comparison }) {
     const observer = new ResizeObserver(draw);
     observer.observe(canvas);
     return () => observer.disconnect();
-  }, [series]);
+  }, [series,mixedUnits]);
 
+  if(mixedUnits)return <p role="status">Different units cannot share one chart axis. See the labelled table.</p>;
   if (series.length === 0) return <p className="muted">No numeric observations are available to graph.</p>;
 
   return (
     <>
+      <p data-chart-caption>{chartPeriodCaption(series.flatMap(s=>s.points))}</p>
       <div className="comparison-legend" aria-label="Chart countries">
         {series.map(item => (
           <span key={item.name}><i style={{ background: item.color }} />{item.name}</span>

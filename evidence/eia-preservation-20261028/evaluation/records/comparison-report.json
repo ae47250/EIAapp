@@ -1,0 +1,4518 @@
+{
+  "generatedAt": "2026-10-28T11:10:34.817Z",
+  "models": [
+    {
+      "model": "gpt-5.4-nano-2026-03-17",
+      "scheduledExpected": 20,
+      "scheduledCompleted": 20,
+      "actualAttempts": 20,
+      "retries": 0,
+      "httpSuccesses": 20,
+      "semanticPasses": 1,
+      "strictJSONPasses": 19,
+      "shapePasses": 8,
+      "spanPasses": 5,
+      "contractPasses": 2,
+      "usableOriginalInterpretations": 1,
+      "consistentQueryPairs": 4,
+      "semanticPassAgreementPairs": 9,
+      "latencyMs": {
+        "median": 4904.311124500004,
+        "min": 3879.337333000003,
+        "max": 6425.176084
+      },
+      "tokens": {
+        "input": 15918,
+        "cached": 0,
+        "cacheWrite": 0,
+        "output": 12385
+      },
+      "knownTokenCostUSD": 0.018664850000000004,
+      "unknownBilledAttempts": 0,
+      "unknownCostUpperBoundUSD": 0,
+      "costPerUsableUSD": 0.018664850000000004,
+      "downstream": [
+        {
+          "scheduledId": 1,
+          "queryId": 9,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_geography_item",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "GEO",
+              "FRA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "electricity consumption in Georgia and France",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 45,
+                  "text": "electricity consumption in Georgia and France",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 4,
+          "queryId": 3,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction",
+            "frequency_or_explicit_flag"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": false,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 1,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [
+            {
+              "family": "electricity_energy",
+              "baseUnit": "kilowatthours"
+            }
+          ],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "BRA",
+              "JPN"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": false,
+            "blockingClarification": false,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": null,
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "model",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "brazil and japan electrciity consumption",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 6,
+                  "text": "brazil",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 7,
+                  "end": 10,
+                  "text": "and",
+                  "status": "context",
+                  "target": "unknown"
+                },
+                {
+                  "start": 11,
+                  "end": 16,
+                  "text": "japan",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 17,
+                  "end": 28,
+                  "text": "electrciity",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 29,
+                  "end": 40,
+                  "text": "consumption",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 5,
+          "queryId": 7,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "compatibility_summary_contradiction",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "activity_ai_ambiguous"
+            ]
+          },
+          "route": "seds",
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": true,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "seds",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "TX"
+            ],
+            "pairs": [
+              [
+                "natural gas",
+                "production"
+              ],
+              [
+                "natural gas",
+                "consumption"
+              ]
+            ],
+            "product": "natural gas",
+            "activity": "production",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "seds",
+              "label": "SEDS",
+              "reason": "A state-level energy request uses SEDS.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "natural gas production and consumption in Texas annually",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 56,
+                  "text": "natural gas production and consumption in Texas annually",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 8,
+          "queryId": 4,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "product_activity_pairs_or_order",
+            "frequency_or_explicit_flag"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit",
+            "invalid_pair_item"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": false,
+          "publicStatus": 200,
+          "candidateCount": 5,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [
+            "million metric tons of oil equivalent",
+            "quadrillion Btu"
+          ],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": false,
+            "blockingClarification": false,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": null,
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "field_level_deterministic_fallback",
+              "reasons": [
+                "product_ai_low_confidence"
+              ]
+            },
+            "scopeValidation": {
+              "source": "model",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 6,
+                  "text": "energy",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 7,
+                  "end": 18,
+                  "text": "consumption",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 19,
+                  "end": 26,
+                  "text": "iceland",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 9,
+          "queryId": 2,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "product_ai_ambiguous",
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energyy consumption usa",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 29,
+                  "text": "total energyy consumption usa",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 12,
+          "queryId": 5,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "unnecessary_clarification",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_field_country",
+            "invalid_source_scope",
+            "uncovered_source_text"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "field_level_deterministic_fallback",
+              "reasons": [
+                "product_ai_low_confidence"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption icealnd",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 26,
+                  "text": "energy consumption icealnd",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 13,
+          "queryId": 1,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energy consumption united states",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 38,
+                  "text": "total energy consumption united states",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 16,
+          "queryId": 8,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous"
+            ]
+          },
+          "route": "domestic",
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "monthly",
+          "explicit": true,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "domestic",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "CA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "monthly",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "monthly electricity consumption in California",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 45,
+                  "text": "monthly electricity consumption in California",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 17,
+          "queryId": 6,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "product_activity_pairs_or_order",
+            "compatibility_summary_contradiction",
+            "frequency_or_explicit_flag",
+            "unsupported_flat_exclusions",
+            "requested_data_hidden_in_context",
+            "unsupported_excluded_scope"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit",
+            "invalid_exclusion_item",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "metadata_hidden_in_context",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "field_level_deterministic_fallback",
+              "reasons": [
+                "product_ai_missing"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland not ireland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 27,
+                  "text": "energy consumption iceland ",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 27,
+                  "end": 38,
+                  "text": "not ireland",
+                  "status": "excluded",
+                  "target": "data",
+                  "operator": {
+                    "start": 27,
+                    "end": 30,
+                    "text": "not"
+                  }
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 20,
+          "queryId": 10,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "gas_choice_not_clearly_clarified",
+            "guessed_product_or_lost_consumption",
+            "country_summary_contradiction",
+            "frequency_or_explicit_flag"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              null,
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                null,
+                "consumption"
+              ]
+            ],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "gas consumption in the United States",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 36,
+                  "text": "gas consumption in the United States",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 21,
+          "queryId": 4,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "product_activity_pairs_or_order",
+            "compatibility_summary_contradiction",
+            "unnecessary_clarification",
+            "frequency_or_explicit_flag"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify what is requested or excluded in \"energy\". Established request fields are preserved; no series will be selected until this is resolved.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "model",
+              "issues": [],
+              "unresolved": 1
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 6,
+                  "text": "energy",
+                  "status": "unresolved",
+                  "target": "data"
+                },
+                {
+                  "start": 7,
+                  "end": 18,
+                  "text": "consumption",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 19,
+                  "end": 26,
+                  "text": "iceland",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 24,
+          "queryId": 9,
+          "repeat": 2,
+          "originalSemantic": true,
+          "originalContract": true,
+          "originalErrors": [],
+          "contractErrors": [],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": false,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 1,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [
+            {
+              "family": "electricity_energy",
+              "baseUnit": "kilowatthours"
+            }
+          ],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "GEO",
+              "FRA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": false,
+            "blockingClarification": false,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": null,
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "model",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "electricity consumption in Georgia and France",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 11,
+                  "text": "electricity",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 12,
+                  "end": 23,
+                  "text": "consumption",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 24,
+                  "end": 26,
+                  "text": "in",
+                  "status": "context",
+                  "target": "unknown"
+                },
+                {
+                  "start": 27,
+                  "end": 34,
+                  "text": "Georgia",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 35,
+                  "end": 38,
+                  "text": "and",
+                  "status": "context",
+                  "target": "unknown"
+                },
+                {
+                  "start": 39,
+                  "end": 45,
+                  "text": "France",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 25,
+          "queryId": 6,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "product_activity_pairs_or_order",
+            "compatibility_summary_contradiction",
+            "unsupported_flat_exclusions",
+            "unsupported_excluded_scope"
+          ],
+          "contractErrors": [
+            "invalid_exclusion_item",
+            "unsupported_exclusion_target",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "field_level_deterministic_fallback",
+              "reasons": [
+                "product_ai_missing"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland not ireland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 27,
+                  "text": "energy consumption iceland ",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 27,
+                  "end": 38,
+                  "text": "not ireland",
+                  "status": "excluded",
+                  "target": "data",
+                  "operator": {
+                    "start": 27,
+                    "end": 30,
+                    "text": "not"
+                  }
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 28,
+          "queryId": 2,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "no_original_JSON_interpretation"
+          ],
+          "contractErrors": [
+            "original_output_not_strict_JSON_object"
+          ],
+          "interpreter": "rules",
+          "fieldFallback": {
+            "used": true,
+            "method": "deterministic_rules",
+            "reasons": [
+              "openai_invalid_json",
+              "product_from_deterministic_fallback"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "rules",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "deterministic_rules",
+              "reasons": [
+                "submitted_rule_intent",
+                "product_from_deterministic_fallback"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energyy consumption usa",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 29,
+                  "text": "total energyy consumption usa",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 29,
+          "queryId": 8,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": true,
+          "originalErrors": [
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous"
+            ]
+          },
+          "route": "domestic",
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "monthly",
+          "explicit": true,
+          "needsClarification": false,
+          "publicStatus": 200,
+          "candidateCount": 5,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": true,
+            "fromRoute": "domestic",
+            "toRoute": "seds",
+            "targetCount": 1,
+            "displayedCandidateCount": 5,
+            "fallbackIndex": {
+              "buildVersion": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "artifactContentHash": "e9cfe49ce1a9cf7853e76ce9ff8dc2afecfcfb0efd7627410963b50f61916e2a",
+              "artifacts": [
+                {
+                  "output": "seds.jsonl.gz",
+                  "records": 48046,
+                  "contentHash": "94cac14f30e4043496531640606366ff5c4c231cfa54b72ca251b5e4bd3eda2b"
+                }
+              ],
+              "routeFamily": "seds",
+              "recordCount": 48046,
+              "refreshStatus": "partial",
+              "versionStatus": "match",
+              "warnings": [
+                "Phase 1B staging cache only; it is not active production metadata.",
+                "Domestic coverage includes Electricity and Natural Gas; other Domestic product families remain outside this partial cache.",
+                "Full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
+                "International dataFlagId is treated as an observation annotation, not candidate identity.",
+                "Artifacts are gzip-compressed because uncompressed normalized files are not GitHub-safe."
+              ]
+            }
+          },
+          "warnings": [
+            {
+              "code": "requested_frequency_unavailable_seds_annual_fallback",
+              "message": "No valid monthly electricity consumption series was found for California. Annual SEDS alternatives are shown as clearly labeled fallbacks."
+            }
+          ],
+          "units": [
+            "Metric tons CO2 per billion Btu",
+            "Billion Btu",
+            "Kilowatthours"
+          ],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "CA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "monthly",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": false,
+            "blockingClarification": false,
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+              "deterministic": true
+            },
+            "clarificationMessage": null,
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "model",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "monthly electricity consumption in California",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 7,
+                  "text": "monthly",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 8,
+                  "end": 19,
+                  "text": "electricity",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 20,
+                  "end": 31,
+                  "text": "consumption",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 32,
+                  "end": 34,
+                  "text": "in",
+                  "status": "context",
+                  "target": "unknown"
+                },
+                {
+                  "start": 35,
+                  "end": 45,
+                  "text": "California",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 32,
+          "queryId": 7,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "compatibility_summary_contradiction",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "activity_ai_ambiguous"
+            ]
+          },
+          "route": "seds",
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": true,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "seds",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "TX"
+            ],
+            "pairs": [
+              [
+                "natural gas",
+                "production"
+              ],
+              [
+                "natural gas",
+                "consumption"
+              ]
+            ],
+            "product": "natural gas",
+            "activity": "production",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "seds",
+              "label": "SEDS",
+              "reason": "A state-level energy request uses SEDS.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "natural gas production and consumption in Texas annually",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 56,
+                  "text": "natural gas production and consumption in Texas annually",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 33,
+          "queryId": 3,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction",
+            "frequency_or_explicit_flag"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous",
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "BRA",
+              "JPN"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "brazil and japan electrciity consumption",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 40,
+                  "text": "brazil and japan electrciity consumption",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 36,
+          "queryId": 5,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "product_activity_pairs_or_order",
+            "compatibility_summary_contradiction",
+            "unnecessary_clarification",
+            "frequency_or_explicit_flag"
+          ],
+          "contractErrors": [
+            "missing_frequency_explicit",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "field_level_deterministic_fallback",
+              "reasons": [
+                "product_ai_missing"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption icealnd",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 26,
+                  "text": "energy consumption icealnd",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 37,
+          "queryId": 1,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energy consumption united states",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 38,
+                  "text": "total energy consumption united states",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 40,
+          "queryId": 10,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "gas_choice_not_clearly_clarified",
+            "guessed_product_or_lost_consumption",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_pair_item",
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "frequency_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              null,
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                null,
+                "consumption"
+              ]
+            ],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "gas consumption in the United States",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 36,
+                  "text": "gas consumption in the United States",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "gpt-6-luna",
+      "scheduledExpected": 20,
+      "scheduledCompleted": 20,
+      "actualAttempts": 20,
+      "retries": 0,
+      "httpSuccesses": 20,
+      "semanticPasses": 3,
+      "strictJSONPasses": 16,
+      "shapePasses": 16,
+      "spanPasses": 0,
+      "contractPasses": 0,
+      "usableOriginalInterpretations": 0,
+      "consistentQueryPairs": 5,
+      "semanticPassAgreementPairs": 9,
+      "latencyMs": {
+        "median": 5128.121999999999,
+        "min": 2634.603958000007,
+        "max": 9101.860209000006
+      },
+      "tokens": {
+        "input": 15918,
+        "cached": 0,
+        "cacheWrite": 0,
+        "output": 10536
+      },
+      "knownTokenCostUSD": 0.0068598,
+      "unknownBilledAttempts": 0,
+      "unknownCostUpperBoundUSD": 0,
+      "costPerUsableUSD": null,
+      "downstream": [
+        {
+          "scheduledId": 2,
+          "queryId": 9,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "GEO",
+              "FRA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "electricity consumption in Georgia and France",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 45,
+                  "text": "electricity consumption in Georgia and France",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 3,
+          "queryId": 3,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "no_original_JSON_interpretation"
+          ],
+          "contractErrors": [
+            "original_output_not_strict_JSON_object"
+          ],
+          "interpreter": "rules",
+          "fieldFallback": {
+            "used": true,
+            "method": "deterministic_rules",
+            "reasons": [
+              "openai_invalid_json",
+              "product_from_deterministic_fallback"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "rules",
+            "geographies": [
+              "BRA",
+              "JPN"
+            ],
+            "pairs": [],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the product. Example: United States total energy consumption.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "deterministic_rules",
+              "reasons": [
+                "submitted_rule_intent",
+                "product_from_deterministic_fallback"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "brazil and japan electrciity consumption",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 40,
+                  "text": "brazil and japan electrciity consumption",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 6,
+          "queryId": 7,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "compatibility_summary_contradiction",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_rejected",
+              "activity_ai_ambiguous"
+            ]
+          },
+          "route": "seds",
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": true,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "seds",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "TX"
+            ],
+            "pairs": [
+              [
+                "natural gas",
+                "production"
+              ],
+              [
+                "natural gas",
+                "consumption"
+              ]
+            ],
+            "product": "natural gas",
+            "activity": "production",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "seds",
+              "label": "SEDS",
+              "reason": "A state-level energy request uses SEDS.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "natural gas production and consumption in Texas annually",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 56,
+                  "text": "natural gas production and consumption in Texas annually",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 7,
+          "queryId": 4,
+          "repeat": 1,
+          "originalSemantic": true,
+          "originalContract": false,
+          "originalErrors": [],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 26,
+                  "text": "energy consumption iceland",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 10,
+          "queryId": 2,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energyy consumption usa",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 29,
+                  "text": "total energyy consumption usa",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 11,
+          "queryId": 5,
+          "repeat": 1,
+          "originalSemantic": true,
+          "originalContract": false,
+          "originalErrors": [],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption icealnd",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 26,
+                  "text": "energy consumption icealnd",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 14,
+          "queryId": 1,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energy consumption united states",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 38,
+                  "text": "total energy consumption united states",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 15,
+          "queryId": 8,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "no_original_JSON_interpretation"
+          ],
+          "contractErrors": [
+            "original_output_not_strict_JSON_object"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous"
+            ]
+          },
+          "route": "domestic",
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "monthly",
+          "explicit": true,
+          "needsClarification": false,
+          "publicStatus": 200,
+          "candidateCount": 5,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": true,
+            "fromRoute": "domestic",
+            "toRoute": "seds",
+            "targetCount": 1,
+            "displayedCandidateCount": 5,
+            "fallbackIndex": {
+              "buildVersion": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "artifactContentHash": "e9cfe49ce1a9cf7853e76ce9ff8dc2afecfcfb0efd7627410963b50f61916e2a",
+              "artifacts": [
+                {
+                  "output": "seds.jsonl.gz",
+                  "records": 48046,
+                  "contentHash": "94cac14f30e4043496531640606366ff5c4c231cfa54b72ca251b5e4bd3eda2b"
+                }
+              ],
+              "routeFamily": "seds",
+              "recordCount": 48046,
+              "refreshStatus": "partial",
+              "versionStatus": "match",
+              "warnings": [
+                "Phase 1B staging cache only; it is not active production metadata.",
+                "Domestic coverage includes Electricity and Natural Gas; other Domestic product families remain outside this partial cache.",
+                "Full ELEC.PLANT series are replaced by a compact plant directory for later on-demand lookup.",
+                "International dataFlagId is treated as an observation annotation, not candidate identity.",
+                "Artifacts are gzip-compressed because uncompressed normalized files are not GitHub-safe."
+              ]
+            }
+          },
+          "warnings": [
+            {
+              "code": "requested_frequency_unavailable_seds_annual_fallback",
+              "message": "No valid monthly electricity consumption series was found for California. Annual SEDS alternatives are shown as clearly labeled fallbacks."
+            }
+          ],
+          "units": [
+            "Metric tons CO2 per billion Btu",
+            "Billion Btu",
+            "Kilowatthours"
+          ],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "CA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "monthly",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": false,
+            "blockingClarification": false,
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+              "deterministic": true
+            },
+            "clarificationMessage": null,
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "model",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "monthly electricity consumption in California",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 7,
+                  "text": "monthly",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 7,
+                  "end": 19,
+                  "text": " electricity",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 19,
+                  "end": 31,
+                  "text": " consumption",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 31,
+                  "end": 45,
+                  "text": " in California",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 18,
+          "queryId": 6,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "product_activity_pairs_or_order",
+            "compatibility_summary_contradiction",
+            "unnecessary_clarification",
+            "unsupported_flat_exclusions"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "field_level_deterministic_fallback",
+              "reasons": [
+                "product_ai_missing"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland not ireland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 27,
+                  "text": "energy consumption iceland ",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 27,
+                  "end": 38,
+                  "text": "not ireland",
+                  "status": "excluded",
+                  "target": "data",
+                  "operator": {
+                    "start": 27,
+                    "end": 30,
+                    "text": "not"
+                  }
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 19,
+          "queryId": 10,
+          "repeat": 1,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "gas_choice_not_clearly_clarified",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              null,
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                null,
+                "consumption"
+              ]
+            ],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "gas consumption in the United States",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 36,
+                  "text": "gas consumption in the United States",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 22,
+          "queryId": 4,
+          "repeat": 2,
+          "originalSemantic": true,
+          "originalContract": false,
+          "originalErrors": [],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 26,
+                  "text": "energy consumption iceland",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 23,
+          "queryId": 9,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "GEO",
+            "FRA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "GEO",
+              "FRA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "electricity consumption in Georgia and France",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 45,
+                  "text": "electricity consumption in Georgia and France",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 26,
+          "queryId": 6,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "unsupported_flat_exclusions"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "ISL"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "ISL"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption iceland not ireland",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 27,
+                  "text": "energy consumption iceland ",
+                  "status": "requested",
+                  "target": "data"
+                },
+                {
+                  "start": 27,
+                  "end": 38,
+                  "text": "not ireland",
+                  "status": "excluded",
+                  "target": "data",
+                  "operator": {
+                    "start": 27,
+                    "end": 30,
+                    "text": "not"
+                  }
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 27,
+          "queryId": 2,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energyy consumption usa",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 29,
+                  "text": "total energyy consumption usa",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 30,
+          "queryId": 8,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "no_original_JSON_interpretation"
+          ],
+          "contractErrors": [
+            "original_output_not_strict_JSON_object"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_missing"
+            ]
+          },
+          "route": "domestic",
+          "geographies": [
+            "CA"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "monthly",
+          "explicit": true,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "domestic",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "CA"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "monthly",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A nonannual U.S. state request uses Domestic EIA first because SEDS is annual-only.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "monthly electricity consumption in California",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 45,
+                  "text": "monthly electricity consumption in California",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 31,
+          "queryId": 7,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_rejected"
+            ]
+          },
+          "route": "seds",
+          "geographies": [
+            "TX"
+          ],
+          "pairs": [
+            [
+              "natural gas",
+              "production"
+            ],
+            [
+              "natural gas",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": true,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "seds",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "TX"
+            ],
+            "pairs": [
+              [
+                "natural gas",
+                "production"
+              ],
+              [
+                "natural gas",
+                "consumption"
+              ]
+            ],
+            "product": "natural gas",
+            "activity": "production",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": true,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "seds",
+              "label": "SEDS",
+              "reason": "A state-level energy request uses SEDS.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "natural gas production and consumption in Texas annually",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 56,
+                  "text": "natural gas production and consumption in Texas annually",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 34,
+          "queryId": 3,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": true,
+            "method": "field_level_deterministic_fallback",
+            "reasons": [
+              "country_ai_ambiguous"
+            ]
+          },
+          "route": "international",
+          "geographies": [
+            "BRA",
+            "JPN"
+          ],
+          "pairs": [
+            [
+              "electricity",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "BRA",
+              "JPN"
+            ],
+            "pairs": [
+              [
+                "electricity",
+                "consumption"
+              ]
+            ],
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "brazil and japan electrciity consumption",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 40,
+                  "text": "brazil and japan electrciity consumption",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 35,
+          "queryId": 5,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "no_original_JSON_interpretation"
+          ],
+          "contractErrors": [
+            "original_output_not_strict_JSON_object"
+          ],
+          "interpreter": "rules",
+          "fieldFallback": {
+            "used": true,
+            "method": "deterministic_rules",
+            "reasons": [
+              "openai_invalid_json",
+              "route_defaulted_without_geography"
+            ]
+          },
+          "route": "international",
+          "geographies": [],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "rules",
+            "geographies": [],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A request without routable geography defaults to International.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the country. Example: United States total energy consumption.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": true,
+              "method": "deterministic_rules",
+              "reasons": [
+                "submitted_rule_intent",
+                "route_defaulted_without_geography"
+              ]
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "energy consumption icealnd",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 26,
+                  "text": "energy consumption icealnd",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "scheduledId": 38,
+          "queryId": 1,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              "total energy",
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                "total energy",
+                "consumption"
+              ]
+            ],
+            "product": "total energy",
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "total energy consumption united states",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 38,
+                  "text": "total energy consumption united states",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        },
+        {
+          "scheduledId": 39,
+          "queryId": 10,
+          "repeat": 2,
+          "originalSemantic": false,
+          "originalContract": false,
+          "originalErrors": [
+            "geographies_or_order",
+            "gas_choice_not_clearly_clarified",
+            "guessed_product_or_lost_consumption",
+            "country_summary_contradiction"
+          ],
+          "contractErrors": [
+            "invalid_source_scope",
+            "uncovered_source_text",
+            "split_or_uncovered_metadata_mention"
+          ],
+          "interpreter": "openai",
+          "fieldFallback": {
+            "used": false,
+            "method": "field_level_deterministic_fallback",
+            "reasons": []
+          },
+          "route": "international",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            [
+              null,
+              "consumption"
+            ]
+          ],
+          "frequency": "annual",
+          "explicit": false,
+          "needsClarification": true,
+          "publicStatus": 200,
+          "candidateCount": 0,
+          "definitionCount": 0,
+          "frequencyFallback": {
+            "attempted": false,
+            "fromRoute": "international",
+            "toRoute": null,
+            "targetCount": 0,
+            "displayedCandidateCount": 0,
+            "fallbackIndex": null
+          },
+          "warnings": [],
+          "units": [],
+          "sourceScopePreserved": true,
+          "finalMeaning": {
+            "interpreter": "openai",
+            "geographies": [
+              "USA"
+            ],
+            "pairs": [
+              [
+                null,
+                "consumption"
+              ]
+            ],
+            "product": null,
+            "activity": "consumption",
+            "sector": null,
+            "frequency": "annual",
+            "frequencyExplicit": false,
+            "exclusions": [],
+            "needsClarification": true,
+            "blockingClarification": true,
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A U.S. non-electricity request uses the available International metadata.",
+              "deterministic": true
+            },
+            "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+            "unknownQualifiers": [],
+            "fallback": {
+              "used": false,
+              "method": "field_level_deterministic_fallback",
+              "reasons": []
+            },
+            "scopeValidation": {
+              "source": "rules",
+              "issues": [
+                "invalid_evidence_envelope"
+              ],
+              "unresolved": 0
+            },
+            "requestEvidence": {
+              "version": 1,
+              "query": "gas consumption in the United States",
+              "scopes": [
+                {
+                  "start": 0,
+                  "end": 36,
+                  "text": "gas consumption in the United States",
+                  "status": "requested",
+                  "target": "data"
+                }
+              ],
+              "invalid": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "note": "Original meanings/contract scores are separate from downstream app repairs and metadata availability. All disagreements require human inspection against the frozen criteria. No additional model grading calls."
+}

@@ -1,0 +1,486 @@
+{
+  "id": "I12",
+  "repeat": 1,
+  "query": "biofuel production in iowa and nebraksa",
+  "meaning": {
+    "correct": false,
+    "errors": [
+      "geographies_or_order",
+      "clarification_needed",
+      "unexpected_clarification_details"
+    ],
+    "returnedGeographies": [
+      "NE"
+    ],
+    "rawGeographies": [
+      "NE | Nebraska | US state"
+    ]
+  },
+  "checksPassed": true,
+  "firstAttempt": {
+    "meaning": {
+      "correct": false,
+      "errors": [
+        "geographies_or_order",
+        "unexpected_unsupported_words",
+        "clarification_needed",
+        "unexpected_clarification_details"
+      ],
+      "returnedGeographies": [
+        "NE"
+      ],
+      "rawGeographies": [
+        "NE | Nebraska | US state"
+      ]
+    },
+    "checksPassed": false
+  },
+  "data": {
+    "correct": false,
+    "errors": [
+      "unexpected_clarification",
+      "IA/biofuels/production:missing_entry",
+      "NE/biofuels/production:missing_entry"
+    ],
+    "unlabelledWrongData": false,
+    "entries": [
+      {
+        "geographyCode": "IA",
+        "product": "biofuels",
+        "activity": "production",
+        "correct": false,
+        "errors": [
+          "missing_entry"
+        ]
+      },
+      {
+        "geographyCode": "NE",
+        "product": "biofuels",
+        "activity": "production",
+        "correct": false,
+        "errors": [
+          "missing_entry"
+        ]
+      }
+    ]
+  },
+  "clarificationNeeded": true,
+  "attemptCount": 2,
+  "usage": [
+    {
+      "input_tokens": 5574,
+      "input_tokens_details": {
+        "cache_write_tokens": 276,
+        "cached_tokens": 5295
+      },
+      "output_tokens": 217,
+      "output_tokens_details": {
+        "reasoning_tokens": 84
+      },
+      "total_tokens": 5791
+    },
+    {
+      "input_tokens": 5594,
+      "input_tokens_details": {
+        "cache_write_tokens": 296,
+        "cached_tokens": 5295
+      },
+      "output_tokens": 271,
+      "output_tokens_details": {
+        "reasoning_tokens": 161
+      },
+      "total_tokens": 5865
+    }
+  ],
+  "costUSD": 0.0004077,
+  "costUpperUSD": 0.0030360000000000005,
+  "result": {
+    "mode": "lookup",
+    "query": "biofuel production in iowa and nebraksa",
+    "intent": {
+      "originalQuery": "biofuel production in iowa and nebraksa",
+      "cleanedQuery": "biofuel production in iowa and nebraksa",
+      "normalizedQuery": "biofuel production in iowa and nebraksa",
+      "correctedQuery": "biofuel production in iowa and nebraksa",
+      "correctedQuerySource": "unchanged",
+      "interpreter": "openai_locked_form",
+      "interpretationMethod": "enforced_form",
+      "lockedForm": {
+        "geographies": [
+          {
+            "geography": "NE | Nebraska | US state",
+            "quoted_words": "nebraksa"
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "biofuels",
+            "activity": "production",
+            "quoted_words": "biofuel production"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "geography",
+          "options": []
+        }
+      },
+      "country": {
+        "name": "Nebraska",
+        "code": "NE",
+        "type": "state",
+        "routeFamilies": [
+          "domestic",
+          "seds"
+        ]
+      },
+      "countryCode": "NE",
+      "validatedGeographies": [
+        {
+          "name": "Nebraska",
+          "code": "NE",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        }
+      ],
+      "excludedGeographies": [],
+      "product": "biofuels",
+      "activity": "production",
+      "sector": null,
+      "validatedConceptPairs": [
+        {
+          "product": "biofuels",
+          "activity": "production",
+          "order": 0,
+          "source": "validated_interpreter"
+        }
+      ],
+      "exclusions": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "fields": {
+        "country": {
+          "normalizedValue": "NE",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "product": {
+          "normalizedValue": "biofuels",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "activity": {
+          "normalizedValue": "production",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "sector": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "fallbackUsed": false,
+          "explicit": false
+        }
+      },
+      "unknownQualifiers": [],
+      "fallback": {
+        "used": false,
+        "method": null,
+        "reasons": []
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "conceptPairStatus": "validated",
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the geography. No series will be selected until it is resolved.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "biofuels",
+          "activity": "production",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "seds",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "biofuel production in iowa and nebraksa",
+        "normalizedQuery": "biofuel production in iowa and nebraksa",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": null,
+              "source": "validated_interpreter",
+              "evidence": null,
+              "geography": {
+                "name": "Nebraska",
+                "code": "NE",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "biofuels",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "production",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Nebraska",
+          "code": "NE",
+          "type": "state",
+          "routeFamilies": [
+            "domestic",
+            "seds"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Nebraska",
+            "code": "NE",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          }
+        ],
+        "product": "biofuels",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "production",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "biofuels",
+            "activity": "production",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": null
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": false,
+          "status": "not_applicable",
+          "geographyCodes": [],
+          "routeFamily": "seds",
+          "reason": "fewer_than_two_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "none",
+          "reasons": []
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "seds",
+          "label": "SEDS",
+          "reason": "A state-level energy request uses SEDS.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "mechanically_cleaned_raw_query",
+          "geographies": [
+            "validated_interpreter"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "NE",
+              "rawText": null,
+              "source": "validated_interpreter",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": []
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [],
+        "clarificationMessage": "Please clarify the geography. No series will be selected until it is resolved."
+      },
+      "route": {
+        "family": "seds",
+        "label": "SEDS",
+        "reason": "A state-level energy request uses SEDS.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "none",
+        "reasons": []
+      }
+    },
+    "source": "U.S. Energy Information Administration",
+    "selectedSeries": null,
+    "selectedComparison": null,
+    "selectedComparisons": [],
+    "results": [],
+    "choices": [],
+    "choice": null,
+    "needsClarification": true,
+    "userMessage": "Please clarify the geography. No series will be selected until it is resolved."
+  }
+}

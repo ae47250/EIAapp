@@ -1,0 +1,133 @@
+{
+  "status": "Source-definition research only.",
+  "method": "Reuse existing native reserve correspondence; direct native-code/full-definition correspondence for field production. No applicable public reference benchmark.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_crpdn_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-crude-c1a3f76af308.html",
+      "sha256": "c1a3f76af3080eddb8312774549f9febed940abadacf39652e3722eee65757f6"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_api_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-crude-82eed335ee98.html",
+      "sha256": "82eed335ee98ce5a64935150fa1ec43cd14b440b50373a1c2663810cd5d097ea"
+    },
+    {
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_cplc_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/petroleum-crude-4356e88f6ddc.html",
+      "sha256": "4356e88f6ddc3b72121f2975a5460ed793e8e3335861e1170507b6d3065ca8ab"
+    }
+  ],
+  "routes": [
+    "petroleum/crd/pres",
+    "petroleum/crd/cplc",
+    "petroleum/crd/nprod",
+    "petroleum/crd/crpdn",
+    "petroleum/crd/api"
+  ],
+  "reviewedProductionProducts": [
+    {
+      "id": "EPC0",
+      "name": "Crude Oil"
+    },
+    {
+      "id": "EPCANS",
+      "name": "ANS Crude Oil"
+    },
+    {
+      "id": "EPC00U",
+      "name": "Crude Gravity of Unkown"
+    },
+    {
+      "id": "EPC35B",
+      "name": "Crude Gravity 30.1 to 35.0 percent"
+    },
+    {
+      "id": "EPC20B",
+      "name": "Crude Gravity 20.0 percent or less"
+    },
+    {
+      "id": "EPC55B",
+      "name": "Crude Gravity 50.1 to 55.0 percent"
+    },
+    {
+      "id": "EPC54B",
+      "name": "Crude Gravity 40.1 to 50.0 percent"
+    },
+    {
+      "id": "EPC99A",
+      "name": "Crude Gravity of All "
+    },
+    {
+      "id": "EPC55G",
+      "name": "Crude Gravity 55.1 percent or more"
+    },
+    {
+      "id": "EPC30L",
+      "name": "Crude Gravity 30.0 percent or less"
+    },
+    {
+      "id": "EPC43B",
+      "name": "Crude Gravity 30.1 to 40.0 percent"
+    },
+    {
+      "id": "EPC50B",
+      "name": "Crude Gravity 45.1 to 50.0 percent"
+    },
+    {
+      "id": "EPC50G",
+      "name": "Crude Gravity 50.1 percent or more"
+    },
+    {
+      "id": "EPC25B",
+      "name": "Crude Gravity 20.1 to 25.0 percent"
+    },
+    {
+      "id": "EPC30B",
+      "name": "Crude Gravity 25.1 to 30.0 percent"
+    },
+    {
+      "id": "EPC40B",
+      "name": "Crude Gravity 35.1 to 40.0 percent"
+    },
+    {
+      "id": "EPC45B",
+      "name": "Crude Gravity 40.1 to 45.0 percent"
+    }
+  ],
+  "expectationsBeforeClassifierEdit": [
+    "Reserve accounting adjustments, acquisitions and divestitures are not product sales/production or reserve levels.",
+    "Year-end proved reserves and report-year production remain distinct; source survey-based production is labelled and official production totals preferred where broader/better aligned.",
+    "Nonproducing reservoirs remain a component even when their parent product is whole gas or explicit crude.",
+    "Crude production is a petroleum component usable only as explicit crude qualifier. All-gravity crude/lease-condensate may be whole within that qualifier; gravity bands, unknown gravity and North Slope components are narrower.",
+    "Daily-rate units are not period totals. Preserve Thousand Barrels versus Thousand Barrels per Day; no conversion.",
+    "Lower 48/offshore/other-states/substate areas remain separate in the crosswalk and never become full US/state totals.",
+    "Invalid unit endings remain invalid; do not erase suffixes or guess units to make a record eligible.",
+    "Original source definitions, frequencies and call provenance remain intact."
+  ],
+  "findings": [
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_crpdn_tbldef2.asp",
+      "finding": "EIA publishes crude field-production estimates from official survey/state sources; marketed volumes include inventory and sediment adjustments."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_api_tbldef2.asp",
+      "finding": "API gravity is degrees, not percent. This table reports crude plus lease condensate as a daily rate; rounded numeric zero can represent less than 0.5 thousand barrels per day."
+    },
+    {
+      "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_cplc_tbldef2.asp",
+      "finding": "Reserve-survey production estimates can differ from official Petroleum Supply Annual production. Do not label a reserve estimate as that official production series."
+    }
+  ],
+  "notation": {
+    "numericZero": "Keep numeric zero as reported zero; never claim it proves physical absence. Owner status wording Reported as zero every year remains accurate.",
+    "source": "https://www.eia.gov/dnav/pet/TblDefs/pet_crd_api_tbldef2.asp"
+  },
+  "metadataConflicts": [
+    {
+      "route": "petroleum/crd/api",
+      "series": "M_EPC50G_FPF_R98_MBBLD",
+      "finding": "Full title has ULL after closing unit parenthesis. Preserve text, flag invalid unit, never generate a row from unresolved unit."
+    }
+  ]
+}

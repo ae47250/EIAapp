@@ -1,0 +1,32 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const {geographyNameForms,findGeographyMentions,resolveApprovedGeography}=await import(root+'/lib/sources/eia/intent-routing.js');
+const {interpretQuery}=await import(root+'/lib/sources/eia/interpret-query.js');
+const metadata=JSON.parse(readFileSync(root+'/data/eia/routing-metadata.json'));
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+process.env.OPENAI_API_KEY='injected-offline-fixture-not-a-key';
+delete process.env.EIA_API_KEY;
+let model;
+globalThis.fetch=async url=>{assert.equal(url,'https://api.openai.com/v1/responses');return Response.json({output_text:JSON.stringify(model)});};
+const results=[];
+for(const geography of metadata.geographies.filter(g=>g.name.includes(',')||g.name.startsWith('The '))) {
+ for(const name of geographyNameForms(geography.name)) {
+  const query=`energy consumption in ${name}`;
+  const field=value=>({value,confidence:.99});
+  model={confidence:.99,geographies:[field(name)],conceptPairs:[{product:'total energy',activity:'consumption',order:0,confidence:.99}],fields:{country:field(name),product:field('total energy'),activity:field('consumption'),sector:field(null),frequency:{...field('annual'),explicit:false}}};
+  const intent=await interpretQuery(query);
+  const codes=intent.structuredIntent.geographies.map(g=>g.code);
+  assert.deepEqual(codes,[geography.code]);
+  assert.equal(intent.structuredIntent.geographies[0].name,geography.name);
+  assert.equal(resolveApprovedGeography(name).code,geography.code);
+  results.push({query,modelGeographyName:name,expectedCode:geography.code,actualCodes:codes});
+ }
+}
+for(const word of ['The','East','West']) {
+ assert.equal(resolveApprovedGeography(word),null);
+ assert.deepEqual(findGeographyMentions(norm(`energy consumption in ${word}`),`energy consumption in ${word}`),[]);
+ results.push({qualifierOnly:word,expected:null});
+}
+writeFileSync('/private/tmp/eia-followup-geography-results.json',JSON.stringify(results,null,2));
+console.log(JSON.stringify({cases:results.length,passed:results.length,externalFetches:0}));

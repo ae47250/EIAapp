@@ -1,0 +1,775 @@
+{
+  "id": "F2",
+  "repeat": 1,
+  "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+  "attempts": [
+    {
+      "id": "F2",
+      "repeat": 1,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "MEX",
+          "CAN"
+        ],
+        "rawGeographies": [
+          "MEX | Mexico | country",
+          "CAN | Canada | country"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": false,
+        "reason": "First comparison is crude oil including lease condensate exports, a narrower petroleum component rather than the requested petroleum aggregate.",
+        "first": {
+          "definitionId": "eia-definition:1:4fd41286b9f3f67ee0fac0ca1ab2a9fac58f7bf8391a438c3a83bff6062f841e",
+          "rank": 1,
+          "title": "Crude oil including lease condensate exports",
+          "semanticScore": 41.8,
+          "rankingTier": "A",
+          "rankingReasonCodes": [
+            "tier_A",
+            "source_pool_primary",
+            "route_family_validated",
+            "geography_validated",
+            "selector_geography_validated",
+            "product_or_scope_hard_gate_passed",
+            "activity_hard_gate_passed",
+            "frequency_validated",
+            "product_exact_petroleum",
+            "activity_exact_exports",
+            "aggregation_relation_unknown_no_verified_hierarchy",
+            "lexical_title_exports",
+            "frequency_exact",
+            "current_active",
+            "availability_present"
+          ],
+          "availableCountryCount": 2,
+          "requestedCountryCount": 2,
+          "definition": {
+            "product": "petroleum",
+            "activity": "exports",
+            "sector": null,
+            "scope": null,
+            "frequency": "annual",
+            "unit": {
+              "family": "thousand barrels per day",
+              "baseUnit": "thousand barrels per day"
+            },
+            "grossNetTreatment": "unspecified",
+            "source": "eia",
+            "methodology": null
+          },
+          "countries": [
+            {
+              "geography": {
+                "name": "Mexico",
+                "code": "MEX",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              },
+              "candidateId": "eia:1:04c828f0a69bdc8dbab5415b9d4611bf372107b85a79ea03304d2be20191759a",
+              "seriesId": "INTL.57-4-MEX-TBPD.A",
+              "title": "Crude oil including lease condensate exports, Mexico, Annual",
+              "product": "petroleum",
+              "activity": "exports",
+              "routeFamily": "international",
+              "frequency": "annual",
+              "unit": "thousand barrels per day",
+              "dateStart": "1980",
+              "dateEnd": "2020",
+              "coverage": "1980 to 2020",
+              "status": "comparable",
+              "warning": null,
+              "unitConversion": {
+                "required": false,
+                "originalUnit": "thousand barrels per day",
+                "comparisonUnit": "thousand barrels per day",
+                "factor": 1
+              },
+              "certainty": {
+                "schemaVersion": "1.1.0",
+                "intentStatus": "resolved",
+                "semanticCompatibility": "compatible",
+                "conceptPairStatus": "validated",
+                "routeRelation": "exact",
+                "frequencyRelation": "defaulted",
+                "unitRelation": "not_requested",
+                "coverageRelation": "not_requested",
+                "aggregationRelation": "unknown",
+                "hierarchyEvidenceStatus": "none",
+                "presentationClass": "compatible_candidate",
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ]
+              }
+            },
+            {
+              "geography": {
+                "name": "Canada",
+                "code": "CAN",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              },
+              "candidateId": "eia:1:c577bbb09bdeb05740afd210506f5fc6cdaab1c97d9122f326a30bb7d958ed83",
+              "seriesId": "INTL.57-4-CAN-TBPD.A",
+              "title": "Crude oil including lease condensate exports, Canada, Annual",
+              "product": "petroleum",
+              "activity": "exports",
+              "routeFamily": "international",
+              "frequency": "annual",
+              "unit": "thousand barrels per day",
+              "dateStart": "1980",
+              "dateEnd": "2020",
+              "coverage": "1980 to 2020",
+              "status": "comparable",
+              "warning": null,
+              "unitConversion": {
+                "required": false,
+                "originalUnit": "thousand barrels per day",
+                "comparisonUnit": "thousand barrels per day",
+                "factor": 1
+              },
+              "certainty": {
+                "schemaVersion": "1.1.0",
+                "intentStatus": "resolved",
+                "semanticCompatibility": "compatible",
+                "conceptPairStatus": "validated",
+                "routeRelation": "exact",
+                "frequencyRelation": "defaulted",
+                "unitRelation": "not_requested",
+                "coverageRelation": "not_requested",
+                "aggregationRelation": "unknown",
+                "hierarchyEvidenceStatus": "none",
+                "presentationClass": "compatible_candidate",
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ]
+              }
+            }
+          ],
+          "warnings": []
+        }
+      },
+      "elapsedMs": 3057,
+      "usage": {
+        "input_tokens": 5502,
+        "input_tokens_details": {
+          "cache_write_tokens": 204,
+          "cached_tokens": 5295
+        },
+        "output_tokens": 195,
+        "output_tokens_details": {
+          "reasoning_tokens": 76
+        },
+        "total_tokens": 5697
+      },
+      "costUSD": 0.00017115,
+      "costUpperUSD": 0.00017632500000000002,
+      "responseId": "resp_03c8d634ac84878d006ae26ed419e887d2b1a41fd7604bb1a6",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": true,
+        "query": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+        "intent": {
+          "originalQuery": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+          "cleanedQuery": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+          "normalizedQuery": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+          "correctedQuery": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "MEX | Mexico | country",
+                "quoted_words": "Mexico"
+              },
+              {
+                "geography": "CAN | Canada | country",
+                "quoted_words": "Canada"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "petroleum",
+                "activity": "exports",
+                "quoted_words": "exports more petroleum"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Mexico",
+            "code": "MEX",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "countryCode": "MEX",
+          "validatedGeographies": [
+            {
+              "name": "Mexico",
+              "code": "MEX",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            {
+              "name": "Canada",
+              "code": "CAN",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "petroleum",
+          "activity": "exports",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "petroleum",
+              "activity": "exports",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "MEX",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "petroleum",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "exports",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "petroleum",
+              "activity": "exports",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": true,
+            "status": "active",
+            "geographyCodes": [
+              "MEX",
+              "CAN"
+            ],
+            "routeFamily": "international",
+            "reason": "two_or_more_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "I'm not sure if Mexico or Canada exports more petroleum, show both",
+            "normalizedQuery": "i m not sure if mexico or canada exports more petroleum show both",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Mexico",
+                    "code": "MEX",
+                    "type": "country",
+                    "routeFamilies": [
+                      "international"
+                    ]
+                  }
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Canada",
+                    "code": "CAN",
+                    "type": "country",
+                    "routeFamilies": [
+                      "international"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "petroleum",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "exports",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "Mexico",
+              "code": "MEX",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Mexico",
+                "code": "MEX",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              },
+              {
+                "name": "Canada",
+                "code": "CAN",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            ],
+            "product": "petroleum",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "exports",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "petroleum",
+                "activity": "exports",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": true,
+              "status": "active",
+              "geographyCodes": [
+                "MEX",
+                "CAN"
+              ],
+              "routeFamily": "international",
+              "reason": "two_or_more_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "ambiguous",
+              "reasons": [
+                "multiple_geographies"
+              ]
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter",
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "MEX",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                },
+                {
+                  "code": "CAN",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "international",
+            "label": "International",
+            "reason": "A non-U.S. country or multi-country request uses International.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "ambiguous",
+            "reasons": [
+              "multiple_geographies"
+            ]
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [],
+        "candidateGroups": [],
+        "comparisonDefinitions": [
+          {
+            "definitionId": "eia-definition:1:4fd41286b9f3f67ee0fac0ca1ab2a9fac58f7bf8391a438c3a83bff6062f841e",
+            "rank": 1,
+            "title": "Crude oil including lease condensate exports",
+            "semanticScore": 41.8,
+            "rankingTier": "A",
+            "rankingReasonCodes": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_petroleum",
+              "activity_exact_exports",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_exports",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "availableCountryCount": 2,
+            "requestedCountryCount": 2,
+            "definition": {
+              "product": "petroleum",
+              "activity": "exports",
+              "sector": null,
+              "scope": null,
+              "frequency": "annual",
+              "unit": {
+                "family": "thousand barrels per day",
+                "baseUnit": "thousand barrels per day"
+              },
+              "grossNetTreatment": "unspecified",
+              "source": "eia",
+              "methodology": null
+            },
+            "countries": [
+              {
+                "geography": {
+                  "name": "Mexico",
+                  "code": "MEX",
+                  "type": "country",
+                  "routeFamilies": [
+                    "international"
+                  ]
+                },
+                "candidateId": "eia:1:04c828f0a69bdc8dbab5415b9d4611bf372107b85a79ea03304d2be20191759a",
+                "seriesId": "INTL.57-4-MEX-TBPD.A",
+                "title": "Crude oil including lease condensate exports, Mexico, Annual",
+                "product": "petroleum",
+                "activity": "exports",
+                "routeFamily": "international",
+                "frequency": "annual",
+                "unit": "thousand barrels per day",
+                "dateStart": "1980",
+                "dateEnd": "2020",
+                "coverage": "1980 to 2020",
+                "status": "comparable",
+                "warning": null,
+                "unitConversion": {
+                  "required": false,
+                  "originalUnit": "thousand barrels per day",
+                  "comparisonUnit": "thousand barrels per day",
+                  "factor": 1
+                },
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                }
+              },
+              {
+                "geography": {
+                  "name": "Canada",
+                  "code": "CAN",
+                  "type": "country",
+                  "routeFamilies": [
+                    "international"
+                  ]
+                },
+                "candidateId": "eia:1:c577bbb09bdeb05740afd210506f5fc6cdaab1c97d9122f326a30bb7d958ed83",
+                "seriesId": "INTL.57-4-CAN-TBPD.A",
+                "title": "Crude oil including lease condensate exports, Canada, Annual",
+                "product": "petroleum",
+                "activity": "exports",
+                "routeFamily": "international",
+                "frequency": "annual",
+                "unit": "thousand barrels per day",
+                "dateStart": "1980",
+                "dateEnd": "2020",
+                "coverage": "1980 to 2020",
+                "status": "comparable",
+                "warning": null,
+                "unitConversion": {
+                  "required": false,
+                  "originalUnit": "thousand barrels per day",
+                  "comparisonUnit": "thousand barrels per day",
+                  "factor": 1
+                },
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                }
+              }
+            ],
+            "warnings": []
+          }
+        ],
+        "userWarnings": [],
+        "needsClarification": false,
+        "userMessage": null,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 1,
+          "rankingUnit": "variable_definition"
+        },
+        "note": "Choose Graph or Excel for one of the 1 ranked variable definitions. Each choice keeps every requested country."
+      }
+    }
+  ],
+  "events": []
+}

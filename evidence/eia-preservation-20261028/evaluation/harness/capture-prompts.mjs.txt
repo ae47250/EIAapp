@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {interpretQuery, OPENAI_TIMEOUT_MS} from '../snapshot/lib/sources/eia/interpret-query.js';
+const frozen=JSON.parse(fs.readFileSync(new URL('../records/frozen-evaluation.json',import.meta.url)));
+const previousFetch=globalThis.fetch, saved=process.env.OPENAI_API_KEY;
+process.env.OPENAI_API_KEY='offline-prompt-capture';
+let captured;let mockedCalls=0;
+globalThis.fetch=async(url,options)=>{
+ assert.equal(url,frozen.settings.endpoint);assert.equal(options.method,'POST');
+ captured=JSON.parse(options.body);mockedCalls++;
+ return Response.json({output_text:'{}'});
+};
+const prompts=[];
+try{
+ for(const c of frozen.cases){captured=null;await interpretQuery(c.query);assert.ok(captured?.input);assert.equal(captured.input.split('\n').at(-1),'Raw query: '+JSON.stringify(c.query));
+ const suffix='Raw query: '+JSON.stringify(c.query);const template=captured.input.slice(0,-suffix.length)+'Raw query: {{JSON_QUERY}}';
+ const bytes=Buffer.byteLength(captured.input);assert.ok(bytes+1000<=frozen.settings.inputTokenUpperBound,'Input bounded by UTF-8 byte count plus framing margin');
+ prompts.push({queryId:c.id,input:captured.input,inputBytes:bytes,inputSHA256:createHash('sha256').update(captured.input).digest('hex'),templateSHA256:createHash('sha256').update(template).digest('hex'),productionRequestBody:captured});
+ }
+ assert.equal(new Set(prompts.map(p=>p.templateSHA256)).size,1);
+ fs.writeFileSync(new URL('../records/prompts.json',import.meta.url),JSON.stringify({capturedAt:new Date().toISOString(),method:'Exact untouched application prompt intercepted with offline fetch. No network or paid generation.',mockedCalls,productionTimeoutMs:OPENAI_TIMEOUT_MS,prompts},null,2)+'\n',{flag:'wx'});
+ fs.writeFileSync(new URL('../records/prompt-template.txt',import.meta.url),prompts[0].input.replace('Raw query: '+JSON.stringify(frozen.cases[0].query),'Raw query: {{JSON_QUERY}}'),{flag:'wx'});
+ console.log(JSON.stringify({prompts:prompts.length,templateSHA256:prompts[0].templateSHA256,maxInputBytes:Math.max(...prompts.map(p=>p.inputBytes)),productionTimeoutMs:OPENAI_TIMEOUT_MS}));
+}finally{globalThis.fetch=previousFetch;if(saved===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=saved;}

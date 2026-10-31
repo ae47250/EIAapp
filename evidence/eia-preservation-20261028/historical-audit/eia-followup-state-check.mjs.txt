@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const wd='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const zip='<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/EIAapp_Review_Bundle.zip';
+const manifest=JSON.parse(execFileSync('unzip',['-p',zip,'MANIFEST.json']));
+const sha=data=>createHash('sha256').update(data).digest('hex');
+const files=manifest.files.filter(f=>f.path.startsWith('files/')).map(f=>({path:f.path.slice(6),before:f.sha256,now:sha(fs.readFileSync(wd+'/'+f.path.slice(6)))}));
+const result={base:execFileSync('git',['rev-parse','HEAD'],{cwd:wd,encoding:'utf8'}).trim(),branch:execFileSync('git',['branch','--show-current'],{cwd:wd,encoding:'utf8'}).trim(),changedSincePriorBundle:files.filter(f=>f.before!==f.now),unchangedPriorBundleFiles:files.filter(f=>f.before===f.now).map(f=>f.path),sourceArtifactsTrackedDiff:execFileSync('git',['diff','--name-only','HEAD','--','data/eia/builds'],{cwd:wd,encoding:'utf8'}).trim()};
+fs.writeFileSync('/private/tmp/eia-followup-state-check.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));

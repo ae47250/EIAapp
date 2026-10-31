@@ -1,0 +1,171 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+
+const wd = '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const base = '5b60a094ecd10e1ca80492bc8558652768d93366';
+const output = '<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/followup/EIAapp_Review_Bundle.zip';
+fs.mkdirSync(path.dirname(output), {recursive:true});
+if (fs.existsSync(output)) throw new Error('Requested ZIP already exists; refusing to overwrite it.');
+const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const git = args => execFileSync('git', args, { cwd: wd, maxBuffer: 32 * 1024 * 1024 });
+const initialStatus = git(['status', '--porcelain=v1', '-z', '--untracked-files=all']);
+const head = git(['rev-parse', 'HEAD']).toString().trim();
+const branch = git(['branch', '--show-current']).toString().trim();
+if (head !== base || branch !== 'codex/eia-interpretation-audit') throw new Error('Worktree identity differs from the reviewed base/branch.');
+const tracked = git(['diff', '--name-only', '-z', base]).toString().split('\0').filter(Boolean).sort();
+const untracked = git(['ls-files', '--others', '--exclude-standard', '-z']).toString().split('\0').filter(Boolean).sort();
+const changed = [...new Set([...tracked, ...untracked])].sort();
+const stageRoot = fs.mkdtempSync('/private/tmp/eia-review-bundle-');
+const stage = path.join(stageRoot, 'bundle');
+fs.mkdirSync(stage);
+const entries = [], redactions = [], missing = [];
+const credentialPatterns = [
+  ['private-key', /-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----[\s\S]*?-----END (?:[A-Z ]+ )?PRIVATE KEY-----/g],
+  ['openai-token', /\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{20,}\b/g],
+  ['github-token', /\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,})\b/g],
+  ['aws-access-key', /\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/g],
+  ['slack-token', /\bxox[baprs]-[A-Za-z0-9-]{20,}\b/g],
+  ['jwt', /\beyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{12,}\.[A-Za-z0-9_-]{12,}\b/g],
+  ['bearer-token', /\bBearer[ \t]+[A-Za-z0-9._~+\/-]{20,}={0,2}/gi],
+  ['credential-literal', /\b(?:OPENAI_API_KEY|EIA_API_KEY|FRED_API_KEY|AWS_SECRET_ACCESS_KEY|ACCESS_TOKEN|CLIENT_SECRET|api[_-]?key|password)\s*["']?\s*[:=]\s*["'][A-Za-z0-9+/_=-]{20,}["']/gi]
+];
+function safeName(name) {
+  if (path.isAbsolute(name) || name.split('/').some(p => p === '..' || p === 'node_modules' || p === '.git' || /^\.env(?:\.|$)/.test(p))) throw new Error('Excluded or unsafe archive path: ' + name);
+}
+function scan(bytes, name, redact = false) {
+  let text = bytes.toString('utf8');
+  for (const [kind, pattern] of credentialPatterns) {
+    // Reviewed, deliberately fake transport sentinel used only by the archived offline probe.
+    const found = [...text.matchAll(pattern)].filter(match => !(kind === 'credential-literal' && /^OPENAI_API_KEY\s*=\s*'injected-offline-fixture-not-a-key'$/.test(match[0])));
+    if (!found.length) continue;
+    if (!redact) throw new Error(`Secret-pattern review needed: ${name}; category=${kind}; count=${found.length}. Values withheld.`);
+    text = text.replace(pattern, '[REDACTED_CREDENTIAL]');
+    redactions.push({ file: name, kind, occurrences: found.length });
+  }
+  if (redact) {
+    const count = (text.match(/\/Users\/[^/\s"'<>]+/g) || []).length;
+    if (count) {
+      text = text.replace(/\/Users\/[^/\s"'<>]+/g, '<HOME>');
+      redactions.push({ file: name, kind: 'local-home-path', occurrences: count });
+    }
+    const pattern = /(?:\/private)?\/var\/folders\/[^\s"'<>]+\/T\/eia-audit-base-[A-Za-z0-9_-]+/g;
+    const countBase = (text.match(pattern) || []).length;
+    if (countBase) {
+      text = text.replace(pattern, '<BASELINE>');
+      redactions.push({ file: name, kind: 'temporary-baseline-path', occurrences: countBase });
+    }
+    return Buffer.from(text);
+  }
+  return bytes;
+}
+function put(name, data, category, source = null, redact = false) {
+  safeName(name);
+  const original = Buffer.isBuffer(data) ? data : Buffer.from(data);
+  const bytes = /\.png$/.test(name) ? original : scan(original, name, redact);
+  const destination = path.join(stage, name);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, bytes);
+  entries.push({ path: name, category, bytes: bytes.length, sha256: sha(bytes), ...(source ? { source, originalSha256: sha(original) } : {}) });
+}
+function copy(source, name, category, redact = false) {
+  if (!fs.existsSync(source)) { missing.push({ item: name, reason: 'Source record unavailable at packaging time' }); return; }
+  if (!fs.lstatSync(source).isFile()) throw new Error('Not a regular file: ' + name);
+  put(name, fs.readFileSync(source), category, source.startsWith(wd + '/') ? source.slice(wd.length + 1) : path.basename(source), redact);
+}
+for (const relative of changed) copy(path.join(wd, relative), 'files/' + relative, untracked.includes(relative) ? 'new-worktree-file' : 'modified-tracked-file');
+const trackedPatch = git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-textconv', base, '--']);
+put('diff/tracked-changes.patch', trackedPatch, 'tracked-diff');
+let completePatch = trackedPatch;
+for (const relative of untracked) {
+  const result = spawnSync('git', ['diff', '--no-index', '--binary', '--full-index', '--no-ext-diff', '--no-textconv', '--', '/dev/null', relative], { cwd: wd, maxBuffer: 32 * 1024 * 1024 });
+  if (result.status !== 1 || result.error) throw new Error('Unable to create new-file patch: ' + relative);
+  completePatch = Buffer.concat([completePatch, result.stdout]);
+}
+put('diff/complete-changes.patch', completePatch, 'tracked-and-new-file-diff');
+for (const file of ['AGENTS.md', 'package.json', 'package-lock.json']) copy(path.join(wd, file), 'context/' + file, 'unchanged-reproduction-context');
+
+const records = [
+  ['eia-followup-before-final.log', 'followup'],
+  ['eia-followup-final-focused-tests.log', 'followup'],
+  ['eia-followup-final-tests.log', 'followup'],
+  ['eia-followup-final-build.log', 'followup'],
+  ['eia-followup-final-static-checks.json', 'followup'],
+  ['eia-followup-expectations.json', 'followup'],
+  ['eia-followup-after.log', 'followup'],
+  ['eia-followup-full-tests.log', 'followup'],
+  ['eia-followup-build.log', 'followup'],
+  ['eia-followup-static-checks.json', 'followup'],
+  ['eia-followup-freeze.json', 'followup'],
+  ['eia-followup-freeze-final.json', 'followup'],
+  ['eia-followup-state-check.json', 'followup'],
+  ['eia-followup-independent-challenges.json', 'followup'],
+  ['eia-followup-independent-review.md', 'followup'],
+  ['eia-final-tests.log', 'tests'],
+  ['eia-original-suite.log', 'baseline'],
+  ['eia-baseline-final-audit.log', 'baseline'],
+  ['eia-build-final.log', 'build'],
+  ['eia-independent-reviewed-final-tree.log', 'review'],
+  ['eia-independent-initial.log', 'review'],
+  ['eia-blind-challenges.json', 'review'],
+  ['eia-challenge-adjudication.json', 'review'],
+  ['eia-independent-final-boundary.mjs', 'review'],
+  ['eia-independent-pool-review-final.json', 'review']
+];
+for (const name of fs.readdirSync('/private/tmp').filter(name => /^eia-followup-(?:independent|supplemental|content-collision|geography|modifier-precedence|exact-pairs|final-guards|reviewed-(?:initial|modifier|final)-production|final-incremental|final-git-state).*\.(?:json|md|mjs|log|patch|diff)$/.test(name))) {
+  if (!records.some(([existing]) => existing === name)) records.push([name, 'followup']);
+}
+for (const [name, category] of records) copy('/private/tmp/' + name, `evidence/${category}/${name}`, 'verification-record', name.endsWith('.log'));
+const review = JSON.parse(fs.readFileSync(path.join(wd, 'tests/fixtures/eia/review-regressions.json')));
+for (const source of review.sources) {
+  const original = '/private/tmp/' + source.file;
+  if (fs.existsSync(original) && sha(fs.readFileSync(original)) !== source.sha256) throw new Error('Frozen review source hash mismatch: ' + source.file);
+  copy(original, 'evidence/review/' + source.file, 'frozen-review-source');
+}
+copy('<LOCAL_HOME>/.codex/visualizations/2026/10/27/01a17dcf-8f09-7142-9c21-c3dfc67d5159/eia-clarification.png', 'evidence/browser/eia-clarification.png', 'browser-evidence');
+put('evidence/review/prior-review-message.md', `# Prior audit independent review — conversation record\n\nPackaging-time transcription of the final message received from reviewer /root/independent_diff_review in the completed EIA audit. This is not a new review or an original on-disk transcript export.\n\n> No remaining actionable findings in the final reviewed production diff.\n>\n> - Independent checks: 298 tests: 297 passed, 1 disputed-case skip; syntax and diff checks passed.\n> - Frozen counterexamples: all 29 interpretation/submission cases pass. The additional two-country comparison now includes all three requested pairs.\n> - Retrieval: the Texas total natural-gas consumption series reaches displayed results. Validation thresholds remain intact.\n> - Scope: no query/geography-specific exceptions, new dependencies, model changes, UI/auth changes, or raw metadata rewrites found.\n> - Limits: existing 10-candidate and 5-definition limits remain, with explicit overflow warnings. Live models, observations, and deployment were not tested.\n>\n> Production diff SHA-256: 176eb4e9fd390e77ad5d0ae50f79592b80df7d92ee021e68809af80698615499.\n>\n> I made no repository edits or Git writes. Subsequent production changes require another review pass.\n`, 'review-conversation-transcription');
+
+// Verify the complete patch independently against base blobs, without writing to the repository.
+const replay = path.join(stageRoot, 'patch-replay');
+fs.mkdirSync(replay);
+for (const relative of tracked) {
+  const destination = path.join(replay, relative);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, git(['show', `${base}:${relative}`]));
+}
+execFileSync('git', ['apply', '--binary', '--whitespace=nowarn', path.join(stage, 'diff/complete-changes.patch')], { cwd: replay });
+for (const relative of changed) if (sha(fs.readFileSync(path.join(replay, relative))) !== sha(fs.readFileSync(path.join(wd, relative)))) throw new Error('Complete patch replay mismatch: ' + relative);
+
+const absentRecords = [
+  'No standalone original file for the prior audit reviewer’s final message existed; a clearly labeled conversation transcription is included.',
+  'Current syntax/import validation has a command/result record. No new rendered-browser console/network capture was made: follow-up checks execute the actual browser serializer and public route with injected model responses. A prior browser screenshot is retained.',
+  'Live model, live EIA observations/exports, deployed-commit verification and full source-cache regeneration were not performed, so no such records exist. The source ZIP prerequisites were absent, as recorded in the audit.'
+];
+put('REDACTIONS.md', `# Secret scan and redactions\n\nAll selected text payloads were inspected for private keys, OpenAI/GitHub/AWS/Slack credentials, JWTs, bearer credentials and secret-like literal assignments. No credential values are printed in scan output. Exact source/configuration/test/fixture/audit copies and patches were preserved unchanged; a source credential finding would have stopped packaging. No credential-like secret was found in those files. The deliberately fake API-key sentinel in the independent offline probe was reviewed and retained as test data; it cannot call the provider because fetch is intercepted. This pattern scan is bounded evidence, not a guarantee against every possible secret format.\n\nLog redactions made for external sharing:\n\n${redactions.length ? redactions.map(r => `- ${r.file}: ${r.kind}; ${r.occurrences} occurrence(s).`).join('\n') : '- None.'}\n\nLocal-home and temporary-baseline path substitutions remove local path identifiers; they do not alter assertions, results or counts. Original and bundled record SHA-256 values are in MANIFEST.json. Non-log review helper scripts remain byte-for-byte archival records and retain their original import paths. Reproduce checks using the repository tests instead.\n`, 'packaging-report');
+put('INVENTORY.md', `# EIAapp review bundle\n\nBase: ${base}\nCurrent HEAD: ${head}\nBranch: ${branch}\nRepository: https://github.com/ae47250/EIAapp\n\nThis is an uncommitted working-tree snapshot from the isolated EIA audit. There are ${tracked.length} tracked modifications and ${untracked.length} untracked additions; nothing is staged and no commit, push, merge or deployment was performed while packaging. The bounded follow-up changed two shared interpretation mechanisms and added regression coverage; no model or data API calls were made. Records under evidence/followup are current; evidence/tests, baseline, build and review retain the earlier audit evidence for comparison. The ZIP is stored outside the worktree.\n\n## Contents\n\n- diff/tracked-changes.patch: complete binary/full-index Git diff against the base for tracked files.\n- diff/complete-changes.patch: the same diff plus additions for all untracked files below. It was applied to temporary base blobs and reproduced all ${changed.length} final files exactly.\n- files/: full, byte-for-byte final copies with repository-relative paths, including the updated audit.\n- context/: unchanged AGENTS.md, package.json and package-lock.json for interpretation and reproduction.\n- evidence/: final tests, exact-base comparisons, final build, independent-review records and browser screenshot.\n- REDACTIONS.md: scan scope and disclosed log redactions.\n- MANIFEST.json: every archive payload file's size, SHA-256 and provenance (except the manifest itself).\n- SHA256SUMS.txt: checksums for the payload files listed there.\n\n## Changed and new files\n\n| Status | Repository-relative path |\n| --- | --- |\n${changed.map(p => `| ${untracked.includes(p) ? 'New / untracked' : 'Modified / tracked'} | ${p} |`).join('\n')}\n\n## Included verification evidence\n\n${entries.filter(e => e.path.startsWith('evidence/')).map(e => '- ' + e.path).join('\n')}\n\nCurrent follow-up results are detailed in files/docs/eia-interpretation-audit.md and evidence/followup. The follow-up 37-case matrix had 24 failures before production changes and now passes all 37. The final follow-up suite has 79 tests / 79 passed, including 42 retained independent/review cases. The current full suite has 464 tests / 463 passed / 0 failed / 1 disputed skip, and the production build passed. Historical prior-audit results: full suite 385 tests / 384 passed / 0 failed / 1 disputed skip; exact-base original suite 243 passed; the 142 added audit tests on the base 54 passed / 87 failed / 1 skipped; independent final focused suite 298 tests / 297 passed / 1 skipped; production build succeeded. The original comparison and original independent-review results predate this follow-up. The current review is evidence/followup/eia-followup-independent-review.md.\n\n## Missing records and limits\n\n${[...missing.map(m => `${m.item}: ${m.reason}`), ...absentRecords].map(m => '- ' + m).join('\n')}\n\nAll requested changed/new files and available final test, baseline, build and review records were included. Earlier intermediate failed-repair logs, unrelated repository files, credentials, .env files, .git, node_modules and generated build directories are excluded. The bundle is a change-review overlay, not a standalone full repository.\n\n## Reproduce checks\n\nUse a fresh checkout of the public repository at the exact base. Let BUNDLE be the absolute path to the extracted ZIP contents. These commands reproduce the included checks offline after dependencies are installed; the test harness injects model responses and blocks real transport.\n\n\`\`\`sh\ngit clone --no-checkout https://github.com/ae47250/EIAapp.git EIAapp-review\ncd EIAapp-review\ngit checkout --detach ${base}\ngit apply --check "$BUNDLE/diff/complete-changes.patch"\ngit apply "$BUNDLE/diff/complete-changes.patch"\nnpm ci --ignore-scripts --no-audit --no-fund\nOPENAI_API_KEY= EIA_API_KEY= node --test\nOPENAI_API_KEY= EIA_API_KEY= node --test tests/eia-interpretation-audit.test.js tests/eia-independent-challenges.test.js tests/eia-followup-regressions.test.js\nOPENAI_API_KEY= EIA_API_KEY= NEXT_TELEMETRY_DISABLED=1 npm run build\ngit diff --check\n\`\`\`\n\nSyntax checks:\n\n\`\`\`sh\n${changed.filter(p => p.endsWith('.js')).map(p => 'node --check ' + p).join('\n')}\n\`\`\`\n\nFor the baseline comparison, use a second clean checkout at the same base and install the same locked dependencies. First run the original node --test suite (243 tests). Then copy only the two new audit test files and the four new fixture JSON files from files/ into their matching paths; do not apply the production patch or replace the existing interpretation test. Run node --test tests/eia-interpretation-audit.test.js tests/eia-independent-challenges.test.js with both API keys empty. The recorded 87 failures are expected there.\n\nThe independent focused run's exact shell invocation was not saved with its log. That is the historical focused run. Current follow-up commands are recorded in the current independent review, and tests/eia-followup-regressions.test.js runs the 79 retained follow-up cases. The archival .mjs review probes have original absolute imports and are evidence, not portable entry points.\n\nOptional local browser reproduction: LOGIN_REQUIRED=off OPENAI_API_KEY= EIA_API_KEY= NEXT_TELEMETRY_DISABLED=1 npm run dev -- --hostname 127.0.0.1 --port 3214. Recheck the audit's searches without selecting Graph/Excel, which would require live observations. Stop the server afterward.\n\nTo verify extracted payloads, run shasum -a 256 -c SHA256SUMS.txt from the extracted bundle directory.\n`, 'packaging-inventory');
+put('SHA256SUMS.txt', [...entries].sort((a,b) => a.path.localeCompare(b.path)).map(e => `${e.sha256}  ${e.path}\n`).join(''), 'payload-checksums');
+const manifest = { version: 1, baseCommit: base, headCommit: head, branch, trackedModifiedFiles: tracked, newFiles: untracked, exactFinalFileCopies: changed.length, patchReplay: 'passed: all final copies reproduced from base blobs plus complete patch', missingRecords: [...missing, ...absentRecords], redactions, exclusions: ['credentials', '.env files', 'node_modules', '.git', 'generated build files', 'unrelated files'], manifestCoverage: 'All ZIP file entries except MANIFEST.json itself', files: [...entries].sort((a,b) => a.path.localeCompare(b.path)) };
+fs.writeFileSync(path.join(stage, 'MANIFEST.json'), JSON.stringify(manifest, null, 2) + '\n');
+execFileSync('/usr/bin/zip', ['-q', '-r', output, '.'], { cwd: stage });
+
+// Reopen the finished ZIP and validate its actual byte contents, not only the staging folder.
+execFileSync('/usr/bin/unzip', ['-tq', output]);
+const zippedNames = execFileSync('/usr/bin/unzip', ['-Z1', output], { encoding: 'utf8' }).trim().split('\n').filter(n => !n.endsWith('/')).sort();
+const expectedNames = [...entries.map(e => e.path), 'MANIFEST.json'].sort();
+if (JSON.stringify(zippedNames) !== JSON.stringify(expectedNames)) throw new Error('ZIP actual inventory mismatch');
+for (const name of zippedNames) safeName(name);
+const zippedManifest = JSON.parse(execFileSync('/usr/bin/unzip', ['-p', output, 'MANIFEST.json']).toString());
+for (const entry of zippedManifest.files) {
+  const bytes = execFileSync('/usr/bin/unzip', ['-p', output, entry.path], { maxBuffer: 32 * 1024 * 1024 });
+  if (bytes.length !== entry.bytes || sha(bytes) !== entry.sha256) throw new Error('ZIP byte/hash mismatch: ' + entry.path);
+  if (!entry.path.endsWith('.png')) scan(bytes, entry.path);
+}
+for (const relative of changed) {
+  const bytes = execFileSync('/usr/bin/unzip', ['-p', output, 'files/' + relative], { maxBuffer: 32 * 1024 * 1024 });
+  if (sha(bytes) !== sha(fs.readFileSync(path.join(wd, relative)))) throw new Error('ZIP final-copy mismatch: ' + relative);
+}
+if (!initialStatus.equals(git(['status', '--porcelain=v1', '-z', '--untracked-files=all']))) throw new Error('Repository status changed while packaging');
+const summary = { zip: output, sha256: sha(fs.readFileSync(output)), bytes: fs.statSync(output).size, archiveFiles: zippedNames.length, trackedModifiedCopies: tracked.length, newFileCopies: untracked.length, verification: 'ZIP reopened; CRC, exact inventory, every payload hash, all changed/new source copies, complete patch replay, secret-pattern rescan and unchanged Git status passed', credentialRedactions: redactions.filter(r => !r.kind.endsWith('-path')).reduce((s,r) => s+r.occurrences,0), pathRedactionOccurrences: redactions.filter(r => r.kind.endsWith('-path')).reduce((s,r) => s+r.occurrences,0), missingRequestedFileRecords: missing, missingStandaloneRecords: absentRecords };
+fs.writeFileSync(output.replace(/\.zip$/, '.verification.json'), JSON.stringify(summary,null,2)+'\n');
+console.log(JSON.stringify(summary,null,2));

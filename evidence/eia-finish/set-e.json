@@ -1,0 +1,193 @@
+{
+  "frozenAt": "2026-10-30T22:26:23.230083+00:00",
+  "baseline": "2968dd7a1ac5089a7e9da3214a6ff17e5d92a63e",
+  "authority": "Job 6 owner work order; expectations fixed before application edits",
+  "sourceEvidence": "set-e-source-checks.json; Job 5 owner decisions and complete checked native metadata",
+  "cases": [
+    {
+      "id": "E1",
+      "query": "how much oil does japan us",
+      "expected": {
+        "places": [
+          "JPN"
+        ],
+        "product": "petroleum",
+        "activity": "consumption",
+        "buttons": [
+          "Did you also mean United States?"
+        ]
+      }
+    },
+    {
+      "id": "E2",
+      "query": "energy stuff",
+      "expected": {
+        "question": "product",
+        "includesButtons": [
+          "Coal"
+        ],
+        "repetitions": 3
+      }
+    },
+    {
+      "id": "E3",
+      "query": "energy stuff",
+      "expected": {
+        "clicks": [
+          "Coal"
+        ],
+        "question": "activity",
+        "buttons": "all and only checked coal activities"
+      }
+    },
+    {
+      "id": "E4",
+      "query": "Korea natural gas use",
+      "expected": {
+        "places": [
+          "KOR"
+        ],
+        "product": "natural gas",
+        "activity": "consumption",
+        "buttons": [
+          "Did you mean North Korea?"
+        ]
+      }
+    },
+    {
+      "id": "E5",
+      "query": "Georgia electricity consumption",
+      "expected": {
+        "places": [
+          "GA"
+        ],
+        "product": "electricity",
+        "activity": "consumption",
+        "buttons": [
+          "Did you mean Georgia the country?"
+        ]
+      }
+    },
+    {
+      "id": "E6",
+      "query": "petroleum consumption in the US",
+      "expected": {
+        "places": [
+          "USA"
+        ],
+        "product": "petroleum",
+        "activity": "consumption",
+        "data": true
+      }
+    },
+    {
+      "id": "E7",
+      "query": "coal consumption in Japan and Korea since 2005",
+      "expected": {
+        "places": [
+          "JPN",
+          "KOR"
+        ],
+        "product": "coal",
+        "activity": "consumption",
+        "years": [
+          2005,
+          "latest"
+        ],
+        "buttons": [
+          "Did you mean North Korea?"
+        ]
+      }
+    },
+    {
+      "id": "E8",
+      "query": "europe natural gas consumption",
+      "expected": {
+        "region": "Europe",
+        "product": "natural gas",
+        "activity": "consumption"
+      }
+    },
+    {
+      "id": "E9",
+      "query": "electricity prices in ohio vs us average",
+      "expected": {
+        "places": [
+          "OH",
+          "USA"
+        ],
+        "product": "electricity",
+        "activity": "prices"
+      }
+    },
+    {
+      "id": "E10",
+      "query": "COAL USE IN OHIO",
+      "expected": {
+        "places": [
+          "OH"
+        ],
+        "product": "coal",
+        "activity": "consumption"
+      }
+    },
+    {
+      "id": "E11",
+      "query": "all states coal generation",
+      "expected": {
+        "states": true,
+        "product": "coal",
+        "activity": "generation",
+        "buttonPath": "All US states",
+        "otherwise": "R4 wording if no checked rows"
+      }
+    },
+    {
+      "id": "E12",
+      "query": "US gasoline prices last year",
+      "expected": {
+        "places": [
+          "USA"
+        ],
+        "product": "petroleum",
+        "qualifier": "gasoline",
+        "activity": "prices",
+        "unit": "dollars per gallon",
+        "basis": "retail gasoline price (not all petroleum PATXD; nominal retail series preferred to constant-dollar alternatives)",
+        "years": [
+          2025,
+          2025
+        ],
+        "otherwise": "latest published with ends-in note"
+      }
+    },
+    {
+      "id": "E13",
+      "query": "Korea natural gas use",
+      "expected": {
+        "reply": "No, I meant the country",
+        "places": [
+          "KOR"
+        ],
+        "product": "natural gas",
+        "activity": "consumption",
+        "includesButtons": [
+          "South Korea",
+          "North Korea"
+        ]
+      }
+    },
+    {
+      "id": "E14",
+      "query": "coal generation",
+      "expected": {
+        "reply": "All U.S. states",
+        "states": true,
+        "product": "coal",
+        "activity": "generation"
+      }
+    }
+  ],
+  "passMark": "All outcomes correct; E2 three repetitions; no retries of wrong answers",
+  "scope": "These owner regressions are exposed cases, not independent holdouts. Source probes establish available bases, not every historical observation."
+}

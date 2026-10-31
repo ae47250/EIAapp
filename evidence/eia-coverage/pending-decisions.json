@@ -1,0 +1,119 @@
+{
+  "explicitQualifiers": {
+    "status": "resolved by owner",
+    "conflict": "D14 requires U.S. weekly/monthly gasoline prices, but B.1/B.3 permit generated rows only from whole-product cells; the base vocabulary has petroleum, not gasoline.",
+    "existingRows": "Only state-gasoline-prices (annual SEDS) and us-gasoline-consumption; neither serves D14.",
+    "EIAcandidate": {
+      "route": "petroleum/pri/gnd",
+      "product": {
+        "id": "EPM0",
+        "name": "Total Gasoline"
+      },
+      "process": [
+        {
+          "id": "PTE",
+          "name": "Retail Sales"
+        }
+      ],
+      "series": {
+        "id": "EMM_EPM0_PTE_NUS_DPG",
+        "name": "U.S. All Grades All Formulations Retail Gasoline Prices (Dollars per Gallon)"
+      },
+      "facetCalls": {
+        "duoarea": [
+          545
+        ],
+        "product": [
+          546
+        ],
+        "process": [
+          547
+        ],
+        "series": [
+          548
+        ]
+      },
+      "frequenciesInspected": [
+        "monthly",
+        "weekly",
+        "annual"
+      ],
+      "observations": "Not checked yet; this is metadata evidence, not a coverage result."
+    },
+    "recommendedDecision": "Keep the 672 whole-product cells unchanged. Add separately counted cells for explicitly requested existing qualifiers, with generated rows restricted to that qualifier. No schema/vocabulary or original owner-decisions.json changes.",
+    "resolution": "See owner-clarifications.json explicitQualifiers; limited to crude oil and gasoline."
+  },
+  "D12Years": {
+    "status": "resolved by owner",
+    "conflict": "New work order expects 2005-2019 for only from 2005; prior approved whole-interval replacement expects 2005-latest for from 2005. Need reconcile intended general rule without modifying earlier frozen expectations.",
+    "resolution": "See owner-clarifications.json yearBoundarySlots. D12 remains 2005-2019. Earlier whole-interval rule superseded; add open-ended form regression."
+  },
+  "utilityScaleGeneration": {
+    "status": "resolved by owner",
+    "question": "May generation totals limited to utility-scale facilities (at least 1 MW) count as whole-product coverage when labelled, or must they remain subset only?",
+    "recommendedDecision": "Subset only; require total across facility sizes.",
+    "alternative": "Accept EIA utility-scale total as a labelled measurement basis.",
+    "whyExistingRuleNeedsReconciliation": "Whole-product totals and EIA-defined measurement bases are accepted, but facility-size subsets are not explicitly resolved. EIA labels some utility-scale series all sectors and separately publishes a combined solar total.",
+    "sources": [
+      "https://www.eia.gov/totalenergy/data/monthly/pdf/sec7_n.pdf",
+      "https://www.eia.gov/totalenergy/data/monthly/pdf/sec10_12.pdf"
+    ],
+    "gate": "Decision resolved; verify fuel/place estimates and annotate candidate basis before grid freeze. No application implementation before separate owner go.",
+    "resolution": "See owner-clarifications.json#utilityScaleGeneration: prefer published all-size total; otherwise accept labelled utility-scale total with exclusion notice where EIA publishes an omitted small-scale estimate."
+  },
+  "unidentifiedElectricityMetadata": {
+    "status": "resolved by owner: explicit unresolved exceptions authorized",
+    "route": "electricity/electric-power-operational-data",
+    "definitions": [
+      {
+        "facet": "fueltypeid",
+        "code": "OB2",
+        "apiName": "Biomass",
+        "gap": "Exact component definition not documented in checked API/browser/bulk metadata. Ten-year numeric agreement with Other Waste Biomass is corroboration only."
+      },
+      {
+        "facet": "fueltypeid",
+        "code": "OBW",
+        "apiName": "Biomass",
+        "gap": "Exact component definition not documented. Numeric agreement with Other Waste Biomass plus Biogenic Municipal Solid Waste does not establish scope."
+      },
+      {
+        "facet": "sectorid",
+        "code": "95",
+        "apiName": "Coal Consumption",
+        "gap": "Label is an activity, not a sector; current API observations include generation from multiple fuels. Cannot assign a locked sector."
+      }
+    ],
+    "evidence": "electricity-source-review.json",
+    "workOrderRequirement": "B.0b: Classify each as whole product (which product x activity), subset (of what), or out of vocabulary (why).",
+    "constraint": "Do not relabel uncertain definitions as out of vocabulary or subset merely to finish. No unknown series may supply data or justify an EIA-does-not-publish claim.",
+    "decisionNeeded": "Either authorize an explicit unresolved-metadata exception for these three definitions while retaining any affected coverage uncertainty, or hold the dependent grid/coverage phase until authoritative EIA definitions are supplied. An exception amends B.0b and any coverage pass mark affected by unresolved absence; it is not an all-clear or a 100% catalogue claim.",
+    "recommended": "Explicitly disclose and isolate these three codes, without guessing their meanings, and continue verified work. This requires owner amendment; otherwise retain current gate.",
+    "resolution": "owner-clarifications.json#unidentifiedElectricityMetadata",
+    "furtherResearch": "Stopped at owner instruction. Preserve all prior evidence."
+  },
+  "B1Sizing": {
+    "status": "Completed: 40 authorized sizing calls, no coverage calls",
+    "reason": "Full conservative candidate plan exceeds mandatory B.0e estimate threshold; actual observation counts unknown.",
+    "proposal": "At most 40 one-row EIA sizing calls, with no coverage claims, to refine the dominant-route estimates; 25000 actual-call cap and four-hour deadline unchanged.",
+    "evidence": "b1-call-estimate.json",
+    "resolution": "Recalculate afterward. If still over 20000, do not start coverage. Propose reduced plan fitting threshold and wait for owner approval. Actual cap, deadline and gate unchanged.",
+    "results": "sizing-results.json",
+    "recalculatedOriginalPlan": 76874
+  },
+  "ReducedCoveragePlan": {
+    "status": "Approved by owner",
+    "proposal": "reduced-plan-proposal.json",
+    "retrievalProjection": 8539,
+    "verificationAndRetryAllowance": 1000,
+    "totalPlanningAllowance": 9539,
+    "allFrozenCellsRetained": 2088,
+    "nativeRequestGroups": 262,
+    "concurrentRequests": 4,
+    "globalStartSpacingSeconds": 0.55,
+    "deadlineUTC": "2026-10-30T16:12:35Z",
+    "requiredAmendment": "Share native filtered retrieval across cells and return ten electricity measure columns together. Exact original allowed combinations still determine cell acceptance.",
+    "timeCaveat": "Approximately 2.85 hours extrapolating one-row latency with four concurrent requests and allowance; full pages and checkpoint processing can take longer. Stop at unchanged deadline with unfinished work disclosed.",
+    "authorization": "execution-approval.json"
+  }
+}

@@ -1,0 +1,483 @@
+✔ negation target knowledge-0: I'm not sure what's available for USA energy consumption (478.949875ms)
+✔ negation target knowledge-1: I'm not even sure what's available for USA energy consumption (131.394041ms)
+✔ negation target knowledge-2: I'm not 100% sure what's available for USA energy consumption (116.117958ms)
+✔ negation target knowledge-3: I'm not 99.5% sure what's available for USA energy consumption (114.70425ms)
+✔ negation target knowledge-4: I'm not remotely certain about USA energy consumption (113.118041ms)
+✔ negation target knowledge-5: I'm not—in any way—certain about USA energy consumption (120.581458ms)
+✔ negation target knowledge-6: Without really knowing what's available for USA energy consumption (116.140708ms)
+✔ negation target knowledge-7: I have no clear idea what's available for USA energy consumption (114.463916ms)
+✔ negation target knowledge-before-gambia: I'm not 80% sure what is available for The Gambia energy consumption (106.389625ms)
+✖ negation target knowledge-before-state: I'm not even certain about monthly Texas natural gas production (407.995875ms)
+✔ negation target knowledge-sector: I'm not absolutely certain about annual USA residential natural gas consumption (137.386625ms)
+✔ negation target knowledge-ordered: I'm not even sure about Canada and France natural gas consumption and production (470.410042ms)
+✔ negation target bare-exclusion: USA energy consumption, not coal production (134.3235ms)
+✔ negation target geography-exclusion: USA energy consumption, not Canada or Mexico (117.440667ms)
+✔ negation target ordinary-negative-action: USA energy consumption; do not show coal production (125.823ms)
+✖ negation target modified-negative-action: USA energy consumption; please do not ever include coal production (68.666959ms)
+✖ negation target punctuated-negative-action: USA energy consumption; do not, under any circumstances, show coal production (68.726167ms)
+✔ negation target direct-exclude: USA energy consumption excluding coal production (124.744042ms)
+✔ negation target without-data: USA energy consumption without coal production (124.814625ms)
+✔ negation target same-concept-not-negative: Natural gas consumption in Canada, not natural gas production in Canada (88.280291ms)
+✔ negation target knowledge-then-exclusion: I'm not even sure what's available for USA energy consumption, not coal production (134.666416ms)
+✔ negation target excluded-then-positive: France energy consumption, not Canada; Germany energy consumption (185.945667ms)
+✔ negation target excluded-then-knowledge: France energy consumption, not Canada; I am not 100% sure about Germany energy consumption (191.513833ms)
+✔ negation target additive-not-only: Not only USA but also Canada energy consumption (175.442417ms)
+✔ negation target action-composition: USA energy consumption; do not exclude coal production (149.374333ms)
+✔ negation target unknown-bridge: USA energy consumption; not related to coal production (65.394917ms)
+✔ negation target undecided-second-request: USA energy consumption; I'm not sure whether to include coal production (68.786875ms)
+✔ negation target uncertain-exclusion: USA energy consumption, not necessarily coal production (64.900166ms)
+✔ negation target unknown-predicate: USA energy consumption; I am not sold on coal production (64.1965ms)
+✔ negation target clear-parts-around-ambiguity: France energy consumption; not related to coal production; Germany energy consumption (81.944042ms)
+✔ negation target unknown-country-scope: USA energy consumption; not necessarily Canada (52.739958ms)
+✔ negation target country-adverb-collision: Canada energy consumption, not Italy, sure? (104.754667ms)
+✔ negation target activity-adverb-collision: USA energy consumption, not supply, sure? (117.492541ms)
+✔ negation target gas-still-ambiguous: I'm not even sure about USA gas consumption (42.332834ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 31
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5469.5315
+
+✖ failing tests:
+
+test at tests/eia-negation-target.test.js:52:34
+✖ negation target knowledge-before-state: I'm not even certain about monthly Texas natural gas production (407.995875ms)
+  AssertionError [ERR_ASSERTION]: [{"phase":"public-candidates","error":"Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Texas Dry'\n- 'Texas'\n        ^\n","series":["NG.N9050TX2.M","NG.NA1160_STX_2.M","NG.NA1150_STX_2.M"]}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     error: 'Expected values to be strictly equal:\n' +
+  +       '+ actual - expected\n' +
+  +       '\n' +
+  +       "+ 'Texas Dry'\n" +
+  +       "- 'Texas'\n" +
+  +       '        ^\n',
+  +     phase: 'public-candidates',
+  +     series: [
+  +       'NG.N9050TX2.M',
+  +       'NG.NA1160_STX_2.M',
+  +       'NG.NA1150_STX_2.M'
+  +     ]
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///private/tmp/eia-negation-design-probe/tests/eia-negation-target.test.js:100:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { phase: 'public-candidates', error: "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Texas Dry'\n- 'Texas'\n        ^\n", series: [Array] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-negation-target.test.js:52:34
+✖ negation target modified-negative-action: USA energy consumption; please do not ever include coal production (68.666959ms)
+  AssertionError [ERR_ASSERTION]: [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'rules'
+  +   },
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'interpretQuery'
+  +   },
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'browser-serialization'
+  +   },
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'public-search'
+  +   },
+  +   {
+  +     error: 'Expected cached source candidates',
+  +     phase: 'public-candidates',
+  +     series: []
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///private/tmp/eia-negation-design-probe/tests/eia-negation-target.test.js:100:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { phase: 'rules', expected: [Object], actual: [Object] }, { phase: 'interpretQuery', expected: [Object], actual: [Object] }, { phase: 'browser-serialization', expected: [Object], actual: [Object] }, { phase: 'public-search', expected: [Object], actual: [Object] }, { phase: 'public-candidates', error: 'Expected cached source candidates', series: [] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/eia-negation-target.test.js:52:34
+✖ negation target punctuated-negative-action: USA energy consumption; do not, under any circumstances, show coal production (68.726167ms)
+  AssertionError [ERR_ASSERTION]: [{"phase":"rules","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"interpretQuery","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"browser-serialization","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-search","expected":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"exclusions":[["product","coal"],["activity","production"]],"clarify":false},"actual":{"codes":["USA"],"pairs":[["total energy","consumption"]],"frequency":"annual","explicit":false,"sector":null,"clarify":true,"exclusions":[]}},{"phase":"public-candidates","error":"Expected cached source candidates","series":[]}]
+  + actual - expected
+  
+  + [
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'rules'
+  +   },
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'interpretQuery'
+  +   },
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'browser-serialization'
+  +   },
+  +   {
+  +     actual: {
+  +       clarify: true,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     expected: {
+  +       clarify: false,
+  +       codes: [
+  +         'USA'
+  +       ],
+  +       exclusions: [
+  +         [
+  +           'product',
+  +           'coal'
+  +         ],
+  +         [
+  +           'activity',
+  +           'production'
+  +         ]
+  +       ],
+  +       explicit: false,
+  +       frequency: 'annual',
+  +       pairs: [
+  +         [
+  +           'total energy',
+  +           'consumption'
+  +         ]
+  +       ],
+  +       sector: null
+  +     },
+  +     phase: 'public-search'
+  +   },
+  +   {
+  +     error: 'Expected cached source candidates',
+  +     phase: 'public-candidates',
+  +     series: []
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///private/tmp/eia-negation-design-probe/tests/eia-negation-target.test.js:100:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { phase: 'rules', expected: [Object], actual: [Object] }, { phase: 'interpretQuery', expected: [Object], actual: [Object] }, { phase: 'browser-serialization', expected: [Object], actual: [Object] }, { phase: 'public-search', expected: [Object], actual: [Object] }, { phase: 'public-candidates', error: 'Expected cached source candidates', series: [] } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

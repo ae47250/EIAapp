@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-29",
+  "researchOnly": true,
+  "pythonASTFiles": 13,
+  "offlineTests": {
+    "MERCorrespondence": 18,
+    "seriesCorrespondence": 11,
+    "placeCrosswalk": 10,
+    "facetInventory": 6,
+    "failed": 0
+  },
+  "catalogueHashesVerified": 154,
+  "EIA_API_calls": 1417,
+  "newEIA_API_callsThisTurn": 0,
+  "OpenAI_calls": 0,
+  "B1CoverageStarted": false,
+  "observedResearchFailures": [
+    "Total retail electricity sales incorrectly marked subset by end-use wording; fixed with unchanged source-based expectation.",
+    "Monetary trade values incorrectly mapped to total expenditures; fixed with unchanged source-based expectation."
+  ],
+  "generationScopeGate": "47 generation records explicitly unaccepted pending owner decision. MER and catalogue complete flags remain false.",
+  "standardBenchmarkRun": false,
+  "benchmarkLimitation": "Source-based regressions; not an independent reference-alignment benchmark.",
+  "notRun": "Application offline suite/build/live checks: application unchanged, implementation checkpoint not reached.",
+  "commands": [
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.py",
+    "python3 -B scripts/eia-lookup/coverage-mer-classification.test.py",
+    "python3 -B scripts/eia-lookup/coverage-series-catalog.test.py",
+    "python3 -B scripts/eia-lookup/coverage-crosswalk.test.py",
+    "python3 -B scripts/eia-lookup/coverage-facets.test.py",
+    "git diff --check"
+  ]
+}

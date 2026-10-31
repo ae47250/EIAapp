@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const wd='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const p=wd+'/tests/eia-followup-regressions.test.js';
+let s=fs.readFileSync(p,'utf8');
+s=s.replace("const records = new Map(","const geographies = JSON.parse(readFileSync(new URL('../data/eia/routing-metadata.json', import.meta.url))).geographies;\nconst records = new Map(");
+s=s.replace('assert.equal(candidate.geography.name, record.geography.name);',"assert.equal(candidate.geography.name, geographies.find(g => g.code === candidate.geography.code).name);\n        assert.equal(candidate.dateStart, record.date_start);\n        assert.equal(candidate.dateEnd, record.date_end);");
+fs.writeFileSync(p,s);
+const f=wd+'/tests/fixtures/eia/followup-regressions.json';const m=JSON.parse(fs.readFileSync(f));
+m.cases.find(c=>c.id==='ambiguous-product').expected.pairs=[[null,'consumption']];
+fs.writeFileSync(f,JSON.stringify(m,null,2)+'\n');
+fs.writeFileSync('/private/tmp/eia-followup-freeze-final.json',JSON.stringify({cases:m.cases.length,fixtureSha256:createHash('sha256').update(fs.readFileSync(f)).digest('hex'),note:'Before production edits, corrected new harness to compare display names with approved routing metadata and preserve explicit consumption with an ambiguous product. Initial freeze retained.'},null,2));

@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+let s=fs.readFileSync(root+'/tests/eia-followup-regressions.test.js','utf8');
+s=s.replace('./fixtures/eia/followup-regressions.json','./fixtures/eia/negation-target.json');
+s=s.replace("matrix.cases.push(...JSON.parse(readFileSync(new URL('./fixtures/eia/followup-review-regressions.json', import.meta.url))).cases);\n",'');
+s=s.replace('`follow-up ${item.id}: ${item.q}`','`negation target ${item.id}: ${item.q}`');
+s=s.replace('  if (available) {','  const candidates = [...body.variables, ...(body.comparisonDefinitions || []).flatMap(d => d.countries.filter(c => c.seriesId))];\n  if (!expected.clarify) {');
+s=s.replace("assert.ok(body.variables.length, 'Expected cached source candidates');","assert.ok(candidates.length, 'Expected cached source candidates');");
+s=s.replace('for (const candidate of body.variables)', 'for (const candidate of candidates)');
+s=s.replace("if (expected.clarify) assert.equal(body.needsClarification, true);", "if (expected.clarify) {\n    assert.equal(body.needsClarification, true);\n    assert.equal(candidates.length, 0, 'Ambiguous scope must not select data');\n    if (item.id !== 'gas-still-ambiguous') assert.match(body.intent.clarificationMessage, /negat|exclu|scope|intend|request/i);\n  }");
+fs.writeFileSync('/private/tmp/eia-negation-target.test.js',s);

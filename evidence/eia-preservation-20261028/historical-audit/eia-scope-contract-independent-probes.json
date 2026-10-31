@@ -1,0 +1,669 @@
+[
+  {
+    "id": "unknown-excluded-scope",
+    "query": "Show electricity generation in Texas, but not from an unknown fuel called nebularium.",
+    "input": {
+      "confidence": 0.95,
+      "correctedQuery": "Show electricity generation in Texas, but not from an unknown fuel called nebularium.",
+      "fields": {
+        "country": {
+          "rawValue": "TX",
+          "value": "TX",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "product": {
+          "rawValue": "electricity",
+          "value": "electricity",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "activity": {
+          "rawValue": "generation",
+          "value": "generation",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": null,
+          "value": null,
+          "confidence": 0.95,
+          "ambiguityReason": "Unresolved or absent in source"
+        },
+        "frequency": {
+          "rawValue": "annual",
+          "value": "annual",
+          "confidence": 0.95,
+          "ambiguityReason": null,
+          "explicit": false
+        }
+      },
+      "geographies": [
+        {
+          "value": "TX",
+          "confidence": 0.95
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "electricity",
+          "activity": "generation",
+          "order": 0,
+          "confidence": 0.95
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "Show electricity generation in Texas, but not from an unknown fuel called nebularium.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 38,
+            "text": "Show electricity generation in Texas, ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 38,
+            "end": 85,
+            "text": "but not from an unknown fuel called nebularium.",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 42,
+              "end": 45,
+              "text": "not"
+            }
+          }
+        ]
+      }
+    },
+    "spanValidation": {
+      "valid": false,
+      "errors": [
+        "unsupported_exclusion_target"
+      ]
+    },
+    "output": {
+      "product": "electricity",
+      "activity": "generation",
+      "sector": null,
+      "frequency": "annual",
+      "geographies": [
+        "TX"
+      ],
+      "pairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "generation",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.95
+        }
+      ],
+      "blocked": true,
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "unsupported_exclusion_target"
+        ],
+        "unresolved": 1
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "evidence": {
+        "version": 1,
+        "query": "Show electricity generation in Texas, but not from an unknown fuel called nebularium.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 42,
+            "text": "Show electricity generation in Texas, but ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 42,
+            "end": 84,
+            "text": "not from an unknown fuel called nebularium",
+            "status": "unresolved",
+            "target": "unknown"
+          },
+          {
+            "start": 84,
+            "end": 85,
+            "text": ".",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      }
+    },
+    "resubmitted": {
+      "blocked": true,
+      "geographies": [
+        "TX"
+      ],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope"
+        ],
+        "unresolved": 1
+      }
+    }
+  },
+  {
+    "id": "I09-dangling-excluded-operator",
+    "query": "I'm not sure about monthly residential electricity consumption in Texas.",
+    "input": {
+      "confidence": 0.95,
+      "correctedQuery": "I'm not sure about monthly residential electricity consumption in Texas.",
+      "fields": {
+        "country": {
+          "rawValue": "TX",
+          "value": "TX",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "product": {
+          "rawValue": "electricity",
+          "value": "electricity",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "value": "consumption",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "sector": {
+          "rawValue": "residential",
+          "value": "residential",
+          "confidence": 0.95,
+          "ambiguityReason": null
+        },
+        "frequency": {
+          "rawValue": "monthly",
+          "value": "monthly",
+          "confidence": 0.95,
+          "ambiguityReason": null,
+          "explicit": true
+        }
+      },
+      "geographies": [
+        {
+          "value": "TX",
+          "confidence": 0.95
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "electricity",
+          "activity": "consumption",
+          "order": 0,
+          "confidence": 0.95
+        }
+      ],
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "requestEvidence": {
+        "version": 1,
+        "query": "I'm not sure about monthly residential electricity consumption in Texas.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 19,
+            "text": "I'm not sure about ",
+            "status": "context",
+            "target": "knowledge"
+          },
+          {
+            "start": 19,
+            "end": 72,
+            "text": "monthly residential electricity consumption in Texas.",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 999,
+              "end": 1002,
+              "text": "not"
+            }
+          }
+        ]
+      }
+    },
+    "spanValidation": {
+      "valid": false,
+      "errors": [
+        "invalid_exclusion_operator",
+        "operator_after_exclusion_target"
+      ]
+    },
+    "output": {
+      "product": null,
+      "activity": null,
+      "sector": null,
+      "frequency": "annual",
+      "geographies": [],
+      "pairs": [],
+      "blocked": true,
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_exclusion_operator",
+          "operator_after_exclusion_target"
+        ],
+        "unresolved": 1
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "evidence": {
+        "version": 1,
+        "query": "I'm not sure about monthly residential electricity consumption in Texas.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 4,
+            "text": "I'm ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 4,
+            "end": 71,
+            "text": "not sure about monthly residential electricity consumption in Texas",
+            "status": "unresolved",
+            "target": "unknown"
+          },
+          {
+            "start": 71,
+            "end": 72,
+            "text": ".",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      }
+    },
+    "resubmitted": {
+      "blocked": true,
+      "geographies": [],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope"
+        ],
+        "unresolved": 1
+      }
+    }
+  },
+  {
+    "id": "operator-after-requested-target",
+    "query": "Show coal production for Canada and petroleum consumption for Mexico, no certainty needed.",
+    "input": {
+      "confidence": 0.95,
+      "fields": {
+        "country": {
+          "value": "CAN",
+          "confidence": 0.95
+        },
+        "product": {
+          "value": "coal",
+          "confidence": 0.95
+        },
+        "activity": {
+          "value": "production",
+          "confidence": 0.95
+        },
+        "frequency": {
+          "value": "annual",
+          "confidence": 0.95,
+          "explicit": false
+        }
+      },
+      "geographies": [
+        {
+          "value": "CAN",
+          "confidence": 0.95
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "coal",
+          "activity": "production",
+          "confidence": 0.95
+        }
+      ],
+      "requestEvidence": {
+        "version": 1,
+        "query": "Show coal production for Canada and petroleum consumption for Mexico, no certainty needed.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 31,
+            "text": "Show coal production for Canada",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 31,
+            "end": 90,
+            "text": " and petroleum consumption for Mexico, no certainty needed.",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 70,
+              "end": 72,
+              "text": "no"
+            }
+          }
+        ]
+      }
+    },
+    "spanValidation": {
+      "valid": false,
+      "errors": [
+        "operator_after_exclusion_target"
+      ]
+    },
+    "output": {
+      "product": "coal",
+      "activity": "production",
+      "sector": null,
+      "frequency": "annual",
+      "geographies": [
+        "CAN",
+        "MEX"
+      ],
+      "pairs": [
+        {
+          "order": 0,
+          "product": "coal",
+          "activity": "production",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.95
+        },
+        {
+          "order": 1,
+          "product": "petroleum",
+          "activity": "consumption",
+          "sector": null,
+          "source": "deterministic_rules",
+          "confidence": null
+        }
+      ],
+      "blocked": true,
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "operator_after_exclusion_target",
+          "interleaved_country_requests_not_representable"
+        ],
+        "unresolved": 1
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "evidence": {
+        "version": 1,
+        "query": "Show coal production for Canada and petroleum consumption for Mexico, no certainty needed.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 70,
+            "text": "Show coal production for Canada and petroleum consumption for Mexico, ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 70,
+            "end": 89,
+            "text": "no certainty needed",
+            "status": "unresolved",
+            "target": "unknown"
+          },
+          {
+            "start": 89,
+            "end": 90,
+            "text": ".",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      }
+    },
+    "resubmitted": {
+      "blocked": true,
+      "geographies": [
+        "CAN",
+        "MEX"
+      ],
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope",
+          "interleaved_country_requests_not_representable"
+        ],
+        "unresolved": 1
+      }
+    }
+  },
+  {
+    "id": "geography-scoped-activity-exclusion",
+    "query": "Show electricity generation in Texas, not consumption for Canada.",
+    "input": {
+      "confidence": 0.95,
+      "fields": {
+        "country": {
+          "value": "TX",
+          "confidence": 0.95
+        },
+        "product": {
+          "value": "electricity",
+          "confidence": 0.95
+        },
+        "activity": {
+          "value": "generation",
+          "confidence": 0.95
+        },
+        "frequency": {
+          "value": "annual",
+          "confidence": 0.95,
+          "explicit": false
+        }
+      },
+      "geographies": [
+        {
+          "value": "TX",
+          "confidence": 0.95
+        }
+      ],
+      "conceptPairs": [
+        {
+          "product": "electricity",
+          "activity": "generation",
+          "confidence": 0.95
+        }
+      ],
+      "requestEvidence": {
+        "version": 1,
+        "query": "Show electricity generation in Texas, not consumption for Canada.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 38,
+            "text": "Show electricity generation in Texas, ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 38,
+            "end": 65,
+            "text": "not consumption for Canada.",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 38,
+              "end": 41,
+              "text": "not"
+            }
+          }
+        ]
+      }
+    },
+    "spanValidation": {
+      "valid": true,
+      "errors": [],
+      "source": "model",
+      "evidence": {
+        "version": 1,
+        "query": "Show electricity generation in Texas, not consumption for Canada.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 38,
+            "text": "Show electricity generation in Texas, ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 38,
+            "end": 65,
+            "text": "not consumption for Canada.",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 38,
+              "end": 41,
+              "text": "not"
+            }
+          }
+        ]
+      },
+      "positiveQuery": "Show electricity generation in Texas,                           .",
+      "excludedQuery": "                                    , not consumption for Canada.",
+      "mentions": [
+        {
+          "start": 5,
+          "end": 27,
+          "text": "electricity generation",
+          "type": "activity",
+          "value": "generation",
+          "status": "requested"
+        },
+        {
+          "start": 5,
+          "end": 16,
+          "text": "electricity",
+          "type": "product",
+          "value": "electricity",
+          "status": "requested"
+        },
+        {
+          "start": 31,
+          "end": 36,
+          "text": "Texas",
+          "type": "geography",
+          "value": "TX",
+          "status": "requested"
+        },
+        {
+          "start": 42,
+          "end": 53,
+          "text": "consumption",
+          "type": "activity",
+          "value": "consumption",
+          "status": "excluded"
+        },
+        {
+          "start": 58,
+          "end": 64,
+          "text": "Canada",
+          "type": "geography",
+          "value": "CAN",
+          "status": "excluded"
+        }
+      ],
+      "unresolved": []
+    },
+    "output": {
+      "product": "electricity",
+      "activity": "generation",
+      "sector": null,
+      "frequency": "annual",
+      "geographies": [
+        "TX"
+      ],
+      "pairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "generation",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.95
+        }
+      ],
+      "blocked": false,
+      "scopeValidation": {
+        "source": "model",
+        "issues": [],
+        "unresolved": 0
+      },
+      "exclusions": [
+        {
+          "type": "activity",
+          "value": "consumption",
+          "order": 0,
+          "confidence": 1,
+          "source": "validated_source_scope"
+        }
+      ],
+      "unknownQualifiers": [],
+      "evidence": {
+        "version": 1,
+        "query": "Show electricity generation in Texas, not consumption for Canada.",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 38,
+            "text": "Show electricity generation in Texas, ",
+            "status": "requested",
+            "target": "data"
+          },
+          {
+            "start": 38,
+            "end": 65,
+            "text": "not consumption for Canada.",
+            "status": "excluded",
+            "target": "data",
+            "operator": {
+              "start": 38,
+              "end": 41,
+              "text": "not"
+            }
+          }
+        ]
+      }
+    },
+    "resubmitted": {
+      "blocked": false,
+      "geographies": [
+        "TX"
+      ],
+      "scopeValidation": {
+        "source": "model",
+        "issues": [],
+        "unresolved": 0
+      }
+    }
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-30T21:50:07.424551+00:00",
+  "authority": "Owner explicitly authorized pushing under unchanged pass marks, recording the additional every-click-completes gate as a harness defect. D8/D8a missing Coal remains a KNOWN DEFECT for the next job.",
+  "originalFrozenRunSummary": "live/summary.json",
+  "originalSummaryPreserved": true,
+  "requiredChecks": {
+    "setD": true,
+    "frontPage": true,
+    "setC": true,
+    "setI": true,
+    "zeroDeadEnds": true,
+    "zeroIncorrectAvailable": true,
+    "zeroUnlabelledWrongData": true,
+    "modelIdentity": true,
+    "withinBudget": true,
+    "complete": true
+  },
+  "coveragePassMark": "NOT MET; owner-authorized exception",
+  "releasePass": true,
+  "harnessDefect": {
+    "file": "scripts/eia-lookup/evaluate-coverage-followup.js",
+    "extraGate": "complete also required every outcome to lack executionError, unlike the previous runner and original pass marks.",
+    "effect": "D8a repeat 2 has no Coal button and cannot click it. The case remains wrong; it does not introduce an additional release threshold.",
+    "repair": "No frozen file or outcome changed. This owner-authorized release assessment restores the unchanged pass marks. No rerun."
+  },
+  "knownDefects": [
+    "D8/D8a repeat 2: model supplied Natural Gas and Gasoline only; lookup-context.js still uses model choices when any exist. Next job derives valid choices from the shared contract/metadata.",
+    "C4 repeat 2: model chose Western Europe for Europe, omitting SCG and YUG.",
+    "I12 repeat 2: model asked a place question rather than resolving Iowa and misspelled Nebraska."
+  ]
+}

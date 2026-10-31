@@ -1,0 +1,522 @@
+{
+  "id": "F10",
+  "repeat": 2,
+  "query": "electricity consumption in Georgia and Florida",
+  "attempts": [
+    {
+      "id": "F10",
+      "repeat": 2,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "GA",
+          "FL"
+        ],
+        "rawGeographies": [
+          "GA | Georgia | US state",
+          "FL | Florida | US state"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": false,
+        "reason": "No displayed result for either requested state in the tested cache/routes. This does not establish absence from all EIA sources.",
+        "first": []
+      },
+      "elapsedMs": 5286,
+      "usage": {
+        "input_tokens": 5496,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 5493
+        },
+        "output_tokens": 184,
+        "output_tokens_details": {
+          "reasoning_tokens": 63
+        },
+        "total_tokens": 5680
+      },
+      "costUSD": 0.00014722999999999998,
+      "costUpperUSD": 0.000147305,
+      "responseId": "resp_00b19152da586151006ae26f38648487d2a4983b3de5d65972",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "electricity consumption in Georgia and Florida",
+        "intent": {
+          "originalQuery": "electricity consumption in Georgia and Florida",
+          "cleanedQuery": "electricity consumption in Georgia and Florida",
+          "normalizedQuery": "electricity consumption in Georgia and Florida",
+          "correctedQuery": "electricity consumption in Georgia and Florida",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "GA | Georgia | US state",
+                "quoted_words": "Georgia"
+              },
+              {
+                "geography": "FL | Florida | US state",
+                "quoted_words": "Florida"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "electricity",
+                "activity": "consumption",
+                "quoted_words": "electricity consumption"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Georgia",
+            "code": "GA",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          },
+          "countryCode": "GA",
+          "validatedGeographies": [
+            {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            {
+              "name": "Florida",
+              "code": "FL",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "electricity",
+              "activity": "consumption",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "GA",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "electricity",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "consumption",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "electricity",
+              "activity": "consumption",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_eligible",
+            "geographyCodes": [],
+            "routeFamily": "domestic",
+            "reason": "request_contains_non_country_geography"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "electricity consumption in Georgia and Florida",
+            "normalizedQuery": "electricity consumption in georgia and florida",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Georgia",
+                    "code": "GA",
+                    "type": "state",
+                    "routeFamilies": [
+                      "domestic",
+                      "seds"
+                    ]
+                  }
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Florida",
+                    "code": "FL",
+                    "type": "state",
+                    "routeFamilies": [
+                      "domestic",
+                      "seds"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "electricity",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "consumption",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Georgia",
+                "code": "GA",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              },
+              {
+                "name": "Florida",
+                "code": "FL",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            ],
+            "product": "electricity",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "consumption",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "electricity",
+                "activity": "consumption",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_eligible",
+              "geographyCodes": [],
+              "routeFamily": "domestic",
+              "reason": "request_contains_non_country_geography"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly",
+                "weekly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "ambiguous",
+              "reasons": [
+                "multiple_geographies"
+              ]
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A state-level electricity request uses Domestic EIA.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter",
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "GA",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                },
+                {
+                  "code": "FL",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "domestic",
+            "label": "Domestic EIA",
+            "reason": "A state-level electricity request uses Domestic EIA.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly",
+              "weekly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "ambiguous",
+            "reasons": [
+              "multiple_geographies"
+            ]
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [],
+        "candidateGroups": [],
+        "comparisonDefinitions": [],
+        "userWarnings": [
+          {
+            "code": "no_displayable_candidate",
+            "message": "No validated annual electricity consumption candidate was found for Georgia. No substitute was selected."
+          },
+          {
+            "code": "no_displayable_candidate",
+            "message": "No validated annual electricity consumption candidate was found for Florida. No substitute was selected."
+          }
+        ],
+        "needsClarification": false,
+        "userMessage": "No validated EIA candidates were found. No substitute was selected.",
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "No observations were fetched."
+      }
+    }
+  ],
+  "events": []
+}

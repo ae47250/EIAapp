@@ -1,0 +1,42 @@
+[
+  {
+    "file": "tests/eia-candidate-api.test.js",
+    "tests": [
+      "candidate mode blocks missing activity before ranking or observation retrieval",
+      "the retired feature flag cannot switch the route back to legacy search",
+      "preview hierarchy mode exposes only the observation-validated aggregate tie-break",
+      "certainty labels an approved cross-route fallback without calling it exact",
+      "candidate IDs cannot bypass clarification",
+      "explicit selection reruns validation and fetches only the verified series ID",
+      "a candidate ID that was not displayed is rejected before any EIA request",
+      "multi-country responses rank definitions first without fetching observations",
+      "definition selection preserves missing and failed countries as warnings",
+      "combined definition selection fetches all countries with bounded concurrency"
+    ],
+    "change": "Only test entrypoint changed to the retained candidate handler; all assertions stay unchanged. New lookup-route tests cover the replacement public path."
+  },
+  {
+    "file": "tests/eia-contract.test.js",
+    "tests": [
+      "candidate selection and browser-side XLSX export retain verified metadata",
+      "combined comparison XLSX includes all definitions, countries, statuses, and warning fields"
+    ],
+    "change": "Only test entrypoint changed to the retained candidate handler; all assertions stay unchanged. New lookup-route tests cover the replacement public path."
+  },
+  {
+    "file": "tests/eia-independent-challenges.test.js",
+    "tests": [
+      "public cap shares slots across requests and discloses overflow without dropping intent",
+      "comparison definition cap represents each requested pair and discloses excess requests"
+    ],
+    "change": "Only test entrypoint changed to the retained candidate handler; all assertions stay unchanged. New lookup-route tests cover the replacement public path."
+  },
+  {
+    "file": "tests/eia-locked-form.test.js",
+    "tests": [
+      "request enforces schema and uses the owner-authorized low reasoning default with explicit evaluation overrides",
+      "public search rejects missing, unreadable, oversized and legacy payloads without fetching"
+    ],
+    "change": "Default reasoning assertion follows explicitly authorized low setting. Rejection test asserts empty lookup results and choices instead of retired candidate arrays and diagnostics. Frozen validation assertions are unchanged."
+  }
+]

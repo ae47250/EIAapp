@@ -1,0 +1,12 @@
+import {readFileSync} from 'node:fs';import {gunzipSync} from 'node:zlib';
+import {interpretQueryWithRules} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+import {retrieveLocalCandidates} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/local-retrieval.js';
+import {buildLocalCandidatePipeline} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/candidate-pipeline.js';
+const root='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp';
+const intent=interpretQueryWithRules('In Texas, show natural gas production, natural gas consumption, and electricity generation.');
+// Frozen boundary: retain available state total consumption as a candidate for the explicit NG consumption request.
+const records=gunzipSync(readFileSync(root+'/data/eia/builds/phase1b/natural-gas.jsonl.gz')).toString().trim().split('\n').map(JSON.parse);
+const desired=records.find(r=>r.series_id==='NG.NA1490_STX_2.A');
+const raw=await retrieveLocalCandidates(intent); const full=await buildLocalCandidatePipeline(intent);
+const isolated=await retrieveLocalCandidates(intent,{records:[desired],enforceVersion:false});
+console.log(JSON.stringify({desired:{id:desired.series_id,title:desired.title},isolated:isolated.retrievals[1],selected:raw.retrievals[1].primaryCandidates.concat(raw.retrievals[1].fallbackCandidates).map(c=>({id:c.series_id,title:c.title,tier:c.retrieval.tier,pool:c.retrieval.pool})),displayed:full.retrievals[1].displayCandidates.map(c=>({id:c.series_id,title:c.title}))}));

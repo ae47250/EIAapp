@@ -1,0 +1,19 @@
+import fs from 'node:fs';
+const p='<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+let s=fs.readFileSync(p,'utf8');
+s=s.replace('function resolveRequestEvidence(query, proposed = null) {\n  const mentions = listRequestEvidenceMentions(query);',`function resolveRequestEvidence(query, proposed = null, parsed = null) {
+  const corrections = parsed ? collectVerifiedAiVocabularyCorrections(parsed, Number(parsed.confidence) || 0.75, query) : [];
+  const rawWords = [...String(query).matchAll(/[\\p{L}\\p{N}]+|&/gu)];
+  const correctedMentions = corrections.filter(c => c.type !== "negation").map(c => {
+    const first = rawWords[c.tokenStart], last = rawWords[c.tokenStart + c.tokenCount - 1];
+    return first && last ? { start: first.index, end: last.index + last[0].length, text: query.slice(first.index, last.index + last[0].length), type: c.type, value: c.canonicalValue, correction: c } : null;
+  }).filter(Boolean);
+  const mentions = [...listRequestEvidenceMentions(query), ...correctedMentions].sort((a, b) => a.start - b.start || b.end - a.end);`);
+s=s.replace('return { ...resolution, invalidReasons };','return { ...resolution, invalidReasons, corrections };');
+s=s.replace('const resolved = resolveRequestEvidence(query, parsed?.requestEvidence);\n  const inner = (parsed && validateAiInterpretation({ ...parsed, requestEvidence: undefined }, resolved.positiveQuery, countries, null, true))\n    || interpretQueryWithRules(resolved.positiveQuery, countries, fallbackReason, correctionEvidence, true);','const resolved = resolveRequestEvidence(query, parsed?.requestEvidence, parsed);');
+s=s.replace('exclusions.push({ type, value: mention.value, order: exclusions.length, confidence: 1, source: "validated_source_scope" });','exclusions.push({ type, value: mention.value, order: exclusions.length, confidence: 1, source: "validated_source_scope", ...(mention.correction ? { corrections: [serializeVocabularyCorrection(mention.correction)] } : {}) });');
+s=s.replace('  const issues = [...resolved.invalidReasons];',`  const positiveFallback = interpretQueryWithRules(resolved.positiveQuery, countries, fallbackReason, correctionEvidence, true);
+  const inner = (parsed && validateAiInterpretation({ ...parsed, requestEvidence: undefined }, resolved.positiveQuery, countries, { ...positiveFallback, exclusions }, true)) || positiveFallback;
+  const issues = [...resolved.invalidReasons];`);
+s=s.replace('    correctedQuery: forms.cleanedQuery,\n    correctedQuerySource: "unchanged",\n    evidenceQuery:', '    correctedQuery: forms.cleanedQuery,\n    correctedQuerySource: "unchanged",\n    normalizedQuery: normalizeText(applyVerifiedTokenCorrections(query, resolved.corrections)),\n    validatedCorrections: [...(inner.validatedCorrections || []), ...resolved.corrections.map(serializeVocabularyCorrection)].filter((v, i, all) => all.findIndex(x => x.type === v.type && x.from === v.from && x.to === v.to) === i),\n    evidenceQuery:');
+fs.writeFileSync('/private/tmp/eia-scope-interpret-query.js',s);

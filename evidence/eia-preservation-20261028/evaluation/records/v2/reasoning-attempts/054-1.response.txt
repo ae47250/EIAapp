@@ -1,0 +1,102 @@
+{
+  "id": "<REDACTED_PROVIDER_ID>",
+  "object": "response",
+  "created_at": 1793188487,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1793188493,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 32768,
+  "max_tool_calls": null,
+  "model": "gpt-6-luna",
+  "moderation": null,
+  "output": [
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "<REDACTED_ENCRYPTED_REASONING>",
+      "summary": []
+    },
+    {
+      "id": "<REDACTED_PROVIDER_ID>",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\n  \"correctedQuery\": \"energy consumption Iceland\",\n  \"confidence\": 0.91,\n  \"ambiguity\": \"The broad term \\\"energy\\\" does not identify a specific product category.\",\n  \"fields\": {\n    \"country\": {\n      \"rawValue\": \"iceland\",\n      \"value\": \"Iceland\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"product\": {\n      \"rawValue\": \"energy\",\n      \"value\": null,\n      \"confidence\": 0.55,\n      \"ambiguityReason\": \"The broad term \\\"energy\\\" does not identify a specific product category.\"\n    },\n    \"activity\": {\n      \"rawValue\": \"consumption\",\n      \"value\": \"consumption\",\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"sector\": {\n      \"rawValue\": null,\n      \"value\": null,\n      \"confidence\": 1,\n      \"ambiguityReason\": null\n    },\n    \"frequency\": {\n      \"rawValue\": null,\n      \"value\": \"annual\",\n      \"confidence\": 1,\n      \"explicit\": false,\n      \"ambiguityReason\": null\n    }\n  },\n  \"geographies\": [\n    {\n      \"value\": \"Iceland\",\n      \"confidence\": 1\n    }\n  ],\n  \"conceptPairs\": [\n    {\n      \"product\": null,\n      \"activity\": \"consumption\",\n      \"order\": 1,\n      \"confidence\": 0.75\n    }\n  ],\n  \"exclusions\": [],\n  \"unknownQualifiers\": [],\n  \"requestEvidence\": {\n    \"version\": 1,\n    \"query\": \"energy consumption iceland\",\n    \"scopes\": [\n      {\n        \"start\": 0,\n        \"end\": 6,\n        \"text\": \"energy\",\n        \"status\": \"unresolved\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 6,\n        \"end\": 7,\n        \"text\": \" \",\n        \"status\": \"context\",\n        \"target\": \"unknown\"\n      },\n      {\n        \"start\": 7,\n        \"end\": 18,\n        \"text\": \"consumption\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      },\n      {\n        \"start\": 18,\n        \"end\": 19,\n        \"text\": \" \",\n        \"status\": \"context\",\n        \"target\": \"unknown\"\n      },\n      {\n        \"start\": 19,\n        \"end\": 26,\n        \"text\": \"iceland\",\n        \"status\": \"requested\",\n        \"target\": \"data\"\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "low",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 794,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 761,
+    "output_tokens_details": {
+      "reasoning_tokens": 189
+    },
+    "total_tokens": 1555
+  },
+  "user": null,
+  "metadata": {}
+}

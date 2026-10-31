@@ -1,0 +1,915 @@
+{
+  "id": "F1",
+  "repeat": 2,
+  "query": "coal production in germany, not poland",
+  "attempts": [
+    {
+      "id": "F1",
+      "repeat": 2,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "DEU"
+        ],
+        "rawGeographies": [
+          "DEU | Germany | country"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": false,
+        "reason": "First result is metallurgical coal, a subcategory rather than total coal production.",
+        "first": [
+          {
+            "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+            "seriesId": "INTL.130-1-DEU-MT.A",
+            "title": "Metallurgical coal production, Germany, Annual",
+            "product": "coal",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "other"
+            },
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "1000 metric tons",
+            "coverage": "1980 to 2024",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 76.5,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_coal",
+              "activity_exact_production",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_coal",
+              "lexical_title_production",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ]
+      },
+      "elapsedMs": 2009,
+      "usage": {
+        "input_tokens": 5497,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 5494
+        },
+        "output_tokens": 159,
+        "output_tokens_details": {
+          "reasoning_tokens": 38
+        },
+        "total_tokens": 5656
+      },
+      "costUSD": 0.00013474,
+      "costUpperUSD": 0.000134815,
+      "responseId": "resp_0a656ff1a6e21609006ae26f1d0da487d28a07fb2363965178",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "coal production in germany, not poland",
+        "intent": {
+          "originalQuery": "coal production in germany, not poland",
+          "cleanedQuery": "coal production in germany, not poland",
+          "normalizedQuery": "coal production in germany, not poland",
+          "correctedQuery": "coal production in germany, not poland",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "DEU | Germany | country",
+                "quoted_words": "germany"
+              }
+            ],
+            "excluded_geographies": [
+              {
+                "geography": "POL | Poland | country",
+                "quoted_words": "not poland"
+              }
+            ],
+            "topics": [
+              {
+                "product": "coal",
+                "activity": "production",
+                "quoted_words": "coal production"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Germany",
+            "code": "DEU",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          "countryCode": "DEU",
+          "validatedGeographies": [
+            {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          ],
+          "excludedGeographies": [
+            {
+              "name": "Poland",
+              "code": "POL",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          ],
+          "product": "coal",
+          "activity": "production",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "coal",
+              "activity": "production",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "DEU",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "coal",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "production",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "coal",
+              "activity": "production",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [
+              "DEU"
+            ],
+            "routeFamily": "international",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "coal production in germany, not poland",
+            "normalizedQuery": "coal production in germany not poland",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Germany",
+                    "code": "DEU",
+                    "type": "country",
+                    "routeFamilies": [
+                      "international"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "coal",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "production",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Germany",
+                "code": "DEU",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            ],
+            "product": "coal",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "production",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "coal",
+                "activity": "production",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [
+                "DEU"
+              ],
+              "routeFamily": "international",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "none",
+              "reasons": []
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "international",
+              "label": "International",
+              "reason": "A non-U.S. country or multi-country request uses International.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "DEU",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "international",
+            "label": "International",
+            "reason": "A non-U.S. country or multi-country request uses International.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "none",
+            "reasons": []
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [
+          {
+            "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+            "seriesId": "INTL.130-1-DEU-MT.A",
+            "title": "Metallurgical coal production, Germany, Annual",
+            "product": "coal",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "other"
+            },
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "1000 metric tons",
+            "coverage": "1980 to 2024",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 76.5,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_coal",
+              "activity_exact_production",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_coal",
+              "lexical_title_production",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:01b1ab9687fcb25c4edf515edabb46df49af4e7ae37178ead5f5cb1950de8af8",
+            "seriesId": "INTL.7-1-DEU-MT.A",
+            "title": "Coal production, Germany, Annual",
+            "product": "coal",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "other"
+            },
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "1000 metric tons",
+            "coverage": "1980 to 2024",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "rankingTier": "A",
+            "score": 76.5,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_coal",
+              "activity_exact_production",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_coal",
+              "lexical_title_production",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:319a502ee4474cc868360630ed6f6d7a755a91ea3a211473f3162aa68ce1baa0",
+            "seriesId": "INTL.4411-1-DEU-QBTU.A",
+            "title": "Total energy production from coal, Germany, Annual",
+            "product": "coal",
+            "activity": "production",
+            "measureType": "quantity",
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "other"
+            },
+            "routeFamily": "international",
+            "frequency": "annual",
+            "unit": "quadrillion Btu",
+            "coverage": "1980 to 2024",
+            "dateStart": "1980",
+            "dateEnd": "2024",
+            "rankingTier": "C",
+            "score": 73.2,
+            "reasons": [
+              "tier_C",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "selector_geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_coal",
+              "product_extra_concept_penalty",
+              "activity_exact_production",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_coal",
+              "lexical_title_production",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "product_contains_unrequested_concepts",
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "product_contains_unrequested_concepts",
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ],
+        "candidateGroups": [
+          {
+            "id": "DEU:coal:production:quantity",
+            "label": "Production: Energy or physical quantity",
+            "product": "coal",
+            "activity": "production",
+            "measureType": "quantity",
+            "technical": false,
+            "geography": {
+              "name": "Germany",
+              "code": "DEU",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            },
+            "warnings": [],
+            "candidates": [
+              {
+                "candidateId": "eia:1:d068ddc46da58664223283b187d5c2dfeccd57f4705b5440b0fc34881f66aa08",
+                "seriesId": "INTL.130-1-DEU-MT.A",
+                "title": "Metallurgical coal production, Germany, Annual",
+                "product": "coal",
+                "activity": "production",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Germany",
+                  "code": "DEU",
+                  "type": "other"
+                },
+                "routeFamily": "international",
+                "frequency": "annual",
+                "unit": "1000 metric tons",
+                "coverage": "1980 to 2024",
+                "dateStart": "1980",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 76.5,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_coal",
+                  "activity_exact_production",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_coal",
+                  "lexical_title_production",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              },
+              {
+                "candidateId": "eia:1:01b1ab9687fcb25c4edf515edabb46df49af4e7ae37178ead5f5cb1950de8af8",
+                "seriesId": "INTL.7-1-DEU-MT.A",
+                "title": "Coal production, Germany, Annual",
+                "product": "coal",
+                "activity": "production",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Germany",
+                  "code": "DEU",
+                  "type": "other"
+                },
+                "routeFamily": "international",
+                "frequency": "annual",
+                "unit": "1000 metric tons",
+                "coverage": "1980 to 2024",
+                "dateStart": "1980",
+                "dateEnd": "2024",
+                "rankingTier": "A",
+                "score": 76.5,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_coal",
+                  "activity_exact_production",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_coal",
+                  "lexical_title_production",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              },
+              {
+                "candidateId": "eia:1:319a502ee4474cc868360630ed6f6d7a755a91ea3a211473f3162aa68ce1baa0",
+                "seriesId": "INTL.4411-1-DEU-QBTU.A",
+                "title": "Total energy production from coal, Germany, Annual",
+                "product": "coal",
+                "activity": "production",
+                "measureType": "quantity",
+                "geography": {
+                  "name": "Germany",
+                  "code": "DEU",
+                  "type": "other"
+                },
+                "routeFamily": "international",
+                "frequency": "annual",
+                "unit": "quadrillion Btu",
+                "coverage": "1980 to 2024",
+                "dateStart": "1980",
+                "dateEnd": "2024",
+                "rankingTier": "C",
+                "score": 73.2,
+                "reasons": [
+                  "tier_C",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "selector_geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_coal",
+                  "product_extra_concept_penalty",
+                  "activity_exact_production",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_coal",
+                  "lexical_title_production",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "product_contains_unrequested_concepts",
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "product_contains_unrequested_concepts",
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              }
+            ]
+          }
+        ],
+        "comparisonDefinitions": [],
+        "userWarnings": [],
+        "needsClarification": false,
+        "userMessage": null,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 3,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "Choose Graph or Excel for one of the 3 displayed series. No series was selected automatically."
+      }
+    }
+  ],
+  "events": []
+}

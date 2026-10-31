@@ -1,0 +1,2379 @@
+{
+  "manifestHash": "e5112cf50cd260dd1a936290d7b5aeb9516d7a61eecaa6a1b6f24af8e12e8fba",
+  "notes": [
+    "Real exported interpreter with injected model response; no live calls.",
+    "Actual browser serializer source; normalizeSubmittedIntent; public route GET.",
+    "Geography/frequency required exclusions are checked by absence from their positive fields because the existing flat exclusion schema does not represent them.",
+    "Frozen meanings unchanged; implementation-specific assertions are retained in this separate runner."
+  ],
+  "calls": 8,
+  "summary": [
+    {
+      "id": "object_extent_all",
+      "failures": {
+        "interpretation": 3,
+        "resubmission": 3,
+        "publicGET": 3
+      },
+      "issues": [
+        {
+          "check": "false-exclusion",
+          "value": "coal"
+        },
+        {
+          "check": "false-exclusion",
+          "value": "production"
+        },
+        {
+          "check": "missing-required-clarification"
+        }
+      ]
+    },
+    {
+      "id": "object_exclusivity_only",
+      "failures": {
+        "interpretation": 3,
+        "resubmission": 3,
+        "publicGET": 3
+      },
+      "issues": [
+        {
+          "check": "false-exclusion",
+          "value": "coal"
+        },
+        {
+          "check": "false-exclusion",
+          "value": "production"
+        },
+        {
+          "check": "missing-required-clarification"
+        }
+      ]
+    },
+    {
+      "id": "choice_without_action_head",
+      "failures": {
+        "interpretation": 3,
+        "resubmission": 3,
+        "publicGET": 3
+      },
+      "issues": [
+        {
+          "check": "positive-products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": [
+            "total energy",
+            "coal"
+          ]
+        },
+        {
+          "check": "positive-activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": [
+            "consumption",
+            "production"
+          ]
+        },
+        {
+          "check": "missing-required-clarification"
+        }
+      ]
+    },
+    {
+      "id": "choice_country_predicate",
+      "failures": {
+        "interpretation": 4,
+        "resubmission": 4,
+        "publicGET": 4
+      },
+      "issues": [
+        {
+          "check": "ordered-geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": [
+            "USA",
+            "CAN"
+          ]
+        },
+        {
+          "check": "positive-products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": [
+            "total energy",
+            "coal"
+          ]
+        },
+        {
+          "check": "positive-activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": [
+            "consumption",
+            "production"
+          ]
+        },
+        {
+          "check": "missing-required-clarification"
+        }
+      ]
+    },
+    {
+      "id": "certainty_then_fresh_command",
+      "failures": {
+        "interpretation": 3,
+        "resubmission": 3,
+        "publicGET": 3
+      },
+      "issues": [
+        {
+          "check": "ordered-geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "check": "positive-products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "check": "positive-activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        }
+      ]
+    },
+    {
+      "id": "certainty_then_dash_command",
+      "failures": {
+        "interpretation": 3,
+        "resubmission": 3,
+        "publicGET": 3
+      },
+      "issues": [
+        {
+          "check": "ordered-geographies",
+          "expected": [
+            "USA"
+          ],
+          "actual": []
+        },
+        {
+          "check": "positive-products",
+          "expected": [
+            "total energy"
+          ],
+          "actual": []
+        },
+        {
+          "check": "positive-activities",
+          "expected": [
+            "consumption"
+          ],
+          "actual": []
+        }
+      ]
+    },
+    {
+      "id": "fresh_unlisted_request_action",
+      "failures": {
+        "interpretation": 3,
+        "resubmission": 3,
+        "publicGET": 3
+      },
+      "issues": [
+        {
+          "check": "ordered-geographies",
+          "expected": [
+            "USA",
+            "CAN"
+          ],
+          "actual": [
+            "USA"
+          ]
+        },
+        {
+          "check": "ordered-pairs",
+          "expected": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "natural gas",
+              "activity": "consumption"
+            }
+          ],
+          "actual": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ]
+        },
+        {
+          "check": "false-exclusion",
+          "value": "natural gas"
+        }
+      ]
+    },
+    {
+      "id": "conditional_negative_command",
+      "failures": {
+        "interpretation": 4,
+        "resubmission": 4,
+        "publicGET": 4
+      },
+      "issues": [
+        {
+          "check": "false-exclusion",
+          "value": "coal"
+        },
+        {
+          "check": "false-exclusion",
+          "value": "production"
+        },
+        {
+          "check": "false-exclusion",
+          "value": "natural gas"
+        },
+        {
+          "check": "missing-required-clarification"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "object_extent_all",
+      "query": "USA total energy consumption; do not include all coal production.",
+      "injectedModel": {
+        "correctedQuery": "USA total energy consumption; do not include all coal production.",
+        "confidence": 0.99,
+        "ambiguity": "The attachment or requested status of the additional negated phrase is unresolved.",
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [
+          {
+            "value": "do not include all coal production.",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": false,
+        "clarificationBlocked": false,
+        "variableCount": 5,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 5,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    },
+    {
+      "id": "object_exclusivity_only",
+      "query": "USA total energy consumption; do not include only coal production.",
+      "injectedModel": {
+        "correctedQuery": "USA total energy consumption; do not include only coal production.",
+        "confidence": 0.99,
+        "ambiguity": "The attachment or requested status of the additional negated phrase is unresolved.",
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [
+          {
+            "value": "do not include only coal production.",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": false,
+        "clarificationBlocked": false,
+        "variableCount": 5,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 5,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    },
+    {
+      "id": "choice_without_action_head",
+      "query": "USA total energy consumption; I'm not sure whether coal production belongs here.",
+      "injectedModel": {
+        "correctedQuery": "USA total energy consumption; I'm not sure whether coal production belongs here.",
+        "confidence": 0.99,
+        "ambiguity": "The attachment or requested status of the additional negated phrase is unresolved.",
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [
+          {
+            "value": "I'm not sure whether coal production belongs here.",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "coal",
+              "activity": "production"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "coal",
+              "activity": "production"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "coal",
+              "activity": "production"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": [
+              "total energy",
+              "coal"
+            ]
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": [
+              "consumption",
+              "production"
+            ]
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": [
+              "total energy",
+              "coal"
+            ]
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": [
+              "consumption",
+              "production"
+            ]
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": [
+              "total energy",
+              "coal"
+            ]
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": [
+              "consumption",
+              "production"
+            ]
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": false,
+        "clarificationBlocked": false,
+        "variableCount": 8,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 8,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    },
+    {
+      "id": "choice_country_predicate",
+      "query": "USA total energy consumption; I'm not certain that Canada coal production is wanted.",
+      "injectedModel": {
+        "correctedQuery": "USA total energy consumption; I'm not certain that Canada coal production is wanted.",
+        "confidence": 0.99,
+        "ambiguity": "The attachment or requested status of the additional negated phrase is unresolved.",
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [
+          {
+            "value": "I'm not certain that Canada coal production is wanted.",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA",
+            "CAN"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "coal",
+              "activity": "production"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA",
+            "CAN"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "coal",
+              "activity": "production"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA",
+            "CAN"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            },
+            {
+              "product": "coal",
+              "activity": "production"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": [
+              "USA",
+              "CAN"
+            ]
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": [
+              "total energy",
+              "coal"
+            ]
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": [
+              "consumption",
+              "production"
+            ]
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": [
+              "USA",
+              "CAN"
+            ]
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": [
+              "total energy",
+              "coal"
+            ]
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": [
+              "consumption",
+              "production"
+            ]
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": [
+              "USA",
+              "CAN"
+            ]
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": [
+              "total energy",
+              "coal"
+            ]
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": [
+              "consumption",
+              "production"
+            ]
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": false,
+        "clarificationBlocked": false,
+        "variableCount": 0,
+        "comparisonCount": 5,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 5,
+          "rankingUnit": "variable_definition"
+        }
+      }
+    },
+    {
+      "id": "certainty_then_fresh_command",
+      "query": "I'm not sure of the label, please show USA total energy consumption.",
+      "injectedModel": {
+        "correctedQuery": "I'm not sure of the label, please show USA total energy consumption.",
+        "confidence": 0.99,
+        "ambiguity": null,
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": []
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [],
+          "pairs": [],
+          "product": null,
+          "activity": null,
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": true,
+          "blockingClarification": true,
+          "clarificationMessage": "Please clarify what should be excluded or requested in: \"not sure of the label please show usa total energy consumption\". Established request fields are preserved; no series will be selected until the scope is resolved.",
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [],
+          "pairs": [],
+          "product": null,
+          "activity": null,
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": true,
+          "blockingClarification": true,
+          "clarificationMessage": "Please clarify what should be excluded or requested in: \"not sure of the label please show usa total energy consumption\". Established request fields are preserved; no series will be selected until the scope is resolved.",
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [],
+          "pairs": [],
+          "product": null,
+          "activity": null,
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": true,
+          "blockingClarification": true,
+          "clarificationMessage": "Please clarify what should be excluded or requested in: \"not sure of the label please show usa total energy consumption\". Established request fields are preserved; no series will be selected until the scope is resolved.",
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": []
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": []
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": []
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": true,
+        "clarificationBlocked": true,
+        "variableCount": 0,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": false,
+          "clarificationBlocked": true,
+          "clarificationReasons": [
+            "missing_country",
+            "missing_product",
+            "missing_activity",
+            "geography_missing",
+            "product_or_scope_missing",
+            "activity_or_scope_missing",
+            "route_required_fallback",
+            "country_rejected",
+            "product_rejected",
+            "activity_rejected",
+            "negation_scope_unresolved"
+          ],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    },
+    {
+      "id": "certainty_then_dash_command",
+      "query": "I'm not sure of the label — show USA total energy consumption.",
+      "injectedModel": {
+        "correctedQuery": "I'm not sure of the label — show USA total energy consumption.",
+        "confidence": 0.99,
+        "ambiguity": null,
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": []
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [],
+          "pairs": [],
+          "product": null,
+          "activity": null,
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": true,
+          "blockingClarification": true,
+          "clarificationMessage": "Please clarify what should be excluded or requested in: \"not sure of the label show usa total energy consumption\". Established request fields are preserved; no series will be selected until the scope is resolved.",
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [],
+          "pairs": [],
+          "product": null,
+          "activity": null,
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": true,
+          "blockingClarification": true,
+          "clarificationMessage": "Please clarify what should be excluded or requested in: \"not sure of the label show usa total energy consumption\". Established request fields are preserved; no series will be selected until the scope is resolved.",
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [],
+          "pairs": [],
+          "product": null,
+          "activity": null,
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "needsClarification": true,
+          "blockingClarification": true,
+          "clarificationMessage": "Please clarify what should be excluded or requested in: \"not sure of the label show usa total energy consumption\". Established request fields are preserved; no series will be selected until the scope is resolved.",
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": []
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": []
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-products",
+            "expected": [
+              "total energy"
+            ],
+            "actual": []
+          },
+          {
+            "check": "positive-activities",
+            "expected": [
+              "consumption"
+            ],
+            "actual": []
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": true,
+        "clarificationBlocked": true,
+        "variableCount": 0,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": false,
+          "clarificationBlocked": true,
+          "clarificationReasons": [
+            "missing_country",
+            "missing_product",
+            "missing_activity",
+            "geography_missing",
+            "product_or_scope_missing",
+            "activity_or_scope_missing",
+            "route_required_fallback",
+            "country_rejected",
+            "product_rejected",
+            "activity_rejected",
+            "negation_scope_unresolved"
+          ],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 0,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    },
+    {
+      "id": "fresh_unlisted_request_action",
+      "query": "USA energy consumption, not coal production, and give Canada natural gas consumption.",
+      "injectedModel": {
+        "correctedQuery": "USA energy consumption, not coal production, and give Canada natural gas consumption.",
+        "confidence": 0.99,
+        "ambiguity": null,
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          },
+          {
+            "value": "CAN",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption",
+            "order": 1,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [
+          {
+            "type": "product",
+            "value": "coal",
+            "confidence": 0.99
+          },
+          {
+            "type": "activity",
+            "value": "production",
+            "confidence": 0.99
+          }
+        ],
+        "unknownQualifiers": []
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "product",
+              "value": "natural gas",
+              "order": 2,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "product",
+              "value": "natural gas",
+              "order": 2,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "product",
+              "value": "natural gas",
+              "order": 2,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA",
+              "CAN"
+            ],
+            "actual": [
+              "USA"
+            ]
+          },
+          {
+            "check": "ordered-pairs",
+            "expected": [
+              {
+                "product": "total energy",
+                "activity": "consumption"
+              },
+              {
+                "product": "natural gas",
+                "activity": "consumption"
+              }
+            ],
+            "actual": [
+              {
+                "product": "total energy",
+                "activity": "consumption"
+              }
+            ]
+          },
+          {
+            "check": "false-exclusion",
+            "value": "natural gas"
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA",
+              "CAN"
+            ],
+            "actual": [
+              "USA"
+            ]
+          },
+          {
+            "check": "ordered-pairs",
+            "expected": [
+              {
+                "product": "total energy",
+                "activity": "consumption"
+              },
+              {
+                "product": "natural gas",
+                "activity": "consumption"
+              }
+            ],
+            "actual": [
+              {
+                "product": "total energy",
+                "activity": "consumption"
+              }
+            ]
+          },
+          {
+            "check": "false-exclusion",
+            "value": "natural gas"
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "ordered-geographies",
+            "expected": [
+              "USA",
+              "CAN"
+            ],
+            "actual": [
+              "USA"
+            ]
+          },
+          {
+            "check": "ordered-pairs",
+            "expected": [
+              {
+                "product": "total energy",
+                "activity": "consumption"
+              },
+              {
+                "product": "natural gas",
+                "activity": "consumption"
+              }
+            ],
+            "actual": [
+              {
+                "product": "total energy",
+                "activity": "consumption"
+              }
+            ]
+          },
+          {
+            "check": "false-exclusion",
+            "value": "natural gas"
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": false,
+        "clarificationBlocked": false,
+        "variableCount": 5,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 5,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    },
+    {
+      "id": "conditional_negative_command",
+      "query": "USA total energy consumption; do not include coal production unless natural gas consumption is unavailable.",
+      "injectedModel": {
+        "correctedQuery": "USA total energy consumption; do not include coal production unless natural gas consumption is unavailable.",
+        "confidence": 0.99,
+        "ambiguity": "The attachment or requested status of the additional negated phrase is unresolved.",
+        "fields": {
+          "country": {
+            "rawValue": "USA",
+            "value": "USA",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "product": {
+            "rawValue": "total energy",
+            "value": "total energy",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "activity": {
+            "rawValue": "consumption",
+            "value": "consumption",
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "sector": {
+            "rawValue": null,
+            "value": null,
+            "confidence": 0.99,
+            "ambiguityReason": null
+          },
+          "frequency": {
+            "rawValue": "annual",
+            "value": "annual",
+            "confidence": 0.99,
+            "ambiguityReason": null,
+            "explicit": false
+          }
+        },
+        "geographies": [
+          {
+            "value": "USA",
+            "confidence": 0.99
+          }
+        ],
+        "conceptPairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption",
+            "order": 0,
+            "confidence": 0.99
+          }
+        ],
+        "exclusions": [],
+        "unknownQualifiers": [
+          {
+            "value": "do not include coal production unless natural gas consumption is unavailable.",
+            "confidence": 0.99
+          }
+        ]
+      },
+      "stages": {
+        "interpretation": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "product",
+              "value": "natural gas",
+              "order": 2,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "resubmission": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "product",
+              "value": "natural gas",
+              "order": 2,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        },
+        "publicGET": {
+          "interpreter": "openai",
+          "geographies": [
+            "USA"
+          ],
+          "pairs": [
+            {
+              "product": "total energy",
+              "activity": "consumption"
+            }
+          ],
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "exclusions": [
+            {
+              "type": "product",
+              "value": "coal",
+              "order": 0,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "activity",
+              "value": "production",
+              "order": 1,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            },
+            {
+              "type": "product",
+              "value": "natural gas",
+              "order": 2,
+              "confidence": 1,
+              "source": "deterministic_negation"
+            }
+          ],
+          "unknownQualifiers": [],
+          "needsClarification": false,
+          "blockingClarification": false,
+          "clarificationMessage": null,
+          "negationResolution": null
+        }
+      },
+      "judgments": {
+        "interpretation": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "natural gas"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "resubmission": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "natural gas"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ],
+        "publicGET": [
+          {
+            "check": "false-exclusion",
+            "value": "coal"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "production"
+          },
+          {
+            "check": "false-exclusion",
+            "value": "natural gas"
+          },
+          {
+            "check": "missing-required-clarification"
+          }
+        ]
+      },
+      "public": {
+        "status": 200,
+        "clarificationRequired": false,
+        "clarificationBlocked": false,
+        "variableCount": 5,
+        "comparisonCount": 0,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 5,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        }
+      }
+    }
+  ]
+}

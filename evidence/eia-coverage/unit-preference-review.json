@@ -1,0 +1,25 @@
+{
+  "method": "Dimensional unit classification using the official EIA unit and unitName fields already present in recorded responses. Distinguish energy-equivalent units from conventional physical product units; preserve kWh as electricity basis. No unit conversion, candidate exclusion or API call.",
+  "problem": "Btu-only recognition incorrectly ranked joules and tonnes of oil equivalent as physical product units.",
+  "evidenceSource": {
+    "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/research-details/coverage-selection-details-d1c9147a8ac322305caf9f6e85e58ff8f0fd5f758f6ee0caf9c6099eca3aaeb1.json.gz",
+    "sha256": "d1c9147a8ac322305caf9f6e85e58ff8f0fd5f758f6ee0caf9c6099eca3aaeb1"
+  },
+  "observedDefinitions": [
+    {
+      "unit": "TJ",
+      "unitName": "terajoules"
+    },
+    {
+      "unit": "MTOE",
+      "unitName": "million metric tons of oil equivalent"
+    }
+  ],
+  "changedDefaultCount": 1354,
+  "rules": "Keep all candidates. Prefer Btu for total energy; otherwise physical product units. If unavailable, energy-equivalent candidates remain eligible with their original labels and units.",
+  "storage": "local-research-evidence-v1",
+  "summary": "Unit-ranking correction with all 1,354 before/after counterexamples retained locally by hash.",
+  "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/retrieval/observations/unit-preference-review-dbca7a8f805eaba04b0972e01e0d8007881bae7a7741113b2c75b42889cc5549.json.gz",
+  "sha256": "dbca7a8f805eaba04b0972e01e0d8007881bae7a7741113b2c75b42889cc5549",
+  "bytes": 9893
+}

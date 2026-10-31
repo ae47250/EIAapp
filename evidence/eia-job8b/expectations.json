@@ -1,0 +1,80 @@
+{
+  "version": "job8b-expectations-1",
+  "frozenAt": "2026-10-31T13:27:40.170263+00:00",
+  "baseCommit": "db12e1cef63aefa391fffdcb2803d3f00f6061dd",
+  "branch": "codex/eia-fix",
+  "scope": [
+    "Q5 quoted names or approved aliases support the model place; rejected codes never contaminate normal place resolution.",
+    "Q4 owner revision; all other frozen inputs, scorers and pass marks retained."
+  ],
+  "cases": [
+    {
+      "query": "electricity prices in georgia",
+      "modelPlace": "AL",
+      "quote": "georgia",
+      "expected": [
+        "GA"
+      ]
+    },
+    {
+      "query": "compare georgia and armenia natural gas imports",
+      "modelPlaces": [
+        "AL",
+        "ARM"
+      ],
+      "quotes": [
+        "georgia",
+        "armenia"
+      ],
+      "expected": [
+        "GEO",
+        "ARM"
+      ]
+    },
+    {
+      "parent": "D4",
+      "click": "Did you mean Georgia the country?",
+      "expected": [
+        "GEO"
+      ]
+    },
+    {
+      "query": "coal consumption in UK",
+      "modelPlace": "AL",
+      "quote": "UK",
+      "expected": [
+        "GBR"
+      ]
+    },
+    {
+      "query": "energy consumption in icelnd",
+      "modelPlace": "AL",
+      "quote": "icelnd",
+      "expected": [
+        "ISL"
+      ]
+    },
+    {
+      "query": "coal consumption somewhere",
+      "modelPlace": "AL",
+      "quote": "somewhere",
+      "expected": [],
+      "clarification": "geography"
+    }
+  ],
+  "properties": [
+    "Exact approved names and aliases survive; longer names outrank contained names.",
+    "Rejected model codes do not supply context for ambiguous-place defaults.",
+    "Missing, excluded and unresolved places never become unsupported positive requests.",
+    "Initial interpretation, fallback and resubmission apply the same model-place reconciliation.",
+    "Existing button-generated groups, documented national defaults and typed replies remain valid.",
+    "Q4 alternative retains a notice on screen and in Excel; bare activity choices must not silently discard unsupported words."
+  ],
+  "method": {
+    "name": "dictionary candidate generation followed by contextual entity disambiguation",
+    "source": "https://aclanthology.org/2024.naacl-short.11/",
+    "measurement": "Exact place-set accuracy and false-positive count on the approved geography catalogue and frozen domain regressions. Generic Wikipedia entity-linking benchmarks do not exercise this EIA form contract; no external benchmark score claimed."
+  },
+  "q4SHA256": "f90d59cde8f0d44faa4056c514a2021323d8c6810a21a4fadff2654464f7c7f2",
+  "paidRun": "One complete 78-outcome schedule; max 68 model turns plus one validation re-ask each; low reasoning and 2048 output tokens retained; cost calculation frozen after final offline checks, before paid calls."
+}

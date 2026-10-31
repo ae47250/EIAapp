@@ -1,0 +1,65 @@
+{
+  "reviewBase": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "frozenBefore": "Additional approved-content collision probes after Italy collision discovery",
+  "metadata": {
+    "routingMetadata": "data/eia/routing-metadata.json",
+    "metadataBuild": "phase1b",
+    "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+    "geographies": {
+      "GMB": "Gambia, The",
+      "ZMB": "Zambia",
+      "BHS": "The Bahamas",
+      "CAN": "Canada",
+      "USA": "United States",
+      "PNG": "Papua New Guinea",
+      "GNB": "Guinea-Bissau",
+      "GIN": "Guinea",
+      "GEO": "Georgia"
+    }
+  },
+  "defaults": {
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "products": [
+      "total energy"
+    ],
+    "activities": [
+      "consumption"
+    ],
+    "excludedGeographies": [],
+    "excludedProducts": [],
+    "excludedActivities": []
+  },
+  "cases": [
+    {
+      "id": "supply-actual-exclusion",
+      "query": "USA energy consumption, not supply, sure?",
+      "geographies": [
+        "USA"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    },
+    {
+      "id": "italy-exclusion-understand",
+      "query": "Canada energy consumption, not Italy, understand?",
+      "geographies": [
+        "CAN"
+      ],
+      "excludedGeographies": [
+        "ITA"
+      ]
+    },
+    {
+      "id": "supply-exclusion-understand",
+      "query": "USA energy consumption, not supply, understand?",
+      "geographies": [
+        "USA"
+      ],
+      "excludedActivities": [
+        "production"
+      ]
+    }
+  ]
+}

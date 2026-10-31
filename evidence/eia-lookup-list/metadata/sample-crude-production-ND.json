@@ -1,0 +1,72 @@
+{
+  "retrievedAt": "2026-10-28T23:50:51.012257+00:00",
+  "url": "https://api.eia.gov/v2/petroleum/crd/crpdn/data/",
+  "params": {
+    "frequency": "monthly",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[product][]": "EPC0",
+    "facets[process][]": "FPF",
+    "facets[duoarea][]": "SND"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "1094",
+      "dateFormat": "YYYY-MM",
+      "frequency": "monthly",
+      "data": [
+        {
+          "period": "2026-07",
+          "duoarea": "SND",
+          "area-name": "USA-ND",
+          "product": "EPC0",
+          "product-name": "Crude Oil",
+          "process": "FPF",
+          "process-name": "Field Production",
+          "series": "MCRFPND1",
+          "series-description": "North Dakota Field Production of Crude Oil (Thousand Barrels)",
+          "value": "35886",
+          "units": "MBBL"
+        }
+      ]
+    },
+    "request": {
+      "command": "/v2/petroleum/crd/crpdn/data/",
+      "params": {
+        "frequency": "monthly",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "product": [
+            "EPC0"
+          ],
+          "process": [
+            "FPF"
+          ],
+          "duoarea": [
+            "SND"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

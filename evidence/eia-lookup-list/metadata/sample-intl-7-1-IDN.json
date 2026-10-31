@@ -1,0 +1,80 @@
+{
+  "retrievedAt": "2026-10-28T23:49:51.309531+00:00",
+  "url": "https://api.eia.gov/v2/international/data/",
+  "params": {
+    "frequency": "annual",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[productId][]": "7",
+    "facets[activityId][]": "1",
+    "facets[countryRegionId][]": "IDN",
+    "facets[unit][]": "TST"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "45",
+      "dateFormat": "YYYY",
+      "frequency": "annual",
+      "data": [
+        {
+          "period": "2024",
+          "productId": "7",
+          "productName": "Coal",
+          "activityId": "1",
+          "activityName": "Production",
+          "countryRegionId": "IDN",
+          "countryRegionName": "Indonesia",
+          "countryRegionTypeId": "c",
+          "countryRegionTypeName": "Country",
+          "dataFlagId": null,
+          "dataFlagDescription": null,
+          "unitName": "thousand short tons",
+          "value": "921532.2559327945",
+          "unit": "TST"
+        }
+      ],
+      "description": "Country level production, consumption, imports, exports by energy source (petroleum, natural gas, electricity, renewable, etc.)  \r\n        Interactive product:  https://www.eia.gov/international/data/world"
+    },
+    "request": {
+      "command": "/v2/international/data/",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "productId": [
+            "7"
+          ],
+          "activityId": [
+            "1"
+          ],
+          "countryRegionId": [
+            "IDN"
+          ],
+          "unit": [
+            "TST"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

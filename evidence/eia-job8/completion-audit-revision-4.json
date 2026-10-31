@@ -1,0 +1,185 @@
+{
+  "recordedAt": "2026-10-31T13:07:57.589698+00:00",
+  "result": "FAIL_COMPLETE",
+  "codeCommit": "87375429987a798550a023c83db9722957d8d2d3",
+  "evidenceParentCommit": "5eea8a3cd2fc476212bf8651d2c5821641fb934b",
+  "purpose": "Complete the requirement audit and correct two stale descriptions copied from the partial-run report. No scores, frozen inputs, application code or scorers changed; no new model calls or scored runs.",
+  "reportCorrections": [
+    {
+      "field": "scored-run-result-revision-4.json: Q1Baseline.natGasOutOfScope",
+      "correction": "The sentence No live score reached this case describes the earlier partial run only. The complete run reached nat gas production in Texas and returned Texas Natural Gas Marketed Production (Million cubic feet) without clarification."
+    },
+    {
+      "field": "scored-run-result-revision-4.json: Q2.liveD6aFailuresAreNotWording",
+      "correction": "These are historical partial-run failures caused by the runner ignoring clicks. D6a passed both repetitions in the completed run; its frozen form, outcome and presentation checks passed."
+    }
+  ],
+  "requirements": {
+    "start": {
+      "base": "eeefcf72af2fe666d35e6cfd1e0b4f16966a4f4e",
+      "baseIsAncestor": true,
+      "branch": "codex/eia-fix"
+    },
+    "Q1": {
+      "baseline": "Three specified typo regression tests fail on eeefcf7; original failing log preserved below. All three pass in the final 829-test log.",
+      "sharedMechanism": "lib/sources/eia/lookup-ambiguity.js matches adjacent words of vocabulary products and aliases using bounded edit distance for the first word.",
+      "scored": "9/9 frozen Q1 checks passed. Coal and natual gas in Ohio reached the activity question with both products; no natural gas versus gasoline question.",
+      "ownerAmendment": "Gas station prices and national gas prices may ask the product question or return gasoline; natural gas is a failure. Both asked the product question in this run.",
+      "naturalGasolineLimit": "The frozen test proves no natural-gas substitution. The observed result was petroleum production, no data; it does not establish that the distinct natural-gasoline measure remains supported. No scorer or schema change made.",
+      "natGas": "nat gas production in Texas returned Texas Natural Gas Marketed Production (MMcf), with no clarification."
+    },
+    "Q2": {
+      "revision": "evidence/eia-polish/set-d-d6a-revision-2.json.gz",
+      "differences": 28,
+      "onlyChangedField": "statusLabel",
+      "old": "No data for these years (EIA returned none)",
+      "new": "Not yet in our checked list",
+      "unchangedFieldsVerifiedByRecursiveComparison": true,
+      "approvedLabelSet": [
+        "Available",
+        "Reported as zero every year",
+        "No data for these years",
+        "Not yet in our checked list",
+        "EIA does not publish this",
+        "Not in EIA's catalogue"
+      ],
+      "D6aCorrectRepetitions": 2
+    },
+    "Q3": {
+      "exactCommittedText": "- Before any paid or scored test run, run the complete offline test suite against the final code, including replays of saved AI responses, and fix every failure first. If the AI's instructions or input format changed, say which saved responses are out of date. A scored run that fails on something the offline suite would have caught is a process failure; report it as one.",
+      "verifiedIn": "HEAD:AGENTS.md",
+      "test": "tests/eia-job8.test.js: Q3 exact pre-run replay rule is recorded in AGENTS.md"
+    },
+    "offlineBeforePaidRun": {
+      "recordedAt": "2026-10-31T12:40:46.166051+00:00",
+      "pass": true,
+      "codeCommit": "87375429987a798550a023c83db9722957d8d2d3",
+      "applicationCodeUnchanged": true,
+      "keysBlankForOfflineCommands": true,
+      "javascript": {
+        "passed": 829,
+        "failed": 0
+      },
+      "python": {
+        "files": 32,
+        "passed": 32,
+        "command": "Run each scripts/eia-lookup/*.test.py individually with python3 -B; aggregate exit statuses."
+      },
+      "runnerAndOwnerCorrection": {
+        "passed": 7,
+        "failed": 0
+      },
+      "build": "PASS",
+      "savedReplay": {
+        "outcomes": 126,
+        "modelResponses": 115,
+        "eiaResponses": 306,
+        "networkCalls": 0,
+        "q4InjectedCases": 3,
+        "expectedDifferencesMatch": true,
+        "focusedD6aD8a": [
+          {
+            "id": "D6a",
+            "repeat": 1,
+            "correct": true
+          },
+          {
+            "id": "D8a",
+            "repeat": 1,
+            "correct": true
+          },
+          {
+            "id": "D6a",
+            "repeat": 2,
+            "correct": true
+          },
+          {
+            "id": "D8a",
+            "repeat": 2,
+            "correct": true
+          }
+        ],
+        "browserConsoleErrors": []
+      },
+      "modelInputChanged": false,
+      "staleSavedResponses": [],
+      "resolvedOfflineFailure": "The new Python instruction initially changed the frozen data-decisions section hash. Moving it to a separate Python Test Verification section restored the untouched test; no test or frozen expectation was changed.",
+      "artifactsSHA256": {
+        "evidence/eia-job8/checks-revision-4/npm-test-before-doc-placement-fix.log.gz": "f2362a44f6c86b8e594d350d6c7633ac5645e1d7ba97de18251ecc7a729be57a",
+        "evidence/eia-job8/checks-revision-4/npm-test-final.log.gz": "1594353568419af892997a3230fa376e56c1e2427708b237d6357cd839a309ae",
+        "evidence/eia-job8/checks-revision-4/runner-checks.log.gz": "f98dfbfaf64bc3aaffbed3254b709684a4df12834be34ca4a4657053a77102f5",
+        "evidence/eia-job8/checks-revision-4/python-tests.log.gz": "4b2ec456d345ebece0cac71e5963199820ed1d5bfe633ebb14d313bada6ab602",
+        "evidence/eia-job8/checks-revision-4/python-results.json.gz": "09c64ac8257e26853ba0b2975277c86c543b0c4ce1741cd78f4a20c9ba5cb702",
+        "evidence/eia-job8/checks-revision-4/build.log.gz": "65a23062b27880842da965af9790470b839f4e8a80e841a7aa86f9114c74c4a5",
+        "evidence/eia-job8/checks-revision-4/replay-summary.json.gz": "6d20c2efd565b3f32b7b60d414cac31ef04fb9dadb0efb1541274b952d82ca8b"
+      }
+    },
+    "scoredRun": {
+      "outcomes": 78,
+      "D": {
+        "correct": 55,
+        "total": 58
+      },
+      "D1D2D3D21BothRepetitions": true,
+      "F": {
+        "correct": 8,
+        "total": 8
+      },
+      "Q1": {
+        "correct": 9,
+        "total": 9
+      },
+      "Q4": {
+        "correct": 1,
+        "total": 3
+      },
+      "deadEnds": 0,
+      "unlabelledWrongDataOutcomes": 2,
+      "modelCalls": 71,
+      "validationReasks": 3,
+      "buttonOnlyModelCalls": 0,
+      "passMarks": {
+        "complete": true,
+        "modelIdentity": true,
+        "boundedCalls": true,
+        "setD": true,
+        "frontPageAndD21": true,
+        "setF": true,
+        "setQ1": true,
+        "setQ4": false,
+        "zeroDeadEnds": true,
+        "zeroUnlabelledWrongData": false,
+        "withinBudget": true,
+        "noFatalStop": true
+      }
+    },
+    "budget": {
+      "newGenerationUsageUpperBound": 0.068750625,
+      "unusedTokenCountReserve": 0.000861125,
+      "newIncludingReserve": 0.06961175,
+      "priorPartialRunRecordedCost": 0.059300625,
+      "cumulativeIncludingReserve": 0.128912375,
+      "newRunFrozenMaximum": 0.324102125,
+      "cumulativeFrozenMaximum": 0.38340275,
+      "cap": 0.4,
+      "basis": "Conservative usage-based estimate at $0.125/M input and $0.50/M output; no cache discounts deducted. The reserve is not a new token-count call or an invoice charge."
+    },
+    "pythonDiscoveryRule": {
+      "approvedText": "Run each scripts/eia-lookup/*.test.py file individually with python3 -B and aggregate exit statuses; unittest discover does not find these hyphenated test module names.",
+      "location": "AGENTS.md, separate Python Test Verification section",
+      "delivery": "Added locally. Its patch is included in evidence; AGENTS.md itself is excluded from the evidence-only push."
+    }
+  },
+  "baselineEvidence": {
+    "temporaryOriginal": "/private/tmp/eia-job8-before.tap",
+    "durableOriginal": "~/Documents/EIAapp-Evidence/20261031/job8/completion-audit-4/eia-job8-before.tap",
+    "originalSHA256": "9fa323a62be7004d738011a0a921180eab7786dfb1798f1b095e24fdc5fbbe34",
+    "published": "evidence/eia-job8/baseline-before-revision-4.log.gz",
+    "publishedSHA256": "fc619fe515787bc09e1992d36bc7ba30f9687a813f3dd0f25ddb0d18b9b773dc",
+    "homePathRedactions": 6,
+    "originalCopyHashVerified": true,
+    "actualKeysPresent": false
+  },
+  "boundary": "The one complete authorized run has finished and failed. No further app repair or paid rerun is performed. A new owner work order is needed for the geography validation defect, unresolved Q4 behavior/scoring and any subsequent scored run.",
+  "completion": "Not achieved: zero unlabelled wrong data and Q4 marks failed. Natural-gasoline semantic preservation is not proven by the frozen anti-substitution check."
+}

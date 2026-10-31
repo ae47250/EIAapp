@@ -1,0 +1,80 @@
+{
+  "retrievedAt": "2026-10-28T23:49:33.931980+00:00",
+  "url": "https://api.eia.gov/v2/international/data/",
+  "params": {
+    "frequency": "annual",
+    "data[]": "value",
+    "length": 1,
+    "sort[0][column]": "period",
+    "sort[0][direction]": "desc",
+    "facets[productId][]": "44",
+    "facets[activityId][]": "2",
+    "facets[countryRegionId][]": "ISL",
+    "facets[unit][]": "QBTU"
+  },
+  "status": 200,
+  "body": {
+    "warnings": [
+      {
+        "warning": "incomplete return",
+        "description": "The API can only return 5000 rows in JSON format.  Please consider constraining your request with facet, start, or end, or using offset to paginate results."
+      }
+    ],
+    "response": {
+      "total": "45",
+      "dateFormat": "YYYY",
+      "frequency": "annual",
+      "data": [
+        {
+          "period": "2024",
+          "productId": "44",
+          "productName": "Primary energy",
+          "activityId": "2",
+          "activityName": "Consumption",
+          "countryRegionId": "ISL",
+          "countryRegionName": "Iceland",
+          "countryRegionTypeId": "c",
+          "countryRegionTypeName": "Country",
+          "dataFlagId": null,
+          "dataFlagDescription": null,
+          "unitName": "quadrillion Btu",
+          "value": ".11202451180240714784088727219388795412",
+          "unit": "QBTU"
+        }
+      ],
+      "description": "Country level production, consumption, imports, exports by energy source (petroleum, natural gas, electricity, renewable, etc.)  \r\n        Interactive product:  https://www.eia.gov/international/data/world"
+    },
+    "request": {
+      "command": "/v2/international/data/",
+      "params": {
+        "frequency": "annual",
+        "data": [
+          "value"
+        ],
+        "length": "1",
+        "sort": [
+          {
+            "column": "period",
+            "direction": "desc"
+          }
+        ],
+        "facets": {
+          "productId": [
+            "44"
+          ],
+          "activityId": [
+            "2"
+          ],
+          "countryRegionId": [
+            "ISL"
+          ],
+          "unit": [
+            "QBTU"
+          ]
+        }
+      }
+    },
+    "apiVersion": "2.1.14",
+    "ExcelAddInVersion": "2.1.0"
+  }
+}

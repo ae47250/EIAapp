@@ -1,0 +1,122 @@
+{
+  "status": "Definition review only; no B1 availability claim.",
+  "method": "UNSD correspondence and SKOS whole/narrower mapping; source-based regressions, no applicable reference benchmark. See DESIGN.md.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/biofuels/biomass/",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/biomass-report-e4e08fc31618.html",
+      "sha256": "e4e08fc316184a9082e5da4faab54801ef85631fffbca69328d7a88bc6546022"
+    },
+    {
+      "url": "https://www.eia.gov/petroleum/imports/companylevel/cli_note.php",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/crude-import-notes-a1e2a7df108c.html",
+      "sha256": "a1e2a7df108cb546133c4b23113be29968724bb316e3b2425b36fb73476553d6"
+    }
+  ],
+  "biomassFindings": [
+    "EIA-63C covers U.S. densified wood fuels, a component of biofuels; no wood qualifier is authorized.",
+    "Tables 2-8 distinguish manufacturing capacity, raw-material purchases, production, inventory, domestic sales and export sales.",
+    "Domestic price combines retail and wholesale sales; export price is revenue per ton.",
+    "Monthly capacity excludes planned and annually reporting small facilities; published capacity is annual tons per year, while API units say tons.",
+    "Feedstock purchases and their cost are manufacturing inputs, not fuel output or consumer fuel prices."
+  ],
+  "notation": {
+    "symbol": "N/A",
+    "quote": "N/A = No production",
+    "action": "Preserve nonnumeric under owner notation decision; never infer numeric zero.",
+    "source": "https://www.eia.gov/biofuels/biomass/"
+  },
+  "crudeFindings": [
+    "Company-level imports omit estimates included in broader aggregate imports; do not obtain the broader total by summing company records.",
+    "Origin countries are U.S. trade partners, not subject-country imports. Port-state and processing-state destinations are different bases.",
+    "Five advertised grade definitions are components of crude oil; absence of a grade filter does not prove an all-grade aggregate.",
+    "Crude remains a component of petroleum; an all-crude measure may only enter the separately counted explicit crude-oil qualifier cells after scope/availability checks."
+  ],
+  "expectationsBeforeClassifierEdit": [
+    {
+      "route": "densified-biomass/capacity-by-region",
+      "column": "capacity",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "capacity"
+    },
+    {
+      "route": "densified-biomass/sales-and-price-by-region",
+      "column": "quantity",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "sales"
+    },
+    {
+      "route": "densified-biomass/sales-and-price-by-region",
+      "column": "average-price",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "prices"
+    },
+    {
+      "route": "densified-biomass/export-sales-and-price",
+      "column": "quantity",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "exports"
+    },
+    {
+      "route": "densified-biomass/export-sales-and-price",
+      "column": "average-price",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "prices"
+    },
+    {
+      "route": "densified-biomass/production-by-region",
+      "column": "production",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "production"
+    },
+    {
+      "route": "densified-biomass/inventories-by-region",
+      "column": "inventory",
+      "classification": "subset",
+      "product": "biofuels",
+      "activity": "storage"
+    },
+    {
+      "route": "densified-biomass/feedstocks-and-cost",
+      "column": "quantity",
+      "classification": "out of vocabulary"
+    },
+    {
+      "route": "densified-biomass/feedstocks-and-cost",
+      "column": "cost",
+      "classification": "out of vocabulary"
+    },
+    {
+      "route": "densified-biomass/capacity-by-region",
+      "column": "number-of-facilities",
+      "classification": "out of vocabulary"
+    },
+    {
+      "route": "densified-biomass/capacity-by-region",
+      "column": "number-of-fte-employees",
+      "classification": "out of vocabulary"
+    },
+    {
+      "route": "crude-oil-imports",
+      "column": "quantity",
+      "classification": "subset",
+      "product": "petroleum",
+      "activity": "imports",
+      "qualifier": "crude oil"
+    }
+  ],
+  "invariants": [
+    "Every original column/facet definition is retained.",
+    "Every grade is a crude component, even where destination is national.",
+    "Unknown definitions stay pending.",
+    "No source components become whole products through headline fallback.",
+    "No implicit summation, computed totals or substitution.",
+    "No definition constitutes publication proof."
+  ]
+}

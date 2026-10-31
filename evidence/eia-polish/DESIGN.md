@@ -1,0 +1,9 @@
+# Job 7 design and verification basis
+
+The existing form remains the dialogue state, following slot updates in the [dialogue-state-tracking survey](https://arxiv.org/abs/2207.14627). Visible ambiguity choices follow [DataTone (UIST 2015)](https://zcliu.cs.umd.edu/datatone/DataTone-UIST15.pdf). No framework, model, schema or vocabulary change. Existing options carry candidate years; code validates quoted evidence and reconstructs browser history.
+
+MultiWOZ is a standard dialogue-state benchmark but does not cover this EIA ontology, source selectors, numeric display or Excel export. No MultiWOZ score is claimed. The owner's frozen D/C/I/E/F benchmark and its unchanged pass marks measure the requested outcomes; injected regression tests isolate each P requirement. Exposed examples are not holdouts.
+
+EIA route metadata establishes annual/monthly total-energy frequency support; exact MSN/facets are preserved when checking for an annual value. Official responses and safe URLs are recorded in period-source-checks.json and current-year-source.json. No new coverage cells were introduced. Metadata regeneration now omits research instructions from published descriptions; metadata-diff.json confirms description-only changes.
+
+Paid settings use gpt-6-luna with explicit low reasoning and 2,048 output tokens (including reasoning), unchanged from prior measured evaluations. The [model documentation](https://developers.openai.com/api/docs/models/gpt-6-luna) confirms low reasoning, Structured Outputs and prices. [Caching documentation](https://developers.openai.com/api/docs/guides/prompt-caching) establishes default 30-minute cache writes at 1.25 times input price. Worst-case reservations use $0.125/M input and $0.50/M output. No wrong-answer retry. At most one validation re-ask only when realized savings leave the full remaining schedule funded within $0.30.

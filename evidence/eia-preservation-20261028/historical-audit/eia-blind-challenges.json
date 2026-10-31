@@ -1,0 +1,1252 @@
+{
+  "schemaVersion": "independent-challenges-v1",
+  "cases": [
+    {
+      "id": "blind-01",
+      "q": "Show marketed natural gas production in Texas.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production",
+            "qualifier": "marketed natural gas"
+          }
+        ],
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "A preserved annual Texas marketed-production series exists. Unstated frequency defaults to annual and does not imply a sector.",
+      "tags": [
+        "valid",
+        "default-frequency",
+        "qualifier"
+      ]
+    },
+    {
+      "id": "blind-02",
+      "q": "Annual electricity retail sales in Texas.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": true,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "Retail-sales scope belongs to domestic electricity metadata, including annual Texas retail-sales records.",
+      "tags": [
+        "valid",
+        "scope",
+        "explicit-frequency"
+      ]
+    },
+    {
+      "id": "blind-03",
+      "q": "Coal production in Wyoming.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "WY"
+        ],
+        "route": "seds",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ],
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "Preserved SEDS coal-production metadata exists in physical and heat units. Domestic coverage does not include coal production.",
+      "tags": [
+        "valid",
+        "coverage-routing",
+        "default-frequency"
+      ]
+    },
+    {
+      "id": "blind-04",
+      "q": "Annual crude oil production in the United States.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": true,
+        "sector": null,
+        "codes": [
+          "USA"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "petroleum",
+            "activity": "production",
+            "qualifier": "crude oil"
+          }
+        ],
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "Preserved international crude-oil including lease-condensate production exists for USA. Domestic metadata covers electricity and natural gas, not petroleum production.",
+      "tags": [
+        "valid",
+        "coverage-routing",
+        "national"
+      ]
+    },
+    {
+      "id": "blind-05",
+      "q": "Monthly industrial electricity prices in Texas.",
+      "expected": {
+        "frequency": "monthly",
+        "explicit": true,
+        "sector": "industrial",
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "electricity",
+            "activity": "prices"
+          }
+        ],
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "Preserved monthly Texas industrial retail-price metadata exists. Industrial is explicit and must survive normalization.",
+      "tags": [
+        "valid",
+        "sector",
+        "explicit-frequency"
+      ]
+    },
+    {
+      "id": "blind-06",
+      "q": "Coal production in Papua New Guinea, Equatorial Guinea, and Guinea, in that order.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "PNG",
+          "GNQ",
+          "GIN"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "The three exact names are distinct. A shorter contained name must not erase a longer exact name or change their order.",
+      "tags": [
+        "exact-name",
+        "collision",
+        "ordered-geographies"
+      ]
+    },
+    {
+      "id": "blind-07",
+      "q": "Compare natural gas production in Guinea-Bissau and Guinea.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GNB",
+          "GIN"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "The hyphenated exact geography and its shorter neighbor denote separate metadata entries.",
+      "tags": [
+        "exact-name",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-08",
+      "q": "Coal consumption in Nigeria and Niger.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "NGA",
+          "NER"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "Nigeria and Niger are distinct supported names, despite their shared prefix.",
+      "tags": [
+        "exact-name",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-09",
+      "q": "Natural gas consumption in West Virginia and Virginia.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "WV",
+          "VA"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "West Virginia must remain intact and precede Virginia.",
+      "tags": [
+        "exact-name",
+        "collision",
+        "ordered-geographies"
+      ]
+    },
+    {
+      "id": "blind-10",
+      "q": "Natural gas production in New Mexico.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "NM"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "The full state name takes priority over its contained foreign country name Mexico.",
+      "tags": [
+        "exact-name",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-11",
+      "q": "Natural gas production in the United Arab Emirates and Ukraine.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "ARE",
+          "UKR"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "The exact country names must survive competition with the emirates and UK aliases; Ukraine is not the UK.",
+      "tags": [
+        "exact-name",
+        "alias",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-12",
+      "q": "Coal production in Gambia, The; then The Bahamas.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GMB",
+          "BHS"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Both unusual official name spellings appear verbatim in routing metadata; their punctuation is part of the names.",
+      "tags": [
+        "exact-name",
+        "punctuation",
+        "ordered-geographies"
+      ]
+    },
+    {
+      "id": "blind-13",
+      "q": "Total energy production in Germany, West; then Germany, East.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "DEUW",
+          "DDR"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "total energy",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Historical exact names must not collapse into Germany. Preserved metadata confirms the West German total-energy series.",
+      "tags": [
+        "exact-name",
+        "collision",
+        "historical"
+      ]
+    },
+    {
+      "id": "blind-14",
+      "q": "Coal consumption in Samoa and American Samoa.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "WSM",
+          "ASM"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "The names identify distinct geographies; the word American must not trigger the America alias.",
+      "tags": [
+        "exact-name",
+        "alias",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-15",
+      "q": "Coal production in the UK, Czech Republic, and United Kingdom.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GBR",
+          "CZE"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Supported aliases resolve to GBR and CZE. Repeating the same country under an alias must not duplicate it; retain first-mention order.",
+      "tags": [
+        "alias",
+        "deduplication",
+        "ordered-geographies"
+      ]
+    },
+    {
+      "id": "blind-16",
+      "q": "Natural gas consumption in the U.S. Virgin Islands.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "VIR"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "The complete supported territory name must survive a competing U.S. national alias.",
+      "tags": [
+        "exact-name",
+        "alias",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-17",
+      "q": "Coal production in Peru, excluding Canada, Chile, and Brazil.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "PER"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "The comma-separated excluded list remains negative through its final member; only Peru is positive.",
+      "tags": [
+        "negation",
+        "negation-list"
+      ]
+    },
+    {
+      "id": "blind-18",
+      "q": "Coal consumption: not Canada or Mexico, but Argentina.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "ARG"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "The contrast makes Argentina positive while both coordinated names after not remain excluded.",
+      "tags": [
+        "negation",
+        "contrast"
+      ]
+    },
+    {
+      "id": "blind-19",
+      "q": "Natural gas production for Texas only, not California, Oklahoma, or Louisiana.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "A coordinated exclusion list must not reintroduce any excluded state.",
+      "tags": [
+        "negation",
+        "negation-list"
+      ]
+    },
+    {
+      "id": "blind-20",
+      "q": "Exclude Guinea and Guinea-Bissau; show coal production for Papua New Guinea.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "PNG"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Negative shorter names do not negate the distinct full positive name; none of the excluded names may become positive.",
+      "tags": [
+        "negation",
+        "collision"
+      ]
+    },
+    {
+      "id": "blind-21",
+      "q": "Natural gas production for the UK, without France or Germany.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GBR"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Without negates both coordinated foreign geographies; the supported UK alias remains positive.",
+      "tags": [
+        "negation",
+        "alias"
+      ]
+    },
+    {
+      "id": "blind-22",
+      "q": "Natural gas consumption in Georgia.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GA"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "Under the required same-name rule, the state is chosen when no positive foreign geography or qualifying international hint occurs.",
+      "tags": [
+        "same-name",
+        "state-default"
+      ]
+    },
+    {
+      "id": "blind-23",
+      "q": "Natural gas consumption in Georgia and Armenia.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GEO",
+          "ARM"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "A positive foreign geography selects country Georgia under the stipulated precedence.",
+      "tags": [
+        "same-name",
+        "foreign-positive"
+      ]
+    },
+    {
+      "id": "blind-24",
+      "q": "Natural gas consumption in the country Georgia.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GEO"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "An explicit country hint selects Georgia the country in the absence of a positive US national mention.",
+      "tags": [
+        "same-name",
+        "international-hint"
+      ]
+    },
+    {
+      "id": "blind-25",
+      "q": "Compare international natural gas consumption in Georgia and the United States.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GA",
+          "USA"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "The international hint alone does not override a positive US national mention; without another positive foreign geography, Georgia is the state.",
+      "tags": [
+        "same-name",
+        "us-precedence"
+      ]
+    },
+    {
+      "id": "blind-26",
+      "q": "Natural gas consumption in Georgia, excluding Armenia.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GA"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "An excluded foreign geography must neither become positive nor force Georgia into the country interpretation.",
+      "tags": [
+        "same-name",
+        "negation"
+      ]
+    },
+    {
+      "id": "blind-27",
+      "q": "International natural gas consumption in Georgia, excluding the United States.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GEO"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "The international hint applies because the US mention is excluded, not positive.",
+      "tags": [
+        "same-name",
+        "negation",
+        "international-hint"
+      ]
+    },
+    {
+      "id": "blind-28",
+      "q": "Natural gas consumption in Georgia, the United States, and Armenia.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "GEO",
+          "USA",
+          "ARM"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ]
+      },
+      "reason": "A positive foreign geography takes precedence even when a positive US national mention is also present; all geographies retain their requested order.",
+      "tags": [
+        "same-name",
+        "foreign-positive",
+        "us-precedence",
+        "ordered-geographies"
+      ]
+    },
+    {
+      "id": "blind-29",
+      "q": "Can you show us coal production in Peru for my report?",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "PER"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ],
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "Can and us are ordinary request wording, not Canada and the United States. Preserved annual Peru coal-production metadata exists.",
+      "tags": [
+        "filler",
+        "valid",
+        "default-frequency"
+      ]
+    },
+    {
+      "id": "blind-30",
+      "q": "Please show me natural gas production in Texas, or put it in a simple table.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Me, or, and in are ordinary English here and must not create Maine, Oregon, or Indiana.",
+      "tags": [
+        "filler",
+        "short-code"
+      ]
+    },
+    {
+      "id": "blind-31",
+      "q": "I would like natural gas production in Oman; please make the result easy for us to read.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "OMN"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "The harmless request phrase for us to read is not a US national selection and adds no geography or sector.",
+      "tags": [
+        "filler",
+        "default-frequency"
+      ]
+    },
+    {
+      "id": "blind-32",
+      "q": "For Mexico, then Canada, show crude oil production and natural gas consumption.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "MEX",
+          "CAN"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "petroleum",
+            "activity": "production",
+            "qualifier": "crude oil"
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ],
+        "clarify": false
+      },
+      "reason": "The separate noun phrases specify two product/activity pairs and two ordered geographies; both pairs must survive browser resubmission.",
+      "tags": [
+        "multiple-pairs",
+        "ordered-geographies",
+        "qualifier",
+        "resubmission"
+      ]
+    },
+    {
+      "id": "blind-33",
+      "q": "For France and Germany, show both natural gas production and natural gas consumption.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "FRA",
+          "DEU"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          }
+        ],
+        "clarify": false
+      },
+      "reason": "The repeated product makes both activities explicit. Neither requested activity may disappear during normalization or browser resubmission.",
+      "tags": [
+        "multiple-activities",
+        "resubmission"
+      ]
+    },
+    {
+      "id": "blind-34",
+      "q": "Wind electricity generation and solar electricity generation in California.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "CA"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "wind",
+            "activity": "generation"
+          },
+          {
+            "product": "solar",
+            "activity": "generation"
+          }
+        ],
+        "clarify": false
+      },
+      "reason": "Wind and solar are separate fuels for the same electricity-generation activity. Electricity is the carrier, and state generation scope belongs to domestic metadata.",
+      "tags": [
+        "multiple-products",
+        "scope",
+        "resubmission"
+      ]
+    },
+    {
+      "id": "blind-35",
+      "q": "In Texas, show natural gas production, natural gas consumption, and electricity generation.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          },
+          {
+            "product": "natural gas",
+            "activity": "consumption"
+          },
+          {
+            "product": "electricity",
+            "activity": "generation"
+          }
+        ],
+        "clarify": false
+      },
+      "reason": "Three fully stated pairs must survive normalization; no sector was requested.",
+      "tags": [
+        "multiple-pairs",
+        "multiple-activities",
+        "resubmission"
+      ]
+    },
+    {
+      "id": "blind-36",
+      "q": "Coal and natural gas production and consumption for Canada and Mexico.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "CAN",
+          "MEX"
+        ],
+        "route": "international",
+        "clarify": true,
+        "unresolved": [
+          "Whether both activities apply to both products or the two products correspond to the two activities in order."
+        ]
+      },
+      "reason": "The two product and two activity lists could mean four combinations or paired combinations. All requested concepts must be retained; the disputed association is not guessed.",
+      "tags": [
+        "pairing-ambiguity",
+        "multiple-products",
+        "multiple-activities"
+      ]
+    },
+    {
+      "id": "blind-37",
+      "q": "Quarterly coal production in Canada.",
+      "expected": {
+        "frequency": "quarterly",
+        "explicit": true,
+        "sector": null,
+        "codes": [
+          "CAN"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Quarterly is explicit and must remain quarterly even if no matching coal series exists. An empty result or visibly labeled fallback is acceptable; silent annual substitution is not.",
+      "tags": [
+        "explicit-frequency",
+        "unavailable-allowed"
+      ],
+      "additionalChecks": [
+        {
+          "kind": "frequency-fallback",
+          "allowed": "No matching result, or a clearly labeled alternative frequency that does not overwrite the requested quarterly interpretation."
+        }
+      ]
+    },
+    {
+      "id": "blind-38",
+      "q": "Daily coal production in Wyoming.",
+      "expected": {
+        "frequency": "daily",
+        "explicit": true,
+        "sector": null,
+        "codes": [
+          "WY"
+        ],
+        "route": "seds",
+        "pairs": [
+          {
+            "product": "coal",
+            "activity": "production"
+          }
+        ]
+      },
+      "reason": "Daily is explicit. The supported annual state coal-production family is SEDS, and unsupported frequency must not force a domestic route or silent annual answer.",
+      "tags": [
+        "explicit-frequency",
+        "coverage-routing",
+        "unavailable-allowed"
+      ],
+      "additionalChecks": [
+        {
+          "kind": "frequency-fallback",
+          "allowed": "No matching result, or visibly labeled annual SEDS fallback; requested daily frequency remains explicit."
+        }
+      ]
+    },
+    {
+      "id": "blind-39",
+      "q": "Weekly natural gas underground storage in the United States.",
+      "expected": {
+        "frequency": "weekly",
+        "explicit": true,
+        "sector": null,
+        "codes": [
+          "USA"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "storage"
+          }
+        ],
+        "clarify": false
+      },
+      "reason": "Storage context explicitly identifies natural gas and weekly is preserved. The domestic profile includes weekly storage.",
+      "tags": [
+        "explicit-frequency",
+        "scope"
+      ]
+    },
+    {
+      "id": "blind-40",
+      "q": "Gas prices in Texas.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "clarify": true,
+        "unresolved": [
+          "Gas means natural gas or motor gasoline; no route or resolved product pair is asserted before clarification."
+        ]
+      },
+      "reason": "Without pipeline, motor-fuel, or similar context, gas can mean natural gas or gasoline. Those meanings change the product and potentially the source route.",
+      "tags": [
+        "product-ambiguity"
+      ]
+    },
+    {
+      "id": "blind-41",
+      "q": "Pipeline gas production in Texas.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ],
+        "clarify": false
+      },
+      "reason": "Pipeline is an approved context resolving gas to natural gas. The query specifies production and no sector.",
+      "tags": [
+        "ambiguity-resolved",
+        "coverage-routing"
+      ]
+    },
+    {
+      "id": "blind-42",
+      "q": "Monthly residential electricity prices in Texas, in dollars per kilowatt hour.",
+      "expected": {
+        "frequency": "monthly",
+        "explicit": true,
+        "sector": "residential",
+        "codes": [
+          "TX"
+        ],
+        "route": "domestic",
+        "pairs": [
+          {
+            "product": "electricity",
+            "activity": "prices"
+          }
+        ]
+      },
+      "reason": "The requested price unit is dollars per kWh, while preserved retail metadata uses cents per kilowatthour. An explicit conversion or disclosed unit alternative is required; relabeling raw cents as dollars is wrong.",
+      "tags": [
+        "units",
+        "sector",
+        "explicit-frequency"
+      ],
+      "additionalChecks": [
+        {
+          "kind": "unit",
+          "requested": "dollars per kilowatt hour",
+          "allowed": "Correct explicitly labeled conversion from cents, no matching result, or a visibly disclosed source-unit alternative. Never silently relabel cents values as dollars."
+        }
+      ]
+    },
+    {
+      "id": "blind-43",
+      "q": "Natural gas production in Canada, in megawatts.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "codes": [
+          "CAN"
+        ],
+        "route": "international",
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ],
+        "unresolved": [
+          "Whether the user intends an energy-rate conversion and, if so, the required conversion basis."
+        ]
+      },
+      "reason": "Megawatts are a power unit and materially differ from gas-volume or heat-quantity production units. The reviewed metadata does not establish a valid direct conversion.",
+      "tags": [
+        "units",
+        "unavailable-allowed"
+      ],
+      "additionalChecks": [
+        {
+          "kind": "unit",
+          "requested": "megawatts",
+          "allowed": "Clarify the desired conversion, return no match, or explicitly disclose that an offered alternative uses a different unit. Never silently substitute cubic feet or Btu."
+        }
+      ]
+    },
+    {
+      "id": "blind-44",
+      "q": "Natural gas production in Californa.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "pairs": [
+          {
+            "product": "natural gas",
+            "activity": "production"
+          }
+        ],
+        "unresolved": [
+          "Californa is a possible California typo, but automatic correction is not required."
+        ]
+      },
+      "reason": "The misspelling is not an exact supported geography. It may stay unresolved or be offered as a California correction; no unrelated geography may be invented.",
+      "tags": [
+        "typo",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "blind-45",
+      "q": "Annual industrial total energy consumption in California.",
+      "expected": {
+        "frequency": "annual",
+        "explicit": true,
+        "sector": "industrial",
+        "codes": [
+          "CA"
+        ],
+        "route": "seds",
+        "pairs": [
+          {
+            "product": "total energy",
+            "activity": "consumption"
+          }
+        ],
+        "clarify": false,
+        "empty": false
+      },
+      "reason": "Preserved SEDS industrial total-energy-consumption metadata exists for California. The stated annual frequency and industrial sector are explicit.",
+      "tags": [
+        "valid",
+        "scope",
+        "sector",
+        "explicit-frequency"
+      ]
+    }
+  ],
+  "methodology": {
+    "status": "Frozen before execution; no challenge query has been executed by the author.",
+    "createdUtc": "2026-10-27T15:00:24.044783+00:00",
+    "oracle": "The supplied requirements, query meaning, permitted routing metadata/configuration, and selected preserved official metadata titles/selectors only.",
+    "prohibitedSourcesNotRead": [
+      "implementation JavaScript",
+      "diffs",
+      "tests",
+      "development cases",
+      "audit documents",
+      "output logs",
+      "prior chat history"
+    ],
+    "externalCalls": false,
+    "sources": [
+      {
+        "path": "AGENTS.md",
+        "sha256": "7cc12a30a75c9044e3276b05c8536f3bae420232f5c8093c0fcee73bce760ae3"
+      },
+      {
+        "path": "data/eia/routing-metadata.json",
+        "sha256": "8cee62e497af1701405a86561a9a9dd9ba39f607ac092820ccd1a09aa8306558"
+      },
+      {
+        "path": "data/eia/phase4-routing-config.json",
+        "sha256": "3dbd10439a7cb0ca56f77d568725e76ba8ae74ae7e767ec7c99903ce2755c1e7"
+      },
+      {
+        "path": "data/eia/builds/phase1b/domestic.jsonl.gz",
+        "sha256": "6597620233b05eec92668b096159225ee7fc5593ab2cc3aa198be220e5b32b11"
+      },
+      {
+        "path": "data/eia/builds/phase1b/natural-gas.jsonl.gz",
+        "sha256": "7ccb8112a7b34208fad94aabcf064a6da5115aa0a0279dbf611c127f7e3b1ce5"
+      },
+      {
+        "path": "data/eia/builds/phase1b/international.jsonl.gz",
+        "sha256": "879dcb6bd93f141e4f859b29c6fd30953aa6ec6148106439280a3e0e7436233d"
+      },
+      {
+        "path": "data/eia/builds/phase1b/seds.jsonl.gz",
+        "sha256": "6cd7b72b17e14cfe5402dcca4f9898671fb0e15d082d9c061569298202f4fb1d"
+      },
+      {
+        "path": "data/eia/builds/phase1b/plants.jsonl.gz",
+        "sha256": "ff75ce7f3d9554454dacc78accfb89be957ae5d9b48d90ce67d97e09a58af470"
+      }
+    ],
+    "expectedFieldConventions": {
+      "codes": "Ordered unique positive geography codes, using the configured canonical USA alias for United States. A domestic selector may use US without changing the interpreted national geography. Omitted for the typo case because resolution is not prescribed.",
+      "frequency": "Requested frequency or annual by the supplied requirement when unstated. This requirement intentionally overrides metadata route defaults.",
+      "explicit": "True only when the query states frequency.",
+      "sector": "Null means no sector was requested. A default all-sectors candidate is permitted if it is visibly identified; the interpreted request must not invent a named sector.",
+      "route": "Expected source family, not an API endpoint; omitted when the unresolved product meaning changes routing.",
+      "pairs": "Semantically required product/activity combinations. Optional qualifier preserves specificity within a canonical product family. Pair order follows the query; result presentation may group differently if it preserves every requested pair.",
+      "clarify": "Whether material semantic ambiguity requires clarification. Omitted where the requirement does not force a clarification policy.",
+      "empty": "False is asserted only for examples supported by inspected preserved titles/selectors. Omitted elsewhere; an unverified availability claim is not made.",
+      "unresolved": "Meanings the author has deliberately not resolved; these must not be scored against a guessed association.",
+      "additionalChecks": "Human-review acceptance conditions for unit fidelity and visibly labeled frequency fallback, separate from strict interpretation-field assertions."
+    },
+    "resubmissionRule": "For every case with definite interpretation fields, normalize the query and submit it through the browser when authorized; ordered codes, requested pairs/qualifiers, frequency explicitness, and sector must remain stable. Cases 32-35 emphasize multiple pairs.",
+    "negativeGeographyRule": "Excluded names are never positive and do not influence the Georgia precedence rule as positive foreign/national mentions.",
+    "sameNameRule": "Another positive foreign geography selects country Georgia; otherwise an international/country hint selects country only without positive US national mention; otherwise select the state.",
+    "scopeLimit": "Case construction and local integrity validation only. No implementation execution, live API requests, credential use, paid calls, production edits, or git writes."
+  }
+}

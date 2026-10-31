@@ -1,0 +1,85 @@
+{
+  "status": "Independent frozen challenge execution and bounded final code review complete for the recorded source hashes.",
+  "matrix_path": "/private/tmp/eia-scope-contract-independent-matrix.json",
+  "matrix_sha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0",
+  "results_path": "/private/tmp/eia-scope-contract-independent-results-r4.json",
+  "source_hashes": {
+    "lib/sources/eia/request-evidence.js": "d5e370c70355a8438c6a44a720943a4f3724af0c8419b13fa0fc74f2feb0b9e6",
+    "lib/sources/eia/interpret-query.js": "a55399e13c702c9ac8d7856758dbd9883cdbcd8620a2c4e7cd6b8ed5f9ac4a14",
+    "lib/sources/eia/intent-routing.js": "d95587c9a82ede0b59d35bd815a109ce5be156dd8d9b0c230762a5244d3abebf",
+    "components/search/SearchWorkspace.js": "26ccb47d5f182a66414ba35b2fe6b449075163e22112864c29a01852215049f8"
+  },
+  "frozen_model_boundary_cases": {
+    "compliant": 28,
+    "total": 28,
+    "requested_results": 18,
+    "clarifications": 10,
+    "boundaries": [
+      "injected interpretQuery",
+      "actual browser appendIntentParams",
+      "normalizeSubmittedIntent",
+      "public search GET"
+    ]
+  },
+  "frozen_integrity_cases": {
+    "safe_outcomes": 16,
+    "total": 16,
+    "note": "Metadata/category forgeries repaired locally; malformed bounds/text/coverage/overlap/operator/replay and known epistemic exclusions blocked; older direct-exclusion payload safely reparsed; unknown omitted product still required clarification."
+  },
+  "targeted_followup_checks": {
+    "passed": 6,
+    "total": 6,
+    "artifact": "/private/tmp/eia-scope-contract-independent-targeted-final.json"
+  },
+  "payload_sizes": {
+    "minimum_characters": 3085,
+    "maximum_characters": 4133,
+    "parser_limit": 12000
+  },
+  "calls": {
+    "injected_model_responses": 45,
+    "actual_external_calls": 0
+  },
+  "findings_repaired": [
+    "Valid shared trailing-country scope rejected by deterministic direct-exclusion veto.",
+    "Different country/clause frequency constraints flattened into one retrieval and public500, including rules-only path.",
+    "Unknown excluded target silently omitted.",
+    "Negative operator following data accepted as its governing operator.",
+    "Approved no direct fuel costs/no direct cost lexical phrases rejected by inconsistent operator recognition.",
+    "Valid short query produced too many internal scopes and threw.",
+    "Approved scope-only process fuel/plant exclusions rejected by inconsistent target classification."
+  ],
+  "remaining_limitations": [
+    {
+      "kind": "rules_only_degraded",
+      "case_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05",
+        "M18",
+        "M19",
+        "M22",
+        "M24"
+      ],
+      "description": "Unsupported fallback grammar blocks. Some known terms remain only in literal source scopes rather than normalized request fields. In M05 shared trailing Canada is still classified within the rules exclusion and the missing country blocks retrieval; do not claim exact rules-only field preservation."
+    },
+    {
+      "kind": "explicit_policy_adjudication",
+      "case_ids": [
+        "M17"
+      ],
+      "description": "Frozen metadata-only bare-Georgia ambiguity conflicts with established state default. Model unresolved annotation clarifies; separate existing-default probe resolves GA. Frozen original expectation is unchanged."
+    },
+    {
+      "kind": "model_semantic_dependency",
+      "artifact": "/private/tmp/eia-scope-contract-independent-semantic-limit.json",
+      "description": "A deliberately wrong but structurally valid not-convinced exclusion remains accepted and replayable. This demonstrates the stated contract limit: local spans/metadata do not prove arbitrary scope semantics. It is not a recommendation to extend predicate lists."
+    },
+    {
+      "kind": "live_model_not_evaluated",
+      "description": "Tests inject literal model proposals. No live or paid model calls, EIA observation calls, deployment or browser-session UI test was performed by this reviewer."
+    }
+  ],
+  "repo_changes_by_reviewer": []
+}

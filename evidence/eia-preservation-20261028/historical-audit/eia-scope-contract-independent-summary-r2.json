@@ -1,0 +1,172 @@
+{
+  "matrix_sha256": "7de8a72f7b5634420c4bccee70b47412c5c15d24509161c5d4c73ec7c6f3a7e0",
+  "runner": "/private/tmp/eia-scope-contract-independent-runner.mjs",
+  "literal_annotations": "/private/tmp/eia-scope-contract-independent-payloads.json",
+  "r2_results": "/private/tmp/eia-scope-contract-independent-results-r2.json",
+  "frozen_meaning_boundary_result": {
+    "compliant": 28,
+    "total": 28,
+    "boundaries": [
+      "injected interpretQuery",
+      "actual appendIntentParams",
+      "normalizeSubmittedIntent",
+      "public search GET"
+    ],
+    "meaning_failures": [],
+    "clarification_cases": [
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M17",
+      "M23",
+      "M24",
+      "M25",
+      "M26"
+    ]
+  },
+  "integrity": {
+    "safe_outcomes": 16,
+    "total": 16,
+    "notes": [
+      "I03/I04 canonical/category forgeries are repaired from local source metadata rather than rejecting the whole valid source contract.",
+      "I09 was adapted from absent mention IDs to the actual contract operator reference; dangling excluded operator is rejected. An extraneous id/operator on requested scope is ignored and has no authority.",
+      "I13 absent old evidence reparses the simple direct exclusion safely; unsupported version/status cases block.",
+      "I15 epistemic exclusion is rejected by locally supported knowledge-predicate guard.",
+      "I16 missing unknown product still blocks on unresolved/missing product; the unrelated unknown-excluded target probe initially exposed a separate gap, now fixed."
+    ]
+  },
+  "sizes": {
+    "minimum_payload_characters": 3092,
+    "maximum_payload_characters": 4140,
+    "parser_limit": 12000
+  },
+  "fetch_counts": {
+    "modelCalls": 45,
+    "otherCalls": 0
+  },
+  "rules_degradation": [
+    {
+      "id": "M01",
+      "blocked": true,
+      "field_differences": [
+        "lost_products:natural gas",
+        "lost_activities:production",
+        "lost_geographies:CAN"
+      ],
+      "literal_unresolved": [
+        "don't know Canada's natural gas production"
+      ]
+    },
+    {
+      "id": "M02",
+      "blocked": true,
+      "field_differences": [
+        "lost_products:electricity",
+        "lost_activities:consumption",
+        "lost_geographies:TX",
+        "lost_sectors:residential",
+        "frequency_changed"
+      ],
+      "literal_unresolved": [
+        "not sure about monthly residential electricity consumption in Texas"
+      ]
+    },
+    {
+      "id": "M03",
+      "blocked": true,
+      "field_differences": [
+        "lost_products:coal",
+        "lost_activities:production",
+        "lost_geographies:CAN",
+        "lost_geographies:MEX",
+        "country_order_changed"
+      ],
+      "literal_unresolved": [
+        "Without knowing the exact values, show coal production for Canada and Mexico"
+      ]
+    },
+    {
+      "id": "M05",
+      "blocked": true,
+      "field_differences": [
+        "lost_geographies:CAN"
+      ],
+      "literal_unresolved": []
+    },
+    {
+      "id": "M17",
+      "blocked": false,
+      "field_differences": [
+        "required_clarification_missing"
+      ],
+      "literal_unresolved": null
+    },
+    {
+      "id": "M18",
+      "blocked": true,
+      "field_differences": [
+        "lost_products:electricity",
+        "lost_activities:consumption",
+        "lost_geographies:TX",
+        "frequency_changed"
+      ],
+      "literal_unresolved": [
+        "don't know whether monthly electricity consumption in Texas is higher"
+      ]
+    },
+    {
+      "id": "M19",
+      "blocked": true,
+      "field_differences": [
+        "lost_products:electricity",
+        "lost_activities:generation",
+        "lost_geographies:TX"
+      ],
+      "literal_unresolved": [
+        "not sure how to exclude coal from electricity generation in Texas"
+      ]
+    },
+    {
+      "id": "M22",
+      "blocked": true,
+      "field_differences": [
+        "lost_products:electricity",
+        "lost_activities:sales",
+        "lost_geographies:TX",
+        "lost_sectors:commercial",
+        "frequency_changed"
+      ],
+      "literal_unresolved": [
+        "no idea what annual commercial electricity sales in Texas look like"
+      ]
+    },
+    {
+      "id": "M24",
+      "blocked": true,
+      "field_differences": [
+        "lost_geographies:MEX",
+        "country_order_changed"
+      ],
+      "literal_unresolved": [
+        "not exclude Mexico"
+      ]
+    },
+    {
+      "id": "M25",
+      "blocked": false,
+      "field_differences": [
+        "required_clarification_missing",
+        "independent_clause_constraints_flattened"
+      ],
+      "literal_unresolved": null
+    }
+  ],
+  "remaining_checks": [
+    "Rules-only M25 bypasses evidence guard: still unblocked flattening.",
+    "Approved no direct fuel costs/no direct cost terms throw internal evidence error.",
+    "Valid 230-character query can produce >32 internal rules scopes and throw."
+  ],
+  "fundamental_limit": "Successful literal-proposal tests establish boundary correctness for these proposals. They do not measure the live model or establish arbitrary semantic truth from raw spans. Structurally valid but semantically wrong assignments outside bounded local vetoes remain model uncertainty."
+}

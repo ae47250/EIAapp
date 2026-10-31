@@ -1,0 +1,706 @@
+{
+  "id": "I11",
+  "repeat": 1,
+  "query": "compare georgia and armenia natural gas imports",
+  "correct": false,
+  "meaning": {
+    "correct": false,
+    "errors": [
+      "topics_or_order",
+      "clarification_needed",
+      "unexpected_clarification_details"
+    ],
+    "returnedGeographies": [
+      "GEO",
+      "ARM"
+    ],
+    "rawGeographies": [
+      "GEO | Georgia | country",
+      "ARM | Armenia | country"
+    ]
+  },
+  "data": {
+    "correct": false,
+    "errors": [
+      "unexpected_clarification",
+      "GEO/natural gas/imports:missing_entry",
+      "ARM/natural gas/imports:missing_entry"
+    ],
+    "unlabelledWrongData": false,
+    "entries": [
+      {
+        "geographyCode": "GEO",
+        "product": "natural gas",
+        "activity": "imports",
+        "correct": false,
+        "errors": [
+          "missing_entry"
+        ]
+      },
+      {
+        "geographyCode": "ARM",
+        "product": "natural gas",
+        "activity": "imports",
+        "correct": false,
+        "errors": [
+          "missing_entry"
+        ]
+      }
+    ]
+  },
+  "deadEnd": false,
+  "unlabelledWrongData": false,
+  "attempts": 1,
+  "events": [],
+  "rawChecks": {
+    "valid": true,
+    "errors": []
+  },
+  "returnedModel": "gpt-6-luna",
+  "appFormCheck": {
+    "valid": true,
+    "errors": []
+  },
+  "rawMeaning": {
+    "correct": false,
+    "errors": [
+      "topics_or_order",
+      "clarification_needed",
+      "unexpected_clarification_details"
+    ],
+    "returnedGeographies": [
+      "GEO",
+      "ARM"
+    ],
+    "rawGeographies": [
+      "GEO | Georgia | country",
+      "ARM | Armenia | country"
+    ]
+  },
+  "result": {
+    "mode": "lookup",
+    "query": "compare georgia and armenia natural gas imports",
+    "intent": {
+      "originalQuery": "compare georgia and armenia natural gas imports",
+      "cleanedQuery": "compare georgia and armenia natural gas imports",
+      "normalizedQuery": "compare georgia and armenia natural gas imports",
+      "correctedQuery": "compare georgia and armenia natural gas imports",
+      "correctedQuerySource": "unchanged",
+      "interpreter": "openai_locked_form",
+      "formVersion": 2,
+      "years": {
+        "start": null,
+        "end": null,
+        "quoted_words": null
+      },
+      "interpretationMethod": "enforced_form",
+      "lockedForm": {
+        "geographies": [
+          {
+            "geography": "GEO | Georgia | country",
+            "quoted_words": "georgia",
+            "is_default": false
+          },
+          {
+            "geography": "ARM | Armenia | country",
+            "quoted_words": "armenia",
+            "is_default": false
+          }
+        ],
+        "excluded_geographies": [],
+        "topics": [
+          {
+            "product": "natural gas",
+            "activity": null,
+            "quoted_words": "natural gas imports"
+          }
+        ],
+        "excluded_topics": [],
+        "sector": {
+          "value": null,
+          "quoted_words": null
+        },
+        "frequency": {
+          "value": "annual",
+          "explicit": false,
+          "quoted_words": null
+        },
+        "unsupported_words": [],
+        "clarification": {
+          "needed": true,
+          "about": "activity",
+          "options": []
+        },
+        "years": {
+          "start": null,
+          "end": null,
+          "quoted_words": null
+        }
+      },
+      "country": {
+        "name": "Georgia",
+        "code": "GEO",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "countryCode": "GEO",
+      "validatedGeographies": [
+        {
+          "name": "Georgia",
+          "code": "GEO",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "Armenia",
+          "code": "ARM",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "excludedGeographies": [],
+      "product": "natural gas",
+      "activity": null,
+      "sector": null,
+      "validatedConceptPairs": [
+        {
+          "product": "natural gas",
+          "activity": null,
+          "order": 0,
+          "source": "validated_interpreter"
+        }
+      ],
+      "exclusions": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "fields": {
+        "country": {
+          "normalizedValue": "GEO",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "product": {
+          "normalizedValue": "natural gas",
+          "validation": "approved",
+          "fallbackUsed": false
+        },
+        "activity": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "sector": {
+          "normalizedValue": null,
+          "validation": "missing",
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "fallbackUsed": false,
+          "explicit": false
+        }
+      },
+      "unknownQualifiers": [],
+      "fallback": {
+        "used": false,
+        "method": null,
+        "reasons": []
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "conceptPairStatus": "partial",
+      "missingFields": [
+        "activity"
+      ],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the activity. Example: United States total energy consumption.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "natural gas",
+          "activity": null,
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "GEO",
+          "ARM"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "compare georgia and armenia natural gas imports",
+        "normalizedQuery": "compare georgia and armenia natural gas imports",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 0,
+              "text": null,
+              "source": "validated_interpreter",
+              "evidence": null,
+              "geography": {
+                "name": "Georgia",
+                "code": "GEO",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            },
+            {
+              "index": 1,
+              "text": null,
+              "source": "validated_interpreter",
+              "evidence": null,
+              "geography": {
+                "name": "Armenia",
+                "code": "ARM",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "natural gas",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Georgia",
+          "code": "GEO",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Georgia",
+            "code": "GEO",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          {
+            "name": "Armenia",
+            "code": "ARM",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          }
+        ],
+        "product": "natural gas",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": null,
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "natural gas",
+            "activity": null,
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": null
+          }
+        ],
+        "conceptPairStatus": "partial",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": true,
+          "status": "active",
+          "geographyCodes": [
+            "GEO",
+            "ARM"
+          ],
+          "routeFamily": "international",
+          "reason": "two_or_more_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": null,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": null,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "multiple_geographies",
+            "activity_or_scope_missing"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "mechanically_cleaned_raw_query",
+          "geographies": [
+            "validated_interpreter",
+            "validated_interpreter"
+          ],
+          "geographyEvidence": [
+            {
+              "code": "GEO",
+              "rawText": null,
+              "source": "validated_interpreter",
+              "conflictStatus": "none"
+            },
+            {
+              "code": "ARM",
+              "rawText": null,
+              "source": "validated_interpreter",
+              "conflictStatus": "none"
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": []
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [
+          "activity"
+        ],
+        "clarificationMessage": "Please clarify the activity. Example: United States total energy consumption."
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies",
+          "activity_or_scope_missing"
+        ]
+      },
+      "understood": "Georgia, Armenia; natural gas / activity not chosen; all sectors (default); all available years (default); annual (default)",
+      "userMessage": "Which activity should I look up?",
+      "freeText": true,
+      "choices": [
+        {
+          "label": "Sales",
+          "choice": {
+            "about": "activity",
+            "value": "sales"
+          }
+        },
+        {
+          "label": "Customers",
+          "choice": {
+            "about": "activity",
+            "value": "customers"
+          }
+        },
+        {
+          "label": "Consumption",
+          "choice": {
+            "about": "activity",
+            "value": "consumption"
+          }
+        },
+        {
+          "label": "Production",
+          "choice": {
+            "about": "activity",
+            "value": "production"
+          }
+        },
+        {
+          "label": "Generation",
+          "choice": {
+            "about": "activity",
+            "value": "generation"
+          }
+        },
+        {
+          "label": "Imports",
+          "choice": {
+            "about": "activity",
+            "value": "imports"
+          }
+        },
+        {
+          "label": "Exports",
+          "choice": {
+            "about": "activity",
+            "value": "exports"
+          }
+        },
+        {
+          "label": "Reserves",
+          "choice": {
+            "about": "activity",
+            "value": "reserves"
+          }
+        },
+        {
+          "label": "Capacity",
+          "choice": {
+            "about": "activity",
+            "value": "capacity"
+          }
+        },
+        {
+          "label": "Storage",
+          "choice": {
+            "about": "activity",
+            "value": "storage"
+          }
+        },
+        {
+          "label": "Prices",
+          "choice": {
+            "about": "activity",
+            "value": "prices"
+          }
+        },
+        {
+          "label": "Expenditures",
+          "choice": {
+            "about": "activity",
+            "value": "expenditures"
+          }
+        }
+      ]
+    },
+    "understood": "Georgia, Armenia; natural gas / activity not chosen; all sectors (default); all available years (default); annual (default)",
+    "source": "U.S. Energy Information Administration",
+    "selectedSeries": null,
+    "selectedComparison": null,
+    "selectedComparisons": [],
+    "results": [],
+    "choices": [
+      {
+        "label": "Sales",
+        "choice": {
+          "about": "activity",
+          "value": "sales"
+        }
+      },
+      {
+        "label": "Customers",
+        "choice": {
+          "about": "activity",
+          "value": "customers"
+        }
+      },
+      {
+        "label": "Consumption",
+        "choice": {
+          "about": "activity",
+          "value": "consumption"
+        }
+      },
+      {
+        "label": "Production",
+        "choice": {
+          "about": "activity",
+          "value": "production"
+        }
+      },
+      {
+        "label": "Generation",
+        "choice": {
+          "about": "activity",
+          "value": "generation"
+        }
+      },
+      {
+        "label": "Imports",
+        "choice": {
+          "about": "activity",
+          "value": "imports"
+        }
+      },
+      {
+        "label": "Exports",
+        "choice": {
+          "about": "activity",
+          "value": "exports"
+        }
+      },
+      {
+        "label": "Reserves",
+        "choice": {
+          "about": "activity",
+          "value": "reserves"
+        }
+      },
+      {
+        "label": "Capacity",
+        "choice": {
+          "about": "activity",
+          "value": "capacity"
+        }
+      },
+      {
+        "label": "Storage",
+        "choice": {
+          "about": "activity",
+          "value": "storage"
+        }
+      },
+      {
+        "label": "Prices",
+        "choice": {
+          "about": "activity",
+          "value": "prices"
+        }
+      },
+      {
+        "label": "Expenditures",
+        "choice": {
+          "about": "activity",
+          "value": "expenditures"
+        }
+      }
+    ],
+    "freeText": true,
+    "needsClarification": true,
+    "userMessage": "Which activity should I look up?"
+  }
+}

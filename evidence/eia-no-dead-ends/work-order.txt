@@ -1,0 +1,80 @@
+EIAapp Job 3: never a dead end, understand year ranges, and handle vague places like "many countries". Goal mode.
+
+AUTHORIZED: create local branch codex/eia-no-dead-ends from codex/eia-lookup-list at 2c7a4c9 (confirm the SHA; stop if different). Edit code, data and tests. Commit locally. Free EIA calls. Paid OpenAI calls within the F.3 ceiling. When every pass mark is met, push this branch to origin without force (a Vercel preview will appear; report its URL).
+NOT AUTHORIZED: main or any other branch, merge, deploy/promote, Vercel or environment settings, CSV, editable tags, follow-up questions, a second (escalation) model, rankings, transformations, saved history, new product measures beyond the World row in D.3, deleting old modules or the cache.
+Follow AGENTS.md (including its EIAapp guardrails).
+
+WHY: The owner typed "Looking for data on energy consumption for many countries from 2000-2019" on the preview (eiaappv3-9qatn7ygj) about 8 times and got no question and no data. Those attempts ran on gpt-5.4-nano-2026-03-17, not Luna: the preview's Vercel OPENAI_MODEL setting overrides the code default (locked-form.js ~99), confirmed by a preview diagnostic and the owner's OpenAI log. Vercel logs for deployment dpl_55fCUcdYw338D9dTxV5AHejWAMxG (Oct 28, 10:02-10:09 PM ET) show: the checks rejected the model's clarification (invalid_clarification_option, geography_required, unsupported_words_require_clarification, quote_not_in_query); the re-ask failed the same way (locked_form_blocked); then the search route rejected the missing form (missing_or_legacy_form). Code points (verify): SearchWorkspace.js ~42-46 calls search even when interpretation is blocked; locked-form.js ~27 rejects a whole clarification for one bad option; locked-form.js ~30 forces clarification for any unsupported words (years land there, because the form has no year field); locked-form.js ~36 is the generic "Please clarify..." text; lookup-search.js ~36/107 choicesFor returns no buttons when options are empty. Research basis: DataTone (Adobe Research, 2015), which puts disambiguation choices where the ambiguity is; Setlur, Tory & Djalali (Tableau Research, IUI 2019), which handles underspecified requests with sensible constrained options.
+
+STEP 0 (before anything else): replay C1 once through the current code with gpt-6-luna (low) AND once with gpt-5.4-nano-2026-03-17 (low), explicitly passing the model (fractions of a cent). Save both raw answers and the failed checks. This shows whether Luna would also have failed, and confirms the causes above. All later live runs in this job use gpt-6-luna explicitly.
+
+VERSIONING: Keep lib/sources/eia/locked-form-schema.js, locked-form-instructions.txt and the checkLockedForm function byte-identical at their current paths and names (v1). Put v2 in new files/functions (locked-form-schema-v2.js, locked-form-instructions-v2.txt, checkLockedFormV2). Never edit evidence/eia-lookup-list/freeze-manifest.json or the hash assertions in tests/eia-lookup-core.test.js. The app uses v2. Old gold forms and answer keys are converted to v2 only by one written, tested function, upgradeV1Form: years = {start:null, end:null, quoted_words:null}, and every geography is_default = false. v1 gold forms must still pass the v1 shape check.
+
+PART A. Freeze first (one commit, SHA-256 of every frozen file, before any implementation)
+1. All earlier answer keys, gold forms, expected-data.json and v1 files: unchanged.
+2. New set C. Freeze for each the expected v2 form AND expected data entries in the expected-data.json format (route, measure/facets, unit, frequency, allowed basis labels, first and last period), or the expected question with its buttons:
+   C1 Looking for data on energy consumption for many countries from 2000-2019 -> total energy/consumption, years 2000-2019. Expected outcome: a place question with buttons "World total", "All countries in a region", "Type countries", plus free text. No data yet.
+   C1a (C1, then click "World total") -> World total energy consumption, 2000-2019, from the new World row (D.3).
+   C1b (C1, then "All countries in a region", then "Europe") -> total energy consumption side by side, 2000-2019, for the Europe members that have observations in 2000-2019 (determine these by live EIA calls before freezing); the rest are listed by name as missing (status empty or not_available).
+   C2 coal production in Australia 2010 to 2020 -> AUS coal/production, 2010-2020.
+   C3 electricity prices in Ohio since 2015 -> OH electricity/prices, 2015-latest.
+   C4 natural gas consumption in Europe -> the "We don't have natural gas consumption for Europe yet" message, with choices (a) "Natural gas imports for each country in Europe" (row country-natural-gas-imports, expanded by region membership) and (b) "Total energy consumption for each country in Europe", plus free text. A region place such as Europe resolves to its member codes; "not available for a region" messages offer these region-expanded alternatives.
+   C5 coal production for some countries -> coal/production, the same place question as C1 (three buttons).
+   C6 energy stuff -> a clarification about what (product/activity), with buttons and free text.
+   C7 electricity consumption in Germny between 1995 and 2005 -> DEU electricity/consumption, 1995-2005.
+   C8 nuclear generation in France in 2010 -> FRA nuclear/generation, year 2010 only.
+3. For "latest" (C3), the expected last period is EIA's latest period from a live call made at scoring time, recorded in the evidence.
+4. Before any implementation, write and freeze scripts/eia-lookup/score-c.js with its own offline tests. It checks: form (places in order, product/activity pairs, sector, frequency value, years.start/years.end exactly, clarification.about; quoted words and option values ignored); question (exact button labels, free text present); data (route, facets, unit, frequency, basis label, first and last period, and 'missing' entries). A fallback question counts as right only if it matches the expected question. score-data.js and score-c.js may not change after the freeze.
+5. Pass marks (fixed now):
+   - Zero dead ends: every scored response ends in data, a "not available" message with choices, or a question with buttons and free text.
+   - Set C (live model, C1-C8 x 2 runs, plus C1a and C1b click steps on each C1 run = 20 scored outcomes): at least 18/20 right on form AND data/question.
+   - Originals (24 gold forms, no model, upgraded to v2): 24/24 right data, as before.
+   - Second set (I1-I12 x 2 = 24 live answers): at least 21/24, as before.
+   - Zero unlabelled wrong data anywhere.
+
+PART B. Form v2 (Structured Outputs, strict)
+1. years: {start (4-digit year or null), end (4-digit year, "latest", or null), quoted_words}. A single year means start = end. "since X" / "from X" means end = "latest". Only an explicit 4-digit year creates a range; words like "lately" or "recent" create none. Code checks: start <= end, both between 1900 and the current year.
+2. Each geography item gets is_default (boolean). Vague place words ("many/some/all countries", "worldwide", "globally") do NOT become a place. They become a place clarification (code builds the three buttons). The vague-place rule applies only to countries, never to US states or "the US".
+3. Instructions v2 add only these general rules. No example-phrase lists, no per-query rules.
+
+PART C. Never a dead end
+1. A failed check never blocks silently. After the existing single Luna re-ask, code builds a question from what failed: missing place -> the three place buttons; unsupported words -> "I couldn't use: <words>. What should I look up?" with free text; unclear product/activity -> buttons from the vocabulary. Always include free text.
+2. A clarification with some invalid options keeps the question: drop the invalid options and add free text.
+3. The page never sends a blocked or missing form to the search route (fix SearchWorkspace ~42-46).
+4. Log every failed check and fallback question (check names, model used, time), with no personal data. This measures whether a second model is worth adding later.
+5. When the checks fail, code builds a repaired v2 form: it keeps every field that passed, removes the failing parts, and sets clarification to what failed. The repaired form must pass checkLockedFormV2 on the server, and every later click sends the repaired form. Typed free text starts a new interpretation of '<original query> <typed text>'. Offline test: a failed form, then the fallback question, then a click returns data or a question, never a blocked result.
+6. In checkLockedFormV2, geographies may be empty when clarification.about is product or activity. Ask about 'what' before 'where'. After the 'what' answer, if no place is known, ask the place question.
+7. Button steps built by code (e.g. C1 -> region list -> data) are authorized; they are not the excluded AI follow-up questions. A second click carries both choices.
+
+PART D. Screen and data
+1. A read-only "Here's what I understood" line above every result or question: place(s), product, activity, sector, years, frequency, with defaults marked (e.g. "annual (default)").
+2. Years: convert by frequency before calling EIA. Annual: YYYY. Monthly: YYYY-01 to YYYY-12. Quarterly: YYYY-Q1 to YYYY-Q4. Weekly/daily: YYYY-01-01 to YYYY-12-31. "latest" means no end bound. The chart and table show only those years. If EIA covers less than asked, say so plainly ("EIA data for this ends in 2018"). Add an offline test for each frequency.
+3. World and regions:
+   - Add WLD: WORL (verified live) to routes.international.geographies. Add ONE row: World total energy consumption (international route, product 44, activity 2, codes verified live), with region:{code:'WLD', requestedCodes:['WLD'], label:'World total'} and countryRegionTypeId as verified live. Change rowFitsGeography so country rows reject any code a world/region row claims, and test that every country row returns no match for WLD. Keep the "at most 40 non-required rows" test passing.
+   - "All countries in a region": the region buttons are Africa, Asia & Oceania, Central & South America, Eurasia, Europe, Middle East, North America. A click fills in that region's member countries from the existing geography list, then uses the existing country rows. Fetch international countries in as few EIA requests as possible (several countryRegionId values per request), paced within EIA's rate limit.
+   - With more than 10 countries, the chart shows the 10 largest by latest value, labelled "Chart shows the 10 largest; all countries are in the table and Excel file". The table and Excel include all of them.
+4. Excel: add three lines to the existing Metadata sheet only: the question asked, the years shown, and "Source: U.S. Energy Information Administration (data retrieved <date>)".
+
+PART E. Offline tests
+v2 schema within documented limits; upgradeV1Form; the year checks and frequency conversion; every check failure produces a non-empty question with free text; the invalid-options rule; the page never calls search with a blocked form; World and region selection (including that country rows never match WLD); the top-10 chart rule; the Metadata lines. Existing tests pass unchanged except where v2 requires an upgrade, each listed with a reason. Never change an expected meaning. npm run build passes.
+
+PART F. Live checks
+1. EIA (free): the World row and region fetches pass the row checker; C-set data outcomes with real observations and year limits.
+2. Step 0 replay.
+3. OpenAI (paid): C1-C8 x 2 with the click steps, plus I1-I12 x 2, gpt-6-luna reasoning low. Compute the worst case first. Ceiling $1.00.
+4. Browser, local (LOGIN_REQUIRED=off): type C1, click "World total"; type C1 again, choose "All countries in a region" then Europe; type C7; download the Excel file and check the Metadata lines. Screenshots if a tool is available.
+5. After pushing: report the preview URL. The owner will type C1 on the preview himself (it requires his login). Note in the report that the preview runs whatever model Vercel's Preview OPENAI_MODEL names; until the owner changes it, the preview is not running Luna.
+
+SCORED RUNS: each live scored set runs exactly once, in a new evidence folder (live-v2/), with request hashes frozen before the run. If any pass mark fails: do not push, do not re-run, and report the failures with the cause and the fix you propose.
+
+STOP CONDITIONS: start SHA mismatch; World row codes not verifiable live; EIA rate limits blocking the checks; worst-case cost over $1.00; a product decision not settled here (ask one short question with options).
+
+REPORT (plain language, short):
+1. PASS/FAIL per pass mark.
+2. Step 0: what Luna and nano each returned for C1 on the old code, and which checks failed.
+3. C1 now: exactly what the screen shows, step by step, for both buttons.
+4. Set C table: question/step, understood line, outcome, right yes/no.
+5. Originals and second set: unchanged scores, or every change explained.
+6. Fallback-question log summary: which checks failed, how often.
+7. Files changed; tests before and after; build; frozen hashes unchanged.
+8. Commits, the pushed branch, the preview URL (labelled preview), main unchanged.

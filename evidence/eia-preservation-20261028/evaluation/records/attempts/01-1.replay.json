@@ -1,0 +1,1531 @@
+{
+  "queryId": 9,
+  "directValidation": {
+    "interpreter": "openai",
+    "geographies": [
+      "GEO",
+      "FRA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous",
+        "frequency_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "electricity consumption in Georgia and France",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "electricity consumption in Georgia and France",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initial": {
+    "interpreter": "openai",
+    "geographies": [
+      "GEO",
+      "FRA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous",
+        "frequency_ai_ambiguous"
+      ]
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "electricity consumption in Georgia and France",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "electricity consumption in Georgia and France",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "initialFull": {
+    "originalQuery": "electricity consumption in Georgia and France",
+    "cleanedQuery": "electricity consumption in Georgia and France",
+    "correctedQuery": "Electricity consumption in Georgia and France",
+    "correctedQuerySource": "ai",
+    "normalizedQuery": "electricity consumption in georgia and france",
+    "interpreter": "openai",
+    "interpretationMethod": "ai_primary",
+    "country": {
+      "name": "Georgia",
+      "code": "GEO",
+      "type": "country",
+      "routeFamilies": [
+        "international"
+      ]
+    },
+    "countryCode": "GEO",
+    "validatedGeographies": [
+      {
+        "name": "Georgia",
+        "code": "GEO",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      {
+        "name": "France",
+        "code": "FRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      }
+    ],
+    "geographyEvidence": [
+      {
+        "name": "Georgia",
+        "code": "GEO",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "georgia",
+        "index": 27,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "contextual_state_country",
+        "conflictStatus": "deterministic_only",
+        "aiClaims": []
+      },
+      {
+        "name": "France",
+        "code": "FRA",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ],
+        "rawText": "france",
+        "index": 39,
+        "source": "raw_exact_deterministic",
+        "resolutionRule": "exact_name_alias_or_code",
+        "conflictStatus": "agreement",
+        "aiClaims": [
+          {
+            "value": "France",
+            "confidence": 0.98,
+            "candidateCodes": [
+              "FRA"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographyConflicts": [],
+    "validatedCorrections": [],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "requestedFrequency": null,
+    "frequencyExplicit": false,
+    "validatedConceptPairs": [
+      {
+        "order": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "originalActivity": null,
+        "activityNormalization": null,
+        "confidence": 0.96,
+        "source": "validated_interpreter"
+      }
+    ],
+    "conceptPairStatus": "validated",
+    "exclusions": [],
+    "unknownQualifiers": [],
+    "confidence": 0.86,
+    "fields": {
+      "country": {
+        "rawValue": "Georgia and France",
+        "aiValue": null,
+        "normalizedValue": "GEO",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "country_ai_ambiguous",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "Multiple geographies are requested; 'country' as a single summary field cannot be safely selected.",
+        "alternatives": [],
+        "deterministicValue": "GEO",
+        "conflictStatus": "deterministic_only",
+        "resolutionSource": "deterministic_fallback",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "product": {
+        "rawValue": "electricity",
+        "aiValue": "electricity",
+        "normalizedValue": "electricity",
+        "validation": "approved",
+        "confidence": 0.96,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "electricity",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "breadth": "specific"
+      },
+      "activity": {
+        "rawValue": "consumption",
+        "aiValue": "consumption",
+        "normalizedValue": "consumption",
+        "validation": "approved",
+        "confidence": 0.95,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": null,
+        "alternatives": [],
+        "deterministicValue": "consumption",
+        "conflictStatus": "agreement",
+        "resolutionSource": "ai_validated",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "sector": {
+        "rawValue": null,
+        "aiValue": null,
+        "normalizedValue": null,
+        "validation": "missing",
+        "confidence": 0.05,
+        "fallbackUsed": false,
+        "fallbackReason": null,
+        "fallbackMethod": null,
+        "reason": "No approved sector was found.",
+        "alternatives": [],
+        "deterministicValue": null,
+        "conflictStatus": "none",
+        "resolutionSource": "unresolved",
+        "validationEvidenceSource": "raw_derived_deterministic"
+      },
+      "frequency": {
+        "rawValue": null,
+        "aiValue": "annual",
+        "normalizedValue": "annual",
+        "validation": "fallback",
+        "confidence": 0.65,
+        "fallbackUsed": true,
+        "fallbackReason": "frequency_ai_ambiguous",
+        "fallbackMethod": "deterministic_rules",
+        "reason": "No frequency is stated; defaulted to annual with explicit=false.",
+        "alternatives": [],
+        "deterministicValue": "annual",
+        "conflictStatus": "unsupported_ai_claim",
+        "resolutionSource": "deterministic_fallback",
+        "validationEvidenceSource": "raw_derived_deterministic",
+        "explicit": false
+      }
+    },
+    "aiAmbiguity": "The query specifies 'Georgia' without context. Per instructions, Georgia is treated as the U.S. state only when no other foreign country/international hint is present; here, France is a foreign country, so Georgia is interpreted as the country. Sector is explicitly not stated; 'electricity' alone is not sufficient to infer sector per instructions.",
+    "fallback": {
+      "used": true,
+      "method": "field_level_deterministic_fallback",
+      "reasons": [
+        "country_ai_ambiguous",
+        "frequency_ai_ambiguous"
+      ]
+    },
+    "cleanedKeywords": "france",
+    "needsClarification": true,
+    "blockingClarification": true,
+    "missingFields": [],
+    "ambiguousFields": [],
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": "electricity",
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": 0.96
+      }
+    ],
+    "multiCountryComparison": {
+      "active": true,
+      "status": "active",
+      "geographyCodes": [
+        "GEO",
+        "FRA"
+      ],
+      "routeFamily": "international",
+      "reason": "two_or_more_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "electricity consumption in Georgia and France",
+      "normalizedQuery": "electricity consumption in georgia and france",
+      "mentions": {
+        "geographies": [
+          {
+            "index": 27,
+            "text": "georgia",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "Georgia",
+              "code": "GEO",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "georgia",
+              "index": 27,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "contextual_state_country",
+              "conflictStatus": "deterministic_only",
+              "aiClaims": []
+            },
+            "geography": {
+              "name": "Georgia",
+              "code": "GEO",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          },
+          {
+            "index": 39,
+            "text": "france",
+            "source": "raw_exact_deterministic",
+            "evidence": {
+              "name": "France",
+              "code": "FRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "france",
+              "index": 39,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "France",
+                  "confidence": 0.98,
+                  "candidateCodes": [
+                    "FRA"
+                  ]
+                }
+              ]
+            },
+            "geography": {
+              "name": "France",
+              "code": "FRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ]
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "product",
+            "value": "electricity",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": []
+      },
+      "geography": {
+        "name": "Georgia",
+        "code": "GEO",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "geographies": [
+        {
+          "name": "Georgia",
+          "code": "GEO",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "France",
+          "code": "FRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "product": "electricity",
+      "productBreadth": "specific",
+      "productAlternatives": [],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.96
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "GEO",
+          "FRA"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 0.96,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 0.95,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.05,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "fallback",
+            "confidence": 0.65,
+            "fallbackUsed": true
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies",
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "reasons": []
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "validated_source_scopes",
+        "geographies": [
+          "raw_exact_deterministic",
+          "raw_exact_deterministic"
+        ],
+        "geographyEvidence": [
+          {
+            "name": "Georgia",
+            "code": "GEO",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ],
+            "rawText": "georgia",
+            "index": 27,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "contextual_state_country",
+            "conflictStatus": "deterministic_only",
+            "aiClaims": []
+          },
+          {
+            "name": "France",
+            "code": "FRA",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ],
+            "rawText": "france",
+            "index": 39,
+            "source": "raw_exact_deterministic",
+            "resolutionRule": "exact_name_alias_or_code",
+            "conflictStatus": "agreement",
+            "aiClaims": [
+              {
+                "value": "France",
+                "confidence": 0.98,
+                "candidateCodes": [
+                  "FRA"
+                ]
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "default",
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "scopeSemantics": "bounded_deterministic_grammar"
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "requestEvidence": {
+        "version": 1,
+        "query": "electricity consumption in Georgia and France",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 45,
+            "text": "electricity consumption in Georgia and France",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_source_scope",
+          "uncovered_source_text",
+          "split_or_uncovered_metadata_mention"
+        ],
+        "unresolved": 0
+      }
+    },
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "valid",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        },
+        "product": {
+          "validation": "approved",
+          "confidence": 0.96,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": 0.95,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": 0.05,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "fallback",
+          "confidence": 0.65,
+          "fallbackUsed": true
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "multiple_geographies",
+        "request_scope_unresolved"
+      ]
+    },
+    "evidenceQuery": "electricity consumption in Georgia and France",
+    "requestEvidence": {
+      "version": 1,
+      "query": "electricity consumption in Georgia and France",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "electricity consumption in Georgia and France",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_source_scope",
+        "uncovered_source_text",
+        "split_or_uncovered_metadata_mention"
+      ],
+      "unresolved": 0
+    }
+  },
+  "serialized": "q=electricity+consumption+in+Georgia+and+France&intentReady=1&intentPayload=%7B%22requestEvidence%22%3A%7B%22version%22%3A1%2C%22query%22%3A%22electricity+consumption+in+Georgia+and+France%22%2C%22scopes%22%3A%5B%7B%22start%22%3A0%2C%22end%22%3A45%2C%22text%22%3A%22electricity+consumption+in+Georgia+and+France%22%2C%22status%22%3A%22requested%22%2C%22target%22%3A%22data%22%7D%5D%2C%22invalid%22%3Atrue%7D%2C%22originalQuery%22%3A%22electricity+consumption+in+Georgia+and+France%22%2C%22cleanedQuery%22%3A%22electricity+consumption+in+Georgia+and+France%22%2C%22correctedQuery%22%3A%22Electricity+consumption+in+Georgia+and+France%22%2C%22correctedQuerySource%22%3A%22ai%22%2C%22interpreter%22%3A%22openai%22%2C%22confidence%22%3A0.86%2C%22fields%22%3A%7B%22country%22%3A%7B%22rawValue%22%3A%22Georgia+and+France%22%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3A%22GEO%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22country_ai_ambiguous%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22Multiple+geographies+are+requested%3B+%27country%27+as+a+single+summary+field+cannot+be+safely+selected.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22GEO%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22resolutionSource%22%3A%22deterministic_fallback%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22product%22%3A%7B%22rawValue%22%3A%22electricity%22%2C%22aiValue%22%3A%22electricity%22%2C%22normalizedValue%22%3A%22electricity%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.96%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22electricity%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22breadth%22%3A%22specific%22%7D%2C%22activity%22%3A%7B%22rawValue%22%3A%22consumption%22%2C%22aiValue%22%3A%22consumption%22%2C%22normalizedValue%22%3A%22consumption%22%2C%22validation%22%3A%22approved%22%2C%22confidence%22%3A0.95%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3Anull%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22consumption%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22resolutionSource%22%3A%22ai_validated%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22sector%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3Anull%2C%22normalizedValue%22%3Anull%2C%22validation%22%3A%22missing%22%2C%22confidence%22%3A0.05%2C%22fallbackUsed%22%3Afalse%2C%22fallbackReason%22%3Anull%2C%22fallbackMethod%22%3Anull%2C%22reason%22%3A%22No+approved+sector+was+found.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3Anull%2C%22conflictStatus%22%3A%22none%22%2C%22resolutionSource%22%3A%22unresolved%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%7D%2C%22frequency%22%3A%7B%22rawValue%22%3Anull%2C%22aiValue%22%3A%22annual%22%2C%22normalizedValue%22%3A%22annual%22%2C%22validation%22%3A%22fallback%22%2C%22confidence%22%3A0.65%2C%22fallbackUsed%22%3Atrue%2C%22fallbackReason%22%3A%22frequency_ai_ambiguous%22%2C%22fallbackMethod%22%3A%22deterministic_rules%22%2C%22reason%22%3A%22No+frequency+is+stated%3B+defaulted+to+annual+with+explicit%3Dfalse.%22%2C%22alternatives%22%3A%5B%5D%2C%22deterministicValue%22%3A%22annual%22%2C%22conflictStatus%22%3A%22unsupported_ai_claim%22%2C%22resolutionSource%22%3A%22deterministic_fallback%22%2C%22validationEvidenceSource%22%3A%22raw_derived_deterministic%22%2C%22explicit%22%3Afalse%7D%7D%2C%22geographies%22%3A%5B%7B%22name%22%3A%22Georgia%22%2C%22code%22%3A%22GEO%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%2C%7B%22name%22%3A%22France%22%2C%22code%22%3A%22FRA%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%7D%5D%2C%22geographyEvidence%22%3A%5B%7B%22name%22%3A%22Georgia%22%2C%22code%22%3A%22GEO%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22georgia%22%2C%22index%22%3A27%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22contextual_state_country%22%2C%22conflictStatus%22%3A%22deterministic_only%22%2C%22aiClaims%22%3A%5B%5D%7D%2C%7B%22name%22%3A%22France%22%2C%22code%22%3A%22FRA%22%2C%22type%22%3A%22country%22%2C%22routeFamilies%22%3A%5B%22international%22%5D%2C%22rawText%22%3A%22france%22%2C%22index%22%3A39%2C%22source%22%3A%22raw_exact_deterministic%22%2C%22resolutionRule%22%3A%22exact_name_alias_or_code%22%2C%22conflictStatus%22%3A%22agreement%22%2C%22aiClaims%22%3A%5B%7B%22value%22%3A%22France%22%2C%22confidence%22%3A0.98%2C%22candidateCodes%22%3A%5B%22FRA%22%5D%7D%5D%7D%5D%2C%22geographyConflicts%22%3A%5B%5D%2C%22conceptPairs%22%3A%5B%7B%22order%22%3A0%2C%22product%22%3A%22electricity%22%2C%22activity%22%3A%22consumption%22%2C%22sector%22%3Anull%2C%22source%22%3A%22validated_interpreter%22%2C%22confidence%22%3A0.96%7D%5D%2C%22exclusions%22%3A%5B%5D%2C%22unknownQualifiers%22%3A%5B%5D%2C%22frequencyExplicit%22%3Afalse%2C%22requestedFrequency%22%3Anull%2C%22multiCountryComparison%22%3A%7B%22active%22%3Atrue%2C%22status%22%3A%22active%22%2C%22geographyCodes%22%3A%5B%22GEO%22%2C%22FRA%22%5D%2C%22routeFamily%22%3A%22international%22%2C%22reason%22%3A%22two_or_more_validated_countries%22%7D%2C%22ambiguity%22%3A%7B%22status%22%3A%22ambiguous%22%2C%22reasons%22%3A%5B%22multiple_geographies%22%2C%22request_scope_unresolved%22%5D%7D%2C%22fallback%22%3A%7B%22used%22%3Atrue%2C%22method%22%3A%22field_level_deterministic_fallback%22%2C%22reasons%22%3A%5B%22country_ai_ambiguous%22%2C%22frequency_ai_ambiguous%22%5D%7D%7D&intentCorrectedQuery=Electricity+consumption+in+Georgia+and+France&intentCorrectedQuerySource=ai&intentInterpreter=openai&intentCountryCode=GEO&intentProduct=electricity&intentActivity=consumption&intentFrequency=annual&intentConfidence=0.86",
+  "normalized": {
+    "interpreter": "openai",
+    "geographies": [
+      "GEO",
+      "FRA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "electricity consumption in Georgia and France",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "electricity consumption in Georgia and France",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "evidencePreserved": true,
+  "pipeline": {
+    "schemaVersion": "1.0.0",
+    "routeFamily": "international",
+    "retrievals": [],
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "candidatePipelineConnectedToPublicSearch": false,
+      "rankingApplied": false,
+      "semanticRerankingApplied": false,
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "multiple_geographies",
+        "request_scope_unresolved"
+      ],
+      "crossRouteFallback": {
+        "attempted": false,
+        "fromRoute": "international",
+        "toRoute": null,
+        "targetCount": 0,
+        "displayedCandidateCount": 0,
+        "fallbackIndex": null
+      }
+    }
+  },
+  "publicStatus": 200,
+  "public": {
+    "mode": "candidate-selection",
+    "comparisonMode": false,
+    "query": "electricity consumption in Georgia and France",
+    "intent": {
+      "originalQuery": "electricity consumption in Georgia and France",
+      "cleanedQuery": "electricity consumption in Georgia and France",
+      "correctedQuery": "Electricity consumption in Georgia and France",
+      "correctedQuerySource": "ai",
+      "normalizedQuery": "electricity consumption in georgia and france",
+      "interpreter": "openai",
+      "interpretationMethod": "ai_primary",
+      "country": {
+        "name": "Georgia",
+        "code": "GEO",
+        "type": "country",
+        "routeFamilies": [
+          "international"
+        ]
+      },
+      "countryCode": "GEO",
+      "validatedGeographies": [
+        {
+          "name": "Georgia",
+          "code": "GEO",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        {
+          "name": "France",
+          "code": "FRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        }
+      ],
+      "geographyEvidence": [
+        {
+          "name": "Georgia",
+          "code": "GEO",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "georgia",
+          "index": 27,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "contextual_state_country",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "GEO",
+              "confidence": null,
+              "candidateCodes": [
+                "GEO"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "France",
+          "code": "FRA",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ],
+          "rawText": "france",
+          "index": 39,
+          "source": "raw_exact_deterministic",
+          "resolutionRule": "exact_name_alias_or_code",
+          "conflictStatus": "agreement",
+          "aiClaims": [
+            {
+              "value": "FRA",
+              "confidence": null,
+              "candidateCodes": [
+                "FRA"
+              ]
+            }
+          ]
+        }
+      ],
+      "geographyConflicts": [],
+      "validatedCorrections": [],
+      "product": "electricity",
+      "activity": "consumption",
+      "sector": null,
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validatedConceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "originalActivity": null,
+          "activityNormalization": null,
+          "confidence": 0.96,
+          "source": "validated_interpreter"
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "confidence": 0.86,
+      "fields": {
+        "country": {
+          "rawValue": "Georgia and France",
+          "aiValue": "GEO",
+          "normalizedValue": "GEO",
+          "validation": "approved",
+          "confidence": 0.65,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "GEO",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "product": {
+          "rawValue": "electricity",
+          "aiValue": "electricity",
+          "normalizedValue": "electricity",
+          "validation": "approved",
+          "confidence": 0.96,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "electricity",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "breadth": "specific"
+        },
+        "activity": {
+          "rawValue": "consumption",
+          "aiValue": "consumption",
+          "normalizedValue": "consumption",
+          "validation": "approved",
+          "confidence": 0.95,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "consumption",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "sector": {
+          "rawValue": null,
+          "aiValue": null,
+          "normalizedValue": null,
+          "validation": "missing",
+          "confidence": 0.05,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": "No approved sector was found.",
+          "alternatives": [],
+          "deterministicValue": null,
+          "conflictStatus": "none",
+          "resolutionSource": "unresolved",
+          "validationEvidenceSource": "raw_derived_deterministic"
+        },
+        "frequency": {
+          "rawValue": null,
+          "aiValue": "annual",
+          "normalizedValue": "annual",
+          "validation": "approved",
+          "confidence": 0.65,
+          "fallbackUsed": false,
+          "fallbackReason": null,
+          "fallbackMethod": null,
+          "reason": null,
+          "alternatives": [],
+          "deterministicValue": "annual",
+          "conflictStatus": "agreement",
+          "resolutionSource": "ai_validated",
+          "validationEvidenceSource": "raw_derived_deterministic",
+          "explicit": false
+        }
+      },
+      "aiAmbiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies",
+          "request_scope_unresolved"
+        ]
+      },
+      "fallback": {
+        "used": false,
+        "method": "field_level_deterministic_fallback",
+        "reasons": []
+      },
+      "cleanedKeywords": "france",
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [],
+      "ambiguousFields": [],
+      "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "electricity",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": 0.96
+        }
+      ],
+      "multiCountryComparison": {
+        "active": true,
+        "status": "active",
+        "geographyCodes": [
+          "GEO",
+          "FRA"
+        ],
+        "routeFamily": "international",
+        "reason": "two_or_more_validated_countries"
+      },
+      "structuredIntent": {
+        "schemaVersion": "2.1.0",
+        "originalQuery": "electricity consumption in Georgia and France",
+        "normalizedQuery": "electricity consumption in georgia and france",
+        "mentions": {
+          "geographies": [
+            {
+              "index": 27,
+              "text": "georgia",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "Georgia",
+                "code": "GEO",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ],
+                "rawText": "georgia",
+                "index": 27,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "contextual_state_country",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "GEO",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "GEO"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "Georgia",
+                "code": "GEO",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            },
+            {
+              "index": 39,
+              "text": "france",
+              "source": "raw_exact_deterministic",
+              "evidence": {
+                "name": "France",
+                "code": "FRA",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ],
+                "rawText": "france",
+                "index": 39,
+                "source": "raw_exact_deterministic",
+                "resolutionRule": "exact_name_alias_or_code",
+                "conflictStatus": "agreement",
+                "aiClaims": [
+                  {
+                    "value": "FRA",
+                    "confidence": null,
+                    "candidateCodes": [
+                      "FRA"
+                    ]
+                  }
+                ]
+              },
+              "geography": {
+                "name": "France",
+                "code": "FRA",
+                "type": "country",
+                "routeFamilies": [
+                  "international"
+                ]
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "index": 0,
+              "text": null,
+              "type": "product",
+              "value": "electricity",
+              "source": "validated_interpreter"
+            },
+            {
+              "index": 1,
+              "text": null,
+              "type": "activity",
+              "value": "consumption",
+              "source": "validated_interpreter"
+            }
+          ],
+          "frequencies": []
+        },
+        "geography": {
+          "name": "Georgia",
+          "code": "GEO",
+          "type": "country",
+          "routeFamilies": [
+            "international"
+          ]
+        },
+        "geographies": [
+          {
+            "name": "Georgia",
+            "code": "GEO",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          },
+          {
+            "name": "France",
+            "code": "FRA",
+            "type": "country",
+            "routeFamilies": [
+              "international"
+            ]
+          }
+        ],
+        "product": "electricity",
+        "productBreadth": "specific",
+        "productAlternatives": [],
+        "activity": "consumption",
+        "activityInference": null,
+        "sector": null,
+        "conceptPairs": [
+          {
+            "order": 0,
+            "product": "electricity",
+            "activity": "consumption",
+            "sector": null,
+            "source": "validated_interpreter",
+            "confidence": 0.96
+          }
+        ],
+        "conceptPairStatus": "validated",
+        "conceptPairRule": "validated_interpreter",
+        "multiCountryComparison": {
+          "active": true,
+          "status": "active",
+          "geographyCodes": [
+            "GEO",
+            "FRA"
+          ],
+          "routeFamily": "international",
+          "reason": "two_or_more_validated_countries"
+        },
+        "exclusions": [],
+        "unknownQualifiers": [],
+        "frequency": "annual",
+        "requestedFrequency": null,
+        "frequencyExplicit": false,
+        "validation": {
+          "geography": "valid",
+          "geographyConflicts": [],
+          "frequency": "valid",
+          "frequencySupportedByRoute": true,
+          "supportedFrequencies": [
+            "annual",
+            "monthly",
+            "quarterly"
+          ],
+          "metadataSource": {
+            "build": "phase1b",
+            "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+            "generatedFrom": [
+              "domestic.jsonl.gz",
+              "natural-gas.jsonl.gz",
+              "international.jsonl.gz",
+              "seds.jsonl.gz",
+              "routes.json"
+            ],
+            "exclusions": [
+              "Domestic records normalized as region have product-like names and are not safe geography validators."
+            ]
+          },
+          "fields": {
+            "country": {
+              "validation": "approved",
+              "confidence": 0.65,
+              "fallbackUsed": false
+            },
+            "product": {
+              "validation": "approved",
+              "confidence": 0.96,
+              "fallbackUsed": false
+            },
+            "activity": {
+              "validation": "approved",
+              "confidence": 0.95,
+              "fallbackUsed": false
+            },
+            "sector": {
+              "validation": "missing",
+              "confidence": 0.05,
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "validation": "approved",
+              "confidence": 0.65,
+              "fallbackUsed": false
+            }
+          }
+        },
+        "ambiguity": {
+          "status": "ambiguous",
+          "reasons": [
+            "multiple_geographies",
+            "request_scope_unresolved"
+          ]
+        },
+        "fallback": {
+          "used": false,
+          "reasons": []
+        },
+        "route": {
+          "family": "international",
+          "label": "International",
+          "reason": "A non-U.S. country or multi-country request uses International.",
+          "deterministic": true
+        },
+        "provenance": {
+          "query": "validated_source_scopes",
+          "geographies": [
+            "raw_exact_deterministic",
+            "raw_exact_deterministic"
+          ],
+          "geographyEvidence": [
+            {
+              "name": "Georgia",
+              "code": "GEO",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "georgia",
+              "index": 27,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "contextual_state_country",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "GEO",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "GEO"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "France",
+              "code": "FRA",
+              "type": "country",
+              "routeFamilies": [
+                "international"
+              ],
+              "rawText": "france",
+              "index": 39,
+              "source": "raw_exact_deterministic",
+              "resolutionRule": "exact_name_alias_or_code",
+              "conflictStatus": "agreement",
+              "aiClaims": [
+                {
+                  "value": "FRA",
+                  "confidence": null,
+                  "candidateCodes": [
+                    "FRA"
+                  ]
+                }
+              ]
+            }
+          ],
+          "concepts": [
+            "validated_interpreter"
+          ],
+          "canonicalizations": [],
+          "sector": "missing",
+          "frequency": "default",
+          "exclusions": [],
+          "unknownQualifiers": [],
+          "scopeSemantics": "bounded_deterministic_grammar"
+        },
+        "needsClarification": true,
+        "blockingClarification": true,
+        "missingFields": [],
+        "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+        "requestEvidence": {
+          "version": 1,
+          "query": "electricity consumption in Georgia and France",
+          "scopes": [
+            {
+              "start": 0,
+              "end": 45,
+              "text": "electricity consumption in Georgia and France",
+              "status": "requested",
+              "target": "data"
+            }
+          ],
+          "invalid": true
+        },
+        "scopeValidation": {
+          "source": "rules",
+          "issues": [
+            "invalid_evidence_envelope"
+          ],
+          "unresolved": 0
+        }
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A non-U.S. country or multi-country request uses International.",
+        "deterministic": true
+      },
+      "validation": {
+        "geography": "valid",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "approved",
+            "confidence": 0.65,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": 0.96,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": 0.95,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": 0.05,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": 0.65,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "multiple_geographies",
+          "request_scope_unresolved"
+        ]
+      },
+      "evidenceQuery": "electricity consumption in Georgia and France",
+      "requestEvidence": {
+        "version": 1,
+        "query": "electricity consumption in Georgia and France",
+        "scopes": [
+          {
+            "start": 0,
+            "end": 45,
+            "text": "electricity consumption in Georgia and France",
+            "status": "requested",
+            "target": "data"
+          }
+        ],
+        "invalid": true
+      },
+      "scopeValidation": {
+        "source": "rules",
+        "issues": [
+          "invalid_evidence_envelope"
+        ],
+        "unresolved": 0
+      }
+    },
+    "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+    "selectedSeries": null,
+    "variables": [],
+    "candidateGroups": [],
+    "comparisonDefinitions": [],
+    "userWarnings": [],
+    "needsClarification": true,
+    "userMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "diagnostics": {
+      "candidatePipelineVersion": "phase4a-v7",
+      "rankingConfigVersion": "phase4-v8",
+      "rankingTaxonomyVersion": "phase4-concepts-v2",
+      "resultCertaintyVersion": "1.1.0",
+      "hierarchyRankingConfigVersion": null,
+      "hierarchyRankingMode": "off",
+      "hierarchyEvidenceStatus": "none",
+      "verifiedHierarchyRelationshipCount": 0,
+      "hierarchyPreferenceApplied": false,
+      "rankingApplied": false,
+      "clarificationBlocked": true,
+      "clarificationReasons": [
+        "multiple_geographies",
+        "request_scope_unresolved"
+      ],
+      "semanticRerankingApplied": false,
+      "initialDisplayLimit": 10,
+      "displayedCandidateCount": 0,
+      "rankedDefinitionLimit": 5,
+      "displayedDefinitionCount": 0,
+      "rankingUnit": "country_series"
+    },
+    "note": "No observations were fetched."
+  },
+  "final": {
+    "interpreter": "openai",
+    "geographies": [
+      "GEO",
+      "FRA"
+    ],
+    "pairs": [
+      [
+        "electricity",
+        "consumption"
+      ]
+    ],
+    "product": "electricity",
+    "activity": "consumption",
+    "sector": null,
+    "frequency": "annual",
+    "frequencyExplicit": false,
+    "exclusions": [],
+    "needsClarification": true,
+    "blockingClarification": true,
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A non-U.S. country or multi-country request uses International.",
+      "deterministic": true
+    },
+    "clarificationMessage": "Please clarify the request scope. The source evidence is invalid, conflicting, or cannot be represented without changing its meaning. No series will be selected.",
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": false,
+      "method": "field_level_deterministic_fallback",
+      "reasons": []
+    },
+    "scopeValidation": {
+      "source": "rules",
+      "issues": [
+        "invalid_evidence_envelope"
+      ],
+      "unresolved": 0
+    },
+    "requestEvidence": {
+      "version": 1,
+      "query": "electricity consumption in Georgia and France",
+      "scopes": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "electricity consumption in Georgia and France",
+          "status": "requested",
+          "target": "data"
+        }
+      ],
+      "invalid": true
+    }
+  },
+  "interceptedModelCalls": 1,
+  "actualExternalCalls": 0
+}

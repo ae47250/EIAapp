@@ -1,0 +1,185 @@
+{
+  "method": "SDMX-style distinction between series dimensions and observation attributes, verified against EIA native flag definitions. A flag change cannot split a series; flags are preserved alongside original values. Unknown flags or numeric values paired with explicit unavailable/not-existing/withheld flags block certification.",
+  "routes": {
+    "international": {
+      "attributes": [
+        {
+          "field": "dataFlagId",
+          "descriptionField": "dataFlagDescription",
+          "definitions": [
+            {
+              "definition": {
+                "id": "1",
+                "name": "Data are unavailable (permanently)"
+              },
+              "frequencies": [
+                "monthly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "2",
+                "name": "Data are unavailable (temporarily)"
+              },
+              "frequencies": [
+                "monthly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "3",
+                "name": "The country does not exist during a given statistical time period"
+              },
+              "frequencies": [
+                "monthly",
+                "quarterly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                978,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "4",
+                "name": "Data are included elsewhere for this time period"
+              },
+              "frequencies": [
+                "monthly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "5",
+                "name": "A value exists, but rounds to zero; non-rounded values appear when downloaded"
+              },
+              "frequencies": [
+                "monthly",
+                "quarterly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                978,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "6",
+                "name": "A value exists, but cannot be published"
+              },
+              "frequencies": [
+                "monthly",
+                "quarterly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                978,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "10",
+                "name": "Values derived using STEO estimation methodology. Appears as a superscript."
+              },
+              "frequencies": [
+                "monthly",
+                "quarterly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                978,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "11",
+                "name": "Data row has been initialized"
+              },
+              "frequencies": [
+                "monthly",
+                "quarterly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                978,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": null,
+                "name": null
+              },
+              "frequencies": [
+                "monthly",
+                "quarterly",
+                "annual"
+              ],
+              "calls": [
+                250,
+                978,
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "7",
+                "name": "Values derived using SMR estimation methodology. Appears as a superscript."
+              },
+              "frequencies": [
+                "annual"
+              ],
+              "calls": [
+                983
+              ]
+            },
+            {
+              "definition": {
+                "id": "8",
+                "name": "Values flagged perliminary by source. Appears as a superscript."
+              },
+              "frequencies": [
+                "annual"
+              ],
+              "calls": [
+                983
+              ]
+            }
+          ],
+          "nonnumericStatusCodes": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "source": "https://api.eia.gov/v2/international/facet/dataFlagId/"
+        }
+      ]
+    }
+  }
+}

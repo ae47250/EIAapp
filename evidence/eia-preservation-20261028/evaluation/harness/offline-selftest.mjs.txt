@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {frozen,gradeOriginal,replayOriginal} from './replay.mjs';
+const field=(value,rawValue=value)=>({rawValue,value,confidence:.99,ambiguityReason:value===null?'Unstated.':null});
+const fixtures=frozen.cases.map(c=>{
+ const e=c.expected;const corrected=c.query.replace('energyy','energy').replace('electrciity','electricity').replace('icealnd','iceland');
+ const fields={country:field(e.geographies[0]),product:field(e.pairs[0]?.[0]||null),activity:field(e.pairs[0]?.[1]||'consumption'),sector:field(null),frequency:{...field(e.frequency,e.frequencyExplicit?e.frequency:null),explicit:e.frequencyExplicit}};
+ if(c.id===2)fields.product.rawValue='total energyy';if(c.id===3)fields.product.rawValue='electrciity';
+ if(c.id===10)fields.product={...field(null,'gas'),ambiguityReason:'Does gas mean natural gas or gasoline?',alternatives:['natural gas','petroleum']};
+ let scopes=[{start:0,end:c.query.length,text:c.query,status:'requested',target:'data'}];
+ if(c.id===6){const start=c.query.indexOf('not');scopes=[{start:0,end:start,text:c.query.slice(0,start),status:'requested',target:'data'},{start,end:c.query.length,text:c.query.slice(start),status:'excluded',target:'data',operator:{start,end:start+3,text:'not'}}];}
+ if(c.id===10)scopes=[{start:0,end:3,text:'gas',status:'unresolved',target:'unknown'},{start:3,end:c.query.length,text:c.query.slice(3),status:'requested',target:'data'}];
+ return {queryId:c.id,payload:{correctedQuery:corrected,confidence:.99,ambiguity:c.id===10?'Natural gas or gasoline?':null,fields,geographies:e.geographies.map(value=>({value,confidence:.99})),conceptPairs:e.pairs.map(([product,activity],order)=>({product,activity,order,confidence:.99})),exclusions:[],unknownQualifiers:c.id===10?['gas']:[],requestEvidence:{version:1,query:c.query,scopes}}};
+});
+fs.writeFileSync(new URL('../records/offline-literal-fixtures.json',import.meta.url),JSON.stringify({note:'Synthetic harness checks constructed from frozen expectations; NOT paid model outputs.',fixtures},null,2)+'\n',{flag:'wx'});
+const results=[];
+for(const item of fixtures){const c=frozen.cases[item.queryId-1];const data={id:'offline-'+c.id,model:'offline-fixture',output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(item.payload)}]}]};const grade=gradeOriginal(data,c);assert.equal(grade.semantic.pass,true,JSON.stringify({id:c.id,semantic:grade.semantic}));assert.equal(grade.contract.pass,true,JSON.stringify({id:c.id,contract:grade.contract}));const replay=await replayOriginal(JSON.stringify(data),c);results.push({queryId:c.id,grade,replay});}
+const adversarial=[];
+const add=async(name,id,mutate,expect)=>{const c=frozen.cases[id-1],p=structuredClone(fixtures[id-1].payload);const text=mutate(p)??JSON.stringify(p);const data={output_text:text};const grade=gradeOriginal(data,c);expect(grade);const replay=await replayOriginal(JSON.stringify(data),c);adversarial.push({name,grade,replay});};
+await add('wrong_Ireland_is_not_model_success_even_if_app_repairs',4,p=>{p.geographies[0].value='IRL';p.fields.country.value='IRL';},g=>assert.equal(g.semantic.pass,false));
+await add('missing_second_activity_fails_semantics',7,p=>{p.conceptPairs.pop();},g=>assert.equal(g.semantic.pass,false));
+await add('unsupported_gas_guess_fails_semantics',10,p=>{p.fields.product.value='natural gas';p.fields.product.ambiguityReason=null;p.ambiguity=null;},g=>assert.equal(g.semantic.pass,false));
+await add('fenced_JSON_not_repaired_by_grader',1,p=>'```json\n'+JSON.stringify(p)+'\n```',g=>assert.equal(g.contract.json,false));
+await add('invalid_span_fails_contract',4,p=>{p.requestEvidence.scopes[0].end++;},g=>assert.equal(g.contract.spans,false));
+const report={completedAt:new Date().toISOString(),realGenerationCalls:0,actualExternalCalls:0,syntheticCases:results.length,adversarialCases:adversarial.length,results,adversarial};
+fs.writeFileSync(new URL('../records/offline-selftest.json',import.meta.url),JSON.stringify(report,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({synthetic:results.length,adversarial:adversarial.length,externalCalls:0,downstream:results.map(x=>({id:x.queryId,status:x.replay.publicStatus,route:x.replay.final?.route?.family,clarify:x.replay.final?.needsClarification,candidates:x.replay.public?.variables?.length,definitions:x.replay.public?.comparisonDefinitions?.length,pipelineError:x.replay.pipelineError}))}));

@@ -1,0 +1,8 @@
+import {interpretQueryWithRules,validateAiInterpretation} from '<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp/lib/sources/eia/interpret-query.js';
+// Frozen before execution: ever/also qualify a negated command; they do not reverse the exclusion.
+const cases=[
+ {q:'Energy consumption in France; please do not ever show Canada',codes:['FRA']},
+ {q:'Energy consumption in France; do not also include Canada',codes:['FRA']},
+ {q:'Energy consumption in France, excluding Canada, show Germany',codes:['FRA','DEU']}
+];
+for(const {q,codes}of cases){const ai={confidence:.99,geographies:codes.map(value=>({value,confidence:.99})),fields:{country:{value:codes[0],confidence:.99},product:{value:'total energy',confidence:.99},activity:{value:'consumption',confidence:.99}}};console.log(JSON.stringify({q,expected:codes,rules:interpretQueryWithRules(q).structuredIntent.geographies.map(g=>g.code),injected:validateAiInterpretation(ai,q).structuredIntent.geographies.map(g=>g.code)}));}

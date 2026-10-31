@@ -1,0 +1,135 @@
+--- starting/lib/sources/eia/intent-routing.js
++++ final/lib/sources/eia/intent-routing.js
+@@ -1,4 +1,5 @@
+ import { readFileSync } from "node:fs";
++import { ruleRequestEvidence } from "./request-evidence.js";
+ 
+ const ROUTING_METADATA = JSON.parse(readFileSync(new URL("../../../data/eia/routing-metadata.json", import.meta.url), "utf8"));
+ const ROUTING_CONFIG = JSON.parse(readFileSync(new URL("../../../data/eia/phase4-routing-config.json", import.meta.url), "utf8"));
+@@ -24,7 +25,7 @@
+ export function buildStructuredIntent(baseIntent, query) {
+   const originalQuery = String(query ?? baseIntent?.originalQuery ?? "");
+   const authoritativeAi = baseIntent?.interpreter === "openai";
+-  const authoritativeQuery = authoritativeAi
++  const authoritativeQuery = typeof baseIntent?.evidenceQuery === "string" ? baseIntent.evidenceQuery : authoritativeAi
+     ? baseIntent?.cleanedQuery || originalQuery
+     : baseIntent?.correctedQuery || baseIntent?.cleanedQuery || originalQuery;
+   const normalizedQuery = normalizeText(authoritativeQuery);
+@@ -473,7 +474,7 @@
+   return [...new Set(forms.filter(Boolean))];
+ }
+ 
+-export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {
++function collectGeographyMatches(normalizedQuery, originalQuery = "", additionalGeographies = []) {
+   const matches = [];
+   for (const geography of [...ROUTING_METADATA.geographies, ...additionalGeographies.filter(item => !geographyByCode.has(item.code))]) {
+     for (const name of geographyNameForms(geography.name)) {
+@@ -487,6 +488,11 @@
+     const geography = geographyByCode.get(code);
+     if (geography) addPhraseMatch(matches, normalizedQuery, alias, { ...geography, matchPriority: 10 });
+   }
++  return matches;
++}
++
++export function findGeographyMentions(normalizedQuery, originalQuery = "", additionalGeographies = []) {
++  const matches = collectGeographyMatches(normalizedQuery, originalQuery, additionalGeographies);
+   // Remove excluded spans before context resolution: a negated country is not evidence for country scope.
+   const complete = matches.filter(match => !matches.some(other => other.length > match.length
+     && other.index <= match.index && other.index + other.length >= match.index + match.length));
+@@ -522,61 +528,42 @@
+         || (hasOtherGeography && requestVerb && !/^(and|or|versus|vs)$/.test(after || ""))));
+ }
+ 
++// Expose source positions for evidence validation without deciding request polarity.
++export function listRequestEvidenceMentions(query) {
++  const words = [...String(query).matchAll(/[\p{L}\p{N}]+|&/gu)];
++  let offset = 0;
++  const tokens = words.map(word => {
++    const text = normalizeText(word[0]);
++    const token = { text, index: offset, start: word.index, end: word.index + word[0].length };
++    offset += text.length + 1;
++    return token;
++  });
++  const normalized = tokens.map(t => t.text).join(" ");
++  const geoMatches = collectGeographyMatches(normalized, query);
++  const complete = geoMatches.filter(match => !geoMatches.some(other => other.length > match.length
++    && other.index <= match.index && other.index + other.length >= match.index + match.length));
++  const raw = [
++    ...complete.filter(m => !isRequestPronoun(normalized, m, query, complete)).map(m => ({ ...m, type: "geography", value: m.code })),
++    ...findConceptMentions(normalized),
++    ...FREQUENCY_RULES.flatMap(rule => rule.terms.flatMap(term => { const found = []; addPhraseMatch(found, normalized, term, { type: "frequency", value: rule.value }); return found; })),
++    ...SECTOR_RULES.flatMap(rule => rule.terms.flatMap(term => { const found = []; addPhraseMatch(found, normalized, term, { type: "sector", value: rule.value }); return found; }))
++  ];
++  return raw.map(m => {
++    const first = tokens.find(t => t.index === m.index);
++    const last = tokens.find(t => t.index + t.text.length === m.index + m.text.length);
++    return first && last ? { start: first.start, end: last.end, text: String(query).slice(first.start, last.end), type: m.type, value: m.value } : null;
++  }).filter(Boolean).filter((m, i, all) => all.findIndex(x => x.start === m.start && x.end === m.end && x.type === m.type && x.value === m.value) === i)
++    .sort((a, b) => a.start - b.start || b.end - a.end);
++}
++
+ export function getNegationScope(query, index, originalQuery = query) {
+-  // Token positions are shared with normalized matching, but sentence punctuation
+-  // and affirmative/negative commands retain their scope in the original text.
+-  const target = query.slice(0, index).trim().split(/\s+/).filter(Boolean).length;
+-  const rawOriginal = String(originalQuery || query).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ");
+-  const original = rawOriginal.toLowerCase();
+-  const words = rawOriginal.match(/[a-z0-9]+/gi) || [];
+-  const tokens = [...original.matchAll(/[a-z0-9]+|[;.!?]/g)].map(match => match[0]);
+-  const markers = new Set(ROUTING_CONFIG.vocabulary?.negationMarkers || []);
+-  let scope = null;
+-  let wordIndex = 0;
+-  for (let i = 0; i < tokens.length; i++) {
+-    const token = tokens[i];
+-    if (/^[;.!?]$/.test(token)) {
+-      if (token !== "." || (tokens[i - 1] || "").length > 1) scope = null;
+-      continue;
+-    }
+-    if (wordIndex >= target) break;
+-    if (markers.has(token)) {
+-      // Negating knowledge/certainty does not negate the data being asked about.
+-      // Continue scanning so a later explicit exclusion still opens its own scope.
+-      if (token === "not" && tokens[i + 1] === "only") scope = null;
+-      else if (!isUncertaintyPredicate(tokens, i)) scope = wordIndex;
+-    }
+-    else if (["but", "instead", "rather"].includes(token)) scope = null;
+-    else if (["show", "include"].includes(token) && scope !== null) {
+-      // A new command follows a completed excluded subject, not merely an adverb.
+-      // The span starts after the latest negation marker, so it has no nested negation.
+-      const subject = words.slice(scope + 1, wordIndex).join(" ");
+-      const normalizedSubject = normalizeText(subject);
+-      if (findConceptMentions(normalizedSubject).length || findGeographyMentions(normalizedSubject, subject).length) scope = null;
+-    }
+-    wordIndex++;
+-  }
+-  return scope;
+-}
+-
+-function isUncertaintyPredicate(tokens, index) {
+-  const predicate = tokens.slice(index + 1).join(" ");
+-  if (tokens[index] === "not") {
+-    // Predicate modifiers may be degree words, productive -ly adverbs, or "at all".
+-    // Stop at other content words: an exclusion command must not reach a later
+-    // certainty word and be reclassified as uncertainty.
+-    const match = predicate.match(/^((?:(?:[a-z]+ly|very|so|too|quite|rather|yet|that|as|more|less|at all) )*)(?:sure|certain|aware|know|knowing|understand|understanding)\b/);
+-    if (!match) return false;
+-    const modifiers = match[1].trim();
+-    // Known data entities take precedence over an adverb-shaped spelling.
+-    if (findConceptMentions(modifiers).length || firstRuleValue(modifiers, FREQUENCY_RULES)
+-      || firstRuleValue(modifiers, SECTOR_RULES)) return false;
+-    const geographyTerms = [...ROUTING_METADATA.geographies.flatMap(item => geographyNameForms(item.name)), ...GEOGRAPHY_ALIASES.keys()];
+-    return !geographyTerms.some(term => hasPhrase(modifiers, normalizeText(term)));
+-  }
+-  if (tokens[index] === "no") return /^(?:idea|certainty|knowledge)\b/.test(predicate);
+-  if (tokens[index] === "without") return /^(?:knowing|understanding)\b/.test(predicate);
+-  return false;
++  const normalizedWords = [...String(query).matchAll(/[a-z0-9]+/g)];
++  const rawWords = [...String(originalQuery || query).matchAll(/[\p{L}\p{N}]+|&/gu)];
++  const position = rawWords[normalizedWords.findIndex(word => word.index === index)]?.index;
++  if (position === undefined) return null;
++  const scope = ruleRequestEvidence(originalQuery || query, listRequestEvidenceMentions(originalQuery || query)).scopes
++    .find(s => s.start <= position && position < s.end);
++  return scope?.status === "excluded" ? scope.start : null;
+ }
+ 
+ function disambiguateStateCountryMatches(matches, normalizedQuery) {

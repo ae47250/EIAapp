@@ -1,0 +1,146 @@
+{
+  "codeCommit": "b68e74c07dbf4e6603a39f8cc560fb839370d713",
+  "evidenceHead": "25899c08d306b94365e6a6c12c4f3fc755b85a1a",
+  "completedAt": "2026-10-31T14:24:47.131Z",
+  "counts": {
+    "D": {
+      "correct": 58,
+      "total": 58
+    },
+    "F": {
+      "correct": 8,
+      "total": 8
+    },
+    "Q1": {
+      "correct": 8,
+      "total": 9
+    },
+    "Q4": {
+      "correct": 3,
+      "total": 3
+    }
+  },
+  "checks": {
+    "complete": true,
+    "modelIdentity": true,
+    "boundedCalls": true,
+    "setD": true,
+    "frontPageAndD21": true,
+    "setF": true,
+    "setQ1": false,
+    "setQ4": true,
+    "zeroDeadEnds": true,
+    "zeroUnlabelledWrongData": true,
+    "withinBudget": true,
+    "noFatalStop": true
+  },
+  "pass": false,
+  "scheduledOutcomes": 78,
+  "scheduledCalls": 68,
+  "maximumGenerationCalls": 136,
+  "generationCalls": 71,
+  "validationReasksUsed": 3,
+  "blockedModelCalls": 0,
+  "attempts": 71,
+  "eiaCalls": 206,
+  "actualGenerationUSD": 0.06870750000000002,
+  "countingReserveUSD": 0.000861125,
+  "cumulativeActualUSD": 0.06956862500000002,
+  "budgetMaximumUSD": 0.324102125,
+  "cumulativeMaximumUSD": 0.324102125,
+  "ceilingUSD": 0.4,
+  "model": "gpt-6-luna",
+  "reasoning": {
+    "effort": "low"
+  },
+  "failedCases": [
+    {
+      "set": "Q1",
+      "id": "Q1-natural-gasoline",
+      "repeat": 1
+    }
+  ],
+  "consoleErrors": [],
+  "status": "FAIL",
+  "usageBasedCostNote": "actualGenerationUSD is conservative usage accounting at $0.125/M input plus $0.50/M output, not a billing invoice. countingReserveUSD was reserved but not spent; cumulativeActualUSD includes that unused reserve.",
+  "offline": {
+    "pass": true,
+    "recordedAt": "2026-10-31T14:10:12.514261+00:00",
+    "codeCommit": "b68e74c07dbf4e6603a39f8cc560fb839370d713",
+    "javascript": {
+      "passed": 842,
+      "failed": 0,
+      "command": "OPENAI_API_KEY= EIA_API_KEY= npm test"
+    },
+    "python": {
+      "files": 32,
+      "failed": 0,
+      "command": "Each scripts/eia-lookup/*.test.py run individually with python3 -B; aggregate exit statuses."
+    },
+    "build": "PASS with keys blank",
+    "historicalReplay": {
+      "outcomes": 126,
+      "gate": true,
+      "modelResponses": 115,
+      "eiaResponses": 303,
+      "expectedChangesMatch": true,
+      "q4InjectedCasesPass": true,
+      "externalNetworkCalls": 0
+    },
+    "failedJob8Replay": {
+      "outcomes": 78,
+      "allCorrect": true,
+      "counts": {
+        "D": {
+          "correct": 58,
+          "total": 58
+        },
+        "F": {
+          "correct": 8,
+          "total": 8
+        },
+        "Q1": {
+          "correct": 9,
+          "total": 9
+        },
+        "Q4": {
+          "correct": 3,
+          "total": 3
+        }
+      },
+      "modelResponses": 71,
+      "eiaResponses": 153,
+      "externalNetworkCalls": 0,
+      "D4D4aD7": "all pass",
+      "replyContextChanges": [
+        {
+          "id": "D4b",
+          "set": "D",
+          "repeat": 1,
+          "attempt": 1
+        }
+      ],
+      "Q4DropData": "injected from approved metadata; live retrieval is tested only in the scored run"
+    },
+    "browserConsoleErrors": [],
+    "modelPromptOrSchemaChanged": false,
+    "savedResponseCaveat": "D4b repeat 1 has a corrected parent form without Alabama. Replay uses the saved reply response and does not test the model reading that changed context.",
+    "q1ScorerExactlyUnchanged": true,
+    "evidence": "check-artifacts.json; raw logs and both replay folders under ~/Documents/EIAapp-Evidence/20261031/job8b/"
+  },
+  "freezeVerification": {
+    "sha256": "70226f39c40609599c67450a17a31b73bd96b77294c92e4587ba92a6d87755aa",
+    "filesChecked": 350,
+    "mismatches": []
+  },
+  "usage": {
+    "input_tokens": 486176,
+    "output_tokens": 15871,
+    "total_tokens": 502047
+  },
+  "localEvidence": {
+    "path": "~/Documents/EIAapp-Evidence/20261031/job8b/",
+    "liveFiles": 642,
+    "liveBytes": 33417639
+  }
+}

@@ -1,0 +1,2334 @@
+{
+  "base": "5b60a094ecd10e1ca80492bc8558652768d93366",
+  "seed": 47250,
+  "createdBeforeProductionEdits": true,
+  "requirements": [
+    "Raw exact approved names/aliases outrank fuzzy competition.",
+    "Negated geography never becomes a positive request; list negation extends across and/or and ends at but/instead.",
+    "Filler and directional words do not create countries.",
+    "Default annual, explicit false, no unstated sector.",
+    "Rule/AI/submission round trips retain ordered geography and concept meaning.",
+    "Route by geography scope and product coverage, then frequency; no implicit unit conversion.",
+    "Georgia: other positive foreign country => country; otherwise international hint and no positive USA => country; otherwise state.",
+    "Clarify ambiguous gas before retrieval; unknown scope/pairing remains unresolved.",
+    "Unavailable frequency is not a defect; retain explicit frequency and label any approved fallback."
+  ],
+  "cases": [
+    {
+      "id": "D01",
+      "q": "energy consumption Iceland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D02",
+      "q": "energy consumption Ireland",
+      "expected": {
+        "codes": [
+          "IRL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D03",
+      "q": "energy consumption Finland",
+      "expected": {
+        "codes": [
+          "FIN"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D04",
+      "q": "energy consumption Poland",
+      "expected": {
+        "codes": [
+          "POL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D05",
+      "q": "energy consumption Austria",
+      "expected": {
+        "codes": [
+          "AUT"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D06",
+      "q": "energy consumption Australia",
+      "expected": {
+        "codes": [
+          "AUS"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D07",
+      "q": "energy consumption Niger",
+      "expected": {
+        "codes": [
+          "NER"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D08",
+      "q": "energy consumption Nigeria",
+      "expected": {
+        "codes": [
+          "NGA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D09",
+      "q": "energy consumption Guinea",
+      "expected": {
+        "codes": [
+          "GIN"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D10",
+      "q": "energy consumption Equatorial Guinea",
+      "expected": {
+        "codes": [
+          "GNQ"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D11",
+      "q": "energy consumption Guinea-Bissau",
+      "expected": {
+        "codes": [
+          "GNB"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D12",
+      "q": "energy consumption New Zealand",
+      "expected": {
+        "codes": [
+          "NZL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D13",
+      "q": "energy consumption United Kingdom",
+      "expected": {
+        "codes": [
+          "GBR"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D14",
+      "q": "energy consumption Gambia, The",
+      "expected": {
+        "codes": [
+          "GMB"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D15",
+      "q": "energy consumption Germany, East",
+      "expected": {
+        "codes": [
+          "DDR"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D16",
+      "q": "energy consumption Germany, West",
+      "expected": {
+        "codes": [
+          "DEUW"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D17",
+      "q": "energy consumption uk",
+      "expected": {
+        "codes": [
+          "GBR"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D18",
+      "q": "energy consumption u.s.",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D19",
+      "q": "energy consumption uae",
+      "expected": {
+        "codes": [
+          "ARE"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D20",
+      "q": "energy consumption Czechia",
+      "expected": {
+        "codes": [
+          "CZE"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D21",
+      "q": "energy consumption south korea",
+      "expected": {
+        "codes": [
+          "KOR"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D22",
+      "q": "energy consumption icealnd",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "rulesUnresolvedAllowed": true
+      }
+    },
+    {
+      "id": "D23",
+      "q": "energy consumption Irelxnd",
+      "expected": {
+        "codes": [
+          "IRL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "rulesUnresolvedAllowed": true
+      }
+    },
+    {
+      "id": "D24",
+      "q": "energy consumption Iland",
+      "expected": {
+        "codes": [],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "unresolved": true,
+        "disputed": "Ambiguous spelling; no unique geography expectation. Do not force a country."
+      }
+    },
+    {
+      "id": "D25",
+      "q": "energy consumption Iceland not Ireland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D26",
+      "q": "energy consumption Iceland excluding Ireland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D27",
+      "q": "energy consumption Iceland without Ireland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D28",
+      "q": "energy consumption Iceland except Ireland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D29",
+      "q": "energy consumption France not Canada or Mexico",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D30",
+      "q": "energy consumption not Ireland but Iceland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D31",
+      "q": "energy consumption excluding Ireland",
+      "expected": {
+        "codes": [],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": true
+      }
+    },
+    {
+      "id": "D32",
+      "q": "please show the energy consumption for Iceland",
+      "expected": {
+        "codes": [
+          "ISL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D33",
+      "q": "show the energy consumption in the United States",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "international"
+      }
+    },
+    {
+      "id": "D34",
+      "q": "energy consumption east of France",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D35",
+      "q": "energy consumption west of Canada",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D36",
+      "q": "Georgia energy consumption",
+      "expected": {
+        "codes": [
+          "GA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "seds"
+      }
+    },
+    {
+      "id": "D37",
+      "q": "Georgia and France energy consumption",
+      "expected": {
+        "codes": [
+          "GEO",
+          "FRA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "international"
+      }
+    },
+    {
+      "id": "D38",
+      "q": "Georgia and Alabama energy consumption",
+      "expected": {
+        "codes": [
+          "GA",
+          "AL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "seds"
+      }
+    },
+    {
+      "id": "D39",
+      "q": "Georgia and United States energy consumption",
+      "expected": {
+        "codes": [
+          "GA",
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "seds"
+      }
+    },
+    {
+      "id": "D40",
+      "q": "international Georgia energy consumption",
+      "expected": {
+        "codes": [
+          "GEO"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "international"
+      }
+    },
+    {
+      "id": "D41",
+      "q": "international Georgia and United States energy consumption",
+      "expected": {
+        "codes": [
+          "GA",
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "seds"
+      }
+    },
+    {
+      "id": "D42",
+      "q": "France then Iceland then Ireland energy consumption",
+      "expected": {
+        "codes": [
+          "FRA",
+          "ISL",
+          "IRL"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null
+      }
+    },
+    {
+      "id": "D43",
+      "q": "Canada natural gas imports and exports",
+      "expected": {
+        "codes": [
+          "CAN"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "pairs": [
+          [
+            "natural gas",
+            "imports"
+          ],
+          [
+            "natural gas",
+            "exports"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "D44",
+      "q": "Brazil petroleum and natural gas consumption",
+      "expected": {
+        "codes": [
+          "BRA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "pairs": [
+          [
+            "petroleum",
+            "consumption"
+          ],
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "D45",
+      "q": "Texas coal production and natural gas consumption",
+      "expected": {
+        "codes": [
+          "TX"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "pairs": [
+          [
+            "coal",
+            "production"
+          ],
+          [
+            "natural gas",
+            "consumption"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "D46",
+      "q": "Texas coal and natural gas production and consumption",
+      "expected": {
+        "codes": [
+          "TX"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": true
+      }
+    },
+    {
+      "id": "D47",
+      "q": "gas consumption in the United States",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "clarify": true,
+        "product": null,
+        "alternatives": [
+          "natural gas",
+          "petroleum"
+        ]
+      }
+    },
+    {
+      "id": "D48",
+      "q": "United States natural gas consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "domestic",
+        "product": "natural gas"
+      }
+    },
+    {
+      "id": "D49",
+      "q": "United States gasoline consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "international",
+        "product": "petroleum"
+      }
+    },
+    {
+      "id": "D50",
+      "q": "United States total energy consumption",
+      "expected": {
+        "codes": [
+          "USA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "route": "international",
+        "candidate": "INTL.44-2-USA-QBTU.A"
+      }
+    },
+    {
+      "id": "D51",
+      "q": "France weekly solar electricity generation",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "weekly",
+        "explicit": true,
+        "sector": null,
+        "route": "international",
+        "empty": true
+      }
+    },
+    {
+      "id": "D52",
+      "q": "Texas monthly residential natural gas consumption",
+      "expected": {
+        "codes": [
+          "TX"
+        ],
+        "frequency": "monthly",
+        "explicit": true,
+        "sector": "residential",
+        "route": "domestic"
+      }
+    },
+    {
+      "id": "D53",
+      "q": "France quarterly petroleum consumption",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "quarterly",
+        "explicit": true,
+        "sector": null
+      }
+    },
+    {
+      "id": "D54",
+      "q": "France annual energy consumption",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "annual",
+        "explicit": true,
+        "sector": null
+      }
+    },
+    {
+      "id": "D55",
+      "q": "France energy consumption",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "injectedFrequency": "monthly"
+      }
+    },
+    {
+      "id": "D56",
+      "q": "France energy consumption",
+      "expected": {
+        "codes": [
+          "FRA"
+        ],
+        "frequency": "annual",
+        "explicit": false,
+        "sector": null,
+        "injectedSector": "industrial"
+      }
+    }
+  ],
+  "properties": {
+    "exactNames": [
+      {
+        "name": "Afghanistan",
+        "code": "AFG",
+        "type": "country"
+      },
+      {
+        "name": "Africa",
+        "code": "AGO+BDI+BEN+BFA+BWA+CAF+CIV+CMR+COD+COG+COM+CPV+DJI+DZA+EGY+ERI+ESH+ETH+GAB+GHA+GIN+GMB+GNB+GNQ+KEN+LBR+LBY+LSO+MAR+MDG+MLI+MOZ+MRT+MUS+MWI+NAM+NER+NGA+REU+RWA+SDN+SEN+SHN+SLE+SOM+SSD+STP+SWZ+SYC+TCD+TGO+TUN+TZA+UGA+ZAF+ZMB+ZWE",
+        "type": "country"
+      },
+      {
+        "name": "Alabama",
+        "code": "AL",
+        "type": "state"
+      },
+      {
+        "name": "Alaska",
+        "code": "AK",
+        "type": "state"
+      },
+      {
+        "name": "Albania",
+        "code": "ALB",
+        "type": "country"
+      },
+      {
+        "name": "Algeria",
+        "code": "DZA",
+        "type": "country"
+      },
+      {
+        "name": "American Samoa",
+        "code": "ASM",
+        "type": "country"
+      },
+      {
+        "name": "Angola",
+        "code": "AGO",
+        "type": "country"
+      },
+      {
+        "name": "Antarctica",
+        "code": "ATA",
+        "type": "country"
+      },
+      {
+        "name": "Antigua and Barbuda",
+        "code": "ATG",
+        "type": "country"
+      },
+      {
+        "name": "Argentina",
+        "code": "ARG",
+        "type": "country"
+      },
+      {
+        "name": "Arizona",
+        "code": "AZ",
+        "type": "state"
+      },
+      {
+        "name": "Arkansas",
+        "code": "AR",
+        "type": "state"
+      },
+      {
+        "name": "Armenia",
+        "code": "ARM",
+        "type": "country"
+      },
+      {
+        "name": "Aruba",
+        "code": "ABW",
+        "type": "country"
+      },
+      {
+        "name": "Asia & Oceania",
+        "code": "AFG+ASM+AUS+BGD+BRN+BTN+CHN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+IND+JPN+KHM+KIR+KOR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+NZL+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM",
+        "type": "country"
+      },
+      {
+        "name": "Australia",
+        "code": "AUS",
+        "type": "country"
+      },
+      {
+        "name": "Australia and New Zealand",
+        "code": "AUS+NZL",
+        "type": "country"
+      },
+      {
+        "name": "Austria",
+        "code": "AUT",
+        "type": "country"
+      },
+      {
+        "name": "Azerbaijan",
+        "code": "AZE",
+        "type": "country"
+      },
+      {
+        "name": "Bahrain",
+        "code": "BHR",
+        "type": "country"
+      },
+      {
+        "name": "Bangladesh",
+        "code": "BGD",
+        "type": "country"
+      },
+      {
+        "name": "Barbados",
+        "code": "BRB",
+        "type": "country"
+      },
+      {
+        "name": "Belarus",
+        "code": "BLR",
+        "type": "country"
+      },
+      {
+        "name": "Belgium",
+        "code": "BEL",
+        "type": "country"
+      },
+      {
+        "name": "Belize",
+        "code": "BLZ",
+        "type": "country"
+      },
+      {
+        "name": "Benin",
+        "code": "BEN",
+        "type": "country"
+      },
+      {
+        "name": "Bermuda",
+        "code": "BMU",
+        "type": "country"
+      },
+      {
+        "name": "Bhutan",
+        "code": "BTN",
+        "type": "country"
+      },
+      {
+        "name": "Bolivia",
+        "code": "BOL",
+        "type": "country"
+      },
+      {
+        "name": "Bosnia and Herzegovina",
+        "code": "BIH",
+        "type": "country"
+      },
+      {
+        "name": "Botswana",
+        "code": "BWA",
+        "type": "country"
+      },
+      {
+        "name": "Brazil",
+        "code": "BRA",
+        "type": "country"
+      },
+      {
+        "name": "British Virgin Islands",
+        "code": "VGB",
+        "type": "country"
+      },
+      {
+        "name": "Brunei",
+        "code": "BRN",
+        "type": "country"
+      },
+      {
+        "name": "Bulgaria",
+        "code": "BGR",
+        "type": "country"
+      },
+      {
+        "name": "Burkina Faso",
+        "code": "BFA",
+        "type": "country"
+      },
+      {
+        "name": "Burma",
+        "code": "MMR",
+        "type": "country"
+      },
+      {
+        "name": "Burundi",
+        "code": "BDI",
+        "type": "country"
+      },
+      {
+        "name": "Cabo Verde",
+        "code": "CPV",
+        "type": "country"
+      },
+      {
+        "name": "California",
+        "code": "CA",
+        "type": "state"
+      },
+      {
+        "name": "Cambodia",
+        "code": "KHM",
+        "type": "country"
+      },
+      {
+        "name": "Cameroon",
+        "code": "CMR",
+        "type": "country"
+      },
+      {
+        "name": "Canada",
+        "code": "CAN",
+        "type": "country"
+      },
+      {
+        "name": "Cayman Islands",
+        "code": "CYM",
+        "type": "country"
+      },
+      {
+        "name": "Central & South America",
+        "code": "ABW+ARG+ATA+ATG+BHS+BLZ+BOL+BRA+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR",
+        "type": "country"
+      },
+      {
+        "name": "Central African Republic",
+        "code": "CAF",
+        "type": "country"
+      },
+      {
+        "name": "Chad",
+        "code": "TCD",
+        "type": "country"
+      },
+      {
+        "name": "Chile",
+        "code": "CHL",
+        "type": "country"
+      },
+      {
+        "name": "China",
+        "code": "CHN",
+        "type": "country"
+      },
+      {
+        "name": "Colombia",
+        "code": "COL",
+        "type": "country"
+      },
+      {
+        "name": "Colorado",
+        "code": "CO",
+        "type": "state"
+      },
+      {
+        "name": "Comoros",
+        "code": "COM",
+        "type": "country"
+      },
+      {
+        "name": "Congo-Brazzaville",
+        "code": "COG",
+        "type": "country"
+      },
+      {
+        "name": "Congo-Kinshasa",
+        "code": "COD",
+        "type": "country"
+      },
+      {
+        "name": "Connecticut",
+        "code": "CT",
+        "type": "state"
+      },
+      {
+        "name": "Cook Islands",
+        "code": "COK",
+        "type": "country"
+      },
+      {
+        "name": "Costa Rica",
+        "code": "CRI",
+        "type": "country"
+      },
+      {
+        "name": "Croatia",
+        "code": "HRV",
+        "type": "country"
+      },
+      {
+        "name": "Cuba",
+        "code": "CUB",
+        "type": "country"
+      },
+      {
+        "name": "Cyprus",
+        "code": "CYP",
+        "type": "country"
+      },
+      {
+        "name": "Czechia",
+        "code": "CZE",
+        "type": "country"
+      },
+      {
+        "name": "Delaware",
+        "code": "DE",
+        "type": "state"
+      },
+      {
+        "name": "Denmark",
+        "code": "DNK",
+        "type": "country"
+      },
+      {
+        "name": "District of Columbia",
+        "code": "DC",
+        "type": "state"
+      },
+      {
+        "name": "Djibouti",
+        "code": "DJI",
+        "type": "country"
+      },
+      {
+        "name": "Dominica",
+        "code": "DMA",
+        "type": "country"
+      },
+      {
+        "name": "Dominican Republic",
+        "code": "DOM",
+        "type": "country"
+      },
+      {
+        "name": "Germany, East",
+        "code": "DDR",
+        "type": "country"
+      },
+      {
+        "name": "Eastern Europe and Eurasia",
+        "code": "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+SCG+SUN+TJK+TKM+UKR+UZB+YUG",
+        "type": "country"
+      },
+      {
+        "name": "Ecuador",
+        "code": "ECU",
+        "type": "country"
+      },
+      {
+        "name": "Egypt",
+        "code": "EGY",
+        "type": "country"
+      },
+      {
+        "name": "El Salvador",
+        "code": "SLV",
+        "type": "country"
+      },
+      {
+        "name": "Equatorial Guinea",
+        "code": "GNQ",
+        "type": "country"
+      },
+      {
+        "name": "Eritrea",
+        "code": "ERI",
+        "type": "country"
+      },
+      {
+        "name": "Estonia",
+        "code": "EST",
+        "type": "country"
+      },
+      {
+        "name": "Eswatini",
+        "code": "SWZ",
+        "type": "country"
+      },
+      {
+        "name": "Ethiopia",
+        "code": "ETH",
+        "type": "country"
+      },
+      {
+        "name": "Eurasia",
+        "code": "ARM+AZE+BLR+GEO+KAZ+KGZ+MDA+RUS+SUN+TJK+TKM+UKR+UZB",
+        "type": "country"
+      },
+      {
+        "name": "Europe",
+        "code": "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SCG+SRB+SVK+SVN+SWE+TUR+XKS+YUG",
+        "type": "country"
+      },
+      {
+        "name": "European Union",
+        "code": "AUT+BEL+BGR+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GRC+HRV+HUN+IRL+ITA+LTU+LUX+LVA+MLT+NLD+POL+PRT+ROU+SVK+SVN+SWE",
+        "type": "country"
+      },
+      {
+        "name": "Falkland Islands",
+        "code": "FLK",
+        "type": "country"
+      },
+      {
+        "name": "Faroe Islands",
+        "code": "FRO",
+        "type": "country"
+      },
+      {
+        "name": "Federal Offshore - Gulf of America",
+        "code": "X3",
+        "type": "state"
+      },
+      {
+        "name": "Federal Offshore - Pacific",
+        "code": "X5",
+        "type": "state"
+      },
+      {
+        "name": "Fiji",
+        "code": "FJI",
+        "type": "country"
+      },
+      {
+        "name": "Finland",
+        "code": "FIN",
+        "type": "country"
+      },
+      {
+        "name": "Florida",
+        "code": "FL",
+        "type": "state"
+      },
+      {
+        "name": "Former Czechoslovakia",
+        "code": "CSK",
+        "type": "country"
+      },
+      {
+        "name": "Former Serbia and Montenegro",
+        "code": "SCG",
+        "type": "country"
+      },
+      {
+        "name": "Former U.S.S.R.",
+        "code": "SUN",
+        "type": "country"
+      },
+      {
+        "name": "Former Yugoslavia",
+        "code": "YUG",
+        "type": "country"
+      },
+      {
+        "name": "France",
+        "code": "FRA",
+        "type": "country"
+      },
+      {
+        "name": "French Guiana",
+        "code": "GUF",
+        "type": "country"
+      },
+      {
+        "name": "French Polynesia",
+        "code": "PYF",
+        "type": "country"
+      },
+      {
+        "name": "Gabon",
+        "code": "GAB",
+        "type": "country"
+      },
+      {
+        "name": "Georgia",
+        "code": "GA",
+        "type": "state"
+      },
+      {
+        "name": "Georgia",
+        "code": "GEO",
+        "type": "country"
+      },
+      {
+        "name": "Germany",
+        "code": "DEU",
+        "type": "country"
+      },
+      {
+        "name": "Ghana",
+        "code": "GHA",
+        "type": "country"
+      },
+      {
+        "name": "Gibraltar",
+        "code": "GIB",
+        "type": "country"
+      },
+      {
+        "name": "Greece",
+        "code": "GRC",
+        "type": "country"
+      },
+      {
+        "name": "Greenland",
+        "code": "GRL",
+        "type": "country"
+      },
+      {
+        "name": "Grenada",
+        "code": "GRD",
+        "type": "country"
+      },
+      {
+        "name": "Guadeloupe",
+        "code": "GLP",
+        "type": "country"
+      },
+      {
+        "name": "Guam",
+        "code": "GUM",
+        "type": "country"
+      },
+      {
+        "name": "Guatemala",
+        "code": "GTM",
+        "type": "country"
+      },
+      {
+        "name": "Guinea",
+        "code": "GIN",
+        "type": "country"
+      },
+      {
+        "name": "Guinea-Bissau",
+        "code": "GNB",
+        "type": "country"
+      },
+      {
+        "name": "Guyana",
+        "code": "GUY",
+        "type": "country"
+      },
+      {
+        "name": "Haiti",
+        "code": "HTI",
+        "type": "country"
+      },
+      {
+        "name": "Hawaii",
+        "code": "HI",
+        "type": "state"
+      },
+      {
+        "name": "Hawaiian Trade Zone",
+        "code": "HITZ",
+        "type": "country"
+      },
+      {
+        "name": "Honduras",
+        "code": "HND",
+        "type": "country"
+      },
+      {
+        "name": "Hong Kong",
+        "code": "HKG",
+        "type": "country"
+      },
+      {
+        "name": "Hungary",
+        "code": "HUN",
+        "type": "country"
+      },
+      {
+        "name": "Iceland",
+        "code": "ISL",
+        "type": "country"
+      },
+      {
+        "name": "Idaho",
+        "code": "ID",
+        "type": "state"
+      },
+      {
+        "name": "Illinois",
+        "code": "IL",
+        "type": "state"
+      },
+      {
+        "name": "India",
+        "code": "IND",
+        "type": "country"
+      },
+      {
+        "name": "Indiana",
+        "code": "IN",
+        "type": "state"
+      },
+      {
+        "name": "Indonesia",
+        "code": "IDN",
+        "type": "country"
+      },
+      {
+        "name": "Iowa",
+        "code": "IA",
+        "type": "state"
+      },
+      {
+        "name": "Iran",
+        "code": "IRN",
+        "type": "country"
+      },
+      {
+        "name": "Iraq",
+        "code": "IRQ",
+        "type": "country"
+      },
+      {
+        "name": "Ireland",
+        "code": "IRL",
+        "type": "country"
+      },
+      {
+        "name": "Israel",
+        "code": "ISR",
+        "type": "country"
+      },
+      {
+        "name": "Italy",
+        "code": "ITA",
+        "type": "country"
+      },
+      {
+        "name": "Ivory Coast",
+        "code": "CIV",
+        "type": "country"
+      },
+      {
+        "name": "Jamaica",
+        "code": "JAM",
+        "type": "country"
+      },
+      {
+        "name": "Japan",
+        "code": "JPN",
+        "type": "country"
+      },
+      {
+        "name": "Jordan",
+        "code": "JOR",
+        "type": "country"
+      },
+      {
+        "name": "Kansas",
+        "code": "KS",
+        "type": "state"
+      },
+      {
+        "name": "Kazakhstan",
+        "code": "KAZ",
+        "type": "country"
+      },
+      {
+        "name": "Kentucky",
+        "code": "KY",
+        "type": "state"
+      },
+      {
+        "name": "Kenya",
+        "code": "KEN",
+        "type": "country"
+      },
+      {
+        "name": "Kiribati",
+        "code": "KIR",
+        "type": "country"
+      },
+      {
+        "name": "Kosovo",
+        "code": "XKS",
+        "type": "country"
+      },
+      {
+        "name": "Kuwait",
+        "code": "KWT",
+        "type": "country"
+      },
+      {
+        "name": "Kyrgyzstan",
+        "code": "KGZ",
+        "type": "country"
+      },
+      {
+        "name": "Laos",
+        "code": "LAO",
+        "type": "country"
+      },
+      {
+        "name": "Latvia",
+        "code": "LVA",
+        "type": "country"
+      },
+      {
+        "name": "Lebanon",
+        "code": "LBN",
+        "type": "country"
+      },
+      {
+        "name": "Lesotho",
+        "code": "LSO",
+        "type": "country"
+      },
+      {
+        "name": "Liberia",
+        "code": "LBR",
+        "type": "country"
+      },
+      {
+        "name": "Libya",
+        "code": "LBY",
+        "type": "country"
+      },
+      {
+        "name": "Lithuania",
+        "code": "LTU",
+        "type": "country"
+      },
+      {
+        "name": "Louisiana",
+        "code": "LA",
+        "type": "state"
+      },
+      {
+        "name": "Luxembourg",
+        "code": "LUX",
+        "type": "country"
+      },
+      {
+        "name": "Macau",
+        "code": "MAC",
+        "type": "country"
+      },
+      {
+        "name": "Madagascar",
+        "code": "MDG",
+        "type": "country"
+      },
+      {
+        "name": "Maine",
+        "code": "ME",
+        "type": "state"
+      },
+      {
+        "name": "Malawi",
+        "code": "MWI",
+        "type": "country"
+      },
+      {
+        "name": "Malaysia",
+        "code": "MYS",
+        "type": "country"
+      },
+      {
+        "name": "Maldives",
+        "code": "MDV",
+        "type": "country"
+      },
+      {
+        "name": "Mali",
+        "code": "MLI",
+        "type": "country"
+      },
+      {
+        "name": "Malta",
+        "code": "MLT",
+        "type": "country"
+      },
+      {
+        "name": "Martinique",
+        "code": "MTQ",
+        "type": "country"
+      },
+      {
+        "name": "Maryland",
+        "code": "MD",
+        "type": "state"
+      },
+      {
+        "name": "Massachusetts",
+        "code": "MA",
+        "type": "state"
+      },
+      {
+        "name": "Mauritania",
+        "code": "MRT",
+        "type": "country"
+      },
+      {
+        "name": "Mauritius",
+        "code": "MUS",
+        "type": "country"
+      },
+      {
+        "name": "Mexico",
+        "code": "MEX",
+        "type": "country"
+      },
+      {
+        "name": "Michigan",
+        "code": "MI",
+        "type": "state"
+      },
+      {
+        "name": "Micronesia",
+        "code": "FSM",
+        "type": "country"
+      },
+      {
+        "name": "Middle East",
+        "code": "ARE+BHR+IRN+IRQ+ISR+JOR+KWT+LBN+OMN+PSE+QAT+SAU+SYR+YEM",
+        "type": "country"
+      },
+      {
+        "name": "Minnesota",
+        "code": "MN",
+        "type": "state"
+      },
+      {
+        "name": "Mississippi",
+        "code": "MS",
+        "type": "state"
+      },
+      {
+        "name": "Missouri",
+        "code": "MO",
+        "type": "state"
+      },
+      {
+        "name": "Moldova",
+        "code": "MDA",
+        "type": "country"
+      },
+      {
+        "name": "Mongolia",
+        "code": "MNG",
+        "type": "country"
+      },
+      {
+        "name": "Montana",
+        "code": "MT",
+        "type": "state"
+      },
+      {
+        "name": "Montenegro",
+        "code": "MNE",
+        "type": "country"
+      },
+      {
+        "name": "Montserrat",
+        "code": "MSR",
+        "type": "country"
+      },
+      {
+        "name": "Morocco",
+        "code": "MAR",
+        "type": "country"
+      },
+      {
+        "name": "Mozambique",
+        "code": "MOZ",
+        "type": "country"
+      },
+      {
+        "name": "Namibia",
+        "code": "NAM",
+        "type": "country"
+      },
+      {
+        "name": "Nauru",
+        "code": "NRU",
+        "type": "country"
+      },
+      {
+        "name": "Nebraska",
+        "code": "NE",
+        "type": "state"
+      },
+      {
+        "name": "Nepal",
+        "code": "NPL",
+        "type": "country"
+      },
+      {
+        "name": "Netherlands",
+        "code": "NLD",
+        "type": "country"
+      },
+      {
+        "name": "Netherlands Antilles",
+        "code": "NLDA",
+        "type": "country"
+      },
+      {
+        "name": "Nevada",
+        "code": "NV",
+        "type": "state"
+      },
+      {
+        "name": "New Caledonia",
+        "code": "NCL",
+        "type": "country"
+      },
+      {
+        "name": "New Hampshire",
+        "code": "NH",
+        "type": "state"
+      },
+      {
+        "name": "New Jersey",
+        "code": "NJ",
+        "type": "state"
+      },
+      {
+        "name": "New Mexico",
+        "code": "NM",
+        "type": "state"
+      },
+      {
+        "name": "New York",
+        "code": "NY",
+        "type": "state"
+      },
+      {
+        "name": "New Zealand",
+        "code": "NZL",
+        "type": "country"
+      },
+      {
+        "name": "Nicaragua",
+        "code": "NIC",
+        "type": "country"
+      },
+      {
+        "name": "Niger",
+        "code": "NER",
+        "type": "country"
+      },
+      {
+        "name": "Nigeria",
+        "code": "NGA",
+        "type": "country"
+      },
+      {
+        "name": "Niue",
+        "code": "NIU",
+        "type": "country"
+      },
+      {
+        "name": "Non-OECD",
+        "code": "ABW+AFG+AGO+ALB+ARE+ARG+ARM+ATA+ATG+AZE+BDI+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CHN+CIV+CMR+COD+COG+COK+COM+CPV+CUB+CYM+CYP+DJI+DMA+DOM+DZA+ECU+EGY+ERI+ESH+ETH+FJI+FLK+FRO+FSM+GAB+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GNQ+GRD+GRL+GTM+GUF+GUY+HKG+HND+HRV+HTI+IDN+IND+IRN+IRQ+JAM+JOR+KAZ+KEN+KGZ+KHM+KIR+KNA+KWT+LAO+LBN+LBR+LBY+LCA+LKA+LSO+MAC+MAR+MDA+MDG+MDV+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NGA+NIC+NIU+NLDA+NPL+NRU+OMN+PAK+PAN+PER+PHL+PNG+PRK+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SAU+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUV+TWN+TZA+UGA+UKR+URY+USIQ+UZB+VCT+VEN+VGB+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE",
+        "type": "country"
+      },
+      {
+        "name": "Non-OPEC",
+        "code": "ABW+AFG+AGO+ALB+ARG+ARM+ASM+ATA+ATG+AUS+AUT+AZE+BDI+BEL+BEN+BFA+BGD+BGR+BHR+BHS+BIH+BLR+BLZ+BMU+BOL+BRA+BRB+BRN+BTN+BWA+CAF+CAN+CHE+CHL+CHN+CIV+CMR+COD+COK+COL+COM+CPV+CRI+CSK+CUB+CYM+CYP+CZE+DDR+DEU+DEUW+DJI+DMA+DNK+DOM+ECU+EGY+ERI+ESH+ESP+EST+ETH+FIN+FJI+FLK+FRA+FRO+FSM+GBR+GEO+GHA+GIB+GIN+GLP+GMB+GNB+GRC+GRD+GRL+GTM+GUF+GUM+GUY+HITZ+HKG+HND+HRV+HTI+HUN+IDN+IND+IRL+ISL+ISR+ITA+JAM+JOR+JPN+KAZ+KEN+KGZ+KHM+KIR+KNA+KOR+LAO+LBN+LBR+LCA+LKA+LSO+LTU+LUX+LVA+MAC+MAR+MDA+MDG+MDV+MEX+MKD+MLI+MLT+MMR+MNE+MNG+MNP+MOZ+MRT+MSR+MTQ+MUS+MWI+MYS+NAM+NCL+NER+NIC+NIU+NLD+NLDA+NOR+NPL+NRU+NZL+OMN+PAK+PAN+PER+PHL+PNG+POL+PRI+PRK+PRT+PRY+PSE+PYF+QAT+REU+ROU+RUS+RWA+SCG+SDN+SEN+SGP+SHN+SLB+SLE+SLV+SOM+SPM+SRB+SSD+STP+SUN+SUR+SVK+SVN+SWE+SWZ+SYC+SYR+TCA+TCD+TGO+THA+TJK+TKM+TLS+TON+TTO+TUN+TUR+TUV+TWN+TZA+UGA+UKR+URY+USA+USIQ+UZB+VCT+VGB+VIR+VNM+VUT+WAK+WSM+XKS+YEM+YUG+ZAF+ZMB+ZWE",
+        "type": "country"
+      },
+      {
+        "name": "North America",
+        "code": "BMU+CAN+GRL+MEX+SPM+USA",
+        "type": "country"
+      },
+      {
+        "name": "North Carolina",
+        "code": "NC",
+        "type": "state"
+      },
+      {
+        "name": "North Dakota",
+        "code": "ND",
+        "type": "state"
+      },
+      {
+        "name": "North Korea",
+        "code": "PRK",
+        "type": "country"
+      },
+      {
+        "name": "North Macedonia",
+        "code": "MKD",
+        "type": "country"
+      },
+      {
+        "name": "Northern Mariana Islands",
+        "code": "MNP",
+        "type": "country"
+      },
+      {
+        "name": "Norway",
+        "code": "NOR",
+        "type": "country"
+      },
+      {
+        "name": "OECD",
+        "code": "ASM+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+GUM+HITZ+HUN+IRL+ISL+ISR+ITA+JPN+KOR+LTU+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRI+PRT+SVK+SVN+SWE+TUR+USA+USOH+VIR",
+        "type": "country"
+      },
+      {
+        "name": "OECD - Asia And Oceania",
+        "code": "ASM+AUS+GUM+JPN+KOR+NZL",
+        "type": "country"
+      },
+      {
+        "name": "OECD - Europe",
+        "code": "AUT+BEL+CHE+CSK+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+GBR+GRC+HUN+IRL+ISL+ITA+LTU+LUX+LVA+NLD+NOR+POL+PRT+SVK+SVN+SWE+TUR",
+        "type": "country"
+      },
+      {
+        "name": "OECD - North America",
+        "code": "CAN+MEX+USA",
+        "type": "country"
+      },
+      {
+        "name": "Ohio",
+        "code": "OH",
+        "type": "state"
+      },
+      {
+        "name": "Oklahoma",
+        "code": "OK",
+        "type": "state"
+      },
+      {
+        "name": "Oman",
+        "code": "OMN",
+        "type": "country"
+      },
+      {
+        "name": "OPEC",
+        "code": "ARE+COG+DZA+GAB+GNQ+IRN+IRQ+KWT+LBY+NGA+SAU+VEN",
+        "type": "country"
+      },
+      {
+        "name": "OPEC - Africa",
+        "code": "COG+DZA+GAB+GNQ+LBY+NGA",
+        "type": "country"
+      },
+      {
+        "name": "Oregon",
+        "code": "OR",
+        "type": "state"
+      },
+      {
+        "name": "Other Americas",
+        "code": "ABW+ARG+ATA+ATG+BHS+BLZ+BMU+BOL+BRB+CHL+COL+CRI+CUB+CYM+DMA+DOM+ECU+FLK+GLP+GRD+GRL+GTM+GUF+GUY+HND+HTI+JAM+KNA+LCA+MSR+MTQ+NIC+NLDA+PAN+PER+PRI+PRY+SLV+SPM+SUR+TCA+TTO+URY+VCT+VEN+VGB+VIR",
+        "type": "country"
+      },
+      {
+        "name": "Other Asia-Pacific",
+        "code": "AFG+ASM+BGD+BRN+BTN+COK+FJI+FSM+GUM+HITZ+HKG+IDN+KHM+KIR+LAO+LKA+MAC+MDV+MMR+MNG+MNP+MYS+NCL+NIU+NPL+NRU+PAK+PHL+PNG+PRK+PYF+SGP+SLB+THA+TLS+TON+TUV+TWN+USIQ+VNM+VUT+WAK+WSM",
+        "type": "country"
+      },
+      {
+        "name": "Pakistan",
+        "code": "PAK",
+        "type": "country"
+      },
+      {
+        "name": "Palestinian Territories",
+        "code": "PSE",
+        "type": "country"
+      },
+      {
+        "name": "Panama",
+        "code": "PAN",
+        "type": "country"
+      },
+      {
+        "name": "Papua New Guinea",
+        "code": "PNG",
+        "type": "country"
+      },
+      {
+        "name": "Paraguay",
+        "code": "PRY",
+        "type": "country"
+      },
+      {
+        "name": "Pennsylvania",
+        "code": "PA",
+        "type": "state"
+      },
+      {
+        "name": "Persian Gulf",
+        "code": "ARE+BHR+IRN+IRQ+KWT+QAT+SAU",
+        "type": "country"
+      },
+      {
+        "name": "Peru",
+        "code": "PER",
+        "type": "country"
+      },
+      {
+        "name": "Philippines",
+        "code": "PHL",
+        "type": "country"
+      },
+      {
+        "name": "Poland",
+        "code": "POL",
+        "type": "country"
+      },
+      {
+        "name": "Portugal",
+        "code": "PRT",
+        "type": "country"
+      },
+      {
+        "name": "Puerto Rico",
+        "code": "PRI",
+        "type": "country"
+      },
+      {
+        "name": "Qatar",
+        "code": "QAT",
+        "type": "country"
+      },
+      {
+        "name": "Reunion",
+        "code": "REU",
+        "type": "country"
+      },
+      {
+        "name": "Rhode Island",
+        "code": "RI",
+        "type": "state"
+      },
+      {
+        "name": "Romania",
+        "code": "ROU",
+        "type": "country"
+      },
+      {
+        "name": "Russia",
+        "code": "RUS",
+        "type": "country"
+      },
+      {
+        "name": "Rwanda",
+        "code": "RWA",
+        "type": "country"
+      },
+      {
+        "name": "Saint Helena",
+        "code": "SHN",
+        "type": "country"
+      },
+      {
+        "name": "Saint Kitts and Nevis",
+        "code": "KNA",
+        "type": "country"
+      },
+      {
+        "name": "Saint Lucia",
+        "code": "LCA",
+        "type": "country"
+      },
+      {
+        "name": "Saint Pierre and Miquelon",
+        "code": "SPM",
+        "type": "country"
+      },
+      {
+        "name": "Saint Vincent/Grenadines",
+        "code": "VCT",
+        "type": "country"
+      },
+      {
+        "name": "Samoa",
+        "code": "WSM",
+        "type": "country"
+      },
+      {
+        "name": "Sao Tome and Principe",
+        "code": "STP",
+        "type": "country"
+      },
+      {
+        "name": "Saudi Arabia",
+        "code": "SAU",
+        "type": "country"
+      },
+      {
+        "name": "Senegal",
+        "code": "SEN",
+        "type": "country"
+      },
+      {
+        "name": "Serbia",
+        "code": "SRB",
+        "type": "country"
+      },
+      {
+        "name": "Seychelles",
+        "code": "SYC",
+        "type": "country"
+      },
+      {
+        "name": "Sierra Leone",
+        "code": "SLE",
+        "type": "country"
+      },
+      {
+        "name": "Singapore",
+        "code": "SGP",
+        "type": "country"
+      },
+      {
+        "name": "Slovakia",
+        "code": "SVK",
+        "type": "country"
+      },
+      {
+        "name": "Slovenia",
+        "code": "SVN",
+        "type": "country"
+      },
+      {
+        "name": "Solomon Islands",
+        "code": "SLB",
+        "type": "country"
+      },
+      {
+        "name": "Somalia",
+        "code": "SOM",
+        "type": "country"
+      },
+      {
+        "name": "South Africa",
+        "code": "ZAF",
+        "type": "country"
+      },
+      {
+        "name": "South Carolina",
+        "code": "SC",
+        "type": "state"
+      },
+      {
+        "name": "South Dakota",
+        "code": "SD",
+        "type": "state"
+      },
+      {
+        "name": "South Korea",
+        "code": "KOR",
+        "type": "country"
+      },
+      {
+        "name": "South Sudan",
+        "code": "SSD",
+        "type": "country"
+      },
+      {
+        "name": "Spain",
+        "code": "ESP",
+        "type": "country"
+      },
+      {
+        "name": "Sri Lanka",
+        "code": "LKA",
+        "type": "country"
+      },
+      {
+        "name": "Sudan",
+        "code": "SDN",
+        "type": "country"
+      },
+      {
+        "name": "Suriname",
+        "code": "SUR",
+        "type": "country"
+      },
+      {
+        "name": "Sweden",
+        "code": "SWE",
+        "type": "country"
+      },
+      {
+        "name": "Switzerland",
+        "code": "CHE",
+        "type": "country"
+      },
+      {
+        "name": "Syria",
+        "code": "SYR",
+        "type": "country"
+      },
+      {
+        "name": "Taiwan",
+        "code": "TWN",
+        "type": "country"
+      },
+      {
+        "name": "Tajikistan",
+        "code": "TJK",
+        "type": "country"
+      },
+      {
+        "name": "Tanzania",
+        "code": "TZA",
+        "type": "country"
+      },
+      {
+        "name": "Tennessee",
+        "code": "TN",
+        "type": "state"
+      },
+      {
+        "name": "Texas",
+        "code": "TX",
+        "type": "state"
+      },
+      {
+        "name": "Thailand",
+        "code": "THA",
+        "type": "country"
+      },
+      {
+        "name": "Gambia, The",
+        "code": "GMB",
+        "type": "country"
+      },
+      {
+        "name": "The Bahamas",
+        "code": "BHS",
+        "type": "country"
+      },
+      {
+        "name": "Timor-Leste",
+        "code": "TLS",
+        "type": "country"
+      },
+      {
+        "name": "Togo",
+        "code": "TGO",
+        "type": "country"
+      },
+      {
+        "name": "Tonga",
+        "code": "TON",
+        "type": "country"
+      },
+      {
+        "name": "Trinidad and Tobago",
+        "code": "TTO",
+        "type": "country"
+      },
+      {
+        "name": "Tunisia",
+        "code": "TUN",
+        "type": "country"
+      },
+      {
+        "name": "Turkiye",
+        "code": "TUR",
+        "type": "country"
+      },
+      {
+        "name": "Turkmenistan",
+        "code": "TKM",
+        "type": "country"
+      },
+      {
+        "name": "Turks and Caicos Islands",
+        "code": "TCA",
+        "type": "country"
+      },
+      {
+        "name": "Tuvalu",
+        "code": "TUV",
+        "type": "country"
+      },
+      {
+        "name": "U.S. Pacific Islands",
+        "code": "USIQ",
+        "type": "country"
+      },
+      {
+        "name": "U.S. Territories",
+        "code": "USOH",
+        "type": "country"
+      },
+      {
+        "name": "U.S. Virgin Islands",
+        "code": "VIR",
+        "type": "country"
+      },
+      {
+        "name": "Uganda",
+        "code": "UGA",
+        "type": "country"
+      },
+      {
+        "name": "Ukraine",
+        "code": "UKR",
+        "type": "country"
+      },
+      {
+        "name": "United Arab Emirates",
+        "code": "ARE",
+        "type": "country"
+      },
+      {
+        "name": "United Kingdom",
+        "code": "GBR",
+        "type": "country"
+      },
+      {
+        "name": "United States",
+        "code": "US",
+        "type": "national"
+      },
+      {
+        "name": "United States",
+        "code": "USA",
+        "type": "national"
+      },
+      {
+        "name": "United States",
+        "code": "USA",
+        "type": "state"
+      },
+      {
+        "name": "Uruguay",
+        "code": "URY",
+        "type": "country"
+      },
+      {
+        "name": "Utah",
+        "code": "UT",
+        "type": "state"
+      },
+      {
+        "name": "Uzbekistan",
+        "code": "UZB",
+        "type": "country"
+      },
+      {
+        "name": "Vanuatu",
+        "code": "VUT",
+        "type": "country"
+      },
+      {
+        "name": "Venezuela",
+        "code": "VEN",
+        "type": "country"
+      },
+      {
+        "name": "Vermont",
+        "code": "VT",
+        "type": "state"
+      },
+      {
+        "name": "Vietnam",
+        "code": "VNM",
+        "type": "country"
+      },
+      {
+        "name": "Virginia",
+        "code": "VA",
+        "type": "state"
+      },
+      {
+        "name": "Wake Island",
+        "code": "WAK",
+        "type": "country"
+      },
+      {
+        "name": "Washington",
+        "code": "WA",
+        "type": "state"
+      },
+      {
+        "name": "Germany, West",
+        "code": "DEUW",
+        "type": "country"
+      },
+      {
+        "name": "West Virginia",
+        "code": "WV",
+        "type": "state"
+      },
+      {
+        "name": "Western Europe",
+        "code": "ALB+AUT+BEL+BGR+BIH+CHE+CSK+CYP+CZE+DDR+DEU+DEUW+DNK+ESP+EST+FIN+FRA+FRO+GBR+GIB+GRC+HRV+HUN+IRL+ISL+ITA+LTU+LUX+LVA+MKD+MLT+MNE+NLD+NOR+POL+PRT+ROU+SRB+SVK+SVN+SWE+TUR+XKS",
+        "type": "country"
+      },
+      {
+        "name": "Western Sahara",
+        "code": "ESH",
+        "type": "country"
+      },
+      {
+        "name": "Wisconsin",
+        "code": "WI",
+        "type": "state"
+      },
+      {
+        "name": "World",
+        "code": "WLD",
+        "type": "country"
+      },
+      {
+        "name": "Wyoming",
+        "code": "WY",
+        "type": "state"
+      },
+      {
+        "name": "Yemen",
+        "code": "YEM",
+        "type": "country"
+      },
+      {
+        "name": "Zambia",
+        "code": "ZMB",
+        "type": "country"
+      },
+      {
+        "name": "Zimbabwe",
+        "code": "ZWE",
+        "type": "country"
+      }
+    ],
+    "aliases": {
+      "us": "USA",
+      "u s": "USA",
+      "usa": "USA",
+      "america": "USA",
+      "united states": "USA",
+      "uk": "GBR",
+      "britain": "GBR",
+      "great britain": "GBR",
+      "united kingdom": "GBR",
+      "uae": "ARE",
+      "emirates": "ARE",
+      "south korea": "KOR",
+      "north korea": "PRK",
+      "russia": "RUS",
+      "iran": "IRN",
+      "venezuela": "VEN",
+      "vietnam": "VNM",
+      "czech republic": "CZE",
+      "czechia": "CZE",
+      "dc": "DC"
+    },
+    "seededSampleSize": 80,
+    "spelling": "80 seeded single-character deletions/transpositions from unique metadata country names; unresolved allowed; any resolved result must be a unique best edit match; preserve exact valid competing names.",
+    "filler": [
+      "please show",
+      "please show the",
+      "data for",
+      "chart of"
+    ],
+    "negationMarkers": [
+      "not",
+      "no",
+      "without",
+      "exclude",
+      "excluding",
+      "except"
+    ]
+  }
+}

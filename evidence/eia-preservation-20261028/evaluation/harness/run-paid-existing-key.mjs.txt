@@ -1,0 +1,85 @@
+// Evaluation-only entry point. Never imports the production worktree or writes a key.
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {gradeOriginal,replayOriginal,frozen} from './replay.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)), records=path.join(root,'records');
+const sha=x=>createHash('sha256').update(x).digest('hex');
+const prompts=JSON.parse(fs.readFileSync(path.join(records,'prompts.json'))).prompts;
+const rates=JSON.parse(fs.readFileSync(path.join(records,'official-model-checks.json')));
+const manifest=JSON.parse(fs.readFileSync(path.join(records,'precall-manifest.json')));
+for(const[p,h]of Object.entries(manifest.hashes))assert.equal(sha(fs.readFileSync(path.join(root,p))),h,'Frozen evaluation input changed: '+p);
+for(const[p,h]of Object.entries(JSON.parse(fs.readFileSync(path.join(records,'snapshot.json'))).snapshotFiles))assert.equal(sha(fs.readFileSync(path.join(root,'snapshot',p))),h,'Reviewed snapshot changed: '+p);
+if(process.argv[2]!=='--execute-approved-40')throw Error('Explicit approved-evaluation invocation required');
+// Authorized existing download, read directly; no credential file is written.
+const keyPath='<LOCAL_HOME>/Downloads/openai-api-key.txt';
+assert.ok(fs.existsSync(keyPath)&&!fs.lstatSync(keyPath).isSymbolicLink(),'Existing key file unavailable');
+const keyMatches=fs.readFileSync(keyPath,'utf8').match(/(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{40,}(?![A-Za-z0-9_-])/g)||[];
+assert.equal(keyMatches.length,1,'Expected exactly one existing key');
+const key=keyMatches[0];
+const nativeFetch=globalThis.fetch;
+const sanitize=text=>String(text).split(key).join('[REDACTED_CREDENTIAL]');
+const save=(name,data)=>fs.writeFileSync(path.join(records,name),typeof data==='string'?data:JSON.stringify(data,null,2)+'\n',{flag:'wx',mode:0o600});
+const safeHeaders=response=>Object.fromEntries([...response.headers].filter(([k])=>['date','content-type','x-request-id','openai-processing-ms','retry-after'].includes(k)||k.startsWith('x-ratelimit-')));
+const modelAccess=[];
+// Read-only model metadata verifies account visibility. No generation probes.
+for(const model of frozen.settings.models){
+ const start=new Date().toISOString();let response;
+ try{response=await nativeFetch('https://api.openai.com/v1/models/'+encodeURIComponent(model),{headers:{Authorization:'Bearer '+key},signal:AbortSignal.timeout(30000)});}catch(e){save('account-access-failure.json',{model,start,errorName:e.name,networkCode:e.cause?.code||null});throw Error('Model access metadata transport failed; no generation was sent');}
+ const raw=sanitize(await response.text());let data;try{data=JSON.parse(raw)}catch{};
+ const entry={model,start,completedAt:new Date().toISOString(),status:response.status,headers:safeHeaders(response),body:data||raw};modelAccess.push(entry);
+ if(!response.ok){save('account-access.json',modelAccess);throw Error('Requested model account access unavailable; no generation was sent');}
+ assert.equal(data.id,model,'Model metadata ID mismatch');
+}
+save('account-access.json',modelAccess);
+const attemptsDir=path.join(records,'attempts');fs.mkdirSync(attemptsDir); // existing directory stops accidental paid reruns
+const ledger=[];let reserved=0;let fatal=null;
+const isTransient=(status,body)=>frozen.settings.retryHttpStatuses.includes(status)&&!['insufficient_quota','billing_hard_limit_reached','billing_not_active'].includes(body?.error?.code);
+for(const scheduled of frozen.schedule){
+ if(fatal)break;
+ const c=frozen.cases.find(c=>c.id===scheduled.queryId),prompt=prompts.find(p=>p.queryId===c.id);
+ const request={model:scheduled.model,input:prompt.input,reasoning:{effort:'none'},max_output_tokens:4096,service_tier:'default',store:false,stream:false};
+ assert.ok(Buffer.byteLength(request.input)+1000<=10000);
+ let finalAttempt=null;
+ for(let attempt=1;attempt<=2;attempt++){
+  const ceiling=scheduled.model.startsWith('gpt-5.4')?.00762:.003298;
+  if(reserved+ceiling>rates.costCeilingUSD+1e-10)throw Error('Cost ceiling reservation exhausted');
+  reserved+=ceiling;
+  const id=String(scheduled.scheduledId).padStart(2,'0')+'-'+attempt;
+  const base=path.join('attempts',id);
+  const startedAt=new Date().toISOString(),start=performance.now();
+  const record={...scheduled,attempt,startedAt,requestedModel:scheduled.model,requestSHA256:sha(JSON.stringify(request)),promptSHA256:prompt.inputSHA256,timeoutMs:30000,ceilingReservedUSD:ceiling};
+  save(base+'.request.json',{url:frozen.settings.endpoint,method:'POST',headers:{'Content-Type':'application/json'},body:request});
+  save(base+'.started.json',record); // durable attempt reservation before network dispatch
+  let raw=null,body=null,status=null,transient=false;
+  try{
+   const response=await nativeFetch(frozen.settings.endpoint,{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify(request),signal:AbortSignal.timeout(30000)});
+   status=response.status;raw=sanitize(await response.text());save(base+'.response.txt',raw);record.headers=safeHeaders(response);
+   try{body=JSON.parse(raw)}catch{record.responseJSONError=true;}
+   record.httpStatus=status;record.returnedModel=body?.model||null;record.responseId=body?.id||null;record.responseStatus=body?.status||null;record.usage=body?.usage||null;record.serviceTier=body?.service_tier||null;record.responseError=body?.error||null;
+   record.credentialRedactions=raw.includes('[REDACTED_CREDENTIAL]');
+   transient=isTransient(status,body);
+   if([401,403].includes(status)||body?.error?.code==='model_not_found'||body?.error?.code==='insufficient_quota')fatal='account_or_model_access_failure';
+   if(response.ok&&body?.model&&!(body.model===scheduled.model||(scheduled.model==='gpt-6-luna'&&body.model.startsWith('gpt-6-luna-'))))fatal='returned_model_mismatch';
+   if(response.ok&&body?.service_tier&&body.service_tier!=='default')fatal='unexpected_service_tier';
+   if(body?.usage?.input_tokens>10000||body?.usage?.output_tokens>4096)fatal='token_bounds_exceeded';
+  }catch(e){record.transportError={name:e.name,code:e.cause?.code||null};transient=true;}
+  record.completedAt=new Date().toISOString();record.elapsedMs=performance.now()-start;record.retryEligible=transient;record.willRetry=transient&&attempt===1&&!fatal;record.fatal=fatal;
+  // Every received response, including transient errors, is replayed unchanged offline.
+  if(raw!==null){
+   try{record.originalGrade=gradeOriginal(body,c);}catch(e){record.gradingFailure={name:e.name,message:e.message};}
+   try{save(base+'.replay.json',await replayOriginal(raw,c,{status}));record.replayFile=base+'.replay.json';}catch(e){record.replayFailure={name:e.name,message:e.message};}
+  }
+  save(base+'.result.json',record);ledger.push(record);finalAttempt=record;
+  fs.writeFileSync(path.join(records,'progress.json'),JSON.stringify({updatedAt:new Date().toISOString(),actualAttempts:ledger.length,lastScheduled:scheduled.scheduledId,reservedUSD:reserved,fatal,completedScheduled:ledger.filter(r=>!r.willRetry).map(r=>r.scheduledId)},null,2)+'\n');
+  console.log(JSON.stringify({scheduledId:scheduled.scheduledId,queryId:c.id,model:scheduled.model,attempt,httpStatus:status,elapsedMs:Math.round(record.elapsedMs),semantic:record.originalGrade?.semantic?.pass,contract:record.originalGrade?.contract?.pass,retry:record.willRetry,fatal}));
+  if(!record.willRetry)break;
+  const retrySeconds=Number(record.headers?.['retry-after']);
+  await new Promise(resolve=>setTimeout(resolve,Number.isFinite(retrySeconds)?Math.max(1000,Math.min(30000,retrySeconds*1000)):2000));
+ }
+ assert.ok(finalAttempt);
+}
+save('execution-summary.json',{completedAt:new Date().toISOString(),scheduled:40,attempts:ledger.length,completedScheduled:new Set(ledger.map(x=>x.scheduledId)).size,reservedCeilingUSD:reserved,fatal,departures:ledger.length!==40||Boolean(fatal),note:'Raw request bodies omit Authorization; original raw response bodies retained except exact credential redaction if necessary. Each received response replayed offline; no additional generation or EIA calls.'});
+console.log(JSON.stringify({finished:true,attempts:ledger.length,scheduledCompleted:new Set(ledger.map(x=>x.scheduledId)).size,fatal}));

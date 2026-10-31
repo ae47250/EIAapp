@@ -1,0 +1,343 @@
+{
+  "query": "Looking for data on energy consumption for many countries from 2000-2019",
+  "model": "gpt-6-luna",
+  "startedAt": "2026-10-29T02:45:22.809Z",
+  "finishedAt": "2026-10-29T02:45:26.112Z",
+  "attempts": 1,
+  "events": [],
+  "intent": {
+    "originalQuery": "Looking for data on energy consumption for many countries from 2000-2019",
+    "cleanedQuery": "Looking for data on energy consumption for many countries from 2000-2019",
+    "normalizedQuery": "Looking for data on energy consumption for many countries from 2000-2019",
+    "correctedQuery": "Looking for data on energy consumption for many countries from 2000-2019",
+    "correctedQuerySource": "unchanged",
+    "interpreter": "openai_locked_form",
+    "interpretationMethod": "enforced_form",
+    "lockedForm": {
+      "geographies": [],
+      "excluded_geographies": [],
+      "topics": [
+        {
+          "product": "total energy",
+          "activity": "consumption",
+          "quoted_words": "energy consumption"
+        }
+      ],
+      "excluded_topics": [],
+      "sector": {
+        "value": null,
+        "quoted_words": null
+      },
+      "frequency": {
+        "value": "annual",
+        "explicit": false,
+        "quoted_words": null
+      },
+      "unsupported_words": [],
+      "clarification": {
+        "needed": true,
+        "about": "geography",
+        "options": []
+      }
+    },
+    "country": null,
+    "countryCode": null,
+    "validatedGeographies": [],
+    "excludedGeographies": [],
+    "product": "total energy",
+    "activity": "consumption",
+    "sector": null,
+    "validatedConceptPairs": [
+      {
+        "product": "total energy",
+        "activity": "consumption",
+        "order": 0,
+        "source": "validated_interpreter"
+      }
+    ],
+    "exclusions": [],
+    "frequency": "annual",
+    "requestedFrequency": null,
+    "frequencyExplicit": false,
+    "fields": {
+      "country": {
+        "normalizedValue": null,
+        "validation": "missing",
+        "fallbackUsed": false
+      },
+      "product": {
+        "normalizedValue": "total energy",
+        "validation": "approved",
+        "fallbackUsed": false
+      },
+      "activity": {
+        "normalizedValue": "consumption",
+        "validation": "approved",
+        "fallbackUsed": false
+      },
+      "sector": {
+        "normalizedValue": null,
+        "validation": "missing",
+        "fallbackUsed": false
+      },
+      "frequency": {
+        "normalizedValue": "annual",
+        "validation": "approved",
+        "fallbackUsed": false,
+        "explicit": false
+      }
+    },
+    "unknownQualifiers": [],
+    "fallback": {
+      "used": true,
+      "method": null,
+      "reasons": [
+        "route_defaulted_without_geography"
+      ]
+    },
+    "needsClarification": true,
+    "blockingClarification": true,
+    "conceptPairStatus": "validated",
+    "missingFields": [
+      "country"
+    ],
+    "ambiguousFields": [],
+    "clarificationMessage": "Please clarify the country. Example: United States total energy consumption.",
+    "conceptPairs": [
+      {
+        "order": 0,
+        "product": "total energy",
+        "activity": "consumption",
+        "sector": null,
+        "source": "validated_interpreter",
+        "confidence": null
+      }
+    ],
+    "multiCountryComparison": {
+      "active": false,
+      "status": "not_applicable",
+      "geographyCodes": [],
+      "routeFamily": "international",
+      "reason": "fewer_than_two_validated_countries"
+    },
+    "structuredIntent": {
+      "schemaVersion": "2.1.0",
+      "originalQuery": "Looking for data on energy consumption for many countries from 2000-2019",
+      "normalizedQuery": "looking for data on energy consumption for many countries from 2000 2019",
+      "mentions": {
+        "geographies": [],
+        "concepts": [
+          {
+            "index": 0,
+            "text": null,
+            "type": "product",
+            "value": "total energy",
+            "source": "validated_interpreter"
+          },
+          {
+            "index": 1,
+            "text": null,
+            "type": "activity",
+            "value": "consumption",
+            "source": "validated_interpreter"
+          }
+        ],
+        "frequencies": []
+      },
+      "geography": null,
+      "geographies": [],
+      "product": "total energy",
+      "productBreadth": "broad",
+      "productAlternatives": [
+        "natural gas",
+        "petroleum",
+        "electricity",
+        "coal",
+        "nuclear",
+        "renewable"
+      ],
+      "activity": "consumption",
+      "activityInference": null,
+      "sector": null,
+      "conceptPairs": [
+        {
+          "order": 0,
+          "product": "total energy",
+          "activity": "consumption",
+          "sector": null,
+          "source": "validated_interpreter",
+          "confidence": null
+        }
+      ],
+      "conceptPairStatus": "validated",
+      "conceptPairRule": "validated_interpreter",
+      "multiCountryComparison": {
+        "active": false,
+        "status": "not_applicable",
+        "geographyCodes": [],
+        "routeFamily": "international",
+        "reason": "fewer_than_two_validated_countries"
+      },
+      "exclusions": [],
+      "unknownQualifiers": [],
+      "frequency": "annual",
+      "requestedFrequency": null,
+      "frequencyExplicit": false,
+      "validation": {
+        "geography": "missing",
+        "geographyConflicts": [],
+        "frequency": "valid",
+        "frequencySupportedByRoute": true,
+        "supportedFrequencies": [
+          "annual",
+          "monthly",
+          "quarterly"
+        ],
+        "metadataSource": {
+          "build": "phase1b",
+          "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+          "generatedFrom": [
+            "domestic.jsonl.gz",
+            "natural-gas.jsonl.gz",
+            "international.jsonl.gz",
+            "seds.jsonl.gz",
+            "routes.json"
+          ],
+          "exclusions": [
+            "Domestic records normalized as region have product-like names and are not safe geography validators."
+          ]
+        },
+        "fields": {
+          "country": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "product": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "activity": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "sector": {
+            "validation": "missing",
+            "confidence": null,
+            "fallbackUsed": false
+          },
+          "frequency": {
+            "validation": "approved",
+            "confidence": null,
+            "fallbackUsed": false
+          }
+        }
+      },
+      "ambiguity": {
+        "status": "ambiguous",
+        "reasons": [
+          "geography_missing",
+          "route_required_fallback"
+        ]
+      },
+      "fallback": {
+        "used": true,
+        "reasons": [
+          "route_defaulted_without_geography"
+        ]
+      },
+      "route": {
+        "family": "international",
+        "label": "International",
+        "reason": "A request without routable geography defaults to International.",
+        "deterministic": true
+      },
+      "provenance": {
+        "query": "mechanically_cleaned_raw_query",
+        "geographies": [],
+        "geographyEvidence": [],
+        "concepts": [
+          "validated_interpreter"
+        ],
+        "canonicalizations": [],
+        "sector": "missing",
+        "frequency": "default",
+        "exclusions": [],
+        "unknownQualifiers": []
+      },
+      "needsClarification": true,
+      "blockingClarification": true,
+      "missingFields": [
+        "country"
+      ],
+      "clarificationMessage": "Please clarify the country. Example: United States total energy consumption."
+    },
+    "route": {
+      "family": "international",
+      "label": "International",
+      "reason": "A request without routable geography defaults to International.",
+      "deterministic": true
+    },
+    "validation": {
+      "geography": "missing",
+      "geographyConflicts": [],
+      "frequency": "valid",
+      "frequencySupportedByRoute": true,
+      "supportedFrequencies": [
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "metadataSource": {
+        "build": "phase1b",
+        "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+        "generatedFrom": [
+          "domestic.jsonl.gz",
+          "natural-gas.jsonl.gz",
+          "international.jsonl.gz",
+          "seds.jsonl.gz",
+          "routes.json"
+        ],
+        "exclusions": [
+          "Domestic records normalized as region have product-like names and are not safe geography validators."
+        ]
+      },
+      "fields": {
+        "country": {
+          "validation": "missing",
+          "confidence": null,
+          "fallbackUsed": false
+        },
+        "product": {
+          "validation": "approved",
+          "confidence": null,
+          "fallbackUsed": false
+        },
+        "activity": {
+          "validation": "approved",
+          "confidence": null,
+          "fallbackUsed": false
+        },
+        "sector": {
+          "validation": "missing",
+          "confidence": null,
+          "fallbackUsed": false
+        },
+        "frequency": {
+          "validation": "approved",
+          "confidence": null,
+          "fallbackUsed": false
+        }
+      }
+    },
+    "ambiguity": {
+      "status": "ambiguous",
+      "reasons": [
+        "geography_missing",
+        "route_required_fallback"
+      ]
+    }
+  }
+}

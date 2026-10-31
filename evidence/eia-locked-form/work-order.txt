@@ -1,0 +1,114 @@
+EIAapp: measure the data-picking ceiling, then replace the AI interpretation step with an enforced ("locked") form. Goal mode.
+
+AUTHORIZED: create local branch codex/eia-locked-form from commit b7b119333dd111b9b2deea12acf1df68a1c2674d (tip of codex/eia-preservation-20261028; confirm the SHA before starting); run npm ci if node_modules is missing; edit code and tests; change appendIntentParams in components/search/SearchWorkspace.js so it sends the raw form; commit locally; make the paid model calls in Part E within the stated ceiling.
+NOT AUTHORIZED: push, merge, deploy, change Vercel or environment settings, change the production model or its settings, build new UI, or fix retrieval/ranking/data-fetch code beyond the label changes in C.7.
+This work order overrides AGENTS.md "General Change Policy" items 4-6 for this job only: replacing the interpretation step and removing the code it makes unreachable is explicitly requested.
+
+WHY: The app asks the model for JSON described only in prose (lib/sources/eia/interpret-query.js sends only `model` and `input`; no schema is enforced). It makes the model count character offsets (requestEvidence, interpret-query.js ~line 236). Then it re-interprets the query with the rules engine and lets the rules override the model (interpretQueryWithRules inside validateAiInterpretation and normalizeSubmittedIntent). This job replaces that with one enforced form, plain fact checks, and no second interpreter. A probe also suggests the data-picking step returns wrong or no data for several queries even when the reading is right, so Part A0 measures that first. The result tells the owner what this job can and cannot fix.
+
+READ FIRST: AGENTS.md; evidence/eia-preservation-20261028/README.md; evidence/eia-preservation-20261028/evaluation/records/frozen-expectations.md; lib/sources/eia/interpret-query.js (especially addClarificationState ~line 1048); lib/sources/eia/request-evidence.js; lib/sources/eia/intent-routing.js; lib/sources/eia/local-ranking.js; lib/sources/eia/candidate-search.js; lib/sources/eia/candidate-pipeline.js; components/search/SearchWorkspace.js; data/eia/phase4-routing-config.json. After npm ci, record the full test-suite totals (OPENAI_API_KEY and EIA_API_KEY blank) before any change.
+
+ORDER OF WORK: B.1 (read the docs) -> write answer keys, scorer, model instructions and schema builder -> FREEZE COMMIT (Part A) -> A0 -> C -> D -> E. Before the first paid call, structure-only fixes to the schema builder are allowed, each committed and hashed separately. Meaning rules may change only through E.6.
+
+PART A. Freeze (one commit, with SHA-256 of every frozen file)
+1. Original set: the 10 queries and expectations in frozen-expectations.md, unchanged, with its semantic rules. Its "contractCompliance" section refers to the retired offset contract and is replaced by Part C; say so in the report.
+2. Fresh set, expectations exactly as written:
+   query | geographies in order | product/activity pairs | frequency | excluded | clarification
+   F1  coal production in germany, not poland | DEU | coal/production | annual, explicit=false | geography POL | no
+   F2  I'm not sure if Mexico or Canada exports more petroleum, show both | MEX, CAN | petroleum/exports | annual, explicit=false | none | no
+   F3  electricity prices in georgia | GA | electricity/prices | annual, explicit=false | none | no
+   F4  solar generation in the gambia | GMB | solar/generation | annual, explicit=false | none | no
+   F5  can you show us wind capacity in Denmark | DNK | wind/capacity | annual, explicit=false | none | no
+   F6  quarterly natural gas imports to Japan | JPN | natural gas/imports | quarterly, explicit=true | none | no
+   F7  nuclear generaton france and germnay | FRA, DEU | nuclear/generation | annual, explicit=false | none | no
+   F8  coal consumption in China and India but not Japan | CHN, IND | coal/consumption | annual, explicit=false | geography JPN | no
+   F9  gas prices in Ohio | OH | (unresolved)/prices | annual, explicit=false | none | yes: product, natural gas vs petroleum (gasoline)
+   F10 electricity consumption in Georgia and Florida | GA, FL | electricity/consumption | annual, explicit=false | none | no
+   F11 monthly crude oil production in North Dakota | ND | petroleum/production | monthly, explicit=true | none | no
+   F12 Texas electricity consumption annual | TX | electricity/consumption | annual, explicit=true | none | no
+   F13 electricity consumption in springfield | (none) | electricity/consumption | annual, explicit=false | none | yes: geography
+   F14 renewable generation in Texas except hydro | TX | renewable/generation | annual, explicit=false | product hydro | no
+   Scoring: all-or-nothing per response. An unexpected clarification is a failure. US and USA count as the same place for meaning; report which was returned.
+3. Freeze the scorer too: scorer code, its offline test cases (including a test that the answer-key JSON matches the tables above and frozen-expectations.md), the model instructions file and the schema builder.
+4. Pass mark (fixed now; decided by the first run only): PASS if, across all 48 scheduled responses, meaning correct AND checks passed on the FIRST attempt in at least 90% (44 of 48), AND every expected clarification (original #10, F9, F13) is correct in both repeats, AND there are zero unexpected clarifications on original #1-#9. Report re-ask results separately. A revised run (E.6) is labelled "tuned on the same queries, not independent" and cannot change the PASS line.
+
+PART A0. Data-picking ceiling (free; no model or EIA calls)
+Hand-write the correct downstream intent for all 24 queries, exactly as the frozen keys specify. Run each through buildStructuredIntent, the cached candidate pipeline and the candidate-search public grouping (what the page shows). Clarification cases: mark them "pending converter", then re-run all 24 through the real Part C converter once it exists (still free) and report both. Record, per query, what the user would see first and whether it is the right data.
+"Right data" = the requested geography + product + activity. A labelled frequency fallback counts. Crude oil production counts for F11. These do NOT count: a sub-category (e.g. metallurgical coal for coal), a conversion factor, a different measure (e.g. carbon intensity), a single-sector slice for an all-sector request, or, for F14, an all-renewables series that includes hydro. Comparison mode: use the first comparison definition, and every requested geography must be present with no excluded one. Not comparison mode with several geographies: each geography's first result in its own group must be right. Clarification cases: right = no data fetched and the right question shown. Commit this table. It is the ceiling for this job.
+
+PART B. The form (OpenAI Responses API, text.format type json_schema, strict: true)
+1. Re-check the official docs (https://developers.openai.com/api/docs/guides/structured-outputs and the gpt-6-luna model page). Confirm Structured Outputs support, that reasoning.effort "low" is accepted, and the schema limits. Record what you read.
+2. Build allowed values at runtime from existing sources only: geographies from listApprovedGeographies(); products, activities, sectors and frequencies from phase4-routing-config.json. One code per place: leave code "US" out of the enum (USA covers the United States; including both breaks routing). Define each list once under $defs and reference it with $ref. Each geography enum value carries its name and type, e.g. "GA | Georgia | US state", "GEO | Georgia | country"; code parses the code back out. Do not add a separate geography table to the instructions; the enum labels are the reference. Add a test that builds the real schema and fails if it exceeds any documented limit, counting the way the docs count. Record the counts.
+3. Fields (the names may change; the meaning may not):
+   - geographies: ordered list of {geography (enum), quoted_words}
+   - excluded_geographies: list of {geography (enum), quoted_words}
+   - topics: ordered list of {product (enum or null), activity (enum or null), quoted_words}
+   - excluded_topics: list of {product (enum or null), activity (enum or null), sector (enum or null), quoted_words}
+   - sector: {value (enum or null), quoted_words or null}
+   - frequency: {value (enum), explicit (boolean), quoted_words or null}
+   - unsupported_words: list of quoted_words the user asked for that none of the fields can hold
+   - clarification: {needed (boolean), about (enum: product, geography, activity, frequency, other, or null), options: list of {label (string), value (string)}}
+   quoted_words = the words copied exactly as typed, typos included ("icealnd" stays "icealnd"). No character positions anywhere.
+4. Model instructions: short and general. State only these meaning rules:
+   - bare "energy" means total energy;
+   - "gas" without a qualifier is ambiguous: set clarification about product with options natural gas and petroleum (gasoline), leave product null, and keep everything else;
+   - Georgia is the country only when another non-US country or an international context is present; otherwise it is the US state;
+   - with no stated frequency, use annual with explicit=false;
+   - never invent a sector;
+   - keep mention order;
+   - only explicit exclusions ("not X", "except X", "excluding X", "but not X") go in the excluded lists. Doubt or comparison wording ("not sure", "not convinced") is not an exclusion;
+   - a place that cannot be matched to the allowed list needs clarification about geography;
+   - ask for clarification only when a required field cannot be determined.
+   NO example-phrase lists, NO per-query rules, NO special cases for test queries.
+
+PART C. Plain fact checks (replace the offset contract). Put the locked-form path in a NEW module that imports what it needs, so tests can substitute dependencies.
+1. After the model answers, code checks facts only, comparing cleanQueryMechanically() of both sides:
+   (a) every quoted_words appears in the raw query (case-insensitive, whitespace-collapsed);
+   (b) no geography is both included and excluded;
+   (c) clarification about product, activity or frequency: options non-empty and every value valid for that field. About geography or other: options may be empty; any given must be valid;
+   (d) geographies non-empty unless clarification is about geography;
+   (e) unsupported_words non-empty means clarification is required.
+   Code does NOT re-interpret meaning and does NOT check spelling.
+2. Outcome mapping, no exceptions:
+   - no OpenAI key, network error, HTTP 429 or 5xx -> rules outage fallback (C.6);
+   - timeout, refusal, cut-off output, HTTP 400, failed check -> no data fetch; plain message through the existing clarification mechanism; reason logged.
+   At most one automatic re-ask on a failed check, logged. Never route a model answer to the rules engine.
+3. Convert a passing form into the downstream intent object, built through addClarificationState, with at least: originalQuery, cleanedQuery, normalizedQuery, country, countryCode, validatedGeographies, product, activity, sector, validatedConceptPairs, exclusions, frequency, requestedFrequency, frequencyExplicit, and fields.{country,product,activity,sector,frequency} with validation "approved" (or "missing" when null). Pass every geography code through resolveApprovedGeography() and use the result for validatedGeographies, country and countryCode. Mark interpreter: "openai_locked_form".
+   Clarification: whenever clarification.needed is true, set needsClarification and blockingClarification true directly from the form. For a product clarification also set fields.product = {validation: "ambiguous", normalizedValue: null, breadth: "ambiguous", alternatives: [option values]} so the existing specific message ("Please clarify the product: natural gas and petroleum (including gasoline)...") appears.
+   Tests: F9 and original #10 produce that exact message and the pipeline returns clarificationBlocked; a form choosing USA produces exactly [USA], not comparison mode, with no error.
+4. Excluded geographies: enforce them by leaving them out of validatedGeographies, and record them on the intent for display only. Do not add geography exclusions to routing code. Excluded topics map to the existing product/activity/sector exclusion format.
+5. Browser resubmission (every search goes through it: SearchWorkspace interprets, then calls search with intentReady=1): appendIntentParams sends the raw locked form. The server re-runs the Part C checks and the conversion against the raw query. Missing, unreadable or over the existing 12000-character limit (candidate-search.js parseSubmittedIntent) -> clarification message. A legacy "openai" payload -> clarification message. Never fall back to legacy intent fields. (These checks catch model slips, not deliberate tampering.)
+6. The rules engine stays ONLY as the outage fallback in C.2, unchanged, labelled interpreter: "rules". The "AI interpretation unavailable" note goes through the existing status line or clarificationMessage (no new UI). It is never mixed with a model answer.
+7. Labels: intent-routing.js:27 and local-ranking.js:839 trust only interpreter === "openai". Change exactly these two comparisons so "openai_locked_form" is trusted the same way. At interpret-query.js:134 (normalizeSubmittedIntent), route "openai_locked_form" to the new module's re-check (C.5). Add a test proving buildStructuredIntent uses the model's geographies for a locked-form intent. No other routing or ranking edits. List these known places where routing still applies its own rules, and do not fix them: sector inference (intent-routing.js ~line 60); getNegationScope (intent-routing.js ~line 564); ranking keywords built from the raw query, excluded words included (local-ranking.js ~lines 623-629, 838-841).
+8. Remove the offset/requestEvidence contract from the model path. "Unreachable" means not reachable from app/, components/ or lib/; code used only by tests counts as unreachable. Delete it, and list each deleted function. Keep request-evidence.js if the rules fallback still uses it.
+
+PART D. Offline tests (no model or EIA calls)
+1. New tests: schema from live vocabulary within documented limits; each Part C check passes and fails as intended; the C.2 outcome mapping; conversion (including the C.3 tests); resubmission re-check; dependency substitution proving interpretQueryWithRules is NOT called when the model form is valid; outage fallback still works; locked-form label trusted downstream.
+2. Existing suite, before and after. Allowed changes, each listed by file and test name with a one-line reason:
+   (i) tests asserting the retired offset contract or rules-overriding-the-model behavior: retire;
+   (ii) tests that feed the old free-text model reply or assert interpreter "openai": rewrite to the locked form, expecting the same meaning, or retire with a reason.
+   Every other test must pass unchanged. Never change an expected meaning to make a test pass.
+3. Run npm run build and record the result.
+
+PART E. Live check (paid; reuse the existing key file the way the previous evaluation runner did; never print, copy or commit the key; create no new key)
+1. gpt-6-luna, reasoning.effort low only. 24 queries x 2 repeats = 48 scheduled calls, plus at most one re-ask each. For the live check only: max_output_tokens 16000, timeout 90 seconds. Results apply to gpt-6-luna only; production still defaults to gpt-5.4-mini (interpret-query.js ~line 215) and is unchanged and untested. Say so in the report.
+2. Before calling, compute the worst-case cost of everything in Part E (first run, re-asks, a possible E.6 revision run, and E.5) from actual token counts, the allowance and current official prices (re-check them). Ceiling: $2.00 total. If the worst case exceeds it, stop before calling and report the numbers.
+3. Run every response through the real app path: Part C checks, conversion, browser serialization/resubmission, and the cached candidate pipeline and grouping. No EIA calls.
+4. Score each response, first attempt and re-ask separately: (i) meaning correct vs the frozen keys; (ii) checks passed; (iii) right data, using the A0 definition. A rules fallback, refusal, cut-off or timeout scores (i) as a failure.
+5. Local page check: run the app locally with LOGIN_REQUIRED=off and OPENAI_MODEL=gpt-6-luna (these calls count toward the ceiling). Type F9, original #6 and original #7, and record what the page shows. Take screenshots only if a screenshot tool is already installed; otherwise describe the page text and say no screenshot was possible.
+6. At most ONE prompt revision, and only to add or fix a GENERAL meaning rule (never a phrase or a query). If revised, commit and hash it, re-run all 48 within the same ceiling, label it per A.4, and report both runs separately.
+
+PART F. Stop conditions
+- API rejects the schema: stop and report the exact error. Do not fall back to unenforced JSON.
+- Right data fails while meaning is correct: retrieval defect. Record it and do not fix it.
+- A product decision not settled here: stop and ask one short question.
+
+REPORT (plain language, short; the owner is not a programmer):
+1. One line: PASS or FAIL against the A.4 pass mark.
+2. One line: the A0 ceiling, i.e. how many of 24 queries reach the right data with a perfect reading.
+3. Table, original and fresh sets separately: meaning correct, checks passed, right data, clarifications correct, median latency, total cost.
+4. Every failure: query, what the model said, the failing stage, and whether it is interpretation or retrieval.
+5. Files changed, deleted functions, retired or rewritten tests (with reasons), test totals before and after, build result.
+6. SHA-256 of every frozen file, plus confirmation they did not change (or the separately hashed changes allowed above).
+7. Commit SHAs on codex/eia-locked-form, and confirmation that nothing was pushed.
+8. Retrieval defects list (input for the next job).

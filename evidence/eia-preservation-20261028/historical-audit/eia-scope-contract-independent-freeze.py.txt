@@ -1,0 +1,80 @@
+import json, hashlib, datetime
+from pathlib import Path
+root=Path('<LOCAL_HOME>/.codex/worktrees/eia-interpretation-audit/EIAapp')
+metadata_paths=['AGENTS.md','data/eia/routing-metadata.json','data/eia/phase4-routing-config.json']
+def case(id,query,requested,excluded=None,unresolved=None,frequency=None,pairs=None,policy='exact_or_conservative_clarification'):
+    return dict(id=id,query=query,requested=requested,excluded=excluded or {},unresolved=unresolved or [],frequency=frequency or {'value':'annual','explicit':False},pairs=pairs,policy=policy)
+cases=[
+ case('M01',"I don't know Canada's natural gas production.",{'products':['natural gas'],'activities':['production'],'geographies':['CAN']}),
+ case('M02',"I'm not sure about monthly residential electricity consumption in Texas.",{'products':['electricity'],'activities':['consumption'],'geographies':['TX'],'sectors':['residential']},frequency={'value':'monthly','explicit':True}),
+ case('M03','Without knowing the exact values, show coal production for Canada and Mexico.',{'products':['coal'],'activities':['production'],'geographies':['CAN','MEX']}),
+ case('M04','Show coal production for Canada, not Mexico.',{'products':['coal'],'activities':['production'],'geographies':['CAN']},excluded={'geographies':['MEX']}),
+ case('M05','Show natural gas production, not consumption, for Canada.',{'products':['natural gas'],'activities':['production'],'geographies':['CAN']},excluded={'activities':['consumption']}),
+ case('M06','Show coal production for Canada without monthly data.',{'products':['coal'],'activities':['production'],'geographies':['CAN']},excluded={'frequencies':['monthly']}),
+ case('M07','Show electricity generation in Texas, excluding coal.',{'products':['electricity'],'activities':['generation'],'geographies':['TX']},excluded={'products':['coal']}),
+ case('M08','Show monthly electricity consumption in Texas, not residential.',{'products':['electricity'],'activities':['consumption'],'geographies':['TX']},excluded={'sectors':['residential']},frequency={'value':'monthly','explicit':True}),
+ case('M09',"Show coal production for Canada; I do not know Mexico's figures.",{'products':['coal'],'activities':['production'],'geographies':['CAN']},unresolved=['Whether Mexico is also requested; it must not be silently excluded.'],policy='clarification_required'),
+ case('M10',"I'm not saying coal production for Canada is unnecessary.",{},unresolved=['Whether data is requested at all; speech and double negation do not prove a data exclusion.'],policy='clarification_required'),
+ case('M11','Show coal production for Canada, except maybe Mexico.',{'products':['coal'],'activities':['production'],'geographies':['CAN']},unresolved=['The tentative exception does not establish an unambiguous request or exclusion for Mexico.'],policy='clarification_required'),
+ case('M12','Show annual nebularium production for Canada and Mexico.',{'activities':['production'],'geographies':['CAN','MEX']},unresolved=['Unknown product nebularium must remain unresolved with its exact source phrase.'],frequency={'value':'annual','explicit':True},policy='clarification_required'),
+ case('M13','Show gas production in Canada.',{'activities':['production'],'geographies':['CAN']},unresolved=['Gas is ambiguous between natural gas and petroleum.'],policy='clarification_required'),
+ case('M14','Show coal production and natural gas consumption for Mexico and Canada.',{'products':['coal','natural gas'],'activities':['production','consumption'],'geographies':['MEX','CAN']},pairs=[['coal','production'],['natural gas','consumption']]),
+ case('M15','Show annual coal production in the country Georgia.',{'products':['coal'],'activities':['production'],'geographies':['GEO']},frequency={'value':'annual','explicit':True}),
+ case('M16','Show annual residential electricity consumption in the state of Georgia.',{'products':['electricity'],'activities':['consumption'],'geographies':['GA'],'sectors':['residential']},frequency={'value':'annual','explicit':True}),
+ case('M17','Show coal production in Georgia.',{'products':['coal'],'activities':['production']},unresolved=['Georgia has both state GA and country GEO meanings in approved metadata.'],policy='clarification_required'),
+ case('M18',"I don't know whether monthly electricity consumption in Texas is higher; show it.",{'products':['electricity'],'activities':['consumption'],'geographies':['TX']},frequency={'value':'monthly','explicit':True}),
+ case('M19',"I'm not sure how to exclude coal from electricity generation in Texas.",{'products':['electricity'],'activities':['generation'],'geographies':['TX']},excluded={'products':['coal']},unresolved=['If the system cannot determine whether this is a data request or a how-to question, it may clarify without losing the explicit exclusion intent.']),
+ case('M20','Show coal production for Canada and Mexico, excluding Germany.',{'products':['coal'],'activities':['production'],'geographies':['CAN','MEX']},excluded={'geographies':['DEU']}),
+ case('M21','Show coal production for Canada, not monthly but annual.',{'products':['coal'],'activities':['production'],'geographies':['CAN']},excluded={'frequencies':['monthly']},frequency={'value':'annual','explicit':True}),
+ case('M22',"I have no idea what annual commercial electricity sales in Texas look like.",{'products':['electricity'],'activities':['sales'],'geographies':['TX'],'sectors':['commercial']},frequency={'value':'annual','explicit':True}),
+ case('M23','Show coal production and natural gas consumption for Canada, but not natural gas production.',{'products':['coal','natural gas'],'activities':['production','consumption'],'geographies':['CAN']},excluded={'pairs':[['natural gas','production']]},pairs=[['coal','production'],['natural gas','consumption']]),
+ case('M24','Show coal production for Canada. Do not exclude Mexico.',{'products':['coal'],'activities':['production'],'geographies':['CAN','MEX']}),
+ case('M25','Show coal production for Canada. Also show monthly electricity consumption for Texas.',{'products':['coal','electricity'],'activities':['production','consumption'],'geographies':['CAN','TX']},unresolved=['Independent per-clause geography and frequency cannot be flattened into one cross product; clarify if representation cannot preserve them.'],frequency={'value':None,'explicit':True},pairs=[['coal','production'],['electricity','consumption']],policy='clarification_required_if_unrepresentable'),
+ case('M26','Show electricity generation in Texas, but not from an unknown fuel called nebularium.',{'products':['electricity'],'activities':['generation'],'geographies':['TX']},unresolved=['Unknown excluded fuel must remain an exclusion of unresolved source text; do not invent an approved product.'],policy='clarification_required'),
+ case('M27','Show electricity consumption in Texas, without residential or commercial data.',{'products':['electricity'],'activities':['consumption'],'geographies':['TX']},excluded={'sectors':['residential','commercial']}),
+ case('M28','Show coal production for Canada, no certainty needed.',{'products':['coal'],'activities':['production'],'geographies':['CAN']})
+]
+integrity=[
+ {'id':'I01','seed':'M02','mutation':'Use an otherwise plausible relation with start/end outside query bounds or end <= start.','expect':'Reject that contract; do not execute its intent. Preserve safe established fields or clarify.'},
+ {'id':'I02','seed':'M02','mutation':'Source slice is monthly but model claims sourceText residential.','expect':'Reject mismatch; offsets and exact source text must agree against original unmodified query.'},
+ {'id':'I03','seed':'M04','mutation':'Claim product value uranium from source coal or claim geography code FRA from Canada.','expect':'Reject metadata mismatch even when the forged value exists in some catalog.'},
+ {'id':'I04','seed':'M02','mutation':'Claim category product for span residential, or frequency for Texas.','expect':'Reject category mismatch against approved metadata or retain as unresolved; never silently map a wrong category.'},
+ {'id':'I05','seed':'M20','mutation':'Omit Germany and its excluding relation while returning valid Canada and Mexico spans.','expect':'Never silently accept a complete interpretation that loses a recognized explicit exclusion; require local coverage gate or clarification.'},
+ {'id':'I06','seed':'M14','mutation':'Omit natural gas or consumption while claiming interpretation complete.','expect':'Do not silently drop an established requested mention; fail completeness or clarify while preserving recognized parts.'},
+ {'id':'I07','seed':'M05','mutation':'Put the same consumption mention in both requested and excluded relations.','expect':'Reject conflicting assignment or mark unresolved; no arbitrary precedence.'},
+ {'id':'I08','seed':'M14','mutation':'Use overlapping spans to claim natural gas and gas as different simultaneously requested products.','expect':'Do not double count nested lexical matches; allow only explicitly documented compatible cross-category reuse.'},
+ {'id':'I09','seed':'M02','mutation':'Reference a nonexistent mention id from a requested/excluded relation or duplicate ids with different spans.','expect':'Reject dangling or ambiguous relation references.'},
+ {'id':'I10','seed':'M14','mutation':'Reverse country and pair arrays despite unchanged source offsets.','expect':'Local canonicalization restores source order; order must not be trusted from model arrays.'},
+ {'id':'I11','seed':'M23','mutation':'Flatten exclusion of natural gas production into exclusion of every production activity or every natural gas product.','expect':'Preserve pair-scoped exclusion or clarify if representation cannot express it; never globally remove requested natural gas consumption or coal production.'},
+ {'id':'I12','seed':'M02','mutation':'Change query after initial interpretation but retain prior serialized contract, or corrupt source text/offsets in browser payload.','expect':'Revalidate against authoritative request text on resubmission; stale or corrupt payload cannot authorize different results.'},
+ {'id':'I13','seed':'M04','mutation':'Submit an old payload without the new contract, unknown contract version, unknown relation string, or extra authority-like fields.','expect':'Explicit safe compatibility path rebuilds locally or clarifies. Reject unsupported contract semantics rather than trusting legacy derived arrays.'},
+ {'id':'I14','seed':'M02','mutation':'Round-trip a valid source contract through browser JSON and route submission.','expect':'Preserve exact source spans, relations, requested fields, monthly explicit=true and residential; revalidate without new paid/live call.'},
+ {'id':'I15','seed':'M01','mutation':'Supply structurally valid, metadata-valid spans but mark natural gas production excluded solely because of do not know.','expect':'Semantic scope is incorrect. Acknowledge span/metadata validation cannot independently prove grammar; evaluate a meaning case or reject/clarify on known conflict.'},
+ {'id':'I16','seed':'M12','mutation':'Model returns all known fields but omits unknown nebularium and says no unresolved text.','expect':'Coverage must expose unresolved material or clarification; known fields retained and no guessed substitute.'}
+]
+manifest={
+ 'freeze_stage':'Requirements and approved metadata only; no production code, tests, fixtures, or diff inspected before this file was written.',
+ 'base_head_supplied_by_parent':'5b60a094ecd10e1ca80492bc8558652768d93366',
+ 'created_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+ 'source_hashes':{p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in metadata_paths},
+ 'scope':'Independent bounded meaning and contract-integrity challenge matrix. No repo edits, live calls, paid calls, dependencies or external changes.',
+ 'evaluation_policy':[
+   'Meaning expectations describe intended data, not a preselected internal JSON schema.',
+   'For exact_or_conservative_clarification cases, model-assisted interpretation should preserve intended meaning; unsupported rules-only grammar may clarify while preserving established parts. Any exclusion that contradicts expected requested parts is failure.',
+   'Unresolved/disputed text is intentionally not assigned an exact requested/excluded reading.',
+   'Annual with explicit=false is the task-level default, even though route metadata defaults may be monthly.',
+   'Explicit and excluded frequencies are independent facts; excluding monthly must not make monthly the chosen frequency.',
+   'Metadata validity is necessary but cannot prove semantic scope. Model meaning claims remain proposals.',
+   'No fabricated geography/product/activity codes and no live retrieval. Evaluation is bounded to interpretation and resubmission.',
+   'M19 is deliberately context-sensitive: preserve the lexical coal exclusion, but clarification of request intent is allowed.',
+   'M25 tests preservation via clarification, not an authorization to redesign the app to support per-clause plans.'
+ ],
+ 'meaning_cases':cases,'integrity_cases':integrity
+}
+for c in cases:
+    c['source_length_utf16']=len(c['query'].encode('utf-16-le'))//2
+p=Path('/private/tmp/eia-scope-contract-independent-matrix.json')
+p.write_text(json.dumps(manifest,indent=2)+'\n')
+sha=hashlib.sha256(p.read_bytes()).hexdigest()
+Path('/private/tmp/eia-scope-contract-independent-matrix.sha256').write_text(sha+'  '+str(p)+'\n')
+print(json.dumps({'path':str(p),'sha256':sha,'meaning_cases':len(cases),'integrity_cases':len(integrity),'source_hashes':manifest['source_hashes']},indent=2))

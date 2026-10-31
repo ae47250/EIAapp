@@ -1,0 +1,771 @@
+{
+  "id": "F3",
+  "repeat": 2,
+  "query": "electricity prices in georgia",
+  "attempts": [
+    {
+      "id": "F3",
+      "repeat": 2,
+      "attempt": 0,
+      "meaning": {
+        "correct": true,
+        "errors": [],
+        "returnedGeographies": [
+          "GA"
+        ],
+        "rawGeographies": [
+          "GA | Georgia | US state"
+        ]
+      },
+      "checksPassed": true,
+      "clarificationNeeded": false,
+      "rightData": {
+        "correct": true,
+        "reason": "First displayed result/definition matches requested geography, product and activity; comparison has all requested geographies. Explicitly labelled frequency fallback is accepted where used.",
+        "first": [
+          {
+            "candidateId": "eia:1:8ae82ab418afc4d795860c97d2ea9cfa8c2c0d5c9bc32b891313add93108d5d3",
+            "seriesId": "ELEC.PRICE.GA-ALL.A",
+            "title": "Average retail price of electricity : Georgia : all sectors : annual",
+            "product": "electricity",
+            "activity": "prices",
+            "measureType": "price",
+            "geography": {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state"
+            },
+            "routeFamily": "domestic",
+            "frequency": "annual",
+            "unit": "cents per kilowatthour",
+            "coverage": "2001 to 2026",
+            "dateStart": "2001",
+            "dateEnd": "2026",
+            "rankingTier": "A",
+            "score": 77.4,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_electricity",
+              "activity_exact_prices",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ]
+      },
+      "elapsedMs": 2164,
+      "usage": {
+        "input_tokens": 5495,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 5492
+        },
+        "output_tokens": 150,
+        "output_tokens_details": {
+          "reasoning_tokens": 44
+        },
+        "total_tokens": 5645
+      },
+      "costUSD": 0.00013022,
+      "costUpperUSD": 0.000130295,
+      "responseId": "resp_052c5e1d176b75a9006ae26f21d57087d2a71cf7d6f2b7c371",
+      "model": "gpt-6-luna",
+      "public": {
+        "mode": "candidate-selection",
+        "comparisonMode": false,
+        "query": "electricity prices in georgia",
+        "intent": {
+          "originalQuery": "electricity prices in georgia",
+          "cleanedQuery": "electricity prices in georgia",
+          "normalizedQuery": "electricity prices in georgia",
+          "correctedQuery": "electricity prices in georgia",
+          "correctedQuerySource": "unchanged",
+          "interpreter": "openai_locked_form",
+          "interpretationMethod": "enforced_form",
+          "lockedForm": {
+            "geographies": [
+              {
+                "geography": "GA | Georgia | US state",
+                "quoted_words": "georgia"
+              }
+            ],
+            "excluded_geographies": [],
+            "topics": [
+              {
+                "product": "electricity",
+                "activity": "prices",
+                "quoted_words": "electricity prices"
+              }
+            ],
+            "excluded_topics": [],
+            "sector": {
+              "value": null,
+              "quoted_words": null
+            },
+            "frequency": {
+              "value": "annual",
+              "explicit": false,
+              "quoted_words": null
+            },
+            "unsupported_words": [],
+            "clarification": {
+              "needed": false,
+              "about": null,
+              "options": []
+            }
+          },
+          "country": {
+            "name": "Georgia",
+            "code": "GA",
+            "type": "state",
+            "routeFamilies": [
+              "domestic",
+              "seds"
+            ]
+          },
+          "countryCode": "GA",
+          "validatedGeographies": [
+            {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            }
+          ],
+          "excludedGeographies": [],
+          "product": "electricity",
+          "activity": "prices",
+          "sector": null,
+          "validatedConceptPairs": [
+            {
+              "product": "electricity",
+              "activity": "prices",
+              "order": 0,
+              "source": "validated_interpreter"
+            }
+          ],
+          "exclusions": [],
+          "frequency": "annual",
+          "requestedFrequency": null,
+          "frequencyExplicit": false,
+          "fields": {
+            "country": {
+              "normalizedValue": "GA",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "product": {
+              "normalizedValue": "electricity",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "activity": {
+              "normalizedValue": "prices",
+              "validation": "approved",
+              "fallbackUsed": false
+            },
+            "sector": {
+              "normalizedValue": null,
+              "validation": "missing",
+              "fallbackUsed": false
+            },
+            "frequency": {
+              "normalizedValue": "annual",
+              "validation": "approved",
+              "fallbackUsed": false,
+              "explicit": false
+            }
+          },
+          "unknownQualifiers": [],
+          "fallback": {
+            "used": false,
+            "method": null,
+            "reasons": []
+          },
+          "needsClarification": false,
+          "blockingClarification": false,
+          "conceptPairStatus": "validated",
+          "missingFields": [],
+          "ambiguousFields": [],
+          "clarificationMessage": null,
+          "conceptPairs": [
+            {
+              "order": 0,
+              "product": "electricity",
+              "activity": "prices",
+              "sector": null,
+              "source": "validated_interpreter",
+              "confidence": null
+            }
+          ],
+          "multiCountryComparison": {
+            "active": false,
+            "status": "not_applicable",
+            "geographyCodes": [],
+            "routeFamily": "domestic",
+            "reason": "fewer_than_two_validated_countries"
+          },
+          "structuredIntent": {
+            "schemaVersion": "2.1.0",
+            "originalQuery": "electricity prices in georgia",
+            "normalizedQuery": "electricity prices in georgia",
+            "mentions": {
+              "geographies": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "source": "validated_interpreter",
+                  "evidence": null,
+                  "geography": {
+                    "name": "Georgia",
+                    "code": "GA",
+                    "type": "state",
+                    "routeFamilies": [
+                      "domestic",
+                      "seds"
+                    ]
+                  }
+                }
+              ],
+              "concepts": [
+                {
+                  "index": 0,
+                  "text": null,
+                  "type": "product",
+                  "value": "electricity",
+                  "source": "validated_interpreter"
+                },
+                {
+                  "index": 1,
+                  "text": null,
+                  "type": "activity",
+                  "value": "prices",
+                  "source": "validated_interpreter"
+                }
+              ],
+              "frequencies": []
+            },
+            "geography": {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "geographies": [
+              {
+                "name": "Georgia",
+                "code": "GA",
+                "type": "state",
+                "routeFamilies": [
+                  "domestic",
+                  "seds"
+                ]
+              }
+            ],
+            "product": "electricity",
+            "productBreadth": "specific",
+            "productAlternatives": [],
+            "activity": "prices",
+            "activityInference": null,
+            "sector": null,
+            "conceptPairs": [
+              {
+                "order": 0,
+                "product": "electricity",
+                "activity": "prices",
+                "sector": null,
+                "source": "validated_interpreter",
+                "confidence": null
+              }
+            ],
+            "conceptPairStatus": "validated",
+            "conceptPairRule": "validated_interpreter",
+            "multiCountryComparison": {
+              "active": false,
+              "status": "not_applicable",
+              "geographyCodes": [],
+              "routeFamily": "domestic",
+              "reason": "fewer_than_two_validated_countries"
+            },
+            "exclusions": [],
+            "unknownQualifiers": [],
+            "frequency": "annual",
+            "requestedFrequency": null,
+            "frequencyExplicit": false,
+            "validation": {
+              "geography": "valid",
+              "geographyConflicts": [],
+              "frequency": "valid",
+              "frequencySupportedByRoute": true,
+              "supportedFrequencies": [
+                "annual",
+                "monthly",
+                "quarterly",
+                "weekly"
+              ],
+              "metadataSource": {
+                "build": "phase1b",
+                "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+                "generatedFrom": [
+                  "domestic.jsonl.gz",
+                  "natural-gas.jsonl.gz",
+                  "international.jsonl.gz",
+                  "seds.jsonl.gz",
+                  "routes.json"
+                ],
+                "exclusions": [
+                  "Domestic records normalized as region have product-like names and are not safe geography validators."
+                ]
+              },
+              "fields": {
+                "country": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "product": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "activity": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "sector": {
+                  "validation": "missing",
+                  "confidence": null,
+                  "fallbackUsed": false
+                },
+                "frequency": {
+                  "validation": "approved",
+                  "confidence": null,
+                  "fallbackUsed": false
+                }
+              }
+            },
+            "ambiguity": {
+              "status": "none",
+              "reasons": []
+            },
+            "fallback": {
+              "used": false,
+              "reasons": []
+            },
+            "route": {
+              "family": "domestic",
+              "label": "Domestic EIA",
+              "reason": "A state-level electricity request uses Domestic EIA.",
+              "deterministic": true
+            },
+            "provenance": {
+              "query": "mechanically_cleaned_raw_query",
+              "geographies": [
+                "validated_interpreter"
+              ],
+              "geographyEvidence": [
+                {
+                  "code": "GA",
+                  "rawText": null,
+                  "source": "validated_interpreter",
+                  "conflictStatus": "none"
+                }
+              ],
+              "concepts": [
+                "validated_interpreter"
+              ],
+              "canonicalizations": [],
+              "sector": "missing",
+              "frequency": "default",
+              "exclusions": [],
+              "unknownQualifiers": []
+            },
+            "needsClarification": false,
+            "blockingClarification": false,
+            "missingFields": [],
+            "clarificationMessage": null
+          },
+          "route": {
+            "family": "domestic",
+            "label": "Domestic EIA",
+            "reason": "A state-level electricity request uses Domestic EIA.",
+            "deterministic": true
+          },
+          "validation": {
+            "geography": "valid",
+            "geographyConflicts": [],
+            "frequency": "valid",
+            "frequencySupportedByRoute": true,
+            "supportedFrequencies": [
+              "annual",
+              "monthly",
+              "quarterly",
+              "weekly"
+            ],
+            "metadataSource": {
+              "build": "phase1b",
+              "manifestContentHash": "1d2dd5904b9f9c13491f5b168a3c432f080cef708b7252c5a2e0cf37d3239028",
+              "generatedFrom": [
+                "domestic.jsonl.gz",
+                "natural-gas.jsonl.gz",
+                "international.jsonl.gz",
+                "seds.jsonl.gz",
+                "routes.json"
+              ],
+              "exclusions": [
+                "Domestic records normalized as region have product-like names and are not safe geography validators."
+              ]
+            },
+            "fields": {
+              "country": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "product": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "activity": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "sector": {
+                "validation": "missing",
+                "confidence": null,
+                "fallbackUsed": false
+              },
+              "frequency": {
+                "validation": "approved",
+                "confidence": null,
+                "fallbackUsed": false
+              }
+            }
+          },
+          "ambiguity": {
+            "status": "none",
+            "reasons": []
+          }
+        },
+        "source": "U.S. Energy Information Administration API and validated local EIA metadata",
+        "selectedSeries": null,
+        "variables": [
+          {
+            "candidateId": "eia:1:8ae82ab418afc4d795860c97d2ea9cfa8c2c0d5c9bc32b891313add93108d5d3",
+            "seriesId": "ELEC.PRICE.GA-ALL.A",
+            "title": "Average retail price of electricity : Georgia : all sectors : annual",
+            "product": "electricity",
+            "activity": "prices",
+            "measureType": "price",
+            "geography": {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state"
+            },
+            "routeFamily": "domestic",
+            "frequency": "annual",
+            "unit": "cents per kilowatthour",
+            "coverage": "2001 to 2026",
+            "dateStart": "2001",
+            "dateEnd": "2026",
+            "rankingTier": "A",
+            "score": 77.4,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_electricity",
+              "activity_exact_prices",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          },
+          {
+            "candidateId": "eia:1:67cb216e1ce2a5e8ac1b08e49a3d9298d7947cf58529615f55cee31911fa2454",
+            "seriesId": "ELEC.PRICE.GA-OTH.A",
+            "title": "Average retail price of electricity : Georgia : other : annual",
+            "product": "electricity",
+            "activity": "prices",
+            "measureType": "price",
+            "geography": {
+              "name": "other",
+              "code": "GA",
+              "type": "state"
+            },
+            "routeFamily": "domestic",
+            "frequency": "annual",
+            "unit": "cents per kilowatthour",
+            "coverage": "2001 to 2026",
+            "dateStart": "2001",
+            "dateEnd": "2026",
+            "rankingTier": "A",
+            "score": 77.4,
+            "reasons": [
+              "tier_A",
+              "source_pool_primary",
+              "route_family_validated",
+              "geography_validated",
+              "product_or_scope_hard_gate_passed",
+              "activity_hard_gate_passed",
+              "frequency_validated",
+              "product_exact_electricity",
+              "activity_exact_prices",
+              "aggregation_relation_unknown_no_verified_hierarchy",
+              "lexical_title_electricity",
+              "frequency_exact",
+              "current_active",
+              "availability_present"
+            ],
+            "warnings": [
+              "aggregation_relationship_not_verified"
+            ],
+            "certainty": {
+              "schemaVersion": "1.1.0",
+              "intentStatus": "resolved",
+              "semanticCompatibility": "compatible",
+              "conceptPairStatus": "validated",
+              "routeRelation": "exact",
+              "frequencyRelation": "defaulted",
+              "unitRelation": "not_requested",
+              "coverageRelation": "not_requested",
+              "aggregationRelation": "unknown",
+              "hierarchyEvidenceStatus": "none",
+              "presentationClass": "compatible_candidate",
+              "warnings": [
+                "aggregation_relationship_not_verified"
+              ]
+            },
+            "fallback": false
+          }
+        ],
+        "candidateGroups": [
+          {
+            "id": "GA:electricity:prices:price",
+            "label": "Price",
+            "product": "electricity",
+            "activity": "prices",
+            "measureType": "price",
+            "technical": false,
+            "geography": {
+              "name": "Georgia",
+              "code": "GA",
+              "type": "state",
+              "routeFamilies": [
+                "domestic",
+                "seds"
+              ]
+            },
+            "warnings": [],
+            "candidates": [
+              {
+                "candidateId": "eia:1:8ae82ab418afc4d795860c97d2ea9cfa8c2c0d5c9bc32b891313add93108d5d3",
+                "seriesId": "ELEC.PRICE.GA-ALL.A",
+                "title": "Average retail price of electricity : Georgia : all sectors : annual",
+                "product": "electricity",
+                "activity": "prices",
+                "measureType": "price",
+                "geography": {
+                  "name": "Georgia",
+                  "code": "GA",
+                  "type": "state"
+                },
+                "routeFamily": "domestic",
+                "frequency": "annual",
+                "unit": "cents per kilowatthour",
+                "coverage": "2001 to 2026",
+                "dateStart": "2001",
+                "dateEnd": "2026",
+                "rankingTier": "A",
+                "score": 77.4,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_electricity",
+                  "activity_exact_prices",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              },
+              {
+                "candidateId": "eia:1:67cb216e1ce2a5e8ac1b08e49a3d9298d7947cf58529615f55cee31911fa2454",
+                "seriesId": "ELEC.PRICE.GA-OTH.A",
+                "title": "Average retail price of electricity : Georgia : other : annual",
+                "product": "electricity",
+                "activity": "prices",
+                "measureType": "price",
+                "geography": {
+                  "name": "other",
+                  "code": "GA",
+                  "type": "state"
+                },
+                "routeFamily": "domestic",
+                "frequency": "annual",
+                "unit": "cents per kilowatthour",
+                "coverage": "2001 to 2026",
+                "dateStart": "2001",
+                "dateEnd": "2026",
+                "rankingTier": "A",
+                "score": 77.4,
+                "reasons": [
+                  "tier_A",
+                  "source_pool_primary",
+                  "route_family_validated",
+                  "geography_validated",
+                  "product_or_scope_hard_gate_passed",
+                  "activity_hard_gate_passed",
+                  "frequency_validated",
+                  "product_exact_electricity",
+                  "activity_exact_prices",
+                  "aggregation_relation_unknown_no_verified_hierarchy",
+                  "lexical_title_electricity",
+                  "frequency_exact",
+                  "current_active",
+                  "availability_present"
+                ],
+                "warnings": [
+                  "aggregation_relationship_not_verified"
+                ],
+                "certainty": {
+                  "schemaVersion": "1.1.0",
+                  "intentStatus": "resolved",
+                  "semanticCompatibility": "compatible",
+                  "conceptPairStatus": "validated",
+                  "routeRelation": "exact",
+                  "frequencyRelation": "defaulted",
+                  "unitRelation": "not_requested",
+                  "coverageRelation": "not_requested",
+                  "aggregationRelation": "unknown",
+                  "hierarchyEvidenceStatus": "none",
+                  "presentationClass": "compatible_candidate",
+                  "warnings": [
+                    "aggregation_relationship_not_verified"
+                  ]
+                },
+                "fallback": false
+              }
+            ]
+          }
+        ],
+        "comparisonDefinitions": [],
+        "userWarnings": [],
+        "needsClarification": false,
+        "userMessage": null,
+        "diagnostics": {
+          "candidatePipelineVersion": "phase4a-v7",
+          "rankingConfigVersion": "phase4-v8",
+          "rankingTaxonomyVersion": "phase4-concepts-v2",
+          "resultCertaintyVersion": "1.1.0",
+          "hierarchyRankingConfigVersion": null,
+          "hierarchyRankingMode": "off",
+          "hierarchyEvidenceStatus": "none",
+          "verifiedHierarchyRelationshipCount": 0,
+          "hierarchyPreferenceApplied": false,
+          "rankingApplied": true,
+          "clarificationBlocked": false,
+          "clarificationReasons": [],
+          "semanticRerankingApplied": false,
+          "initialDisplayLimit": 10,
+          "displayedCandidateCount": 2,
+          "rankedDefinitionLimit": 5,
+          "displayedDefinitionCount": 0,
+          "rankingUnit": "country_series"
+        },
+        "note": "Choose Graph or Excel for one of the 2 displayed series. No series was selected automatically."
+      }
+    }
+  ],
+  "events": []
+}

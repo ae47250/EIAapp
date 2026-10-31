@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {gradeV2} from './scorer-v2.mjs';
+import {frozen} from './replay.mjs';
+const root=new URL('../',import.meta.url),records=new URL('records/',root),read=p=>JSON.parse(fs.readFileSync(new URL(p,records)));
+const preserved=read('v2/preserved-originals.json');
+for(const[p,h]of Object.entries(preserved.files))assert.equal(createHash('sha256').update(fs.readFileSync(new URL(p,root))).digest('hex'),h,p);
+const oldReport=read('comparison-report.json');
+const rows=fs.readdirSync(new URL('attempts/',records)).filter(p=>p.endsWith('.result.json')).sort().map(filename=>{
+ const a=read('attempts/'+filename),response=JSON.parse(fs.readFileSync(new URL('attempts/'+filename.replace('.result.json','.response.txt'),records),'utf8')),c=frozen.cases.find(c=>c.id===a.queryId),g=gradeV2(response,c),p=g.original.parsed;
+ assert.deepEqual(JSON.parse(JSON.stringify(g.original)),a.originalGrade,'Preserved original scorer reproduces persisted original verdict');
+ const replay=read(a.replayFile);assert.equal(replay.actualExternalCalls,0);
+ const reasons=[];
+ if(a.originalGrade.semantic.pass!==g.semantic.pass){
+  const oldErrors=a.originalGrade.semantic.errors;
+  if(oldErrors.includes('geographies_or_order')&&!g.semantic.errors.includes('geographies_or_order'))reasons.push('Resolve approved same-entity metadata aliases or an explicit country qualifier; no country was changed.');
+  if(oldErrors.includes('country_summary_contradiction')&&!g.semantic.errors.includes('country_summary_contradiction'))reasons.push(p?.fields?.country?.value==null?'Null compatibility country summary is not a contradiction when the ordered geography array is correct.':'US/USA national metadata equivalence also applies to the country summary.');
+  if(oldErrors.includes('compatibility_summary_contradiction')&&!g.semantic.errors.some(e=>e.endsWith('_summary_contradiction')))reasons.push('Null or requested-member compatibility summaries do not replace or contradict preserved ordered pairs.');
+  if(oldErrors.includes('frequency_or_explicit_flag')&&!g.semantic.errors.includes('frequency_or_explicit_flag'))reasons.push('Unstated/missing frequency defaults to annual with explicit=false; structural omissions still fail contract.');
+  if(oldErrors.includes('product_activity_pairs_or_order')&&!g.semantic.errors.includes('product_activity_pairs_or_order'))reasons.push('Existing nested value fields express the correct pair; wrong pair shape remains a contract failure, with no response rewriting.');
+  if(oldErrors.includes('unsupported_flat_exclusions')&&!g.semantic.errors.some(e=>e.includes('exclusion')))reasons.push('The flat Ireland exclusion duplicates the requested geography exclusion; it does not introduce a product/activity exclusion.');
+ }
+ const changed={semantic:a.originalGrade.semantic.pass!==g.semantic.pass,usable:(a.originalGrade.semantic.pass&&a.originalGrade.contract.pass)!==g.usable,json:a.originalGrade.contract.json!==g.strictJSON,spans:a.originalGrade.contract.spans!==g.sourceSpans,contract:a.originalGrade.contract.pass!==g.contract.pass};
+ return {scheduledId:a.scheduledId,queryId:a.queryId,query:c.query,repeat:a.repeat,model:a.model,effort:'none',original:{semantic:a.originalGrade.semantic,contract:a.originalGrade.contract,usable:a.originalGrade.semantic.pass&&a.originalGrade.contract.pass},corrected:{semantic:g.semantic,strictJSON:g.strictJSON,shape:g.shape,sourceSpans:g.sourceSpans,contract:g.contract,usable:g.usable,truncated:g.truncated},changed,changeReasons:reasons,downstream:{...oldReport.models.find(m=>m.model===a.model).downstream.find(x=>x.scheduledId===a.scheduledId),replayFile:a.replayFile},usage:a.usage,elapsedMs:a.elapsedMs};
+});
+assert.equal(rows.length,40);
+function summarize(model){
+ const m=oldReport.models.find(m=>m.model===model),items=rows.filter(r=>r.model===model);let consistency=0;
+ for(const c of frozen.cases){const pair=items.filter(r=>r.queryId===c.id);if(pair.length===2&&pair.every(r=>r.corrected.semantic.gradable)&&JSON.stringify(pair[0].corrected.semantic.signature)===JSON.stringify(pair[1].corrected.semantic.signature))consistency++;}
+ const correct=items.filter(r=>r.corrected.semantic.pass).length,usable=items.filter(r=>r.corrected.usable).length,ungradable=items.filter(r=>!r.corrected.semantic.gradable).length;
+ return {label:model==='gpt-6-luna'?'Luna-none':'Nano-none',model,scheduled:20,actualAttempts:m.actualAttempts,retries:m.retries,originalSemantic:m.semanticPasses,correctedSemantic:correct,observedSemanticMistakes:20-correct-ungradable,ungradable,strictJSON:items.filter(r=>r.corrected.strictJSON).length,shape:items.filter(r=>r.corrected.shape).length,sourceSpans:items.filter(r=>r.corrected.sourceSpans).length,contract:items.filter(r=>r.corrected.contract.pass).length,originalUsable:m.usableOriginalInterpretations,correctedUsable:usable,repeatConsistency:consistency,latencyMs:m.latencyMs,tokens:{...m.tokens,reasoning:items.reduce((s,r)=>s+(r.usage.output_tokens_details?.reasoning_tokens||0),0)},costUSD:m.knownTokenCostUSD,costPerUsable:usable?m.knownTokenCostUSD/usable:null,downstreamDisplayingResults:items.filter(r=>r.downstream.candidateCount||r.downstream.definitionCount).length,downstreamClarifications:items.filter(r=>r.downstream.needsClarification).length};
+}
+const result={version:2,createdAt:new Date().toISOString(),newGenerationCalls:0,scorerSHA256:createHash('sha256').update(fs.readFileSync(new URL('harness/scorer-v2.mjs',root))).digest('hex'),fixturesSHA256:fs.readFileSync(new URL('v2/labelled-scorer-fixtures.sha256',records),'utf8').trim(),semantics:'Same frozen expected meanings. Missing/default frequency, metadata alias equivalence and null summaries corrected. Semantics, syntax, shape, source spans and app outcomes are independent. No JSON repair. All scheduled responses retained in denominator.',models:frozen.settings.models.map(summarize),changedVerdicts:rows.filter(r=>Object.values(r.changed).some(Boolean)).map(({scheduledId,queryId,query,repeat,model,original,corrected,changed,changeReasons})=>({scheduledId,queryId,query,repeat,model,originalSemantic:original.semantic.pass,correctedSemantic:corrected.semantic.pass,originalUsable:original.usable,correctedUsable:corrected.usable,changed,changeReasons})),rows};
+fs.writeFileSync(new URL('v2/rescored-baselines.json',records),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({models:result.models,changedVerdicts:result.changedVerdicts},null,2));

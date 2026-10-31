@@ -1,0 +1,72 @@
+{
+  "status": "Definition correspondence only, not B1 availability.",
+  "method": "UNSD correspondence table and SKOS exact/narrower distinction, as documented in DESIGN.md. No directly applicable public reference alignment found; regressions are not benchmark scores.",
+  "scope": "Twelve natural-gas/enr FITS leaves; other natural-gas leaves remain pending.",
+  "sources": [
+    {
+      "url": "https://www.eia.gov/dnav/ng/TblDefs/ng_enr_sum_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-summary-18b484a7bf2c.html",
+      "sha256": "18b484a7bf2cd7098521d6e95e8c07013e7bd5ab8b7f0545b1524aeae4ad71d3",
+      "finding": "Dry and wet gas are separately defined whole-gas bases; associated/nonassociated are reservoir components. Stored gas is not proved reserves."
+    },
+    {
+      "url": "https://www.eia.gov/dnav/ng/TblDefs/ng_enr_dry_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-dry-definitions-d236a59d40b6.html",
+      "sha256": "d236a59d40b67325369ef55710b3b3b4f0932cb6bab9c40689e6b63006bf632c",
+      "finding": "Reserve adjustments, revisions, discoveries and ownership transfers differ from year-end reserves and report-year production."
+    },
+    {
+      "url": "https://www.eia.gov/dnav/ng/ng_enr_dry_dcu_NUS_a.htm",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-dry-table-40078b3f718a.html",
+      "sha256": "40078b3f718a8762fc14a0aca5fc8e6ea0b322d8d10ed85e034fbddaf2dcabdf",
+      "finding": "Year-end proved reserves links to RNGR11NUS history titled Expected Future Production; estimated annual production is a separate row."
+    },
+    {
+      "url": "https://www.eia.gov/dnav/ng/hist/rngr11nus_1a.htm",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-dry-history-2cb6a6f3dbf6.html",
+      "sha256": "2cb6a6f3dbf61a71481ada30a8698616fc3acd17a036e11b046cbcbdef527318",
+      "finding": "Referring pages identify this series as dry gas proved reserves as of December 31. The title is not an annual output or forecast measure."
+    },
+    {
+      "url": "https://www.eia.gov/dnav/ng/tbldefs/ng_enr_nprod_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-nonproducing-cb7d9b29026e.html",
+      "sha256": "cb7d9b29026e6959c2e7e66eeb0e9c543cf4f52b5933af68735b13cd45540cb5",
+      "finding": "Nonproducing reserves exclude producing reservoirs; they are a subset of proved reserves."
+    },
+    {
+      "url": "https://www.eia.gov/dnav/ng/TblDefs/ng_enr_ngl_tbldef2.asp",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-liquids-51893ecb203f.html",
+      "sha256": "51893ecb203fce6ade4b2b3eeb2bb8dc0808e310c1b521f28ec6fb81beaa35e0",
+      "finding": "Gas liquids are separated liquid hydrocarbons; they are not whole natural gas or whole petroleum."
+    },
+    {
+      "url": "https://www.eia.gov/naturalgas/crudeoilreserves/",
+      "localFile": "~/Documents/EIAapp-Evidence/20261029/coverage/source-pages/reserve-current-report-25f458049cbb.html",
+      "sha256": "25f458049cbbfcecb060d2a623b8f25986f56698ffd225fb37ec2e5935c63388",
+      "finding": "EIA publishes crude oil plus lease condensate as its crude reserve total; Table 11 separately reports wet gas reserves and their dry-gas/liquid content."
+    }
+  ],
+  "expectationsBeforeClassifierEdit": [
+    "Dry Expected Future Production is year-end reserves, distinct from estimated report-year production.",
+    "Dry and wet-after-lease-separation total gas reserves and production are whole-gas measurement bases, labelled; no summing them.",
+    "Associated, nonassociated, coalbed and shale measures remain subsets of total natural gas.",
+    "Nonproducing reserves are subsets even where product names otherwise describe a whole product.",
+    "Reserve ownership sales, acquisitions, revisions, extensions and discoveries are outside the locked activities; never gas sales, expenditures or total reserves.",
+    "Natural gas liquids and lease condensate are liquid components of petroleum, not whole natural gas. No new qualifier.",
+    "Crude oil plus lease condensate remains a subset of petroleum. EIA headline crude basis may qualify only for separately counted explicit crude-oil requests and must be labelled.",
+    "Full series names control mixed-product routes; every original definition is retained.",
+    "Mapped geography is a separate requirement; districts and federal-offshore components cannot become whole states.",
+    "Unknown titles or new process codes remain pending; no catch-all acceptance.",
+    "No native definition or compatible combination proves numeric observations or complete history."
+  ],
+  "metadataConflicts": [
+    {
+      "field": "R11 / RNGR11 series titles",
+      "finding": "Expected Future Production is linked by EIA as year-end dry natural-gas proved reserves, not annual production."
+    },
+    {
+      "field": "R05 and other reserve-sales process codes",
+      "finding": "Sales refers to ownership divestitures; not a product sales measure."
+    }
+  ]
+}

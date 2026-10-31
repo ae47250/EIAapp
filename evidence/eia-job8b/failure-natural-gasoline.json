@@ -1,0 +1,120 @@
+{
+  "classification": "FAIL_MODEL_SEMANTIC_VARIATION",
+  "query": "natural gasoline production in Texas",
+  "expectation": {
+    "id": "Q1-natural-gasoline",
+    "query": "natural gasoline production in Texas",
+    "kind": "not_natural_gas",
+    "place": "TX",
+    "productMustNotBe": "natural gas"
+  },
+  "rawModelForm": {
+    "geographies": [
+      {
+        "geography": "TX | Texas | US state",
+        "quoted_words": "Texas",
+        "is_default": false
+      }
+    ],
+    "excluded_geographies": [],
+    "topics": [
+      {
+        "product": null,
+        "activity": "production",
+        "quoted_words": "natural gasoline production in Texas"
+      }
+    ],
+    "excluded_topics": [],
+    "sector": {
+      "value": null,
+      "quoted_words": null
+    },
+    "frequency": {
+      "value": "annual",
+      "explicit": false,
+      "quoted_words": null
+    },
+    "unsupported_words": [],
+    "clarification": {
+      "needed": true,
+      "about": "product",
+      "options": [
+        {
+          "label": "Natural gas",
+          "value": "natural gas"
+        },
+        {
+          "label": "Gasoline (petroleum)",
+          "value": "petroleum"
+        }
+      ]
+    },
+    "years": {
+      "start": null,
+      "end": null,
+      "quoted_words": null
+    }
+  },
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "renderedQuestion": "Which product should I look up?",
+  "renderedChoices": [
+    "Natural Gas",
+    "Coal",
+    "Nuclear",
+    "Renewable",
+    "Hydro",
+    "Solar",
+    "Wind",
+    "Geothermal",
+    "Biofuels",
+    "Total Energy"
+  ],
+  "shownData": false,
+  "savedReplayForm": {
+    "geographies": [
+      {
+        "geography": "TX | Texas | US state",
+        "quoted_words": "Texas",
+        "is_default": false
+      }
+    ],
+    "excluded_geographies": [],
+    "topics": [
+      {
+        "product": "petroleum",
+        "activity": "production",
+        "quoted_words": "natural gasoline production"
+      }
+    ],
+    "excluded_topics": [],
+    "sector": {
+      "value": null,
+      "quoted_words": null
+    },
+    "frequency": {
+      "value": "annual",
+      "explicit": false,
+      "quoted_words": null
+    },
+    "unsupported_words": [],
+    "clarification": {
+      "needed": false,
+      "about": null,
+      "options": []
+    },
+    "years": {
+      "start": null,
+      "end": null,
+      "quoted_words": null
+    }
+  },
+  "sourceSHA256": "66dd9352d5daae301f3dd343fdce93625d4aedb208084d83f0e6ef5ce394bac0",
+  "previousSourceSHA256": "d65ac8d9a9f81afdbd83b3c58dbf3d90a11f5e3b0daffe9d44079d71c7240719",
+  "scorer": "evidence/eia-job8b/score-q1.mjs:32-34 (unchanged checks)",
+  "cause": "The model returned product=null and a natural gas / gasoline question. Shape and quote validation accepted it, so there was no automatic re-ask. The checked lookup list produced a product question; no series was returned. The frozen Q1 rule rejects an unexpected product question for natural gasoline. The previously saved model form selected petroleum and therefore passed replay.",
+  "processAssessment": "All complete offline gates passed on final code before this run. This newly observed model response was absent from the saved replay; no known failing offline gate was bypassed. That is a replay coverage gap, not proof that the natural-gasoline mechanism is generally correct.",
+  "nextAction": "Retain this exact response as an exposed regression in a separately authorized follow-up. No app, prompt, scorer or expectation change after this run."
+}

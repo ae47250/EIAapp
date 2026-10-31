@@ -1,0 +1,25 @@
+// Offline browser → real API handlers → exact recorded model/EIA responses.
+// The server's replay transport denies unmatched upstream calls.
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';import {homedir} from 'node:os';import {execFileSync} from 'node:child_process';import assert from 'node:assert/strict';
+const {chromium}=await import(process.env.EIA_PLAYWRIGHT_PATH),local=homedir()+'/Documents/EIAapp-Evidence/20261030/finish/scored-live',dir=local+'/final-route-browser';mkdirSync(dir,{recursive:true});
+const browser=await chromium.launch({executablePath:process.env.EIA_CHROME_PATH,headless:true}),page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true});let lastResult;const errors=[],network=[],records=[];
+page.on('pageerror',e=>errors.push(e.message));page.on('response',async r=>{const u=new URL(r.url());if(u.pathname.startsWith('/api/')){network.push({path:u.pathname,status:r.status()});if(u.pathname==='/api/search-eia')lastResult=await r.json();}});
+async function ready(){await page.getByRole('button',{name:'Search',exact:true}).waitFor();await page.waitForFunction(()=>!document.querySelector('.search-panel button')?.disabled);await page.locator('[aria-label="Understood request"]').waitFor();}
+async function search(id){lastResult=null;const r=JSON.parse(readFileSync(local+'/'+id+'-1-result.json'));await page.goto('http://127.0.0.1:3190');await page.getByRole('textbox',{name:'Search query',exact:true}).fill(r.query);await page.getByRole('button',{name:'Search',exact:true}).click();await ready();}
+async function reply(text){await page.getByRole('textbox',{name:'Or describe what you mean',exact:true}).fill(text);await page.getByRole('button',{name:'Use this text',exact:true}).click();await ready();}
+async function snap(id,download=false){const text=await page.locator('body').innerText(),row={id,understood:await page.locator('[aria-label="Understood request"]').innerText(),headlines:await page.locator('[data-headline]').allTextContents(),buttons:await page.locator('button').allTextContents(),network:network.splice(0),consoleErrors:[...errors]};
+ if(download){const pending=page.waitForEvent('download');await page.getByRole('button',{name:'Excel',exact:true}).first().click();const d=await pending,file=dir+'/'+id+'.xlsx';await d.saveAs(file);row.workbook=JSON.parse(execFileSync('python3',['-B','scripts/eia-lookup/read-finish-export.py',file],{encoding:'utf8'}));}
+ await page.screenshot({path:dir+'/'+id+'.png',fullPage:true});writeFileSync(dir+'/'+id+'.json',JSON.stringify({row,text,result:lastResult},null,2)+'\n');records.push({...row,workbook:row.workbook?{rows:row.workbook.rows.length,metadataFields:row.workbook.metadataFields}:undefined});assert.equal(errors.length,0);assert.ok(row.network.every(n=>n.status<400));return {row,text};}
+let failure;
+try{
+ await search('D2');await snap('D2',true);
+ await search('D9');let x=await snap('D9',true);assert.ok(x.row.headlines.some(t=>t.includes('185,035')));assert.equal(x.row.workbook.rows.filter(r=>r.code==='JPN'&&r.period==='2024')[0].value,185034.87432294185);assert.ok(!x.text.includes('Coal total consumption; Coal total consumption'));
+ await search('D18');x=await snap('D18');assert.deepEqual(lastResult.intent.lockedForm.geographies.map(g=>g.geography.split('|')[0].trim()),['WLD']);
+ await search('E1');await page.getByRole('button',{name:'Did you also mean United States?',exact:true}).click();await ready();await snap('E1-add-US',true);assert.deepEqual(lastResult.intent.lockedForm.geographies.map(g=>g.geography.split('|')[0].trim()),['JPN','USA']);
+ await search('E3');await page.getByRole('button',{name:'Coal',exact:true}).click();await ready();x=await snap('E3-Coal');assert.ok(x.row.buttons.includes('Production')&&x.row.buttons.includes('Consumption'));
+ await search('E12');x=await snap('E12',true);for(const field of ['Units','Frequency','Source','Series name'])assert.equal(x.row.workbook.metadataFields.filter(f=>f===field).length,1,field);assert.ok(x.text.includes('gasoline (part of petroleum)'));
+ await search('E13');await snap('Korea-initial',true);await reply('No, I meant the country');x=await snap('E13-reply');assert.ok(x.row.buttons.includes('South Korea')&&x.row.buttons.includes('North Korea'));assert.ok(x.row.understood.includes('natural gas / consumption'));
+ await search('E14');await reply('All U.S. states');x=await snap('E14-reply',true);assert.equal(new Set(x.row.workbook.rows.map(r=>r.code)).size,51);assert.equal(lastResult.intent.lockedForm.geographies.length,51);
+}catch(e){failure=e.message;}
+finally{await browser.close();}
+const summary={at:new Date().toISOString(),kind:'Post-run offline browser replay through real API handlers; exact recorded upstream responses; no new model or EIA calls',records,failure,pass:!failure};writeFileSync('evidence/eia-finish/final-browser-workflow.json',JSON.stringify(summary,null,2)+'\n');console.log(JSON.stringify({pass:!failure,failure,checks:records.map(r=>r.id),consoleErrors:errors}));if(failure)process.exitCode=2;
