@@ -1,0 +1,131 @@
+{
+  "chosen": "010",
+  "noiseFloor": 1,
+  "candidates": [
+    {
+      "name": "LUNA-LOW-MEAN",
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "status": "complete",
+      "harnessPass": true,
+      "right": 83.5,
+      "costUSD": 0.08340168750000002,
+      "latencyP90Ms": 5516
+    },
+    {
+      "name": "TERRA",
+      "model": "gpt-6.1-terra",
+      "effort": "low",
+      "status": "complete",
+      "harnessPass": true,
+      "right": 83,
+      "costUSD": 0.6510780000000002,
+      "latencyP90Ms": 3816
+    },
+    {
+      "name": "LUNA-MED",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "status": "complete",
+      "harnessPass": true,
+      "right": 82,
+      "costUSD": 0.08609874999999997,
+      "latencyP90Ms": 7152
+    },
+    {
+      "name": "LUNA-HIGH",
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "status": "complete",
+      "harnessPass": true,
+      "right": 81,
+      "costUSD": 0.08831449999999996,
+      "latencyP90Ms": 7309
+    },
+    {
+      "name": "SOL",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "status": "complete",
+      "harnessPass": true,
+      "right": 82,
+      "costUSD": 1.3002840000000004,
+      "latencyP90Ms": 5954
+    }
+  ],
+  "best": 83.5,
+  "eligible": [
+    "LUNA-LOW-MEAN",
+    "TERRA"
+  ],
+  "recommendation": {
+    "model": "gpt-6-luna",
+    "effort": "low",
+    "costUSD": 0.08340168750000002,
+    "right": 83.5,
+    "p90Ms": 5516
+  },
+  "solScore": {
+    "right": 82,
+    "total": 85,
+    "perSet": {
+      "C": {
+        "right": 10,
+        "total": 10
+      },
+      "D": {
+        "right": 29,
+        "total": 30
+      },
+      "E": {
+        "right": 14,
+        "total": 14
+      },
+      "F": {
+        "right": 8,
+        "total": 8
+      },
+      "I": {
+        "right": 12,
+        "total": 12
+      },
+      "Q1": {
+        "right": 8,
+        "total": 8
+      },
+      "Q4": {
+        "right": 1,
+        "total": 3
+      }
+    },
+    "failures": [
+      {
+        "id": "D-D7q",
+        "kind": "wrong value shown",
+        "errors": [
+          "activity",
+          "question",
+          "buttons"
+        ]
+      },
+      {
+        "id": "Q4-Q4-ash",
+        "kind": "wrong value shown",
+        "errors": [
+          "sector"
+        ]
+      },
+      {
+        "id": "Q4-Q4-sulfur",
+        "kind": "asked the wrong question or buttons",
+        "errors": [
+          "activity",
+          "question"
+        ]
+      }
+    ],
+    "comparisonCostUSD": 1.3002840000000004,
+    "comparisonLatencyP90Ms": 5954,
+    "notReplayed": []
+  }
+}

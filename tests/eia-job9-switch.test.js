@@ -1,42 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {typoRepairEnabled,placeInjectionEnabled,namedPartRestoreEnabled} from '../lib/sources/eia/text-repair.js';
 import {resolveQuotedPlaces,ordinaryPlaceMentions,placeSwitches} from '../lib/sources/eia/lookup-geography.js';
-import {repairProductNearMisses,normalizeLinkingWords,normalizeAmbiguity} from '../lib/sources/eia/lookup-ambiguity.js';
-import {restoreNamedParts,quotedNamedParts} from '../lib/sources/eia/locked-form-evidence.js';
+import {normalizeAmbiguity} from '../lib/sources/eia/lookup-ambiguity.js';
+import {quotedNamedParts} from '../lib/sources/eia/locked-form-evidence.js';
 import {normalizeLockedFormV2,interpretLockedFormV2} from '../lib/sources/eia/locked-form-v2.js';
 import {applyReplyUpdate} from '../lib/sources/eia/locked-form-reply-update.js';
 const f=()=>({geographies:[{geography:'TX | Texas | US state',quoted_words:'Texas',is_default:false}],excluded_geographies:[],topics:[{product:'petroleum',activity:'production',quoted_words:'oil production'}],excluded_topics:[],sector:{value:null,quoted_words:null},frequency:{value:'annual',explicit:false,quoted_words:null},years:{start:null,end:null,quoted_words:null},unsupported_words:[],clarification:{needed:false,about:null,options:[]}});
-const withFlags=(values,fn)=>{
- const keys=['EIA_REPAIR_G1','EIA_REPAIR_G2','EIA_REPAIR_G3'],old=keys.map(k=>process.env[k]);
- const restore=()=>keys.forEach((k,i)=>old[i]===undefined?delete process.env[k]:process.env[k]=old[i]);
- keys.forEach((k,i)=>process.env[k]=values[i]);
- try{const result=fn();if(result?.then)return result.finally(restore);restore();return result;}catch(error){restore();throw error;}
-};
-test('G1 reaches one-edit place repair, product repair and linker repair',()=>{
- for(const on of [true,false])withFlags([on?'on':'OFF','off','off'],()=>{
-  assert.equal(typoRepairEnabled(),on);
-  assert.equal(resolveQuotedPlaces([],[],'coal production in Arkansa').items.length,on?1:0);
-  const a=f();a.topics=[{product:null,activity:'production',quoted_words:'antural gas production'}];assert.equal(repairProductNearMisses(a,'antural gas production'),on);
-  const b=f();b.unsupported_words=['ni'];b.clarification={needed:true,about:'other',options:[]};normalizeLinkingWords(b,'oil production ni Texas');assert.equal(b.unsupported_words.length,on?0:1);
- });
+test('removed G1 does not repair one-edit places, product typos or linking words',()=>{
+ assert.equal(resolveQuotedPlaces([],[],'coal production in Arkansa').items.length,0);
+ const a=f();a.topics=[{product:null,activity:'production',quoted_words:'antural gas production'}];normalizeAmbiguity(a,'antural gas production');assert.equal(a.topics[0].product,null);
+ const b=f();b.unsupported_words=['ni'];b.clarification={needed:true,about:'other',options:[]};normalizeLockedFormV2(b,'oil production ni Texas');assert.deepEqual(b.unsupported_words,['ni']);
 });
-test('G2 reaches full-name and capital-code place injection',()=>{
- for(const on of [true,false])withFlags(['off',on?'on':'OFF','off'],()=>{
-  assert.equal(placeInjectionEnabled(),on);
-  assert.equal(resolveQuotedPlaces([],[],'coal production in Michigan').items.length,on?1:0);
-  assert.equal(ordinaryPlaceMentions('coal in OH').find(m=>m.geo.code==='OH').accept,on);
- });
+test('kept G2 always injects full-name and capital-code places',()=>{
+ assert.equal(resolveQuotedPlaces([],[],'coal production in Michigan').items.length,1);
+ assert.equal(ordinaryPlaceMentions('coal in OH').find(m=>m.geo.code==='OH').accept,true);
 });
-test('G3 reaches question-text named-part restoration; quote-path is always on',()=>{
- for(const on of [true,false])withFlags(['off','off',on?'on':'OFF'],()=>{
-  assert.equal(namedPartRestoreEnabled(),on);
-  const a=f();restoreNamedParts(a,'crude oil production in Texas');assert.equal(quotedNamedParts(a.topics[0]).includes('crude oil'),on);
-  const b=f();b.topics[0].quoted_words='crude oil production';restoreNamedParts(b,'crude oil production in Texas');assert.deepEqual(quotedNamedParts(b.topics[0]),['crude oil']);
- });
+test('removed G3 leaves question-text named parts untouched; quote evidence remains',()=>{
+ const a=f();normalizeLockedFormV2(a,'crude oil production in Texas');assert.deepEqual(quotedNamedParts(a.topics[0]),[]);
+ const b=f();b.topics[0].quoted_words='crude oil production';assert.deepEqual(quotedNamedParts(b.topics[0]),['crude oil']);
 });
-test('owner ambiguity, state-group, typed kind and outage rules remain with every group off',async()=>{
- await withFlags(['off','off','off'],async()=>{
+test('owner ambiguity, state-group, typed kind and outage rules remain',async()=>{
   const a=f();a.geographies=[];a.clarification={needed:true,about:'geography',options:[]};assert.match(normalizeLockedFormV2(a,'oil production Georgia').geographies[0].geography,/^GA/);
   const korea=resolveQuotedPlaces([],[],'coal consumption Korea').items;
   assert.match(korea[0].geography,/^KOR/);
@@ -55,5 +38,4 @@ test('owner ambiguity, state-group, typed kind and outage rules remain with ever
   const states=f();states.geographies=[];states.topics=[{product:'coal',activity:'generation',quoted_words:'coal generation'}];states.clarification={needed:true,about:'geography',options:[]};
   assert.equal(applyReplyUpdate(states,'coal generation',{about:'geography',reply:'all US states',answer:{...empty,unresolved:[{about:'geography',quoted_words:'all US states'}]}}).form.geographies.length,51);
   const outage=await interpretLockedFormV2('coal production in Texas',{apiKey:'',log:()=>{},rules:()=>({needsClarification:true,product:'coal'})});assert.equal(outage.product,'coal');
- });
 });

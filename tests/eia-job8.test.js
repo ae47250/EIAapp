@@ -18,20 +18,20 @@ function form(query,place,topics,about='product'){
 }
 const normalize=(q,f)=>normalizeLockedFormV2(f,q);
 for(const [query,state,topics,want] of [
- ['antural gas reserves in Arkansas','AR',[{product:null,activity:'reserves'}],[['natural gas','reserves']]],
- ['natrual gas consumption in Texas','TX',[{product:null,activity:'consumption'}],[['natural gas','consumption']]],
- ['coal and natual gas in Ohio','OH',[{product:'coal',activity:'consumption'},{product:null,activity:'consumption'}],[['coal','consumption'],['natural gas','consumption']]],
-]) test('Q1 fixes a first-word typo in an adjacent multi-word product: '+query,()=>{
+ ['antural gas reserves in Arkansas','AR',[{product:null,activity:'reserves'}],[[null,'reserves']]],
+ ['natrual gas consumption in Texas','TX',[{product:null,activity:'consumption'}],[[null,'consumption']]],
+ ['coal and natual gas in Ohio','OH',[{product:'coal',activity:'consumption'},{product:null,activity:'consumption'}],[['coal','consumption'],[null,'consumption']]],
+]) test('Q1 removed product typo repair leaves a product question: '+query,()=>{
  const f=normalize(query,form(query,state,topics));
  assert.deepEqual(f.topics.map(t=>[t.product,t.activity]),want);
- assert.equal(f.clarification.needed,false);
+ assert.equal(f.clarification.needed,true);
 });
-test('Q1 Arkansas typo reaches data without a product question',async()=>{
+test('Q1 Arkansas product typo asks before data retrieval',async()=>{
  const q='antural gas reserves in Arkansas',intent=convertLockedFormV2(normalize(q,form(q,'AR',[{product:null,activity:'reserves'}])) ,q);
  const r=await searchLookup(q,sourceIntentPayload(intent),{},{fetchData:async selector=>({complete:true,total:1,rows:[{...selector.facets,period:'2024',value:12,unitName:'Bcf'}]})});
- assert.equal(r.needsClarification,false);assert.equal(r.results.flatMap(g=>g.countries||[]).some(c=>c.series?.points?.length),true);
+ assert.equal(r.needsClarification,true);
 });
-for(const q of ['gas prices in Ohio','gass prices in Ohio'])test('Q1 preserves required ambiguous gas question: '+q,()=>{
+for(const q of ['gas prices in Ohio','gass prices in Ohio'])test('Q1 keeps a product question: '+q,()=>{
  const state=q.includes('Ohio')?'OH':'USA',f=normalize(q,form(q,state,[{product:null,activity:'prices'}]));
  assert.equal(f.clarification.needed,true);assert.equal(f.clarification.about,'product');
  assert.deepEqual(clarificationFor(f,null,{query:q}).choices.map(c=>c.label),['Natural Gas','Gasoline']);

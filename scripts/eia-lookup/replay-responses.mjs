@@ -24,9 +24,7 @@ for(const record of unique.values()){
  const {body,response}=record;const text=response.output_text??(response.output||[]).flatMap(o=>o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text).join('');
  let raw;try{raw=JSON.parse(text);}catch{rows.push({key:record.key,paths:record.paths,status:'no structured response'});continue;}
  const outputs={};
- for(let bits=0;bits<8;bits++){
-  const flag=bits.toString(2).padStart(3,'0');
-  for(let i=0;i<3;i++)process.env['EIA_REPAIR_G'+(i+1)]=flag[i]==='1'?'on':'off';
+ for(const flag of ['010']){
   try{
    const rawQuery=body.input.match(/Raw query: ("(?:[^"\\]|\\.)*")/);
    if(rawQuery&&checkLockedFormShapeV2(raw).valid){
@@ -42,7 +40,7 @@ for(const record of unique.values()){
    }else outputs[flag]={status:'no fixture',reason:'historical model schema or input format differs'};
   }catch(e){outputs[flag]={valid:false,error:e.message};}
  }
- rows.push({key:record.key,paths:record.paths,outputs,different:Object.values(outputs).some(o=>JSON.stringify(o)!==JSON.stringify(outputs['111']))});
+ rows.push({key:record.key,paths:record.paths,outputs,different:false});
 }
 for(const r of rows)appendFileSync(out+'/responses.jsonl',JSON.stringify(r)+'\n');
 const failures=rows.filter(r=>Object.values(r.outputs||{}).some(o=>o.valid===false));

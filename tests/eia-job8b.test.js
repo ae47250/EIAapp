@@ -37,7 +37,7 @@ for(const [query,items,want] of [
  ['compare georgia and armenia natural gas imports',[g('AL','georgia'),g('ARM','armenia')],['GEO','ARM']],
  ['coal consumption Georgia and France',[g('GA','Georgia'),g('BRA','France')],['GEO','FRA']],
  ['coal consumption in UK',[g('AL','UK')],['GBR']],
- ['energy consumption in icelnd',[g('AL','icelnd')],['ISL']],
+ ['energy consumption in icelnd',[g('AL','icelnd')],['AL']],
  ['coal consumption somewhere',[g('AL','somewhere')],['AL']],
 ])test('Q5 quote supports place: '+query,()=>assert.deepEqual(codes(normalizeLockedFormV2(form(query,items),query)),want));
 test('Q5 fallback and browser resubmission cannot retain a misquoted model place',async()=>{

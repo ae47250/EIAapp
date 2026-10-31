@@ -65,13 +65,12 @@ export function historicalFixtures(){
  const records=[];for(const root of roots){if(!existsSync(root))throw new Error('Missing saved response archive '+root);for(const name of readdirSync(root).filter(n=>/attempt-\d+\.json$/.test(n))){const r=read(root+'/'+name);if(r.body&&r.response)records.push({path:root+'/'+name,...r});}}
  return records;
 }
-export function frozenHashes(){const files=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','--','app','components','lib','data','scripts','tests','package.json','package-lock.json','next.config.mjs','proxy.js'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);return Object.fromEntries(files.sort().map(p=>[p,hash(readFileSync(p))]));}
+export function frozenHashes(){const files=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','--','app','components','lib','data','scripts','tests','package.json','package-lock.json','next.config.mjs','proxy.js'],{encoding:'utf8'}).trim().split('\n').filter(p=>p&&existsSync(p));return Object.fromEntries(files.sort().map(p=>[p,hash(readFileSync(p))]));}
 export function verifyFreeze(freeze){if(JSON.stringify(Object.keys(frozenHashes()))!==JSON.stringify(Object.keys(freeze.files)))throw new Error('Frozen file inventory changed');for(const [p,h]of Object.entries(freeze.files))if(hash(readFileSync(p))!==h)throw new Error('Frozen file changed: '+p);}
 export async function main(args=process.argv.slice(2)){
  const opts={};for(let i=0;i<args.length;i+=2){if(!args[i].startsWith('--')||args[i+1]===undefined)throw new Error('Arguments must be --name value');opts[args[i].slice(2)]=args[i+1];}
- const {name,model='gpt-6-luna',effort='low',groups='111',mode='offline',from}=opts;
- if(!name||!prices[model]||!['low','medium','high'].includes(effort)||! /^[01]{3}$/.test(groups)||!['offline','live','replay'].includes(mode))throw new Error('Invalid runner arguments');
- for(let i=0;i<3;i++)process.env['EIA_REPAIR_G'+(i+1)]=groups[i]==='1'?'on':'off';
+ const {name,model='gpt-6-luna',effort='low',groups='010',mode='offline',from}=opts;
+ if(!name||!prices[model]||!['low','medium','high'].includes(effort)||groups!=='010'||!['offline','live','replay'].includes(mode))throw new Error('Invalid runner arguments');
  const base=homedir()+'/Documents/EIAapp-Evidence/20261031/job9/job9c',dir=base+'/'+name;
  if(existsSync(dir))throw new Error('Preserve existing evidence folder: '+dir);
  mkdirSync(dir,{recursive:true,mode:0o700});mkdirSync(dir+'/browser');
