@@ -1,0 +1,25 @@
+{
+  "frozenFiles": 310,
+  "drift": [],
+  "javascriptTests": 803,
+  "pythonTests": 447,
+  "polishBaseline": {
+    "pass": 5,
+    "fail": 21
+  },
+  "polishFinal": {
+    "pass": 26,
+    "fail": 0
+  },
+  "scorerMutationTests": 8,
+  "build": "PASS",
+  "baseline": "f4138a879c0ca45709977ffb4340fd3245bebfae",
+  "testedCommit": "4c17f53",
+  "commands": [
+    "OPENAI_API_KEY= EIA_API_KEY= npm test",
+    "Run each scripts/eia-lookup/*.test.py with python3 -B",
+    "OPENAI_API_KEY= EIA_API_KEY= npm run build",
+    "node --test tests/eia-polish.test.js on git archive f4138a8 with the final regression file copied in"
+  ],
+  "note": "Five preservation cases already passed baseline; each P1-P7 requirement has at least one failing baseline test and passing final test. Python generator regression separately fails baseline and passes final."
+}
