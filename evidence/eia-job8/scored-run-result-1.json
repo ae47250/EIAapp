@@ -1,0 +1,42 @@
+{
+  "version": "eia-job8-scored-result-1",
+  "branch": "codex/eia-fix",
+  "codeCommit": "24c153532a8186c913ebb4cdc72031555ef08090",
+  "freezeCommit": "51560527cfd4cd3a46dd842af23abe73b55a5a2e",
+  "freezeSHA256": "6b115343df7167d9ac04a67041f5c1c1fab812fd8a7c204025f1a6949e91bd68",
+  "result": "FAIL_INCOMPLETE",
+  "reason": "Q1-coal-and-natual-gas returned an invalid locked form with activity_required. The interpreter attempted a validation re-ask; the frozen one-call runner blocked it before an external request and stopped the schedule.",
+  "schedule": {
+    "plannedGenerationCalls": 68,
+    "actualGenerationRequests": 59,
+    "attemptRecords": 60,
+    "blockedBeforeNetwork": 1,
+    "retries": 0,
+    "model": "gpt-6-luna",
+    "reasoning": "low"
+  },
+  "scores": {
+    "D": {"correct": 44, "total": 48, "passMark": "at least 44; passed", "frontPage": "D1-D3 passed both repeats"},
+    "F": {"correct": 8, "total": 8, "passMark": "8 of 8; passed"},
+    "Q1": {"correct": 2, "total": 3, "passMark": "9 of 9; failed and incomplete", "failure": "Q1-coal-and-natual-gas: activity_required; no re-ask request was sent"},
+    "Q4": {"correct": 0, "total": 0, "passMark": "3 of 3; not run", "cases": ["Q4-ash", "Q4-sulfur", "Q4-reactors"]}
+  },
+  "offlineReplay": {
+    "passed": true,
+    "savedCases": 126,
+    "savedModelResponses": 115,
+    "savedEiaResponses": 306,
+    "injectedQ4Cases": {"passed": 3, "total": 3},
+    "externalRequests": 0,
+    "changedSavedCases": ["D8a repeat 1", "D21 repeats 1 and 2", "E3 repeat 1"]
+  },
+  "eiaRetrieval": {"calls": 146, "http200": 146, "networkErrors": 0},
+  "costUSD": {
+    "generationUsage": 0.0584395,
+    "inputCountRequestReserve": 0.000861125,
+    "totalAccountedSoFar": 0.059300625,
+    "frozenMaximum": 0.137753625,
+    "authorizedCeiling": 0.15
+  },
+  "evidence": "Raw model and EIA records remain in protected local evidence; this public record contains only sanitized counts, IDs, scores, and hashes."
+}
