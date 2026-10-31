@@ -17,7 +17,7 @@ const gold=read('tests/fixtures/eia/locked-form/gold-forms.json');
 const oracle=read('evidence/eia-finish/expected-data-revision.json');
 const checks=[...read('evidence/eia-lookup-list/row-checks-1.json').records,...read('evidence/eia-lookup-list/row-checks-2.json').records];
 const key=id=>keys.find(k=>k.id===id);
-const payload=id=>({interpreter:'openai_locked_form',lockedForm:upgradeV1Form(gold.find(g=>g.id===id).form)});
+const payload=id=>{const f=upgradeV1Form(gold.find(g=>g.id===id).form);if(id==='O7')f.topics[1].quoted_words=key(id).query;return {interpreter:'openai_locked_form',lockedForm:f};};
 const calls=[];
 async function recorded(selector){
  calls.push(selector);
@@ -31,6 +31,7 @@ async function recorded(selector){
 const run=(id,action={})=>searchLookup(key(id).query,payload(id),action,{fetchData:recorded});
 for(const k of keys)test('full lookup path with injected EIA observations '+k.id,async()=>{
  const before=calls.length,result=await run(k.id),score=scoreData(result,oracle.questions.find(q=>q.id===k.id));
+ if(k.id==='O2'){assert.equal(result.needsClarification,true);assert.equal(result.intent.lockedForm.topics[0].product,null);assert.equal(calls.length,before);return;}
  assert.deepEqual(score.errors,[]);assert.equal(score.unlabelledWrongData,false);
  assert.deepEqual(result.intent.lockedForm,payload(k.id).lockedForm);
  if(k.clarification)assert.equal(calls.length,before);

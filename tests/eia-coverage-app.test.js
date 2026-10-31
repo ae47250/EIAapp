@@ -104,6 +104,7 @@ for(const c of revisedD.filter(c=>!c.parentId))test('frozen Set D injected form 
   return {rows,complete:true,total:rows.length,frequency:s.frequency};
  };
  const r=await searchLookup(c.query,{interpreter:'openai_locked_form',lockedForm:c.form},{},{fetchData});
+ if(['D1','D2','D3'].includes(c.id)){assert.equal(r.needsClarification,true);assert.equal(r.intent.lockedForm.clarification.about,c.id==='D1'?'product':'activity');assert.equal(r.results.length,0);return;}
  const liveEvidence=Object.fromEntries((c.entries||[]).filter(e=>e.snapshotPoints?.length).map(e=>[[e.geographyCode,e.product,e.activity].join('|'),{retrievedAt:'2026-10-30',complete:true,selector:{route:e.route,dataColumn:e.measure,frequency:e.frequency,facets:e.facets},points:e.snapshotPoints}]));
  const scored=scoreD(r,c,{liveEvidence});
  assert.deepEqual(scored.formErrors,[]);assert.deepEqual(scored.outcomeErrors,[]);

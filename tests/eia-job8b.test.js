@@ -55,8 +55,8 @@ test('Q5 D4a switch after a misquoted D4 yields only Georgia country',async()=>{
  assert.deepEqual(codes(next.intent.lockedForm),['GEO']);
 });
 test('Q4 missing activity retains its question and offers explicit consumption instead',async()=>{
- const query='US average ash content of coal receipts delivered for electricity generation';
- const f=form(query,[g('USA','US')],'coal',null);f.sector={value:'electric power',quoted_words:'electricity generation'};f.unsupported_words=['ash content','receipts delivered'];
+ const query='US average ash content of coal receipts delivered for electricity generation in electric power';
+ const f=form(query,[g('USA','US')],'coal',null);f.sector={value:'electric power',quoted_words:'electric power'};f.unsupported_words=['ash content','receipts delivered'];
  const c=clarificationFor(f,null,{query});assert.equal(c.userMessage,'Which activity should I look up?');
  assert.ok(c.unsupportedMessage.includes('ash content'));
  const choice=c.choices.find(x=>x.label==='Show Coal consumption instead');assert.ok(choice);

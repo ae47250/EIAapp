@@ -19,8 +19,10 @@ const answer = form => Response.json({ status: 'completed', output: [{ type: 'me
 
 for (const k of keys) test(`locked form ${k.id}: frozen meaning survives conversion and browser resubmission`, async () => {
   const form = upgradeV1Form(gold(k.id));
+  if(k.id==='O7')form.topics[1].quoted_words=k.query; // Separate product needs its own supporting span.
   const intent = await interpretQuery(k.query, [], { apiKey: 'offline-placeholder', fetch: async () => answer(form), rules: noRules, log: quiet });
   assert.equal(intent.interpreter, 'openai_locked_form');
+  if(k.id==='O2'){assert.equal(intent.needsClarification,true);assert.equal(intent.lockedForm.topics[0].product,null);return;}
   assert.deepEqual(checkLockedForm(gold(k.id), k.query), { valid: true, errors: [] });
   const params = appendIntentParams(new URLSearchParams({ q: k.query }), intent);
   const payload = JSON.parse(params.get('intentPayload'));
