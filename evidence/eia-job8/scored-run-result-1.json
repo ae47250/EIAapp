@@ -1,13 +1,18 @@
 {
-  "version": "eia-job8-scored-result-1",
+  "version": "eia-job8-scored-result-2",
   "branch": "codex/eia-fix",
   "codeCommit": "24c153532a8186c913ebb4cdc72031555ef08090",
   "freezeCommit": "51560527cfd4cd3a46dd842af23abe73b55a5a2e",
   "freezeSHA256": "6b115343df7167d9ac04a67041f5c1c1fab812fd8a7c204025f1a6949e91bd68",
-  "result": "FAIL_INCOMPLETE",
-  "reason": "Q1-coal-and-natual-gas returned an invalid locked form with activity_required. The interpreter attempted a validation re-ask; the frozen one-call runner blocked it before an external request and stopped the schedule.",
+  "result": "FAIL_INCOMPLETE_AND_PROCESS_FAILURE",
+  "reason": "The frozen schedule had 48 D outcomes instead of the required 58. During the 59th actual model request, Q1-coal-and-natual-gas returned an invalid locked form with activity_required. The interpreter attempted a validation re-ask; the frozen one-call runner blocked it before an external request and stopped the schedule.",
   "schedule": {
     "plannedGenerationCalls": 68,
+    "requiredDOutcomes": 58,
+    "frozenDOutcomes": 48,
+    "missingDOutcomes": 10,
+    "frozenExcludedDCaseIds": ["D4a", "D4b", "D5a", "D5b", "D12a", "D7q"],
+    "requiredCallsIncludingQ4": 78,
     "actualGenerationRequests": 59,
     "attemptRecords": 60,
     "blockedBeforeNetwork": 1,
@@ -16,11 +21,19 @@
     "reasoning": "low"
   },
   "scores": {
-    "D": {"correct": 44, "total": 48, "passMark": "at least 44; passed", "frontPage": "D1-D3 passed both repeats"},
+    "D": {"correct": 44, "completed": 48, "requiredTotal": 58, "passMark": "at least 53 of 58; not met / incomplete", "frontPage": "D1-D3 passed both repeats; D21 passed both repeats", "liveFailures": {"D6a": ["form:places", "form:clarificationAbout"], "D8a": ["form:pairs", "form:clarificationAbout"]}},
     "F": {"correct": 8, "total": 8, "passMark": "8 of 8; passed"},
-    "Q1": {"correct": 2, "total": 3, "passMark": "9 of 9; failed and incomplete", "failure": "Q1-coal-and-natual-gas: activity_required; no re-ask request was sent"},
+    "Q1": {"correct": 2, "completed": 3, "requiredTotal": 9, "passMark": "9 of 9; not met / incomplete", "failure": "Q1-coal-and-natual-gas: activity_required; no re-ask request was sent", "notRun": ["Q1-gas-prices-ohio", "Q1-gass-prices-ohio", "Q1-national-gas-prices", "Q1-gas-station-prices", "Q1-natural-gasoline", "Q1-nat-gas"]},
     "Q4": {"correct": 0, "total": 0, "passMark": "3 of 3; not run", "cases": ["Q4-ash", "Q4-sulfur", "Q4-reactors"]}
   },
+  "q1Baseline": {"baseCommit": "eeefcf72af2fe666d35e6cfd1e0b4f16966a4f4e", "typoRegressionTests": {"failed": 3, "total": 3}, "finalOfflineSuite": "all 3 passed within 829/829 JavaScript tests", "natGasOutOfScope": "With model form product=natural gas, 'nat gas production in Texas' remains natural gas production without clarification. If product is unresolved, normal product clarification remains. No live score reached this case."},
+  "d6aRevision": {
+    "oldLabel": "No data for these years (EIA returned none)",
+    "newLabel": "Not yet in our checked list",
+    "newLabelSet": ["Available", "Reported as zero every year", "No data for these years", "Not yet in our checked list", "EIA does not publish this", "Not in EIA's catalogue"],
+    "liveD6aFailuresAreNotWording": ["form:places", "form:clarificationAbout"]
+  },
+  "q3AddedInstruction": "- Before any paid or scored test run, run the complete offline test suite against the final code, including replays of saved AI responses, and fix every failure first. If the AI's instructions or input format changed, say which saved responses are out of date. A scored run that fails on something the offline suite would have caught is a process failure; report it as one.",
   "offlineReplay": {
     "passed": true,
     "savedCases": 126,
@@ -28,14 +41,21 @@
     "savedEiaResponses": 306,
     "injectedQ4Cases": {"passed": 3, "total": 3},
     "externalRequests": 0,
-    "changedSavedCases": ["D8a repeat 1", "D21 repeats 1 and 2", "E3 repeat 1"]
+    "changedSavedCases": ["D8a repeat 1", "D21 repeats 1 and 2", "E3 repeat 1"],
+    "javascriptTests": {"passed": 829, "total": 829},
+    "pythonTestFiles": {"passed": 32, "total": 32},
+    "build": "passed",
+    "q1BaselineTestCommandResult": "The 3 Q1 typo tests failed on eeefcf7 as expected; all 3 pass on the final code."
   },
   "eiaRetrieval": {"calls": 146, "http200": 146, "networkErrors": 0},
   "costUSD": {
     "generationUsage": 0.0584395,
     "inputCountRequestReserve": 0.000861125,
     "totalAccountedSoFar": 0.059300625,
-    "frozenMaximum": 0.137753625,
+    "frozen68CallMaximum": 0.137753625,
+    "required78CallMaximum": 0.157884875,
+    "requiredScheduleAboveCeilingUSD": 0.007884875,
+    "shouldHaveStoppedBeforePaidCalls": true,
     "authorizedCeiling": 0.15
   },
   "evidence": "Raw model and EIA records remain in protected local evidence; this public record contains only sanitized counts, IDs, scores, and hashes."
