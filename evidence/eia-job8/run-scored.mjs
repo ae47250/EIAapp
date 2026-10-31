@@ -22,9 +22,17 @@ const modelOptions={model:freeze.model,reasoning:freeze.reasoning,maxOutputToken
 if(!freeze.budget||freeze.budget.totalMaximumUSD>.15||freeze.schedule.totalGenerationCalls!==68)throw new Error('Frozen run is not permitted.');
 if(existsSync(local)||existsSync(publicDir))throw new Error('Scored evidence directory exists; refusing to repeat the run.');
 if(!process.env.EIA_PLAYWRIGHT_PATH||!existsSync(process.env.EIA_PLAYWRIGHT_PATH)||!process.env.EIA_CHROME_PATH||!existsSync(process.env.EIA_CHROME_PATH))throw new Error('Local browser runtime is unavailable.');
-const branch=(await import('node:child_process')).execFileSync('git',['branch','--show-current'],{encoding:'utf8'}).trim();
-const commit=(await import('node:child_process')).execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
-if(branch!==freeze.branch||commit!==freeze.codeCommit)throw new Error('Branch or commit differs from the scored-run freeze.');
+const git=(await import('node:child_process')).execFileSync;
+const branch=git('git',['branch','--show-current'],{encoding:'utf8'}).trim();
+const commit=git('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+let frozenCommitMatches=commit===freeze.codeCommit;
+if(!frozenCommitMatches){
+ const ancestry=git('git',['rev-list','--parents','-n','1',commit],{encoding:'utf8'}).trim().split(' ');
+ const changed=git('git',['diff-tree','--no-commit-id','--name-only','-r',commit],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+ const committedFreeze=git('git',['show',`${commit}:${freezePath}`],{encoding:'utf8'});
+ frozenCommitMatches=ancestry.length===2&&ancestry[1]===freeze.codeCommit&&changed.length===1&&changed[0]===freezePath&&committedFreeze===readFileSync(freezePath,'utf8');
+}
+if(branch!==freeze.branch||!frozenCommitMatches)throw new Error('Branch or commit differs from the scored-run freeze.');
 for(const [path,expected]of Object.entries(freeze.filesSHA256))if(hash(readFileSync(path))!==expected)throw new Error('Frozen source changed: '+path);
 const openai=readFileSync(homedir()+'/Downloads/openai-api-key.txt','utf8').trim();
 const eia=readFileSync(homedir()+'/Downloads/eia-api-key.txt','utf8').trim();
