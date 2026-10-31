@@ -18,6 +18,7 @@ const root='evidence/eia-job8',freezePath=root+'/run-freeze.json';
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const read=path=>JSON.parse(path.endsWith('.gz')?gunzipSync(readFileSync(path)):readFileSync(path));
 const freeze=read(freezePath),local=homedir()+'/'+freeze.localEvidenceDirectory,publicDir=local+'/records';
+const modelOptions={model:freeze.model,reasoning:freeze.reasoning,maxOutputTokens:freeze.maximumOutputTokens};
 if(!freeze.budget||freeze.budget.totalMaximumUSD>.15||freeze.schedule.totalGenerationCalls!==68)throw new Error('Frozen run is not permitted.');
 if(existsSync(local)||existsSync(publicDir))throw new Error('Scored evidence directory exists; refusing to repeat the run.');
 if(!process.env.EIA_PLAYWRIGHT_PATH||!existsSync(process.env.EIA_PLAYWRIGHT_PATH)||!process.env.EIA_CHROME_PATH||!existsSync(process.env.EIA_CHROME_PATH))throw new Error('Local browser runtime is unavailable.');
@@ -52,7 +53,6 @@ mkdirSync(local,{recursive:true,mode:0o700});mkdirSync(publicDir,{mode:0o700});m
 const save=(dir,name,value)=>{const data=JSON.stringify(value,null,2)+'\n';if(data.includes(openai)||data.includes(eia))throw new Error('Credential detected in local evidence; write refused.');writeFileSync(dir+'/'+name,data,{flag:'wx',mode:0o600});};
 const append=(name,value)=>{const data=JSON.stringify(value)+'\n';if(data.includes(openai)||data.includes(eia))throw new Error('Credential detected in local evidence; append refused.');appendFileSync(publicDir+'/'+name,data,{mode:0o600});};
 const scheduledMaximum=freeze.budget.perCallMaximumUSD;
-const modelOptions={model:freeze.model,reasoning:freeze.reasoning,maxOutputTokens:freeze.maximumOutputTokens};
 let generationCalls=0,attempts=0,eiaCalls=0,actualGenerationUSD=0,fatalStop=null,activeLabel='',activeSet='',browser;
 const modelRecords=[],outcomes=[],sourceCache=new Map(),results=new Map();
 save(publicDir,'started.json',{startedAt:new Date().toISOString(),branch,commit,freezeSHA256:hash(readFileSync(freezePath)),runnerSHA256:hash(readFileSync(new URL(import.meta.url))),model:freeze.model,reasoning:freeze.reasoning,scheduledCalls:schedule.length,maximumUSD:freeze.budget.totalMaximumUSD,ceilingUSD:freeze.budget.ceilingUSD});
