@@ -1,5 +1,7 @@
 # FAIL — Job 9c stopped at the required saved-form test
 
+Historical stop report, superseded by [owner-decision.md](owner-decision.md).
+
 Start: `codex/eia-measure` at `d6a0f8d13063397fc87b6f986265f153053d0267`.
 
 The saved first-turn `job9b-LUNA-MED` answer for `D-D3` has two topics: `nuclear / production` quoted as `prdouction`, and `nuclear / consumption` quoted as `consumption of nuclear energy`. The frozen suite expects `nuclear / generation` and `nuclear / consumption` for this case, with `country-nuclear-generation` as the first lookup row key. EIA metadata has different verified nuclear production and generation series and units. Under Job 9c item 1, `prdouction` names no other activity, so the validator must retain the model's `production`. G1 changes typo repair for places, products and linking words; G2 adds exact place names; G3 restores named product parts. None may convert an activity from production to generation. Thus item 8's required `D-D3` correct in every chosen-setting replay cannot pass for LUNA-MED without changing a written rule, the frozen suite, the model answer, or app behavior outside the authorized groups.

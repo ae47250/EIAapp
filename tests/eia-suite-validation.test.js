@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {gunzipSync} from 'node:zlib';
 import {lookupCatalog} from '../lib/sources/eia/lookup-list.js';
 
 // Referential integrity: every recorded key must exist in the runner's offline
@@ -25,4 +27,19 @@ test('EIA suite data expectations have nonempty, existing lookup row keys', () =
   assert.deepEqual(invalidKeys(fixture([{place: 'USA', keys: [lookupCatalog.rows[0].key]}])), []);
   const suite = JSON.parse(readFileSync(new URL('./golden/eia-suite.json', import.meta.url)));
   assert.deepEqual(invalidKeys(suite.cases), []);
+});
+test('Every scored case has a substantive expectation in a verified source revision',()=>{
+ const suite=JSON.parse(readFileSync(new URL('./golden/eia-suite.json',import.meta.url)));
+ const sources=Object.fromEntries(Object.entries({...suite.sources,...suite.revisions}).map(([name,path])=>{
+  const bytes=readFileSync(path),hash=createHash('sha256').update(bytes).digest('hex');
+  assert.equal(hash,suite.sourceHashes[path],`source hash: ${path}`);
+  const document=JSON.parse(path.endsWith('.gz')?gunzipSync(bytes):bytes);
+  return [name,Array.isArray(document)?document:document.questions||document.cases||[document.question]];
+ }));
+ for(const c of suite.cases){
+  const revision=c.id==='D-D6a'?'D6a':c.id==='D-D8a'?'D8a':c.set;
+  assert.ok(sources[revision].some(x=>x.id===c.sourceCase.id),`${c.id}: source case missing`);
+  const substantive=Object.values(c.expected).some(v=>v!==null&&v!==undefined&&v!==''&&(!Array.isArray(v)||v.length>0));
+  assert.ok(substantive||Array.isArray(c.sourceCase.accept)&&c.sourceCase.accept.length>0,`${c.id}: empty expected answer`);
+ }
 });

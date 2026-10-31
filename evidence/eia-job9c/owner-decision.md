@@ -1,0 +1,5 @@
+# Job 9c D3 owner decision — 2026-10-31
+
+The frozen D3 expected activity remains `generation`. The typo-quote validator continues to retain a model reading when its quote names no competing activity. The LUNA-MED saved D3 form reads `nuclear / production` and `nuclear / consumption`; its production reading is a valid alternative with checked US rows, but scores as a miss against the unchanged D3 expectation. Exclude only LUNA-MED D3 from the Job 9c front-page PASS mark, and report it separately as **valid alternative reading; expectation too narrow**. It remains an ordinary miss in the scorecard and all repair-group comparisons. The frozen expectation may be revised in a later job.
+
+Checked local rows include `coverage-e0d73fddcb6e10fe1a05` (SEDS NUPRP, US nuclear electricity production) and `coverage-c436b842636d9c622272` (MER NUETBUS, US nuclear electric power consumption/production). EIA's [SEDS nuclear production technical notes](https://www.eia.gov/state/seds/sep_fuel/notes/prod_nuclear.pdf) state its production and consumption relationship. No lookup, suite, schema, vocabulary, or product behavior was changed for this decision.

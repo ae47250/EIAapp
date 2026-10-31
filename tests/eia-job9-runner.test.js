@@ -1,11 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {retryTransport,runBudget,executeCase,suite} from '../scripts/eia-lookup/run-suite.mjs';
-import {exactSet,scoreCase,scorecard} from '../scripts/eia-lookup/score-suite.mjs';
+import {retryTransport,runBudget,executeCase,suite,replayDropReason} from '../scripts/eia-lookup/run-suite.mjs';
+import {exactSet,exactButtons,scoreCase,scorecard} from '../scripts/eia-lookup/score-suite.mjs';
 import {findEvaluationChoice} from '../scripts/eia-lookup/evaluation-choice.js';
 import {interpretLockedFormV2} from '../lib/sources/eia/locked-form-v2.js';
 test('Job9 suite schedule contains every source case exactly once',()=>{assert.equal(suite.cases.length,86);assert.equal(new Set(suite.cases.map(k=>k.id)).size,86);assert.equal(suite.cases.filter(k=>k.excludedFromJointAccuracy).length,1);assert.equal(suite.cases.find(k=>k.id==='Q1-Q1-natural-gasoline').excludedFromJointAccuracy,true);});
 test('Job9 buttons match as exact sets ignoring case and order',()=>{assert.equal(exactSet(['Coal','Gas'],['gas','COAL']),true);assert.equal(exactSet(['Coal'],['Coal','Gas']),false);assert.equal(findEvaluationChoice({choices:[{label:'Coal',choice:{value:'coal'}}]},'COAL').choice.value,'coal');});
+test('Job9c button scoring ignores only Edit search',()=>{assert.equal(exactButtons(['Coal','Edit search'],['coal']),true);assert.equal(exactButtons(['Coal','Other'],['coal']),false);});
+test('Job9c a capped replay drops its dependent case too',()=>{
+ assert.equal(replayDropReason({id:'C-C1',parentId:null},new Set(['C-C1']),new Set()),'recorded cap drop');
+ assert.equal(replayDropReason({id:'C-C1a',parentId:'C-C1'},new Set(),new Set(['C-C1'])),'parent not replayed');
+ assert.equal(replayDropReason({id:'D-D1',parentId:null},new Set(),new Set()),null);
+});
 test('Job9 absent fixture is not scored as a failure',()=>{const score=scoreCase(suite.cases[0],null,{noFixture:true});assert.equal(score.status,'no fixture');assert.equal(score.correct,null);assert.equal(scorecard([{set:'C',score}]).total,0);});
 test('Job9 transport retries exactly three times with backoff',async()=>{let n=0;const waits=[],records=[];const r=await retryTransport(async()=>Response.json({},{status:++n<4?429:200}),{wait:async ms=>waits.push(ms),onAttempt:r=>records.push(r)});assert.equal(n,4);assert.deepEqual(waits,[1000,2000,4000]);assert.equal(r.record.success,true);assert.equal(records.length,4);assert.equal(r.record.retry,3);});
 test('Job9 exhausted transport returns a failure; nontransport errors are not retried',async()=>{let n=0;const r=await retryTransport(async()=>{n++;throw new Error('network');},{wait:async()=>{}});assert.equal(n,4);assert.equal(r.record.success,false);n=0;await retryTransport(async()=>{n++;return Response.json({},{status:400});},{wait:async()=>{}});assert.equal(n,1);});

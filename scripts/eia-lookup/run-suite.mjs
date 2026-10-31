@@ -23,6 +23,7 @@ export function runBudget(cases,model,counts,maxOutput=2048){
  return {initial,replies,calls,attempts,counts,maxOutput,prices:p,maximumUSD,method:'Two allowed model calls per turn; four transport attempts per call; measured prompt bounds and full output allowance.'};
 }
 export const transportStreak = (previous,failed) => failed?previous+1:0;
+export const replayDropReason=(k,dropIds,priorDrops)=>dropIds.has(k.id)?'recorded cap drop':k.parentId&&priorDrops.has(k.parentId)?'parent not replayed':null;
 export async function retryTransport(send,{wait=sleep,onAttempt=()=>{},maxRetries=3,timeoutMs=90000}={}){
  for(let retry=0;retry<=maxRetries;retry++){
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs),started=Date.now();let response,data,error;
@@ -78,6 +79,9 @@ export async function main(args=process.argv.slice(2)){
  const save=(name,value)=>writeFileSync(dir+'/'+name,serialize(value,2)+'\n',{flag:'wx',mode:0o600});
  const append=(name,value)=>appendFileSync(dir+'/'+name,serialize(value)+'\n',{mode:0o600});
  const smoke=opts.smoke==='true',cases=smoke?['C-C2','D-D20','E-E4','F-F1','I-I8'].map(id=>suite.cases.find(k=>k.id===id)):suite.cases;
+ const dropIds=opts['drop-ids']?new Set(read(opts['drop-ids'])):new Set();
+ if(dropIds.size&&mode!=='replay')throw new Error('Drop list is valid only for replay');
+ if([...dropIds].some(id=>!cases.some(k=>k.id===id)))throw new Error('Drop list names an unknown case');
  const options={model,reasoning:{effort},maxOutputTokens:2048};
  const freezePath='evidence/eia-job9c/freeze.json';
  if(existsSync(freezePath))verifyFreeze(read(freezePath));
@@ -88,7 +92,7 @@ export async function main(args=process.argv.slice(2)){
  const ledger=base+'/spend.jsonl',prior=existsSync(ledger)?readFileSync(ledger,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse).reduce((n,r)=>n+r.costUSD,0):0;
  let missingFixture=false;
  let key,eiaKey,budget,browser,stopReason=null,consecutiveErrors=0,totalCalls=0,activeId='',diverged=false,networkLive=false,modelTransportError=null,notReplayed=false,caseBudgetReserved=false;
- const calls=[],rows=[],parents=new Map();
+ const calls=[],rows=[],parents=new Map(),notReplayedIds=new Set();
  const deadline=Date.parse('2026-10-31T20:07:05Z')+5*3600000;
  const checkDeadline=()=>{if(Date.now()>=deadline)throw new Error('Five-hour limit reached');};
  const scheduledMax=cases.reduce((n,k)=>n+modelTurns(k)*2,0);
@@ -185,6 +189,11 @@ export async function main(args=process.argv.slice(2)){
   }
   for(const k of cases){
    activeId=k.id;missingFixture=false;diverged=false;networkLive=mode==='live';modelTransportError=null;notReplayed=false;caseBudgetReserved=false;checkDeadline();
+   const dropReason=replayDropReason(k,dropIds,notReplayedIds);
+   if(dropReason){
+    const row={id:k.id,set:k.set,excludedFromJointAccuracy:k.excludedFromJointAccuracy,diverged:false,notReplayed:true,dropReason,score:scoreCase(k,null,{noFixture:true})};
+    notReplayedIds.add(k.id);rows.push(row);append('scores.jsonl',row);console.log(JSON.stringify({id:k.id,status:'not replayed',reason:dropReason}));continue;
+   }
    let result,initial,error,noFixture=false;
    const beforeCalls=calls.length;
    try{({result,initial}=await executeCase(k,parents.get(k.parentId),dependencies(k),eiaOptions,e=>append('steps.jsonl',{id:k.id,...e})));}
@@ -198,6 +207,7 @@ export async function main(args=process.argv.slice(2)){
    let ui;if(browser&&result?.intent?.lockedForm)ui=await browser.render({...result,query:k.query},k.id,{screenshot:smoke});
    const score=scoreCase(k,result,{initial,ui,executionError:error,noFixture});
    const row={id:k.id,set:k.set,excludedFromJointAccuracy:k.excludedFromJointAccuracy,diverged,notReplayed,score};rows.push(row);append('scores.jsonl',row);
+   if(notReplayed)notReplayedIds.add(k.id);
    console.log(JSON.stringify({id:k.id,status:score.status,correct:score.correct,kind:score.kind,diverged}));
    if(stopReason)break;
   }
@@ -212,7 +222,7 @@ export async function main(args=process.argv.slice(2)){
    }
   }
  }catch(e){stopReason=e.message;}finally{await browser?.close();}
- const summary={...started,completedAt:new Date().toISOString(),status:stopReason?'not run':'complete',stopReason,scheduled:cases.length,executed:rows.length,budget,priorUSD:prior,...scorecard(rows,calls),consoleErrors:browser?.consoleErrors||[],rows};
+ const summary={...started,completedAt:new Date().toISOString(),status:stopReason?'not run':'complete',stopReason,scheduled:cases.length,executed:rows.length,budget,priorUSD:prior,...scorecard(rows,calls),notReplayed:[...notReplayedIds],consoleErrors:browser?.consoleErrors||[],rows};
  summary.harnessPass=!stopReason&&rows.length===cases.length&&!summary.consoleErrors.length;
  save('summary.json',summary);
  writeFileSync('evidence/eia-job9c/'+name+'-scorecard.json',JSON.stringify({...summary,rows:summary.rows.map(r=>({...r,score:{...r.score,actual:undefined}}))},null,2)+'\n');
