@@ -1,0 +1,129 @@
+{
+  "version": "job8-dialogue-runner-cause-audit-1",
+  "recordedAt": "2026-10-31T12:46:20.860415+00:00",
+  "historicalRunStatus": "FAIL_INCOMPLETE_AND_PROCESS_FAILURE",
+  "historicalScoresUnchanged": true,
+  "cause": {
+    "file": "evidence/eia-job8/run-scored.mjs",
+    "line": 200,
+    "finding": "The runner unconditionally called interpretQuery(testCase.query) for child outcomes. It never read parentId, clicks or typedReply for Set D. D6a and D8a were scored against post-click expectations without executing their recorded clicks. Their recorded form mismatches do not establish an app defect after the click.",
+    "alsoPresentInUnrunPlan": "evidence/eia-job8/run-scored-revision-3.mjs:209"
+  },
+  "records": [
+    {
+      "id": "D6a",
+      "repeat": 1,
+      "recordedParentId": "D6",
+      "recordedClicks": [
+        "All US states"
+      ],
+      "actualQuestion": "Which place should I look up?",
+      "actualPlaces": [],
+      "actualTopics": [
+        [
+          "natural gas",
+          "reserves"
+        ]
+      ],
+      "reportedFormErrors": [
+        "form:places",
+        "form:clarificationAbout"
+      ],
+      "resultSHA256": "b2bb23b51860868382897e73c786ace235943051af16e031d58f0289469a79da",
+      "scoreSHA256": "e063bbc2c8c83dae680fe1c4701b0cb5be3eb17ae8bface72920741090c52719"
+    },
+    {
+      "id": "D6a",
+      "repeat": 2,
+      "recordedParentId": "D6",
+      "recordedClicks": [
+        "All US states"
+      ],
+      "actualQuestion": "Which place should I look up?",
+      "actualPlaces": [],
+      "actualTopics": [
+        [
+          "natural gas",
+          "reserves"
+        ]
+      ],
+      "reportedFormErrors": [
+        "form:places",
+        "form:clarificationAbout"
+      ],
+      "resultSHA256": "b2bb23b51860868382897e73c786ace235943051af16e031d58f0289469a79da",
+      "scoreSHA256": "da0246b1bcb5cd419d750018a8b06b3957e1818fa46b1474aff94aefa546f346"
+    },
+    {
+      "id": "D8a",
+      "repeat": 1,
+      "recordedParentId": "D8",
+      "recordedClicks": [
+        "Coal"
+      ],
+      "actualQuestion": "Which product should I look up?",
+      "actualPlaces": [],
+      "actualTopics": [
+        [
+          null,
+          null
+        ]
+      ],
+      "reportedFormErrors": [
+        "form:pairs",
+        "form:clarificationAbout"
+      ],
+      "resultSHA256": "0a7e58c058974689445b8bb7ad5a1e2531c899afc1783cd2d08b7fea220fddd2",
+      "scoreSHA256": "01135b77744047b42607db569deb878c00b00c1ce1444fb0981bc68b75173310"
+    },
+    {
+      "id": "D8a",
+      "repeat": 2,
+      "recordedParentId": "D8",
+      "recordedClicks": [
+        "Coal"
+      ],
+      "actualQuestion": "Which product should I look up?",
+      "actualPlaces": [],
+      "actualTopics": [
+        [
+          null,
+          null
+        ]
+      ],
+      "reportedFormErrors": [
+        "form:pairs",
+        "form:clarificationAbout"
+      ],
+      "resultSHA256": "5bfe90756096ec3caba4dc8c72516bba88d1f8917d342975fda5cfdb79d6fd9b",
+      "scoreSHA256": "77462175f5ad3601b0e55f9f6c509bc10cac75226a0cef1209f9d3d20a8e9c83"
+    }
+  ],
+  "correction": {
+    "file": "evidence/eia-job8/dialogue-step-revision-4.mjs",
+    "mechanism": "Use the corresponding parent outcome for each repetition; execute every recorded choice through sourceIntentPayload, findEvaluationChoice and searchLookup; send typed replies through interpretClarification; only initial interpretations and typed replies can use model calls.",
+    "buttonOnlyOutcomeIds": [
+      "D4a",
+      "D5a",
+      "D5b",
+      "D6a",
+      "D8a"
+    ],
+    "typedReplyOutcomeIds": [
+      "D4b",
+      "D12a"
+    ],
+    "totalOutcomes": 78,
+    "initialInterpretations": 64,
+    "typedReplies": 4,
+    "buttonOnlyOutcomes": 10,
+    "modelTurns": 68,
+    "maximumAttemptsPerModelTurn": 2,
+    "maximumModelCalls": 136
+  },
+  "supersededBudgetRecord": "evidence/eia-job8/budget-gate-stop-revision-1.json",
+  "budgetCorrection": "The earlier 156-call estimate incorrectly charged model calls for ten button-only outcomes. The current run freeze separately budgets initial interpretations and dynamic typed-reply inputs; it preserves both permitted validation attempts, model, reasoning effort and output token allowance.",
+  "currentFreeze": "evidence/eia-job8/run-freeze-revision-4.json",
+  "offlineProof": "evidence/eia-job8/offline-checks-revision-4.json",
+  "noApplicationCodeChange": true
+}
