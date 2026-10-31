@@ -60,7 +60,7 @@ test('year endpoints are independent checked slots and survive browser resubmiss
  const noEnd=structuredClone(c.form);noEnd.years={start:null,end:null,quoted_words:null};
  assert.equal(applyReplyUpdate(noEnd,c.query,{about:'geography',reply,answer:a}).form.years.end,'latest');
 });
-for(const [label,values,want] of [['zero',[0,0],'Reported as zero every year'],['missing',[null,null],'No data for these years'],['mixed zero',[null,0],'Reported as zero every year'],['real',[0,2,null],'Available']])test('observation status '+label,()=>assert.equal(observationStatus(values.map(value=>({value}))),want));
+for(const [label,values,want] of [['zero',[0,0],'Reported as zero every year'],['missing',[null,null],'No data for these years (EIA returned none)'],['mixed zero',[null,0],'Reported as zero every year'],['real',[0,2,null],'Available']])test('observation status '+label,()=>assert.equal(observationStatus(values.map(value=>({value}))),want));
 test('nonnumeric EIA symbols survive parser, table and Excel; only numeric zero is zero',async()=>{
  const row={key:'test',route:'test',dataColumn:'value',unit:'Btu',reportedUnits:['Btu'],product:'coal',activity:'production',basisLabel:'Coal production',description:'All coal',eiaName:'Coal production'};
  const geo=resolveApprovedGeography('BRA'),request={frequency:'annual',sector:null},selector={route:'test',dataColumn:'value',facets:{country:'BRA'},frequency:'annual'};

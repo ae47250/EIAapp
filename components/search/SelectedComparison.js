@@ -1,6 +1,6 @@
 import {formatNumber} from '../../lib/client/formatting.js';
 import { downloadComparisonWorkbook } from "../../lib/client/xlsx.js";
-import { chartCountries, observationRows, TOP_TEN_NOTE, observationStatus, seriesDescription, headlineFor, seriesCardText } from "../../lib/client/lookup-display.js";
+import { placeStatus, placeTypeHeader, chartCountries, observationRows, TOP_TEN_NOTE, observationStatus, seriesDescription, headlineFor, seriesCardText } from "../../lib/client/lookup-display.js";
 import SeriesChart from './SeriesChart.js';
 import ComparisonChart from "./ComparisonChart.js";
 
@@ -42,12 +42,12 @@ export default function SelectedComparison({ comparison, source }) {
       </table></div> : null}
       <div className="table-wrap">
         <table className="comparison-status-table">
-          <thead><tr><th>Country</th><th>Status</th><th>Series</th><th>Coverage</th><th>Units</th></tr></thead>
+          <thead><tr><th>{comparison.lookup?placeTypeHeader(comparison.countries):"Country"}</th><th>Status</th><th>Series</th><th>Coverage</th><th>Units</th></tr></thead>
           <tbody>
             {comparison.countries.map(country => (
               <tr key={country.geography.code}>
                 <td><strong>{country.geography.displayName || country.geography.name}</strong></td>
-                <td>{comparison.lookup?observationStatus(country.series?.points):statusLabel(country.status)}</td>
+                <td>{comparison.lookup?placeStatus(country):statusLabel(country.status)}</td>
                 <td>{comparison.lookup?seriesDescription(country.series):country.seriesId || "Unavailable"}</td>
                 <td>{country.series ? `${country.series.coverage.start} to ${country.series.coverage.end}` : country.coverage}</td>
                 <td>{country.series?.unit || country.unit || "Unavailable"}</td>

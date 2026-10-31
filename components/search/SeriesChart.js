@@ -1,5 +1,6 @@
 "use client";
 
+import {chartPeriodCaption} from "../../lib/client/lookup-display.js";
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -9,6 +10,7 @@ import {
 } from "../../lib/client/formatting.js";
 
 export default function SeriesChart({ series }) {
+  series=series?.chartSeries||series;
   const initialPoints = getCleanPoints(series?.points);
   const [range, setRange] = useState({ start: 0, end: Math.max(0, initialPoints.length - 1) });
   const [tooltip, setTooltip] = useState(null);
@@ -64,6 +66,7 @@ export default function SeriesChart({ series }) {
 
   return (
     <>
+      <p data-chart-caption>{chartPeriodCaption(cleanPoints.slice(range.start,range.end+1))}</p>
       <div className="chart-wrap">
         <canvas
           ref={canvasRef}

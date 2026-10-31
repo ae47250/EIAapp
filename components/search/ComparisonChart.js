@@ -1,5 +1,6 @@
 "use client";
 
+import {chartPeriodCaption} from "../../lib/client/lookup-display.js";
 import { useEffect, useRef } from "react";
 
 import { formatLineChartValue, getCleanPoints } from "../../lib/client/formatting.js";
@@ -14,7 +15,7 @@ export default function ComparisonChart({ comparison }) {
       name: country.geography.name,
       color: COLORS[index % COLORS.length],
       unit: country.series.unit,
-      points: getCleanPoints(country.series.points)
+      points: getCleanPoints((country.series.chartSeries || country.series).points)
     }));
 
   const mixedUnits=new Set(series.map(s=>s.unit)).size>1;
@@ -37,6 +38,7 @@ export default function ComparisonChart({ comparison }) {
 
   return (
     <>
+      <p data-chart-caption>{chartPeriodCaption(series.flatMap(s=>s.points))}</p>
       <div className="comparison-legend" aria-label="Chart countries">
         {series.map(item => (
           <span key={item.name}><i style={{ background: item.color }} />{item.name}</span>

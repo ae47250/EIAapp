@@ -1,0 +1,57 @@
+{
+  "frozenAt": "2026-10-31T01:15:34.648426+00:00",
+  "changes": [
+    {
+      "file": "evidence/eia-polish/set-d-polish.json.gz",
+      "change": "D4a removes lowercase in -> Indiana suggestion",
+      "authority": "P2 Ordinary two-letter words: a lowercase two-letter word (in, or, me, ok, hi, pa, oh, ...) counts as a place only if the model's reading names that place, and never triggers a \"Did you also mean\" suggestion on its own. Lowercase \"us\"/\"usa\" may trigger a US suggestion only when no other place in the request is the United States; a state never counts as covering the United States. If the input is mostly capitals, treat it as lowercase for code detection. Capitalised codes in normal-case text follow the existing R2 rule. Tests: \"marine capacity in World\" -> no Indiana suggestion; \"how much oil does japan us\" -> Japan plus US suggestion; \"gas in OH vs us\" -> Ohio and US, no suggestion; \"coal in pa\" -> Pennsylvania (when the model names it); \"coal OR gas in Ohio\" -> no Oregon; \"COAL USE IN OHIO\" -> Ohio only; \"coal in OR\" -> Oregon."
+    },
+    {
+      "file": "evidence/eia-polish/set-d-polish.json.gz",
+      "change": "D4a/D4b status: Not yet in our checked list. D6a missing observations: No data for these years (EIA returned none). Selectors, data and all other checks unchanged.",
+      "authority": "P6 One status per place, never contradictory, same in card, table and Excel: Available / Reported as zero every year / No data for these years (EIA returned none) / Not yet in our checked list / EIA does not publish this / Not in EIA's catalogue. Test with the all-states result (DC, Vermont)."
+    },
+    {
+      "file": "scripts/eia-lookup/score-d-polish.js",
+      "change": "Only status text check versioned; missing places require their exact frozen status, all other checks retained.",
+      "authority": "P6 One status per place, never contradictory, same in card, table and Excel: Available / Reported as zero every year / No data for these years (EIA returned none) / Not yet in our checked list / EIA does not publish this / Not in EIA's catalogue. Test with the all-states result (DC, Vermont)."
+    },
+    {
+      "file": "evidence/eia-polish/set-e-policy.json",
+      "change": "E12 uses EIA annual MGUCUUS for 2025, same route/facets; monthly chart additionally required by every-output checks and F2.",
+      "authority": "P3 Period wording: \"last year\" = previous calendar year (2025 today). The headline states the exact period of the value it shows. When the user asks for a year and EIA publishes an annual value for the same measure, the headline uses it (\"$X per gallon, 2025 average\") and the chart below shows that year's monthly values; otherwise the headline names the month (\"$3.195 per gallon in December 2025\") and says \"monthly values for 2025\". An incomplete year says so (\"January-September 2026, year not complete\"). Captions (\"Last N years shown\") match the points plotted. October 2025 gasoline: report the series ID, the API call and whether EIA's response contains the value."
+    },
+    {
+      "file": "tests/eia-coverage-app.test.js",
+      "change": "Missing status exact text; original preserved compressed",
+      "authority": "P6 One status per place, never contradictory, same in card, table and Excel: Available / Reported as zero every year / No data for these years (EIA returned none) / Not yet in our checked list / EIA does not publish this / Not in EIA's catalogue. Test with the all-states result (DC, Vermont)."
+    },
+    {
+      "file": "tests/eia-finish.test.js",
+      "change": "AGENTS block hash after exact P7 sentence and separately retained defaults; original preserved compressed",
+      "authority": "P7 In the repo AGENTS.md \"EIAapp data decisions\" section, replace the \"Ambiguous place names\" line with exactly: \"Never choose silently: ambiguous input uses a stated default (listed here) with a switch button, or buttons for each candidate; place words that are also ordinary words are never added or dropped silently; lowercase two-letter words never trigger suggestions.\" Test against that exact sentence, quoted in the test file."
+    },
+    {
+      "file": "scripts/eia-lookup/read-polish-export.py",
+      "change": "Accept State/Country/Place name/code headers; preserve old reader",
+      "authority": "P5 Place-type headers: \"State\" for states only, \"Country\" for countries only, \"Place\" when mixed, in tables and Excel. Tests: all-states export; \"coal use Ohio vs Japan\" -> \"Place\"."
+    },
+    {
+      "file": "scripts/eia-lookup/coverage-browser-polish.js",
+      "change": "Capture every output and workbook, captions and status text",
+      "authority": "P3 Period wording: \"last year\" = previous calendar year (2025 today). The headline states the exact period of the value it shows. When the user asks for a year and EIA publishes an annual value for the same measure, the headline uses it (\"$X per gallon, 2025 average\") and the chart below shows that year's monthly values; otherwise the headline names the month (\"$3.195 per gallon in December 2025\") and says \"monthly values for 2025\". An incomplete year says so (\"January-September 2026, year not complete\"). Captions (\"Last N years shown\") match the points plotted. October 2025 gasoline: report the series ID, the API call and whether EIA's response contains the value."
+    },
+    {
+      "file": "scripts/eia-lookup/score-polish-output.js",
+      "change": "Additional every-output exact period/caption, full Excel precision, no research text, exact statuses and place headers; all original checks retained",
+      "authority": "P3 Period wording: \"last year\" = previous calendar year (2025 today). The headline states the exact period of the value it shows. When the user asks for a year and EIA publishes an annual value for the same measure, the headline uses it (\"$X per gallon, 2025 average\") and the chart below shows that year's monthly values; otherwise the headline names the month (\"$3.195 per gallon in December 2025\") and says \"monthly values for 2025\". An incomplete year says so (\"January-September 2026, year not complete\"). Captions (\"Last N years shown\") match the points plotted. October 2025 gasoline: report the series ID, the API call and whether EIA's response contains the value."
+    }
+  ],
+  "unchanged": [
+    "Set C revision 2",
+    "I meaning revision 2 and finish data revision",
+    "Set E cases, score-e-finish-revision-2.js",
+    "All pass marks"
+  ],
+  "timing": "Before any Job 7 scored generation. No post-run revisions permitted for score."
+}

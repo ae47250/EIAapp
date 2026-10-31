@@ -34,7 +34,8 @@ def generate(table,selected,checks,cross,catalog):
   cid,route,column,freq,unit,basis,original=g;kind,p,a,sector,qualifier=cid.split('|');common={k:v for k,v in ds[0]['facets'].items() if all(d['facets'].get(k)==v for d in ds)}
   place={d['geographyCode']:{k:v for k,v in d['facets'].items() if k not in common} for d in ds};assert len(place)==len(ds)
   description=basis
-  for note in dict.fromkeys(str(n) for d in ds for n in d.get('scopeNotes',[]) if n):description+='; '+note
+  # scopeNotes are research instructions, never user-facing descriptions.
+  # The verified basis and explicit display notes below carry measurement scope.
   n=nuclear['sources']['consumption']['selector']
   if nuclear.get('sameWithinPublishedRounding') and route==n['route'] and column==n['column'] and all(all(d['facets'].get(k)==v for k,v in n['facets'].items()) for d in ds):description+='; '+nuclear['displayNote']
   if qualifier:description+='; '+qualifier.title()+' (part of '+p+')'

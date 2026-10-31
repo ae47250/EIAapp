@@ -355,7 +355,8 @@ Distinguish proposed, implemented, tested, committed, pushed and deployed. Repor
 ### EIAapp data decisions (owner, Oct 2026)
 - Model: gpt-6-luna, reasoning low. No dated snapshot exists; rerun scored sets if results look odd.
 - Places: use a country's own code (type c); never match places or codes by name alone. Lookalike region codes (e.g. WP13 "Brazil") only if the country code has no data, labelled.
-- Ambiguous place names: default kept in the geography data, shown with full name, plus a switch button (Georgia -> US state unless beside another non-US country; Korea -> South Korea). Place words that are also ordinary words are never added or dropped silently.
+- Never choose silently: ambiguous input uses a stated default (listed here) with a switch button, or buttons for each candidate; place words that are also ordinary words are never added or dropped silently; lowercase two-letter words never trigger suggestions.
+- Approved ambiguity defaults: Georgia -> US state unless beside another non-US country; Korea -> South Korea.
 - Values: EIA symbols stay non-numeric with EIA's meaning; only numeric 0 is "Reported as zero"; a blank never becomes 0 anywhere (screen, chart, Excel).
 - Scope: use EIA's broader total if published; else EIA's headline figure, labelled with EIA's scope wording; "subset only" means a component or one sector when all were asked. Named parts: only "crude oil" and "gasoline", labelled.
 - Existing lookup rows and defaults win; generated mappings only fill gaps. US-only datasets without a place filter count for the US only.

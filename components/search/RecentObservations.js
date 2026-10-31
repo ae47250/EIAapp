@@ -11,7 +11,7 @@ export default function RecentObservations({ series }) {
     <section className="grid">
       <article className="card recent-observations-card">
         <h3 className="result-card-title">Recent Observations</h3>
-        <div className="muted">Last 4 years shown. Excel download includes the full selected series.</div>
+        <div className="muted">{new Set(points.map(p=>p.period.slice(0,4))).size} {new Set(points.map(p=>p.period.slice(0,4))).size===1?"year":"years"} shown. Excel download includes the full selected series.</div>
         <div className="recent-country">{series.country || ""}</div>
         <div className="compact-observations">
           {points.map(point => (

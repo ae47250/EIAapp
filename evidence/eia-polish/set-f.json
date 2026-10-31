@@ -1,0 +1,110 @@
+{
+  "authority": "Owner Set F frozen word-for-word in set-f-owner.txt before implementation; explicit machine checks for those meanings. F7 only specifies places, not a product/activity.",
+  "cases": [
+    {
+      "id": "F1",
+      "query": "marine capacity in World",
+      "expected": {
+        "places": [
+          "WLD"
+        ],
+        "product": "marine",
+        "activity": "capacity",
+        "noIndiana": true,
+        "data": true,
+        "noQuestion": true
+      }
+    },
+    {
+      "id": "F2",
+      "query": "US gasoline prices last year",
+      "expected": {
+        "places": [
+          "USA"
+        ],
+        "product": "petroleum",
+        "activity": "prices",
+        "data": true,
+        "annual": true,
+        "noQuestion": true
+      }
+    },
+    {
+      "id": "F3",
+      "query": "all states coal generation",
+      "expected": {
+        "states": true,
+        "product": "coal",
+        "activity": "generation",
+        "buttonPath": "All US states",
+        "data": true
+      }
+    },
+    {
+      "id": "F4",
+      "query": "Nambia energy use",
+      "expected": {
+        "places": [
+          "NAM"
+        ],
+        "product": "total energy",
+        "activity": "consumption",
+        "data": true,
+        "noQuestion": true
+      }
+    },
+    {
+      "id": "F5",
+      "query": "how much oil does japan us",
+      "expected": {
+        "places": [
+          "JPN"
+        ],
+        "product": "petroleum",
+        "activity": "consumption",
+        "buttons": [
+          "Did you also mean United States?"
+        ],
+        "data": true
+      }
+    },
+    {
+      "id": "F6",
+      "query": "gas prices in Ohio",
+      "expected": {
+        "places": [
+          "OH"
+        ],
+        "question": "product",
+        "buttons": [
+          "Natural Gas",
+          "Gasoline"
+        ]
+      }
+    },
+    {
+      "id": "F7",
+      "query": "gas in OH vs us",
+      "expected": {
+        "places": [
+          "OH",
+          "USA"
+        ]
+      }
+    },
+    {
+      "id": "F8",
+      "query": "petroleum consumption ni Burma",
+      "expected": {
+        "places": [
+          "MMR"
+        ],
+        "product": "petroleum",
+        "activity": "consumption",
+        "data": true,
+        "noQuestion": true,
+        "noNi": true
+      }
+    }
+  ]
+}
