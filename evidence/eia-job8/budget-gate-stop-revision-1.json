@@ -1,0 +1,102 @@
+{
+  "version": "eia-job8-budget-gate-stop-1",
+  "recordedAt": "2026-10-31T12:14:02.560Z",
+  "status": "NOT_RUN_BUDGET_GATE",
+  "result": "No new scored outcomes. The paid run stopped before any model call because the actual retry bound exceeds the authorized cumulative ceiling.",
+  "branch": "codex/eia-fix",
+  "codeCommit": "87375429987a798550a023c83db9722957d8d2d3",
+  "schedule": {
+    "D": {
+      "cases": 29,
+      "outcomes": 58
+    },
+    "F": 8,
+    "Q1": 9,
+    "Q4": 3,
+    "scheduledInitialInterpretations": 78
+  },
+  "ownerCorrection": {
+    "caseId": "Q1-coal-and-natual-gas",
+    "query": "coal and natual gas in Ohio",
+    "expected": "Recognize coal and natural gas as two products; ask for activity with activity buttons; do not ask natural gas versus gasoline.",
+    "frozenIn": "evidence/eia-job8/q1-freeze-revision-2.json"
+  },
+  "reaskPolicy": {
+    "source": "lib/sources/eia/locked-form-v2.js:194-233",
+    "behavior": "Each interpretation permits an initial model call and one automatic validation re-ask. This applies to every scheduled case.",
+    "scheduledInitialCalls": 78,
+    "maximumReasks": 78,
+    "maximumGenerationCalls": 156
+  },
+  "correctedBudget": {
+    "ceilingUSD": 0.3,
+    "priorPartialRunActualUSD": 0.059300625,
+    "inputTokenBoundPerCall": 7913,
+    "outputTokenBoundPerCall": 2048,
+    "inputPricePerMillionUSD": 0.125,
+    "outputPricePerMillionUSD": 0.5,
+    "maximumPerGenerationUSD": 0.002013125,
+    "maximumGenerationCalls": 156,
+    "generationMaximumUSD": 0.31404750000000003,
+    "tokenCountReserveUSD": 0.000861125,
+    "newRunMaximumUSD": 0.31490862500000005,
+    "cumulativeMaximumUSD": 0.37420925000000005,
+    "overCumulativeCeilingUSD": 0.07420925000000006,
+    "decision": "STOP_BEFORE_PAID_CALL",
+    "pricingBasis": {
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checkedOn": "2026-10-31",
+      "model": "gpt-6-luna",
+      "standardInputPerMillionUSD": 0.1,
+      "outputPerMillionUSD": 0.5,
+      "thirtyMinuteCacheWritePerMillionUSD": 0.125,
+      "rateUsedForWorstCaseInput": 0.125,
+      "reason": "Use the higher 30-minute cache-write rate for a conservative maximum."
+    }
+  },
+  "supersededEstimate": {
+    "file": "evidence/eia-job8/run-freeze-revision-3.json",
+    "recordedMaximumGenerationCalls": 79,
+    "reason": "The estimate incorrectly treated the single automatic validation re-ask as a run-wide allowance. The application allows one re-ask per interpretation, so its schedule-wide worst case is 156 generations."
+  },
+  "execution": {
+    "paidModelCallsForThisAttempt": 0,
+    "apiKeyUse": "Readability checked by preflight only; key contents were not printed, copied, or sent.",
+    "scoredOutputDirectoryCreated": false,
+    "priorPartialRunPreserved": true,
+    "preflight": "Passed identity, schedule, request-hash, key-availability, and original freeze-budget checks; no model request was sent.",
+    "offlineReplay": {
+      "gate": true,
+      "modelResponseReplays": 115,
+      "eiaResponseReplays": 306,
+      "networkCalls": 0,
+      "totalSavedOutcomes": 126,
+      "q4InjectedCases": 3,
+      "q4Pass": true,
+      "d6a": "Unchanged in saved-response replay; not a new scored outcome.",
+      "d8a": "Changed as an expected saved-response difference because current unsupported-measure behavior preserves the explicitly unsupported word stuff while keeping the activity question and buttons; not a new scored outcome.",
+      "summarySHA256": "b234231a40ae0baf7d12ed25c5df71f70a94c1a6b38b460bd29ab899dc8c276e",
+      "summaryFile": "evidence/eia-job8/saved-replay-summary-revision-1.json"
+    },
+    "checks": {
+      "npmTest": "PASS: 829/829",
+      "pythonOffline": "PASS: 32 test files",
+      "ownerCorrectionRegression": "PASS: 2/2",
+      "savedResponseReplay": "PASS: replay gate true; 126 existing saved outcomes plus 3 injected Q4 checks; networkCalls=0",
+      "productionBuild": "PASS: npm run build"
+    }
+  },
+  "commands": [
+    "npm test",
+    "python runner over scripts/eia-lookup/*.test.py (32 files)",
+    "node --test evidence/eia-job8/check-revision-2.mjs",
+    "EIA_PLAYWRIGHT_PATH=<existing Playwright path> EIA_CHROME_PATH=<Chrome path> node evidence/eia-job8/replay-saved-revision-3.mjs",
+    "npm run build",
+    "EIA_JOB8_PREFLIGHT=1 EIA_PLAYWRIGHT_PATH=<existing Playwright path> EIA_CHROME_PATH=<Chrome path> node evidence/eia-job8/run-scored-revision-3.mjs"
+  ],
+  "evidenceHashes": {
+    "priorFreezeSHA256": "2af10484b931506c88598ed2c086a438dbe7bf8777acd67c313425ae9ecaf0e4",
+    "supersededFreezeSHA256": "8d07db5462e0f9b98cd646ea98b154d0ad60b307f50732ff4306985fa2a82d54",
+    "q1CorrectionSHA256": "0b88e99e906d207641997cc982f455b0898c6cc18ac7106466cd39f24962d8a1"
+  }
+}
