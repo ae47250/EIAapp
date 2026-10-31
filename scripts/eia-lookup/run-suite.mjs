@@ -68,10 +68,10 @@ export function frozenHashes(){const files=execFileSync('git',['ls-files','--cac
 export function verifyFreeze(freeze){if(JSON.stringify(Object.keys(frozenHashes()))!==JSON.stringify(Object.keys(freeze.files)))throw new Error('Frozen file inventory changed');for(const [p,h]of Object.entries(freeze.files))if(hash(readFileSync(p))!==h)throw new Error('Frozen file changed: '+p);}
 export async function main(args=process.argv.slice(2)){
  const opts={};for(let i=0;i<args.length;i+=2){if(!args[i].startsWith('--')||args[i+1]===undefined)throw new Error('Arguments must be --name value');opts[args[i].slice(2)]=args[i+1];}
- const {name,model='gpt-6-luna',effort='low',repair='on',mode='offline',from}=opts;
- if(!name||!prices[model]||!['low','medium','high'].includes(effort)||!['on','off'].includes(repair)||!['offline','live','replay'].includes(mode))throw new Error('Invalid runner arguments');
- process.env.EIA_TEXT_REPAIR=repair;
- const base=homedir()+'/Documents/EIAapp-Evidence/20261031/job9',dir=base+'/'+name;
+ const {name,model='gpt-6-luna',effort='low',groups='111',mode='offline',from}=opts;
+ if(!name||!prices[model]||!['low','medium','high'].includes(effort)||! /^[01]{3}$/.test(groups)||!['offline','live','replay'].includes(mode))throw new Error('Invalid runner arguments');
+ for(let i=0;i<3;i++)process.env['EIA_REPAIR_G'+(i+1)]=groups[i]==='1'?'on':'off';
+ const base=homedir()+'/Documents/EIAapp-Evidence/20261031/job9/job9c',dir=base+'/'+name;
  if(existsSync(dir))throw new Error('Preserve existing evidence folder: '+dir);
  mkdirSync(dir,{recursive:true,mode:0o700});mkdirSync(dir+'/browser');
  const secrets=[];const serialize=(value,pretty)=>{let text=JSON.stringify(value,null,pretty);for(const secret of secrets)text=text.replaceAll(secret,'[REDACTED]');return text;};
@@ -79,22 +79,22 @@ export async function main(args=process.argv.slice(2)){
  const append=(name,value)=>appendFileSync(dir+'/'+name,serialize(value)+'\n',{mode:0o600});
  const smoke=opts.smoke==='true',cases=smoke?['C-C2','D-D20','E-E4','F-F1','I-I8'].map(id=>suite.cases.find(k=>k.id===id)):suite.cases;
  const options={model,reasoning:{effort},maxOutputTokens:2048};
- const freezePath='evidence/eia-job9/freeze.json';
+ const freezePath='evidence/eia-job9c/freeze.json';
  if(existsSync(freezePath))verifyFreeze(read(freezePath));
  const head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
  const promptHash=hash(readFileSync('lib/sources/eia/locked-form-instructions-v2.txt')+readFileSync('lib/sources/eia/locked-form-reply.js'));
- const started={name,model,effort,repair,mode,from:from||null,smoke,startedAt:new Date().toISOString(),head,promptHash,scheduled:cases.length,suiteHash:hash(readFileSync('tests/golden/eia-suite.json'))};
+ const started={name,model,effort,groups,mode,from:from||null,strictReplay:opts['strict-replay']==='true',smoke,startedAt:new Date().toISOString(),head,promptHash,scheduled:cases.length,suiteHash:hash(readFileSync('tests/golden/eia-suite.json'))};
  save('started.json',started);
  const ledger=base+'/spend.jsonl',prior=existsSync(ledger)?readFileSync(ledger,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse).reduce((n,r)=>n+r.costUSD,0):0;
  let missingFixture=false;
- let key,eiaKey,budget,browser,stopReason=null,consecutiveErrors=0,totalCalls=0,activeId='',diverged=false,networkLive=false,modelTransportError=null;
+ let key,eiaKey,budget,browser,stopReason=null,consecutiveErrors=0,totalCalls=0,activeId='',diverged=false,networkLive=false,modelTransportError=null,notReplayed=false,caseBudgetReserved=false;
  const calls=[],rows=[],parents=new Map();
- const deadline=Number(execFileSync('git',['reflog','show','--format=%ct','codex/eia-measure'],{encoding:'utf8'}).trim().split('\n').at(-1))*1000+6*3600000;
- const checkDeadline=()=>{if(Date.now()>=deadline)throw new Error('Six-hour limit reached');};
+ const deadline=Date.parse('2026-10-31T20:07:05Z')+5*3600000;
+ const checkDeadline=()=>{if(Date.now()>=deadline)throw new Error('Five-hour limit reached');};
  const scheduledMax=cases.reduce((n,k)=>n+modelTurns(k)*2,0);
  if(mode!=='offline'){
-  const gate=read('evidence/eia-job9/offline-gate.json');if(!gate.pass)throw new Error('Complete offline gate must pass');verifyFreeze(gate);
-  if(!smoke&&!existsSync(freezePath))throw new Error('Smoke freeze required before scored runs');
+  const gate=read('evidence/eia-job9c/offline-gate.json');if(!gate.pass)throw new Error('Complete offline gate must pass');verifyFreeze(gate);
+  if(!existsSync(freezePath))throw new Error('Offline freeze required before scored runs');
   key=readFileSync(homedir()+'/Downloads/openai-api-key.txt','utf8').trim();eiaKey=readFileSync(homedir()+'/Downloads/eia-api-key.txt','utf8').trim();
   secrets.push(key,eiaKey);
   const access=await fetch('https://api.openai.com/v1/models',{headers:{Authorization:`Bearer ${key}`}});const models=await access.json();
@@ -112,8 +112,8 @@ export async function main(args=process.argv.slice(2)){
    measurements[kind]={inputTokens:data.input_tokens,requestHash:hash(JSON.stringify(countBody)),additionalBound:kind==='reply'?12000:240};
   }
   const counts=Object.fromEntries(Object.entries(measurements).map(([k,v])=>[k,v.inputTokens+v.additionalBound]));
-  budget=runBudget(cases,model,counts);save('budget.json',{...budget,measurements,priorUSD:prior,remainingUSD:20-prior,capUSD:20});
-  if(budget.maximumUSD>20-prior||smoke&&budget.maximumUSD>=.5){save('summary.json',{...started,status:'not run',reason:'whole run exceeds worst-case budget',budget,priorUSD:prior,costUSD:0});return;}
+  budget=runBudget(cases,model,counts);save('budget.json',{...budget,measurements,priorUSD:prior,remainingUSD:30-prior,capUSD:30});
+  if(mode==='live'&&budget.maximumUSD>30-prior){save('summary.json',{...started,status:'not run',reason:'whole run exceeds worst-case budget',budget,priorUSD:prior,costUSD:0});return;}
  }
  const replayRecords=from?readFileSync(from+'/model-attempts.jsonl','utf8').trim().split('\n').filter(Boolean).map(JSON.parse):[];
  const history=mode==='offline'?historicalFixtures():[];
@@ -156,6 +156,12 @@ export async function main(args=process.argv.slice(2)){
     }
     if(mode==='offline'){missingFixture=true;throw Object.assign(new Error('No saved model response'),{noFixture:true});}
     if(mode==='replay'){diverged=true;networkLive=true;}
+    if(opts['strict-replay']==='true')throw new Error('Strict replay prompt mismatch: '+k.id+' call '+turn+'/'+ordinal);
+    if(mode==='replay'&&!caseBudgetReserved){
+     const used=prior+calls.reduce((n,c)=>n+(c.costUSD||0),0),reserved=runBudget([k],model,budget.counts).maximumUSD;
+     if(used+reserved>30){notReplayed=true;throw Object.assign(new Error('Not replayed: divergence exceeds remaining worst-case budget'),{notReplayed:true});}
+     caseBudgetReserved=true;
+    }
     checkDeadline();
     const bound=kind==='eia_search_v2'?budget.counts.initial:budget.counts.reply;
     // Runtime byte guards keep dynamic prompts within the pre-run reservation.
@@ -178,11 +184,11 @@ export async function main(args=process.argv.slice(2)){
    browser=await createCoverageBrowser(dir+'/browser');
   }
   for(const k of cases){
-   activeId=k.id;missingFixture=false;diverged=false;networkLive=mode==='live';modelTransportError=null;checkDeadline();
+   activeId=k.id;missingFixture=false;diverged=false;networkLive=mode==='live';modelTransportError=null;notReplayed=false;caseBudgetReserved=false;checkDeadline();
    let result,initial,error,noFixture=false;
    const beforeCalls=calls.length;
    try{({result,initial}=await executeCase(k,parents.get(k.parentId),dependencies(k),eiaOptions,e=>append('steps.jsonl',{id:k.id,...e})));}
-   catch(e){error=e.message;noFixture=mode==='offline'&&(/No saved|Required parent/.test(error));initial=e.initial;result=e.result||parents.get(k.parentId)||{query:k.query,intent:{},results:[],choices:[]};}
+   catch(e){error=e.message;noFixture=mode==='offline'&&(/No saved|Required parent/.test(error))||Boolean(e.notReplayed);initial=e.initial;result=e.result||parents.get(k.parentId)||{query:k.query,intent:{},results:[],choices:[]};}
    noFixture ||= missingFixture;
    if(error&&!noFixture&&!/Required button|Required parent|reply context|clarification field|Model outage|transport/i.test(error))stopReason='Harness/application defect: '+error;
    if(mode==='offline'&&calls.slice(beforeCalls).some(c=>c.stale))append('stale.jsonl',{id:k.id,reason:'Saved response does not test the new prompt/context reading.'});
@@ -191,7 +197,7 @@ export async function main(args=process.argv.slice(2)){
    save(k.id+'-result.json',{result,initial,error});
    let ui;if(browser&&result?.intent?.lockedForm)ui=await browser.render({...result,query:k.query},k.id,{screenshot:smoke});
    const score=scoreCase(k,result,{initial,ui,executionError:error,noFixture});
-   const row={id:k.id,set:k.set,excludedFromJointAccuracy:k.excludedFromJointAccuracy,diverged,score};rows.push(row);append('scores.jsonl',row);
+   const row={id:k.id,set:k.set,excludedFromJointAccuracy:k.excludedFromJointAccuracy,diverged,notReplayed,score};rows.push(row);append('scores.jsonl',row);
    console.log(JSON.stringify({id:k.id,status:score.status,correct:score.correct,kind:score.kind,diverged}));
    if(stopReason)break;
   }
@@ -209,7 +215,7 @@ export async function main(args=process.argv.slice(2)){
  const summary={...started,completedAt:new Date().toISOString(),status:stopReason?'not run':'complete',stopReason,scheduled:cases.length,executed:rows.length,budget,priorUSD:prior,...scorecard(rows,calls),consoleErrors:browser?.consoleErrors||[],rows};
  summary.harnessPass=!stopReason&&rows.length===cases.length&&!summary.consoleErrors.length;
  save('summary.json',summary);
- writeFileSync('evidence/eia-job9/'+name+'-scorecard.json',JSON.stringify({...summary,rows:summary.rows.map(r=>({...r,score:{...r.score,actual:undefined}}))},null,2)+'\n');
+ writeFileSync('evidence/eia-job9c/'+name+'-scorecard.json',JSON.stringify({...summary,rows:summary.rows.map(r=>({...r,score:{...r.score,actual:undefined}}))},null,2)+'\n');
  if(smoke&&summary.harnessPass){const freeze={createdAt:new Date().toISOString(),smoke:name,promptHash,files:frozenHashes()};writeFileSync(freezePath,JSON.stringify(freeze,null,2)+'\n',{flag:'wx'});}
  console.log(JSON.stringify({...summary,rows:undefined,naturalGasoline:undefined}));
  if(!summary.harnessPass)process.exitCode=1;

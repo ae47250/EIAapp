@@ -24,8 +24,9 @@ for(const record of unique.values()){
  const {body,response}=record;const text=response.output_text??(response.output||[]).flatMap(o=>o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text).join('');
  let raw;try{raw=JSON.parse(text);}catch{rows.push({key:record.key,paths:record.paths,status:'no structured response'});continue;}
  const outputs={};
- for(const flag of ['on','off']){
-  process.env.EIA_TEXT_REPAIR=flag;
+ for(let bits=0;bits<8;bits++){
+  const flag=bits.toString(2).padStart(3,'0');
+  for(let i=0;i<3;i++)process.env['EIA_REPAIR_G'+(i+1)]=flag[i]==='1'?'on':'off';
   try{
    const rawQuery=body.input.match(/Raw query: ("(?:[^"\\]|\\.)*")/);
    if(rawQuery&&checkLockedFormShapeV2(raw).valid){
@@ -41,9 +42,9 @@ for(const record of unique.values()){
    }else outputs[flag]={status:'no fixture',reason:'historical model schema or input format differs'};
   }catch(e){outputs[flag]={valid:false,error:e.message};}
  }
- rows.push({key:record.key,paths:record.paths,outputs,different:JSON.stringify(outputs.on)!==JSON.stringify(outputs.off)});
+ rows.push({key:record.key,paths:record.paths,outputs,different:Object.values(outputs).some(o=>JSON.stringify(o)!==JSON.stringify(outputs['111']))});
 }
 for(const r of rows)appendFileSync(out+'/responses.jsonl',JSON.stringify(r)+'\n');
 const failures=rows.filter(r=>Object.values(r.outputs||{}).some(o=>o.valid===false));
-const summary={roots,uniqueResponses:unique.size,sourceRecords:[...unique.values()].reduce((n,r)=>n+r.paths.length,0),parseErrors,failures:failures.map(r=>({key:r.key,paths:r.paths,outputs:r.outputs})),differences:rows.filter(r=>r.different).map(r=>({key:r.key,paths:r.paths,on:r.outputs.on,off:r.outputs.off})),unavailable:rows.filter(r=>r.status||Object.values(r.outputs||{}).some(o=>o.status==='no fixture')).length,pass:!failures.length&&!parseErrors.length,promptChanged:false,limitation:'Historical schemas are reported no fixture. Typed-parent replay reconstructs only saved parent quotes and does not test the model reading the current parent. Complete dialogue replay is separately run by run-suite.mjs.'};
+const summary={roots,uniqueResponses:unique.size,sourceRecords:[...unique.values()].reduce((n,r)=>n+r.paths.length,0),parseErrors,failures:failures.map(r=>({key:r.key,paths:r.paths,outputs:r.outputs})),differences:rows.filter(r=>r.different).map(r=>({key:r.key,paths:r.paths,outputs:r.outputs})),unavailable:rows.filter(r=>r.status||Object.values(r.outputs||{}).some(o=>o.status==='no fixture')).length,pass:!failures.length&&!parseErrors.length,promptChanged:false,limitation:'Historical schemas are reported no fixture. Typed-parent replay reconstructs only saved parent quotes and does not test the model reading the current parent. Complete dialogue replay is separately run by run-suite.mjs.'};
 writeFileSync(out+'/summary.json',JSON.stringify(summary,null,2)+'\n');console.log(JSON.stringify({...summary,failures:failures.length,differences:summary.differences.length}));if(!summary.pass)process.exitCode=1;

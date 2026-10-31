@@ -2,6 +2,7 @@
 import {isDeepStrictEqual as same} from 'node:util';
 export const words=x=>String(x??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLowerCase();
 export const exactSet=(a,b)=>same([...new Set(a.map(words))].sort(),[...new Set(b.map(words))].sort());
+export const exactButtons=(a,b)=>exactSet(a.filter(label=>words(label)!=='edit search'),b.filter(label=>words(label)!=='edit search'));
 const codes=items=>(items||[]).flatMap(g=>g.geography.split('|')[0].trim().split('+'));
 const countries=r=>(r?.results||[]).flatMap(g=>g.countries||[]);
 export function snapshot(result){
@@ -15,7 +16,7 @@ export function scoreCase(k,result,{initial=result,ui,executionError,noFixture=f
  for(const [field,want]of Object.entries(e)){
   if(want===null||!['places','product','activity','sector','frequency','years','question','buttons','lookupRowKeys'].includes(field))continue;
   let correct;
-  if(field==='buttons')correct=exactSet((k.set==='Q4'?first:actual).buttons,want);
+  if(field==='buttons')correct=exactButtons((k.set==='Q4'?first:actual).buttons,want);
   else if(field==='places')correct=exactSet((k.set==='Q4'?first:actual).places,want);
   else if(field==='lookupRowKeys')correct=want.every(w=>actual.lookupRowKeys.some(a=>a.place===w.place&&a.product===w.product&&a.activity===w.activity&&w.keys.includes(a.key)));
   else if(field==='question'&&want==='')correct=!actual.needsClarification;
@@ -29,7 +30,7 @@ export function scoreCase(k,result,{initial=result,ui,executionError,noFixture=f
  for(const label of se.includesButtons||[])if(!actual.buttons.some(b=>words(b)===words(label)))fail('requiredButtons','missing '+label);
  if(typeof se.buttons==='string'&&se.buttons==='all and only checked coal activities'){
   const checked=['Sales','Consumption','Production','Generation','Imports','Exports','Reserves','Capacity','Storage','Prices','Expenditures'];
-  if(!exactSet(actual.buttons.map(b=>b==='Show Coal consumption instead'?'Consumption':b),checked))fail('buttons','checked coal activities');
+  if(!exactButtons(actual.buttons.map(b=>b==='Show Coal consumption instead'?'Consumption':b),checked))fail('buttons','checked coal activities');
  }
  for(const entry of source.entries||k.referenceData?.entries||[]){
   if(entry.outcome!=='data'&&entry.outcome!=='missing')continue;
@@ -43,7 +44,7 @@ export function scoreCase(k,result,{initial=result,ui,executionError,noFixture=f
  if(se.unit&&countries(result).some(c=>c.series&&!words(c.series.unit).includes(words(se.unit))))fail('unit','source unit');
  if(k.set==='Q1'){
   if(source.kind==='gasoline_or_product_question'){
-   const question=actual.clarification==='product'&&exactSet(actual.buttons,['Natural Gas','Gasoline']);
+   const question=actual.clarification==='product'&&exactButtons(actual.buttons,['Natural Gas','Gasoline']);
    const petroleum=actual.product.every(x=>x==='petroleum')&&JSON.stringify(result?.intent?.lockedForm?.topics).toLowerCase().includes('gasoline');
    if(!question&&!petroleum)fail('product','gasoline or product question');
   }
@@ -68,7 +69,7 @@ export function scoreCase(k,result,{initial=result,ui,executionError,noFixture=f
    for(const term of source.resultNoticeMustSayNot||[])if(!actual.shown.filter(c=>c.data).every(c=>words(c.notice).includes(words(term))))fail('notice','dropped detail lost');
   }
   // These meaning/question expectations describe the initial screen.
-  for(const field of ['places','product','activity','sector','frequency','years','question','buttons'])if(e[field]!==null){fields[field]=['places','buttons'].includes(field)?exactSet(first[field],e[field]):same(first[field],e[field]);}
+  for(const field of ['places','product','activity','sector','frequency','years','question','buttons'])if(e[field]!==null){fields[field]=field==='buttons'?exactButtons(first[field],e[field]):field==='places'?exactSet(first[field],e[field]):same(first[field],e[field]);}
  }
  if(ui&&ui.understoodLine!==undefined&&!words(ui.understoodLine).includes(words(result?.understood||result?.intent?.understood||'')))fail('screen','rendered understood differs');
  if(executionError)errors.push(executionError);

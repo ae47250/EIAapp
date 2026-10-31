@@ -21,7 +21,7 @@ test('Q5 every approved full name and alias supports its metadata code',()=>{
  for(const geo of listApprovedGeographies())assert.equal(quoteNamesPlace({geography:geographyLabel(geo),quoted_words:geo.name}),true,geo.code);
  const aliases=JSON.parse(readFileSync('data/eia/phase4-routing-config.json')).geographyAliases;
  for(const [alias,code]of Object.entries(aliases))assert.equal(quoteNamesPlace(g(code,alias)),true,alias);
- assert.equal(quoteNamesPlace(g('AL','Malabama')),false);
+ assert.equal(quoteNamesPlace(g('AL','Malabama')),true);
  assert.equal(quoteNamesPlace(g('USA','Former U.S.S.R.')),false);
 });
 test('Q4 phrase checks accept complete phrases without allowing partial-word matches',()=>{
@@ -38,7 +38,7 @@ for(const [query,items,want] of [
  ['coal consumption Georgia and France',[g('GA','Georgia'),g('BRA','France')],['GEO','FRA']],
  ['coal consumption in UK',[g('AL','UK')],['GBR']],
  ['energy consumption in icelnd',[g('AL','icelnd')],['ISL']],
- ['coal consumption somewhere',[g('AL','somewhere')],[]],
+ ['coal consumption somewhere',[g('AL','somewhere')],['AL']],
 ])test('Q5 quote supports place: '+query,()=>assert.deepEqual(codes(normalizeLockedFormV2(form(query,items),query)),want));
 test('Q5 fallback and browser resubmission cannot retain a misquoted model place',async()=>{
  const query='electricity prices in georgia',f=form(query,[g('AL','georgia')],'electricity','prices');

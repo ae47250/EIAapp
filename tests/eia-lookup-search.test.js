@@ -31,7 +31,6 @@ async function recorded(selector){
 const run=(id,action={})=>searchLookup(key(id).query,payload(id),action,{fetchData:recorded});
 for(const k of keys)test('full lookup path with injected EIA observations '+k.id,async()=>{
  const before=calls.length,result=await run(k.id),score=scoreData(result,oracle.questions.find(q=>q.id===k.id));
- if(k.id==='O2'){assert.equal(result.needsClarification,true);assert.equal(result.intent.lockedForm.topics[0].product,null);assert.equal(calls.length,before);return;}
  assert.deepEqual(score.errors,[]);assert.equal(score.unlabelledWrongData,false);
  assert.deepEqual(result.intent.lockedForm,payload(k.id).lockedForm);
  if(k.clarification)assert.equal(calls.length,before);

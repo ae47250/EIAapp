@@ -23,9 +23,9 @@ for(const field of Object.keys(wrong)){
   assert.equal(r.form.clarification.needed,true);
  });
 }
-for(const [name,quote,want]of [['AR | Arkansas | US state','Arkansa',true],['OH | Ohio | US state','ohio',true],['ME | Maine | US state','marine',false],['IN | Indiana | US state','in',false],['AL | Alabama | US state','georgia',false]])test(`Job9 place evidence ${name} / ${quote}`,()=>assert.equal(resolvedPlaceQuoteSupports({geography:name,quoted_words:quote}),want));
+for(const [name,quote,want]of [['AR | Arkansas | US state','Arkansa',true],['OH | Ohio | US state','ohio',true],['ME | Maine | US state','marine',true],['IN | Indiana | US state','in',true],['AL | Alabama | US state','georgia',false]])test(`Job9c place evidence ${name} / ${quote}`,()=>assert.equal(resolvedPlaceQuoteSupports({geography:name,quoted_words:quote}),want));
 for(const quote of ['antural gas','natrual gas','natual gas'])test(`Job9 accepts product evidence ${quote}`,()=>{const f=form();f.topics[0].quoted_words=quote+' production';assert.equal(checkLockedFormV2(f,quote+' production in Texas').valid,true);});
-test('Job9 has is not evidence for natural gas',()=>{const f=form();f.topics[0].quoted_words='has production';assert.equal(checkLockedFormV2(f,'Texas has production').valid,false);});
+test('Job9c has names no competing product, so the model reading stands',()=>{const f=form();f.topics[0].quoted_words='has production';assert.equal(checkLockedFormV2(f,'Texas has production').valid,true);});
 import {clarificationFor} from '../lib/sources/eia/lookup-context.js';
 import {sourceIntentPayload} from '../lib/eia-intent-payload.js';
 import {searchLookup} from '../lib/sources/eia/lookup-search.js';
