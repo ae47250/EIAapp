@@ -1,0 +1,222 @@
+{
+  "name": "SMOKE",
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "repair": "on",
+  "mode": "live",
+  "from": null,
+  "smoke": true,
+  "startedAt": "2026-10-31T18:00:51.710Z",
+  "head": "18d25e9060a0eb49a446f4fcbb16fe40a068a863",
+  "promptHash": "e944a7de763c23ac68c3a5b3e70bc02c62c84b52cf8a9614950a60970d4b94ae",
+  "scheduled": 5,
+  "suiteHash": "3a91365f536fd5dc968e70f30229c73879b8f2197388c4719951e5a50a547666",
+  "completedAt": "2026-10-31T18:02:08.860Z",
+  "status": "complete",
+  "stopReason": null,
+  "executed": 5,
+  "budget": {
+    "initial": 5,
+    "replies": 0,
+    "calls": 10,
+    "attempts": 40,
+    "counts": {
+      "initial": 7147,
+      "reply": 18136
+    },
+    "maxOutput": 2048,
+    "prices": {
+      "input": 0.125,
+      "output": 0.5
+    },
+    "maximumUSD": 0.076695,
+    "method": "Two allowed model calls per turn; four transport attempts per call; measured prompt bounds and full output allowance."
+  },
+  "priorUSD": 0,
+  "right": 3,
+  "total": 5,
+  "perSet": {
+    "C": {
+      "right": 1,
+      "total": 1
+    },
+    "D": {
+      "right": 1,
+      "total": 1
+    },
+    "E": {
+      "right": 0,
+      "total": 1
+    },
+    "F": {
+      "right": 1,
+      "total": 1
+    },
+    "I": {
+      "right": 0,
+      "total": 1
+    }
+  },
+  "perField": {
+    "places": {
+      "right": 5,
+      "total": 5
+    },
+    "product": {
+      "right": 5,
+      "total": 5
+    },
+    "activity": {
+      "right": 5,
+      "total": 5
+    },
+    "sector": {
+      "right": 0,
+      "total": 0
+    },
+    "frequency": {
+      "right": 3,
+      "total": 3
+    },
+    "years": {
+      "right": 2,
+      "total": 2
+    },
+    "question": {
+      "right": 4,
+      "total": 4
+    },
+    "buttons": {
+      "right": 0,
+      "total": 1
+    },
+    "lookupRowKeys": {
+      "right": 2,
+      "total": 3
+    }
+  },
+  "failures": {
+    "wrong value shown": 1,
+    "asked when it should have answered": 0,
+    "answered when it should have asked": 0,
+    "asked the wrong question or buttons": 1,
+    "error": 0
+  },
+  "noFixture": 0,
+  "costUSD": 0.00479675,
+  "comparisonCostUSD": 0.00479675,
+  "comparisonLatencyMedianMs": 3114,
+  "comparisonLatencyP90Ms": 4782,
+  "latencyMedianMs": 3114,
+  "latencyP90Ms": 4782,
+  "retries": 0,
+  "naturalGasoline": [],
+  "consoleErrors": [],
+  "rows": [
+    {
+      "id": "C-C2",
+      "set": "C",
+      "excludedFromJointAccuracy": false,
+      "diverged": false,
+      "score": {
+        "status": "scored",
+        "correct": true,
+        "kind": null,
+        "fields": {
+          "places": true,
+          "product": true,
+          "activity": true,
+          "frequency": true,
+          "years": true,
+          "question": true,
+          "lookupRowKeys": true
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "D-D20",
+      "set": "D",
+      "excludedFromJointAccuracy": false,
+      "diverged": false,
+      "score": {
+        "status": "scored",
+        "correct": true,
+        "kind": null,
+        "fields": {
+          "places": true,
+          "product": true,
+          "activity": true,
+          "frequency": true,
+          "years": true,
+          "question": true,
+          "lookupRowKeys": true
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "E-E4",
+      "set": "E",
+      "excludedFromJointAccuracy": false,
+      "diverged": false,
+      "score": {
+        "status": "scored",
+        "correct": false,
+        "kind": "asked the wrong question or buttons",
+        "fields": {
+          "places": true,
+          "product": true,
+          "activity": true,
+          "buttons": false
+        },
+        "errors": [
+          "buttons"
+        ]
+      }
+    },
+    {
+      "id": "F-F1",
+      "set": "F",
+      "excludedFromJointAccuracy": false,
+      "diverged": false,
+      "score": {
+        "status": "scored",
+        "correct": true,
+        "kind": null,
+        "fields": {
+          "places": true,
+          "product": true,
+          "activity": true,
+          "question": true
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "I-I8",
+      "set": "I",
+      "excludedFromJointAccuracy": false,
+      "diverged": false,
+      "score": {
+        "status": "scored",
+        "correct": false,
+        "kind": "wrong value shown",
+        "fields": {
+          "places": true,
+          "product": true,
+          "activity": true,
+          "frequency": true,
+          "question": true,
+          "lookupRowKeys": false
+        },
+        "errors": [
+          "lookupRowKeys",
+          "selector NOR",
+          "selector SWE"
+        ]
+      }
+    }
+  ],
+  "harnessPass": true
+}
