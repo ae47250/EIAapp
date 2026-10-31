@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "scope": "Measurement completed under the owner PASS definition; application failures remain.",
+  "flagDecision": {
+    "setting": "on",
+    "noiseFloor": 1,
+    "gain": 5.5,
+    "regressions": [],
+    "complete": true
+  },
+  "modelRecommendation": {
+    "best": 71,
+    "eligible": [
+      "LUNA-LOW-MEAN",
+      "job9b-LUNA-MED",
+      "job9b-TERRA"
+    ],
+    "recommendation": {
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "costUSD": 0.09101168750000001,
+      "right": 70.5,
+      "p90Ms": 5474.5
+    }
+  },
+  "comparison": [
+    {
+      "name": "LUNA-LOW-MEAN",
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "right": 70.5,
+      "total": 85,
+      "costUSD": 0.09101168750000001,
+      "latencyMedianMs": 3178,
+      "latencyP90Ms": 5474.5
+    },
+    {
+      "name": "job9b-TERRA",
+      "model": "gpt-6.1-terra",
+      "effort": "low",
+      "right": 71,
+      "total": 85,
+      "costUSD": 0.6976030000000002,
+      "latencyMedianMs": 3015.5,
+      "latencyP90Ms": 3991
+    },
+    {
+      "name": "job9b-LUNA-MED",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "right": 70,
+      "total": 85,
+      "costUSD": 0.09369187499999997,
+      "latencyMedianMs": 4569.5,
+      "latencyP90Ms": 7152
+    },
+    {
+      "name": "job9b-LUNA-HIGH",
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "right": 69,
+      "total": 85,
+      "costUSD": 0.09613649999999997,
+      "latencyMedianMs": 4102,
+      "latencyP90Ms": 7309
+    }
+  ],
+  "lunaMeanMethod": "Arithmetic mean of the two chosen-flag run summaries, including costs and per-run latency quantiles.",
+  "skipped": {
+    "name": "job9b-SOL",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "repair": "on",
+    "mode": "live",
+    "from": null,
+    "smoke": false,
+    "startedAt": "2026-10-31T19:07:21.294Z",
+    "head": "986568a8a69306abd5dd5034c95eb49b78a26b6b",
+    "promptHash": "e944a7de763c23ac68c3a5b3e70bc02c62c84b52cf8a9614950a60970d4b94ae",
+    "scheduled": 86,
+    "suiteHash": "3eef5152964437577f5f967448a1865a6a6ff1d366a379a34c85fc297e8c9098",
+    "status": "not run",
+    "reason": "whole run exceeds worst-case budget",
+    "budget": {
+      "initial": 79,
+      "replies": 4,
+      "calls": 166,
+      "attempts": 664,
+      "counts": {
+        "initial": 7166,
+        "reply": 18136
+      },
+      "maxOutput": 2048,
+      "prices": {
+        "input": 2,
+        "output": 10
+      },
+      "maximumUSD": 23.817248,
+      "method": "Two allowed model calls per turn; four transport attempts per call; measured prompt bounds and full output allowance."
+    },
+    "priorUSD": 0.8892018750000003,
+    "costUSD": 0
+  },
+  "paidSpendUSD": 1.0790302500000006,
+  "frozenFilesUnchanged": true
+}
