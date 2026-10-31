@@ -203,7 +203,7 @@ export default function SearchWorkspace({ showLogout }) {
   function applySearchResult(nextData) {
     if (nextData.mode === "lookup") {
       setData(nextData);
-      setStatus({ message: nextData.userMessage || nextData.note || "Search complete." });
+      setStatus({ message: [nextData.unsupportedMessage, nextData.userMessage].filter(Boolean).join(" ") || nextData.note || "Search complete." });
       return;
     }
     if (nextData.needsCountry || nextData.needsClarification) {
@@ -294,6 +294,7 @@ export default function SearchWorkspace({ showLogout }) {
         }} /> : null}
       {lookupMode ? (data.results || []).map(result => (
         <section className="results-pair single-result" key={result.topicIndex} aria-label={result.title}>
+          {result.unsupportedNotice ? <p className="card compact-card" role="status">{result.unsupportedNotice}</p> : null}
           {result.selectedComparison ? <SelectedComparison comparison={result.selectedComparison} source={data.source} />
             : result.selectedSeries ? <SelectedSeries series={result.selectedSeries} source={data.source} />
             : null}

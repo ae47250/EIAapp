@@ -92,7 +92,9 @@ test('typed answer, next-question button and serialization preserve both evidenc
  const regions=await searchLookup(c.query,sourceIntentPayload(first.intent),first.choices[1],{fetchData:noFetch});
  const params=appendLookupChoice(new URLSearchParams(),regions.intent,regions.choices.find(c=>c.label==='Europe'));
  const result=await searchLookup(c.query,JSON.parse(params.get('intentPayload')),{choice:JSON.parse(params.get('choice'))},{fetchData:async()=>({rows:[],complete:true,total:0})});
- assert.equal(result.intent.lockedForm.topics[0].activity,'production');assert.equal(result.intent.choiceHistory.length,3);assert.equal(result.intent.lockedForm.geographies.length,1);assert.equal(result.intent.needsClarification,false);
+ assert.equal(result.intent.lockedForm.topics[0].activity,'production');assert.equal(result.intent.choiceHistory.length,3);assert.equal(result.intent.lockedForm.geographies.length,1);assert.equal(result.intent.needsClarification,true);assert.equal(result.intent.lockedForm.clarification.about,'other');assert.match(result.userMessage,/We can't look up 'stuff' yet/);
+ const drop=result.choices.find(choice=>/^Show Total Energy production instead$/i.test(choice.label));assert.ok(drop);
+ const resolved=await searchLookup(c.query,sourceIntentPayload(result.intent),drop,{fetchData:async()=>({rows:[],complete:true,total:0})});assert.equal(resolved.intent.needsClarification,false);assert.equal(resolved.intent.choiceHistory.length,4);assert.ok(resolved.results[0].unsupportedNotice.includes("not 'stuff'"));
 });
 test('unrelated fields in submitted merged form cannot override replayed history',async()=>{
  const c=cases[0],intent=historicalIntent(c);

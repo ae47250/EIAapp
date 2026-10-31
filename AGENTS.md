@@ -365,6 +365,7 @@ Distinguish proposed, implemented, tested, committed, pushed and deployed. Repor
 - Charts: top 10 places by latest value, labelled; all places in table and Excel; never mix units on one axis.
 - Tests: when an older frozen answer conflicts with a recorded owner decision, keep the old one on record, freeze a versioned revision with only that change, list it in the report; do not ask.
 - Every work-order requirement gets a test; the report lists each requirement with its test; no test = not done.
+- Before any paid or scored test run, run the complete offline test suite against the final code, including replays of saved AI responses, and fix every failure first. If the AI's instructions or input format changed, say which saved responses are out of date. A scored run that fails on something the offline suite would have caught is a process failure; report it as one.
 
 ---
 
