@@ -1,0 +1,46 @@
+{
+  "ownerAuthority": "Job 8b Q5 and Q4 revision, plus standing rule to version only historical expectations conflicting with recorded owner decisions.",
+  "changes": [
+    {
+      "file": "q4-freeze.json",
+      "changes": [
+        "Full unsupported phrases accepted when all required words occur.",
+        "Ash permits absent activity with activity question or already identified consumption with other-measure question; both must offer explicit consumption instead.",
+        "All screen and Excel dropped-detail notices retain every unsupported phrase."
+      ]
+    },
+    {
+      "file": "set-d-d8a-revision.json",
+      "changes": [
+        "Only consumption button wording is conditional on an unsupported detail remaining; other fields and buttons unchanged."
+      ],
+      "scorer": "score-d.mjs delegates every other check to the unchanged historical D scorer."
+    },
+    {
+      "file": "set-f-revision.json",
+      "changes": [
+        "Only F4 changes: Nambia is a tied place mention, so Q5 requires the Namibia/Gambia/Zambia question instead of trusting the model code."
+      ],
+      "scorer": "Unchanged historical F scorer; pass mark remains 8/8."
+    },
+    {
+      "file": "tests/eia-polish.test.js",
+      "changes": [
+        "Tied Nambia must clarify even when the raw model supplies Namibia."
+      ],
+      "original": "historical-tests/eia-polish.test.js.gz"
+    },
+    {
+      "file": "tests/eia-coverage-followup.test.js",
+      "changes": [
+        "Existing empty-topic and resubmission checks retained; consumption alternative label reflects Q4 when unsupported stuff remains."
+      ],
+      "original": "historical-tests/eia-coverage-followup.test.js.gz"
+    }
+  ],
+  "modelPromptOrSchemaChanged": false,
+  "historicalArtifactsPreserved": true,
+  "passMarksChanged": false,
+  "replayHarnessCorrection": "The new 78-outcome offline runner initially omitted F3 expected.buttonPath, although the live runner already performed it. Corrected before paid testing; failed offline attempt retained.",
+  "savedReplyContextDifference": "D4b repeat 1 now receives the repaired Georgia-only parent instead of the old form containing Alabama. The saved response is replayed, but this does not test how the model reads the repaired parent; the single live run will test it."
+}

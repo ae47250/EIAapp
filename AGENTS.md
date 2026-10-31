@@ -58,6 +58,12 @@ If tests cannot be run, state why and provide manual test steps.
 
 ---
 
+## Python Test Verification
+
+Run each `scripts/eia-lookup/*.test.py` file individually with `python3 -B` and aggregate exit statuses; `unittest discover` does not find these hyphenated test module names.
+
+---
+
 ## Secrets and Environment Variables
 
 Never expose API keys, tokens, or secrets in frontend files or public code.

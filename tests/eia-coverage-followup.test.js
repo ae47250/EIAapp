@@ -25,7 +25,8 @@ test('empty topics normalize before conversion and survive browser resubmission'
  const r=await searchLookup(c.query,sourceIntentPayload(intent),{});assert.deepEqual(r.choices.map(c=>c.label),get('D8').question.buttons);
  const clicked=await searchLookup(c.query,sourceIntentPayload(r.intent),r.choices.find(c=>c.choice.value==='coal'));
  assert.equal(clicked.intent.lockedForm.topics[0].product,'coal');assert.equal(clicked.intent.lockedForm.clarification.about,'activity');
- assert.deepEqual(clicked.choices.map(c=>c.label),get('D8a').question.buttons);
+ // Job 8b Q4: an explicit consumption alternative labels dropping unsupported detail.
+ assert.deepEqual(clicked.choices.map(c=>c.label),get('D8a').question.buttons.map(label=>label==='Consumption'?'Show Coal consumption instead':label));
 });
 for(const [query,items,want] of [
  ['coal production Korea',[geo('PRK','Korea')],['KOR']],
